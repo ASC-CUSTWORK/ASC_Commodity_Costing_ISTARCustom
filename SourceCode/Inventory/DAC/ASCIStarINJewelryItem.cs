@@ -11,7 +11,7 @@ namespace ASCISTARCustom.Inventory.DAC
 {
     [Serializable]
     [PXCacheName("Jewelry Item Data DAC")]
-    public class INJewelryItemData : AuditSystemFields, IBqlTable
+    public class ASCIStarINJewelryItem : AuditSystemFields, IBqlTable
     {
         public static bool IsActive() => true;
 

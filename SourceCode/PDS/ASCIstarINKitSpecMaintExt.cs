@@ -1297,7 +1297,7 @@ namespace ASCISTARCustom
 
         private void CopyJewelryItemFields(INKitSpecHdr kitSpecHdr)
         {
-            var jewelItem = SelectFrom<INJewelryItemData>.Where<INJewelryItemData.inventoryID.IsEqual<P.AsInt>>.View.Select(this.Base, kitSpecHdr.KitInventoryID)?.TopFirst;
+            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<P.AsInt>>.View.Select(this.Base, kitSpecHdr.KitInventoryID)?.TopFirst;
 
             if (jewelItem == null) return;
 

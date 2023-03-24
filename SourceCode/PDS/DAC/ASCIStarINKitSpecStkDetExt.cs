@@ -10,13 +10,7 @@ namespace ASCISTARCustom
 {
     public class ASCIStarINKitSpecStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecStkDet>
     {
-        #region Static Functions
-        public bool IsActive()
-        {
-
-            return true;
-        }
-        #endregion
+        public static bool IsActive() => true;
         //#region UsrItemClassID
         //[PXInt]
         //[PXParent(typeof(Select<

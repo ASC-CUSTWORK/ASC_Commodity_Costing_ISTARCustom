@@ -1,0 +1,49 @@
+﻿<Sql TableName="ASCIStarINKitSpecJewelryItem" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="ASCIStarINKitSpecJewelryItem">
+  <col name="CompanyID" type="Int" default="Zero" />
+  <col name="KitInventoryID" type="Int" />
+  <col name="RevisionID" type="NVarChar(10)" />
+  <col name="ShortDesc" type="NVarChar(255)" nullable="true" />
+  <col name="LongDesc" type="NVarChar(500)" nullable="true" />
+  <col name="StyleStatus" type="NVarChar(10)" nullable="true" />
+  <col name="CustomerCode" type="NVarChar(10)" nullable="true" />
+  <col name="InvCategory" type="NVarChar(10)" nullable="true" />
+  <col name="ItemType" type="NVarChar(10)" nullable="true" />
+  <col name="ItemSubType" type="NVarChar(10)" nullable="true" />
+  <col name="Collection" type="NVarChar(10)" nullable="true" />
+  <col name="MetalType" type="NVarChar(10)" nullable="true" />
+  <col name="MetalColor" type="NVarChar(10)" nullable="true" />
+  <col name="MetalNote" type="NVarChar(100)" nullable="true" />
+  <col name="Plating" type="NVarChar(10)" nullable="true" />
+  <col name="Finishes" type="NVarChar(10)" nullable="true" />
+  <col name="VendorMaker" type="NVarChar(10)" nullable="true" />
+  <col name="OrgCountry" type="NVarChar(10)" nullable="true" />
+  <col name="StoneType" type="NVarChar(10)" nullable="true" />
+  <col name="WebNotesComment" type="NVarChar(255)" nullable="true" />
+  <col name="StoneComment" type="NVarChar(255)" nullable="true" />
+  <col name="StoneColor" type="NVarChar(10)" nullable="true" />
+  <col name="StoneShape" type="NVarChar(10)" nullable="true" />
+  <col name="StoneCreation" type="NVarChar(10)" nullable="true" />
+  <col name="GemstoneTreatment" type="NVarChar(10)" nullable="true" />
+  <col name="SettingType" type="NVarChar(10)" nullable="true" />
+  <col name="Findings" type="NVarChar(10)" nullable="true" />
+  <col name="FindingsSubType" type="NVarChar(10)" nullable="true" />
+  <col name="ChainType" type="NVarChar(10)" nullable="true" />
+  <col name="RingLength" type="NVarChar(10)" nullable="true" />
+  <col name="RingSize" type="NVarChar(10)" nullable="true" />
+  <col name="OD" type="NVarChar(10)" nullable="true" />
+  <col name="tstamp" type="Timestamp" />
+  <col name="NoteID" type="UniqueIdentifier" />
+  <col name="CreatedByID" type="UniqueIdentifier" />
+  <col name="CreatedByScreenID" type="Char(8)" />
+  <col name="CreatedDateTime" type="DateTime" />
+  <col name="LastModifiedByID" type="UniqueIdentifier" />
+  <col name="LastModifiedByScreenID" type="Char(8)" />
+  <col name="LastModifiedDateTime" type="DateTime" />
+  <index name="PK_ASCIStarINKitSpecJewelryItem" clustered="true" primary="true" unique="true">
+    <col name="CompanyID" />
+    <col name="KitInventoryID" />
+    <col name="RevisionID" />
+  </index>
+</table>]]></CDATA>
+</Sql>

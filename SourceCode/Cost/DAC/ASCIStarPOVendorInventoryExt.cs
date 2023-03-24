@@ -14,68 +14,33 @@ using PX.Objects.PO;
 using PX.Objects;
 using System.Collections.Generic;
 using System;
+using PX.Data.BQL.Fluent;
 
 namespace ASCISTARCustom
 {
-    public class ASCIStarPOVendorInventoryExt : PXCacheExtension<PX.Objects.PO.POVendorInventory>
+    public class ASCIStarPOVendorInventoryExt : PXCacheExtension<POVendorInventory>
     {
+        public static bool IsActive() => true;
 
-        #region Fields
-
-        #region MarketID
-        public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
-        protected Int32? _usrMarketID;
-        //[APTranInventoryItem(Filterable = true)]
-        [PXSelector(
-        typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>,
-            Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
-            typeof(Vendor.acctCD),
-            typeof(Vendor.acctName)
-
-            , SubstituteKey = typeof(Vendor.acctCD)
-            , DescriptionField = typeof(Vendor.acctName))]
-        [PXUIField(DisplayName = "Market")]
-        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
+        #region UsrMarketID
         [PXDBInt()]
-        public virtual Int32? UsrMarketID
-        {
-            get
-            {
-                return this._usrMarketID;
-            }
-            set
-            {
-                this._usrMarketID = value;
-            }
-        }
+        [PXUIField(DisplayName = "Market")]
+        [PXSelector(typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
+            typeof(Vendor.acctCD), typeof(Vendor.acctName)
+            , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
+        //  [PXFormula(typeof(Selector<POVendorInventory.vendorID, ASCIStarAPVendorPriceExt.usrMarketID>))]
+        public virtual int? UsrMarketID { get; set; }
+        public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
         #endregion
 
-        #region CommodityID
-        public abstract class usrCommodityID : PX.Data.BQL.BqlInt.Field<usrCommodityID> { }
-        protected Int32? _CommodityID;
-        //[APTranInventoryItem(Filterable = true)]
-        [PXSelector(
-        typeof(Search2<InventoryItem.inventoryID, InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>,
-            Where<INItemClass.itemClassCD, Equal<CommodityClass>>>),
-            typeof(InventoryItem.inventoryCD),
-            typeof(InventoryItem.descr)
-
-            , SubstituteKey = typeof(InventoryItem.inventoryCD)
-            , DescriptionField = typeof(InventoryItem.descr))]
-        [PXUIField(DisplayName = "Metal")]
+        #region UsrCommodityID
         [PXDBInt()]
-        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
-        public virtual Int32? UsrCommodityID
-        {
-            get
-            {
-                return this._CommodityID;
-            }
-            set
-            {
-                this._CommodityID = value;
-            }
-        }
+        [PXUIField(DisplayName = "Metal")]
+        [PXSelector(typeof(Search2<InventoryItem.inventoryID, InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<CommodityClass>>>),
+            typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
+            , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
+        public virtual int? UsrCommodityID { get; set; }
+        public abstract class usrCommodityID : PX.Data.BQL.BqlInt.Field<usrCommodityID> { }
         #endregion
 
         #region UsrVendorDefault
@@ -116,7 +81,7 @@ namespace ASCISTARCustom
 
         #region UsrCommodityCost
         [PXDBDecimal()]
-        [PXUIField(DisplayName = "Metal Cost")]
+        [PXUIField(DisplayName = "Metal Cost", IsReadOnly = true)] // why readonly and no logic with it
         public virtual Decimal? UsrCommodityCost { get; set; }
         public abstract class usrCommodityCost : PX.Data.BQL.BqlDecimal.Field<usrCommodityCost> { }
         #endregion
@@ -186,7 +151,5 @@ namespace ASCISTARCustom
         public virtual Decimal? UsrUnitCost { get; set; }
         public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
         #endregion
-
-        #endregion Fields
     }
 }

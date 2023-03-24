@@ -1,0 +1,63 @@
+﻿<Page path="~/pages/ap/ap202000.aspx" ControlId="2" pageSource="tVhbc+o2EH5OZvIfPO6kbw0kJ6cPKXRKTMhhJiQ0zu2NUewFdJAtH0nmch7627uSsLHBEJKmnsxEllffXr7VrkTj+C+nT0bg3JB4lOKg6Xq/uE6PSAVCf+hQhnP/1FYzstbhImqDIpSdRGbadVqp4ldTiNUzFZAmTVeJFFzniTAaEgX38CMFqZrukDCJ80eHBx4Pl+Ct/ln9rF6vnxCZzE8C6TrdeAyCKtl0jcJBqz/IhFzngSq96jFWehAa813n+M+jw6PDBrpjLX1YJOA8UaFSwvpEjffwQUM00IYLj8cKXXG67aYb4PjUdZZTfUYC+MZZCEJ/TMZt33VEGhN0zQcxRRgEcfBpJPOL/kubKOLzVARgwEKZS0srjSZK+qr9eTABe6ahtvW0Xj92nb6gERGLJwqzpouxMlZqx25JhCv6Lyd3r98hUPKk1ce/J4hDLnBRAD1CY6VNOThoeISxVxJMPB5FJA7l0sDsWRrqr4k5+j9V3hjzAmRmnlXskymOaxa+VoGPs2vu69DWCrHdFuqz7aHu7Iy05lMHyiAN8WUj0itjMip8tdCR//kbjUOYXzinOr1KDHgkUZTHWiXDQOPQ4vQgegWRk7KKaBuGJGVK+yA404og9FKpDCseI1J227hbGOMzjzNGEgnZprDhfIAoYbhjzNuB9e2GLHiq7lNms6g4cbrhpq+IQP0sjeKMtRvyCkwuHfN7NsRonk9/ovaXnuVyMyms01xU54J1ziaddqoi3B0KLGy6Kxnj+FVIVQZSK/rpwyhC5nGbTnap7CqITCi9nVpLYiU9KAQPNAJtyDrAml5V0Hs1HOocmEJL3g01RkldxdfaniSefR6J745lrIs2F4vdDJbE3iLx7aTxqYLdCjOJSl2bmbojuF821PRAjGA33j5OLAttjO3kjfy/m8VWpFqZN4Zgcsnn1cr8NEkESGn4L1oQjCe9xaPUutZzWANCmAkXLOktjC0fCOP5tjB2bEd/N+DX/4uXZy4m14KnyW5SSmKfT0wOv8uGkti7I/j7HpToBl1sKcvGnHXLfdvyl+1t+XpnW74WNDQoIxzs0ZK/AR2NUeL0/DyZv69DEwbSMZtSFhqyP6GxBrdnPdRgW7Y/5lhgU5Wz2Qq/6zaNm9kWVH2gXZYfnKTxKKd9EQd9LqnVavpDgbjGDUyxTFdSqWNhPpeOEPcQcIGu2xp60LjnswJhTsWzWeA/v5Zn1fw21VZWNcoC4qUAMvlbLbIduHr/CJoh0vCYt4vCTIbYqO0OVMN2T1k2QFNgP1SfTyq7f+09GAM7GLSCQOnT8p7LWzopMSKwzYq9UErUfgbKYDXG09SgDTIQe3r0eIdHkjaVSNBClxvN9q8j9Qcxz38JdXY2+DhCF7OJR1xvYbwd2sTS9yq8/C5LPr7DXLUYHeEm9zAEW8+Geylc7YgC7L0udftRUtwBGwj7meClNi22C+uSpy9zl3iZy7yrOuDaw+229NpesartuponVBBNxerQvLG+VtrNyyaW19Nln8tLL75oX3QhN20LL8O60j5jE+Ez17mKCd648+NRj8Z51/laLxvQaJlL3yUR5mcGkd/WO9mVrWSmkfFBKewX0unxECVvka6+gGmHCqluiFRrGmq5Cmu5XuV0Y6puYYYlrpRmBcc3Ove/">
+    <PXGridLevel DataMember="Records" ParentId="phG_grid_Levels#0" TypeFullName="PX.Web.UI.PXGridLevel">
+        <Children Key="Columns">
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrCommodityPerGram" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrCommodityLossPct" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrMarketID" />
+                    <Prop Key="Width" Value="140" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrCommodity" />
+                    <Prop Key="Width" Value="70" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrCommodityPrice" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrCommodityIncrement" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrCommoditySurchargePct" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <PXGridColumn DataField="CuryID" OriginalIndex="10" />
+        </Children>
+        <Children Key="RowTemplate">
+            <AddItem>
+                <PXSegmentMask TypeFullName="PX.Web.UI.PXSegmentMask">
+                    <Prop Key="Virtual:ApplyStylesheetSkin" />
+                    <Prop Key="ID" Value="CstPXSegmentMask2" />
+                    <Prop Key="DataField" Value="VendorID" />
+                    <Prop Key="AllowEdit" Value="True" />
+                    <Prop Key="AutoRefresh" Value="True" />
+                </PXSegmentMask>
+            </AddItem>
+        </Children>
+    </PXGridLevel>
+    <PXFormView ID="form" ParentId="phF_form" TypeFullName="PX.Web.UI.PXFormView">
+        <Children Key="Template" />
+    </PXFormView>
+</Page>

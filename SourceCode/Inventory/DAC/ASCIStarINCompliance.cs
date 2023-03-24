@@ -9,7 +9,7 @@ namespace ASCISTARCustom.Inventory.DAC
 {
     [Serializable]
     [PXCacheName("Compliance DAC")]
-    public class INCompliance : AuditSystemFields, IBqlTable
+    public class ASCIStarINCompliance : AuditSystemFields, IBqlTable
     {
         #region InventoryID
         [PXDBInt(IsKey = true)]
@@ -29,7 +29,7 @@ namespace ASCISTARCustom.Inventory.DAC
         #region CustomerAlphaCode
         [PXDBString(50, IsUnicode = true)]
         [PXUIField(DisplayName = "Customer Alpha Code")]
-        [PXDefault(typeof(SearchFor<INJewelryItemData.customerCode>.In<SelectFrom<INJewelryItemData>.Where<INJewelryItemData.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
+        [PXDefault(typeof(SearchFor<ASCIStarINJewelryItem.customerCode>.In<SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
             , PersistingCheck = PXPersistingCheck.Nothing)]
         [PXStringList()]
         public virtual string CustomerAlphaCode { get; set; }
@@ -39,7 +39,7 @@ namespace ASCISTARCustom.Inventory.DAC
         #region Division 
         [PXDBString(50, IsUnicode = true)]
         [PXUIField(DisplayName = "Division")]
-        [PXDefault(typeof(SearchFor<INJewelryItemData.invCategory>.In<SelectFrom<INJewelryItemData>.Where<INJewelryItemData.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
+        [PXDefault(typeof(SearchFor<ASCIStarINJewelryItem.invCategory>.In<SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
             , PersistingCheck = PXPersistingCheck.Nothing)]
         [PXStringList()]
         public virtual string Division { get; set; }

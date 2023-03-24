@@ -1,0 +1,33 @@
+﻿<Sql TableName="ASCIstarINKitSpecHdrAttribute" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="ASCIstarINKitSpecHdrAttribute">
+  <col name="CompanyID" type="Int" default="Zero" />
+  <col name="KitInventoryID" type="Int" />
+  <col name="RevisionID" type="NVarChar(10)" />
+  <col name="SilverMarket" type="Decimal(18,5)" nullable="true" />
+  <col name="TargetFirstCost" type="Decimal(18,4)" nullable="true" />
+  <col name="TargetMargin" type="Decimal(6,2)" nullable="true" />
+  <col name="TargetListPrice" type="Decimal(18,2)" nullable="true" />
+  <col name="TargetRetail" type="Decimal(18,2)" nullable="true" />
+  <col name="TotalSilverWt" type="Decimal(18,6)" nullable="true" />
+  <col name="FinishedWt" type="Decimal(18,6)" nullable="true" />
+  <col name="ProductWt" type="Decimal(18,6)" nullable="true" />
+  <col name="ActualFirstCost" type="Decimal(18,4)" nullable="true" />
+  <col name="ActualMargin" type="Decimal(6,2)" nullable="true" />
+  <col name="ActualListPrice" type="Decimal(18,2)" nullable="true" />
+  <col name="FreightType" type="Char(1)" nullable="true" />
+  <col name="FreightCost" type="Decimal(18,2)" nullable="true" />
+  <col name="FreightPercent" type="Decimal(6,2)" nullable="true" />
+  <col name="TotalFreightCost" type="Decimal(18,2)" nullable="true" />
+  <col name="DutyPercent" type="Decimal(6,2)" nullable="true" />
+  <col name="DutyCost" type="Decimal(18,2)" nullable="true" />
+  <col name="ComponentCost" type="Decimal(18,2)" nullable="true" />
+  <col name="LaborCost" type="Decimal(18,2)" nullable="true" />
+  <col name="SupportCost" type="Decimal(18,2)" nullable="true" />
+  <col name="MiscCost" type="Decimal(18,2)" nullable="true" />
+  <index name="PK_ASCIStarINKitSpecHdriStarAttribute" clustered="true" primary="true" unique="true">
+    <col name="CompanyID" />
+    <col name="KitInventoryID" />
+    <col name="RevisionID" />
+  </index>
+</table>]]></CDATA>
+</Sql>

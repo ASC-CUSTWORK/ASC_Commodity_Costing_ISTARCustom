@@ -11,13 +11,7 @@ namespace ASCISTARCustom
 {
     public class ASCIStarINKitSpecHdrExt : PXCacheExtension<PX.Objects.IN.INKitSpecHdr>
     {
-        #region Static Functions
-        public bool IsActive()
-        {
-
-            return true;
-        }
-        #endregion
+        public static bool IsActive() => true;
 
         #region UsrVQuoteLineCtr
         [PXDBInt]

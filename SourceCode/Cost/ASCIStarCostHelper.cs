@@ -425,7 +425,7 @@ namespace ASCISTARCustom
                     ItemExt = this.Item.GetExtension<ASCIStarINInventoryItemExt>();
                 }
                 /* INFO SOURCE TEMPORARY */
-                INJewelryItemData jewelryItemData = PXSelect<INJewelryItemData, Where<INJewelryItemData.inventoryID, Equal<Required<INJewelryItemData.inventoryID>>>>.Select(graph, item.InventoryID);
+                ASCIStarINJewelryItem jewelryItemData = PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>.Select(graph, item.InventoryID);
                 Fineness = jewelryItemData.MetalType;
                 _itemVendor = new Vendor();
                 _itemVendorBasis = new ASCIStarVendorExt();
@@ -892,9 +892,9 @@ namespace ASCISTARCustom
                 string msg = "";
                 try
                 {
-                    if (PricingDate == null || PricingDate > DateTime.Today.AddDays(-1))
+                    if (PricingDate == null || PricingDate > DateTime.Today)//.AddDays(-1))
                     {
-                        PricingDate = DateTime.Today.AddDays(-1);
+                        PricingDate = DateTime.Today;//.AddDays(-1);
                     }
 
                     msg = $"cost       :{cost}{Environment.NewLine}";

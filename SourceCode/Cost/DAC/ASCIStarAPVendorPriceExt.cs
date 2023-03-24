@@ -20,54 +20,31 @@ using PX.Objects;
 using System.Collections.Generic;
 using System;
 
-namespace ASCISTARCustom 
+namespace ASCISTARCustom
 {
     public class ASCIStarAPVendorPriceExt : PXCacheExtension<PX.Objects.AP.APVendorPrice>
     {
-        #region Static Method
-        public static bool IsActive()
-        {
-            return true;
-        }
-        #endregion Static Method
-
-        #region Fields
+        public static bool IsActive() => true;
 
         #region UsrMarket
         [PXDBString(2, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Market", Required = true)]
         [MarketList.List]
-        [PXDefault(MarketList.LondonPM, PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(MarketList.LondonPM)]
         public virtual string UsrMarket { get; set; }
         public abstract class usrMarket : PX.Data.BQL.BqlString.Field<usrMarket> { }
         #endregion
 
-        #region MarketID
-        public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
-        protected Int32? _usrMarketID;
-        //[APTranInventoryItem(Filterable = true)]
-        [PXSelector(
-        typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>,
-            Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
-            typeof(Vendor.acctCD),
-            typeof(Vendor.acctName)
-
-            , SubstituteKey = typeof(Vendor.acctCD)
-            , DescriptionField = typeof(Vendor.acctName))]
-        [PXUIField(DisplayName = "Market")]
-        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
+        #region UsrMarketID
         [PXDBInt()]
-        public virtual Int32? UsrMarketID
-        {
-            get
-            {
-                return this._usrMarketID;
-            }
-            set
-            {
-                this._usrMarketID = value;
-            }
-        }
+        [PXUIField(DisplayName = "Market Vendor")]
+        [PXSelector(
+        typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
+            typeof(Vendor.acctCD), typeof(Vendor.acctName)
+            , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
+        public virtual int? UsrMarketID { get; set; }
+        public abstract class usrMarketID : PX.Data.BQL.BqlDecimal.Field<usrMarketID> { }
+
         #endregion
 
         #region UsrCommodityPrice
@@ -111,7 +88,6 @@ namespace ASCISTARCustom
         public abstract class usrCommodityIncrement : PX.Data.BQL.BqlDecimal.Field<usrCommodityIncrement> { }
         #endregion
 
- 
         #region UsrCommodity
         [PXDBString(1)]
         [PXUIField(DisplayName = "Metal")]
@@ -121,15 +97,9 @@ namespace ASCISTARCustom
         public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
         #endregion
 
-        #endregion Fields
-
-
-        #region Interface Fields
-
         #region UsrCommodityPerGram
         [PXDecimal(6)]
         [PXUIField(DisplayName = "Price/Gram", Visible = true, Enabled = false)]
-
         public virtual decimal? UsrCommodityPerGram { get; set; }
         public abstract class usrCommodityPerGram : PX.Data.BQL.BqlDecimal.Field<usrCommodityPerGram> { }
         #endregion
@@ -140,8 +110,5 @@ namespace ASCISTARCustom
         public virtual decimal? UsrIncrementPerGram { get; set; }
         public abstract class usrIncrementPerGram : PX.Data.BQL.BqlDecimal.Field<usrIncrementPerGram> { }
         #endregion
-
-        #endregion Interface Fields
-
     }
 }

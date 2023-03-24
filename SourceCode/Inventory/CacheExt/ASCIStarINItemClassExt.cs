@@ -11,18 +11,7 @@ namespace ASCISTARCustom
 {
     public class ASCIStarINItemClassExt : PXCacheExtension<PX.Objects.IN.INItemClass>
     {
-
-
-        #region Static Functions
-        public bool IsActive()
-        {
-
-            return true;
-        }
-        #endregion
-
-
-
+        public static bool IsActive() => true;
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]

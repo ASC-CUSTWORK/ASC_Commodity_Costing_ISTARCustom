@@ -25,12 +25,7 @@ namespace ASCISTARCustom
 {
     public class ASCIStarPOOrderExt : PXCacheExtension<PX.Objects.PO.POOrder>
     {
-        #region Static Method
-        public static bool IsActive()
-        {
-            return true;
-        }
-        #endregion
+        public static bool IsActive() => true;
 
         #region UsrCancelDate
         [PXDBDate]
@@ -75,34 +70,19 @@ namespace ASCISTARCustom
         //#endregion
 
         #region MarketID
-        public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
-        protected Int32? _usrMarketID;
-        //[APTranInventoryItem(Filterable = true)]
+        [PXDBInt()]
+        [PXUIField(DisplayName = "Market")]
         [PXSelector(
         typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>,
             Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
-            typeof(Vendor.acctCD),
-            typeof(Vendor.acctName)
+            typeof(Vendor.acctCD), typeof(Vendor.acctName)
+                        , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
+        public virtual int? UsrMarketID { get; set; }
+        public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
 
-            , SubstituteKey = typeof(Vendor.acctCD)
-            , DescriptionField = typeof(Vendor.acctName))]
-        [PXUIField(DisplayName = "Market")]
-        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXDBInt()]
-        public virtual Int32? UsrMarketID
-        {
-            get
-            {
-                return this._usrMarketID;
-            }
-            set
-            {
-                this._usrMarketID = value;
-            }
-        }
         #endregion
+
         #region UsrSetupID
-        public abstract class usrSetupID : PX.Data.BQL.BqlGuid.Field<usrSetupID> { }
         [PXDBGuid()]
         [PXSelector(typeof(Search<NotificationSetup.setupID,
             Where<NotificationSetup.sourceCD, Equal<APNotificationSource.vendor>,
@@ -111,11 +91,8 @@ namespace ASCISTARCustom
             SelectorMode = PXSelectorMode.DisplayModeText | PXSelectorMode.NoAutocomplete)]
         [PXUIField(DisplayName = "Mailing ID")]
         [PXDefault(typeof(ASCIStarVendorExt.usrSetupID))]
-        public virtual Guid? UsrSetupID
-        {
-            get;
-            set;
-        }
+        public virtual Guid? UsrSetupID { get; set; }
+        public abstract class usrSetupID : PX.Data.BQL.BqlGuid.Field<usrSetupID> { }
         #endregion
     }
 }

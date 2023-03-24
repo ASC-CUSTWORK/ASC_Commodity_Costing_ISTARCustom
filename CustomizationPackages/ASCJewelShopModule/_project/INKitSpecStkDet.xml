@@ -1,0 +1,6 @@
+﻿<Table TableName="INKitSpecStkDet">
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrUnitCost" ColumnType="decimal" AllowNull="True" MaxLength="10" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrCostingType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrExtCost" ColumnType="decimal" AllowNull="True" MaxLength="10" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrUnitPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+</Table>

@@ -1,0 +1,6 @@
+﻿<Table TableName="POLine">
+    <Column TableName="POLine" ColumnName="UsrPurity" ColumnType="string" AllowNull="True" MaxLength="20" DecimalPrecision="2" DecimalLength="20" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrWeight" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrRatePerGram" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrMaterialCost" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="2" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+</Table>

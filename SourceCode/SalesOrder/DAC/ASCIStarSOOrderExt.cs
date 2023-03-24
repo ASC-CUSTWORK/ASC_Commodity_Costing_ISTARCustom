@@ -24,13 +24,7 @@ namespace ASCISTARCustom
 {
     public class ASCIStarSOOrderExt : PXCacheExtension<PX.Objects.SO.SOOrder>
     {
-        #region Static Method
-        public static bool IsActive()
-        {
-            return true;
-        }
-        #endregion
-
+        public static bool IsActive() => true;
 
         #region UsrLegacyOrder
         [PXDBString(20)]

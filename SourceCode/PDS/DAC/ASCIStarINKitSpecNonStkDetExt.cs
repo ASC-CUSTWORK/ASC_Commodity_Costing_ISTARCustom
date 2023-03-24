@@ -10,30 +10,15 @@ namespace ASCISTARCustom
 {
     public class ASCIStarINKitSpecNonStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecNonStkDet>
     {
-        #region Static Functions
-        public bool IsActive()
-        {
-
-            return true;
-        }
-        #endregion
+        public static bool IsActive() => true;
+        
         #region UsrItemClassID
         [PXInt]
-        [PXParent(typeof(Select<
-        InventoryItem,
-        Where<
-            InventoryItem.inventoryID, Equal<Current<INKitSpecNonStkDet.compInventoryID>>>>))]
-
+        [PXParent(typeof(Select<        InventoryItem,        Where<            InventoryItem.inventoryID, Equal<Current<INKitSpecNonStkDet.compInventoryID>>>>))]
         [PXFormula(typeof(Parent<InventoryItem.itemClassID>))]
         public virtual int? UsrItemClassID { get; set; }
         public abstract class usrItemClassID : PX.Data.BQL.BqlInt.Field<usrItemClassID> { }
         #endregion
-
-        #region COST ROLLUP
-
-
-
-        #endregion COST ROLLUP
 
         #region UsrUnitCost
         [PXDBDecimal()]
