@@ -15,7 +15,6 @@ namespace ASCISTARCustom
         #region UsrLegacyShortRef
         [PXDBString(30)]
         [PXUIField(DisplayName = "Legacy Short Ref")]
-        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual string UsrLegacyShortRef { get; set; }
         public abstract class usrLegacyShortRef : PX.Data.BQL.BqlString.Field<usrLegacyShortRef> { }
         #endregion
@@ -23,7 +22,6 @@ namespace ASCISTARCustom
         #region UsrLegacyID
         [PXDBString(30)]
         [PXUIField(DisplayName = "Legacy ID")]
-        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual string UsrLegacyID { get; set; }
         public abstract class usrLegacyID : PX.Data.BQL.BqlString.Field<usrLegacyID> { }
         #endregion
@@ -38,48 +36,21 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrPriceAsID
-        protected Int32? _PriceAsID;
         [PXDBInt()]
         [PXUIField(DisplayName = "Price as Item")]
-        [PXSelector(
-        typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>,
-            Where<INItemClass.itemClassCD, Equal<CommodityClass>>>),
-            typeof(InventoryItem.inventoryCD),
-            typeof(InventoryItem.descr)
-
-            , SubstituteKey = typeof(InventoryItem.inventoryCD)
-            , DescriptionField = typeof(InventoryItem.descr))]
-        public virtual Int32? UsrPriceAsID
-        {
-            get
-            {
-                return this._PriceAsID;
-            }
-            set
-            {
-                this._PriceAsID = value;
-            }
-        }
+        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<CommodityClass>>>),
+            typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
+                        , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
+        public virtual int? UsrPriceAsID { get; set; }
         public abstract class usrPriceAsID : PX.Data.BQL.BqlInt.Field<usrPriceAsID> { }
         #endregion
 
         #region ToUnit
-        public abstract class usrPriceToUnit : PX.Data.BQL.BqlString.Field<usrPriceToUnit> { }
-        protected String _ToUnit;
         [INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible)]
         [PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXRestrictor(typeof(Where<ASCIStarINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
-        public virtual String UsrPriceToUnit
-        {
-            get
-            {
-                return this._ToUnit;
-            }
-            set
-            {
-                this._ToUnit = value;
-            }
-        }
+        public virtual string UsrPriceToUnit { get; set; }
+        public abstract class usrPriceToUnit : PX.Data.BQL.BqlString.Field<usrPriceToUnit> { }
 
         #endregion
 
@@ -93,7 +64,7 @@ namespace ASCISTARCustom
         #region UsrPricingGRAMSilver
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Fine Silver, Grams")]
-        public virtual Decimal? UsrPricingGRAMSilver { get; set; }
+        public virtual decimal? UsrPricingGRAMSilver { get; set; }
         public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
         #endregion
 
@@ -245,15 +216,15 @@ namespace ASCISTARCustom
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
         #endregion
 
-        //#region UsrContractSurchargeType
-        //[PXDBString(1, IsUnicode = true, InputMask = "")]
-        //[PXUIField(DisplayName = "Surcharge Type")]
-        //[ContractSurchargeType.List]
-        //[PXDefault(ContractSurchargeType.PercentageAmt, PersistingCheck = PXPersistingCheck.Null)]
+        #region UsrContractSurchargeType
+        [PXDBString(1, IsUnicode = true, InputMask = "")]
+        [PXUIField(DisplayName = "Surcharge Type")]
+        [ContractSurchargeType.List]
+        [PXDefault(ContractSurchargeType.PercentageAmt, PersistingCheck = PXPersistingCheck.Null)]
 
-        //public virtual string UsrContractSurchargeType { get; set; }
-        //public abstract class usrContractSurchargeType : PX.Data.BQL.BqlString.Field<usrContractSurchargeType> { }
-        //#endregion
+        public virtual string UsrContractSurchargeType { get; set; }
+        public abstract class usrContractSurchargeType : PX.Data.BQL.BqlString.Field<usrContractSurchargeType> { }
+        #endregion
 
         #region UsrCommodityCost
         [PXDBDecimal(6)]
@@ -274,7 +245,6 @@ namespace ASCISTARCustom
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Fabrication Cost")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
-
         public virtual Decimal? UsrFabricationCost { get; set; }
         public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
         #endregion

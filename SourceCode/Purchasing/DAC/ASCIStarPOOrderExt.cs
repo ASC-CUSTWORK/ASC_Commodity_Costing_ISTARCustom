@@ -43,10 +43,7 @@ namespace ASCISTARCustom
 
         #region UsrProgram
         [PXDBString(255)]
-        /*[PXUIField(DisplayName="Program", Required = false)]*/
         [PXUIField(DisplayName = "Program", Required = true)]
-        /*[PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]*/
-        [PXDefault(PersistingCheck = PXPersistingCheck.NullOrBlank)]
         public virtual string UsrProgram { get; set; }
         public abstract class usrProgram : PX.Data.BQL.BqlString.Field<usrProgram> { }
         #endregion
@@ -73,9 +70,8 @@ namespace ASCISTARCustom
         [PXDBInt()]
         [PXUIField(DisplayName = "Market")]
         [PXSelector(
-        typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>,
-            Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
-            typeof(Vendor.acctCD), typeof(Vendor.acctName)
+        typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
+                        typeof(Vendor.acctCD), typeof(Vendor.acctName)
                         , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
         public virtual int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }

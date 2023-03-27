@@ -28,7 +28,6 @@ namespace ASCISTARCustom
         [PXSelector(typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
             , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
-        //  [PXFormula(typeof(Selector<POVendorInventory.vendorID, ASCIStarAPVendorPriceExt.usrMarketID>))]
         public virtual int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
         #endregion
