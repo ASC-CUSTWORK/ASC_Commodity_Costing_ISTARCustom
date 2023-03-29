@@ -224,6 +224,14 @@ namespace ASCISTARCustom
             e.NewValue = classExt.UsrCostRollupType ?? CostRollupType.Other;
         }
 
+        protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrContractSurcharge> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+           // if ((decimal?)e.NewValue == null || ) throw new PXSetPropertyException<ASCIStarINInventoryItemExt.usrContractSurcharge>("Surcharge can not be less 0%!");
+
+        }
+
         protected virtual void _(Events.FieldUpdated<InventoryItem, InventoryItem.itemClassID> e)
         {
             var row = e.Row;
@@ -818,12 +826,13 @@ namespace ASCISTARCustom
 
             decimal? temp1 = costProvider.CostBasis.GoldBasis.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz;
             decimal? temp2 = temp1 * (1.0m + rowExt.UsrContractSurcharge / 100.0m);
-            decimal? newIncrementValue = temp2 * (costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz);
+            decimal? temp3 = costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz;
+
+            decimal? newIncrementValue = (temp3 == 0.0m || temp3 == null) ? temp2 : temp2 * temp3;
 
             if (newIncrementValue == rowExt.UsrContractIncrement) return;
 
             rowExt.UsrContractIncrement = newIncrementValue;
-            //cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractIncrement>(row, newIncrementValue);
         }
 
         private void UpdateSurcharge(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
