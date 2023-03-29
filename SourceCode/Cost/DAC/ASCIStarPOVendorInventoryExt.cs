@@ -45,14 +45,14 @@ namespace ASCISTARCustom
         #region UsrVendorDefault
         [PXDBBool()]
         [PXUIField(DisplayName = "Override Vendor")]
-        [PXDefault(false)]
+        [PXDefault(false, PersistingCheck = PXPersistingCheck.Null)]
         public virtual bool? UsrVendorDefault { get; set; }
         public abstract class usrVendorDefault : PX.Data.BQL.BqlBool.Field<usrVendorDefault> { }
         #endregion
 
         #region UsrCommodityPrice
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Market Price")]
+        [PXUIField(DisplayName = "Vendor Price")]
         public virtual decimal? UsrCommodityPrice { get; set; }
         public abstract class usrCommodityPrice : PX.Data.BQL.BqlDecimal.Field<usrCommodityPrice> { }
         #endregion

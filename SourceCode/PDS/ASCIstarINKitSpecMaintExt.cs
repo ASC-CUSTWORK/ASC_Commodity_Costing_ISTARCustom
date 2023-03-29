@@ -593,7 +593,7 @@ namespace ASCISTARCustom
 
             ASCIStarINKitSpecStkDetExt ext = cache.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
             PXTrace.WriteInformation($"ext.UsrCostingType:{ext.UsrCostingType}");
-            if (ext.UsrCostingType == CostingType.PercentageCost)
+            if (/*ext.UsrCostingType == CostingType.PercentageCost*/ false)
             {
                 PXTrace.WriteInformation($"Disabling Cost");
                 ext.UsrUnitCost = 0.00m;

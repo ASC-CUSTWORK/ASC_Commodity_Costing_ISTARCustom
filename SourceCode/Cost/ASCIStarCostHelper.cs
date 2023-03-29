@@ -926,9 +926,9 @@ namespace ASCISTARCustom
                         case CostingType.WeightCost:
                             msg += $"Costing    :Weight{Environment.NewLine}";
                             break;
-                        case CostingType.PercentageCost:
-                            msg += $"Costing    :Percentage{Environment.NewLine}";
-                            break;
+                        //case CostingType.PercentageCost:
+                        //    msg += $"Costing    :Percentage{Environment.NewLine}";
+                        //    break;
                         default: /* CostingType.StandardCost */
                             msg += $"Costing    :Standard{Environment.NewLine}";
                             break;
@@ -1102,15 +1102,15 @@ namespace ASCISTARCustom
                     foreach (string Key in CostRollupTotal.Keys)
                     {
                         TraceCost = TraceCost + $"{Key}:{CostRollupTotal[Key]}{System.Environment.NewLine}";
-                        if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping && Key != CostRollupType.Commodity)
+                        if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping /*&& Key != CostRollupType.Commodity*/)
                         {
 
                             costTotal += CostRollupTotal[Key];
                         }
-                        if (Key == CostRollupType.Commodity)
-                        {
-                            costTotal += marketCommodityCost;
-                        }
+                        //if (Key == CostRollupType.Commodity)
+                        //{
+                        //    costTotal += marketCommodityCost;
+                        //}
                     }
                     PXTrace.WriteInformation($"ContractCost:{System.Environment.NewLine}{TraceCost}");
                     return costTotal;
