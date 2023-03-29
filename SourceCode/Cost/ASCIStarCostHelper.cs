@@ -926,9 +926,9 @@ namespace ASCISTARCustom
                         case CostingType.WeightCost:
                             msg += $"Costing    :Weight{Environment.NewLine}";
                             break;
-                        case CostingType.PercentageCost:
-                            msg += $"Costing    :Percentage{Environment.NewLine}";
-                            break;
+                        //case CostingType.PercentageCost:
+                        //    msg += $"Costing    :Percentage{Environment.NewLine}";
+                        //    break;
                         default: /* CostingType.StandardCost */
                             msg += $"Costing    :Standard{Environment.NewLine}";
                             break;
@@ -1039,17 +1039,17 @@ namespace ASCISTARCustom
 
                     this.CostRollupTotal[CostRollupType.Shipping] = itemExt.UsrFreightCost ?? 0.00m;
                     this.CostRollupTotal[CostRollupType.Labor] = itemExt.UsrLaborCost ?? 0.00m;
+                    this.CostRollupTotal[CostRollupType.Duty] = itemExt.UsrDutyCost ?? 0.00m;
 
-
-                    decimal totalNoDuty = 0.00m;
-                    foreach (string Key in CostRollupTotal.Keys)
-                    {
-                        if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping)
-                        {
-                            totalNoDuty += CostRollupTotal[Key];
-                        }
-                    }
-                    this.CostRollupTotal[CostRollupType.Duty] = (itemExt.UsrDutyCostPct ?? 0.0000m) / 100.0000m * totalNoDuty;
+                    //decimal totalNoDuty = 0.00m;
+                    //foreach (string Key in CostRollupTotal.Keys)
+                    //{
+                    //    if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping)
+                    //    {
+                    //        totalNoDuty += CostRollupTotal[Key];
+                    //    }
+                    //}
+                    //this.CostRollupTotal[CostRollupType.Duty] = (itemExt.UsrDutyCostPct ?? 0.0000m) / 100.0000m * totalNoDuty;
                     PXTrace.WriteInformation(msg);
                 }
                 catch (Exception err)
@@ -1102,15 +1102,15 @@ namespace ASCISTARCustom
                     foreach (string Key in CostRollupTotal.Keys)
                     {
                         TraceCost = TraceCost + $"{Key}:{CostRollupTotal[Key]}{System.Environment.NewLine}";
-                        if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping && Key != CostRollupType.Commodity)
+                        if (true/*Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping*/ /*&& Key != CostRollupType.Commodity*/)
                         {
 
                             costTotal += CostRollupTotal[Key];
                         }
-                        if (Key == CostRollupType.Commodity)
-                        {
-                            costTotal += marketCommodityCost;
-                        }
+                        //if (Key == CostRollupType.Commodity)
+                        //{
+                        //    costTotal += marketCommodityCost;
+                        //}
                     }
                     PXTrace.WriteInformation($"ContractCost:{System.Environment.NewLine}{TraceCost}");
                     return costTotal;

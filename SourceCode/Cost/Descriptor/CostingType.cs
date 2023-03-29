@@ -29,8 +29,8 @@ namespace ASCISTARCustom
         public class ListAttribute : PXStringListAttribute
         {
             public ListAttribute() : base(
-                new[] { StandardCost, MarketCost, ContractCost, PercentageCost, WeightCost },
-                new[] { MessageStandard, MessageMarket, MessageContract, MessagePercentage, MessageWeight }
+                new[] { StandardCost, MarketCost, ContractCost,/* PercentageCost,*/ WeightCost },
+                new[] { MessageStandard, MessageMarket, MessageContract,/* MessagePercentage,*/ MessageWeight }
                 )
             { }
         }
@@ -38,13 +38,13 @@ namespace ASCISTARCustom
         public const string StandardCost = "S";
         public const string MarketCost = "M"; // GRAMS * Market Price from Matrix * (1 + Surcharge) * (1 + Loss Percentage)
         public const string ContractCost = "C"; // Get Fixed Price from Assembly
-        public const string PercentageCost = "P"; // SUM(All Non PercentageCost) * 
+       // public const string PercentageCost = "P"; // SUM(All Non PercentageCost) * 
         public const string WeightCost = "W"; // GRAMS * Unit
 
         public const string MessageStandard = "Standard";
         public const string MessageMarket = "Market";
         public const string MessageContract = "Contract";
-        public const string MessagePercentage = "Percentage";
+   //     public const string MessagePercentage = "Percentage";
         public const string MessageWeight = "By Weight";
 
 
@@ -63,11 +63,11 @@ namespace ASCISTARCustom
             public contractCost() : base(ContractCost) { }
 
         }
-        public class percentageCost : PX.Data.BQL.BqlString.Constant<percentageCost>
-        {
-            public percentageCost() : base(PercentageCost) { }
+        //public class percentageCost : PX.Data.BQL.BqlString.Constant<percentageCost>
+        //{
+        //    public percentageCost() : base(PercentageCost) { }
 
-        }
+        //}
         public class weightCost : PX.Data.BQL.BqlString.Constant<weightCost>
         {
             public weightCost() : base(WeightCost) { }
