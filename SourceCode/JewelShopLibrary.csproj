@@ -32,23 +32,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PX.Common">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Common.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.Std.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Data.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Objects.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

@@ -3,4 +3,5 @@
     <Column TableName="POLine" ColumnName="UsrWeight" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POLine" ColumnName="UsrRatePerGram" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POLine" ColumnName="UsrMaterialCost" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="2" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrCostingType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
 </Table>
