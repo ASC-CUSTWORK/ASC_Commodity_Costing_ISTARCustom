@@ -17,7 +17,7 @@ using ASCISTARCustom.Inventory.DAC;
 
 using POVendorInventoryPriceUpdate = PX.Objects.PO.POItemCostManager.POVendorInventoryPriceUpdate;
 using ItemCost = PX.Objects.PO.POItemCostManager.ItemCost;
-
+using PX.Common;
 
 namespace ASCISTARCustom
 {
@@ -1166,6 +1166,51 @@ namespace ASCISTARCustom
             }
 
             #endregion xctor
+
+            public decimal GetMarketCost()
+            {
+                decimal value = 0m;
+                if (CostRollupTotal.Any())
+                {
+                    CostRollupTotal.Keys.ForEach(key =>
+                    {
+                        value += CostRollupTotal[key];
+                    });
+                }
+                return value;
+            }
+
+            public decimal GetContractCost()
+            {
+                decimal value = 0m;
+                if (CostRollupTotal.Any())
+                {
+                    CostRollupTotal.Keys.ForEach(key =>
+                    {
+                        if (true)
+                        {
+                            value += CostRollupTotal[key];
+                        }
+                    });
+                }
+                return value;
+            }
+
+            public decimal GetWeightCost()
+            {
+                decimal value = 0m;
+                if (CostRollupTotal.Any())
+                {
+                    CostRollupTotal.Keys.ForEach(key =>
+                    {
+                        if (true)
+                        {
+                            value += CostRollupTotal[key];
+                        }
+                    });
+                }
+                return value;
+            }
 
             //public InventoryItem GetCommodityItem(PXGraph graph, string InventoryCD)
             //{
