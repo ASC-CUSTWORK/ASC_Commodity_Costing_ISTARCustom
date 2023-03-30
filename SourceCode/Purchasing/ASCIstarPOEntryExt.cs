@@ -113,19 +113,16 @@ namespace ASCISTARCustom
                 var inventoryItem = PXSelectorAttribute.Select<InventoryItem.inventoryID>(sender, row, row.InventoryID) as InventoryItem;
                 if (inventoryItem != null)
                 {
+                    var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
+                    inventoryItemExt.UsrCostingType = rowExt.UsrCostingType;
+
                     var costHelper = new ASCIStarMarketCostHelper.JewelryCost(Base, inventoryItem, 0m, 0m, doc.VendorID, docExt.UsrMarketID, docExt.UsrEstArrivalDate, row.UOM, doc.CuryID);
-                    e.NewValue = CuryUnitCost(rowExt, costHelper);
+                    if (rowExt.UsrCostingType != CostingType.StandardCost)
+                    {
+                        e.NewValue = costHelper.GetPurchaseCost(rowExt.UsrCostingType);
+                    }
                 }
             }
-        }
-        #endregion
-
-        #region Service Methods
-        private decimal CuryUnitCost(ASCIStarPOLineExt rowExt, ASCIStarMarketCostHelper.JewelryCost costHelper)
-        {
-            return rowExt.UsrCostingType == CostingType.MarketCost ? costHelper.GetMarketCost() : 
-                   rowExt.UsrCostingType == CostingType.ContractCost ? costHelper.GetContractCost() : 
-                   rowExt.UsrCostingType == CostingType.WeightCost ? costHelper.GetWeightCost() : 0m;
         }
         #endregion
     }
