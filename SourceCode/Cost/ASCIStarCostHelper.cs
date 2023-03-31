@@ -17,7 +17,8 @@ using ASCISTARCustom.Inventory.DAC;
 
 using POVendorInventoryPriceUpdate = PX.Objects.PO.POItemCostManager.POVendorInventoryPriceUpdate;
 using ItemCost = PX.Objects.PO.POItemCostManager.ItemCost;
-
+using PX.Common;
+using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -907,23 +908,23 @@ namespace ASCISTARCustom
 
 
                     ASCIStarINInventoryItemExt itemExt = item.GetExtension<ASCIStarINInventoryItemExt>();
-                    this.costingType = itemExt.UsrCostingType ?? CostingType.StandardCost;
-                    this.costRollupType = itemExt.UsrCostRollupType ?? CostRollupType.Other;
+                    this.costingType = itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost;
+                    this.costRollupType = itemExt.UsrCostRollupType ?? ASCIStarCostRollupType.Other;
 
                     this.SubItem = new List<JewelryCost>();
                     this.CostRollup = new Dictionary<string, decimal>();
                     this.CostRollupTotal = new Dictionary<string, decimal>();
 
 
-                    switch (itemExt.UsrCostingType ?? CostingType.StandardCost)
+                    switch (itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost)
                     {
-                        case CostingType.MarketCost:
+                        case ASCIStarCostingType.MarketCost:
                             msg += $"Costing    :Market{Environment.NewLine}";
                             break;
-                        case CostingType.ContractCost:
+                        case ASCIStarCostingType.ContractCost:
                             msg += $"Costing    :Contract{Environment.NewLine}";
                             break;
-                        case CostingType.WeightCost:
+                        case ASCIStarCostingType.WeightCost:
                             msg += $"Costing    :Weight{Environment.NewLine}";
                             break;
                         //case CostingType.PercentageCost:
@@ -1006,6 +1007,33 @@ namespace ASCISTARCustom
                         msg += $"Found {itemExt.UsrPricingGRAMGold} Gold Grams to Price{Environment.NewLine}";
                         msg += $"PricingDate:{pricingDate}{Environment.NewLine}";
                         msg += $"Gold Eff   :{CostBasis.GoldBasis.EffectiveDate}{Environment.NewLine}";
+
+                        //pricingDate = CostBasis.GoldBasis.EffectiveDate; //goldMarket.EffectiveDate;
+
+                        decimal costPerGram = 0;
+
+                        switch (itemExt.UsrCostingType)
+                        {
+                            case ASCIStarCostingType.MarketCost:
+                                costPerGram = CostBasis.GoldBasis.EffectiveMarketPerGram;
+                                break;
+                            case ASCIStarCostingType.ContractCost:
+                                costPerGram = CostBasis.GoldBasis.BasisPerGram();
+                                break;
+                            case ASCIStarCostingType.WeightCost:
+                                costPerGram = CostBasis.GoldBasis.BasisPerGram();
+                                // labor cost * gold grams
+                                break;
+
+                            case ASCIStarCostingType.StandardCost:
+                                break;
+                            default: 
+                                
+                                break;
+                        }
+
+                        cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * (costPerGram) * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
+                        marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
                         msg += $"Gold Loss  : {CostBasis.GoldBasis.LossPct}{Environment.NewLine}";
                         msg += $"Gold Sur   : {CostBasis.GoldBasis.SurchargePct}{Environment.NewLine}";
                     }
@@ -1028,17 +1056,16 @@ namespace ASCISTARCustom
                         msg += $"Silver Loss: {CostBasis.SilverBasis.LossPct}{Environment.NewLine}";
                         msg += $"Silver Sur : {CostBasis.SilverBasis.SurchargePct}{Environment.NewLine}";
                     }
+                    this.CostRollupTotal[ASCIStarCostRollupType.Commodity] = cost;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Materials] = itemExt.UsrOtherMaterialCost ?? 0.00m;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Fabrication] = itemExt.UsrFabricationCost ?? 0.00m;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Handling] = itemExt.UsrHandlingCost ?? 0.00m;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Packaging] = itemExt.UsrPackagingCost ?? 0.00m;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Other] = itemExt.UsrOtherCost ?? 0.00m;
 
-                    this.CostRollupTotal[CostRollupType.Commodity] = cost;
-                    this.CostRollupTotal[CostRollupType.Materials] = itemExt.UsrOtherMaterialCost ?? 0.00m;
-                    this.CostRollupTotal[CostRollupType.Fabrication] = itemExt.UsrFabricationCost ?? 0.00m;
-                    this.CostRollupTotal[CostRollupType.Handling] = itemExt.UsrHandlingCost ?? 0.00m;
-                    this.CostRollupTotal[CostRollupType.Packaging] = itemExt.UsrPackagingCost ?? 0.00m;
-                    this.CostRollupTotal[CostRollupType.Other] = itemExt.UsrOtherCost ?? 0.00m;
-
-                    this.CostRollupTotal[CostRollupType.Shipping] = itemExt.UsrFreightCost ?? 0.00m;
-                    this.CostRollupTotal[CostRollupType.Labor] = itemExt.UsrLaborCost ?? 0.00m;
-                    this.CostRollupTotal[CostRollupType.Duty] = itemExt.UsrDutyCost ?? 0.00m;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Shipping] = itemExt.UsrFreightCost ?? 0.00m;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Labor] = itemExt.UsrLaborCost ?? 0.00m;
+                    this.CostRollupTotal[ASCIStarCostRollupType.Duty] = itemExt.UsrDutyCost ?? 0.00m;
 
                     //decimal totalNoDuty = 0.00m;
                     //foreach (string Key in CostRollupTotal.Keys)
@@ -1086,85 +1113,33 @@ namespace ASCISTARCustom
                 return costPerOz;
             }
 
-            public decimal MarketCost
-            {
-                get
-                {
-                    if (this.CostRollupTotal == null)
-                    {
-                        PXTrace.WriteInformation("CostRollupTotal is NULL");
-                        return 0.00m;
-                    }
-
-                    decimal costTotal = 0.00m;
-                    string TraceCost = "";
-                    foreach (string Key in CostRollupTotal.Keys)
-                    {
-                        TraceCost = TraceCost + $"{Key}:{CostRollupTotal[Key]}{System.Environment.NewLine}";
-                        if (true/*Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping*/ /*&& Key != CostRollupType.Commodity*/)
-                        {
-
-                            costTotal += CostRollupTotal[Key];
-                        }
-                        //if (Key == CostRollupType.Commodity)
-                        //{
-                        //    costTotal += marketCommodityCost;
-                        //}
-                    }
-                    PXTrace.WriteInformation($"ContractCost:{System.Environment.NewLine}{TraceCost}");
-                    return costTotal;
-                }
-            }
-
-            public decimal ContractCost
-            {
-                get
-                {
-                    if (this.CostRollupTotal == null)
-                    {
-                        PXTrace.WriteInformation("CostRollupTotal is NULL");
-                        return 0.00m;
-                    }
-
-                    decimal costTotal = 0.00m;
-                    string TraceCost = "";
-                    foreach (string Key in CostRollupTotal.Keys)
-                    {
-                        TraceCost = TraceCost + $"{Key}:{CostRollupTotal[Key]}{System.Environment.NewLine}";
-                        if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping)
-                        {
-
-                            costTotal += CostRollupTotal[Key];
-                        }
-                    }
-                    PXTrace.WriteInformation($"ContractCost:{System.Environment.NewLine}{TraceCost}");
-                    return costTotal;
-                }
-            }
-
-            public decimal UnitCost
-            {
-                get
-                {
-                    if (this.CostRollupTotal == null)
-                    {
-                        PXTrace.WriteInformation("CostRollupTotal is NULL");
-                        return 0.00m;
-                    }
-
-                    decimal costTotal = 0.00m;
-                    string TraceCost = "";
-                    foreach (string Key in CostRollupTotal.Keys)
-                    {
-                        TraceCost = TraceCost + $"{Key}:{CostRollupTotal[Key]}{System.Environment.NewLine}";
-                        costTotal += CostRollupTotal[Key];
-                    }
-                    PXTrace.WriteInformation($"UnitCost:{System.Environment.NewLine}{TraceCost}");
-                    return costTotal;
-                }
-            }
-
             #endregion xctor
+
+            public decimal GetPurchaseCost(string costingType)
+            {
+                var itemExt = CostBasis.ItemExt;
+                decimal value = 0m;
+                if (CostRollupTotal.Any())
+                {
+                    CostRollupTotal.Keys.ForEach(key =>
+                    {
+                        if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMGold > 0)
+                        {
+                            value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                        }
+                        else if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMSilver > 0)
+                        {
+                            value += (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                        }
+                        else
+                        {
+                            value += CostRollupTotal[key];
+                        }
+                    });
+                }
+                return value;
+            }
+
 
             //public InventoryItem GetCommodityItem(PXGraph graph, string InventoryCD)
             //{
