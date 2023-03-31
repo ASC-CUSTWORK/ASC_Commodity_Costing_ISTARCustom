@@ -674,7 +674,8 @@ namespace ASCISTARCustom
 
         private void UpdatePurchaseContractCost(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
         {
-            decimal? newCost = rowExt.UsrCommodityCost + rowExt.UsrOtherMaterialCost + rowExt.UsrFabricationCost + rowExt.UsrLaborCost + rowExt.UsrPackagingCost + rowExt.UsrOtherCost;
+            decimal? laborValue = rowExt.UsrCostingType == ASCIStarCostingType.WeightCost ? rowExt.UsrLaborCost * (rowExt.UsrPricingGRAMSilver + rowExt.UsrActualGRAMGold) : rowExt.UsrLaborCost;
+            decimal? newCost = rowExt.UsrCommodityCost + rowExt.UsrOtherMaterialCost + rowExt.UsrFabricationCost + laborValue +rowExt.UsrPackagingCost + rowExt.UsrOtherCost;
 
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractCost>(row, newCost);
 

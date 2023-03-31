@@ -865,8 +865,6 @@ namespace ASCISTARCustom
 
             #endregion Declarations
 
-            #region xctor
-
             //public JewelryCost(InventoryItem item, DateTime? PricingDate) 
             //{
             //    if (PricingDate == null)
@@ -879,16 +877,8 @@ namespace ASCISTARCustom
             //public JewelryCost(InventoryItem item, string uom, string curyID, decimal cost, bool convertCury)
             //{
             //}
-            public JewelryCost(PXGraph graph
-                            , InventoryItem item
-                            , decimal cost = 0.000000m
-                            , decimal baseCost = 0.000000m
-                            , int? vendorID = null
-                            , int? marketID = null
-                            , DateTime? PricingDate = null
-                            , string uom = "EA"
-                            , string curyID = "USD"
-                            , bool convertCury = false)
+            public JewelryCost(PXGraph graph, InventoryItem item, decimal cost = 0.000000m, decimal baseCost = 0.000000m, int? vendorID = null, int? marketID = null
+                            , DateTime? PricingDate = null, string uom = "EA", string curyID = "USD", bool convertCury = false)
             {
                 string msg = "";
                 try
@@ -1027,8 +1017,8 @@ namespace ASCISTARCustom
 
                             case ASCIStarCostingType.StandardCost:
                                 break;
-                            default: 
-                                
+                            default:
+
                                 break;
                         }
 
@@ -1048,7 +1038,23 @@ namespace ASCISTARCustom
 
                         CostBasis.SilverBasis.BuildFinePrices();
 
-                        var metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                        decimal metalCostPerOz = 0.0m;
+                        switch (itemExt.UsrCostingType)
+                        {
+                            case ASCIStarCostingType.MarketCost:
+                                metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                                break;
+                            case ASCIStarCostingType.ContractCost:
+                                metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                                break;
+                            case ASCIStarCostingType.WeightCost:  // labor cost * silver grams
+                                metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                                break;
+
+                            case ASCIStarCostingType.StandardCost: break;
+                            default: break;
+                        }
+                        //  var metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
                         cost += (itemExt.UsrPricingGRAMSilver ?? 0.00m) * metalCostPerOz / 31.10348m * (1.0000m + CostBasis.SilverBasis.LossPct) * (1.0000m + CostBasis.SilverBasis.SurchargePct);
                         //   marketCommodityCost += cost * (CostBasis.SilverBasis.MarketPerFineOz["SSS"] / CostBasis.SilverBasis.BasisPerFineOz["SSS"]);
 
@@ -1085,6 +1091,8 @@ namespace ASCISTARCustom
                 }
             }
 
+
+            #region Helpers Methods
             public decimal GetSilverMetalCostPerOZ(decimal basisCost, decimal marketCost, decimal? incrementNullable)
             {
                 string msg = "";
@@ -1102,7 +1110,7 @@ namespace ASCISTARCustom
                 decimal steps3 = Math.Ceiling(temp);
                 decimal steps = Math.Truncate(temp);
 
-              //  decimal steps = temp % 1 == 0 && temp > 1 && temp % 2 == 0 ? temp - 1 : Math.Truncate(temp);
+                //  decimal steps = temp % 1 == 0 && temp > 1 && temp % 2 == 0 ? temp - 1 : Math.Truncate(temp);
                 decimal floor = basisCost + (steps * increment);
                 decimal ceiling = floor + increment;
                 costPerOz = (floor + ceiling) / 2.000000m;
@@ -1113,8 +1121,6 @@ namespace ASCISTARCustom
                 return costPerOz;
             }
 
-            #endregion xctor
-
             public decimal GetPurchaseCost(string costingType)
             {
                 var itemExt = CostBasis.ItemExt;
@@ -1123,57 +1129,31 @@ namespace ASCISTARCustom
                 {
                     CostRollupTotal.Keys.ForEach(key =>
                     {
-                        if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMGold > 0)
+                        if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor)
                         {
-                            value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[ASCIStarCostRollupType.Labor];
-                        }
-                        else if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMSilver > 0)
-                        {
-                            value += (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                            value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[key] + (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[key];
                         }
                         else
                         {
                             value += CostRollupTotal[key];
                         }
+                        //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMGold > 0)
+                        //{
+                        //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                        //}
+                        //else if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMSilver > 0)
+                        //{
+                        //    value += (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                        //}
+                        //else
+                        //{
+                        //    value += CostRollupTotal[key];
+                        //}
                     });
                 }
                 return value;
             }
-
-
-            //public InventoryItem GetCommodityItem(PXGraph graph, string InventoryCD)
-            //{
-            //    InventoryItem commodity = new PXSelect<InventoryItem, Where<InventoryItem.inventoryCD, Equal<Required<InventoryItem.inventoryCD>>>>(graph).SelectSingle(InventoryCD);
-            //    if (commodity == null)
-            //        throw new PXException($"{InventoryCD} commodity not found in Stock Items");
-            //    return commodity;
-
-            //}
-
-            //public Vendor GetMarketVendor(PXGraph graph, string AcctCD = "LONDON PM")
-            //{
-            //    Vendor market = new PXSelect<Vendor, Where<Vendor.acctCD, Equal<Required<Vendor.acctCD>>>>(graph).SelectSingle(AcctCD);
-            //    if (market == null)
-            //        throw new PXException($"Market {AcctCD} not found in Vendors");
-            //    return market;
-
-            //}
-
-            //public Vendor GetMarketVendor(PXGraph graph, int? VendorID)
-            //{
-            //    if(VendorID == null)
-            //    {
-            //        PXTrace.WriteWarning("No Market Selected, Using LONDON PM");
-            //        return GetMarketVendor(graph);
-            //    }    
-            //    Vendor market = new PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>(graph).SelectSingle(VendorID);
-            //    if (market == null)
-            //        throw new PXException($"Market not found in Vendors");
-            //    return market;
-
-            //}
-
-
+            #endregion
 
             ////public APVendorPrice MarketSilverPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "SSS")
             //public APVendorPrice MarketSilverPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "SSS", DateTime? effectiveDate = null)
@@ -1476,118 +1456,6 @@ namespace ASCISTARCustom
             //    }
             //}
 
-            public static decimal CalcStandardCost(PXCache cache, int kitInventoryID, int compInventoryID)
-            {
-                decimal cost = 0.00000m;
-                try
-                {
-
-                }
-                catch (Exception err)
-                {
-                    throw;
-                }
-
-                return cost;
-
-            }
-            public static decimal GetCommodityPrice(PXCache cache,
-                                                    int kitInventoryID,
-                                                    int compInventoryID,
-                                                    int? VendorID = null,
-                                                    DateTime? EffectiveDate = null)
-            {
-                if (VendorID == null)
-                {
-
-                }
-
-                if (EffectiveDate == null)
-                    EffectiveDate = DateTime.Today;
-                decimal cost = 0.00000m;
-                try
-                {
-
-                }
-                catch (Exception err)
-                {
-                    throw;
-                }
-
-                return cost;
-
-            }
-            public static decimal CalcMarketCost(PXCache cache, InventoryItem item, int kitInventoryID, int compInventoryID, DateTime? EffectiveDate = null)
-            {
-                if (EffectiveDate == null)
-                    EffectiveDate = DateTime.Today;
-                decimal cost = 0.00000m;
-                try
-                {
-
-                }
-                catch (Exception err)
-                {
-                    throw err;
-                }
-
-                return cost;
-
-            }
-
-            public static decimal CalcContractCost(PXCache cache, InventoryItem item, int kitInventoryID, int compInventoryID, DateTime? EffectiveDate = null)
-            {
-                if (EffectiveDate == null)
-                    EffectiveDate = DateTime.Today;
-                decimal cost = 0.00000m;
-                try
-                {
-
-                }
-                catch (Exception err)
-                {
-                    throw err;
-                }
-
-                return cost;
-
-            }
-
-            public static decimal CalcPercentageCost(PXCache cache, InventoryItem item, int kitInventoryID, int compInventoryID, DateTime? EffectiveDate = null)
-            {
-                if (EffectiveDate == null)
-                    EffectiveDate = DateTime.Today;
-                decimal cost = 0.00000m;
-                try
-                {
-
-                }
-                catch (Exception err)
-                {
-                    throw err;
-                }
-
-                return cost;
-
-            }
-
-            public static decimal CalcWeightCost(PXCache cache, InventoryItem item, int kitInventoryID, int compInventoryID, DateTime? EffectiveDate = null)
-            {
-                if (EffectiveDate == null)
-                    EffectiveDate = DateTime.Today;
-                decimal cost = 0.00000m;
-                try
-                {
-
-                }
-                catch (Exception err)
-                {
-                    throw err;
-                }
-
-                return cost;
-
-            }
 
 
             //public void UpdateDependents(PXCache cache, int? kitInventoryID)
@@ -1612,55 +1480,55 @@ namespace ASCISTARCustom
             //}
 
 
-            public APVendorPrice GetCommodityPrice(PXCache cache, int? inventoryID, string UOM, int? vendorID, DateTime? effectiveDate = null)
-            {
-                APVendorPrice retPrice = new APVendorPrice();
-                InventoryItem item = InventoryItem.PK.Find(cache.Graph, inventoryID);
-                if (item == null)
-                    return retPrice;
-                if (effectiveDate == null)
-                    effectiveDate = DateTime.Today;
-                PXTrace.WriteInformation($"{item.InventoryCD} Exists, Checking Commodity");
-                INItemClass itemClass = INItemClass.PK.Find(cache.Graph, item.ItemClassID);
-                PXTrace.WriteInformation($"Class {itemClass.ItemClassCD} Found");
-                if (itemClass.ItemClassCD.Trim() == "COMMODITY")
-                {
-                    PXTrace.WriteInformation("Item is Class Commodity");
+            //public APVendorPrice GetCommodityPrice(PXCache cache, int? inventoryID, string UOM, int? vendorID, DateTime? effectiveDate = null)
+            //{
+            //    APVendorPrice retPrice = new APVendorPrice();
+            //    InventoryItem item = InventoryItem.PK.Find(cache.Graph, inventoryID);
+            //    if (item == null)
+            //        return retPrice;
+            //    if (effectiveDate == null)
+            //        effectiveDate = DateTime.Today;
+            //    PXTrace.WriteInformation($"{item.InventoryCD} Exists, Checking Commodity");
+            //    INItemClass itemClass = INItemClass.PK.Find(cache.Graph, item.ItemClassID);
+            //    PXTrace.WriteInformation($"Class {itemClass.ItemClassCD} Found");
+            //    if (itemClass.ItemClassCD.Trim() == "COMMODITY")
+            //    {
+            //        PXTrace.WriteInformation("Item is Class Commodity");
 
-                    Vendor vendor;
-                    if (vendorID == null)
-                    {
-                        PXTrace.WriteInformation("No Market Selected, defaulting LONDON PM");
-                        vendor = PXSelectReadonly<Vendor, Where<Vendor.acctCD, Equal<Required<Vendor.acctCD>>>>.Select(cache.Graph, "LONDON PM");
-                        if (vendor == null)
-                            throw new PXException("LONDON PM Vendor missing and no vendor provided");
-                        vendorID = vendor.BAccountID;
+            //        Vendor vendor;
+            //        if (vendorID == null)
+            //        {
+            //            PXTrace.WriteInformation("No Market Selected, defaulting LONDON PM");
+            //            vendor = PXSelectReadonly<Vendor, Where<Vendor.acctCD, Equal<Required<Vendor.acctCD>>>>.Select(cache.Graph, "LONDON PM");
+            //            if (vendor == null)
+            //                throw new PXException("LONDON PM Vendor missing and no vendor provided");
+            //            vendorID = vendor.BAccountID;
 
-                    }
-                    else
-                    {
-                        vendor = PXSelectReadonly<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(cache.Graph, vendorID);
-                    }
-                    PXTrace.WriteInformation($"item/ID:{item.InventoryCD}/{inventoryID}, vendor/ID:{vendor}/{vendorID}, effectiveDate:{effectiveDate}");
-                    APVendorPrice price = (APVendorPrice)CommodityPrice.SelectSingle(cache.Graph, inventoryID, vendorID, effectiveDate);
-                    if (price == null)
-                    {
-                        PXTrace.WriteInformation($"No Price found for InventoryID:{inventoryID}, vendorID:{vendorID}, effectiveDate:{effectiveDate}");
-                    }
-                    else
-                    {
-                        PXTrace.WriteInformation($"{price.EffectiveDate}: {price.SalesPrice} per {price.UOM}");
-                        ASCIStarAPVendorPriceExt priceext = cache.GetExtension<ASCIStarAPVendorPriceExt>(price);
-                        retPrice = price;
-                    }
+            //        }
+            //        else
+            //        {
+            //            vendor = PXSelectReadonly<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(cache.Graph, vendorID);
+            //        }
+            //        PXTrace.WriteInformation($"item/ID:{item.InventoryCD}/{inventoryID}, vendor/ID:{vendor}/{vendorID}, effectiveDate:{effectiveDate}");
+            //        APVendorPrice price = (APVendorPrice)CommodityPrice.SelectSingle(cache.Graph, inventoryID, vendorID, effectiveDate);
+            //        if (price == null)
+            //        {
+            //            PXTrace.WriteInformation($"No Price found for InventoryID:{inventoryID}, vendorID:{vendorID}, effectiveDate:{effectiveDate}");
+            //        }
+            //        else
+            //        {
+            //            PXTrace.WriteInformation($"{price.EffectiveDate}: {price.SalesPrice} per {price.UOM}");
+            //            ASCIStarAPVendorPriceExt priceext = cache.GetExtension<ASCIStarAPVendorPriceExt>(price);
+            //            retPrice = price;
+            //        }
 
-                }
-                else
-                {
-                    PXTrace.WriteInformation("Item is Not a Commodity");
-                }
-                return retPrice;
-            }
+            //    }
+            //    else
+            //    {
+            //        PXTrace.WriteInformation("Item is Not a Commodity");
+            //    }
+            //    return retPrice;
+            //}
 
         }
     }
