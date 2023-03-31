@@ -73,10 +73,10 @@
     <Compile Include="Cost\Descriptor\ASCIStarItemPrice.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarMarket.cs" />
     <Compile Include="Cost\Descriptor\CommodityType.cs" />
-    <Compile Include="Cost\Descriptor\ContractSurchargeType.cs" />
+    <Compile Include="Cost\Descriptor\ASCIStarContractSurchargeType.cs" />
     <Compile Include="Cost\Descriptor\CostBasisType.cs" />
-    <Compile Include="Cost\Descriptor\CostingType.cs" />
-    <Compile Include="Cost\Descriptor\CostRollupType.cs" />
+    <Compile Include="Cost\Descriptor\ASCIStarCostingType.cs" />
+    <Compile Include="Cost\Descriptor\ASCIStarCostRollupType.cs" />
     <Compile Include="CustomerAllowance\ASCIStarCustomerAllowanceMaint.cs" />
     <Compile Include="CustomerAllowance\ASCIStarCustomerMaintAllowanceExt.cs" />
     <Compile Include="CustomerAllowance\DAC\ASCIStarCustomerAllowance.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="Inventory\CacheExt\ASCIStarInventoryItemCommodity.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINCompliance.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINJewelryItem.cs" />
+    <Compile Include="Inventory\DAC\ASCIStarItemWeightCostSpec.cs" />
     <Compile Include="Inventory\GraphExt\InventoryItemMaintExt.cs" />
     <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
     <Compile Include="PDS\ASCIstarINKitSpecMaintExt.cs" />

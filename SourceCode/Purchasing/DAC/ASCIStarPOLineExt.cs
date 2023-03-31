@@ -1,4 +1,5 @@
-﻿using PX.Data;
+﻿using ASCISTARCustom.Cost.Descriptor;
+using PX.Data;
 using PX.Objects.PO;
 using System;
 
@@ -74,7 +75,7 @@ namespace ASCISTARCustom
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
-        [CostingType.List]
+        [ASCIStarCostingType.List]
         [PXFormula(typeof(Selector<POLine.inventoryID, ASCIStarINInventoryItemExt.usrCostingType>))]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }

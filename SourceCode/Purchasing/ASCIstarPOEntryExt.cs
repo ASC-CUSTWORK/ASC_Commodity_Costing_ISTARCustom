@@ -9,6 +9,7 @@ using PX.Objects.IN;
 using PX.Objects.AP;
 using PX.Objects.Common;
 using PX.Objects.PO;
+using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -117,7 +118,7 @@ namespace ASCISTARCustom
                     inventoryItemExt.UsrCostingType = rowExt.UsrCostingType;
 
                     var costHelper = new ASCIStarMarketCostHelper.JewelryCost(Base, inventoryItem, 0m, 0m, doc.VendorID, docExt.UsrMarketID, docExt.UsrEstArrivalDate, row.UOM, doc.CuryID);
-                    if (rowExt.UsrCostingType != CostingType.StandardCost)
+                    if (rowExt.UsrCostingType != ASCIStarCostingType.StandardCost)
                     {
                         e.NewValue = costHelper.GetPurchaseCost(rowExt.UsrCostingType);
                     }

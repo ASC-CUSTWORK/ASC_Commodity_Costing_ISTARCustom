@@ -5,6 +5,7 @@ using PX.Objects.IN;
 using PX.Objects;
 using System.Collections.Generic;
 using System;
+using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -52,7 +53,7 @@ namespace ASCISTARCustom
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
-        [CostingType.List]
+        [ASCIStarCostingType.List]
         [PXDefault("F")]
         public virtual string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
@@ -61,7 +62,7 @@ namespace ASCISTARCustom
         #region UsrCostRollupType
         [PXString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type", Enabled = false)]
-        [CostRollupType.List]
+        [ASCIStarCostRollupType.List]
         public virtual string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion   

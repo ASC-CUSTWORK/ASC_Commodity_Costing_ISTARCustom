@@ -15,6 +15,7 @@ using PX.Objects.CR.Standalone;
 using PX.CS;
 using System.Linq;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -212,7 +213,7 @@ namespace ASCISTARCustom
 
             INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
             ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
-            e.NewValue = classExt.UsrCostingType ?? CostingType.StandardCost;
+            e.NewValue = classExt.UsrCostingType ?? ASCIStarCostingType.StandardCost;
         }
 
         protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCIStarINInventoryItemExt.usrCostRollupType> e)
@@ -221,7 +222,7 @@ namespace ASCISTARCustom
 
             INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
             ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
-            e.NewValue = classExt.UsrCostRollupType ?? CostRollupType.Other;
+            e.NewValue = classExt.UsrCostRollupType ?? ASCIStarCostRollupType.Other;
         }
 
         protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrContractSurcharge> e)
@@ -791,7 +792,7 @@ namespace ASCISTARCustom
         {
             ASCIStarMarketCostHelper.JewelryCost jewelryCostProvider = GetCostProvider(row);
 
-            decimal costFineGoldPerGramm = jewelryCostProvider.CostRollupTotal[CostRollupType.Commodity];
+            decimal costFineGoldPerGramm = jewelryCostProvider.CostRollupTotal[ASCIStarCostRollupType.Commodity];
 
             decimal? lossValue = 1.0m + rowExt.UsrContractLossPct / 100.0m;
             decimal? surchargeValue = 1.0m + rowExt.UsrContractSurcharge / 100.0m;

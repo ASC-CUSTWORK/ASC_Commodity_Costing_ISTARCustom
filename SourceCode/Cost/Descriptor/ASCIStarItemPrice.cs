@@ -8,6 +8,7 @@ using PX.Objects.IN;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -66,7 +67,7 @@ namespace ASCISTARCustom
 			public readonly string commodityType;
 			public readonly string market;
 			public readonly List<ItemPrice> SubItemPrice;
-			public readonly Dictionary<CostRollupType, decimal> CostRollupTotal;
+			public readonly Dictionary<ASCIStarCostRollupType, decimal> CostRollupTotal;
 
 			public readonly ASCIStarAPVendorPriceExt vendorPrice; //What the Vendor is Charging for the item
 			public readonly ASCIStarAPVendorPriceExt commodityPrice;
