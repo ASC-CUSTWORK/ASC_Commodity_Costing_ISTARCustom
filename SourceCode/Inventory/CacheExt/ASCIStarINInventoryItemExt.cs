@@ -210,7 +210,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6/*, MinValue = 0, MaxValue = 1000*/)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
         [PXUIField(DisplayName = "Surcharge %", Visible = true)]
         public virtual decimal? UsrContractSurcharge { get; set; }

@@ -6,7 +6,7 @@
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXLayoutRule1" />
                     <Prop Key="StartGroup" Value="True" />
-                    <Prop Key="GroupCaption" Value="Jewelry Settings" />
+                    <Prop Key="GroupCaption" Value="Default Jewelry Settings" />
                 </PXLayoutRule>
             </AddItem>
             <AddItem>
