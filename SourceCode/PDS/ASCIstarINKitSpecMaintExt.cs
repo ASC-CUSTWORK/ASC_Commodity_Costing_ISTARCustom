@@ -28,13 +28,21 @@ namespace ASCISTARCustom.PDS
             return true;
         }
         #endregion
+        public class today : PX.Data.BQL.BqlDateTime.Constant<today> // <-Why?
+        {
+            public today() : base(DateTime.Today)
+            {
+            }
+        }
 
         #region View
         public SelectFrom<InventoryItem>.Where<InventoryItem.inventoryID.IsEqual<INKitSpecHdr.kitInventoryID.FromCurrent>>.View InventoryItemHdr;
 
         //public PXSelect<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> InventoryItemHdr;
         //public PXSelect<ASCIStarInventoryItemCommodity, Where<ASCIStarInventoryItemCommodity.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ItemCommodity;
-        public PXSelect<ASCIStarINKitSpecHdrAttribute, Where<ASCIStarINKitSpecHdrAttribute.kitInventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<ASCIStarINKitSpecHdrAttribute.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>> iStarAttributes;
+        public PXSelect<ASCIStarINKitSpecHdrAttribute,
+            Where<ASCIStarINKitSpecHdrAttribute.kitInventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>
+                , And<ASCIStarINKitSpecHdrAttribute.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>> iStarAttributes;
         //public PXSelect<ASCIStarINKitSpecHdrVendorQuote, Where<ASCIStarINKitSpecHdrVendorQuote.kitInventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<ASCIStarINKitSpecHdrVendorQuote.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>> iStarVendorQuote;
         public PXSelect<APVendorPrice, Where<APVendorPrice.inventoryID, Equal<Current<INKitSpecStkDet.compInventoryID>>,
             And<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>>>> iStarCommodityPrice;
@@ -48,14 +56,6 @@ namespace ASCISTARCustom.PDS
                  .Where<ASCIStarINKitSpecJewelryItem.kitInventoryID.IsEqual<INKitSpecHdr.kitInventoryID.FromCurrent>
                     .And<ASCIStarINKitSpecJewelryItem.revisionID.IsEqual<INKitSpecHdr.revisionID.FromCurrent>>>
                         .View JewelryItemView;
-
-        
-        public class today : PX.Data.BQL.BqlDateTime.Constant<today> // <-Why?
-        {
-            public today() : base(DateTime.Today)
-            {
-            }
-        }
 
         //[PXFilterable]
         //public PXSelectJoin<APVendorPrice,
@@ -143,9 +143,9 @@ namespace ASCISTARCustom.PDS
         //public PXSelect<ASCIStarItemCostRollup, Where<ASCIStarItemCostRollup.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<ASCIStarItemCostRollup.bAccountID, NotEqual<CompanyBAccount.bAccountID>>>> VendorCostRollup;
 
         public PXSelect<
-            ASCIStarItemWeightCostSpec, 
-            Where<ASCIStarItemWeightCostSpec.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, 
-                And<ASCIStarItemWeightCostSpec.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>> 
+            ASCIStarItemWeightCostSpec,
+            Where<ASCIStarItemWeightCostSpec.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>,
+                And<ASCIStarItemWeightCostSpec.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>>
             ASCIStarCostSpecification;
         #endregion
 

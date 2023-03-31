@@ -92,7 +92,22 @@ namespace ASCISTARCustom
         {
             var row = e.Row;
             if (row == null) return;
-            if ((decimal?)e.NewValue < 0.0m) throw new PXSetPropertyException<ASCIStarINInventoryItemExt.usrContractSurcharge>("Surcharge can not be less 0%!");
+            if ((decimal?)e.NewValue < 0.0m)
+            {
+                if (GetMetalType() == true)
+                {
+                    //PXUIFieldAttribute.SetError<ASCIStarINInventoryItemExt.usrContractIncrement>(e.Cache, row, "Please, increase increment");
+                    e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractIncrement>(row, e.OldValue, new PXSetPropertyException("Please, increase increment"));
+                }
+
+                //PXUIFieldAttribute.SetError<ASCIStarINInventoryItemExt.usrContractSurcharge>(e.Cache, row, "Surcharge can not be less 0%!");
+                e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, e.OldValue, new PXSetPropertyException("Surcharge can not be less 0%!"));
+            }
+            else
+            {
+                //e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractIncrement>(row, e.NewValue, null);
+                //e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, null, null);
+            }
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, InventoryItem.itemClassID> e)
@@ -102,6 +117,15 @@ namespace ASCISTARCustom
 
             bool isVisible = IsVisibleFileds(row.ItemClassID);
             SetVisibleJewelFields(e.Cache, row, isVisible);
+        }
+
+        protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrCostingType> e)
+        {
+            var row = e.Row;
+            if (e.Row == null) return;
+
+            var rowExt = row.GetExtension<ASCIStarINInventoryItemExt>();
+            UpdateCommodityCostMetal(e.Cache, row, rowExt);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrActualGRAMGold> e)
@@ -273,7 +297,7 @@ namespace ASCISTARCustom
             var rowExt = row.GetExtension<ASCIStarINInventoryItemExt>();
             UpdateUnitCost(e.Cache, row, rowExt);
 
-            if (rowExt.UsrDutyCost == null || rowExt.UsrDutyCost == 0m) return;
+            //    if (rowExt.UsrDutyCost == null || rowExt.UsrDutyCost == 0m) return;
             if (rowExt.UsrContractCost == null || rowExt.UsrContractCost == 0.0m)
             {
                 rowExt.UsrDutyCostPct = decimal.Zero;
@@ -674,8 +698,8 @@ namespace ASCISTARCustom
 
         private void UpdatePurchaseContractCost(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
         {
-            decimal? laborValue = rowExt.UsrCostingType == ASCIStarCostingType.WeightCost ? rowExt.UsrLaborCost * (rowExt.UsrPricingGRAMSilver + rowExt.UsrActualGRAMGold) : rowExt.UsrLaborCost;
-            decimal? newCost = rowExt.UsrCommodityCost + rowExt.UsrOtherMaterialCost + rowExt.UsrFabricationCost + laborValue +rowExt.UsrPackagingCost + rowExt.UsrOtherCost;
+            decimal? laborValue = rowExt.UsrCostingType == ASCIStarCostingType.WeightCost ? rowExt.UsrLaborCost * (rowExt.UsrActualGRAMSilver + rowExt.UsrActualGRAMGold) : rowExt.UsrLaborCost;
+            decimal? newCost = rowExt.UsrCommodityCost + rowExt.UsrOtherMaterialCost + rowExt.UsrFabricationCost + laborValue + rowExt.UsrPackagingCost + rowExt.UsrOtherCost;
 
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractCost>(row, newCost);
 
@@ -707,7 +731,7 @@ namespace ASCISTARCustom
 
             decimal? temp1 = costProvider.CostBasis.GoldBasis.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz;
             decimal? temp2 = temp1 * (1.0m + rowExt.UsrContractSurcharge / 100.0m);
-            decimal? temp3 = costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz;
+            decimal? temp3 = 1.0m;//costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz;
 
             decimal? newIncrementValue = (temp3 == 0.0m || temp3 == null) ? temp2 : temp2 * temp3;
 

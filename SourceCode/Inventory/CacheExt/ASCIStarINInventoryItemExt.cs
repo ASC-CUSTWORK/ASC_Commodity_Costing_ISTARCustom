@@ -278,7 +278,7 @@ namespace ASCISTARCustom
         #region UsrDutyCost
         [PXUIField(DisplayName = "Duty Cost")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.NullOrBlank)]
         public virtual Decimal? UsrDutyCost { get; set; }
         public abstract class usrDutyCost : PX.Data.BQL.BqlDecimal.Field<usrDutyCost> { }
         #endregion
@@ -287,7 +287,7 @@ namespace ASCISTARCustom
 
         [PXUIField(DisplayName = "Duty %")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.NullOrBlank)]
         public virtual Decimal? UsrDutyCostPct { get; set; }
         public abstract class usrDutyCostPct : PX.Data.BQL.BqlDecimal.Field<usrDutyCostPct> { }
         #endregion
