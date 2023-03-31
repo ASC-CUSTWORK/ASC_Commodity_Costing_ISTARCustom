@@ -84,14 +84,6 @@
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
-                            <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXDropDown65" />
-                                <Prop Key="DataField" Value="UsrContractSurchargeType" />
-                                <Prop Key="CommitChanges" Value="True" />
-                            </PXDropDown>
-                        </AddItem>
-                        <AddItem>
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit45" />

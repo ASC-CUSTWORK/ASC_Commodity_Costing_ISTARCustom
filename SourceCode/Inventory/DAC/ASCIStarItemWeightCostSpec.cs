@@ -112,14 +112,14 @@ namespace ASCISTARCustom.Inventory.DAC
         public abstract class surchargePct : PX.Data.BQL.BqlDecimal.Field<surchargePct> { }
         #endregion
 
-        #region SurchargeType
-        [PXDBString(1, IsFixed = true, InputMask = "")]
-        [ASCIStarContractSurchargeType.List]
-        [PXDefault(ASCIStarContractSurchargeType.PercentageAmt, PersistingCheck = PXPersistingCheck.Null)]
-        [PXUIField(DisplayName = "Surcharge Type")]
-        public virtual string SurchargeType { get; set; }
-        public abstract class surchargeType : PX.Data.BQL.BqlString.Field<surchargeType> { }
-        #endregion
+        //#region SurchargeType
+        //[PXDBString(1, IsFixed = true, InputMask = "")]
+        //[ASCIStarContractSurchargeType.List]
+        //[PXDefault(ASCIStarContractSurchargeType.PercentageAmt, PersistingCheck = PXPersistingCheck.Null)]
+        //[PXUIField(DisplayName = "Surcharge Type")]
+        //public virtual string SurchargeType { get; set; }
+        //public abstract class surchargeType : PX.Data.BQL.BqlString.Field<surchargeType> { }
+        //#endregion
 
         #region Increment
         [PXDBDecimal(6)]

@@ -661,7 +661,7 @@ namespace ASCISTARCustom
         {
             ASCIStarMarketCostHelper.JewelryCost jewelryCostProvider = GetCostProvider(row);
 
-            decimal costFineMetalPerGramm = jewelryCostProvider.CostRollupTotal[CostRollupType.Commodity];
+            decimal costFineMetalPerGramm = jewelryCostProvider.CostRollupTotal[ASCIStarCostRollupType.Commodity];
 
             decimal? lossValue = GetMetalType() == true ? 1.0m + rowExt.UsrContractLossPct / 100.0m : 1.0m; // for silver don't calc loss
             decimal? surchargeValue = 1.0m + rowExt.UsrContractSurcharge / 100.0m;

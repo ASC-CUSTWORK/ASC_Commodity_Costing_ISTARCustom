@@ -12,7 +12,6 @@
   <col name="FineSilverGrams" type="Decimal(19,6)" nullable="true" />
   <col name="MetalLossPct" type="Decimal(19,4)" nullable="true" />
   <col name="SurchargePct" type="Decimal(19,6)" nullable="true" />
-  <col name="SurchargeType" type="NVarChar(1)" nullable="true" />
   <col name="Increment" type="Decimal(19,6)" nullable="true" />
   <col name="RollupType" type="NVarChar(1)" nullable="true" />
   <col name="CostingType" type="NVarChar(1)" nullable="true" />
