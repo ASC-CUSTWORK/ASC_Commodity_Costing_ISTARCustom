@@ -16,10 +16,11 @@ using System.Reflection;
 using ASCISTARCustom.PDS.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
 using ASCISTARCustom.Inventory.CacheExt;
+using ASCISTARCustom.Cost.Descriptor;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.PDS
 {
-    public class ASCIStarINKitSpecMaint_Extension : PXGraphExtension<INKitSpecMaint>
+    public class ASCIstarINKitSpecMaintExt : PXGraphExtension<INKitSpecMaint>
     {
         #region Static Functions
         public static bool IsActive()
@@ -27,13 +28,21 @@ namespace ASCISTARCustom
             return true;
         }
         #endregion
+        public class today : PX.Data.BQL.BqlDateTime.Constant<today> // <-Why?
+        {
+            public today() : base(DateTime.Today)
+            {
+            }
+        }
 
         #region View
         public SelectFrom<InventoryItem>.Where<InventoryItem.inventoryID.IsEqual<INKitSpecHdr.kitInventoryID.FromCurrent>>.View InventoryItemHdr;
 
         //public PXSelect<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> InventoryItemHdr;
         //public PXSelect<ASCIStarInventoryItemCommodity, Where<ASCIStarInventoryItemCommodity.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ItemCommodity;
-        public PXSelect<ASCIStarINKitSpecHdrAttribute, Where<ASCIStarINKitSpecHdrAttribute.kitInventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<ASCIStarINKitSpecHdrAttribute.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>> iStarAttributes;
+        public PXSelect<ASCIStarINKitSpecHdrAttribute,
+            Where<ASCIStarINKitSpecHdrAttribute.kitInventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>
+                , And<ASCIStarINKitSpecHdrAttribute.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>> iStarAttributes;
         //public PXSelect<ASCIStarINKitSpecHdrVendorQuote, Where<ASCIStarINKitSpecHdrVendorQuote.kitInventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<ASCIStarINKitSpecHdrVendorQuote.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>> iStarVendorQuote;
         public PXSelect<APVendorPrice, Where<APVendorPrice.inventoryID, Equal<Current<INKitSpecStkDet.compInventoryID>>,
             And<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>>>> iStarCommodityPrice;
@@ -47,14 +56,6 @@ namespace ASCISTARCustom
                  .Where<ASCIStarINKitSpecJewelryItem.kitInventoryID.IsEqual<INKitSpecHdr.kitInventoryID.FromCurrent>
                     .And<ASCIStarINKitSpecJewelryItem.revisionID.IsEqual<INKitSpecHdr.revisionID.FromCurrent>>>
                         .View JewelryItemView;
-
-
-        public class today : PX.Data.BQL.BqlDateTime.Constant<today>
-        {
-            public today() : base(DateTime.Today)
-            {
-            }
-        }
 
         //[PXFilterable]
         //public PXSelectJoin<APVendorPrice,
@@ -140,6 +141,12 @@ namespace ASCISTARCustom
 
         //public PXSelect<ASCIStarItemCostRollup, Where<ASCIStarItemCostRollup.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<ASCIStarItemCostRollup.bAccountID, Equal<CompanyBAccount.bAccountID>>>> CostRollup;
         //public PXSelect<ASCIStarItemCostRollup, Where<ASCIStarItemCostRollup.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<ASCIStarItemCostRollup.bAccountID, NotEqual<CompanyBAccount.bAccountID>>>> VendorCostRollup;
+
+        public PXSelect<
+            ASCIStarItemWeightCostSpec,
+            Where<ASCIStarItemWeightCostSpec.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>,
+                And<ASCIStarItemWeightCostSpec.revisionID, Equal<Current<INKitSpecHdr.revisionID>>>>>
+            ASCIStarCostSpecification;
         #endregion
 
         #region CacheAttached
@@ -206,6 +213,19 @@ namespace ASCISTARCustom
         [PXDefault(typeof(INKitSpecHdr.kitInventoryID))]
         protected void APVendorPrice_InventoryID_CacheAttached(PXCache sender) { }
 
+
+        [PXRemoveBaseAttribute(typeof(PXDBDefaultAttribute))]
+        [PXRemoveBaseAttribute(typeof(PXParentAttribute))]
+        [PXMergeAttributes(Method = MergeMethod.Append)]
+        [PXDBDefault(typeof(INKitSpecHdr.kitInventoryID))]
+        [PXParent(typeof(ASCIStarItemWeightCostSpec.FK.InventoryItemFK))]
+        protected void _(Events.CacheAttached<ASCIStarItemWeightCostSpec.inventoryID> cacheAttached) { }
+
+        [PXMergeAttributes(Method = MergeMethod.Replace)]
+        [PXDBString(10, IsKey = true, IsUnicode = true, InputMask = ">aaaaaaaaaa")]
+        [PXDBDefault(typeof(INKitSpecHdr.revisionID))]
+        [PXParent(typeof(ASCIStarItemWeightCostSpec.FK.KitSpecificationFK))]
+        protected void _(Events.CacheAttached<ASCIStarItemWeightCostSpec.revisionID> cacheAttached) { }
         #endregion
 
         #region Event Handlers
@@ -440,7 +460,7 @@ namespace ASCISTARCustom
             PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
 
 
-            e.NewValue = CostingType.StandardCost;
+            e.NewValue = ASCIStarCostingType.StandardCost;
             INKitSpecHdr row = e.Row as INKitSpecHdr;
             if (row == null)
                 return;
@@ -575,7 +595,7 @@ namespace ASCISTARCustom
             MethodBase m = MethodBase.GetCurrentMethod();
             PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
 
-            e.NewValue = CostingType.StandardCost;
+            e.NewValue = ASCIStarCostingType.StandardCost;
             INKitSpecStkDet row = e.Row as INKitSpecStkDet;
             if (row == null) return;
             InventoryItem baseItem = PXSelect<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecStkDet.compInventoryID>>>>.Select(cache.Graph);
@@ -661,28 +681,28 @@ namespace ASCISTARCustom
                 /*Commodity, Fabrication, Labor, Handling, Shipping, Duty, Other*/
                 switch (ext.UsrCostRollupType)
                 {
-                    case CostRollupType.Commodity:
+                    case ASCIStarCostRollupType.Commodity:
                         ext.UsrCommodityCost = Rollup;
                         break;
-                    case CostRollupType.Fabrication:
+                    case ASCIStarCostRollupType.Fabrication:
                         ext.UsrFabricationCost = Rollup;
                         break;
-                    case CostRollupType.Materials:
+                    case ASCIStarCostRollupType.Materials:
                         ext.UsrOtherMaterialCost = Rollup;
                         break;
-                    case CostRollupType.Packaging:
+                    case ASCIStarCostRollupType.Packaging:
                         ext.UsrPackagingCost = Rollup;
                         break;
-                    case CostRollupType.Labor:
+                    case ASCIStarCostRollupType.Labor:
                         ext.UsrLaborCost = Rollup;
                         break;
-                    case CostRollupType.Handling:
+                    case ASCIStarCostRollupType.Handling:
                         ext.UsrHandlingCost = Rollup;
                         break;
-                    case CostRollupType.Duty:
+                    case ASCIStarCostRollupType.Duty:
                         ext.UsrDutyCost = Rollup;
                         break;
-                    case CostRollupType.Other:
+                    case ASCIStarCostRollupType.Other:
                         ext.UsrOtherCost = Rollup;
                         break;
                     default: /* CostingType.StandardCost */
@@ -728,35 +748,35 @@ namespace ASCISTARCustom
                 /*Commodity, Fabrication, Labor, Handling, Shipping, Duty, Other*/
                 switch (ext.UsrCostRollupType)
                 {
-                    case CostRollupType.Commodity:
+                    case ASCIStarCostRollupType.Commodity:
                         ext.UsrCommodityCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrCommodityCost>(e.Row, null);
                         break;
-                    case CostRollupType.Fabrication:
+                    case ASCIStarCostRollupType.Fabrication:
                         ext.UsrFabricationCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrFabricationCost>(e.Row, null);
                         break;
-                    case CostRollupType.Materials:
+                    case ASCIStarCostRollupType.Materials:
                         ext.UsrOtherMaterialCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrOtherMaterialCost>(e.Row, null);
                         break;
-                    case CostRollupType.Packaging:
+                    case ASCIStarCostRollupType.Packaging:
                         ext.UsrPackagingCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrPackagingCost>(e.Row, null);
                         break;
-                    case CostRollupType.Labor:
+                    case ASCIStarCostRollupType.Labor:
                         ext.UsrLaborCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrLaborCost>(e.Row, null);
                         break;
-                    case CostRollupType.Handling:
+                    case ASCIStarCostRollupType.Handling:
                         ext.UsrHandlingCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrHandlingCost>(e.Row, null);
                         break;
-                    case CostRollupType.Duty:
+                    case ASCIStarCostRollupType.Duty:
                         ext.UsrDutyCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrDutyCost>(e.Row, null);
                         break;
-                    case CostRollupType.Other:
+                    case ASCIStarCostRollupType.Other:
                         ext.UsrOtherCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrOtherCost>(e.Row, null);
                         break;
@@ -778,7 +798,7 @@ namespace ASCISTARCustom
 
             ASCIStarINKitSpecNonStkDetExt ext = row.GetExtension<ASCIStarINKitSpecNonStkDetExt>();
             PXTrace.WriteInformation($"e.NewValue:{ext.UsrCostingType}");
-            if (CostingType.WeightCost == (string)ext.UsrCostingType)
+            if (ASCIStarCostingType.WeightCost == (string)ext.UsrCostingType)
             {
                 row.DfltCompQty = 1.00m;
                 decimal qty = 0.00m;
@@ -836,40 +856,40 @@ namespace ASCISTARCustom
                 PXTrace.WriteInformation($"{ext.UsrCostRollupType}");
 
                 /*Commodity, Fabrication, Labor, Handling, Shipping, Duty, Other*/
-                switch (ext.UsrCostRollupType ?? CostingType.StandardCost)
+                switch (ext.UsrCostRollupType ?? ASCIStarCostingType.StandardCost)
                 {
-                    case CostRollupType.Commodity:
+                    case ASCIStarCostRollupType.Commodity:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrCommodityCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrCommodityCost>(e.Row, null);
                         break;
-                    case CostRollupType.Materials:
+                    case ASCIStarCostRollupType.Materials:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrOtherMaterialCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrOtherMaterialCost>(e.Row, null);
                         break;
-                    case CostRollupType.Packaging:
+                    case ASCIStarCostRollupType.Packaging:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrPackagingCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrPackagingCost>(e.Row, null);
                         break;
-                    case CostRollupType.Fabrication:
+                    case ASCIStarCostRollupType.Fabrication:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrFabricationCost>(e.Row, null);
 
                         break;
-                    case CostRollupType.Labor:
+                    case ASCIStarCostRollupType.Labor:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrLaborCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrLaborCost>(e.Row, null);
 
                         break;
-                    case CostRollupType.Handling:
+                    case ASCIStarCostRollupType.Handling:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrHandlingCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrHandlingCost>(e.Row, null);
 
                         break;
-                    case CostRollupType.Duty:
+                    case ASCIStarCostRollupType.Duty:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrDutyCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrDutyCost>(e.Row, null);
                         break;
-                    case CostRollupType.Other:
+                    case ASCIStarCostRollupType.Other:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrOtherCost>(cache.Current, Rollup);
                         //cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrOtherCost>(e.Row, null);
                         break;
@@ -1211,11 +1231,11 @@ namespace ASCISTARCustom
             InventoryItem item = InventoryItem.PK.Find(cache.Graph, row.CompInventoryID);
             if (item == null)
             {
-                e.NewValue = CostingType.StandardCost;
+                e.NewValue = ASCIStarCostingType.StandardCost;
                 return;
             }
             ASCIStarINInventoryItemExt itemExt = item.GetExtension<ASCIStarINInventoryItemExt>();
-            e.NewValue = itemExt.UsrCostingType ?? CostingType.StandardCost;
+            e.NewValue = itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost;
             PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecNonStkDetExt.usrCostingType>(cache, row, true);
 
         }

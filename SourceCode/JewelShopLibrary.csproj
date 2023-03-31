@@ -32,23 +32,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PX.Common">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Common.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.Std.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Data.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>E:\Program Files\Acumatica ERP\Acu21209\Bin\PX.Objects.dll</HintPath>
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -73,10 +73,10 @@
     <Compile Include="Cost\Descriptor\ASCIStarItemPrice.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarMarket.cs" />
     <Compile Include="Cost\Descriptor\CommodityType.cs" />
-    <Compile Include="Cost\Descriptor\ContractSurchargeType.cs" />
+    <Compile Include="Cost\Descriptor\ASCIStarContractSurchargeType.cs" />
     <Compile Include="Cost\Descriptor\CostBasisType.cs" />
-    <Compile Include="Cost\Descriptor\CostingType.cs" />
-    <Compile Include="Cost\Descriptor\CostRollupType.cs" />
+    <Compile Include="Cost\Descriptor\ASCIStarCostingType.cs" />
+    <Compile Include="Cost\Descriptor\ASCIStarCostRollupType.cs" />
     <Compile Include="CustomerAllowance\ASCIStarCustomerAllowanceMaint.cs" />
     <Compile Include="CustomerAllowance\ASCIStarCustomerMaintAllowanceExt.cs" />
     <Compile Include="CustomerAllowance\DAC\ASCIStarCustomerAllowance.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="Inventory\CacheExt\ASCIStarInventoryItemCommodity.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINCompliance.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINJewelryItem.cs" />
+    <Compile Include="Inventory\DAC\ASCIStarItemWeightCostSpec.cs" />
     <Compile Include="Inventory\GraphExt\InventoryItemMaintExt.cs" />
     <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
     <Compile Include="PDS\ASCIstarINKitSpecMaintExt.cs" />

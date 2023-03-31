@@ -1,0 +1,41 @@
+﻿<Sql TableName="ASCIStarItemWeightCostSpec" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="ASCIStarItemWeightCostSpec">
+  <col name="CompanyID" type="Int" default="Zero" />
+  <col name="InventoryID" type="Int" />
+  <col name="RevisionID" type="NVarChar(10)" nullable="true" />
+  <col name="SubItemID" type="Int" nullable="true" />
+  <col name="LegacyID" type="NVarChar(30)" nullable="true" />
+  <col name="LegacyShortRef" type="NVarChar(30)" nullable="true" />
+  <col name="GoldGrams" type="Decimal(19,6)" nullable="true" />
+  <col name="FineGoldGrams" type="Decimal(19,6)" nullable="true" />
+  <col name="SilverGrams" type="Decimal(19,6)" nullable="true" />
+  <col name="FineSilverGrams" type="Decimal(19,6)" nullable="true" />
+  <col name="MetalLossPct" type="Decimal(19,4)" nullable="true" />
+  <col name="SurchargePct" type="Decimal(19,6)" nullable="true" />
+  <col name="Increment" type="Decimal(19,6)" nullable="true" />
+  <col name="RollupType" type="NVarChar(1)" nullable="true" />
+  <col name="CostingType" type="NVarChar(1)" nullable="true" />
+  <col name="MetalCost" type="Decimal(19,6)" nullable="true" />
+  <col name="FabricationCost" type="Decimal(19,6)" nullable="true" />
+  <col name="PackagingCost" type="Decimal(19,6)" nullable="true" />
+  <col name="LaborCost" type="Decimal(19,6)" nullable="true" />
+  <col name="OtherMaterialCost" type="Decimal(19,6)" nullable="true" />
+  <col name="OtherCost" type="Decimal(19,6)" nullable="true" />
+  <col name="FreightCost" type="Decimal(19,6)" nullable="true" />
+  <col name="HandlingCost" type="Decimal(19,6)" nullable="true" />
+  <col name="DutyCost" type="Decimal(19,6)" nullable="true" />
+  <col name="DutyCostPct" type="Decimal(19,6)" nullable="true" />
+  <col name="NoteID" type="UniqueIdentifier" />
+  <col name="CreatedByID" type="UniqueIdentifier" />
+  <col name="CreatedByScreenID" type="Char(8)" />
+  <col name="CreatedDateTime" type="DateTime" />
+  <col name="LastModifiedByID" type="UniqueIdentifier" />
+  <col name="LastModifiedByScreenID" type="Char(8)" />
+  <col name="LastModifiedDateTime" type="DateTime" />
+  <col name="tstamp" type="Timestamp" />
+  <index name="ASCIStarItemWeightCostSpec_PK" clustered="true" primary="true" unique="true">
+    <col name="CompanyID" />
+    <col name="InventoryID" />
+  </index>
+</table>]]></CDATA>
+</Sql>
