@@ -43,8 +43,8 @@
                         <AddItem>
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit49" />
-                                <Prop Key="DataField" Value="UsrContractSurcharge" />
+                                <Prop Key="ID" Value="CstPXNumberEdit48" />
+                                <Prop Key="DataField" Value="UsrContractLossPct" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DisplayFormat" Value="P" />
                             </PXNumberEdit>
@@ -52,8 +52,8 @@
                         <AddItem>
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit48" />
-                                <Prop Key="DataField" Value="UsrContractLossPct" />
+                                <Prop Key="ID" Value="CstPXNumberEdit49" />
+                                <Prop Key="DataField" Value="UsrContractSurcharge" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DisplayFormat" Value="P" />
                             </PXNumberEdit>

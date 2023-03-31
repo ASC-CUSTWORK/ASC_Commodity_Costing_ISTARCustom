@@ -568,117 +568,117 @@ namespace ASCISTARCustom
             public ASCIStarAPVendorPriceExt Basis;
             #endregion properties
 
-            #region Public Methods
+            //#region Public Methods
 
-            public void SetItem(InventoryItem item, ASCIStarINInventoryItemExt itemExt = null)
-            {
-                Item = item;
-                if (itemExt != null)
-                    ItemExt = itemExt;
-                else
-                    ItemExt = Item.GetExtension<ASCIStarINInventoryItemExt>();
-
-            }
-
-
-            public void SetVendor(Vendor vendor = null, InventoryItem item = null, ASCIStarVendorExt vendorExt = null, DateTime? PricingDate = null)
-            {
-                if (PricingDate == null)
-                    PricingDate = DateTime.Today;
-                if (vendor != null && vendor.BAccountID != null)
-                    _itemVendor = vendor;
-                if (ItemVendor != null)
-                    _itemVendorBasis = _itemVendor.GetExtension<ASCIStarVendorExt>();
-                if (Item != null && Item.InventoryID != null &&
-                    _itemVendor == null && _itemVendor.BAccountID == null)
-                {
-                    foreach (var record in PXSelectJoin<POVendorInventory,
-                        InnerJoin<InventoryItemCurySettings, On<InventoryItem.inventoryID, Equal<Required<InventoryItemCurySettings.inventoryID>>>>,
-                        Where<POVendorInventory.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>.Select(_graph, Item.InventoryID).ToArray()
-                        .Select(r => new { vendorInventory = r.GetItem<POVendorInventory>(), itemSettings = r.GetItem<InventoryItemCurySettings>() }))
-
-                    {
-                        if (vendor == null && record.vendorInventory != null
-                            && record.vendorInventory.VendorID == record.itemSettings.PreferredVendorID)
-                        {
-                            _itemVendor = new PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>(_graph).SelectSingle(record.itemSettings.PreferredVendorID);
-                            _itemVendorBasis = _itemVendor.GetExtension<ASCIStarVendorExt>();
-                            _vendorItem = record.vendorInventory;
-                            _vendorItemBasis = _vendorItem.GetExtension<ASCIStarPOVendorInventoryExt>();
-                        }
-
-                    }
-                }
-
-            }
-
-            //public costBasis(PXGraph graph, InventoryItem item, Vendor vendor = null)
+            //public void SetItem(InventoryItem item, ASCIStarINInventoryItemExt itemExt = null)
             //{
-            //    if (Item == null && item != null)
-            //        Item = item;
-            //    if (ItemVendor == null && vendor != null)
-            //        ItemVendor = vendor;
-            //    if (VendorItem == null && vendor != null)
-            //    {
-            //        VendorItem = PXSelect<POVendorInventory, Where<POVendorInventory.vendorID, Equal<Required<Vendor.bAccountID>>,
-            //            And<POVendorInventory.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>>.Select(graph, this.vendor.BAccountID, item.InventoryID);
-            //        VendorItemBasis = VendorItem.GetExtension<ASCIStarPOVendorInventoryExt>();
-            //    }
-            //    if (VendorItem == null && vendor == null)
-            //    {
-
-            //        foreach (POVendorInventory vitem in PXSelect<POVendorInventory, Where<POVendorInventory.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>.Select(graph, item.InventoryID))
-            //        {
-            //            PXTrace.WriteInformation($"{vitem.VendorID}:{vitem.IsDefault}");
-
-            //            if (vitem.IsDefault == true)
-            //                VendorItem = vitem;
-            //        }
-
-            //    }
-
-
+            //    Item = item;
+            //    if (itemExt != null)
+            //        ItemExt = itemExt;
+            //    else
+            //        ItemExt = Item.GetExtension<ASCIStarINInventoryItemExt>();
 
             //}
-            #endregion Public Methods
 
-            #region Private Methods
 
-            private void Load()
-            {
-                Validate();
-            }
-            private void Validate()
-            {
-                string err = "";
-                try
-                {
-                    if (Item == null)
-                        err += $"Item is NULL{System.Environment.NewLine}";
-                    if (ItemExt == null)
-                        err += $"ItemExt is NULL{System.Environment.NewLine}";
-                    if (_itemVendor == null)
-                        err += $"ItemVendor is NULL{System.Environment.NewLine}";
-                    if (_itemVendorBasis == null)
-                        err += $"ItemVendorBasis is NULL{System.Environment.NewLine}";
-                    if (_market == null)
-                        err += $"Market is NULL{System.Environment.NewLine}";
-                    if (_marketBasis == null)
-                        err += $"MarketBasis is NULL{System.Environment.NewLine}";
-                    if (_vendorItem == null)
-                        err += $"VendorItem is NULL{System.Environment.NewLine}";
-                    if (_vendorItemBasis == null)
-                        err += $"VendorItemBasis is NULL{System.Environment.NewLine}";
-                    if (err.Length > 0)
-                        throw new PXException(err);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
+            //public void SetVendor(Vendor vendor = null, InventoryItem item = null, ASCIStarVendorExt vendorExt = null, DateTime? PricingDate = null)
+            //{
+            //    if (PricingDate == null)
+            //        PricingDate = DateTime.Today;
+            //    if (vendor != null && vendor.BAccountID != null)
+            //        _itemVendor = vendor;
+            //    if (ItemVendor != null)
+            //        _itemVendorBasis = _itemVendor.GetExtension<ASCIStarVendorExt>();
+            //    if (Item != null && Item.InventoryID != null &&
+            //        _itemVendor == null && _itemVendor.BAccountID == null)
+            //    {
+            //        foreach (var record in PXSelectJoin<POVendorInventory,
+            //            InnerJoin<InventoryItemCurySettings, On<InventoryItem.inventoryID, Equal<Required<InventoryItemCurySettings.inventoryID>>>>,
+            //            Where<POVendorInventory.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>.Select(_graph, Item.InventoryID).ToArray()
+            //            .Select(r => new { vendorInventory = r.GetItem<POVendorInventory>(), itemSettings = r.GetItem<InventoryItemCurySettings>() }))
 
-            #endregion Private Methods
+            //        {
+            //            if (vendor == null && record.vendorInventory != null
+            //                && record.vendorInventory.VendorID == record.itemSettings.PreferredVendorID)
+            //            {
+            //                _itemVendor = new PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>(_graph).SelectSingle(record.itemSettings.PreferredVendorID);
+            //                _itemVendorBasis = _itemVendor.GetExtension<ASCIStarVendorExt>();
+            //                _vendorItem = record.vendorInventory;
+            //                _vendorItemBasis = _vendorItem.GetExtension<ASCIStarPOVendorInventoryExt>();
+            //            }
+
+            //        }
+            //    }
+
+            //}
+
+            ////public costBasis(PXGraph graph, InventoryItem item, Vendor vendor = null)
+            ////{
+            ////    if (Item == null && item != null)
+            ////        Item = item;
+            ////    if (ItemVendor == null && vendor != null)
+            ////        ItemVendor = vendor;
+            ////    if (VendorItem == null && vendor != null)
+            ////    {
+            ////        VendorItem = PXSelect<POVendorInventory, Where<POVendorInventory.vendorID, Equal<Required<Vendor.bAccountID>>,
+            ////            And<POVendorInventory.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>>.Select(graph, this.vendor.BAccountID, item.InventoryID);
+            ////        VendorItemBasis = VendorItem.GetExtension<ASCIStarPOVendorInventoryExt>();
+            ////    }
+            ////    if (VendorItem == null && vendor == null)
+            ////    {
+
+            ////        foreach (POVendorInventory vitem in PXSelect<POVendorInventory, Where<POVendorInventory.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>.Select(graph, item.InventoryID))
+            ////        {
+            ////            PXTrace.WriteInformation($"{vitem.VendorID}:{vitem.IsDefault}");
+
+            ////            if (vitem.IsDefault == true)
+            ////                VendorItem = vitem;
+            ////        }
+
+            ////    }
+
+
+
+            ////}
+            //#endregion Public Methods
+
+            //#region Private Methods
+
+            ////private void Load()
+            ////{
+            ////    Validate();
+            ////}
+            ////private void Validate()
+            ////{
+            ////    string err = "";
+            ////    try
+            ////    {
+            ////        if (Item == null)
+            ////            err += $"Item is NULL{System.Environment.NewLine}";
+            ////        if (ItemExt == null)
+            ////            err += $"ItemExt is NULL{System.Environment.NewLine}";
+            ////        if (_itemVendor == null)
+            ////            err += $"ItemVendor is NULL{System.Environment.NewLine}";
+            ////        if (_itemVendorBasis == null)
+            ////            err += $"ItemVendorBasis is NULL{System.Environment.NewLine}";
+            ////        if (_market == null)
+            ////            err += $"Market is NULL{System.Environment.NewLine}";
+            ////        if (_marketBasis == null)
+            ////            err += $"MarketBasis is NULL{System.Environment.NewLine}";
+            ////        if (_vendorItem == null)
+            ////            err += $"VendorItem is NULL{System.Environment.NewLine}";
+            ////        if (_vendorItemBasis == null)
+            ////            err += $"VendorItemBasis is NULL{System.Environment.NewLine}";
+            ////        if (err.Length > 0)
+            ////            throw new PXException(err);
+            ////    }
+            ////    catch (Exception e)
+            ////    {
+            ////        throw e;
+            ////    }
+            ////}
+
+            //#endregion Private Methods
 
             //public static INUnit ConvertPrice(PXGraph graph, string FromUnit, string ToUnit)
             //{
@@ -992,44 +992,43 @@ namespace ASCISTARCustom
 
                     if (itemExt.UsrPricingGRAMGold > 0.0m)
                     {
-                        msg += $"Found {itemExt.UsrPricingGRAMGold} Gold Grams to Price{Environment.NewLine}";
 
                         CostBasis = new costBasis(graph, item, (DateTime)PricingDate);
+
                         CostBasis.ItemVendor = PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, itemVendor.VendorID);
+
                         CostBasis.GoldBasis.BuildFinePrices();
 
+                        decimal basisPerGram = CostBasis.GoldBasis.BasisPerGram();
+                        cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * basisPerGram * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
+                        //   marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
+
+                        msg += $"Found {itemExt.UsrPricingGRAMGold} Gold Grams to Price{Environment.NewLine}";
                         msg += $"PricingDate:{pricingDate}{Environment.NewLine}";
                         msg += $"Gold Eff   :{CostBasis.GoldBasis.EffectiveDate}{Environment.NewLine}";
-
-                        //pricingDate = CostBasis.GoldBasis.EffectiveDate; //goldMarket.EffectiveDate;
-
-                        cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * (CostBasis.GoldBasis.BasisPerGram()) * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
-                        marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
                         msg += $"Gold Loss  : {CostBasis.GoldBasis.LossPct}{Environment.NewLine}";
                         msg += $"Gold Sur   : {CostBasis.GoldBasis.SurchargePct}{Environment.NewLine}";
-
-
                     }
 
                     if (itemExt.UsrPricingGRAMSilver > 0.0m)
                     {
                         PXTrace.WriteInformation($"Found {itemExt.UsrPricingGRAMSilver} Silver Grams to Price");
+
                         CostBasis = new costBasis(graph, item, (DateTime)PricingDate);
+
                         CostBasis.ItemVendor = PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, itemVendor.VendorID);
+
                         CostBasis.SilverBasis.BuildFinePrices();
 
+                        var metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                        cost += (itemExt.UsrPricingGRAMSilver ?? 0.00m) * metalCostPerOz / 31.10348m * (1.0000m + CostBasis.SilverBasis.LossPct) * (1.0000m + CostBasis.SilverBasis.SurchargePct);
+                        //   marketCommodityCost += cost * (CostBasis.SilverBasis.MarketPerFineOz["SSS"] / CostBasis.SilverBasis.BasisPerFineOz["SSS"]);
+
                         msg += $"Silver Eff :{CostBasis.SilverBasis.EffectiveDate}{Environment.NewLine}";
-
-                        //pricingDate = CostBasis.SilverBasis.EffectiveDate; 
-
-                        CostBasis.SilverBasis.BasisPerOz = MatrixPrice(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.Increment, CostBasis.SilverBasis.BasisPerOz);
                         msg += $"Silver Loss: {CostBasis.SilverBasis.LossPct}{Environment.NewLine}";
                         msg += $"Silver Sur : {CostBasis.SilverBasis.SurchargePct}{Environment.NewLine}";
-
-                        cost += (itemExt.UsrPricingGRAMSilver ?? 0.00m) * (CostBasis.SilverBasis.BasisPerGram()) * (1.0000m + CostBasis.SilverBasis.LossPct) * (1.0000m + CostBasis.SilverBasis.SurchargePct);
-                        marketCommodityCost += cost * (CostBasis.SilverBasis.MarketPerFineOz["SSS"] / CostBasis.SilverBasis.BasisPerFineOz["SSS"]);
-
                     }
+
                     this.CostRollupTotal[CostRollupType.Commodity] = cost;
                     this.CostRollupTotal[CostRollupType.Materials] = itemExt.UsrOtherMaterialCost ?? 0.00m;
                     this.CostRollupTotal[CostRollupType.Fabrication] = itemExt.UsrFabricationCost ?? 0.00m;
@@ -1059,32 +1058,32 @@ namespace ASCISTARCustom
                 }
             }
 
-            /*
-             decimal basis = B3 on Costing Worksheet.xlsx
-             decimal increment = C3 on Costing Worksheet.xlsx
-             decimal market = A8, A14 on Costing Worksheet.xlsx
-             */
-
-
-            public decimal MatrixPrice(decimal basis, decimal increment, decimal market)
+            public decimal GetSilverMetalCostPerOZ(decimal basisCost, decimal marketCost, decimal? incrementNullable)
             {
                 string msg = "";
-                if (increment == 0)
+                if (incrementNullable == 0.0m || incrementNullable == null)
                 {
-                    msg += $"basis    :{basis}{Environment.NewLine}increment:{increment}{Environment.NewLine}market    :{market}{Environment.NewLine}matrix    :{market}";
-                    return market;
+                    msg += $"basis    :{basisCost}{Environment.NewLine}increment:{incrementNullable}{Environment.NewLine}market    :{market}{Environment.NewLine}matrix    :{market}";
+                    return marketCost;
                 }
-                decimal matrix = market;
-                int steps = (int)Math.Floor((market / increment) - (basis / increment));
-                decimal floor = basis + ((decimal)steps * increment);
+                decimal increment = (decimal)incrementNullable;
+                decimal costPerOz = marketCost;
+                decimal temp = (marketCost / increment) - (basisCost / increment);
+
+                decimal steps1 = Math.Round(temp, 0);
+                decimal steps2 = Math.Floor(temp);
+                decimal steps3 = Math.Ceiling(temp);
+                decimal steps = Math.Truncate(temp);
+
+              //  decimal steps = temp % 1 == 0 && temp > 1 && temp % 2 == 0 ? temp - 1 : Math.Truncate(temp);
+                decimal floor = basisCost + (steps * increment);
                 decimal ceiling = floor + increment;
-                matrix = (floor + ceiling) / 2.000000m;
-                msg += $"basis    :{basis}{Environment.NewLine}increment:{increment}{Environment.NewLine}market    :{market}{Environment.NewLine}Steps     :{steps}{Environment.NewLine}floor     :{floor}{Environment.NewLine}ceiling   :{ceiling}{Environment.NewLine}matrix    :{market}";
+                costPerOz = (floor + ceiling) / 2.000000m;
+                msg += $"basis    :{basisCost}{Environment.NewLine}increment:{increment}{Environment.NewLine}market    :{marketCost}{Environment.NewLine}Steps     :{steps}{Environment.NewLine}floor     :{floor}{Environment.NewLine}ceiling   :{ceiling}{Environment.NewLine}matrix    :{market}";
 
                 PXTrace.WriteInformation(msg);
 
-                return matrix;
-
+                return costPerOz;
             }
 
             public decimal MarketCost
@@ -1291,216 +1290,216 @@ namespace ASCISTARCustom
             //    return conv;
             //}
 
-            public static INUnit GetFinenessConversionRate(PXGraph graph, string FromUnit, string ToUnit)
-            {
-                INUnit conv =
-                new PXSelect<INUnit,
-                Where<INUnit.fromUnit, Equal<Required<INUnit.fromUnit>>,
-                    And<INUnit.toUnit, Equal<Required<INUnit.toUnit>>>>,
-                OrderBy<Desc<APVendorPrice.effectiveDate>>>(graph).SelectSingle(
-                    FromUnit,
-                    ToUnit);
-                return conv;
-            }
-            public static APVendorPrice FindMarketPrice(PXGraph graph, APVendorPrice price)
+            //public static INUnit GetFinenessConversionRate(PXGraph graph, string FromUnit, string ToUnit)
+            //{
+            //    INUnit conv =
+            //    new PXSelect<INUnit,
+            //    Where<INUnit.fromUnit, Equal<Required<INUnit.fromUnit>>,
+            //        And<INUnit.toUnit, Equal<Required<INUnit.toUnit>>>>,
+            //    OrderBy<Desc<APVendorPrice.effectiveDate>>>(graph).SelectSingle(
+            //        FromUnit,
+            //        ToUnit);
+            //    return conv;
+            //}
+            //public static APVendorPrice FindMarketPrice(PXGraph graph, APVendorPrice price)
 
-            {
-                if (price.EffectiveDate == null)
-                    price.EffectiveDate = DateTime.Today;
+            //{
+            //    if (price.EffectiveDate == null)
+            //        price.EffectiveDate = DateTime.Today;
 
-                ASCIStarAPVendorPriceExt MarketPriceExt = price.GetExtension<ASCIStarAPVendorPriceExt>();
-                InventoryItem Commodity = InventoryItem.PK.Find(graph, price.InventoryID);
+            //    ASCIStarAPVendorPriceExt MarketPriceExt = price.GetExtension<ASCIStarAPVendorPriceExt>();
+            //    InventoryItem Commodity = InventoryItem.PK.Find(graph, price.InventoryID);
 
-                APVendorPrice MarketPrice =
-                    new PXSelect<APVendorPrice,
-                    Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
-                        And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-                        And<APVendorPrice.uOM, Equal<Required<APVendorPrice.uOM>>>>>,
-                    OrderBy<Desc<APVendorPrice.effectiveDate>>>(graph).SelectSingle(
-                        price.VendorID,
-                        price.InventoryID,
-                        price.UOM);
-                return MarketPrice;
-            }
+            //    APVendorPrice MarketPrice =
+            //        new PXSelect<APVendorPrice,
+            //        Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
+            //            And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
+            //            And<APVendorPrice.uOM, Equal<Required<APVendorPrice.uOM>>>>>,
+            //        OrderBy<Desc<APVendorPrice.effectiveDate>>>(graph).SelectSingle(
+            //            price.VendorID,
+            //            price.InventoryID,
+            //            price.UOM);
+            //    return MarketPrice;
+            //}
 
-            public static JewelryCost Fetch(PXGraph graph, int? vendorID, int? vendorLocationID, DateTime? docDate, string curyID, string baseCuryID, int? inventoryID, int? subItemID, int? siteID, string uom, bool onlyVendor = false)
-            {
-                PXSelectBase<InventoryItem> vendorCostSelect =
-                    new PXSelectReadonly2<InventoryItem,
-                        LeftJoin<INItemCost, On<INItemCost.inventoryID, Equal<InventoryItem.inventoryID>,
-                            And<INItemCost.curyID, Equal<Required<INItemCost.curyID>>>>,
-                    LeftJoin<POVendorInventory, On<
-                        POVendorInventory.inventoryID, Equal<InventoryItem.inventoryID>,
-                        And<POVendorInventory.active, Equal<True>,
-                                    And<POVendorInventory.vendorID, Equal<Required<Vendor.bAccountID>>,
-                                    And<POVendorInventory.curyID, Equal<Required<POVendorInventory.curyID>>,
-                        And2<Where<POVendorInventory.subItemID, Equal<Required<POVendorInventory.subItemID>>,
-                                                Or<POVendorInventory.subItemID, Equal<InventoryItem.defaultSubItemID>,
-                                                Or<POVendorInventory.subItemID, IsNull,
-                                                Or<Where<Required<POVendorInventory.subItemID>, IsNull,
-                                                     And<POVendorInventory.subItemID, Equal<True>>>>>>>,
-                                 And2<Where<POVendorInventory.purchaseUnit, Equal<Required<POVendorInventory.purchaseUnit>>>,
-                                 And<Where<POVendorInventory.vendorLocationID, Equal<Required<POVendorInventory.vendorLocationID>>,
-                                                Or<POVendorInventory.vendorLocationID, IsNull>>>>>>>>>>>,
-                        Where<InventoryItem.inventoryID, Equal<Required<InventoryItem.inventoryID>>>,
-                        OrderBy<
-                        Asc<Switch<Case<Where<POVendorInventory.purchaseUnit, Equal<InventoryItem.purchaseUnit>>, True>, False>,
-                        Asc<Switch<Case<Where<POVendorInventory.subItemID, Equal<InventoryItem.defaultSubItemID>>, True>, False>,
-                        Asc<Switch<Case<Where<POVendorInventory.vendorLocationID, IsNull>, True>, False>,
-                        Asc<InventoryItem.inventoryCD>>>>>>(graph);
+            //public static JewelryCost Fetch(PXGraph graph, int? vendorID, int? vendorLocationID, DateTime? docDate, string curyID, string baseCuryID, int? inventoryID, int? subItemID, int? siteID, string uom, bool onlyVendor = false)
+            //{
+            //    PXSelectBase<InventoryItem> vendorCostSelect =
+            //        new PXSelectReadonly2<InventoryItem,
+            //            LeftJoin<INItemCost, On<INItemCost.inventoryID, Equal<InventoryItem.inventoryID>,
+            //                And<INItemCost.curyID, Equal<Required<INItemCost.curyID>>>>,
+            //        LeftJoin<POVendorInventory, On<
+            //            POVendorInventory.inventoryID, Equal<InventoryItem.inventoryID>,
+            //            And<POVendorInventory.active, Equal<True>,
+            //                        And<POVendorInventory.vendorID, Equal<Required<Vendor.bAccountID>>,
+            //                        And<POVendorInventory.curyID, Equal<Required<POVendorInventory.curyID>>,
+            //            And2<Where<POVendorInventory.subItemID, Equal<Required<POVendorInventory.subItemID>>,
+            //                                    Or<POVendorInventory.subItemID, Equal<InventoryItem.defaultSubItemID>,
+            //                                    Or<POVendorInventory.subItemID, IsNull,
+            //                                    Or<Where<Required<POVendorInventory.subItemID>, IsNull,
+            //                                         And<POVendorInventory.subItemID, Equal<True>>>>>>>,
+            //                     And2<Where<POVendorInventory.purchaseUnit, Equal<Required<POVendorInventory.purchaseUnit>>>,
+            //                     And<Where<POVendorInventory.vendorLocationID, Equal<Required<POVendorInventory.vendorLocationID>>,
+            //                                    Or<POVendorInventory.vendorLocationID, IsNull>>>>>>>>>>>,
+            //            Where<InventoryItem.inventoryID, Equal<Required<InventoryItem.inventoryID>>>,
+            //            OrderBy<
+            //            Asc<Switch<Case<Where<POVendorInventory.purchaseUnit, Equal<InventoryItem.purchaseUnit>>, True>, False>,
+            //            Asc<Switch<Case<Where<POVendorInventory.subItemID, Equal<InventoryItem.defaultSubItemID>>, True>, False>,
+            //            Asc<Switch<Case<Where<POVendorInventory.vendorLocationID, IsNull>, True>, False>,
+            //            Asc<InventoryItem.inventoryCD>>>>>>(graph);
 
-                Func<string, PXResult<InventoryItem, INItemCost, POVendorInventory>> selectVendorCostByUOM =
-                    uomParam => vendorCostSelect
-                        .Select(baseCuryID, vendorID, curyID, subItemID, subItemID, uomParam, vendorLocationID, inventoryID).AsEnumerable()
-                        .FirstOrDefault(r => r.GetItem<POVendorInventory>() != null)
-                        as PXResult<InventoryItem, INItemCost, POVendorInventory>;
+            //    Func<string, PXResult<InventoryItem, INItemCost, POVendorInventory>> selectVendorCostByUOM =
+            //        uomParam => vendorCostSelect
+            //            .Select(baseCuryID, vendorID, curyID, subItemID, subItemID, uomParam, vendorLocationID, inventoryID).AsEnumerable()
+            //            .FirstOrDefault(r => r.GetItem<POVendorInventory>() != null)
+            //            as PXResult<InventoryItem, INItemCost, POVendorInventory>;
 
-                var vendorCostRow = selectVendorCostByUOM(uom);
-                var item = vendorCostRow.GetItem<InventoryItem>();
+            //    var vendorCostRow = selectVendorCostByUOM(uom);
+            //    var item = vendorCostRow.GetItem<InventoryItem>();
 
-                Func<POVendorInventory, JewelryCost> fetchVendorLastCost =
-                    vendorPrice => vendorPrice.LastPrice != null && vendorPrice.LastPrice != 0m
-                        ? new JewelryCost(graph, item, vendorPrice.LastPrice.Value, vendorPrice.LastPrice.Value, vendorPrice.VendorID, null, DateTime.Today
-                        , vendorPrice.PurchaseUnit, curyID, false)
-                        : null;
+            //    Func<POVendorInventory, JewelryCost> fetchVendorLastCost =
+            //        vendorPrice => vendorPrice.LastPrice != null && vendorPrice.LastPrice != 0m
+            //            ? new JewelryCost(graph, item, vendorPrice.LastPrice.Value, vendorPrice.LastPrice.Value, vendorPrice.VendorID, null, DateTime.Today
+            //            , vendorPrice.PurchaseUnit, curyID, false)
+            //            : null;
 
-                return fetchVendorLastCost(vendorCostRow.GetItem<POVendorInventory>())
-                    ?? fetchVendorLastCost(selectVendorCostByUOM(item.BaseUnit).GetItem<POVendorInventory>())
-                    ?? (onlyVendor ? null : FetchStdCost(graph, item, baseCuryID, docDate))
-                    ?? (onlyVendor ? null : FetchSiteLastCost(graph, item, siteID, baseCuryID))
-                    ?? new JewelryCost(graph, item, vendorCostRow.GetItem<INItemCost>()?.LastCost ?? 0);
-            }
+            //    return fetchVendorLastCost(vendorCostRow.GetItem<POVendorInventory>())
+            //        ?? fetchVendorLastCost(selectVendorCostByUOM(item.BaseUnit).GetItem<POVendorInventory>())
+            //        ?? (onlyVendor ? null : FetchStdCost(graph, item, baseCuryID, docDate))
+            //        ?? (onlyVendor ? null : FetchSiteLastCost(graph, item, siteID, baseCuryID))
+            //        ?? new JewelryCost(graph, item, vendorCostRow.GetItem<INItemCost>()?.LastCost ?? 0);
+            //}
 
 
 
-            private static JewelryCost FetchStdCost(PXGraph graph, InventoryItem item, string baseCuryID, DateTime? docDate)
-            {
-                if (item.StkItem == false || item.ValMethod == INValMethod.Standard)
-                {
-                    InventoryItemCurySettings curySettings =
-                        InventoryItemCurySettings.PK.Find(graph, item.InventoryID, baseCuryID ?? CurrencyCollection.GetBaseCurrency()?.CuryID);
+            //private static JewelryCost FetchStdCost(PXGraph graph, InventoryItem item, string baseCuryID, DateTime? docDate)
+            //{
+            //    if (item.StkItem == false || item.ValMethod == INValMethod.Standard)
+            //    {
+            //        InventoryItemCurySettings curySettings =
+            //            InventoryItemCurySettings.PK.Find(graph, item.InventoryID, baseCuryID ?? CurrencyCollection.GetBaseCurrency()?.CuryID);
 
-                    if (curySettings == null) return null;
+            //        if (curySettings == null) return null;
 
-                    if (!docDate.HasValue || (curySettings.StdCostDate.HasValue && curySettings.StdCostDate.Value <= docDate.Value))
-                    {
-                        return new JewelryCost(graph, item, curySettings.StdCost.Value);
-                    }
-                }
-                return null;
-            }
+            //        if (!docDate.HasValue || (curySettings.StdCostDate.HasValue && curySettings.StdCostDate.Value <= docDate.Value))
+            //        {
+            //            return new JewelryCost(graph, item, curySettings.StdCost.Value);
+            //        }
+            //    }
+            //    return null;
+            //}
 
-            private static JewelryCost FetchSiteLastCost(PXGraph graph, InventoryItem item, int? siteID, string baseCuryID)
-            {
-                INItemStats itemStats;
-                if (siteID != null)
-                {
-                    itemStats = PXSelect<INItemStats,
-                         Where<INItemStats.inventoryID, Equal<Required<INItemStats.inventoryID>>,
-                        And<INItemStats.siteID, Equal<Required<INItemStats.siteID>>>>>
-                        .Select(graph, item.InventoryID, siteID);
-                }
-                else
-                {
-                    itemStats = PXSelectJoin<INItemStats,
-                        InnerJoin<INSite, On<INItemStats.FK.Site>>,
-                        Where<INItemStats.inventoryID, Equal<Required<INItemStats.inventoryID>>,
-                            And<INSite.baseCuryID, Equal<Required<INSite.baseCuryID>>>>,
-                        OrderBy<Desc<INItemStats.lastCostDate>>>
-                        .Select(graph, item.InventoryID, baseCuryID);
-                }
+            //private static JewelryCost FetchSiteLastCost(PXGraph graph, InventoryItem item, int? siteID, string baseCuryID)
+            //{
+            //    INItemStats itemStats;
+            //    if (siteID != null)
+            //    {
+            //        itemStats = PXSelect<INItemStats,
+            //             Where<INItemStats.inventoryID, Equal<Required<INItemStats.inventoryID>>,
+            //            And<INItemStats.siteID, Equal<Required<INItemStats.siteID>>>>>
+            //            .Select(graph, item.InventoryID, siteID);
+            //    }
+            //    else
+            //    {
+            //        itemStats = PXSelectJoin<INItemStats,
+            //            InnerJoin<INSite, On<INItemStats.FK.Site>>,
+            //            Where<INItemStats.inventoryID, Equal<Required<INItemStats.inventoryID>>,
+            //                And<INSite.baseCuryID, Equal<Required<INSite.baseCuryID>>>>,
+            //            OrderBy<Desc<INItemStats.lastCostDate>>>
+            //            .Select(graph, item.InventoryID, baseCuryID);
+            //    }
 
-                if (itemStats?.LastCost != null)
-                    return new JewelryCost(graph, item, itemStats.LastCost.Value);
+            //    if (itemStats?.LastCost != null)
+            //        return new JewelryCost(graph, item, itemStats.LastCost.Value);
 
-                return null;
-            }
+            //    return null;
+            //}
 
-            public static int? FetchLocation(PXGraph graph, int? vendorID, int? itemID, int? subItemID, int? siteID)
-            {
-                BAccountR company = PXSelectJoin<BAccountR,
-                    InnerJoin<Branch, On<Branch.bAccountID, Equal<BAccountR.bAccountID>>>,
-                    Where<BAccountR.bAccountID, Equal<Required<BAccountR.bAccountID>>>>.Select(graph, vendorID);
-                if (company != null)
-                {
-                    return company.DefLocationID;
-                }
+            //public static int? FetchLocation(PXGraph graph, int? vendorID, int? itemID, int? subItemID, int? siteID)
+            //{
+            //    BAccountR company = PXSelectJoin<BAccountR,
+            //        InnerJoin<Branch, On<Branch.bAccountID, Equal<BAccountR.bAccountID>>>,
+            //        Where<BAccountR.bAccountID, Equal<Required<BAccountR.bAccountID>>>>.Select(graph, vendorID);
+            //    if (company != null)
+            //    {
+            //        return company.DefLocationID;
+            //    }
 
-                Vendor vendor = PXSelectReadonly<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, vendorID);
+            //    Vendor vendor = PXSelectReadonly<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, vendorID);
 
-                var record =
-                            PXSelectJoin<INItemSiteSettings,
-                                    LeftJoin<POVendorInventory,
-                                        On<POVendorInventory.inventoryID, Equal<INItemSiteSettings.inventoryID>,
-                                        And<POVendorInventory.active, Equal<boolTrue>,
-                                        And<POVendorInventory.vendorID, Equal<Required<Vendor.bAccountID>>,
-                                        And<Where<POVendorInventory.subItemID, Equal<Required<POVendorInventory.subItemID>>,
-                                                Or<POVendorInventory.subItemID, Equal<INItemSiteSettings.defaultSubItemID>,
-                                                Or<POVendorInventory.subItemID, IsNull,
-                                                Or<Where<Required<POVendorInventory.subItemID>, IsNull,
-                                                     And<POVendorInventory.subItemID, Equal<True>>>>>>>>>>>>,
-                                Where<INItemSiteSettings.inventoryID, Equal<Required<INItemSiteSettings.inventoryID>>,
-                                    And<INItemSiteSettings.siteID, Equal<Required<INItemSiteSettings.siteID>>>>>
-                                    .Select(graph, vendorID, subItemID, subItemID, itemID, siteID).ToArray()
-                                    .Select(r => new { Item = r.GetItem<POVendorInventory>(), Site = r.GetItem<INItemSiteSettings>() })
-                                    .Where(r => r.Item != null && r.Site != null)
-                                    .OrderBy(r => r.Item.LastPrice)
-                                    .ThenByDescending(r => r.Item.SubItemID == r.Site.DefaultSubItemID)
-                                    .ThenByDescending(r => r.Item.VendorLocationID != null)
-                                    .ThenByDescending(r => r.Item.IsDefault == true)
-                                    .ThenByDescending(r => r.Item.VendorLocationID == vendor?.DefLocationID)
-                                    .FirstOrDefault();
+            //    var record =
+            //                PXSelectJoin<INItemSiteSettings,
+            //                        LeftJoin<POVendorInventory,
+            //                            On<POVendorInventory.inventoryID, Equal<INItemSiteSettings.inventoryID>,
+            //                            And<POVendorInventory.active, Equal<boolTrue>,
+            //                            And<POVendorInventory.vendorID, Equal<Required<Vendor.bAccountID>>,
+            //                            And<Where<POVendorInventory.subItemID, Equal<Required<POVendorInventory.subItemID>>,
+            //                                    Or<POVendorInventory.subItemID, Equal<INItemSiteSettings.defaultSubItemID>,
+            //                                    Or<POVendorInventory.subItemID, IsNull,
+            //                                    Or<Where<Required<POVendorInventory.subItemID>, IsNull,
+            //                                         And<POVendorInventory.subItemID, Equal<True>>>>>>>>>>>>,
+            //                    Where<INItemSiteSettings.inventoryID, Equal<Required<INItemSiteSettings.inventoryID>>,
+            //                        And<INItemSiteSettings.siteID, Equal<Required<INItemSiteSettings.siteID>>>>>
+            //                        .Select(graph, vendorID, subItemID, subItemID, itemID, siteID).ToArray()
+            //                        .Select(r => new { Item = r.GetItem<POVendorInventory>(), Site = r.GetItem<INItemSiteSettings>() })
+            //                        .Where(r => r.Item != null && r.Site != null)
+            //                        .OrderBy(r => r.Item.LastPrice)
+            //                        .ThenByDescending(r => r.Item.SubItemID == r.Site.DefaultSubItemID)
+            //                        .ThenByDescending(r => r.Item.VendorLocationID != null)
+            //                        .ThenByDescending(r => r.Item.IsDefault == true)
+            //                        .ThenByDescending(r => r.Item.VendorLocationID == vendor?.DefLocationID)
+            //                        .FirstOrDefault();
 
-                if (record == null)
-                    return null;
-                if (record.Item.VendorLocationID != null)
-                    return record.Item.VendorLocationID;
-                if (record.Site.PreferredVendorID == vendorID)
-                    return record.Site.PreferredVendorLocationID ?? vendor?.DefLocationID;
-                if (vendor != null && vendor.BAccountID == vendorID)
-                    return vendor.DefLocationID;
-                return null;
-            }
+            //    if (record == null)
+            //        return null;
+            //    if (record.Item.VendorLocationID != null)
+            //        return record.Item.VendorLocationID;
+            //    if (record.Site.PreferredVendorID == vendorID)
+            //        return record.Site.PreferredVendorLocationID ?? vendor?.DefLocationID;
+            //    if (vendor != null && vendor.BAccountID == vendorID)
+            //        return vendor.DefLocationID;
+            //    return null;
+            //}
 
-            public static void Update(PXGraph graph, int? vendorID, int? vendorLocationID, string curyID, int? inventoryID, int? subItemID, string uom, decimal curyCost)
-            {
-                if (curyCost <= 0 || string.IsNullOrEmpty(uom) ||
-                    vendorID == null ||
-                    vendorLocationID == null) return;
+            //public static void Update(PXGraph graph, int? vendorID, int? vendorLocationID, string curyID, int? inventoryID, int? subItemID, string uom, decimal curyCost)
+            //{
+            //    if (curyCost <= 0 || string.IsNullOrEmpty(uom) ||
+            //        vendorID == null ||
+            //        vendorLocationID == null) return;
 
-                PXCache cache = graph.Caches[typeof(POVendorInventoryPriceUpdate)];
+            //    PXCache cache = graph.Caches[typeof(POVendorInventoryPriceUpdate)];
 
-                foreach (PXResult<InventoryItem, Vendor, Company> r in
-                    PXSelectReadonly2<InventoryItem,
-                        LeftJoinSingleTable<Vendor,
-                                     On<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>,
-                        CrossJoin<Company>>,
-                        Where<InventoryItem.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>.
-                        Select(graph, vendorID, inventoryID))
-                {
-                    InventoryItem item = r;
-                    Vendor vendor = r;
-                    Company company = r;
-                    if (item.InventoryID == null || vendor.BAccountID == null ||
-                        (item.StkItem == true && subItemID == null)) continue;
-                    INSetup setup = PXSetupOptional<INSetup>.Select(graph);
+            //    foreach (PXResult<InventoryItem, Vendor, Company> r in
+            //        PXSelectReadonly2<InventoryItem,
+            //            LeftJoinSingleTable<Vendor,
+            //                         On<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>,
+            //            CrossJoin<Company>>,
+            //            Where<InventoryItem.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>.
+            //            Select(graph, vendorID, inventoryID))
+            //    {
+            //        InventoryItem item = r;
+            //        Vendor vendor = r;
+            //        Company company = r;
+            //        if (item.InventoryID == null || vendor.BAccountID == null ||
+            //            (item.StkItem == true && subItemID == null)) continue;
+            //        INSetup setup = PXSetupOptional<INSetup>.Select(graph);
 
-                    int? savedSubItemID = item.StkItem == true ? subItemID : null;
+            //        int? savedSubItemID = item.StkItem == true ? subItemID : null;
 
-                    POVendorInventoryPriceUpdate vendorPrice = (POVendorInventoryPriceUpdate)cache.CreateInstance();
-                    vendorPrice.InventoryID = inventoryID;
-                    vendorPrice.SubItemID = savedSubItemID;
-                    vendorPrice.VendorID = vendorID;
-                    vendorPrice.VendorLocationID = vendorLocationID;
-                    vendorPrice.PurchaseUnit = uom;
-                    vendorPrice = (POVendorInventoryPriceUpdate)cache.Insert(vendorPrice);
-                    if (item.StkItem != true) vendorPrice.SubItemID = savedSubItemID;
-                    vendorPrice.CuryID = curyID;
-                    cache.Normalize();
-                    vendorPrice.Active = true;
-                    vendorPrice.LastPrice = curyCost;
-                }
-            }
+            //        POVendorInventoryPriceUpdate vendorPrice = (POVendorInventoryPriceUpdate)cache.CreateInstance();
+            //        vendorPrice.InventoryID = inventoryID;
+            //        vendorPrice.SubItemID = savedSubItemID;
+            //        vendorPrice.VendorID = vendorID;
+            //        vendorPrice.VendorLocationID = vendorLocationID;
+            //        vendorPrice.PurchaseUnit = uom;
+            //        vendorPrice = (POVendorInventoryPriceUpdate)cache.Insert(vendorPrice);
+            //        if (item.StkItem != true) vendorPrice.SubItemID = savedSubItemID;
+            //        vendorPrice.CuryID = curyID;
+            //        cache.Normalize();
+            //        vendorPrice.Active = true;
+            //        vendorPrice.LastPrice = curyCost;
+            //    }
+            //}
 
             public static decimal CalcStandardCost(PXCache cache, int kitInventoryID, int compInventoryID)
             {
