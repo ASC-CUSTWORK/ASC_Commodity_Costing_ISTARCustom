@@ -31,12 +31,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\Dependencies\VERSION2021R2\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\VERSION2021R2\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PX.Common">
       <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
       <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.Std.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PX.CS.Contracts">
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.CS.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
@@ -47,8 +60,24 @@
       <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PX.DbServices">
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.DbServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PX.Objects">
       <HintPath>..\..\Dependencies\VERSION2021R2\PX.Objects.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PX.Web.Customization">
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Web.Customization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PX.Web.UI">
+      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Web.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\Dependencies\VERSION2021R2\RestSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -61,7 +90,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonHelpers\AuditSystemFields.cs" />
+    <Compile Include="Common\DAC\AuditSystemFields.cs" />
+    <Compile Include="Common\Descriptor\ASCIStarEndpoints.cs" />
+    <Compile Include="Common\Descriptor\ASCIStarMessages.cs" />
+    <Compile Include="Common\Descriptor\ASCIStarQueryParams.cs" />
+    <Compile Include="Common\Helper\ASCIStarJsonConverter.cs" />
+    <Compile Include="Common\Helper\ASCIStarParseStringConverter.cs" />
+    <Compile Include="Common\Helper\Exceptions\ASCIStarStatusCodeException.cs" />
+    <Compile Include="Common\Helper\Extensions\ASCIStarStringExtension.cs" />
+    <Compile Include="Common\Models\ASCIStarErrorModel.cs" />
+    <Compile Include="Common\Models\ASCIStarHistoricalRatesModel.cs" />
+    <Compile Include="Common\Models\ASCIStarLatestRatesModel.cs" />
+    <Compile Include="Common\Models\IASCIStarModel.cs" />
+    <Compile Include="Common\Services\ASCIStarRESTService.cs" />
+    <Compile Include="Common\Services\ASCIStarServiceRegistrator.cs" />
+    <Compile Include="Common\Services\Interfaces\IASCIStarRESTService.cs" />
     <Compile Include="Cost\ASCIStarAPVendorPriceMaintExt.cs" />
     <Compile Include="Cost\ASCIStarCostHelper.cs" />
     <Compile Include="Cost\ASCIStarVendorMaintExt.cs" />
@@ -99,6 +142,10 @@
     <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrVendorQuote.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecNonStkDetExt.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecStkDetExt.cs" />
+    <Compile Include="Common\Plugins\ASCIStarPlugin.cs" />
+    <Compile Include="Preferences\ASCIStarSetupMaint.cs" />
+    <Compile Include="Preferences\DAC\ASCIStarSetup.cs" />
+    <Compile Include="Preferences\Descriptor\ASCIStarSymbols.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchasing\ASCIstarPOEntryExt.cs" />
     <Compile Include="Purchasing\DAC\ASCIStarPOLineExt.cs" />

@@ -2,8 +2,8 @@
 using PX.Data.BQL.Fluent;
 using System;
 using PX.Objects.IN;
-using ASCISTARCustom.CommonHelpers;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.Common.DAC;
 
 namespace ASCISTARCustom.Inventory.DAC
 {
