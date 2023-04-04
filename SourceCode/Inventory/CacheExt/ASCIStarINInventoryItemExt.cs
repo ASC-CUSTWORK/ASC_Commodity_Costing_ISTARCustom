@@ -222,7 +222,7 @@ namespace ASCISTARCustom
         //[PXUIField(DisplayName = "Surcharge Type")]
         //[ContractSurchargeType.List]
         //[PXDefault(ContractSurchargeType.PercentageAmt, PersistingCheck = PXPersistingCheck.Null)]
-                //public virtual string UsrContractSurchargeType { get; set; }
+        //public virtual string UsrContractSurchargeType { get; set; }
         //public abstract class usrContractSurchargeType : PX.Data.BQL.BqlString.Field<usrContractSurchargeType> { }
         //#endregion
 

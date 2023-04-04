@@ -66,14 +66,14 @@ namespace ASCISTARCustom
 
         #region UsrCommodityLossPct
         [PXDBDecimal(4)]
-        [PXUIField(DisplayName = "Loss Pct")]
+        [PXUIField(DisplayName = "Metal Loss %")]
         public virtual decimal? UsrCommodityLossPct { get; set; }
         public abstract class usrCommodityLossPct : PX.Data.BQL.BqlDecimal.Field<usrCommodityLossPct> { }
         #endregion
 
         #region UsrCommoditySurchargePct
         [PXDBDecimal(4)]
-        [PXUIField(DisplayName = "Surcharge Pct")]
+        [PXUIField(DisplayName = "Surcharge %")]
         public virtual decimal? UsrCommoditySurchargePct { get; set; }
         public abstract class usrCommoditySurchargePct : PX.Data.BQL.BqlDecimal.Field<usrCommoditySurchargePct> { }
         #endregion
@@ -88,7 +88,6 @@ namespace ASCISTARCustom
         #region UsrOtherMaterialCost
         [PXUIField(DisplayName = "Other Materials")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
         public virtual Decimal? UsrOtherMaterialCost { get; set; }
         public abstract class usrOtherMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrOtherMaterialCost> { }
         #endregion
@@ -104,7 +103,6 @@ namespace ASCISTARCustom
 
         [PXUIField(DisplayName = "Packaging Cost")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
         public virtual Decimal? UsrPackagingCost { get; set; }
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
