@@ -284,26 +284,26 @@ namespace ASCISTARCustom
             #region Private Methods
 
 
-            private APVendorPrice MarketSilverPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "SSS", DateTime? effectiveDate = null)
-            {
-                InventoryItem commodity = GetCommodityItem(graph, "SSS");
-                Vendor market = GetMarketVendor(graph, MarketID);
-                return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
-            }
+            //private APVendorPrice MarketSilverPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "SSS", DateTime? effectiveDate = null)
+            //{
+            //    InventoryItem commodity = GetCommodityItem(graph, "SSS");
+            //    Vendor market = GetMarketVendor(graph, MarketID);
+            //    return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
+            //}
 
-            private APVendorPrice MarketGoldPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "24K", DateTime? effectiveDate = null)
-            {
-                InventoryItem commodity = GetCommodityItem(graph, "24K");
-                Vendor market = GetMarketVendor(graph, MarketID);
-                return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
-            }
+            //private APVendorPrice MarketGoldPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "24K", DateTime? effectiveDate = null)
+            //{
+            //    InventoryItem commodity = GetCommodityItem(graph, "24K");
+            //    Vendor market = GetMarketVendor(graph, MarketID);
+            //    return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
+            //}
 
-            private APVendorPrice MarketPlatinumPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "9995", DateTime? effectiveDate = null)
-            {
-                InventoryItem commodity = GetCommodityItem(graph, "PLT");
-                Vendor market = GetMarketVendor(graph, MarketID);
-                return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
-            }
+            //private APVendorPrice MarketPlatinumPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "9995", DateTime? effectiveDate = null)
+            //{
+            //    InventoryItem commodity = GetCommodityItem(graph, "PLT");
+            //    Vendor market = GetMarketVendor(graph, MarketID);
+            //    return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
+            //}
 
             private APVendorPrice FindMarketPrice(PXGraph graph, Vendor Market, InventoryItem commodity, string UOM, string Fineness, DateTime effectiveDate)
             {
@@ -809,24 +809,24 @@ namespace ASCISTARCustom
 
         public class JewelryCost
         {
-            #region Selects
-            public PXSelect<APVendorPrice, Where<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-                    And<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
-                    And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>>>>> CommodityPrice;
+            //#region Selects
+            //public PXSelect<APVendorPrice, Where<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
+            //        And<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
+            //        And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>>>>> CommodityPrice;
 
-            //public PXSelect<ASCIStarVendorExt, Where<Vendor.acctCD, Equal<MarketList.londonPM>>> VendorDefaultMarket;
-            //public PXSelect<BAccount, Where<BAccount.acctCD, Equal<DEFAULTMARKET>>> DefaultMarket;
-            //public class DEFAULTMARKET : PX.Data.BQL.BqlString.Constant<DEFAULTMARKET>
-            //{
-            //    public static readonly string value = "LONDON PM";
-            //    public DEFAULTMARKET() : base(value) { }
-            //}
-            public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecStkDet.kitInventoryID>>>,
-                    Where<INKitSpecStkDet.compInventoryID, Equal<Required<INKitSpecStkDet.compInventoryID>>>> StockLines;
+            ////public PXSelect<ASCIStarVendorExt, Where<Vendor.acctCD, Equal<MarketList.londonPM>>> VendorDefaultMarket;
+            ////public PXSelect<BAccount, Where<BAccount.acctCD, Equal<DEFAULTMARKET>>> DefaultMarket;
+            ////public class DEFAULTMARKET : PX.Data.BQL.BqlString.Constant<DEFAULTMARKET>
+            ////{
+            ////    public static readonly string value = "LONDON PM";
+            ////    public DEFAULTMARKET() : base(value) { }
+            ////}
+            //public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecStkDet.kitInventoryID>>>,
+            //        Where<INKitSpecStkDet.compInventoryID, Equal<Required<INKitSpecStkDet.compInventoryID>>>> StockLines;
 
-            public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecNonStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecNonStkDet.kitInventoryID>>>,
-                    Where<INKitSpecNonStkDet.compInventoryID, Equal<Required<INKitSpecNonStkDet.compInventoryID>>>> NonStockLines;
-            #endregion Selects
+            //public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecNonStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecNonStkDet.kitInventoryID>>>,
+            //        Where<INKitSpecNonStkDet.compInventoryID, Equal<Required<INKitSpecNonStkDet.compInventoryID>>>> NonStockLines;
+            //#endregion Selects
 
             #region Declarations
 
