@@ -1,4 +1,5 @@
 ﻿using ASCISTARCustom.Common.Models;
+using ASCISTARCustom.Preferences.DAC;
 using System.Collections.Generic;
 
 namespace ASCISTARCustom.Common.Services.Interfaces
@@ -15,5 +16,7 @@ namespace ASCISTARCustom.Common.Services.Interfaces
         /// <exception cref="ASCIStarStatusCodeException">Thrown when the response has a non-OK status code.</exception>
         /// <exception cref="PXException">Thrown when an ASCIStarStatusCodeException is caught, to indicate a remote server error.</exception>
         TModel Get<TModel>(string endpoint, params KeyValuePair<string, string>[] parameters) where TModel : IASCIStarModel;
+
+        ASCIStarSetup GetASCIStarSetup();
     }
 }

@@ -14,7 +14,7 @@ namespace ASCISTARCustom.Common.Plugins
         private const string _baseUrl = "https://metals-api.com/api/";
         private const string _apiToken = "<api_token>";
         private const string _currency = "USD";
-        private const string _symbols = "LBXAUAM,LBXAUPM,XAU,XAG";
+        private const string _symbols = "LBXAG,LBXAUAM,LBXAUPM,XAU,XAG";
         #endregion
 
         public override void OnPublished() { }

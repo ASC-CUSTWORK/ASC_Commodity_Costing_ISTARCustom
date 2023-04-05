@@ -33,5 +33,15 @@ namespace ASCISTARCustom.Common.Descriptor
             public const string TestConnectionFailed = "Test connection failed. For more details, please refer to the trace log.";
         }
         #endregion
+
+        #region Error
+        [PXLocalizable]
+        public class Error
+        {
+            public const string SymbolNotSpecified = "Symbol not provided. Please specify the desired symbol in preferences and try again.";
+            public const string ProcError = "Error: {0}";
+        }
+        #endregion
+
     }
 }

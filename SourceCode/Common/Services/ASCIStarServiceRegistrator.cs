@@ -10,6 +10,7 @@ namespace ASCISTARCustom.Common.Services
             base.Load(builder);
 
             builder.RegisterType<ASCIStarRESTService>().As<IASCIStarRESTService>();
+            builder.RegisterType<ASCIStarMetalsAPILatestRates>().As<IASCIStarMetalsAPILatestRates>();
         }
     }
 }

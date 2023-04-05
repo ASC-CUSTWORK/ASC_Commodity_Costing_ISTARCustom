@@ -8,4 +8,5 @@
     <Column TableName="APVendorPrice" ColumnName="UsrCommodity" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="2" DecimalLength="1" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrCommodityPerGram" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrIncrementPerGram" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrFormAPI" ColumnType="bool" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
 </Table>
