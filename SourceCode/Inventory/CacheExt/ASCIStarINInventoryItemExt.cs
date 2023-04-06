@@ -168,7 +168,7 @@ namespace ASCISTARCustom
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Costing Type", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Costing Type")]
         [ASCIStarCostingType.List]
         [PXDefault(ASCIStarCostingType.ContractCost, PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual string UsrCostingType { get; set; }
@@ -177,7 +177,7 @@ namespace ASCISTARCustom
 
         #region UsrCostRollupType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Rollup Type", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Rollup Type")]
         [ASCIStarCostRollupType.List]
         [PXDefault(ASCIStarCostRollupType.Other, PersistingCheck = PXPersistingCheck.Null)]
         //[PXDefault(typeof(), PersistingCheck = PXPersistingCheck.Null)]
@@ -311,7 +311,7 @@ namespace ASCISTARCustom
 
         #region UsrContractCost
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Purchase Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         //[PXFormula(typeof(Add<Add<Add<Add<
         //            ASCIStarINInventoryItemExt.usrCommodityCost
         //           , ASCIStarINInventoryItemExt.usrFabricationCost>
@@ -326,7 +326,7 @@ namespace ASCISTARCustom
 
         #region UsrUnitCost
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         //[PXFormula(typeof(Mult<Add<Add<Add<Add<Add<Add<
         //                    ASCIStarINInventoryItemExt.usrCommodityCost
         //                   , ASCIStarINInventoryItemExt.usrFabricationCost>

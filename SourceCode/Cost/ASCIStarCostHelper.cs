@@ -1133,40 +1133,48 @@ namespace ASCISTARCustom
                 decimal value = 0m;
                 if (CostRollupTotal.Any())
                 {
-                    CostRollupTotal.Keys.ForEach(key =>
-                    {
-                        //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor)
-                        //{
-                        //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[key] + (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[key];
-                        //}
-                        //else
-                        //{
-                        //    value += CostRollupTotal[key];
-                        //}
-                        if (key == "C")
-                        {
-                            decimal loss = 1.0m + itemExt.UsrContractLossPct.Value / 100;
-                            decimal surcharge = 1.0m + itemExt.UsrContractSurcharge.Value / 100;
+                    //CostRollupTotal.Keys.ForEach(key =>
+                    //{
+                    //    //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor)
+                    //    //{
+                    //    //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[key] + (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[key];
+                    //    //}
+                    //    //else
+                    //    //{
+                    //    //    value += CostRollupTotal[key];
+                    //    //}
+                    //    if (key == "C")
+                    //    {
+                    //        //decimal loss = 1.0m + itemExt.UsrContractLossPct.Value / 100;
+                    //        //decimal surcharge = 1.0m + itemExt.UsrContractSurcharge.Value / 100;
 
-                            value += CostBasis.GoldBasis.MarketPerGram() * surcharge * loss;
-                        }
-                        else
-                        {
-                            value += CostRollupTotal[key];
-                        }
-                        //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMGold > 0)
-                        //{
-                        //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[ASCIStarCostRollupType.Labor];
-                        //}
-                        //else if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMSilver > 0)
-                        //{
-                        //    value += (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[ASCIStarCostRollupType.Labor];
-                        //}
-                        //else
-                        //{
-                        //    value += CostRollupTotal[key];
-                        //}
-                    });
+                    //        value += itemExt.UsrPricingGRAMGold.Value * CostBasis.GoldBasis.MarketPerGram() * surcharge * loss;
+                    //    }
+                    //    else
+                    //    {
+                    //        value += CostRollupTotal[key];
+                    //    }
+                    //    //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMGold > 0)
+                    //    //{
+                    //    //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                    //    //}
+                    //    //else if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMSilver > 0)
+                    //    //{
+                    //    //    value += (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                    //    //}
+                    //    //else
+                    //    //{
+                    //    //    value += CostRollupTotal[key];
+                    //    //}
+                    //});
+                    decimal loss = 1.0m + itemExt.UsrContractLossPct.Value / 100;
+                    decimal surcharge = 1.0m + itemExt.UsrContractSurcharge.Value / 100;
+
+                    value = itemExt.UsrPricingGRAMGold.Value * CostBasis.GoldBasis.MarketPerGram() * surcharge * loss 
+                        + CostRollupTotal[ASCIStarCostRollupType.Fabrication]
+                        + CostRollupTotal[ASCIStarCostRollupType.Packaging]
+                        + CostRollupTotal[ASCIStarCostRollupType.Materials];
+                    
                 }
                 return value;
             }

@@ -112,8 +112,55 @@ namespace ASCISTARCustom
             e.Cache.SetValueExt<ASCIStarPOOrderExt.usrMarketID>(row, vendor.GetExtension<ASCIStarVendorExt>().UsrMarketID);
         }
 
-        protected virtual void _(Events.FieldUpdated<POLine, POLine.inventoryID> e)
+        protected virtual void _(Events.FieldUpdated<POLine, POLine.orderQty> e)
         {
+            var row = e.Row;
+            if (row == null || row.InventoryID == null) return;
+            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, row.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+
+            SetNewCosts(e.Cache, row, InventoryItemView.Current, inventoryItemExt);
+        }
+
+        protected virtual void _(Events.FieldUpdated<POOrder, POOrder.orderDate> e)
+        {
+            var row = e.Row;
+            if (row == null ) return;
+            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, this.Base.Transactions.Current?.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+
+            SetNewCosts(e.Cache, this.Base.Transactions.Current, InventoryItemView.Current, inventoryItemExt);
+        }
+
+        protected virtual void _(Events.FieldUpdated<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, this.Base.Transactions.Current?.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+
+            SetNewCosts(e.Cache, this.Base.Transactions.Current, InventoryItemView.Current, inventoryItemExt);
+        }
+
+        protected virtual void _(Events.FieldUpdated<POLine, POLine.inventoryID> e, PXFieldUpdated baseEvent)
+        {
+            baseEvent(e.Cache, e.Args);
+
             var row = e.Row;
             if (row == null || row.InventoryID == null) return;
 
