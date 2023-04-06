@@ -1,5 +1,5 @@
 ﻿using System;
-using ASCISTARCustom.CommonHelpers;
+using ASCISTARCustom.Common.DAC;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
@@ -9,8 +9,12 @@ using static ASCISTARCustom.Inventory.Descriptor.Constants.INConstants;
 
 namespace ASCISTARCustom.PDS.CacheExt
 {
+    [Serializable]
+    [PXCacheName(_cacheName)]
     public class ASCIStarINKitSpecJewelryItem : AuditSystemFields, IBqlTable
     {
+        private const string _cacheName = "ASCIStarINKitSpecJewelryItem";
+
         public static bool IsActive() => true;
 
         #region KitInventoryID

@@ -30,10 +30,11 @@ using PX.Objects;
 using PX.Objects.IN;
 //using InfoSmartSearch;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.Cost
 {
     public class ASCIStarVendorMaintExt : PXGraphExtension<VendorMaint>
     {
+        public static bool IsActive() => true;
 
         #region Selects
 

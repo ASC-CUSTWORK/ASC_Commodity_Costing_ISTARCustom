@@ -25,68 +25,68 @@ namespace ASCISTARCustom
     [Serializable]
     public static class ASCIStarMarketCostHelper
     {
-        #region Contract
+        //#region Contract
 
-        public class Contract
-        {
+        //public class Contract
+        //{
 
-            string _Source;
-            string _Commodity;
-            decimal _CommodityPrice;
-            decimal _MatrixPrice;
-            decimal _SurchargePct;
-            decimal _LossPct;
-            decimal _Increment;
+        //    string _Source;
+        //    string _Commodity;
+        //    decimal _CommodityPrice;
+        //    decimal _MatrixPrice;
+        //    decimal _SurchargePct;
+        //    decimal _LossPct;
+        //    decimal _Increment;
 
-            public string Source { get { return _Source; } set { if (value == "I" || value == "V" || value == "S") _Source = value; else throw new PXException($"Contract Source Must be I for Item, V for Vendor or S for System Default"); } }
-            public string Commodity { get { return _Commodity; } set { if (value == "24K" || value == "SSS" || value == "PLT") _Commodity = value; else throw new PXException($"Contract Commodity Must be 24K, SSS, or PLT"); } }
-            public decimal CommodityPrice { get { return _CommodityPrice; } set { _CommodityPrice = value; } }
-            //public decimal MatrixPrice { get { return _CommodityPrice; } set { _CommodityPrice = value; } }
-            public decimal SurchargePct { get { return _SurchargePct; } set { _SurchargePct = value; } }
-            public decimal LossPct { get { return _LossPct; } set { _LossPct = value; } }
-            public decimal Increment { get { return _Increment; } set { _Increment = value; } }
+        //    public string Source { get { return _Source; } set { if (value == "I" || value == "V" || value == "S") _Source = value; else throw new PXException($"Contract Source Must be I for Item, V for Vendor or S for System Default"); } }
+        //    public string Commodity { get { return _Commodity; } set { if (value == "24K" || value == "SSS" || value == "PLT") _Commodity = value; else throw new PXException($"Contract Commodity Must be 24K, SSS, or PLT"); } }
+        //    public decimal CommodityPrice { get { return _CommodityPrice; } set { _CommodityPrice = value; } }
+        //    //public decimal MatrixPrice { get { return _CommodityPrice; } set { _CommodityPrice = value; } }
+        //    public decimal SurchargePct { get { return _SurchargePct; } set { _SurchargePct = value; } }
+        //    public decimal LossPct { get { return _LossPct; } set { _LossPct = value; } }
+        //    public decimal Increment { get { return _Increment; } set { _Increment = value; } }
 
-            public Contract(string source, string commodity, decimal commodityPrice, decimal surchargePct, decimal lossPct, decimal increment, decimal? marketPrice = null)
-            {
-                Source = source;
-                Commodity = commodity;
-                CommodityPrice = commodityPrice;
-                SurchargePct = surchargePct;
-                LossPct = lossPct;
-                Increment = increment;
-                if (marketPrice != null && Commodity == "SSS")
-                    MatrixPrice((decimal)marketPrice);
-            }
+        //    public Contract(string source, string commodity, decimal commodityPrice, decimal surchargePct, decimal lossPct, decimal increment, decimal? marketPrice = null)
+        //    {
+        //        Source = source;
+        //        Commodity = commodity;
+        //        CommodityPrice = commodityPrice;
+        //        SurchargePct = surchargePct;
+        //        LossPct = lossPct;
+        //        Increment = increment;
+        //        if (marketPrice != null && Commodity == "SSS")
+        //            MatrixPrice((decimal)marketPrice);
+        //    }
 
-            public decimal MatrixPrice(decimal MarketPrice)
-            {
-                string msg = "";
-                if (Increment == 0)
-                {
-                    msg += $"Commodity:{Commodity}{Environment.NewLine};CommodityPrice:{CommodityPrice}{Environment.NewLine}Increment:{Increment}{Environment.NewLine}MarketPrice:{MarketPrice}{Environment.NewLine}Matrix:{MarketPrice}";
-                    return MarketPrice;
-                }
-                decimal matrix = MarketPrice;
-                int steps = (int)Math.Floor((MarketPrice / Increment) - (CommodityPrice / Increment));
-                decimal floor = CommodityPrice + ((decimal)steps * Increment);
-                decimal ceiling = floor + Increment;
-                matrix = (floor + ceiling) / 2.000000m;
-                msg += $"Commodity:{Commodity}{Environment.NewLine}";
-                msg += $"CommodityPrice:{CommodityPrice}{Environment.NewLine}";
-                msg += $"Increment:{Increment}{Environment.NewLine}";
-                msg += $"MarketPrice:{MarketPrice}{Environment.NewLine}";
-                msg += $"Floor:{floor}{Environment.NewLine}";
-                msg += $"Ceiling:{ceiling}{Environment.NewLine}";
-                msg += $"Matrix:{matrix}";
-                PXTrace.WriteInformation(msg);
-                _MatrixPrice = matrix;
-                return matrix;
+        //    public decimal MatrixPrice(decimal MarketPrice)
+        //    {
+        //        string msg = "";
+        //        if (Increment == 0)
+        //        {
+        //            msg += $"Commodity:{Commodity}{Environment.NewLine};CommodityPrice:{CommodityPrice}{Environment.NewLine}Increment:{Increment}{Environment.NewLine}MarketPrice:{MarketPrice}{Environment.NewLine}Matrix:{MarketPrice}";
+        //            return MarketPrice;
+        //        }
+        //        decimal matrix = MarketPrice;
+        //        int steps = (int)Math.Floor((MarketPrice / Increment) - (CommodityPrice / Increment));
+        //        decimal floor = CommodityPrice + ((decimal)steps * Increment);
+        //        decimal ceiling = floor + Increment;
+        //        matrix = (floor + ceiling) / 2.000000m;
+        //        msg += $"Commodity:{Commodity}{Environment.NewLine}";
+        //        msg += $"CommodityPrice:{CommodityPrice}{Environment.NewLine}";
+        //        msg += $"Increment:{Increment}{Environment.NewLine}";
+        //        msg += $"MarketPrice:{MarketPrice}{Environment.NewLine}";
+        //        msg += $"Floor:{floor}{Environment.NewLine}";
+        //        msg += $"Ceiling:{ceiling}{Environment.NewLine}";
+        //        msg += $"Matrix:{matrix}";
+        //        PXTrace.WriteInformation(msg);
+        //        _MatrixPrice = matrix;
+        //        return matrix;
 
-            }
+        //    }
 
-        }
+        //}
 
-        #endregion Contract
+        //#endregion Contract
 
 
         #region Basis
@@ -219,7 +219,7 @@ namespace ASCISTARCustom
                     Increment = (decimal)vendorPriceExt.UsrCommodityIncrement;
                     LossPct = (decimal)vendorPriceExt.UsrCommodityLossPct / 100.0000m;
                     SurchargePct = (decimal)vendorPriceExt.UsrCommoditySurchargePct / 100.0000m; ;
-                    EffectiveBasisPerOz = basisPerOz * (1.0000m + SurchargePct) * (1.00000m + LossPct);
+                    EffectiveBasisPerOz = basisPerOz;// * (1.0000m + SurchargePct) * (1.00000m + LossPct);
                     EffectiveBasisPerGram = EffectiveBasisPerOz / 31.10348m;
                     EffectiveBasisPerDWT = EffectiveBasisPerOz / 20.00000m;
 
@@ -255,7 +255,7 @@ namespace ASCISTARCustom
                     LossPct = (decimal)marketPriceExt.UsrCommodityLossPct / 100.0000m; ;
                     SurchargePct = (decimal)marketPriceExt.UsrCommoditySurchargePct / 100.0000m; ;
                     msg += $"MarketPerOz:{marketPerOz}{Environment.NewLine}Increment:{Increment}{Environment.NewLine}LossPct:{LossPct}{Environment.NewLine}SurchargePct:{SurchargePct}{Environment.NewLine}";
-                    EffectiveMarketPerOz = marketPerOz * (1 + SurchargePct) * (1 + LossPct);
+                    EffectiveMarketPerOz = marketPerOz;// * (1 + SurchargePct) * (1 + LossPct);
                     EffectiveMarketPerGram = EffectiveMarketPerOz / 31.10348m;
                     EffectiveMarketPerDWT = EffectiveMarketPerOz / 20.00000m;
 
@@ -284,26 +284,26 @@ namespace ASCISTARCustom
             #region Private Methods
 
 
-            private APVendorPrice MarketSilverPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "SSS", DateTime? effectiveDate = null)
-            {
-                InventoryItem commodity = GetCommodityItem(graph, "SSS");
-                Vendor market = GetMarketVendor(graph, MarketID);
-                return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
-            }
+            //private APVendorPrice MarketSilverPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "SSS", DateTime? effectiveDate = null)
+            //{
+            //    InventoryItem commodity = GetCommodityItem(graph, "SSS");
+            //    Vendor market = GetMarketVendor(graph, MarketID);
+            //    return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
+            //}
 
-            private APVendorPrice MarketGoldPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "24K", DateTime? effectiveDate = null)
-            {
-                InventoryItem commodity = GetCommodityItem(graph, "24K");
-                Vendor market = GetMarketVendor(graph, MarketID);
-                return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
-            }
+            //private APVendorPrice MarketGoldPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "24K", DateTime? effectiveDate = null)
+            //{
+            //    InventoryItem commodity = GetCommodityItem(graph, "24K");
+            //    Vendor market = GetMarketVendor(graph, MarketID);
+            //    return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
+            //}
 
-            private APVendorPrice MarketPlatinumPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "9995", DateTime? effectiveDate = null)
-            {
-                InventoryItem commodity = GetCommodityItem(graph, "PLT");
-                Vendor market = GetMarketVendor(graph, MarketID);
-                return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
-            }
+            //private APVendorPrice MarketPlatinumPrice(PXGraph graph, int? MarketID, string UOM = "TOZ", string Fineness = "9995", DateTime? effectiveDate = null)
+            //{
+            //    InventoryItem commodity = GetCommodityItem(graph, "PLT");
+            //    Vendor market = GetMarketVendor(graph, MarketID);
+            //    return FindMarketPrice(graph, market, commodity, UOM, Fineness, effectiveDate ?? DateTime.Today);
+            //}
 
             private APVendorPrice FindMarketPrice(PXGraph graph, Vendor Market, InventoryItem commodity, string UOM, string Fineness, DateTime effectiveDate)
             {
@@ -809,24 +809,24 @@ namespace ASCISTARCustom
 
         public class JewelryCost
         {
-            #region Selects
-            public PXSelect<APVendorPrice, Where<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-                    And<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
-                    And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>>>>> CommodityPrice;
+            //#region Selects
+            //public PXSelect<APVendorPrice, Where<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
+            //        And<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
+            //        And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>>>>> CommodityPrice;
 
-            //public PXSelect<ASCIStarVendorExt, Where<Vendor.acctCD, Equal<MarketList.londonPM>>> VendorDefaultMarket;
-            //public PXSelect<BAccount, Where<BAccount.acctCD, Equal<DEFAULTMARKET>>> DefaultMarket;
-            //public class DEFAULTMARKET : PX.Data.BQL.BqlString.Constant<DEFAULTMARKET>
-            //{
-            //    public static readonly string value = "LONDON PM";
-            //    public DEFAULTMARKET() : base(value) { }
-            //}
-            public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecStkDet.kitInventoryID>>>,
-                    Where<INKitSpecStkDet.compInventoryID, Equal<Required<INKitSpecStkDet.compInventoryID>>>> StockLines;
+            ////public PXSelect<ASCIStarVendorExt, Where<Vendor.acctCD, Equal<MarketList.londonPM>>> VendorDefaultMarket;
+            ////public PXSelect<BAccount, Where<BAccount.acctCD, Equal<DEFAULTMARKET>>> DefaultMarket;
+            ////public class DEFAULTMARKET : PX.Data.BQL.BqlString.Constant<DEFAULTMARKET>
+            ////{
+            ////    public static readonly string value = "LONDON PM";
+            ////    public DEFAULTMARKET() : base(value) { }
+            ////}
+            //public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecStkDet.kitInventoryID>>>,
+            //        Where<INKitSpecStkDet.compInventoryID, Equal<Required<INKitSpecStkDet.compInventoryID>>>> StockLines;
 
-            public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecNonStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecNonStkDet.kitInventoryID>>>,
-                    Where<INKitSpecNonStkDet.compInventoryID, Equal<Required<INKitSpecNonStkDet.compInventoryID>>>> NonStockLines;
-            #endregion Selects
+            //public PXSelectJoin<INKitSpecHdr, InnerJoin<INKitSpecNonStkDet, On<INKitSpecHdr.kitInventoryID, Equal<INKitSpecNonStkDet.kitInventoryID>>>,
+            //        Where<INKitSpecNonStkDet.compInventoryID, Equal<Required<INKitSpecNonStkDet.compInventoryID>>>> NonStockLines;
+            //#endregion Selects
 
             #region Declarations
 
@@ -881,214 +881,220 @@ namespace ASCISTARCustom
                             , DateTime? PricingDate = null, string uom = "EA", string curyID = "USD", bool convertCury = false)
             {
                 string msg = "";
-                try
+                //try
+                //{
+                if (PricingDate == null || PricingDate > DateTime.Today)//.AddDays(-1))
                 {
-                    if (PricingDate == null || PricingDate > DateTime.Today)//.AddDays(-1))
+                    PricingDate = DateTime.Today;//.AddDays(-1);
+                }
+
+                msg = $"cost       :{cost}{Environment.NewLine}";
+                msg += $"baseCost   :{baseCost}{Environment.NewLine}";
+                msg += $"vendorID   :{vendorID}{Environment.NewLine}";
+                msg += $"marketID   :{marketID}{Environment.NewLine}";
+                msg += $"PricingDate:{PricingDate}{Environment.NewLine}";
+                msg += $"uom        :{uom}{Environment.NewLine}";
+                msg += $"curyID     :{curyID}{Environment.NewLine}";
+
+
+                ASCIStarINInventoryItemExt itemExt = item.GetExtension<ASCIStarINInventoryItemExt>();
+                this.costingType = itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost;
+                this.costRollupType = itemExt.UsrCostRollupType ?? ASCIStarCostRollupType.Other;
+
+                this.SubItem = new List<JewelryCost>();
+                this.CostRollup = new Dictionary<string, decimal>();
+                this.CostRollupTotal = new Dictionary<string, decimal>();
+
+
+                switch (itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost)
+                {
+                    case ASCIStarCostingType.MarketCost:
+                        msg += $"Costing    :Market{Environment.NewLine}";
+                        break;
+                    case ASCIStarCostingType.ContractCost:
+                        msg += $"Costing    :Contract{Environment.NewLine}";
+                        break;
+                    case ASCIStarCostingType.WeightCost:
+                        msg += $"Costing    :Weight{Environment.NewLine}";
+                        break;
+                    //case CostingType.PercentageCost:
+                    //    msg += $"Costing    :Percentage{Environment.NewLine}";
+                    //    break;
+                    default: /* CostingType.StandardCost */
+                        msg += $"Costing    :Standard{Environment.NewLine}";
+                        break;
+                }
+
+
+                if (marketID == null)
+                {
+                    msg += $"Market Def :LONDON PM{Environment.NewLine}";
+                    //  BAccount market = DefaultMarket.Select();
+                    marketID = SelectFrom<Vendor>.Where<Vendor.acctCD.IsEqual<MarketList.defaultMarket>>.View.Select(graph)?.TopFirst.BAccountID;
+                }
+
+                /*
+                   public SelectFrom<APVendorPrice>.
+                    InnerJoin<POVendorInventory>.
+                    On<POVendorInventory.inventoryID.IsEqual<INKitSpecHdr.kitInventoryID.FromCurrent>.
+                        And<APVendorPrice.vendorID.IsEqual<POVendorInventory.vendorID>>>.
+                    InnerJoin<InventoryItem>.
+                        On<InventoryItem.inventoryID.IsEqual<APVendorPrice.inventoryID>>.
+                    InnerJoin<INItemClass>.On<InventoryItem.itemClassID.IsEqual<INItemClass.itemClassID>.
+                        And<INItemClass.itemClassCD.IsEqual<CommodityClass>>>.
+                    Where<APVendorPrice.effectiveDate.IsLessEqual<AccessInfo.businessDate>.
+                        And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<AccessInfo.businessDate>.
+                            Or<APVendorPrice.expirationDate.IsNull>>>>.
+                            OrderBy<APVendorPrice.effectiveDate.Asc> 
+                */
+
+                //POVendorInventory itemVendor = SelectFrom<POVendorInventory>
+                //    .InnerJoin<InventoryItem>
+                //    .On<POVendorInventory.inventoryID.IsEqual<InventoryItem.inventoryID>>
+                //    .InnerJoin<InventoryItemCurySettings>.On<POVendorInventory.inventoryID.IsEqual<InventoryItemCurySettings.inventoryID>
+                //    .And<POVendorInventory.vendorID.IsEqual<InventoryItemCurySettings.preferredVendorID>>>.View.Select(graph)
+                //    .FirstOrDefault();
+
+
+                POVendorInventory itemVendor = SelectFrom<POVendorInventory>
+                    .Where<POVendorInventory.inventoryID.IsEqual<@P.AsInt>
+                    .And<POVendorInventory.vendorID.IsEqual<@P.AsInt>>>.View.Select(graph, item.InventoryID, vendorID);
+
+
+                if (itemVendor == null || itemVendor.VendorID == null)
+                {
+                    var poVendorInventory = SelectFrom<POVendorInventory>
+                        .Where<POVendorInventory.inventoryID.IsEqual<@P.AsInt>>.View.Select(graph, item.InventoryID).FirstTableItems;
+
+                    if (poVendorInventory.Count() == 0)
                     {
-                        PricingDate = DateTime.Today;//.AddDays(-1);
+                        throw new PXSetPropertyException("The item has not Vendor prices, please, setup it on Vendor Prices screen", PXErrorLevel.RowError);
+                        //  PXUIFieldAttribute.SetError<INKitSpecStkDet.compInventoryID>(graph.Caches[] , "Error Message");
                     }
 
-                    msg = $"cost       :{cost}{Environment.NewLine}";
-                    msg += $"baseCost   :{baseCost}{Environment.NewLine}";
-                    msg += $"vendorID   :{vendorID}{Environment.NewLine}";
-                    msg += $"marketID   :{marketID}{Environment.NewLine}";
-                    msg += $"PricingDate:{PricingDate}{Environment.NewLine}";
-                    msg += $"uom        :{uom}{Environment.NewLine}";
-                    msg += $"curyID     :{curyID}{Environment.NewLine}";
-
-
-                    ASCIStarINInventoryItemExt itemExt = item.GetExtension<ASCIStarINInventoryItemExt>();
-                    this.costingType = itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost;
-                    this.costRollupType = itemExt.UsrCostRollupType ?? ASCIStarCostRollupType.Other;
-
-                    this.SubItem = new List<JewelryCost>();
-                    this.CostRollup = new Dictionary<string, decimal>();
-                    this.CostRollupTotal = new Dictionary<string, decimal>();
-
-
-                    switch (itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost)
+                    foreach (POVendorInventory vitem in poVendorInventory)
                     {
-                        case ASCIStarCostingType.MarketCost:
-                            msg += $"Costing    :Market{Environment.NewLine}";
-                            break;
-                        case ASCIStarCostingType.ContractCost:
-                            msg += $"Costing    :Contract{Environment.NewLine}";
-                            break;
-                        case ASCIStarCostingType.WeightCost:
-                            msg += $"Costing    :Weight{Environment.NewLine}";
-                            break;
-                        //case CostingType.PercentageCost:
-                        //    msg += $"Costing    :Percentage{Environment.NewLine}";
-                        //    break;
-                        default: /* CostingType.StandardCost */
-                            msg += $"Costing    :Standard{Environment.NewLine}";
-                            break;
+                        if (vitem.IsDefault == true)
+                            itemVendor = vitem;
                     }
+                }
+                msg += $"Item Vendor:{itemVendor?.VendorID} Default: {itemVendor?.IsDefault}{Environment.NewLine}";
 
 
-                    if (marketID == null)
-                    {
-                        msg += $"Market Def :LONDON PM{Environment.NewLine}";
-                        //  BAccount market = DefaultMarket.Select();
-                        marketID = SelectFrom<Vendor>.Where<Vendor.acctCD.IsEqual<MarketList.defaultMarket>>.View.Select(graph)?.TopFirst.BAccountID;
-                    }
+                if (itemExt.UsrPricingGRAMGold > 0.0m)
+                {
 
-                    /*
-                       public SelectFrom<APVendorPrice>.
-                        InnerJoin<POVendorInventory>.
-                        On<POVendorInventory.inventoryID.IsEqual<INKitSpecHdr.kitInventoryID.FromCurrent>.
-                            And<APVendorPrice.vendorID.IsEqual<POVendorInventory.vendorID>>>.
-                        InnerJoin<InventoryItem>.
-                            On<InventoryItem.inventoryID.IsEqual<APVendorPrice.inventoryID>>.
-                        InnerJoin<INItemClass>.On<InventoryItem.itemClassID.IsEqual<INItemClass.itemClassID>.
-                            And<INItemClass.itemClassCD.IsEqual<CommodityClass>>>.
-                        Where<APVendorPrice.effectiveDate.IsLessEqual<AccessInfo.businessDate>.
-                            And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<AccessInfo.businessDate>.
-                                Or<APVendorPrice.expirationDate.IsNull>>>>.
-                                OrderBy<APVendorPrice.effectiveDate.Asc> 
-                    */
+                    CostBasis = new costBasis(graph, item, (DateTime)PricingDate);
 
-                    //POVendorInventory itemVendor = SelectFrom<POVendorInventory>
-                    //    .InnerJoin<InventoryItem>
-                    //    .On<POVendorInventory.inventoryID.IsEqual<InventoryItem.inventoryID>>
-                    //    .InnerJoin<InventoryItemCurySettings>.On<POVendorInventory.inventoryID.IsEqual<InventoryItemCurySettings.inventoryID>
-                    //    .And<POVendorInventory.vendorID.IsEqual<InventoryItemCurySettings.preferredVendorID>>>.View.Select(graph)
-                    //    .FirstOrDefault();
+                    CostBasis.ItemVendor = PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, itemVendor.VendorID);
 
+                    CostBasis.GoldBasis.BuildFinePrices();
 
-                    POVendorInventory itemVendor = SelectFrom<POVendorInventory>
-                        .Where<POVendorInventory.inventoryID.IsEqual<@P.AsInt>
-                        .And<POVendorInventory.vendorID.IsEqual<@P.AsInt>>>.View.Select(graph, item.InventoryID, vendorID);
+                    //decimal basisPerGram = CostBasis.GoldBasis.BasisPerGram();
+                    //cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * basisPerGram * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
+                    //   marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
 
+                    msg += $"Found {itemExt.UsrPricingGRAMGold} Gold Grams to Price{Environment.NewLine}";
+                    msg += $"PricingDate:{pricingDate}{Environment.NewLine}";
+                    msg += $"Gold Eff   :{CostBasis.GoldBasis.EffectiveDate}{Environment.NewLine}";
 
-                    if (itemVendor == null || itemVendor.VendorID == null)
-                    {
-                        var poVendorInventory = SelectFrom<POVendorInventory>
-                            .Where<POVendorInventory.inventoryID.IsEqual<@P.AsInt>>.View.Select(graph, item.InventoryID).FirstTableItems;
+                    //pricingDate = CostBasis.GoldBasis.EffectiveDate; //goldMarket.EffectiveDate;
 
-                        if (poVendorInventory.Count() == 0)
-                        {
-                            throw new PXSetPropertyException("The item has not Vendor prices, please, setup it on Vendor Prices screen", PXErrorLevel.RowError);
-                            //  PXUIFieldAttribute.SetError<INKitSpecStkDet.compInventoryID>(graph.Caches[] , "Error Message");
-                        }
+                    decimal costPerGram = 0;
 
-                        foreach (POVendorInventory vitem in poVendorInventory)
-                        {
-                            if (vitem.IsDefault == true)
-                                itemVendor = vitem;
-                        }
-                    }
-                    msg += $"Item Vendor:{itemVendor?.VendorID} Default: {itemVendor?.IsDefault}{Environment.NewLine}";
-
-
-                    if (itemExt.UsrPricingGRAMGold > 0.0m)
-                    {
-
-                        CostBasis = new costBasis(graph, item, (DateTime)PricingDate);
-
-                        CostBasis.ItemVendor = PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, itemVendor.VendorID);
-
-                        CostBasis.GoldBasis.BuildFinePrices();
-
-                        decimal basisPerGram = CostBasis.GoldBasis.BasisPerGram();
-                        cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * basisPerGram * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
-                        //   marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
-
-                        msg += $"Found {itemExt.UsrPricingGRAMGold} Gold Grams to Price{Environment.NewLine}";
-                        msg += $"PricingDate:{pricingDate}{Environment.NewLine}";
-                        msg += $"Gold Eff   :{CostBasis.GoldBasis.EffectiveDate}{Environment.NewLine}";
-
-                        //pricingDate = CostBasis.GoldBasis.EffectiveDate; //goldMarket.EffectiveDate;
-
-                        decimal costPerGram = 0;
-
-                        switch (itemExt.UsrCostingType)
-                        {
-                            case ASCIStarCostingType.MarketCost:
-                                costPerGram = CostBasis.GoldBasis.EffectiveMarketPerGram;
-                                break;
-                            case ASCIStarCostingType.ContractCost:
-                                costPerGram = CostBasis.GoldBasis.BasisPerGram();
-                                break;
-                            case ASCIStarCostingType.WeightCost:
-                                costPerGram = CostBasis.GoldBasis.BasisPerGram();
-                                // labor cost * gold grams
-                                break;
-
-                            case ASCIStarCostingType.StandardCost:
-                                break;
-                            default:
-
-                                break;
-                        }
-
-                        cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * (costPerGram) * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
-                        marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
-                        msg += $"Gold Loss  : {CostBasis.GoldBasis.LossPct}{Environment.NewLine}";
-                        msg += $"Gold Sur   : {CostBasis.GoldBasis.SurchargePct}{Environment.NewLine}";
-                    }
-
-                    if (itemExt.UsrPricingGRAMSilver > 0.0m)
-                    {
-                        PXTrace.WriteInformation($"Found {itemExt.UsrPricingGRAMSilver} Silver Grams to Price");
-
-                        CostBasis = new costBasis(graph, item, (DateTime)PricingDate);
-
-                        CostBasis.ItemVendor = PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, itemVendor.VendorID);
-
-                        CostBasis.SilverBasis.BuildFinePrices();
-
-                        decimal metalCostPerOz = 0.0m;
-                        switch (itemExt.UsrCostingType)
-                        {
-                            case ASCIStarCostingType.MarketCost:
-                                metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
-                                break;
-                            case ASCIStarCostingType.ContractCost:
-                                metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
-                                break;
-                            case ASCIStarCostingType.WeightCost:  // labor cost * silver grams
-                                metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
-                                break;
-
-                            case ASCIStarCostingType.StandardCost: break;
-                            default: break;
-                        }
-                        //  var metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
-                        cost += (itemExt.UsrPricingGRAMSilver ?? 0.00m) * metalCostPerOz / 31.10348m * (1.0000m + CostBasis.SilverBasis.LossPct) * (1.0000m + CostBasis.SilverBasis.SurchargePct);
-                        //   marketCommodityCost += cost * (CostBasis.SilverBasis.MarketPerFineOz["SSS"] / CostBasis.SilverBasis.BasisPerFineOz["SSS"]);
-
-                        msg += $"Silver Eff :{CostBasis.SilverBasis.EffectiveDate}{Environment.NewLine}";
-                        msg += $"Silver Loss: {CostBasis.SilverBasis.LossPct}{Environment.NewLine}";
-                        msg += $"Silver Sur : {CostBasis.SilverBasis.SurchargePct}{Environment.NewLine}";
-                    }
-                    this.CostRollupTotal[ASCIStarCostRollupType.Commodity] = cost;
-                    this.CostRollupTotal[ASCIStarCostRollupType.Materials] = itemExt.UsrOtherMaterialCost ?? 0.00m;
-                    this.CostRollupTotal[ASCIStarCostRollupType.Fabrication] = itemExt.UsrFabricationCost ?? 0.00m;
-                    this.CostRollupTotal[ASCIStarCostRollupType.Handling] = itemExt.UsrHandlingCost ?? 0.00m;
-                    this.CostRollupTotal[ASCIStarCostRollupType.Packaging] = itemExt.UsrPackagingCost ?? 0.00m;
-                    this.CostRollupTotal[ASCIStarCostRollupType.Other] = itemExt.UsrOtherCost ?? 0.00m;
-
-                    this.CostRollupTotal[ASCIStarCostRollupType.Shipping] = itemExt.UsrFreightCost ?? 0.00m;
-                    this.CostRollupTotal[ASCIStarCostRollupType.Labor] = itemExt.UsrLaborCost ?? 0.00m;
-                    this.CostRollupTotal[ASCIStarCostRollupType.Duty] = itemExt.UsrDutyCost ?? 0.00m;
-
-                    //decimal totalNoDuty = 0.00m;
-                    //foreach (string Key in CostRollupTotal.Keys)
+                    //switch (itemExt.UsrCostingType)
                     //{
-                    //    if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping)
-                    //    {
-                    //        totalNoDuty += CostRollupTotal[Key];
-                    //    }
+                    //    case ASCIStarCostingType.MarketCost:
+                    //        // costPerGram = CostBasis.GoldBasis.BasisPerGram(); // CostBasis.GoldBasis.EffectiveMarketPerGram;
+                    //        costPerGram = CostBasis.GoldBasis.MarketPerGram();
+                    //        break;
+                    //    case ASCIStarCostingType.ContractCost:
+                    //        costPerGram = CostBasis.GoldBasis.BasisPerGram();
+                    //        break;
+                    //    case ASCIStarCostingType.WeightCost:
+                    //        costPerGram = CostBasis.GoldBasis.MarketPerGram();
+                    //        // labor cost * gold grams
+                    //        break;
+
+                    //    case ASCIStarCostingType.StandardCost:
+                    //        break;
+                    //    default:
+
+                    //        break;
                     //}
-                    //this.CostRollupTotal[CostRollupType.Duty] = (itemExt.UsrDutyCostPct ?? 0.0000m) / 100.0000m * totalNoDuty;
-                    PXTrace.WriteInformation(msg);
+
+                    costPerGram = CostBasis.GoldBasis.BasisPerGram();
+
+                    cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * (costPerGram);// * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
+                                                                                 //  marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
+                    msg += $"Gold Loss  : {CostBasis.GoldBasis.LossPct}{Environment.NewLine}";
+                    msg += $"Gold Sur   : {CostBasis.GoldBasis.SurchargePct}{Environment.NewLine}";
                 }
-                catch (Exception err)
+
+                if (itemExt.UsrPricingGRAMSilver > 0.0m)
                 {
-                    PXTrace.WriteInformation(msg);
-                    throw err;
+                    PXTrace.WriteInformation($"Found {itemExt.UsrPricingGRAMSilver} Silver Grams to Price");
+
+                    CostBasis = new costBasis(graph, item, (DateTime)PricingDate);
+
+                    CostBasis.ItemVendor = PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Required<Vendor.bAccountID>>>>.Select(graph, itemVendor.VendorID);
+
+                    CostBasis.SilverBasis.BuildFinePrices();
+
+                    decimal metalCostPerOz = 0.0m;
+                    //switch (itemExt.UsrCostingType)
+                    //{
+                    //    case ASCIStarCostingType.MarketCost:
+                    //        metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                    //        break;
+                    //    case ASCIStarCostingType.ContractCost:
+                    //        metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                    //        break;
+                    //    case ASCIStarCostingType.WeightCost:  // labor cost * silver grams
+                    //        metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                    //        break;
+
+                    //    case ASCIStarCostingType.StandardCost: break;
+                    //    default: break;
+                    //}
+
+                    metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+
+                    //  var metalCostPerOz = GetSilverMetalCostPerOZ(CostBasis.SilverBasis.BasisPerOz, CostBasis.SilverBasis.EffectiveMarketPerOz, CostBasis.ItemExt.UsrContractIncrement);
+                    cost += (itemExt.UsrPricingGRAMSilver ?? 0.00m) * metalCostPerOz / 31.10348m;// * (1.0000m + CostBasis.SilverBasis.LossPct) * (1.0000m + CostBasis.SilverBasis.SurchargePct);
+                    //   marketCommodityCost += cost * (CostBasis.SilverBasis.MarketPerFineOz["SSS"] / CostBasis.SilverBasis.BasisPerFineOz["SSS"]);
+
+                    msg += $"Silver Eff :{CostBasis.SilverBasis.EffectiveDate}{Environment.NewLine}";
+                    msg += $"Silver Loss: {CostBasis.SilverBasis.LossPct}{Environment.NewLine}";
+                    msg += $"Silver Sur : {CostBasis.SilverBasis.SurchargePct}{Environment.NewLine}";
                 }
+                this.CostRollupTotal[ASCIStarCostRollupType.Commodity] = cost;
+                this.CostRollupTotal[ASCIStarCostRollupType.Materials] = itemExt.UsrOtherMaterialCost ?? 0.00m;
+                this.CostRollupTotal[ASCIStarCostRollupType.Fabrication] = itemExt.UsrFabricationCost ?? 0.00m;
+                this.CostRollupTotal[ASCIStarCostRollupType.Handling] = itemExt.UsrHandlingCost ?? 0.00m;
+                this.CostRollupTotal[ASCIStarCostRollupType.Packaging] = itemExt.UsrPackagingCost ?? 0.00m;
+                this.CostRollupTotal[ASCIStarCostRollupType.Other] = itemExt.UsrOtherCost ?? 0.00m;
+
+                this.CostRollupTotal[ASCIStarCostRollupType.Shipping] = itemExt.UsrFreightCost ?? 0.00m;
+                this.CostRollupTotal[ASCIStarCostRollupType.Labor] = itemExt.UsrLaborCost ?? 0.00m;
+                this.CostRollupTotal[ASCIStarCostRollupType.Duty] = itemExt.UsrDutyCost ?? 0.00m;
+
+                //decimal totalNoDuty = 0.00m;
+                //foreach (string Key in CostRollupTotal.Keys)
+                //{
+                //    if (Key != CostRollupType.Duty && Key != CostRollupType.Labor && Key != CostRollupType.Shipping)
+                //    {
+                //        totalNoDuty += CostRollupTotal[Key];
+                //    }
+                //}
+                //this.CostRollupTotal[CostRollupType.Duty] = (itemExt.UsrDutyCostPct ?? 0.0000m) / 100.0000m * totalNoDuty;
+                PXTrace.WriteInformation(msg);
+                //}
+                //catch (Exception err)
+                //{
+                //    PXTrace.WriteInformation(msg);
+                //    throw err;
+                //}
             }
 
 
@@ -1105,9 +1111,9 @@ namespace ASCISTARCustom
                 decimal costPerOz = marketCost;
                 decimal temp = (marketCost / increment) - (basisCost / increment);
 
-                decimal steps1 = Math.Round(temp, 0);
-                decimal steps2 = Math.Floor(temp);
-                decimal steps3 = Math.Ceiling(temp);
+                //decimal steps1 = Math.Round(temp, 0);
+                //decimal steps2 = Math.Floor(temp);
+                //decimal steps3 = Math.Ceiling(temp);
                 decimal steps = Math.Truncate(temp);
 
                 //  decimal steps = temp % 1 == 0 && temp > 1 && temp % 2 == 0 ? temp - 1 : Math.Truncate(temp);
@@ -1127,29 +1133,48 @@ namespace ASCISTARCustom
                 decimal value = 0m;
                 if (CostRollupTotal.Any())
                 {
-                    CostRollupTotal.Keys.ForEach(key =>
-                    {
-                        if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor)
-                        {
-                            value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[key] + (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[key];
-                        }
-                        else
-                        {
-                            value += CostRollupTotal[key];
-                        }
-                        //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMGold > 0)
-                        //{
-                        //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[ASCIStarCostRollupType.Labor];
-                        //}
-                        //else if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMSilver > 0)
-                        //{
-                        //    value += (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[ASCIStarCostRollupType.Labor];
-                        //}
-                        //else
-                        //{
-                        //    value += CostRollupTotal[key];
-                        //}
-                    });
+                    //CostRollupTotal.Keys.ForEach(key =>
+                    //{
+                    //    //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor)
+                    //    //{
+                    //    //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[key] + (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[key];
+                    //    //}
+                    //    //else
+                    //    //{
+                    //    //    value += CostRollupTotal[key];
+                    //    //}
+                    //    if (key == "C")
+                    //    {
+                    //        //decimal loss = 1.0m + itemExt.UsrContractLossPct.Value / 100;
+                    //        //decimal surcharge = 1.0m + itemExt.UsrContractSurcharge.Value / 100;
+
+                    //        value += itemExt.UsrPricingGRAMGold.Value * CostBasis.GoldBasis.MarketPerGram() * surcharge * loss;
+                    //    }
+                    //    else
+                    //    {
+                    //        value += CostRollupTotal[key];
+                    //    }
+                    //    //if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMGold > 0)
+                    //    //{
+                    //    //    value += (decimal)itemExt.UsrActualGRAMGold * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                    //    //}
+                    //    //else if (costingType == ASCIStarCostingType.WeightCost && key == ASCIStarCostRollupType.Labor && itemExt.UsrActualGRAMSilver > 0)
+                    //    //{
+                    //    //    value += (decimal)itemExt.UsrActualGRAMSilver * CostRollupTotal[ASCIStarCostRollupType.Labor];
+                    //    //}
+                    //    //else
+                    //    //{
+                    //    //    value += CostRollupTotal[key];
+                    //    //}
+                    //});
+                    decimal loss = 1.0m + itemExt.UsrContractLossPct.Value / 100;
+                    decimal surcharge = 1.0m + itemExt.UsrContractSurcharge.Value / 100;
+
+                    value = itemExt.UsrPricingGRAMGold.Value * CostBasis.GoldBasis.MarketPerGram() * surcharge * loss 
+                        + CostRollupTotal[ASCIStarCostRollupType.Fabrication]
+                        + CostRollupTotal[ASCIStarCostRollupType.Packaging]
+                        + CostRollupTotal[ASCIStarCostRollupType.Materials];
+                    
                 }
                 return value;
             }
