@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PX.Common;
 using PX.Data;
+using PX.Data.BQL.Fluent;
 using PX.Objects.CS;
 using PX.Objects.IN;
 using PX.Objects.AP;
@@ -29,11 +30,7 @@ namespace ASCISTARCustom
                And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
                    And<APVendorPrice.effectiveDate, Equal<Required<APVendorPrice.effectiveDate>>>>>> vendorPrice;
 
-        PXSelect<InventoryItemCurySettings,
-            Where<InventoryItemCurySettings.inventoryID, Equal<Required<InventoryItemCurySettings.inventoryID>>>> itemCurySettings;
-
-        PXSelect<InventoryItem,
-            Where<InventoryItem.inventoryID, Equal<Required<InventoryItemCurySettings.inventoryID>>>> inventoryItem;
+        public SelectFrom<InventoryItem>.Where<InventoryItem.inventoryID.IsEqual<POLine.inventoryID.FromCurrent>>.View InventoryItemView;
         #endregion
 
         #region Actions
@@ -95,36 +92,129 @@ namespace ASCISTARCustom
         #endregion
 
         #region Event Handlers
-        protected virtual void _(Events.FieldUpdated<POLine, ASCIStarPOLineExt.usrCostingType> args)
-        {
-            if (args.Row is POLine row)
-            {
-                args.Cache.RaiseFieldDefaulting<POLine.curyUnitCost>(row, out object value);
-                args.Cache.SetValueExt<POLine.curyUnitCost>(row, value);
-            }
-        }
-        protected virtual void POLine_CuryUnitCost_FieldDefaulting(PXCache sender, PXFieldDefaultingEventArgs e, PXFieldDefaulting InvokeBaseHandler)
-        {
-            InvokeBaseHandler?.Invoke(sender, e);
-            if (e.Row is POLine row)
-            {
-                var doc = Base.Document.Current;
-                var docExt = PXCache<POOrder>.GetExtension<ASCIStarPOOrderExt>(doc);
-                var rowExt = PXCache<POLine>.GetExtension<ASCIStarPOLineExt>(row);
-                var inventoryItem = PXSelectorAttribute.Select<InventoryItem.inventoryID>(sender, row, row.InventoryID) as InventoryItem;
-                if (inventoryItem != null)
-                {
-                    var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
-                    inventoryItemExt.UsrCostingType = rowExt.UsrCostingType;
 
-                    var costHelper = new ASCIStarMarketCostHelper.JewelryCost(Base, inventoryItem, 0m, 0m, doc.VendorID, docExt.UsrMarketID, docExt.UsrEstArrivalDate, row.UOM, doc.CuryID);
-                    if (rowExt.UsrCostingType != ASCIStarCostingType.StandardCost)
-                    {
-                        e.NewValue = costHelper.GetPurchaseCost(rowExt.UsrCostingType);
-                    }
-                }
-            }
+        protected virtual void _(Events.FieldVerifying<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            if ((DateTime?)e.NewValue > DateTime.Today || e.NewValue == null) throw new PXSetPropertyException<ASCIStarPOOrderExt.usrPricingDate>("Pricing date can not be from future or empty!");
         }
+
+        protected virtual void _(Events.FieldUpdated<POOrder, POOrder.vendorID> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            Vendor vendor = Vendor.PK.Find(Base, row.VendorID);
+            if (vendor == null) return;
+
+            e.Cache.SetValueExt<ASCIStarPOOrderExt.usrMarketID>(row, vendor.GetExtension<ASCIStarVendorExt>().UsrMarketID);
+        }
+
+        protected virtual void _(Events.FieldUpdated<POLine, POLine.orderQty> e)
+        {
+            var row = e.Row;
+            if (row == null || row.InventoryID == null) return;
+            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, row.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+
+            SetNewCosts(e.Cache, row, InventoryItemView.Current, inventoryItemExt);
+        }
+
+        protected virtual void _(Events.FieldUpdated<POOrder, POOrder.orderDate> e)
+        {
+            var row = e.Row;
+            if (row == null ) return;
+            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, this.Base.Transactions.Current?.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+
+            SetNewCosts(e.Cache, this.Base.Transactions.Current, InventoryItemView.Current, inventoryItemExt);
+        }
+
+        protected virtual void _(Events.FieldUpdated<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, this.Base.Transactions.Current?.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+
+            SetNewCosts(e.Cache, this.Base.Transactions.Current, InventoryItemView.Current, inventoryItemExt);
+        }
+
+        protected virtual void _(Events.FieldUpdated<POLine, POLine.inventoryID> e, PXFieldUpdated baseEvent)
+        {
+            baseEvent(e.Cache, e.Args);
+
+            var row = e.Row;
+            if (row == null || row.InventoryID == null) return;
+
+            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, row.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+
+            SetNewCosts(e.Cache, row, InventoryItemView.Current, inventoryItemExt);
+            SetInventoryItemCustomFields(e.Cache, row, inventoryItemExt);
+        }
+
+        #endregion
+
+
+        #region Helper Methods
+        private void SetNewCosts(PXCache cache, POLine row, InventoryItem inventoryItem, ASCIStarINInventoryItemExt inventoryItemExt)
+        {
+            if (this.Base.Document.Current == null || this.Base.Document.Current.VendorID == null) return;
+
+            var poOrderExt = PXCache<POOrder>.GetExtension<ASCIStarPOOrderExt>(this.Base.Document.Current);
+
+            if (poOrderExt == null || poOrderExt.UsrMarketID == null)
+            {
+                this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null, new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
+                return;
+            }
+            var costProvider = new ASCIStarMarketCostHelper.JewelryCost(Base, inventoryItem, 0m, 0m,
+                this.Base.Document.Current.VendorID, poOrderExt.UsrMarketID, poOrderExt.UsrPricingDate, row.UOM, this.Base.Document.Current.CuryID);
+
+            row.CuryUnitCost = costProvider.GetPurchaseCost(inventoryItemExt.UsrCostingType);
+            cache.SetValueExt<POLine.curyUnitCost>(row, row.CuryUnitCost);
+
+            decimal? marketPrice = decimal.Zero;
+            if (costProvider.CostBasis?.GoldBasis == null)
+                marketPrice = costProvider.CostBasis.SilverBasis?.EffectiveMarketPerOz;
+            else
+                marketPrice = costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz;
+
+            cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(row, marketPrice);
+        }
+
+        private void SetInventoryItemCustomFields(PXCache cache, POLine row, ASCIStarINInventoryItemExt inventoryItemExt)
+        {
+            cache.SetValueExt<ASCIStarPOLineExt.usrContractIncrement>(row, inventoryItemExt.UsrContractIncrement);
+            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMGold>(row, inventoryItemExt.UsrActualGRAMGold);
+            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMGold>(row, inventoryItemExt.UsrPricingGRAMGold);
+            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMSilver>(row, inventoryItemExt.UsrActualGRAMSilver);
+            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMSilver>(row, inventoryItemExt.UsrPricingGRAMSilver);
+        }
+
         #endregion
     }
 }

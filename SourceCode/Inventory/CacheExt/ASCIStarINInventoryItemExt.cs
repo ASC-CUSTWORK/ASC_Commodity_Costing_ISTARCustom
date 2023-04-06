@@ -222,13 +222,13 @@ namespace ASCISTARCustom
         //[PXUIField(DisplayName = "Surcharge Type")]
         //[ContractSurchargeType.List]
         //[PXDefault(ContractSurchargeType.PercentageAmt, PersistingCheck = PXPersistingCheck.Null)]
-                //public virtual string UsrContractSurchargeType { get; set; }
+        //public virtual string UsrContractSurchargeType { get; set; }
         //public abstract class usrContractSurchargeType : PX.Data.BQL.BqlString.Field<usrContractSurchargeType> { }
         //#endregion
 
         #region UsrCommodityCost
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Metal Cost")]
+        [PXUIField(DisplayName = "Precious Metal Cost")]
         public virtual Decimal? UsrCommodityCost { get; set; }
         public abstract class usrCommodityCost : PX.Data.BQL.BqlDecimal.Field<usrCommodityCost> { }
         #endregion
@@ -250,7 +250,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrLaborCost
-        [PXUIField(DisplayName = "Labor Cost")]
+        [PXUIField(DisplayName = "In-house Labor Cost")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
 
@@ -293,7 +293,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrOtherCost
-        [PXUIField(DisplayName = "Other Cost")]
+        [PXUIField(DisplayName = "Other Cost", Visible = false)]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
         public virtual Decimal? UsrOtherCost { get; set; }
@@ -311,7 +311,7 @@ namespace ASCISTARCustom
 
         #region UsrContractCost
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Purchase Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         //[PXFormula(typeof(Add<Add<Add<Add<
         //            ASCIStarINInventoryItemExt.usrCommodityCost
         //           , ASCIStarINInventoryItemExt.usrFabricationCost>
@@ -326,7 +326,7 @@ namespace ASCISTARCustom
 
         #region UsrUnitCost
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         //[PXFormula(typeof(Mult<Add<Add<Add<Add<Add<Add<
         //                    ASCIStarINInventoryItemExt.usrCommodityCost
         //                   , ASCIStarINInventoryItemExt.usrFabricationCost>
