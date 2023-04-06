@@ -1002,28 +1002,28 @@ namespace ASCISTARCustom
 
                     decimal costPerGram = 0;
 
-                    switch (itemExt.UsrCostingType)
-                    {
-                        case ASCIStarCostingType.MarketCost:
-                            // costPerGram = CostBasis.GoldBasis.BasisPerGram(); // CostBasis.GoldBasis.EffectiveMarketPerGram;
-                            costPerGram = CostBasis.GoldBasis.MarketPerGram();
-                            break;
-                        case ASCIStarCostingType.ContractCost:
-                            costPerGram = CostBasis.GoldBasis.BasisPerGram();
-                            break;
-                        case ASCIStarCostingType.WeightCost:
-                            costPerGram = CostBasis.GoldBasis.MarketPerGram();
-                            // labor cost * gold grams
-                            break;
+                    //switch (itemExt.UsrCostingType)
+                    //{
+                    //    case ASCIStarCostingType.MarketCost:
+                    //        // costPerGram = CostBasis.GoldBasis.BasisPerGram(); // CostBasis.GoldBasis.EffectiveMarketPerGram;
+                    //        costPerGram = CostBasis.GoldBasis.MarketPerGram();
+                    //        break;
+                    //    case ASCIStarCostingType.ContractCost:
+                    //        costPerGram = CostBasis.GoldBasis.BasisPerGram();
+                    //        break;
+                    //    case ASCIStarCostingType.WeightCost:
+                    //        costPerGram = CostBasis.GoldBasis.MarketPerGram();
+                    //        // labor cost * gold grams
+                    //        break;
 
-                        case ASCIStarCostingType.StandardCost:
-                            break;
-                        default:
+                    //    case ASCIStarCostingType.StandardCost:
+                    //        break;
+                    //    default:
 
-                            break;
-                    }
+                    //        break;
+                    //}
 
-
+                    costPerGram = CostBasis.GoldBasis.BasisPerGram();
 
                     cost = (itemExt.UsrPricingGRAMGold ?? 0.00m) * (costPerGram);// * (1.0000m + CostBasis.GoldBasis.LossPct) * (1.0000m + CostBasis.GoldBasis.SurchargePct);
                                                                                  //  marketCommodityCost = cost * (CostBasis.GoldBasis.MarketPerFineOz["24K"] / CostBasis.GoldBasis.BasisPerFineOz["24K"]);
@@ -1148,7 +1148,7 @@ namespace ASCISTARCustom
                             decimal loss = 1.0m + itemExt.UsrContractLossPct.Value / 100;
                             decimal surcharge = 1.0m + itemExt.UsrContractSurcharge.Value / 100;
 
-                            value += CostRollupTotal[key] * surcharge * loss;
+                            value += CostBasis.GoldBasis.MarketPerGram() * surcharge * loss;
                         }
                         else
                         {

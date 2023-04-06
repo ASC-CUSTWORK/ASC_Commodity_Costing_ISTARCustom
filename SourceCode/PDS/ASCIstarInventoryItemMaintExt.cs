@@ -631,7 +631,7 @@ namespace ASCISTARCustom
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrDutyCostPct>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrHandlingCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPackagingCost>(cache, row, isVisible);
-            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrOtherCost>(cache, row, isVisible);
+          //  PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrOtherCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrOtherMaterialCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, isVisible);
@@ -685,7 +685,7 @@ namespace ASCISTARCustom
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrHandlingCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFreightCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrDutyCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrOtherCost>(cache, row, isDefaultVendor);
+        //    PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrOtherCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrUnitCost>(cache, row, isDefaultVendor);
         }
 
@@ -809,8 +809,8 @@ namespace ASCISTARCustom
 
         private void UpdatePurchaseContractCost(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
         {
-         //   decimal? laborValue = rowExt.UsrCostingType == ASCIStarCostingType.WeightCost ? rowExt.UsrLaborCost * (rowExt.UsrActualGRAMSilver + rowExt.UsrActualGRAMGold) : rowExt.UsrLaborCost;
-            decimal? newCost = rowExt.UsrCommodityCost + rowExt.UsrOtherMaterialCost + rowExt.UsrFabricationCost + rowExt.UsrLaborCost + rowExt.UsrPackagingCost + rowExt.UsrOtherCost;
+            //   decimal? laborValue = rowExt.UsrCostingType == ASCIStarCostingType.WeightCost ? rowExt.UsrLaborCost * (rowExt.UsrActualGRAMSilver + rowExt.UsrActualGRAMGold) : rowExt.UsrLaborCost;
+            decimal? newCost = rowExt.UsrCommodityCost + rowExt.UsrOtherMaterialCost + rowExt.UsrFabricationCost + rowExt.UsrPackagingCost;/* + rowExt.UsrOtherCost;*/
 
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractCost>(row, newCost);
 
@@ -819,7 +819,7 @@ namespace ASCISTARCustom
 
         private void UpdateUnitCost(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
         {
-            decimal? newCost = rowExt.UsrUnitCost = rowExt.UsrContractCost + rowExt.UsrHandlingCost + rowExt.UsrFreightCost + rowExt.UsrDutyCost;
+            decimal? newCost = rowExt.UsrUnitCost = rowExt.UsrContractCost + rowExt.UsrHandlingCost + rowExt.UsrFreightCost + rowExt.UsrLaborCost + rowExt.UsrDutyCost;
 
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrUnitCost>(row, newCost);
         }

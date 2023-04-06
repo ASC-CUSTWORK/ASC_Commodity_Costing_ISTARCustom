@@ -168,7 +168,7 @@ namespace ASCISTARCustom
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Costing Type")]
+        [PXUIField(DisplayName = "Costing Type", IsReadOnly = true)]
         [ASCIStarCostingType.List]
         [PXDefault(ASCIStarCostingType.ContractCost, PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual string UsrCostingType { get; set; }
@@ -177,7 +177,7 @@ namespace ASCISTARCustom
 
         #region UsrCostRollupType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Rollup Type")]
+        [PXUIField(DisplayName = "Rollup Type", IsReadOnly = true)]
         [ASCIStarCostRollupType.List]
         [PXDefault(ASCIStarCostRollupType.Other, PersistingCheck = PXPersistingCheck.Null)]
         //[PXDefault(typeof(), PersistingCheck = PXPersistingCheck.Null)]
@@ -250,7 +250,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrLaborCost
-        [PXUIField(DisplayName = "Labor Cost")]
+        [PXUIField(DisplayName = "In-house Labor Cost")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
 
@@ -293,7 +293,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrOtherCost
-        [PXUIField(DisplayName = "Other Cost")]
+        [PXUIField(DisplayName = "Other Cost", Visible = false)]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
         public virtual Decimal? UsrOtherCost { get; set; }

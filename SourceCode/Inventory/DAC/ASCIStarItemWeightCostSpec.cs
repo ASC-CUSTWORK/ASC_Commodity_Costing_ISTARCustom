@@ -46,8 +46,8 @@ namespace ASCISTARCustom.Inventory.DAC
         #region SubItemID
         [SubItem(typeof(ASCIStarItemWeightCostSpec.inventoryID))]
         [PXDefault(typeof(Search<
-            InventoryItem.defaultSubItemID, 
-            Where<InventoryItem.inventoryID, Equal<Current<ASCIStarItemWeightCostSpec.inventoryID>>, 
+            InventoryItem.defaultSubItemID,
+            Where<InventoryItem.inventoryID, Equal<Current<ASCIStarItemWeightCostSpec.inventoryID>>,
                 And<InventoryItem.defaultSubItemOnEntry, Equal<boolTrue>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Default<ASCIStarItemWeightCostSpec.inventoryID>))]
         public virtual int? SubItemID { get; set; }
@@ -180,7 +180,7 @@ namespace ASCISTARCustom.Inventory.DAC
         #region LaborCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
-        [PXUIField(DisplayName = "Labor Cost")]
+        [PXUIField(DisplayName = "In-house Labor Cost")]
         public virtual decimal? LaborCost { get; set; }
         public abstract class laborCost : PX.Data.BQL.BqlDecimal.Field<laborCost> { }
         #endregion
@@ -196,7 +196,7 @@ namespace ASCISTARCustom.Inventory.DAC
         #region OtherCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
-        [PXUIField(DisplayName = "Other Cost")]
+        [PXUIField(DisplayName = "Other Cost", Visible = false)]
         public virtual decimal? OtherCost { get; set; }
         public abstract class otherCost : PX.Data.BQL.BqlDecimal.Field<otherCost> { }
         #endregion
