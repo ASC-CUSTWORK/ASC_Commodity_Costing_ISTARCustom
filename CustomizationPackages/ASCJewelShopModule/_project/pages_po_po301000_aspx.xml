@@ -136,4 +136,8 @@
             <PXLayoutRule OriginalIndex="19" />
         </Children>
     </PXFormView>
+    <PXLayoutRule ParentId="phF_form_PXLayoutRule#0" TypeFullName="PX.Web.UI.PXLayoutRule">
+        <Prop Key="ControlSize" Value="S" />
+        <Prop Key="LabelsWidth" Value="SM" />
+    </PXLayoutRule>
 </Page>

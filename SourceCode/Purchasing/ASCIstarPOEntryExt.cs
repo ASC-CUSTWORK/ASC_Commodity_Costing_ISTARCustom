@@ -115,11 +115,15 @@ namespace ASCISTARCustom
         protected virtual void _(Events.FieldUpdated<POLine, POLine.inventoryID> e)
         {
             var row = e.Row;
-            if (row == null) return;
+            if (row == null || row.InventoryID == null) return;
 
             InventoryItemView.Current = InventoryItemView.Select().TopFirst;
-            var inventoryItemExt = InventoryItemView.Current?.GetExtension<ASCIStarINInventoryItemExt>();
-            if (inventoryItemExt.UsrCostingType == ASCIStarCostingType.StandardCost) return;
+            if (InventoryItemView.Current == null)
+                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, row.InventoryID);
+            if (InventoryItemView.Current == null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
+            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
 
             SetNewCosts(e.Cache, row, InventoryItemView.Current, inventoryItemExt);
             SetInventoryItemCustomFields(e.Cache, row, inventoryItemExt);
@@ -133,9 +137,9 @@ namespace ASCISTARCustom
         {
             if (this.Base.Document.Current == null || this.Base.Document.Current.VendorID == null) return;
 
-            var poOrderExt = this.Base.Document.Current.GetExtension<ASCIStarPOOrderExt>();
+            var poOrderExt = PXCache<POOrder>.GetExtension<ASCIStarPOOrderExt>(this.Base.Document.Current);
 
-            if (poOrderExt.UsrMarketID == null)
+            if (poOrderExt == null || poOrderExt.UsrMarketID == null)
             {
                 this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null, new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
                 return;

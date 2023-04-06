@@ -228,7 +228,7 @@ namespace ASCISTARCustom
 
         #region UsrCommodityCost
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Metal Cost")]
+        [PXUIField(DisplayName = "Precious Metal Cost")]
         public virtual Decimal? UsrCommodityCost { get; set; }
         public abstract class usrCommodityCost : PX.Data.BQL.BqlDecimal.Field<usrCommodityCost> { }
         #endregion
