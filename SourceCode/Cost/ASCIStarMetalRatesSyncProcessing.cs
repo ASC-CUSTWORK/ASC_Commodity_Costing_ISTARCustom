@@ -89,7 +89,7 @@ namespace ASCISTARCustom.Cost
                 {
                     var vendor = vendors.Select(record.VendorID).RowCast<Vendor>().FirstOrDefault();
                     var item = inventoryItems.Select(record.InventoryID).RowCast<InventoryItem>().FirstOrDefault();
-                    if (vendor != null && vendor.AcctCD.Trim() == LondonPM)
+                    if (vendor.AcctCD.Trim() == LondonPM)
                     {
                         switch (item.InventoryCD.Trim())
                         {
@@ -109,7 +109,7 @@ namespace ASCISTARCustom.Cost
                                 break;
                         }
                     }
-                    if (vendor != null && vendor.AcctCD.Trim() == LondonAM)
+                    if (vendor.AcctCD.Trim() == LondonAM)
                     {
                         switch (item.InventoryCD.Trim())
                         {
@@ -129,7 +129,7 @@ namespace ASCISTARCustom.Cost
                                 break;
                         }
                     }
-                    if (vendor != null && vendor.AcctCD.Trim() == NewYork)
+                    if (vendor.AcctCD.Trim() == NewYork)
                     {
                         switch (item.InventoryCD.Trim())
                         {
