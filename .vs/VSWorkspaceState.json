@@ -2,12 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\SourceCode",
-    "\\SourceCode\\Cost",
-    "\\SourceCode\\Cost\\Descriptor",
-    "\\SourceCode\\Inventory\\CacheExt",
-    "\\SourceCode\\Inventory\\DAC",
     "\\SourceCode\\PDS"
   ],
-  "SelectedNode": "\\ASC_ISTARCustom.sln",
+  "SelectedNode": "\\SourceCode\\PDS\\ASCIstarINKitSpecMaintExt.cs",
   "PreviewInSolutionExplorer": false
 }

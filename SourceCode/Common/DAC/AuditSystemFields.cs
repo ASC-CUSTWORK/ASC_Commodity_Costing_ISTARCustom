@@ -1,7 +1,7 @@
 ﻿using PX.Data;
 using System;
 
-namespace ASCISTARCustom.CommonHelpers
+namespace ASCISTARCustom.Common.DAC
 {
     [Serializable]
     [PXCacheName("Base System Fields")]
