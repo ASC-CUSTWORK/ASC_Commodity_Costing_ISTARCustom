@@ -209,6 +209,14 @@ namespace ASCISTARCustom
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
         #endregion
 
+        #region UsrMatrixStep
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Matrix Step")]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
+        public virtual decimal? UsrMatrixStep { get; set; }
+        public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
+        #endregion
+
         #region UsrContractSurcharge
         [PXDBDecimal(6/*, MinValue = 0, MaxValue = 1000*/)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]

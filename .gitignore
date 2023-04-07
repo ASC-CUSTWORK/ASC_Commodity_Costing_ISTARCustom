@@ -371,3 +371,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /SourceCode/bin
 /.vs
+/SourceCode/.vs
