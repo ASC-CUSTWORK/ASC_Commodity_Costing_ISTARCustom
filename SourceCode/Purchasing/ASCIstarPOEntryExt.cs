@@ -191,17 +191,17 @@ namespace ASCISTARCustom
                 this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null, new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
                 return;
             }
-            var costProvider = new ASCIStarMarketCostHelper.JewelryCost(Base, inventoryItem, 0m, 0m,
+            var costProvider = new ASCIStarMarketCostProvider.JewelryCost(Base, inventoryItem, 0m, 0m,
                 this.Base.Document.Current.VendorID, poOrderExt.UsrMarketID, poOrderExt.UsrPricingDate, row.UOM, this.Base.Document.Current.CuryID);
 
             row.CuryUnitCost = costProvider.GetPurchaseCost(inventoryItemExt.UsrCostingType);
             cache.SetValueExt<POLine.curyUnitCost>(row, row.CuryUnitCost);
 
             decimal? marketPrice = decimal.Zero;
-            if (costProvider.CostBasis?.GoldBasis == null)
-                marketPrice = costProvider.CostBasis.SilverBasis?.EffectiveMarketPerOz;
+            if (costProvider.CostBasisGold?.GoldBasis == null)
+                marketPrice = costProvider.CostBasisGold.SilverBasis?.EffectiveMarketPerOz;
             else
-                marketPrice = costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz;
+                marketPrice = costProvider.CostBasisGold.GoldBasis.EffectiveMarketPerOz;
 
             cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(row, marketPrice);
         }

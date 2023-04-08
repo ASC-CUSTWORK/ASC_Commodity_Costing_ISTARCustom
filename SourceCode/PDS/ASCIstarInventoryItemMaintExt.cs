@@ -771,7 +771,7 @@ namespace ASCISTARCustom
             POVendorInventory vendorInventory = GetDefaultOverrideVendor();
             decimal? costFineMetalPerGramm = decimal.Zero;
 
-            ASCIStarMarketCostHelper.JewelryCost jewelryCostProvider = GetCostProvider(row);
+            ASCIStarMarketCostProvider.JewelryCost jewelryCostProvider = GetCostProvider(row);
             var metalType = GetMetalType();
 
             if (vendorInventory == null)
@@ -783,18 +783,18 @@ namespace ASCISTARCustom
                 if (metalType == true)
                 {
                     var vendorInventoryExt = vendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
-                    jewelryCostProvider.CostBasis.GoldBasis.EffectiveBasisPerOz = vendorInventoryExt.UsrCommodityPrice.HasValue ? vendorInventoryExt.UsrCommodityPrice.Value : decimal.Zero;
+                    jewelryCostProvider.CostBasisGold.EffectiveBasisPerOz = vendorInventoryExt.UsrCommodityPrice.HasValue ? vendorInventoryExt.UsrCommodityPrice.Value : decimal.Zero;
 
                     decimal goldMultFactor = GetGoldMult().HasValue ? GetGoldMult().Value : 0.0m;
-                    costFineMetalPerGramm = jewelryCostProvider.CostBasis.GoldBasis.EffectiveBasisPerOz * goldMultFactor / 24 / 31.10348m * rowExt.UsrActualGRAMGold;
+                    costFineMetalPerGramm = jewelryCostProvider.CostBasisGold.EffectiveBasisPerOz * goldMultFactor / 24 / 31.10348m * rowExt.UsrActualGRAMGold;
                 }
                 if (metalType == false)
                 {
                     var vendorInventoryExt = vendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
-                    jewelryCostProvider.CostBasis.SilverBasis.EffectiveBasisPerOz = vendorInventoryExt.UsrCommodityPrice.HasValue ? vendorInventoryExt.UsrCommodityPrice.Value : decimal.Zero;
+                    jewelryCostProvider.CostBasisSilver.EffectiveBasisPerOz = vendorInventoryExt.UsrCommodityPrice.HasValue ? vendorInventoryExt.UsrCommodityPrice.Value : decimal.Zero;
 
                     decimal silverMultFactor = GetSilverMult().HasValue ? GetSilverMult().Value : 0.0m;
-                    costFineMetalPerGramm = jewelryCostProvider.CostBasis.SilverBasis.EffectiveBasisPerOz * silverMultFactor / 31.10348m * rowExt.UsrActualGRAMSilver;
+                    costFineMetalPerGramm = jewelryCostProvider.CostBasisSilver.EffectiveBasisPerOz * silverMultFactor / 31.10348m * rowExt.UsrActualGRAMSilver;
                 }
             }
 
@@ -824,7 +824,7 @@ namespace ASCISTARCustom
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrUnitCost>(row, newCost);
         }
 
-        private void UpdateIncrement(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt, ASCIStarMarketCostHelper.JewelryCost costProvider)
+        private void UpdateIncrement(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt, ASCIStarMarketCostProvider.JewelryCost costProvider)
         {
             bool? metaltype = GetMetalType();
             switch (metaltype)
@@ -835,14 +835,14 @@ namespace ASCISTARCustom
             }
         }
 
-        private void UpdateGoldIncrement(InventoryItem row, ASCIStarINInventoryItemExt rowExt, ASCIStarMarketCostHelper.JewelryCost costProvider)
+        private void UpdateGoldIncrement(InventoryItem row, ASCIStarINInventoryItemExt rowExt, ASCIStarMarketCostProvider.JewelryCost costProvider)
         {
-            if (costProvider == null || costProvider.CostBasis == null || costProvider.CostBasis.GoldBasis == null
-                  || costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz == decimal.Zero || costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz == 0.0m) return;
+            if (costProvider == null || costProvider.CostBasisGold == null || costProvider.CostBasisGold.GoldBasis == null
+                  || costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz == decimal.Zero || costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz == 0.0m) return;
 
             // decimal? temp1 = costProvider.CostBasis.GoldBasis.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz;
             decimal? goldMultFactor = GetGoldMult();
-            decimal? temp1 = costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz * goldMultFactor / 24 / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz;
+            decimal? temp1 = costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz * goldMultFactor / 24 / 31.10348m / costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz;
             decimal? temp2 = temp1 * (1.0m + rowExt.UsrContractSurcharge / 100.0m);
             decimal? temp3 = 1.0m;//costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz;
 
@@ -857,7 +857,7 @@ namespace ASCISTARCustom
             rowExt.UsrContractIncrement = newIncrementValue;
         }
 
-        private void UpdateSilverIncrement(InventoryItem row, ASCIStarINInventoryItemExt rowExt, ASCIStarMarketCostHelper.JewelryCost costProvider)
+        private void UpdateSilverIncrement(InventoryItem row, ASCIStarINInventoryItemExt rowExt, ASCIStarMarketCostProvider.JewelryCost costProvider)
         {
 
 
@@ -874,12 +874,12 @@ namespace ASCISTARCustom
                     new PXSetPropertyException<ASCIStarINInventoryItemExt.usrContractSurcharge>("Surcharge will be negative, uncrease Increment!"));
             }
 
-            ASCIStarMarketCostHelper.JewelryCost costProvider = GetCostProvider(row);
+            ASCIStarMarketCostProvider.JewelryCost costProvider = GetCostProvider(row);
 
-            if (costProvider == null || costProvider.CostBasis == null || costProvider.CostBasis.GoldBasis == null /*|| costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz == decimal.Zero*/) return;
+            if (costProvider == null || costProvider.CostBasisGold == null /*|| costProvider.CostBasisGold.GoldBasis == null || costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz == decimal.Zero*/) return;
 
             decimal? temp1 = rowExt?.UsrContractIncrement;// / (costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz);
-            decimal? temp2 = (costProvider.CostBasis.GoldBasis.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz);
+            decimal? temp2 = (costProvider.CostBasisGold.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasisGold.EffectiveBasisPerOz);
 
             if (temp2 == null || temp2 == 0.0m) return;
 
@@ -888,7 +888,7 @@ namespace ASCISTARCustom
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, surchargeNewValue);
         }
 
-        private ASCIStarMarketCostHelper.JewelryCost GetCostProvider(InventoryItem row)
+        private ASCIStarMarketCostProvider.JewelryCost GetCostProvider(InventoryItem row)
         {
             POVendorInventory vendorItem = new POVendorInventory();
             foreach (POVendorInventory vitem in Base.VendorItems.Select())
@@ -919,8 +919,8 @@ namespace ASCISTARCustom
             //if (rowExt.UsrPricingGRAMGold > 0 || rowExt.UsrPricingGRAMSilver > 0)
             //{
 
-            ASCIStarMarketCostHelper.JewelryCost jewelryCostProvider
-                = new ASCIStarMarketCostHelper.JewelryCost(Base, row, 0.000000m, 0.000000m
+            ASCIStarMarketCostProvider.JewelryCost jewelryCostProvider
+                = new ASCIStarMarketCostProvider.JewelryCost(Base, row, 0.000000m, 0.000000m
                                                                       , vendorItem?.VendorID, vendorItemExt?.UsrMarketID
                                                                       , DateTime.Today, row.BaseUnit);
             return jewelryCostProvider;

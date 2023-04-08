@@ -934,8 +934,8 @@ namespace ASCISTARCustom.PDS
             ASCIStarINInventoryItemExt ext = item.GetExtension<ASCIStarINInventoryItemExt>();
             PXTrace.WriteInformation($"Kit:{kit.InventoryCD}");
             PXTrace.WriteInformation($"Component Item:{item.InventoryCD}");
-            ASCIStarMarketCostHelper.JewelryCost itemCost =
-                new ASCIStarMarketCostHelper.JewelryCost(cache.Graph, item, 0.00m);
+            ASCIStarMarketCostProvider.JewelryCost itemCost =
+                new ASCIStarMarketCostProvider.JewelryCost(cache.Graph, item, 0.00m);
 
             ext.UsrUnitCost = 0.000000m;
             ext.UsrCostingType = itemCost.costingType;
@@ -1059,7 +1059,7 @@ namespace ASCISTARCustom.PDS
             }
             if (item != null)
             {
-                ASCIStarMarketCostHelper.JewelryCost costHelper = new ASCIStarMarketCostHelper.JewelryCost(cache.Graph, item, 0.000000m);
+                ASCIStarMarketCostProvider.JewelryCost costHelper = new ASCIStarMarketCostProvider.JewelryCost(cache.Graph, item, 0.000000m);
                 //APVendorPrice price = costHelper.GetCommodityPrice(cache, row.CompInventoryID, vendorID, null);
                 //if (price.InventoryID == null)
                 //    PXTrace.WriteInformation("No Price Returned");
