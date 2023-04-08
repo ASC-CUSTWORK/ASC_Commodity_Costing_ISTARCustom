@@ -17,6 +17,8 @@ using ASCISTARCustom.PDS.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
 using ASCISTARCustom.Inventory.CacheExt;
 using ASCISTARCustom.Cost.Descriptor;
+using static PX.Data.BQL.BqlPlaceholder;
+using ASCISTARCustom.Common.Descriptor;
 
 namespace ASCISTARCustom.PDS
 {
@@ -1299,7 +1301,31 @@ namespace ASCISTARCustom.PDS
         //    }
         //}
 
+        /////////////////////////////////////////////////////////////////////////////////
+        protected virtual void _(Events.FieldUpdated<ASCIStarItemWeightCostSpec, ASCIStarItemWeightCostSpec.goldGrams> args)
+        {
+            if (args.Row is ASCIStarItemWeightCostSpec row)
+            {
+                var metalTypeValue = GetMetalTypeValue(JewelryItemView.Current?.MetalType);
+                var result = row.GoldGrams * (metalTypeValue / 24);
+                args.Cache.SetValueExt<ASCIStarItemWeightCostSpec.fineGoldGrams>(row, result);
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<ASCIStarItemWeightCostSpec, ASCIStarItemWeightCostSpec.fineGoldGrams> args)
+        {
+            if (args.Row is ASCIStarItemWeightCostSpec row)
+            {
+                UpdateCommodityCostMetal(args.Cache, row);
 
+                var metalTypeValue = GetMetalTypeValue(JewelryItemView.Current?.MetalType);
+                decimal? newGoldGram = (metalTypeValue == null || metalTypeValue == 0.0m) ? decimal.Zero : (decimal?)args.NewValue * 24 / metalTypeValue;
+
+                if (newGoldGram != row.GoldGrams)
+                {
+                    row.GoldGrams = newGoldGram;
+                }
+            }
+        }
         #endregion Event Handlers
 
         #region Action
@@ -1313,8 +1339,7 @@ namespace ASCISTARCustom.PDS
         #endregion
 
 
-        #region Helpers Methods
-
+        #region ServiceMethods
         private void CopyJewelryItemFields(INKitSpecHdr kitSpecHdr)
         {
             var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<P.AsInt>>.View.Select(this.Base, kitSpecHdr.KitInventoryID)?.TopFirst;
@@ -1358,13 +1383,187 @@ namespace ASCISTARCustom.PDS
 
             this.JewelryItemView.Insert(jewelryKitItem);
         }
-
-
         private void SetVisibleRevisionID()
         {
             var inSetup = SelectFrom<INSetup>.View.Select(this.Base)?.TopFirst;
             var inSetupExt = inSetup?.GetExtension<ASCIStarINSetupExt>();
             PXUIFieldAttribute.SetVisible<INKitSpecHdr.revisionID>(this.Base.Hdr.Cache, this.Base.Hdr.Current, inSetupExt?.UsrIsPDSTenant == true);
+        }
+        //////////////////////////////////////////////////////////////////////////////
+        private decimal? GetMetalTypeValue(string metalType) // <- move to service
+        {
+            if (metalType == null) 
+                throw new PXException(ASCIStarMessages.Error.MissingMetalType);
+
+            switch (metalType)
+            {
+                case ASCIStarConstants.MetalType.Type_24K: return 24.000000m;
+                case ASCIStarConstants.MetalType.Type_22K: return 22.000000m;
+                case ASCIStarConstants.MetalType.Type_20K: return 20.000000m;
+                case ASCIStarConstants.MetalType.Type_18K: return 18.000000m;
+                case ASCIStarConstants.MetalType.Type_16K: return 16.000000m;
+                case ASCIStarConstants.MetalType.Type_14K: return 14.000000m;
+                case ASCIStarConstants.MetalType.Type_12K: return 12.000000m;
+                case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
+                case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
+                case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
+                case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m;
+                case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m;
+                default: return decimal.Zero;
+            }
+        }
+        private bool? GetMetalType(string metalType)
+        {
+            switch (metalType?.ToUpper())
+            {
+                case ASCIStarConstants.MetalType.Type_24K: return true;
+                case ASCIStarConstants.MetalType.Type_23K: return true;
+                case ASCIStarConstants.MetalType.Type_22K: return true;
+                case ASCIStarConstants.MetalType.Type_21K: return true;
+                case ASCIStarConstants.MetalType.Type_20K: return true;
+                case ASCIStarConstants.MetalType.Type_19K: return true;
+                case ASCIStarConstants.MetalType.Type_18K: return true;
+                case ASCIStarConstants.MetalType.Type_17K: return true;
+                case ASCIStarConstants.MetalType.Type_16K: return true;
+                case ASCIStarConstants.MetalType.Type_15K: return true;
+                case ASCIStarConstants.MetalType.Type_14K: return true;
+                case ASCIStarConstants.MetalType.Type_13K: return true;
+                case ASCIStarConstants.MetalType.Type_12K: return true;
+                case ASCIStarConstants.MetalType.Type_11K: return true;
+                case ASCIStarConstants.MetalType.Type_10K: return true;
+                case ASCIStarConstants.MetalType.Type_09K: return true;
+                case ASCIStarConstants.MetalType.Type_08K: return true;
+                case ASCIStarConstants.MetalType.Type_07K: return true;
+                case ASCIStarConstants.MetalType.Type_06K: return true;
+
+                case ASCIStarConstants.MetalType.Type_24F: return true;
+                case ASCIStarConstants.MetalType.Type_23F: return true;
+                case ASCIStarConstants.MetalType.Type_22F: return true;
+                case ASCIStarConstants.MetalType.Type_21F: return true;
+                case ASCIStarConstants.MetalType.Type_20F: return true;
+                case ASCIStarConstants.MetalType.Type_19F: return true;
+                case ASCIStarConstants.MetalType.Type_18F: return true;
+                case ASCIStarConstants.MetalType.Type_17F: return true;
+                case ASCIStarConstants.MetalType.Type_16F: return true;
+                case ASCIStarConstants.MetalType.Type_15F: return true;
+                case ASCIStarConstants.MetalType.Type_14F: return true;
+                case ASCIStarConstants.MetalType.Type_13F: return true;
+                case ASCIStarConstants.MetalType.Type_12F: return true;
+                case ASCIStarConstants.MetalType.Type_11F: return true;
+                case ASCIStarConstants.MetalType.Type_10F: return true;
+                case ASCIStarConstants.MetalType.Type_09F: return true;
+                case ASCIStarConstants.MetalType.Type_08F: return true;
+                case ASCIStarConstants.MetalType.Type_07F: return true;
+                case ASCIStarConstants.MetalType.Type_06F: return true;
+
+                case ASCIStarConstants.MetalType.Type_FSS: return false;
+                case ASCIStarConstants.MetalType.Type_SSS: return false;
+
+                default: return null;
+            }
+        }
+        private void UpdateCommodityCostMetal(PXCache cache, ASCIStarItemWeightCostSpec row)
+        {
+
+            if ((row.SilverGrams == null || row.SilverGrams == 0.0m) && (row.GoldGrams == null || row.GoldGrams == 0.0m)) 
+            {
+                return;
+            }
+
+            POVendorInventory vendorInventory = GetDefaultOverrideVendor();
+            decimal? costFineMetalPerGramm = decimal.Zero;
+
+            ASCIStarMarketCostHelper.JewelryCost jewelryCostProvider = GetCostProvider(row);
+            var metalType = GetMetalType(JewelryItemView.Current?.MetalType);
+
+            if (vendorInventory == null)
+            {
+                costFineMetalPerGramm = jewelryCostProvider.CostRollupTotal[ASCIStarCostRollupType.Commodity];
+            }
+            else
+            {
+                if (metalType == true)
+                {
+                    var vendorInventoryExt = vendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
+                    jewelryCostProvider.CostBasis.GoldBasis.EffectiveBasisPerOz = vendorInventoryExt.UsrCommodityPrice.HasValue ? vendorInventoryExt.UsrCommodityPrice.Value : decimal.Zero;
+
+                    decimal goldMultFactor = GetMetalTypeValue(JewelryItemView.Current?.MetalType).HasValue ? GetMetalTypeValue(JewelryItemView.Current?.MetalType).Value : 0.0m;
+                    costFineMetalPerGramm = jewelryCostProvider.CostBasis.GoldBasis.EffectiveBasisPerOz * goldMultFactor / 24 / 31.10348m * row.GoldGrams;
+                }
+                if (metalType == false)
+                {
+                    var vendorInventoryExt = vendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
+                    jewelryCostProvider.CostBasis.SilverBasis.EffectiveBasisPerOz = vendorInventoryExt.UsrCommodityPrice.HasValue ? vendorInventoryExt.UsrCommodityPrice.Value : decimal.Zero;
+
+                    decimal silverMultFactor = GetMetalTypeValue(JewelryItemView.Current?.MetalType).HasValue ? GetMetalTypeValue(JewelryItemView.Current?.MetalType).Value : 0.0m;
+                    costFineMetalPerGramm = jewelryCostProvider.CostBasis.SilverBasis.EffectiveBasisPerOz * silverMultFactor / 31.10348m * row.SilverGrams;
+                }
+            }
+
+            decimal? lossValue = metalType == true ? 1.0m + row.MetalLossPct / 100.0m : 1.0m; // for silver don't calc loss
+            decimal? surchargeValue = 1.0m + row.SurchargePct / 100.0m;
+
+            row.MetalCost = costFineMetalPerGramm * lossValue * surchargeValue;
+            cache.SetValueExt<ASCIStarItemWeightCostSpec.metalCost>(row, row.MetalCost);
+
+            UpdateIncrement(cache, row, jewelryCostProvider);
+        }
+        private void UpdateIncrement(PXCache cache, ASCIStarItemWeightCostSpec row, ASCIStarMarketCostHelper.JewelryCost costProvider)
+        {
+            if (GetMetalType(JewelryItemView.Current?.MetalType) == true)
+            {
+                UpdateGoldIncrement(row costProvider); 
+                return;
+            }
+        }
+        private void UpdateGoldIncrement(ASCIStarItemWeightCostSpec row, ASCIStarMarketCostHelper.JewelryCost costProvider)
+        {
+            if (costProvider == null || costProvider.CostBasis == null || costProvider.CostBasis.GoldBasis == null
+                  || costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz == decimal.Zero || costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz == 0.0m) return;
+
+            // decimal? temp1 = costProvider.CostBasis.GoldBasis.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz;
+            decimal? goldMultFactor = GetMetalTypeValue(JewelryItemView.Current?.MetalType);
+            decimal? temp1 = costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz * goldMultFactor / 24 / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz;
+            decimal? temp2 = temp1 * (1.0m + rowExt.UsrContractSurcharge / 100.0m);
+            decimal? temp3 = 1.0m;//costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz;
+
+
+            decimal? newIncrementValue = (temp3 == 0.0m || temp3 == null) ? temp2 : temp2 * temp3;
+
+            //  decimal? temp11 = costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz / 31.10348m - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz / 31.10348m;
+            newIncrementValue = temp2;
+
+            if (newIncrementValue == rowExt.UsrContractIncrement) return;
+
+            rowExt.UsrContractIncrement = newIncrementValue;
+        }
+
+        private ASCIStarMarketCostHelper.JewelryCost GetCostProvider(InventoryItem row)
+        {
+            POVendorInventory vendorItem = new POVendorInventory();
+            foreach (POVendorInventory vitem in Base.VendorItems.Select())
+            {
+                // PXTrace.WriteInformation($"{vitem.VendorID}:{vitem.IsDefault}");
+
+                if (vitem.IsDefault == true)
+                {
+                    vendorItem = vitem;
+                    break;
+                }
+            }
+
+            if (vendorItem.VendorID == null)
+            {
+                throw new PXSetPropertyException("No default vendor on Vendors tab");
+            }
+
+            ASCIStarPOVendorInventoryExt vendorItemExt = vendorItem?.GetExtension<ASCIStarPOVendorInventoryExt>();
+
+            ASCIStarMarketCostHelper.JewelryCost jewelryCostProvider
+                = new ASCIStarMarketCostHelper.JewelryCost(Base, row, 0.000000m, 0.000000m
+                                                                      , vendorItem?.VendorID, vendorItemExt?.UsrMarketID
+                                                                      , DateTime.Today, row.BaseUnit);
+            return jewelryCostProvider;
         }
         #endregion Helpers Methods
     }

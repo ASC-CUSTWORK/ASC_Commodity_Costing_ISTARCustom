@@ -40,6 +40,7 @@ namespace ASCISTARCustom.Common.Descriptor
         {
             public const string SymbolNotSpecified = "Symbol not provided. Please specify the desired symbol in preferences and try again.";
             public const string ProcError = "Error: {0}";
+            public const string MissingMetalType = "The Metal Type on Jewelry tab is missing!";
         }
         #endregion
 

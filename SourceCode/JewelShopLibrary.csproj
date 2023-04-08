@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\DAC\AuditSystemFields.cs" />
+    <Compile Include="Common\Descriptor\ASCIStarConstants.cs" />
     <Compile Include="Common\Descriptor\ASCIStarEndpoints.cs" />
     <Compile Include="Common\Descriptor\ASCIStarMessages.cs" />
     <Compile Include="Common\Descriptor\ASCIStarQueryParams.cs" />
