@@ -1,4 +1,7 @@
-﻿using ASCISTARCustom.Common.Services.Interfaces;
+﻿using ASCISTARCustom.Common.Services.DataProvider;
+using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
+using ASCISTARCustom.Common.Services.REST;
+using ASCISTARCustom.Common.Services.REST.Interfaces;
 using Autofac;
 
 namespace ASCISTARCustom.Common.Services
@@ -10,7 +13,9 @@ namespace ASCISTARCustom.Common.Services
             base.Load(builder);
 
             builder.RegisterType<ASCIStarRESTService>().As<IASCIStarRESTService>();
-            builder.RegisterType<ASCIStarMetalsAPILatestRates>().As<IASCIStarMetalsAPILatestRates>();
+            builder.RegisterType<ASCIStarMetalsAPILatestRateService>().As<IASCIStarMetalsAPILatestRateService>();
+
+            builder.RegisterType<ASCIStarVendorDataProvider>().As<IASCIStarVendorDataProvider>();
         }
     }
 }

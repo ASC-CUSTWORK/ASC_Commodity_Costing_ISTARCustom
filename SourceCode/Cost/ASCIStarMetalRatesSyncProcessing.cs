@@ -1,5 +1,5 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.Services.Interfaces;
+using ASCISTARCustom.Common.Services.REST.Interfaces;
 using ASCISTARCustom.Cost.DAC.Projections;
 using ASCISTARCustom.Cost.DAC.Unbounds;
 using ASCISTARCustom.Preferences.DAC;
@@ -32,7 +32,7 @@ namespace ASCISTARCustom.Cost
 
         #region Dependency Injection
         [InjectDependency]
-        public IASCIStarMetalsAPILatestRates _apiRates { get; set; }
+        public IASCIStarMetalsAPILatestRateService _apiRates { get; set; }
         #endregion
 
         #region ctor

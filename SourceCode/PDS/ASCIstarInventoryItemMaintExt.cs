@@ -16,6 +16,7 @@ using PX.CS;
 using System.Linq;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.Cost.Descriptor;
+using ASCISTARCustom.Common.Builder;
 
 namespace ASCISTARCustom
 {
@@ -838,7 +839,8 @@ namespace ASCISTARCustom
         private void UpdateGoldIncrement(InventoryItem row, ASCIStarINInventoryItemExt rowExt, ASCIStarMarketCostProvider.JewelryCost costProvider)
         {
             if (costProvider == null || costProvider.CostBasisGold == null || costProvider.CostBasisGold.GoldBasis == null
-                  || costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz == decimal.Zero || costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz == 0.0m) return;
+                  || costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz == decimal.Zero 
+                  || costProvider.CostBasisGold.GoldBasis.EffectiveBasisPerOz == 0.0m) return;
 
             // decimal? temp1 = costProvider.CostBasis.GoldBasis.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz;
             decimal? goldMultFactor = GetGoldMult();
@@ -918,6 +920,13 @@ namespace ASCISTARCustom
 
             //if (rowExt.UsrPricingGRAMGold > 0 || rowExt.UsrPricingGRAMSilver > 0)
             //{
+
+            var costBuilder = new ASCIStarCostBuilder(this.Base)
+                .WithInventoryItem(row)
+                .WithPOVendorInventory(vendorItem)
+                .WithUOM(row.BaseUnit)
+                .Build();
+
 
             ASCIStarMarketCostProvider.JewelryCost jewelryCostProvider
                 = new ASCIStarMarketCostProvider.JewelryCost(Base, row, 0.000000m, 0.000000m

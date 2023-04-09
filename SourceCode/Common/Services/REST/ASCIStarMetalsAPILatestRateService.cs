@@ -1,11 +1,11 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Models;
-using ASCISTARCustom.Common.Services.Interfaces;
+using ASCISTARCustom.Common.Services.REST.Interfaces;
 using PX.Data;
 using System.Collections.Generic;
 using static ASCISTARCustom.Preferences.Descriptor.ASCIStarSymbols;
 
-namespace ASCISTARCustom.Common.Services
+namespace ASCISTARCustom.Common.Services.REST
 {
     /// <summary>
     /// A service class that provides methods for retrieving inverse rate values for different metals from the ASCIStar API.
@@ -17,12 +17,12 @@ namespace ASCISTARCustom.Common.Services
     /// Returns the inverse of the rate value as a decimal if the value is not zero, and returns 0 if the value is zero.
     /// Implements private static Parameters and IsSymbolSpecified methods that respectively create an array of key-value pairs representing API request parameters and check whether the specified symbol is included in the symbols list in the ASCIStar setup details.
     /// </summary>
-    public class ASCIStarMetalsAPILatestRates : IASCIStarMetalsAPILatestRates
+    public class ASCIStarMetalsAPILatestRateService : IASCIStarMetalsAPILatestRateService
     {
         private readonly IASCIStarRESTService _starRESTService;
         private readonly PXGraph _graph;
 
-        public ASCIStarMetalsAPILatestRates(PXGraph graph)
+        public ASCIStarMetalsAPILatestRateService(PXGraph graph)
         {
             _graph = graph;
             _starRESTService = new ASCIStarRESTService(_graph);

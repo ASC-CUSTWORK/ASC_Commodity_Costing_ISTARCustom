@@ -506,7 +506,11 @@ namespace ASCISTARCustom
             public decimal EffectiveMarketPerGram { get; set; }
             public decimal EffectiveMarketPerDWT { get; set; }
             public decimal MarketPerOz(string fineness = null) { return MarketPerFineOz[fineness]; }
-            public decimal MarketPerGram(string fineness = null) { Fineness = Fineness ?? MarketCommodity; return MarketPerFineOz[Fineness] / 31.103480m; }
+            public decimal MarketPerGram(string fineness = null) 
+            { 
+                Fineness = Fineness ?? MarketCommodity; 
+                return MarketPerFineOz[Fineness] / 31.103480m; 
+            }
             private static INUnit ConvertPrice(PXGraph graph, string FromUnit, string ToUnit)
             {
                 INUnit conv =
@@ -1202,7 +1206,7 @@ namespace ASCISTARCustom
                             costPerGram = CostBasisGold.MarketPerGram();
                             // labor cost * gold grams
                             break;
-
+                    }
                     //    case ASCIStarCostingType.StandardCost:
                     //        break;
                     //    default:

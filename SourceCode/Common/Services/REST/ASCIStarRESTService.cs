@@ -3,14 +3,14 @@ using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Common.Helper.Exceptions;
 using ASCISTARCustom.Common.Helper.Extensions;
 using ASCISTARCustom.Common.Models;
-using ASCISTARCustom.Common.Services.Interfaces;
+using ASCISTARCustom.Common.Services.REST.Interfaces;
 using ASCISTARCustom.Preferences.DAC;
 using PX.Data;
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ASCISTARCustom.Common.Services
+namespace ASCISTARCustom.Common.Services.REST
 {
     /// <summary>
     /// Implementation of the IASCIStarRESTService interface that provides methods for sending HTTP requests to the ASCIStar API using RestSharp.

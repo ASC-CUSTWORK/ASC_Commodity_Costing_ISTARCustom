@@ -1390,78 +1390,7 @@ namespace ASCISTARCustom.PDS
             PXUIFieldAttribute.SetVisible<INKitSpecHdr.revisionID>(this.Base.Hdr.Cache, this.Base.Hdr.Current, inSetupExt?.UsrIsPDSTenant == true);
         }
         //////////////////////////////////////////////////////////////////////////////
-        private decimal? GetMetalTypeValue(string metalType) // <- move to service
-        {
-            if (metalType == null) 
-                throw new PXException(ASCIStarMessages.Error.MissingMetalType);
-
-            switch (metalType)
-            {
-                case ASCIStarConstants.MetalType.Type_24K: return 24.000000m;
-                case ASCIStarConstants.MetalType.Type_22K: return 22.000000m;
-                case ASCIStarConstants.MetalType.Type_20K: return 20.000000m;
-                case ASCIStarConstants.MetalType.Type_18K: return 18.000000m;
-                case ASCIStarConstants.MetalType.Type_16K: return 16.000000m;
-                case ASCIStarConstants.MetalType.Type_14K: return 14.000000m;
-                case ASCIStarConstants.MetalType.Type_12K: return 12.000000m;
-                case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
-                case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
-                case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
-                case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m;
-                case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m;
-                default: return decimal.Zero;
-            }
-        }
-        private bool? GetMetalType(string metalType)
-        {
-            switch (metalType?.ToUpper())
-            {
-                case ASCIStarConstants.MetalType.Type_24K: return true;
-                case ASCIStarConstants.MetalType.Type_23K: return true;
-                case ASCIStarConstants.MetalType.Type_22K: return true;
-                case ASCIStarConstants.MetalType.Type_21K: return true;
-                case ASCIStarConstants.MetalType.Type_20K: return true;
-                case ASCIStarConstants.MetalType.Type_19K: return true;
-                case ASCIStarConstants.MetalType.Type_18K: return true;
-                case ASCIStarConstants.MetalType.Type_17K: return true;
-                case ASCIStarConstants.MetalType.Type_16K: return true;
-                case ASCIStarConstants.MetalType.Type_15K: return true;
-                case ASCIStarConstants.MetalType.Type_14K: return true;
-                case ASCIStarConstants.MetalType.Type_13K: return true;
-                case ASCIStarConstants.MetalType.Type_12K: return true;
-                case ASCIStarConstants.MetalType.Type_11K: return true;
-                case ASCIStarConstants.MetalType.Type_10K: return true;
-                case ASCIStarConstants.MetalType.Type_09K: return true;
-                case ASCIStarConstants.MetalType.Type_08K: return true;
-                case ASCIStarConstants.MetalType.Type_07K: return true;
-                case ASCIStarConstants.MetalType.Type_06K: return true;
-
-                case ASCIStarConstants.MetalType.Type_24F: return true;
-                case ASCIStarConstants.MetalType.Type_23F: return true;
-                case ASCIStarConstants.MetalType.Type_22F: return true;
-                case ASCIStarConstants.MetalType.Type_21F: return true;
-                case ASCIStarConstants.MetalType.Type_20F: return true;
-                case ASCIStarConstants.MetalType.Type_19F: return true;
-                case ASCIStarConstants.MetalType.Type_18F: return true;
-                case ASCIStarConstants.MetalType.Type_17F: return true;
-                case ASCIStarConstants.MetalType.Type_16F: return true;
-                case ASCIStarConstants.MetalType.Type_15F: return true;
-                case ASCIStarConstants.MetalType.Type_14F: return true;
-                case ASCIStarConstants.MetalType.Type_13F: return true;
-                case ASCIStarConstants.MetalType.Type_12F: return true;
-                case ASCIStarConstants.MetalType.Type_11F: return true;
-                case ASCIStarConstants.MetalType.Type_10F: return true;
-                case ASCIStarConstants.MetalType.Type_09F: return true;
-                case ASCIStarConstants.MetalType.Type_08F: return true;
-                case ASCIStarConstants.MetalType.Type_07F: return true;
-                case ASCIStarConstants.MetalType.Type_06F: return true;
-
-                case ASCIStarConstants.MetalType.Type_FSS: return false;
-                case ASCIStarConstants.MetalType.Type_SSS: return false;
-
-                default: return null;
-            }
-        }
+       
         private void UpdateCommodityCostMetal(PXCache cache, ASCIStarItemWeightCostSpec row)
         {
 

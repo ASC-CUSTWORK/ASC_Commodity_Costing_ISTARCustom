@@ -1,6 +1,6 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Models;
-using ASCISTARCustom.Common.Services.Interfaces;
+using ASCISTARCustom.Common.Services.REST.Interfaces;
 using ASCISTARCustom.Preferences.DAC;
 using PX.Data;
 using PX.Data.WorkflowAPI;
