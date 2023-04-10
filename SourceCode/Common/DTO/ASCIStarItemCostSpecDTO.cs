@@ -33,6 +33,7 @@ namespace ASCISTARCustom.Common.DTO
         public decimal? LaborCost { get; set; }
         public decimal? DutyCost { get; set; }
         public decimal? DutyCostPct { get; set; }
+        public string CostingType { get; set; }
 
         public static implicit operator ASCIStarItemCostSpecDTO(InventoryItem value)
         {
@@ -61,6 +62,7 @@ namespace ASCISTARCustom.Common.DTO
                 LaborCost = valueExt.UsrLaborCost,
                 DutyCost = valueExt.UsrDutyCost,
                 DutyCostPct = valueExt.UsrDutyCostPct,
+                CostingType = valueExt.UsrCostingType,
             };
         }
             

@@ -11,6 +11,7 @@ using PX.Objects.AP;
 using PX.Objects.Common;
 using PX.Objects.PO;
 using ASCISTARCustom.Cost.Descriptor;
+using ASCISTARCustom.Common.Builder;
 
 namespace ASCISTARCustom
 {
@@ -130,7 +131,7 @@ namespace ASCISTARCustom
         protected virtual void _(Events.FieldUpdated<POOrder, POOrder.orderDate> e)
         {
             var row = e.Row;
-            if (row == null ) return;
+            if (row == null) return;
             InventoryItemView.Current = InventoryItemView.Select().TopFirst;
             if (InventoryItemView.Current == null)
                 InventoryItemView.Current = InventoryItem.PK.Find(this.Base, this.Base.Transactions.Current?.InventoryID);
@@ -191,19 +192,17 @@ namespace ASCISTARCustom
                 this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null, new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
                 return;
             }
-            var costProvider = new ASCIStarMarketCostProvider.JewelryCost(Base, inventoryItem, 0m, 0m,
-                this.Base.Document.Current.VendorID, poOrderExt.UsrMarketID, poOrderExt.UsrPricingDate, row.UOM, this.Base.Document.Current.CuryID);
+            var vendor = vendorItemSelect.Select().TopFirst;
+            var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
+                            .WithInventoryItem(inventoryItem)
+                            .WithPOVendorInventory(vendor)
+                            .Build();
 
-            row.CuryUnitCost = costProvider.GetPurchaseCost(inventoryItemExt.UsrCostingType);
+            row.CuryUnitCost = jewelryCostProvider.GetPurchaseUnitCost(ASCIStarCostingType.MarketCost);
+
             cache.SetValueExt<POLine.curyUnitCost>(row, row.CuryUnitCost);
 
-            decimal? marketPrice = decimal.Zero;
-            if (costProvider.CostBasisGold?.GoldBasis == null)
-                marketPrice = costProvider.CostBasisGold.SilverBasis?.EffectiveMarketPerOz;
-            else
-                marketPrice = costProvider.CostBasisGold.GoldBasis.EffectiveMarketPerOz;
-
-            cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(row, marketPrice);
+            cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(row, jewelryCostProvider.PreciousMetalMarketCostPerTOZ);
         }
 
         private void SetInventoryItemCustomFields(PXCache cache, POLine row, ASCIStarINInventoryItemExt inventoryItemExt)

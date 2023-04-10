@@ -23,5 +23,6 @@
         decimal? LaborCost { get; set; }
         decimal? DutyCost { get; set; }
         decimal? DutyCostPct { get; set; }
+        string CostingType { get; set; }
     }
 }
