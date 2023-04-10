@@ -1,7 +1,6 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.DTO;
 using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
 using ASCISTARCustom.Cost.Descriptor;
 using ASCISTARCustom.Inventory.DAC;
 using PX.Common;
@@ -9,12 +8,10 @@ using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
-using PX.Objects.CS;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ASCISTARCustom.Common.Builder
 {
@@ -96,24 +93,14 @@ namespace ASCISTARCustom.Common.Builder
 
             PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
             PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem.MetalType);
-
-            //PreciousMetalCost = CalculatePreciousMetalCost(ItemCostSpecification, effectiveBasePricePerOz, jewelryItem.MetalType);
-            //IncrementValue = CalculateGoldIncrementValue(ItemCostSpecification, effectiveBasePricePerOz, jewelryItem.MetalType);
-            //Surcharge = CalculateSurchargeValue(ItemCostSpecification, effectiveBasePricePerOz, jewelryItem.MetalType);
         }
 
         public virtual decimal? CalculateSurchargeValue(ASCIStarItemCostSpecDTO itemCostSpecification)
         {
-            //decimal? temp1 = rowExt?.UsrContractIncrement;// / (costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz - costProvider.CostBasis.GoldBasis.EffectiveMarketPerOz);
-            //decimal? temp2 = (costProvider.CostBasis.GoldBasis.BasisPerFineOz[this.JewelryItemView.Current.MetalType?.ToUpper()] / 31.10348m / costProvider.CostBasis.GoldBasis.EffectiveBasisPerOz);
-
             decimal? temp1 = itemCostSpecification.Increment;
             decimal? temp2 = (1.0m / 31.10348m);
 
-            //if (temp2 == null || temp2 == 0.0m) return;
-
             decimal? surchargeNewValue = (temp1 / temp2 - 1.0m) * 100.0m;
-
 
             return surchargeNewValue;
         }
@@ -177,7 +164,6 @@ namespace ASCISTARCustom.Common.Builder
             return PreciousMetalUnitCost;
         }
 
-
         public virtual decimal? GetVendorPricePerTOZ(int? vendorID, int? inventoryID)
         {
             var result = GetAPVendorPrice(vendorID, inventoryID, UOM, PricingDate);
@@ -189,27 +175,6 @@ namespace ASCISTARCustom.Common.Builder
 
             return result.SalesPrice;
         }
-
-
-        ///// <summary>
-        ///// Method that tries to convert the sales price of an item to its equivalent value in troy ounces.
-        ///// Gets the conversion factor between the specified UOM and TOZ (troy ounce) units by calling the GetConversionFactor method.
-        ///// Multiplies the sales price by the conversion factor if the conversion factor multiplier/divisor is set to Multiply, and divides the sales price by the conversion factor otherwise.
-        ///// </summary>
-        ///// <param name="UOM">The unit of measure to convert from.</param>
-        ///// <param name="salesPrice">The sales price to convert.</param>
-        ///// <returns>The converted sales price as a decimal.</returns>
-        //private decimal? TryConvertSalesPrice(string UOM, decimal? salesPrice)
-        //{
-        //    // TODO create constant for "TOZ"
-        //    var conversionFactor = GetConversionFactor(UOM, "TOZ");
-        //    if (conversionFactor.Item2 == MultDiv.Multiply)
-        //    {
-        //        return salesPrice * conversionFactor.Item1;
-        //    }
-
-        //    return salesPrice / conversionFactor.Item1;
-        //}
 
         /// <summary>
         /// Retrieves the conversion factor between two inventory units.
@@ -288,23 +253,11 @@ namespace ASCISTARCustom.Common.Builder
         private INUnit GetINUnit(string fromUnit, string toUnit)
             => PXSelect<INUnit,
                 Where<INUnit.fromUnit, Equal<Required<INUnit.fromUnit>>, And<INUnit.toUnit, Equal<Required<INUnit.toUnit>>>>>.Select(_graph, fromUnit, toUnit);
-        private IEnumerable<INUnit> GetINUnits(string toUnit)
-            => PXSelect<INUnit,
-                Where<INUnit.fromUnit, Equal<Required<INUnit.toUnit>>>>.Select(_graph, toUnit).FirstTableItems;
-
-        private InventoryItem GetINventoryItemByInvenctoryCD(string inventoryCD)
-            => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
-
+        
         private InventoryItem GetInventoryItemByInvenctoryCD(string inventiryCD)
             => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventiryCD)?.TopFirst;
 
         private APVendorPrice GetAPVendorPrice(int? vendorID, int? inventoryID, string UOM, DateTime effectiveDate)
-            //=> PXSelectBase<APVendorPrice, PXSelect<APVendorPrice,
-            //    Where<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-            //        And<APVendorPrice.uOM, Equal<Required<APVendorPrice.uOM>>,
-            //        And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>,
-            //        And<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>>>>>>.Config>
-            //    .Select(_graph, inventoryID, UOM, effectiveDate, vendorID);
             => new PXSelect<APVendorPrice,
                 Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
                     And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
@@ -312,8 +265,6 @@ namespace ASCISTARCustom.Common.Builder
                     And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>,
                     And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>>>>>>,
                 OrderBy<Desc<APVendorPrice.effectiveDate>>>(_graph).SelectSingle(vendorID, inventoryID, "TOZ", effectiveDate, effectiveDate);
-
-
         #endregion
     }
 }
