@@ -149,8 +149,6 @@ namespace ASCISTARCustom.PDS
         #endregion
 
         #region Event Handlers
-       
-
         protected void INKitSpecStkDet_DfltCompQty_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
         {
             MethodBase m = MethodBase.GetCurrentMethod();
