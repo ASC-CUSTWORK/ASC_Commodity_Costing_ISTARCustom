@@ -1,5 +1,5 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.Services.Interfaces;
+using ASCISTARCustom.Common.Services.REST.Interfaces;
 using ASCISTARCustom.Cost.DAC.Projections;
 using ASCISTARCustom.Cost.DAC.Unbounds;
 using ASCISTARCustom.Preferences.DAC;
@@ -32,7 +32,7 @@ namespace ASCISTARCustom.Cost
 
         #region Dependency Injection
         [InjectDependency]
-        public IASCIStarMetalsAPILatestRates _apiRates { get; set; }
+        public IASCIStarMetalsAPILatestRateService _apiRates { get; set; }
         #endregion
 
         #region ctor
@@ -81,6 +81,7 @@ namespace ASCISTARCustom.Cost
         {
             var vendors = graph.GetVendorByBAccuntID(graph);
             var inventoryItems = graph.GetInventoryItemByID(graph);
+            var vendorPrices = graph.GetAPVendorPrice(graph);
             var vendorPriceMaint = new Lazy<APVendorPriceMaint>(() => PXGraph.CreateInstance<APVendorPriceMaint>());
 
             foreach (var record in selectedRecords)
@@ -89,66 +90,9 @@ namespace ASCISTARCustom.Cost
                 {
                     var vendor = vendors.Select(record.VendorID).RowCast<Vendor>().FirstOrDefault();
                     var item = inventoryItems.Select(record.InventoryID).RowCast<InventoryItem>().FirstOrDefault();
-                    if (vendor.AcctCD.Trim() == LondonPM)
-                    {
-                        switch (item.InventoryCD.Trim())
-                        {
-                            case Gold24K:
-                                {
-                                    var salesPrice = graph._apiRates.GetLBXAUPMRate(record.CuryID);
-                                    CreateRecord(vendorPriceMaint, record, salesPrice);
-                                }
-                                break;
-                            case Silver:
-                                {
-                                    var salesPrice = graph._apiRates.GetLBXAGRate(record.CuryID);
-                                    CreateRecord(vendorPriceMaint, record, salesPrice);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    if (vendor.AcctCD.Trim() == LondonAM)
-                    {
-                        switch (item.InventoryCD.Trim())
-                        {
-                            case Gold24K:
-                                {
-                                    var salesPrice = graph._apiRates.GetLBXAUAMRate(record.CuryID);
-                                    CreateRecord(vendorPriceMaint, record, salesPrice);
-                                }
-                                break;
-                            case Silver:
-                                {
-                                    var salesPrice = graph._apiRates.GetLBXAGRate(record.CuryID);
-                                    CreateRecord(vendorPriceMaint, record, salesPrice);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    if (vendor.AcctCD.Trim() == NewYork)
-                    {
-                        switch (item.InventoryCD.Trim())
-                        {
-                            case Gold24K:
-                                {
-                                    var salesPrice = graph._apiRates.GetXAURate(record.CuryID);
-                                    CreateRecord(vendorPriceMaint, record, salesPrice);
-                                }
-                                break;
-                            case Silver:
-                                {
-                                    var salesPrice = graph._apiRates.GetXAGRate(record.CuryID);
-                                    CreateRecord(vendorPriceMaint, record, salesPrice);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    var vendorPrice = vendorPrices.Select(record.VendorID, record.InventoryID, graph.Accessinfo.BusinessDate, graph.Accessinfo.BusinessDate).RowCast<APVendorPrice>().FirstOrDefault();
+
+                    graph.CreateOrUpdatePriceRecord(graph, vendorPriceMaint, record, vendor, item, vendorPrice);
                 }
                 catch (Exception exc)
                 {
@@ -159,7 +103,102 @@ namespace ASCISTARCustom.Cost
             }
         }
 
-        private static void CreateRecord(Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, decimal salesPrice)
+        public virtual void CreateOrUpdatePriceRecord(ASCIStarMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, Vendor vendor, InventoryItem item, APVendorPrice vendorPrice)
+        {
+            string trimmedAcctCD = vendor.AcctCD.Trim();
+
+            if (trimmedAcctCD == LondonPM)
+            {
+                SetLondonPMVendorPrice(graph, vendorPriceMaint, record, item, vendorPrice);
+            }
+            else if (trimmedAcctCD == LondonAM)
+            {
+                SetLondonAMVendorPrice(graph, vendorPriceMaint, record, item, vendorPrice);
+            }
+            else if (trimmedAcctCD == NewYork)
+            {
+                SetNewYorkVendorPrice(graph, vendorPriceMaint, record, item, vendorPrice);
+            }
+        }
+
+        public virtual void SetNewYorkVendorPrice(ASCIStarMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, InventoryItem item, APVendorPrice vendorPrice)
+        {
+            switch (item.InventoryCD.Trim())
+            {
+                case Gold24K:
+                    {
+                        var salesPrice = graph._apiRates.GetXAURate(record.CuryID);
+                        var _ = vendorPrice == null ? CreateRecord(vendorPriceMaint, record, salesPrice) : UpdateRecord(vendorPriceMaint, vendorPrice, salesPrice);
+                    }
+                    break;
+                case Silver:
+                    {
+                        var salesPrice = graph._apiRates.GetXAGRate(record.CuryID);
+                        var _ = vendorPrice == null ? CreateRecord(vendorPriceMaint, record, salesPrice) : UpdateRecord(vendorPriceMaint, vendorPrice, salesPrice);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public virtual void SetLondonAMVendorPrice(ASCIStarMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, InventoryItem item, APVendorPrice vendorPrice)
+        {
+            switch (item.InventoryCD.Trim())
+            {
+                case Gold24K:
+                    {
+                        var salesPrice = graph._apiRates.GetLBXAUAMRate(record.CuryID);
+                        var _ = vendorPrice == null ? CreateRecord(vendorPriceMaint, record, salesPrice) : UpdateRecord(vendorPriceMaint, vendorPrice, salesPrice);
+                    }
+                    break;
+                case Silver:
+                    {
+                        var salesPrice = graph._apiRates.GetLBXAGRate(record.CuryID);
+                        var _ = vendorPrice == null ? CreateRecord(vendorPriceMaint, record, salesPrice) : UpdateRecord(vendorPriceMaint, vendorPrice, salesPrice);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public virtual void SetLondonPMVendorPrice(ASCIStarMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, InventoryItem item, APVendorPrice vendorPrice)
+        {
+            switch (item.InventoryCD.Trim())
+            {
+                case Gold24K:
+                    {
+                        var salesPrice = graph._apiRates.GetLBXAUPMRate(record.CuryID);
+                        var _ = vendorPrice == null ? CreateRecord(vendorPriceMaint, record, salesPrice) : UpdateRecord(vendorPriceMaint, vendorPrice, salesPrice);
+                    }
+                    break;
+                case Silver:
+                    {
+                        var salesPrice = graph._apiRates.GetLBXAGRate(record.CuryID);
+                        var _ = vendorPrice == null ? CreateRecord(vendorPriceMaint, record, salesPrice) : UpdateRecord(vendorPriceMaint, vendorPrice, salesPrice);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public virtual APVendorPrice UpdateRecord(Lazy<APVendorPriceMaint> vendorPriceMaint, APVendorPrice record, decimal salesPrice)
+        {
+            APVendorPrice vendorPrice = null;
+            vendorPriceMaint.Value.Clear(PXClearOption.ClearAll);
+            using (var transactionScope = new PXTransactionScope())
+            {
+                record.SalesPrice = salesPrice;
+                vendorPrice = vendorPriceMaint.Value.Records.Update(record);
+                vendorPriceMaint.Value.Save.Press();
+                transactionScope.Complete();
+                return vendorPrice;
+            }
+        }
+
+        public virtual APVendorPrice CreateRecord(Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, decimal salesPrice)
         {
             vendorPriceMaint.Value.Clear(PXClearOption.ClearAll);
             using (var transactionScope = new PXTransactionScope())
@@ -179,6 +218,7 @@ namespace ASCISTARCustom.Cost
                 vendorPriceMaint.Value.Records.Update(vendorPrice);
                 vendorPriceMaint.Value.Save.PressButton();
                 transactionScope.Complete();
+                return vendorPrice;
             }
         }
 
@@ -207,6 +247,14 @@ namespace ASCISTARCustom.Cost
         public PXSelectBase<InventoryItem> GetInventoryItemByID(PXGraph graph)
         {
             return new PXSelect<InventoryItem, Where<InventoryItem.inventoryID, Equal<Required<InventoryItem.inventoryID>>>>(graph);
+        }
+        public PXSelectBase<APVendorPrice> GetAPVendorPrice(PXGraph graph)
+        {
+            return new PXSelect<APVendorPrice, 
+                Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>, 
+                    And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>, 
+                    And<APVendorPrice.effectiveDate, Equal<Required<APVendorPrice.effectiveDate>>, 
+                    And<APVendorPrice.expirationDate, Equal<Required<APVendorPrice.expirationDate>>>>>>>(graph);
         }
         #endregion
     }

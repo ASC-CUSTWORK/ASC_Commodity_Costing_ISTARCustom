@@ -2,7 +2,7 @@
 using ASCISTARCustom.Preferences.DAC;
 using System.Collections.Generic;
 
-namespace ASCISTARCustom.Common.Services.Interfaces
+namespace ASCISTARCustom.Common.Services.REST.Interfaces
 {
     public interface IASCIStarRESTService
     {
