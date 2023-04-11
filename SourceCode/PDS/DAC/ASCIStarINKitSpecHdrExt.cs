@@ -1,25 +1,20 @@
-using PX.Data.ReferentialIntegrity.Attributes;
 using PX.Data;
-using PX.Objects.CS;
 using PX.Objects.IN;
-using PX.Objects.AR;
-using PX.Objects;
-using System.Collections.Generic;
-using System;
 
 namespace ASCISTARCustom
 {
-    public class ASCIStarINKitSpecHdrExt : PXCacheExtension<PX.Objects.IN.INKitSpecHdr>
+    public sealed class ASCIStarINKitSpecHdrExt : PXCacheExtension<INKitSpecHdr>
     {
         public static bool IsActive() => true;
 
         #region UsrVQuoteLineCtr
         [PXDBInt]
-        [PXDefault(0)]
-        public virtual int? UsrVQuoteLineCtr { get; set; }
+        [PXDefault(0, PersistingCheck = PXPersistingCheck.Nothing)]
+        public int? UsrVQuoteLineCtr { get; set; }
         public abstract class usrVQuoteLineCtr : PX.Data.BQL.BqlInt.Field<usrVQuoteLineCtr> { }
         #endregion
 
+        //TODO Check if this fields are exists in data base table or not, if so then remove them all!
         #region Decpracated 
         //        //#region UsrPricingDate
         //        //[PXDBDate]

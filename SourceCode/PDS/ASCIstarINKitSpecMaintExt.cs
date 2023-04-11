@@ -10,6 +10,12 @@ using ASCISTARCustom.PDS.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
 using ASCISTARCustom.Inventory.CacheExt;
 using ASCISTARCustom.Cost.Descriptor;
+using ASCISTARCustom.Common.Helper;
+using System;
+using PX.Objects.FA;
+using static PX.CS.RMReport.FK;
+using ASCISTARCustom.Common.Builder;
+using System.Linq;
 
 namespace ASCISTARCustom.PDS
 {
@@ -143,22 +149,7 @@ namespace ASCISTARCustom.PDS
         #endregion
 
         #region Event Handlers
-        protected virtual void _(Events.RowInserted<INKitSpecHdr> e)
-        {
-            var row = e.Row;
-            if (row == null || this.Base.Hdr.Current == null) return;
-
-            CopyJewelryItemFields(this.Base.Hdr.Current);
-            
-        }
-
-        protected virtual void _(Events.RowSelected<INKitSpecHdr> e, PXRowSelected baseMethod)
-        {
-            if (e.Row is INKitSpecHdr row)
-            {
-                SetVisibleRevisionID();
-            }
-        }
+       
 
         protected void INKitSpecStkDet_DfltCompQty_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
         {
@@ -526,6 +517,68 @@ namespace ASCISTARCustom.PDS
             e.NewValue = itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost;
             PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecNonStkDetExt.usrCostingType>(cache, row, true);
         }
+
+        #region INKitSpecHdr Events
+        protected virtual void _(Events.RowInserted<INKitSpecHdr> e)
+        {
+            var row = e.Row;
+            if (row == null || this.Base.Hdr.Current == null) return;
+
+            CopyJewelryItemFields(this.Base.Hdr.Current);
+        }
+
+        protected virtual void _(Events.RowSelected<INKitSpecHdr> e, PXRowSelected baseMethod)
+        {
+            if (e.Row is INKitSpecHdr row)
+            {
+                SetVisibleRevisionID();
+
+                var baseMetalType = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
+                SetReadOnlyItemCostSpecificationFields(e.Cache, ASCIStarCostSpecification.Current, baseMetalType);
+            }
+        }
+        #endregion
+
+        #region ASCIStarItemWeightCostSpec Events
+        protected virtual void _(Events.FieldUpdated<ASCIStarItemWeightCostSpec, ASCIStarItemWeightCostSpec.goldGrams> e)
+        {
+            if (e.Row is ASCIStarItemWeightCostSpec row)
+            {
+                if (JewelryItemView.Current != null)
+                {
+                    var value = ASCIStarMetalType.GetGoldTypeValue(JewelryItemView.Current?.MetalType);
+                    var result = row?.GoldGrams * (value / 24);
+
+                    e.Cache.SetValueExt<ASCIStarItemWeightCostSpec.fineGoldGrams>(row, result);
+                }
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<ASCIStarItemWeightCostSpec, ASCIStarItemWeightCostSpec.fineGoldGrams> e)
+        {
+            if (e.Row is ASCIStarItemWeightCostSpec row)
+            {
+                UpdateCommodityCostMetal(e.Cache, Base.Hdr.Current, row);
+                var value = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
+                var result = (decimal?)e.NewValue * 24 / value;
+                if (result != row.GoldGrams)
+                {
+                    row.GoldGrams = result;
+                }
+            }
+        }
+        #endregion
+
+        #region JewelryItem Events
+        protected virtual void _(Events.FieldUpdated<ASCIStarINKitSpecJewelryItem, ASCIStarINKitSpecJewelryItem.metalType> e)
+        {
+            if (e.Row is ASCIStarINKitSpecJewelryItem row)
+            {
+                var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
+                SetMetalGramsToZero(result, e.Cache, this.ASCIStarCostSpecification.Current);
+            }
+        }
+        #endregion
+
         #endregion
 
         #region ServiceMethods
@@ -578,7 +631,81 @@ namespace ASCISTARCustom.PDS
             var inSetupExt = inSetup?.GetExtension<ASCIStarINSetupExt>();
             PXUIFieldAttribute.SetVisible<INKitSpecHdr.revisionID>(this.Base.Hdr.Cache, this.Base.Hdr.Current, inSetupExt?.UsrIsPDSTenant == true);
         }
-       
+        
+        private void SetReadOnlyItemCostSpecificationFields(PXCache cache, ASCIStarItemWeightCostSpec current, bool? baseMetalType)
+        {
+            if (baseMetalType == null)
+            {
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.fineGoldGrams>(cache, current, true);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.fineSilverGrams>(cache, current, true);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.goldGrams>(cache, current, true);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.silverGrams>(cache, current, true);
+            }
+            else
+            {
+                bool isReadOnly = baseMetalType == true;
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.goldGrams>(cache, current, !isReadOnly);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.fineGoldGrams>(cache, current, !isReadOnly);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.silverGrams>(cache, current, isReadOnly);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.fineSilverGrams>(cache, current, isReadOnly);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarItemWeightCostSpec.metalLossPct>(cache, current, !isReadOnly);
+            }
+        }
+
+        private void SetMetalGramsToZero(bool? baseMetalType, PXCache cache, ASCIStarItemWeightCostSpec current)
+        {
+            switch (baseMetalType)
+            {
+                case true:
+                    {
+                        cache.SetValueExt<ASCIStarItemWeightCostSpec.silverGrams>(current, decimal.Zero);
+                        break;
+                    }
+                case false:
+                    {
+                        cache.SetValueExt<ASCIStarItemWeightCostSpec.goldGrams>(current, decimal.Zero);
+                        cache.SetValueExt<ASCIStarItemWeightCostSpec.increment>(current, 0.5m);
+                        break;
+                    }
+                default:
+                    {
+                        cache.SetValueExt<ASCIStarItemWeightCostSpec.silverGrams>(current, decimal.Zero);
+                        cache.SetValueExt<ASCIStarItemWeightCostSpec.goldGrams>(current, decimal.Zero);
+                        break;
+                    }
+            }
+            cache.SetValueExt<ASCIStarItemWeightCostSpec.landedCost>(current, decimal.Zero);
+            cache.SetValueExt<ASCIStarItemWeightCostSpec.unitCost>(current, decimal.Zero);
+            cache.SetValueExt<ASCIStarItemWeightCostSpec.preciousMetalCost>(current, decimal.Zero);
+            cache.SetValueExt<ASCIStarItemWeightCostSpec.metalLossPct>(current, decimal.Zero);
+            cache.SetValueExt<ASCIStarItemWeightCostSpec.surchargePct>(current, decimal.Zero);
+        }
+
+        private void UpdateCommodityCostMetal(PXCache cache, INKitSpecHdr kitSpecHdr, ASCIStarItemWeightCostSpec current)
+        {
+            if ((current.SilverGrams == null || current.SilverGrams == 0.0m) && (current.GoldGrams == null || current.GoldGrams == 0.0m)) return;
+            
+            var jewelryCostProvider = CreateCostBuilder(current);
+
+            current.PreciousMetalCost = jewelryCostProvider.CalculatePreciousMetalCost();
+            cache.SetValueExt<ASCIStarItemWeightCostSpec.preciousMetalCost>(current, current.PreciousMetalCost);
+
+            current.Increment = jewelryCostProvider.CalculateGoldIncrementValue(current);
+        }
+        private ASCIStarCostBuilder CreateCostBuilder(ASCIStarItemWeightCostSpec currentRow)
+        {
+            var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+            if (defaultVendor != null)
+            {
+                return new ASCIStarCostBuilder(this.Base)
+                            .WithInventoryItem(currentRow)
+                            .WithPOVendorInventory(defaultVendor)
+                            .WithINJewelryItem(this.JewelryItemView.Current)
+                            .Build();
+            }
+
+            throw new PXSetPropertyException("No default vendor on Vendors tab");
+        }
         #endregion Helpers Methods
     }
 }
