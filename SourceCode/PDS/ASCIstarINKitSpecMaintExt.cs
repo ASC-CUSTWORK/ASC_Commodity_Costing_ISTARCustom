@@ -149,42 +149,17 @@ namespace ASCISTARCustom.PDS
             if (row == null || this.Base.Hdr.Current == null) return;
 
             CopyJewelryItemFields(this.Base.Hdr.Current);
+            
         }
 
-        protected virtual void POVendorInventory_UsrVendorDefault_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
+        protected virtual void _(Events.RowSelected<INKitSpecHdr> e, PXRowSelected baseMethod)
         {
-            MethodBase m = MethodBase.GetCurrentMethod();
-            PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
-
-            if (InvokeBaseHandler != null)
-                InvokeBaseHandler(cache, e);
-
-            POVendorInventory row = e.Row as POVendorInventory;
-            if (row != null)
+            if (e.Row is INKitSpecHdr row)
             {
-                ASCIStarPOVendorInventoryExt ext = row.GetExtension<ASCIStarPOVendorInventoryExt>();
-                bool UseVendor = (ext.UsrVendorDefault == true);
-                if (UseVendor)
-                {
-                    ext.UsrCommodityPrice = 0.00m; //REPLACE WITH MARKET CALL
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommodityPrice>(cache, row, !UseVendor);
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommodityIncrement>(cache, row, !UseVendor);
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommoditySurchargePct>(cache, row, !UseVendor);
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommodityLossPct>(cache, row, !UseVendor);
-                    //Replace with Vendor Defaults
-                }
-                else
-                {
-
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommodityPrice>(cache, row, !UseVendor);
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommodityIncrement>(cache, row, !UseVendor);
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommoditySurchargePct>(cache, row, !UseVendor);
-                    PXUIFieldAttribute.SetEnabled<ASCIStarPOVendorInventoryExt.usrCommodityLossPct>(cache, row, !UseVendor);
-                }
-
+                SetVisibleRevisionID();
             }
         }
-        
+
         protected void INKitSpecStkDet_DfltCompQty_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
         {
             MethodBase m = MethodBase.GetCurrentMethod();
@@ -249,36 +224,7 @@ namespace ASCISTARCustom.PDS
                     cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(e.Row, null);
                     cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(e.Row, null);
                 }
-
-
             }
-        }
-
-        protected void INKitSpecHdr_RevisionID_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e, PXFieldDefaulting InvokeBaseHandler)
-
-        {
-            MethodBase m = MethodBase.GetCurrentMethod();
-            PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
-
-
-            e.NewValue = ASCIStarCostingType.StandardCost;
-            INKitSpecHdr row = e.Row as INKitSpecHdr;
-            if (row == null)
-                return;
-
-            SetVisibleRevisionID();
-        }
-
-        protected void INKitSpecHdr_RevisionID_FieldSelecting(PXCache cache, PXFieldSelectingEventArgs e, PXFieldSelecting InvokeBaseHandler)
-        {
-            MethodBase m = MethodBase.GetCurrentMethod();
-            PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
-
-            INKitSpecHdr row = e.Row as INKitSpecHdr;
-            if (row == null)
-                return;
-
-            SetVisibleRevisionID();
         }
 
         protected void INKitSpecHdr_UsrUnitCost_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e, PXFieldDefaulting InvokeBaseHandler)
@@ -524,70 +470,6 @@ namespace ASCISTARCustom.PDS
 
 
         }
-        
-        protected void INKitSpecNonStkDet_UsrUnitCost_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
-        {
-            MethodBase m = MethodBase.GetCurrentMethod();
-            PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
-
-
-            if (InvokeBaseHandler != null)
-                InvokeBaseHandler(cache, e);
-            var row = (INKitSpecNonStkDet)e.Row;
-            if (row == null) return;
-            ASCIStarINKitSpecNonStkDetExt ext = cache.GetExtension<ASCIStarINKitSpecNonStkDetExt>(row);
-
-            ext.UsrExtCost = ext.UsrUnitCost * row.DfltCompQty;
-          
-            decimal Rollup = 0.0m;
-
-            if (e.Row != null)
-            {
-
-                foreach (PXResult<INKitSpecNonStkDet, InventoryItem> r in
-                    SpecOverhead.Select(cache))
-                {
-
-                    ASCIStarINKitSpecNonStkDetExt stkDetExt = cache.GetExtension<ASCIStarINKitSpecNonStkDetExt>(r);
-                    if (stkDetExt.UsrCostRollupType == ext.UsrCostRollupType)
-                        Rollup = Rollup + stkDetExt.UsrExtCost.Value;
-                    PXTrace.WriteInformation($"Rollup:{Rollup}");
-                }
-                PXTrace.WriteInformation($"{ext.UsrCostRollupType}");
-
-                /*Commodity, Fabrication, Labor, Handling, Shipping, Duty, Other*/
-                switch (ext.UsrCostRollupType ?? ASCIStarCostingType.StandardCost)
-                {
-                    case ASCIStarCostRollupType.Commodity:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrCommodityCost>(cache.Current, Rollup);
-                        break;
-                    case ASCIStarCostRollupType.Materials:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrOtherMaterialCost>(cache.Current, Rollup);
-                        break;
-                    case ASCIStarCostRollupType.Packaging:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrPackagingCost>(cache.Current, Rollup);
-                        break;
-                    case ASCIStarCostRollupType.Fabrication:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(cache.Current, Rollup);
-                        break;
-                    case ASCIStarCostRollupType.Labor:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrLaborCost>(cache.Current, Rollup);
-                        break;
-                    case ASCIStarCostRollupType.Handling:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrHandlingCost>(cache.Current, Rollup);
-                        break;
-                    case ASCIStarCostRollupType.Duty:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrDutyCost>(cache.Current, Rollup);
-                        break;
-                    case ASCIStarCostRollupType.Other:
-                        cache.SetValueExt<ASCIStarINInventoryItemExt.usrOtherCost>(cache.Current, Rollup);
-                        break;
-                    default: /* CostingType.StandardCost */
-                        break;
-                }
-
-            }
-        }
        
         protected void INKitSpecStkDet_InventoryID_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
         {
@@ -620,41 +502,9 @@ namespace ASCISTARCustom.PDS
                 if (ext == null)
                     return;
                 ext.UsrContractWgt = row.DfltCompQty;
-
             }
-
         }
 
-        protected void INKitSpecStkDet_RowInserted(PXCache cache, PXRowInsertedEventArgs e, PXRowInserted InvokeBaseHandler)
-        {
-            MethodBase m = MethodBase.GetCurrentMethod();
-            PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
-
-            if (InvokeBaseHandler != null)
-                InvokeBaseHandler(cache, e);
-            var row = (INKitSpecStkDet)e.Row;
-            if (row == null) return;
-            PXTrace.WriteInformation("Row Exists");
-
-            ASCIStarINKitSpecStkDetExt ext = cache.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
-            PXTrace.WriteInformation("ASCIStarINKitSpecStkDetExt Exists");
-            InventoryItem item = InventoryItem.PK.Find(cache.Graph, row.CompInventoryID);
-            INKitSpecHdr kitItem = INKitSpecHdr.PK.Find(cache.Graph, row.KitInventoryID, row.RevisionID);
-
-            POVendorInventory vendorItem = PXSelect<POVendorInventory, Where<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>, And<POVendorInventory.isDefault, Equal<True>>>>.Select(cache.Graph);
-            int? vendorID = null;
-            if (vendorItem != null && vendorItem.VendorID != null)
-            {
-                PXTrace.WriteInformation($"Found VendorID: {vendorItem.VendorID}");
-                vendorID = vendorItem.VendorID;
-            }
-            //if (item != null)
-            //{
-            //    ASCIStarMarketCostProvider.JewelryCost costHelper = new ASCIStarMarketCostProvider.JewelryCost(cache.Graph, item, 0.000000m);
-                
-            //}
-        }
-        
         protected virtual void INKitSpecNonStkDet_UsrCostingType_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e, PXFieldDefaulting InvokeBaseHandler)
         {
             MethodBase m = MethodBase.GetCurrentMethod();
@@ -676,7 +526,6 @@ namespace ASCISTARCustom.PDS
             e.NewValue = itemExt.UsrCostingType ?? ASCIStarCostingType.StandardCost;
             PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecNonStkDetExt.usrCostingType>(cache, row, true);
         }
-       
         #endregion
 
         #region ServiceMethods

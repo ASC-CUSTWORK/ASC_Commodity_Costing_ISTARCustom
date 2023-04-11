@@ -298,7 +298,7 @@
             </AddItem>
             <AddItem>
                 <PXTabItem TypeFullName="PX.Web.UI.PXTabItem">
-                    <Prop Key="Text" Value="Costing" />
+                    <Prop Key="Text" Value="Vendor" />
                     <Children Key="Template">
                         <AddItem>
                             <PXGrid TypeFullName="PX.Web.UI.PXGrid">
@@ -780,7 +780,7 @@
                                         <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
                                             <Prop Key="ID" Value="ASCIStarPurchaseCostNumberEdit" />
-                                            <Prop Key="DataField" Value="PurchaseCost" />
+                                            <Prop Key="DataField" Value="UnitCost" />
                                             <Prop Key="CommitChanges" Value="True" />
                                             <Prop Key="Border.Bottom.Style" Value="Groove" />
                                             <Prop Key="Border.Bottom.Color" Value="Red" />
@@ -790,7 +790,7 @@
                                         <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
                                             <Prop Key="ID" Value="ASCIStarMetalCostNumberEdit" />
-                                            <Prop Key="DataField" Value="MetalCost" />
+                                            <Prop Key="DataField" Value="PreciousMetalCost" />
                                             <Prop Key="CommitChanges" Value="True" />
                                         </PXNumberEdit>
                                     </AddItem>
@@ -839,7 +839,7 @@
                                         <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
                                             <Prop Key="ID" Value="ASCIStarUnitCostNumberEdit" />
-                                            <Prop Key="DataField" Value="UnitCost" />
+                                            <Prop Key="DataField" Value="LandedCost" />
                                             <Prop Key="CommitChanges" Value="True" />
                                             <Prop Key="Border.Bottom.Color" Value="Green" />
                                             <Prop Key="Border.Bottom.Style" Value="Groove" />

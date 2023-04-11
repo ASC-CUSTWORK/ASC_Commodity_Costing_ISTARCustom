@@ -112,15 +112,6 @@ namespace ASCISTARCustom.Inventory.DAC
         public abstract class surchargePct : PX.Data.BQL.BqlDecimal.Field<surchargePct> { }
         #endregion
 
-        //#region SurchargeType
-        //[PXDBString(1, IsFixed = true, InputMask = "")]
-        //[ASCIStarContractSurchargeType.List]
-        //[PXDefault(ASCIStarContractSurchargeType.PercentageAmt, PersistingCheck = PXPersistingCheck.Null)]
-        //[PXUIField(DisplayName = "Surcharge Type")]
-        //public virtual string SurchargeType { get; set; }
-        //public abstract class surchargeType : PX.Data.BQL.BqlString.Field<surchargeType> { }
-        //#endregion
-
         #region Increment
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
@@ -147,18 +138,18 @@ namespace ASCISTARCustom.Inventory.DAC
         public abstract class costingType : PX.Data.BQL.BqlString.Field<costingType> { }
         #endregion
 
-        #region PurchaseCost
+        #region UnitCost
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Purchase Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        public virtual decimal? PurchaseCost { get; set; }
-        public abstract class purchaseCost : PX.Data.BQL.BqlDecimal.Field<purchaseCost> { }
+        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        public virtual decimal? UnitCost { get; set; }
+        public abstract class unitCost : PX.Data.BQL.BqlDecimal.Field<unitCost> { }
         #endregion
 
         #region CommodityCost
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Metal Cost")]
-        public virtual decimal? MetalCost { get; set; }
-        public abstract class metalCost : PX.Data.BQL.BqlDecimal.Field<metalCost> { }
+        [PXUIField(DisplayName = "Precious Metal Cost")]
+        public virtual decimal? PreciousMetalCost { get; set; }
+        public abstract class preciousMetalCost : PX.Data.BQL.BqlDecimal.Field<preciousMetalCost> { }
         #endregion
 
         #region FabricationCost
@@ -203,9 +194,9 @@ namespace ASCISTARCustom.Inventory.DAC
 
         #region UnitCost
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        public virtual decimal? UnitCost { get; set; }
-        public abstract class unitCost : PX.Data.BQL.BqlDecimal.Field<unitCost> { }
+        [PXUIField(DisplayName = "Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        public virtual decimal? LandedCost { get; set; }
+        public abstract class landedCost : PX.Data.BQL.BqlDecimal.Field<landedCost> { }
         #endregion
 
         #region FreightCost

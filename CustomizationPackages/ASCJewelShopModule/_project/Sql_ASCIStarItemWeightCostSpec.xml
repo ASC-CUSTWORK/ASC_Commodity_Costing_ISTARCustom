@@ -15,7 +15,7 @@
   <col name="Increment" type="Decimal(19,6)" nullable="true" />
   <col name="RollupType" type="NVarChar(1)" nullable="true" />
   <col name="CostingType" type="NVarChar(1)" nullable="true" />
-  <col name="MetalCost" type="Decimal(19,6)" nullable="true" />
+  <col name="PreciousMetalCost" type="Decimal(19,6)" nullable="true" />
   <col name="FabricationCost" type="Decimal(19,6)" nullable="true" />
   <col name="PackagingCost" type="Decimal(19,6)" nullable="true" />
   <col name="LaborCost" type="Decimal(19,6)" nullable="true" />
