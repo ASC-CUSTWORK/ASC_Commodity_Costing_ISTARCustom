@@ -5,7 +5,7 @@ namespace ASCISTARCustom.Cost.Descriptor
 {
     public class ASCIStarCostRollupType
     {
-        public const string Commodity = "C";
+        public const string PreciousMetal = "C";
         public const string Materials = "M";
         public const string Fabrication = "F";
         public const string Labor = "L";
@@ -15,10 +15,10 @@ namespace ASCISTARCustom.Cost.Descriptor
         public const string Packaging = "P";
         public const string Other = "O";
 
-        public const string MessageCommodity = "Commodity";
+        public const string MessagePreciousMetal = "Precious Metal";
         public const string MessageMaterials = "Materials";
         public const string MessageFabrication = "Fabrication";
-        public const string MessageLabor = "Labor";
+        public const string MessageLabor = "In-house Labor";
         public const string MessageHandling = "Handling";
         public const string MessageShipping = "Shipping";
         public const string MessageDuty = "Duty";
@@ -29,28 +29,28 @@ namespace ASCISTARCustom.Cost.Descriptor
         {
             private static readonly string[] _values = new string[] 
             { 
-                Commodity, 
+                PreciousMetal, 
                 Materials, 
-                Fabrication, 
+                Fabrication,
+                Packaging,
+                Shipping,
+                Duty,
                 Labor, 
-                Handling, 
-                Shipping, 
-                Duty, 
-                Packaging, 
-                Other 
+                Handling,
+                Other
             };
 
             private static readonly string[] _lables = new string[]
             {
-                MessageCommodity, 
+                MessagePreciousMetal, 
                 MessageMaterials, 
-                MessageFabrication, 
+                MessageFabrication,
+                MessagePackaging,
+                MessageShipping,
+                MessageDuty,
                 MessageLabor, 
-                MessageHandling, 
-                MessageShipping, 
-                MessageDuty, 
-                MessagePackaging, 
-                MessageOther 
+                MessageHandling,
+                MessageOther
             };
 
             public ListAttribute() : base(_values, _lables) { }
@@ -58,7 +58,7 @@ namespace ASCISTARCustom.Cost.Descriptor
 
         public class commodity : PX.Data.BQL.BqlString.Constant<commodity>
         {
-            public commodity() : base(Commodity) { }
+            public commodity() : base(PreciousMetal) { }
         }
 
         public class materials : PX.Data.BQL.BqlString.Constant<materials>

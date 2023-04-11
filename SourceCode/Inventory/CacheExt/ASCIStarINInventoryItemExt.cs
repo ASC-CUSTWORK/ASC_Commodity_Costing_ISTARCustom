@@ -5,7 +5,7 @@ using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
-    public sealed class ASCIStarINInventoryItemExt : PXCacheExtension<InventoryItem>
+    public class ASCIStarINInventoryItemExt : PXCacheExtension<InventoryItem>
     {
         public static bool IsActive() => true;
 
@@ -130,6 +130,14 @@ namespace ASCISTARCustom
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
         #endregion
 
+        #region UsrMatrixStep
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Matrix Step")]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.NullOrBlank)]
+        public virtual decimal? UsrMatrixStep { get; set; }
+        public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
+        #endregion
+
         #region UsrContractSurcharge
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
@@ -145,12 +153,12 @@ namespace ASCISTARCustom
         public abstract class usrCommodityCost : PX.Data.BQL.BqlDecimal.Field<usrCommodityCost> { }
         #endregion
 
-        #region UsrOtherMaterialCost
-        [PXUIField(DisplayName = "Other Materials Cost")]
+        #region UsrMaterialsCost
+        [PXUIField(DisplayName = "Materials Cost")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        public Decimal? UsrOtherMaterialCost { get; set; }
-        public abstract class usrOtherMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrOtherMaterialCost> { }
+        public Decimal? UsrMaterialsCost { get; set; }
+        public abstract class usrMaterialsCost : PX.Data.BQL.BqlDecimal.Field<usrMaterialsCost> { }
         #endregion
 
         #region UsrFabricationCost

@@ -317,14 +317,14 @@ namespace ASCISTARCustom.PDS
                 /*Commodity, Fabrication, Labor, Handling, Shipping, Duty, Other*/
                 switch (ext.UsrCostRollupType)
                 {
-                    case ASCIStarCostRollupType.Commodity:
+                    case ASCIStarCostRollupType.PreciousMetal:
                         ext.UsrCommodityCost = Rollup;
                         break;
                     case ASCIStarCostRollupType.Fabrication:
                         ext.UsrFabricationCost = Rollup;
                         break;
                     case ASCIStarCostRollupType.Materials:
-                        ext.UsrOtherMaterialCost = Rollup;
+                        ext.UsrMaterialsCost = Rollup;
                         break;
                     case ASCIStarCostRollupType.Packaging:
                         ext.UsrPackagingCost = Rollup;
@@ -385,7 +385,7 @@ namespace ASCISTARCustom.PDS
                 /*Commodity, Fabrication, Labor, Handling, Shipping, Duty, Other*/
                 switch (ext.UsrCostRollupType)
                 {
-                    case ASCIStarCostRollupType.Commodity:
+                    case ASCIStarCostRollupType.PreciousMetal:
                         ext.UsrCommodityCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrCommodityCost>(e.Row, null);
                         break;
@@ -394,8 +394,8 @@ namespace ASCISTARCustom.PDS
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrFabricationCost>(e.Row, null);
                         break;
                     case ASCIStarCostRollupType.Materials:
-                        ext.UsrOtherMaterialCost = Rollup;
-                        cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrOtherMaterialCost>(e.Row, null);
+                        ext.UsrMaterialsCost = Rollup;
+                        cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrMaterialsCost>(e.Row, null);
                         break;
                     case ASCIStarCostRollupType.Packaging:
                         ext.UsrPackagingCost = Rollup;
@@ -426,36 +426,36 @@ namespace ASCISTARCustom.PDS
         
         protected void INKitSpecNonStkDet_UsrCostingType_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
         {
-            MethodBase m = MethodBase.GetCurrentMethod();
-            PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
+            //MethodBase m = MethodBase.GetCurrentMethod();
+            //PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
 
-            if (InvokeBaseHandler != null)
-                InvokeBaseHandler(cache, e);
-            var row = (INKitSpecNonStkDet)e.Row;
-            if (row == null) return;
+            //if (InvokeBaseHandler != null)
+            //    InvokeBaseHandler(cache, e);
+            //var row = (INKitSpecNonStkDet)e.Row;
+            //if (row == null) return;
 
-            ASCIStarINKitSpecNonStkDetExt ext = row.GetExtension<ASCIStarINKitSpecNonStkDetExt>();
-            PXTrace.WriteInformation($"e.NewValue:{ext.UsrCostingType}");
-            if (ASCIStarCostingType.WeightCost == (string)ext.UsrCostingType)
-            {
-                row.DfltCompQty = 1.00m;
-                decimal qty = 0.00m;
-                row.UOM = "GRAM";
-                foreach (INKitSpecStkDet r in
-                    SpecCommodity.Select(cache))
-                {
-                    InventoryItem item = InventoryItem.PK.Find(cache.Graph, r.CompInventoryID);
-                    PXTrace.WriteInformation($"item:{item.InventoryCD}");
-                    if (r.UOM == "DWT")
-                        qty += ((r.DfltCompQty ?? 0.00m) * 1.555170m);
-                    else
-                        qty += (r.DfltCompQty ?? 0.00m);
+            //ASCIStarINKitSpecNonStkDetExt ext = row.GetExtension<ASCIStarINKitSpecNonStkDetExt>();
+            //PXTrace.WriteInformation($"e.NewValue:{ext.UsrCostingType}");
+            //if (/*ASCIStarCostingType.WeightCost == (string)ext.UsrCostingType*/)
+            //{
+            //    row.DfltCompQty = 1.00m;
+            //    decimal qty = 0.00m;
+            //    row.UOM = "GRAM";
+            //    foreach (INKitSpecStkDet r in
+            //        SpecCommodity.Select(cache))
+            //    {
+            //        InventoryItem item = InventoryItem.PK.Find(cache.Graph, r.CompInventoryID);
+            //        PXTrace.WriteInformation($"item:{item.InventoryCD}");
+            //        if (r.UOM == "DWT")
+            //            qty += ((r.DfltCompQty ?? 0.00m) * 1.555170m);
+            //        else
+            //            qty += (r.DfltCompQty ?? 0.00m);
 
-                }
-                row.DfltCompQty = qty;
-            }
-            else
-                row.UOM = "EA";
+            //    }
+            //    row.DfltCompQty = qty;
+            //}
+            //else
+            //    row.UOM = "EA";
 
 
         }

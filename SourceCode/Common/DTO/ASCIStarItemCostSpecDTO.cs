@@ -56,7 +56,7 @@ namespace ASCISTARCustom.Common.DTO
                 FabricationCost = valueExt.UsrFabricationCost,
                 LandedCost = valueExt.UsrUnitCost,
                 PackagingCost = valueExt.UsrPackagingCost,
-                OtherMaterialCost = valueExt.UsrOtherMaterialCost,
+                OtherMaterialCost = valueExt.UsrMaterialsCost,
                 FreightCost = valueExt.UsrFreightCost,
                 HandlingCost = valueExt.UsrHandlingCost,
                 LaborCost = valueExt.UsrLaborCost,

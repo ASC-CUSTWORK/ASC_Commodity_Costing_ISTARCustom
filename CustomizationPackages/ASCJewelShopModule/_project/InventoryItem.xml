@@ -25,5 +25,6 @@
     <Column TableName="InventoryItem" ColumnName="UsrContractPrice" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrPackagingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrDutyCostPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrOtherMaterialCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrMaterialsCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
 </Table>

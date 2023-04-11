@@ -50,6 +50,19 @@ namespace ASCISTARCustom
 
         #region InventoryItem Events
 
+        protected virtual void _(Events.RowSelecting<InventoryItem> e, PXRowSelecting baseEvent)
+        {
+            if (e.Row == null) return;
+            baseEvent(e.Cache, e.Args);
+
+            var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(e.Row);
+            using (new PXConnectionScope())
+            {
+                //    this.Base.Item.Current = e.Row;
+                //  UpdateCommodityCostMetal(e.Cache, e.Row, rowExt);
+            }
+        }
+
         protected virtual void _(Events.RowSelected<InventoryItem> e)
         {
             var row = e.Row;
@@ -57,6 +70,9 @@ namespace ASCISTARCustom
 
             bool isVisible = IsVisibleFileds(row.ItemClassID);
             SetVisibleJewelFields(e.Cache, row, isVisible);
+
+            if (this.JewelryItemView.Current == null)
+                this.JewelryItemView.Current = this.JewelryItemView.Select();
 
             bool? baseMetalType = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
             SetReadOnlyJewelFields(e.Cache, row, baseMetalType);
@@ -97,6 +113,10 @@ namespace ASCISTARCustom
 
                 e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, e.NewValue, new PXSetPropertyException("Surcharge can not be less 0%!"));
             }
+            else
+            {
+                e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, e.NewValue, null);
+            }
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, InventoryItem.itemClassID> e)
@@ -122,10 +142,10 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null || this.JewelryItemView.Current == null) return;
 
-            var value = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
+            var mult = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(this.JewelryItemView.Current?.MetalType);
 
             ASCIStarINInventoryItemExt rowExt = row.GetExtension<ASCIStarINInventoryItemExt>();
-            decimal? pricingGRAMGold = rowExt?.UsrActualGRAMGold * (value / 24);
+            decimal? pricingGRAMGold = rowExt?.UsrActualGRAMGold * mult;
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(row, pricingGRAMGold);
         }
 
@@ -149,11 +169,11 @@ namespace ASCISTARCustom
 
             UpdateCommodityCostMetal(e.Cache, row, rowExt);
 
-            var value = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
-            var result = (decimal?)e.NewValue * 24 / value;
-            if (result != rowExt.UsrActualGRAMGold)
+            var valueMult = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(this.JewelryItemView.Current?.MetalType);
+            var actualGRAMGold = (decimal?)e.NewValue / valueMult;
+            if (actualGRAMGold != rowExt.UsrActualGRAMGold)
             {
-                rowExt.UsrActualGRAMGold = result;
+                rowExt.UsrActualGRAMGold = actualGRAMGold;
             }
         }
 
@@ -166,11 +186,16 @@ namespace ASCISTARCustom
 
             UpdateCommodityCostMetal(e.Cache, row, rowExt);
 
-            var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
-            var result = (decimal?)e.NewValue / value;
-            if (result != rowExt.UsrActualGRAMSilver)
+            var valueMult = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
+            decimal? actualGRAMSilver = 0.0m;
+
+            if (actualGRAMSilver != null && valueMult != 0.0m)
             {
-                rowExt.UsrActualGRAMSilver = result;
+                actualGRAMSilver = (decimal?)e.NewValue / valueMult;
+            }
+            if (actualGRAMSilver != rowExt.UsrActualGRAMSilver)
+            {
+                rowExt.UsrActualGRAMSilver = actualGRAMSilver;
             }
         }
 
@@ -235,7 +260,7 @@ namespace ASCISTARCustom
             SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrCommodityLossPct>(e.NewValue);
         }
 
-        protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrOtherMaterialCost> e)
+        protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrMaterialsCost> e)
         {
             var row = e.Row;
             if (row == null) return;
@@ -497,7 +522,8 @@ namespace ASCISTARCustom
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrDutyCostPct>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrHandlingCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPackagingCost>(cache, row, isVisible);
-            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrOtherMaterialCost>(cache, row, isVisible);
+            //  PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrOtherCost>(cache, row, isVisible);
+            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrMaterialsCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, isVisible);
@@ -544,6 +570,7 @@ namespace ASCISTARCustom
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrHandlingCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFreightCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrDutyCost>(cache, row, isDefaultVendor);
+            //    PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrOtherCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrUnitCost>(cache, row, isDefaultVendor);
         }
 
