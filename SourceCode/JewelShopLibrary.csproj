@@ -145,10 +145,9 @@
     <Compile Include="Inventory\DAC\ASCIStarItemWeightCostSpec.cs" />
     <Compile Include="Inventory\GraphExt\InventoryItemMaintExt.cs" />
     <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
-    <Compile Include="PDS\ASCIstarINKitSpecMaintExt.cs" />
+    <Compile Include="PDS\ASCIStarINKitSpecMaintExt.cs" />
     <Compile Include="PDS\ASCIstarInventoryItemMaintExt.cs" />
     <Compile Include="PDS\CacheExt\ASCIStarINKitSpecJewelryItem.cs" />
-    <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrAttribute.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrExt.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrVendorQuote.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecNonStkDetExt.cs" />

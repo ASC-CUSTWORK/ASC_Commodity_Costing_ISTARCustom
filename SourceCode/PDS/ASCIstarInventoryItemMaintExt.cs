@@ -58,7 +58,7 @@ namespace ASCISTARCustom
             bool isVisible = IsVisibleFileds(row.ItemClassID);
             SetVisibleJewelFields(e.Cache, row, isVisible);
 
-            bool? baseMetalType = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current.MetalType);
+            bool? baseMetalType = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
             SetReadOnlyJewelFields(e.Cache, row, baseMetalType);
 
             PXUIFieldAttribute.SetRequired<ASCIStarINJewelryItem.metalType>(this.JewelryItemView.Cache, isVisible);
@@ -89,7 +89,7 @@ namespace ASCISTARCustom
             if (row == null) return;
             if ((decimal?)e.NewValue < 0.0m)
             {
-                var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current.MetalType);
+                var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
                 if (result == true)
                 {
                     e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractIncrement>(row, 0.0m, new PXSetPropertyException("Please, increase increment"));
@@ -122,7 +122,7 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null || this.JewelryItemView.Current == null) return;
 
-            var value = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current.MetalType);
+            var value = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
 
             ASCIStarINInventoryItemExt rowExt = row.GetExtension<ASCIStarINInventoryItemExt>();
             decimal? pricingGRAMGold = rowExt?.UsrActualGRAMGold * (value / 24);
@@ -134,7 +134,7 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null || this.JewelryItemView.Current == null) return;
 
-            var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current.MetalType);
+            var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
 
             var rowExt = row.GetExtension<ASCIStarINInventoryItemExt>();
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(row, rowExt?.UsrActualGRAMSilver * value);
@@ -149,7 +149,7 @@ namespace ASCISTARCustom
 
             UpdateCommodityCostMetal(e.Cache, row, rowExt);
 
-            var value = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current.MetalType);
+            var value = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
             var result = (decimal?)e.NewValue * 24 / value;
             if (result != rowExt.UsrActualGRAMGold)
             {
@@ -166,7 +166,7 @@ namespace ASCISTARCustom
 
             UpdateCommodityCostMetal(e.Cache, row, rowExt);
 
-            var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current.MetalType);
+            var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
             var result = (decimal?)e.NewValue / value;
             if (result != rowExt.UsrActualGRAMSilver)
             {
@@ -200,7 +200,7 @@ namespace ASCISTARCustom
             if (row == null) return;
 
             var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
-            var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current.MetalType);
+            var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
             if (result == true)
             {
                 UpdateSurcharge(e.Cache, row, rowExt);
@@ -350,7 +350,7 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null) return;
 
-            var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current.MetalType);
+            var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
             SetReadOnlyJewelFields(this.Base.Item.Cache, this.Base.Item.Current, result);
             SetMetalGramsToZero(result);
 
@@ -379,7 +379,7 @@ namespace ASCISTARCustom
             Vendor vendor = Vendor.PK.Find(Base, (int?)e.NewValue);
 
             ASCIStarVendorExt vendorExt = vendor?.GetExtension<ASCIStarVendorExt>();
-            var inventoryCD = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current.MetalType) == true ? "24K" : "SSS";
+            var inventoryCD = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType) == true ? "24K" : "SSS";
             var inventoryID = SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(Base, inventoryCD)?.TopFirst.InventoryID;
 
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrMarketID>(e.Row, vendorExt.UsrMarketID);
