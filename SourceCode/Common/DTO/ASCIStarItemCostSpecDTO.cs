@@ -22,6 +22,7 @@ namespace ASCISTARCustom.Common.DTO
         public decimal? MetalLossPct { get; set; }
         public decimal? SurchargePct { get; set; }
         public decimal? Increment { get; set; }
+        public decimal? MatrixStep { get; set; }
         public decimal? UnitCost { get; set; }
         public decimal? PreciousMetalCost { get; set; }
         public decimal? FabricationCost { get; set; }
@@ -51,6 +52,7 @@ namespace ASCISTARCustom.Common.DTO
                 MetalLossPct = valueExt.UsrContractLossPct,
                 SurchargePct = valueExt.UsrContractSurcharge,
                 Increment = valueExt.UsrContractIncrement,
+                MatrixStep = valueExt.UsrMatrixStep,
                 UnitCost = valueExt.UsrContractCost,
                 PreciousMetalCost = valueExt.UsrCommodityCost,
                 FabricationCost = valueExt.UsrFabricationCost,
@@ -79,12 +81,13 @@ namespace ASCISTARCustom.Common.DTO
                 MetalLossPct = value.MetalLossPct,
                 SurchargePct = value.SurchargePct,
                 Increment = value.Increment,
+                MatrixStep = value.MatrixStep,
                 UnitCost = value.UnitCost,
                 PreciousMetalCost = value.PreciousMetalCost,
                 FabricationCost = value.FabricationCost,
                 LandedCost = value.UnitCost,
                 PackagingCost = value.PackagingCost,
-                OtherMaterialCost = value.OtherMaterialCost,
+                OtherMaterialCost = value.MaterialCost,
                 FreightCost = value.FreightCost,
                 HandlingCost = value.HandlingCost,
                 LaborCost = value.LaborCost,

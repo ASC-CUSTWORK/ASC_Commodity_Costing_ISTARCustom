@@ -132,10 +132,17 @@ namespace ASCISTARCustom.PDS
         protected void _(Events.CacheAttached<ASCIStarItemWeightCostSpec.inventoryID> cacheAttached) { }
 
         [PXMergeAttributes(Method = MergeMethod.Replace)]
-        [PXDBString(10, IsKey = true, IsUnicode = true, InputMask = ">aaaaaaaaaa")]
+        [PXDBString(10, IsKey = true, IsUnicode = true, InputMask = ">##")]
         [PXDBDefault(typeof(INKitSpecHdr.revisionID))]
         [PXParent(typeof(ASCIStarItemWeightCostSpec.FK.KitSpecificationFK))]
         protected void _(Events.CacheAttached<ASCIStarItemWeightCostSpec.revisionID> cacheAttached) { }
+
+        [PXRemoveBaseAttribute(typeof(PXDBStringAttribute))]
+        [PXRemoveBaseAttribute(typeof(PXDefaultAttribute))]
+        [PXMergeAttributes(Method = MergeMethod.Append)]
+        [PXDBString(10, IsUnicode = true, IsKey = true, InputMask = ">##")]
+        [PXDefault("01")]
+        protected void _(Events.CacheAttached<INKitSpecHdr.revisionID> cacheAttached) { }
         #endregion
 
         #region Actions
@@ -423,42 +430,6 @@ namespace ASCISTARCustom.PDS
 
             }
         }
-        
-        protected void INKitSpecNonStkDet_UsrCostingType_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
-        {
-            //MethodBase m = MethodBase.GetCurrentMethod();
-            //PXTrace.WriteInformation("Executing {0}.{1}", m.ReflectedType.Name, m.Name);
-
-            //if (InvokeBaseHandler != null)
-            //    InvokeBaseHandler(cache, e);
-            //var row = (INKitSpecNonStkDet)e.Row;
-            //if (row == null) return;
-
-            //ASCIStarINKitSpecNonStkDetExt ext = row.GetExtension<ASCIStarINKitSpecNonStkDetExt>();
-            //PXTrace.WriteInformation($"e.NewValue:{ext.UsrCostingType}");
-            //if (/*ASCIStarCostingType.WeightCost == (string)ext.UsrCostingType*/)
-            //{
-            //    row.DfltCompQty = 1.00m;
-            //    decimal qty = 0.00m;
-            //    row.UOM = "GRAM";
-            //    foreach (INKitSpecStkDet r in
-            //        SpecCommodity.Select(cache))
-            //    {
-            //        InventoryItem item = InventoryItem.PK.Find(cache.Graph, r.CompInventoryID);
-            //        PXTrace.WriteInformation($"item:{item.InventoryCD}");
-            //        if (r.UOM == "DWT")
-            //            qty += ((r.DfltCompQty ?? 0.00m) * 1.555170m);
-            //        else
-            //            qty += (r.DfltCompQty ?? 0.00m);
-
-            //    }
-            //    row.DfltCompQty = qty;
-            //}
-            //else
-            //    row.UOM = "EA";
-
-
-        }
        
         protected void INKitSpecStkDet_InventoryID_FieldUpdated(PXCache cache, PXFieldUpdatedEventArgs e, PXFieldUpdated InvokeBaseHandler)
         {
@@ -698,7 +669,7 @@ namespace ASCISTARCustom.PDS
                 return new ASCIStarCostBuilder(this.Base)
                             .WithInventoryItem(currentRow)
                             .WithPOVendorInventory(defaultVendor)
-                            .WithINJewelryItem(this.JewelryItemView.Current)
+                            //.WithINJewelryItem(this.JewelryItemView.Current)
                             .Build();
             }
 

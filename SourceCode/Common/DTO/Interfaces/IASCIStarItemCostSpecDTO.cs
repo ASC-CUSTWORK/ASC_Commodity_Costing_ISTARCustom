@@ -12,6 +12,7 @@
         decimal? MetalLossPct { get; set; }
         decimal? SurchargePct { get; set; }
         decimal? Increment { get; set; }
+        decimal? MatrixStep { get; set; }
         decimal? UnitCost { get; set; }
         decimal? PreciousMetalCost { get; set; }
         decimal? FabricationCost { get; set; }

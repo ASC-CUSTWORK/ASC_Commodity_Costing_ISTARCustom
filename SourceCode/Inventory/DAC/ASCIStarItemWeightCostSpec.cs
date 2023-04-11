@@ -120,6 +120,14 @@ namespace ASCISTARCustom.Inventory.DAC
         public abstract class increment : PX.Data.BQL.BqlDecimal.Field<increment> { }
         #endregion
 
+        #region MatrixStep
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Matrix Step")]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public virtual decimal? MatrixStep { get; set; }
+        public abstract class matrixStep : PX.Data.BQL.BqlDecimal.Field<matrixStep> { }
+        #endregion
+
         #region RollupType
         [PXDBString(1, IsFixed = true, InputMask = "")]
         [ASCIStarCostRollupType.List]
@@ -176,12 +184,12 @@ namespace ASCISTARCustom.Inventory.DAC
         public abstract class laborCost : PX.Data.BQL.BqlDecimal.Field<laborCost> { }
         #endregion
 
-        #region OtherMaterialCost
+        #region MaterialCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Null)]
-        [PXUIField(DisplayName = "Other Materials Cost")]
-        public virtual decimal? OtherMaterialCost { get; set; }
-        public abstract class otherMaterialCost : PX.Data.BQL.BqlDecimal.Field<otherMaterialCost> { }
+        [PXUIField(DisplayName = "Materials Cost")]
+        public virtual decimal? MaterialCost { get; set; }
+        public abstract class materialCost : PX.Data.BQL.BqlDecimal.Field<materialCost> { }
         #endregion
 
         #region OtherCost
