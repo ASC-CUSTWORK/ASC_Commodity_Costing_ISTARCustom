@@ -228,10 +228,10 @@ namespace ASCISTARCustom.PDS
                 case ASCIStarCostRollupType.Materials:
                     rowExt.UsrMaterialCost += value;
                     break;
-                case ASCIStarCostRollupType.Other:
+                case ASCIStarCostRollupType.Blank:
                     rowExt.UsrOtherCost += value;
                     break;
-                case ASCIStarCostRollupType.Shipping:
+                case ASCIStarCostRollupType.Freight:
                     rowExt.UsrFreightCost += value;
                     break;
                 case ASCIStarCostRollupType.Handling:
