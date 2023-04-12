@@ -154,7 +154,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrMaterialsCost
-        [PXUIField(DisplayName = "Materials Cost")]
+        [PXUIField(DisplayName = "Other Materials Cost")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public Decimal? UsrMaterialsCost { get; set; }

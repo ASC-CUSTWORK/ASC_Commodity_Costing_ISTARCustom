@@ -23,7 +23,7 @@ namespace ASCISTARCustom.Common.Builder
         public DateTime PricingDate { get; set; } = PXTimeZoneInfo.Now;
         private bool IsEnabledOverideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
-        private ASCIStarINJewelryItem INJewelryItem { get; set; }
+        public ASCIStarINJewelryItem INJewelryItem { get; set; }
 
         public ASCIStarItemCostSpecDTO ItemCostSpecification { get; set; }
         public POVendorInventory POVendorInventory { get; set; }
@@ -153,7 +153,7 @@ namespace ASCISTARCustom.Common.Builder
                 metalLossValue = (100m + ItemCostSpecification.MetalLossPct.Value) / 100m;
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
-            {//change to Martix Step field
+            {
                 preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.MatrixStep)
                     * priciousMetalMultFactor
                     * ItemCostSpecification.SilverGrams;
@@ -199,6 +199,11 @@ namespace ASCISTARCustom.Common.Builder
             return costSpecDTO.PreciousMetalCost + costSpecDTO.OtherMaterialCost + costSpecDTO.FabricationCost + costSpecDTO.PackagingCost; ;
         }
 
+        public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
+        {
+            return costSpecDTO.UnitCost + costSpecDTO.HandlingCost + costSpecDTO.FreightCost + costSpecDTO.LaborCost + costSpecDTO.DutyCost;
+        }
+
         public static decimal? CalculateDutyCost(ASCIStarItemCostSpecDTO costSpecDTO, decimal? newValue)
         {
             return (costSpecDTO.DutyCostPct + newValue) / 100m;
@@ -215,12 +220,7 @@ namespace ASCISTARCustom.Common.Builder
 
             return value;
         }
-
-        public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
-        {
-            return costSpecDTO.UnitCost + costSpecDTO.HandlingCost + costSpecDTO.FreightCost + costSpecDTO.LaborCost + costSpecDTO.DutyCost;
-        }
-
+   
         public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? matrixStep)
         {
             if (matrixStep <= 0.0m || matrixStep == null)
