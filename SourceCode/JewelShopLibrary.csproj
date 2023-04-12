@@ -90,11 +90,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Builder\ASCIStarCostBuilder.cs" />
     <Compile Include="Common\DAC\AuditSystemFields.cs" />
+    <Compile Include="Common\Descriptor\ASCIStarConstants.cs" />
     <Compile Include="Common\Descriptor\ASCIStarEndpoints.cs" />
     <Compile Include="Common\Descriptor\ASCIStarMessages.cs" />
     <Compile Include="Common\Descriptor\ASCIStarQueryParams.cs" />
+    <Compile Include="Common\DTO\ASCIStarItemCostSpecDTO.cs" />
+    <Compile Include="Common\DTO\Interfaces\IASCIStarItemCostSpecDTO.cs" />
     <Compile Include="Common\Helper\ASCIStarJsonConverter.cs" />
+    <Compile Include="Common\Helper\ASCIStarMetalType.cs" />
     <Compile Include="Common\Helper\ASCIStarParseStringConverter.cs" />
     <Compile Include="Common\Helper\Exceptions\ASCIStarStatusCodeException.cs" />
     <Compile Include="Common\Helper\Extensions\ASCIStarStringExtension.cs" />
@@ -102,11 +107,13 @@
     <Compile Include="Common\Models\ASCIStarHistoricalRatesModel.cs" />
     <Compile Include="Common\Models\ASCIStarLatestRatesModel.cs" />
     <Compile Include="Common\Models\IASCIStarModel.cs" />
-    <Compile Include="Common\Services\ASCIStarMetalsAPILatestRates.cs" />
-    <Compile Include="Common\Services\ASCIStarRESTService.cs" />
+    <Compile Include="Common\Services\DataProvider\ASCIStarVendorDataProvider.cs" />
+    <Compile Include="Common\Services\DataProvider\Interfaces\IASCIStarVendorDataProvider.cs" />
+    <Compile Include="Common\Services\REST\ASCIStarMetalsAPILatestRateService.cs" />
+    <Compile Include="Common\Services\REST\ASCIStarRESTService.cs" />
     <Compile Include="Common\Services\ASCIStarServiceRegistrator.cs" />
-    <Compile Include="Common\Services\Interfaces\IASCIStarMetalsAPILatestRates.cs" />
-    <Compile Include="Common\Services\Interfaces\IASCIStarRESTService.cs" />
+    <Compile Include="Common\Services\REST\Interfaces\IASCIStarMetalsAPILatestRateService.cs" />
+    <Compile Include="Common\Services\REST\Interfaces\IASCIStarRESTService.cs" />
     <Compile Include="Cost\ASCIStarAPVendorPriceMaintExt.cs" />
     <Compile Include="Cost\ASCIStarCostHelper.cs" />
     <Compile Include="Cost\ASCIStarVendorMaintExt.cs" />
@@ -132,16 +139,13 @@
     <Compile Include="Inventory\CacheExt\ASCIStarINInventoryItemExt.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINItemClassExt.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINSetupExt.cs" />
-    <Compile Include="Inventory\CacheExt\ASCIStarInventoryItemCommodity.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINCompliance.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINJewelryItem.cs" />
     <Compile Include="Inventory\DAC\ASCIStarItemWeightCostSpec.cs" />
-    <Compile Include="Inventory\GraphExt\InventoryItemMaintExt.cs" />
-    <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
-    <Compile Include="PDS\ASCIstarINKitSpecMaintExt.cs" />
-    <Compile Include="PDS\ASCIstarInventoryItemMaintExt.cs" />
+    <Compile Include="Inventory\Descriptor\Constants\ASCIStarINConstants.cs" />
+    <Compile Include="PDS\ASCIStarINKitSpecMaintExt.cs" />
+    <Compile Include="Inventory\GraphExt\ASCIstarInventoryItemMaintExt.cs" />
     <Compile Include="PDS\CacheExt\ASCIStarINKitSpecJewelryItem.cs" />
-    <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrAttribute.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrExt.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrVendorQuote.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecNonStkDetExt.cs" />

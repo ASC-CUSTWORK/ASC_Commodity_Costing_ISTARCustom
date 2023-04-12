@@ -1,12 +1,12 @@
 ﻿using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
-using static ASCISTARCustom.Inventory.Descriptor.Constants.INConstants;
+using static ASCISTARCustom.Inventory.Descriptor.Constants.ASCIStarINConstants;
 
 namespace ASCISTARCustom.Inventory.Descriptor.Constants
 {
     [PXLocalizable]
-    public static class INConstants
+    public static class ASCIStarINConstants
     {
         public class INTestType
         {
@@ -89,7 +89,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         }
     }
 
-    public class INComplianceType
+    public class ASCIStarINComplianceType
     {
         public static readonly string[] Values = { INTestType.Material, INTestType.Assay, INTestType.Plating,
                                                    INTestType.TarnishTesting, INTestType.PreProduction, INTestType.Production,
@@ -104,7 +104,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         }
     }
 
-    public class INCompliancePassStatus
+    public class ASCIStarINCompliancePassStatus
     {
         public static readonly string[] Labels = { INPassStatus.Pass, INPassStatus.Fail, INPassStatus.ConditionalFailed };
         public static readonly string[] Values = { INPassStatus.P, INPassStatus.F, INPassStatus.C };

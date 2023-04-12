@@ -13,6 +13,10 @@
   <col name="LastModifiedByScreenID" type="Char(8)" />
   <col name="LastModifiedDateTime" type="DateTime" />
   <col name="tstamp" type="Timestamp" />
+  <index name="ASCIStarSetup_NoteID" unique="true">
+    <col name="NoteID" />
+    <col name="CompanyID" />
+  </index>
   <index name="ASCIStarSetup_PK" clustered="true" primary="true" unique="true">
     <col name="CompanyID" />
   </index>

@@ -5,7 +5,7 @@ using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.CS;
 using PX.Objects.IN;
-using static ASCISTARCustom.Inventory.Descriptor.Constants.INConstants;
+using static ASCISTARCustom.Inventory.Descriptor.Constants.ASCIStarINConstants;
 
 namespace ASCISTARCustom.Inventory.DAC
 {

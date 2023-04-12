@@ -37,6 +37,7 @@ namespace ASCISTARCustom
         #region UsrProgram
         [PXDBString(255)]
         [PXUIField(DisplayName = "Program", Required = true)]
+        [PXDefault]
         public virtual string UsrProgram { get; set; }
         public abstract class usrProgram : PX.Data.BQL.BqlString.Field<usrProgram> { }
         #endregion
@@ -61,7 +62,7 @@ namespace ASCISTARCustom
                 And<NotificationSetup.module, Like<PXModule.po_>>>>),
             DescriptionField = typeof(NotificationSetup.notificationCD),
             SelectorMode = PXSelectorMode.DisplayModeText | PXSelectorMode.NoAutocomplete)]
-        [PXUIField(DisplayName = "Mailing ID")]
+        [PXUIField(DisplayName = "Mailing ID", Required = true)]
         [PXDefault(typeof(ASCIStarVendorExt.usrSetupID))]
         public virtual Guid? UsrSetupID { get; set; }
         public abstract class usrSetupID : PX.Data.BQL.BqlGuid.Field<usrSetupID> { }

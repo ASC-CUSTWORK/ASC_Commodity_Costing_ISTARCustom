@@ -896,45 +896,6 @@
                                 <Prop Key="ColumnSpan" Value="2" />
                             </PXLayoutRule>
                         </AddItem>
-                        <AddItem>
-                            <PXPanel TypeFullName="PX.Web.UI.PXPanel">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPanel184" />
-                                <Children Key="Controls">
-                                    <AddItem>
-                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
-                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                            <Prop Key="ID" Value="CstPXLayoutRule186" />
-                                            <Prop Key="StartColumn" Value="True" />
-                                        </PXLayoutRule>
-                                    </AddItem>
-                                    <AddItem>
-                                        <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
-                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                            <Prop Key="ID" Value="CstPXDropDown189" />
-                                            <Prop Key="DataField" Value="RollupType" />
-                                            <Prop Key="CommitChanges" Value="True" />
-                                        </PXDropDown>
-                                    </AddItem>
-                                    <AddItem>
-                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
-                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                            <Prop Key="ID" Value="CstPXLayoutRule187" />
-                                            <Prop Key="StartColumn" Value="True" />
-                                        </PXLayoutRule>
-                                    </AddItem>
-                                    <AddItem>
-                                        <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
-                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                            <Prop Key="ID" Value="CstPXDropDown188" />
-                                            <Prop Key="DataField" Value="CostingType" />
-                                            <Prop Key="CommitChanges" Value="True" />
-                                        </PXDropDown>
-                                    </AddItem>
-                                </Children>
-                                <Prop Key="Caption" Value="Contract Behavior" />
-                            </PXPanel>
-                        </AddItem>
                     </Children>
                 </PXFormView>
             </AddItem>
