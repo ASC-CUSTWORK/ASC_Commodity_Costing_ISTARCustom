@@ -204,7 +204,11 @@ namespace ASCISTARCustom.Common.Builder
 
         public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
         {
-            return costSpecDTO.UnitCost + costSpecDTO.HandlingCost + costSpecDTO.FreightCost + costSpecDTO.LaborCost + costSpecDTO.DutyCost;
+            return (costSpecDTO.UnitCost ?? 0m) 
+                + (costSpecDTO.HandlingCost ?? 0m) 
+                + (costSpecDTO.FreightCost ?? 0m) 
+                + (costSpecDTO.LaborCost ?? 0m) 
+                + (costSpecDTO.DutyCost ?? 0m);
         }
 
         public static decimal? CalculateDutyCost(ASCIStarItemCostSpecDTO costSpecDTO, decimal? newValue)
