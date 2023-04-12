@@ -1,16 +1,10 @@
-using PX.Data.ReferentialIntegrity.Attributes;
 using PX.Data;
-using PX.Objects.CS;
 using PX.Objects.IN;
-using PX.Objects.AR;
-using PX.Objects;
-using System.Collections.Generic;
-using System;
 using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
-    public class ASCIStarINItemClassExt : PXCacheExtension<PX.Objects.IN.INItemClass>
+    public class ASCIStarINItemClassExt : PXCacheExtension<INItemClass>
     {
         public static bool IsActive() => true;
 

@@ -54,7 +54,7 @@ namespace ASCISTARCustom.Common.Builder
         {
             POVendorInventory = vendorInventory;
             POVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(vendorInventory);
-            IsEnabledOverideVendor = POVendorInventoryExt.UsrVendorDefault == true;
+            IsEnabledOverideVendor = POVendorInventoryExt.UsrIsOverrideVendor == true;
             return this;
         }
         public ASCIStarCostBuilder WithINJewelryItem(ASCIStarINJewelryItem inJewelryItem)

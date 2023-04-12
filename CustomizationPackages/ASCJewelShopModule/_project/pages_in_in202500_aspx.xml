@@ -385,17 +385,11 @@
         <Children Key="Columns">
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrVendorDefault" />
+                    <Prop Key="DataField" Value="UsrIsOverrideVendor" />
                     <Prop Key="Width" Value="60" />
+                    <Prop Key="CommitChanges" Value="True" />
                     <Prop Key="Type" Value="CheckBox" />
-                    <Prop Key="CommitChanges" Value="True" />
-                </PXGridColumn>
-            </AddItem>
-            <AddItem>
-                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrMarketID" />
-                    <Prop Key="Width" Value="140" />
-                    <Prop Key="CommitChanges" Value="True" />
+                    <Prop Key="TextAlign" Value="Center" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>

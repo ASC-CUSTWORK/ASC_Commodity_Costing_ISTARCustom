@@ -49,7 +49,7 @@ namespace ASCISTARCustom.Inventory.DAC
         #region TestType  
         [PXDBString(20, IsUnicode = true)]
         [PXUIField(DisplayName = "Test Type")]
-        [INComplianceType.TestTypeList()]
+        [ASCIStarINComplianceType.TestTypeList()]
         public virtual string TestType { get; set; }
         public abstract class testType : PX.Data.BQL.BqlString.Field<testType> { }
         #endregion
@@ -64,7 +64,7 @@ namespace ASCISTARCustom.Inventory.DAC
         #region Pass 
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Pass")]
-        [INCompliancePassStatus.PassStatusList]
+        [ASCIStarINCompliancePassStatus.PassStatusList]
         public virtual string Pass { get; set; }
         public abstract class pass : PX.Data.BQL.BqlString.Field<pass> { }
         #endregion

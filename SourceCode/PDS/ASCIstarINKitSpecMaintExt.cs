@@ -163,7 +163,7 @@ namespace ASCISTARCustom.PDS
             if (row != null)
             {
                 ASCIStarPOVendorInventoryExt ext = row.GetExtension<ASCIStarPOVendorInventoryExt>();
-                bool UseVendor = (ext.UsrVendorDefault == true);
+                bool UseVendor = (ext.UsrIsOverrideVendor == true);
                 if (UseVendor)
                 {
                     ext.UsrCommodityPrice = 0.00m; //REPLACE WITH MARKET CALL

@@ -6,9 +6,7 @@ using PX.Objects.AP;
 using PX.Objects.PO;
 using PX.Objects.IN;
 using ASCISTARCustom.Inventory.DAC;
-using ASCISTARCustom.PDS.CacheExt;
 using System.Collections.Generic;
-using PX.Api.Models;
 using PX.Data.BQL;
 using PX.Common;
 using PX.Objects.CR.Standalone;
@@ -18,8 +16,9 @@ using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.Cost.Descriptor;
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Helper;
+using ASCISTARCustom.Common.Descriptor;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.Inventory.GraphExt
 {
     public class ASCIstarInventoryItemMaintExt : PXGraphExtension<InventoryItemMaint>
     {
@@ -377,7 +376,7 @@ namespace ASCISTARCustom
             if (row == null) return;
 
             var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
-         //   SetReadOnlyJewelFields(this.Base.Item.Cache, this.Base.Item.Current, result);
+            //   SetReadOnlyJewelFields(this.Base.Item.Cache, this.Base.Item.Current, result);
             SetMetalGramsToZero(result);
         }
         #endregion JewelryItem Events
@@ -388,7 +387,7 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null) return;
 
-            bool isDefaultVendor = row.IsDefault == true && row.GetExtension<ASCIStarPOVendorInventoryExt>().UsrVendorDefault == true;
+            bool isDefaultVendor = row.IsDefault == true && row.GetExtension<ASCIStarPOVendorInventoryExt>().UsrIsOverrideVendor == true;
             SetReadOnlyVendorsFields(this.VendorItems.Cache, row, isDefaultVendor);
         }
 
@@ -426,9 +425,7 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null) return;
 
-            bool isDefaultVendor = (bool?)e.NewValue == true && row.GetExtension<ASCIStarPOVendorInventoryExt>().UsrVendorDefault == true;
-
-            SetReadOnlyVendorsFields(this.VendorItems.Cache, row, isDefaultVendor);
+            bool isDefaultVendor = (bool?)e.NewValue == true && row.GetExtension<ASCIStarPOVendorInventoryExt>().UsrIsOverrideVendor == true;
 
             if (isDefaultVendor)
             {
@@ -454,18 +451,16 @@ namespace ASCISTARCustom
             UpdateCommodityCostMetal(this.Base.Item.Cache, this.Base.Item.Current, inventoryItemExt);
         }
 
-        protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrVendorDefault> e)
+        protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrIsOverrideVendor> e)
         {
             var row = e.Row;
             if (row == null) return;
 
             var rowExt = row.GetExtension<ASCIStarPOVendorInventoryExt>();
-            if (rowExt.UsrVendorDefault != true) return;
+            if (rowExt.UsrIsOverrideVendor != true) return;
 
-            if (row.IsDefault != true) throw new PXSetPropertyException<POVendorInventory.isDefault>("First make Vendor as default, then use Override logic");
-
-            if (rowExt.UsrCommodityID == null) throw new PXSetPropertyException<ASCIStarPOVendorInventoryExt.usrCommodityID>("Metal Item can not be empty.");
-            if (rowExt.UsrCommodityPrice == null) throw new PXSetPropertyException<ASCIStarPOVendorInventoryExt.usrCommodityPrice>("Vendor Price can not be empty.");
+            if (rowExt.UsrCommodityID == null) throw new PXSetPropertyException<ASCIStarPOVendorInventoryExt.usrCommodityID>(ASCIStarMessages.Error.POVendorInventoryMetalItemEmpty);
+            if (rowExt.UsrCommodityPrice == null) throw new PXSetPropertyException<ASCIStarPOVendorInventoryExt.usrCommodityPrice>(ASCIStarMessages.Error.POVendorInventoryVendorPriceEmpty);
 
             var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current);
             UpdateCommodityCostMetal(this.Base.Item.Cache, this.Base.Item.Current, inventoryItemExt);
@@ -476,27 +471,27 @@ namespace ASCISTARCustom
         #region Compliance Events
         public virtual void _(Events.FieldSelecting<ASCIStarINCompliance, ASCIStarINCompliance.customerAlphaCode> e)
         {
-            SetupStringList<ASCIStarINCompliance.customerAlphaCode>(e.Cache, INConstants.INAttributesID.CustomerCode);
+            SetupStringList<ASCIStarINCompliance.customerAlphaCode>(e.Cache, ASCIStarINConstants.INAttributesID.CustomerCode);
         }
 
         public virtual void _(Events.FieldSelecting<ASCIStarINCompliance, ASCIStarINCompliance.division> e)
         {
-            SetupStringList<ASCIStarINCompliance.division>(e.Cache, INConstants.INAttributesID.InventoryCategory);
+            SetupStringList<ASCIStarINCompliance.division>(e.Cache, ASCIStarINConstants.INAttributesID.InventoryCategory);
         }
 
         public virtual void _(Events.FieldSelecting<ASCIStarINCompliance, ASCIStarINCompliance.testingLab> e)
         {
-            SetupStringList<ASCIStarINCompliance.testingLab>(e.Cache, INConstants.INAttributesID.CPTESTTYPE);
+            SetupStringList<ASCIStarINCompliance.testingLab>(e.Cache, ASCIStarINConstants.INAttributesID.CPTESTTYPE);
         }
 
         public virtual void _(Events.FieldSelecting<ASCIStarINCompliance, ASCIStarINCompliance.protocolTestedTo> e)
         {
-            SetupStringList<ASCIStarINCompliance.protocolTestedTo>(e.Cache, INConstants.INAttributesID.CPPROTOCOL);
+            SetupStringList<ASCIStarINCompliance.protocolTestedTo>(e.Cache, ASCIStarINConstants.INAttributesID.CPPROTOCOL);
         }
 
         public virtual void _(Events.FieldSelecting<ASCIStarINCompliance, ASCIStarINCompliance.waiverReasonCode> e)
         {
-            SetupStringList<ASCIStarINCompliance.waiverReasonCode>(e.Cache, INConstants.INAttributesID.REASONCODE);
+            SetupStringList<ASCIStarINCompliance.waiverReasonCode>(e.Cache, ASCIStarINConstants.INAttributesID.REASONCODE);
         }
         #endregion Compliance Events
 
@@ -569,8 +564,8 @@ namespace ASCISTARCustom
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrHandlingCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFreightCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrDutyCost>(cache, row, isDefaultVendor);
-            //    PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrOtherCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrUnitCost>(cache, row, isDefaultVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrIsOverrideVendor>(cache, row, row.IsDefault == true);
         }
 
         private void SetValueExtPOVendorInventory<Field>(object newValue) where Field : IBqlField
@@ -673,7 +668,7 @@ namespace ASCISTARCustom
         }
 
         private POVendorInventory GetDefaultOverrideVendor() => this.VendorItems.Select().FirstTableItems
-                .FirstOrDefault(x => x.IsDefault == true && x.GetExtension<ASCIStarPOVendorInventoryExt>().UsrVendorDefault == true);
+                .FirstOrDefault(x => x.IsDefault == true && x.GetExtension<ASCIStarPOVendorInventoryExt>().UsrIsOverrideVendor == true);
 
         private void SetupStringList<Field>(PXCache cache, string attributeID) where Field : IBqlField
         {
