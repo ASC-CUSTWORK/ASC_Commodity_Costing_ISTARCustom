@@ -42,12 +42,12 @@ namespace ASCISTARCustom
         public abstract class usrCommodityID : PX.Data.BQL.BqlInt.Field<usrCommodityID> { }
         #endregion
 
-        #region UsrVendorDefault
+        #region UsrIsOverrideVendor
         [PXDBBool()]
         [PXUIField(DisplayName = "Override Vendor")]
         [PXDefault(false, PersistingCheck = PXPersistingCheck.Null)]
-        public virtual bool? UsrVendorDefault { get; set; }
-        public abstract class usrVendorDefault : PX.Data.BQL.BqlBool.Field<usrVendorDefault> { }
+        public virtual bool? UsrIsOverrideVendor { get; set; }
+        public abstract class usrIsOverrideVendor : PX.Data.BQL.BqlBool.Field<usrIsOverrideVendor> { }
         #endregion
 
         #region UsrCommodityPrice

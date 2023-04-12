@@ -101,7 +101,7 @@ namespace ASCISTARCustom
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type")]
         [ASCIStarCostRollupType.List]
-        [PXDefault(ASCIStarCostRollupType.Other, PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(ASCIStarCostRollupType.Blank, PersistingCheck = PXPersistingCheck.Nothing)]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion
@@ -131,15 +131,15 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrMatrixStep
-        [PXDBDecimal(6)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 100)]
         [PXUIField(DisplayName = "Matrix Step")]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        public virtual decimal? UsrMatrixStep { get; set; }
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.NullOrBlank)]
+        public decimal? UsrMatrixStep { get; set; }
         public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(6)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge %", Visible = true)]
         public decimal? UsrContractSurcharge { get; set; }
@@ -154,7 +154,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrMaterialsCost
-        [PXUIField(DisplayName = "Materials Cost")]
+        [PXUIField(DisplayName = "Other Materials Cost")]
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public Decimal? UsrMaterialsCost { get; set; }

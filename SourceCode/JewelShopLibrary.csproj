@@ -141,13 +141,14 @@
     <Compile Include="Inventory\CacheExt\ASCIStarINInventoryItemExt.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINItemClassExt.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINSetupExt.cs" />
-    <Compile Include="Inventory\CacheExt\ASCIStarInventoryItemCommodity.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINCompliance.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINJewelryItem.cs" />
     <Compile Include="Inventory\GraphExt\InventoryItemMaintExt.cs" />
     <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
+    <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
+    <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
     <Compile Include="PDS\ASCIStarINKitSpecMaintExt.cs" />
-    <Compile Include="PDS\ASCIstarInventoryItemMaintExt.cs" />
+    <Compile Include="Inventory\GraphExt\ASCIstarInventoryItemMaintExt.cs" />
     <Compile Include="PDS\CacheExt\ASCIStarINKitSpecJewelryItem.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrExt.cs" />
     <Compile Include="PDS\DAC\ASCIStarINKitSpecHdrVendorQuote.cs" />

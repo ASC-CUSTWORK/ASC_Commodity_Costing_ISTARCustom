@@ -14,6 +14,6 @@
     <Column TableName="POVendorInventory" ColumnName="UsrCommodityIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POVendorInventory" ColumnName="UsrCommoditySurchargePct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POVendorInventory" ColumnName="UsrCommodityLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrVendorDefault" ColumnType="bool" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrIsOverrideVendor" ColumnType="bool" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POVendorInventory" ColumnName="UsrCommodityID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
 </Table>

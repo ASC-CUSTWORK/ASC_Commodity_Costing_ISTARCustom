@@ -10,47 +10,47 @@ namespace ASCISTARCustom.Cost.Descriptor
         public const string Fabrication = "F";
         public const string Labor = "L";
         public const string Handling = "H";
-        public const string Shipping = "S";
+        public const string Freight = "S";
         public const string Duty = "D";
         public const string Packaging = "P";
-        public const string Other = "O";
+        public const string Blank = "";
 
         public const string MessagePreciousMetal = "Precious Metal";
-        public const string MessageMaterials = "Materials";
-        public const string MessageFabrication = "Fabrication";
+        public const string MessageMaterials = "Other Materials";
+        public const string MessageFabrication = "Value Add Fabrication";
         public const string MessageLabor = "In-house Labor";
         public const string MessageHandling = "Handling";
-        public const string MessageShipping = "Shipping";
+        public const string MessageFreight = "Freight";
         public const string MessageDuty = "Duty";
         public const string MessagePackaging = "Packaging";
-        public const string MessageOther = "Other";
+        public const string MessageBlank = "<Blank>";
 
         public class ListAttribute : PXStringListAttribute
         {
-            private static readonly string[] _values = new string[] 
-            { 
-                PreciousMetal, 
-                Materials, 
+            private static readonly string[] _values = new string[]
+            {
+                PreciousMetal,
                 Fabrication,
+                Materials,
                 Packaging,
-                Shipping,
-                Duty,
-                Labor, 
+                Freight,
                 Handling,
-                Other
+                Duty,
+             //   Labor, 
+           //     Blank
             };
 
             private static readonly string[] _lables = new string[]
             {
-                MessagePreciousMetal, 
-                MessageMaterials, 
+                MessagePreciousMetal,
                 MessageFabrication,
+                MessageMaterials,
                 MessagePackaging,
-                MessageShipping,
-                MessageDuty,
-                MessageLabor, 
+                MessageFreight,
                 MessageHandling,
-                MessageOther
+                MessageDuty,
+             //   MessageLabor, 
+             //   MessageBlank
             };
 
             public ListAttribute() : base(_values, _lables) { }
@@ -81,9 +81,9 @@ namespace ASCISTARCustom.Cost.Descriptor
             public handling() : base(Handling) { }
         }
 
-        public class shipping : PX.Data.BQL.BqlString.Constant<shipping>
+        public class freight : PX.Data.BQL.BqlString.Constant<freight>
         {
-            public shipping() : base(Shipping) { }
+            public freight() : base(Freight) { }
         }
 
         public class duty : PX.Data.BQL.BqlString.Constant<duty>
@@ -98,7 +98,7 @@ namespace ASCISTARCustom.Cost.Descriptor
 
         public class other : PX.Data.BQL.BqlString.Constant<other>
         {
-            public other() : base(Other) { }
+            public other() : base(Blank) { }
         }
     }
 }
