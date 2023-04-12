@@ -181,11 +181,16 @@ namespace ASCISTARCustom.PDS
                                 CalculateAndAssignItemCosts(specHdrExt, quantity, inventoryItemExt);
 
                                 DisableRollupType(e.Cache, currentLine);
+
+                                //Silver Always Market costing type and ERP Valuation
                             }
                             else
                             {
                                 var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(currentLine);
                                 AssignCost(rowExt.UsrCostRollupType, specHdrExt, rowExt.UsrExtCost);
+
+                                // for other component items always costing type should be ERP Valuation. and disabled
+
                             }
                         }
                     });
