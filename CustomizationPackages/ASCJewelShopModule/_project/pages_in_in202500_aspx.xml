@@ -295,8 +295,8 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXLayoutRule69" />
                                 <Prop Key="StartColumn" Value="True" />
-                                <Prop Key="ControlSize" Value="S" />
-                                <Prop Key="LabelsWidth" Value="SM" />
+                                <Prop Key="ControlSize" Value="M" />
+                                <Prop Key="LabelsWidth" Value="S" />
                             </PXLayoutRule>
                         </AddItem>
                         <AddItem>

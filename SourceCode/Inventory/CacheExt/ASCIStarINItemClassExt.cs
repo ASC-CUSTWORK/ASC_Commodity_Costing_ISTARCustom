@@ -27,7 +27,7 @@ namespace ASCISTARCustom
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type")]
         [ASCIStarCostRollupType.List]
-        [PXDefault(ASCIStarCostRollupType.Other, PersistingCheck = PXPersistingCheck.Null)]
+        [PXDefault(ASCIStarCostRollupType.Blank, PersistingCheck = PXPersistingCheck.Null)]
         public virtual string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion    

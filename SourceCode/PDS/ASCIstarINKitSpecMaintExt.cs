@@ -403,7 +403,7 @@ namespace ASCISTARCustom.PDS
                     case ASCIStarCostRollupType.Duty:
                         ext.UsrDutyCost = Rollup;
                         break;
-                    case ASCIStarCostRollupType.Other:
+                    case ASCIStarCostRollupType.Blank:
                         ext.UsrOtherCost = Rollup;
                         break;
                     default: /* CostingType.StandardCost */
@@ -478,7 +478,7 @@ namespace ASCISTARCustom.PDS
                         ext.UsrDutyCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrDutyCost>(e.Row, null);
                         break;
-                    case ASCIStarCostRollupType.Other:
+                    case ASCIStarCostRollupType.Blank:
                         ext.UsrOtherCost = Rollup;
                         cache.RaiseFieldUpdated<ASCIStarINInventoryItemExt.usrOtherCost>(e.Row, null);
                         break;
@@ -579,7 +579,7 @@ namespace ASCISTARCustom.PDS
                     case ASCIStarCostRollupType.Duty:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrDutyCost>(cache.Current, Rollup);
                         break;
-                    case ASCIStarCostRollupType.Other:
+                    case ASCIStarCostRollupType.Blank:
                         cache.SetValueExt<ASCIStarINInventoryItemExt.usrOtherCost>(cache.Current, Rollup);
                         break;
                     default: /* CostingType.StandardCost */

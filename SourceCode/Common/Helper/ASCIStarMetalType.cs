@@ -116,28 +116,28 @@ namespace ASCISTARCustom.Common.Helper
         ///</summary>
         ///<param name="metalType">The metal type for which the gold value is being retrieved.</param>
         ///<returns>The gold value for the provided metal type.</returns>
-        //public static decimal GetGoldTypeValue(string metalType)
-        //{
-        //    if (metalType == null)
-        //        throw new PXException(ASCIStarMessages.Error.MissingMetalType);
+        public static decimal GetGoldTypeValue(string metalType)
+        {
+            if (metalType == null)
+                throw new PXException(ASCIStarMessages.Error.MissingMetalType);
 
-        //    switch (metalType)
-        //    {
-        //        case ASCIStarConstants.MetalType.Type_24K: return 24.000000m;
-        //        case ASCIStarConstants.MetalType.Type_22K: return 22.000000m;
-        //        case ASCIStarConstants.MetalType.Type_20K: return 20.000000m;
-        //        case ASCIStarConstants.MetalType.Type_18K: return 18.000000m;
-        //        case ASCIStarConstants.MetalType.Type_16K: return 16.000000m;
-        //        case ASCIStarConstants.MetalType.Type_14K: return 14.000000m;
-        //        case ASCIStarConstants.MetalType.Type_12K: return 12.000000m;
-        //        case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
-        //        case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
-        //        case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
-        //        case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m;
-        //        case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m;
-        //        default: return decimal.Zero;
-        //    }
-        //}
+            switch (metalType)
+            {
+                case ASCIStarConstants.MetalType.Type_24K: return 24.000000m;
+                case ASCIStarConstants.MetalType.Type_22K: return 22.000000m;
+                case ASCIStarConstants.MetalType.Type_20K: return 20.000000m;
+                case ASCIStarConstants.MetalType.Type_18K: return 18.000000m;
+                case ASCIStarConstants.MetalType.Type_16K: return 16.000000m;
+                case ASCIStarConstants.MetalType.Type_14K: return 14.000000m;
+                case ASCIStarConstants.MetalType.Type_12K: return 12.000000m;
+                case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
+                case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
+                case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
+                case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m;
+                case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m;
+                default: return decimal.Zero;
+            }
+        }
 
         ///<summary>
         /// Returns the corresponding silver type value based on the given metalType parameter.

@@ -98,9 +98,9 @@ namespace ASCISTARCustom.Common.Builder
         public virtual decimal? CalculateSurchargeValue(ASCIStarItemCostSpecDTO itemCostSpecification)
         {
             decimal? temp1 = itemCostSpecification.Increment;
-            decimal? temp2 = (1.0m / 31.10348m);
+            decimal? temp2 = (temp1 * 31.10348m);
 
-            decimal? surchargeNewValue = (temp1 / temp2 - 1.0m) * 100.0m;
+            decimal? surchargeNewValue = (temp2 - 1.0m) * 100.0m;
 
             return surchargeNewValue;
         }
@@ -149,17 +149,17 @@ namespace ASCISTARCustom.Common.Builder
                         break;
                     default: break;
                 }
-                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * ItemCostSpecification.FineGoldGrams.Value;
-                metalLossValue = 1m + ItemCostSpecification.MetalLossPct.Value / 100m;
+                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * ItemCostSpecification.GoldGrams.Value;
+                metalLossValue = (100m + ItemCostSpecification.MetalLossPct.Value) / 100m;
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
             {//change to Martix Step field
-                preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.Increment)
+                preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.MatrixStep)
                     * priciousMetalMultFactor
-                    * ItemCostSpecification.FineSilverGrams;
+                    * ItemCostSpecification.SilverGrams;
             }
 
-            decimal surchargeValue = 1m + ItemCostSpecification.SurchargePct ?? 0.0m / 100m;
+            decimal surchargeValue = (100m + ItemCostSpecification.SurchargePct ?? 0.0m) / 100m;
             PreciousMetalUnitCost = preciousMetalCost * metalLossValue * surchargeValue;
             return PreciousMetalUnitCost;
         }
@@ -221,20 +221,20 @@ namespace ASCISTARCustom.Common.Builder
             return costSpecDTO.UnitCost + costSpecDTO.HandlingCost + costSpecDTO.FreightCost + costSpecDTO.LaborCost + costSpecDTO.DutyCost;
         }
 
-        public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? incrementNullable)
+        public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? matrixStep)
         {
-            if (incrementNullable == 0.0m || incrementNullable == null)
+            if (matrixStep <= 0.0m || matrixStep == null)
             {
                 return marketCost;
             }
-            decimal? increment = (decimal)incrementNullable;
+            // decimal? increment = (decimal)matrixStep;
             decimal? costPerOz = marketCost;
-            decimal? temp = (marketCost / increment) - (basisCost / increment);
+            decimal? temp = (marketCost / matrixStep) - (basisCost / matrixStep);
 
             decimal steps = Math.Truncate(temp ?? 0.0m);
 
-            decimal? floor = basisCost + (steps * increment);
-            decimal? ceiling = floor + increment;
+            decimal? floor = basisCost + (steps * matrixStep);
+            decimal? ceiling = floor + matrixStep;
             costPerOz = (floor + ceiling) / 2.000000m;
 
             return costPerOz;
@@ -253,7 +253,7 @@ namespace ASCISTARCustom.Common.Builder
         private INUnit GetINUnit(string fromUnit, string toUnit)
             => PXSelect<INUnit,
                 Where<INUnit.fromUnit, Equal<Required<INUnit.fromUnit>>, And<INUnit.toUnit, Equal<Required<INUnit.toUnit>>>>>.Select(_graph, fromUnit, toUnit);
-        
+
         private InventoryItem GetInventoryItemByInvenctoryCD(string inventiryCD)
             => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventiryCD)?.TopFirst;
 

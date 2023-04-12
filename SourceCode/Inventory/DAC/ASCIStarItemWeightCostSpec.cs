@@ -132,7 +132,7 @@ namespace ASCISTARCustom.Inventory.DAC
         #region RollupType
         [PXDBString(1, IsFixed = true, InputMask = "")]
         [ASCIStarCostRollupType.List]
-        [PXDefault(ASCIStarCostRollupType.Other, PersistingCheck = PXPersistingCheck.Null)]
+        [PXDefault(ASCIStarCostRollupType.Blank, PersistingCheck = PXPersistingCheck.Null)]
         [PXUIField(DisplayName = "Rollup Type")]
         public virtual string RollupType { get; set; }
         public abstract class rollupType : PX.Data.BQL.BqlString.Field<rollupType> { }
