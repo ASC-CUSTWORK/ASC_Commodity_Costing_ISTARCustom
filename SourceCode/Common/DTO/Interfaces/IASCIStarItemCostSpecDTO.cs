@@ -18,7 +18,7 @@
         decimal? FabricationCost { get; set; }
         decimal? LandedCost { get; set; }
         decimal? PackagingCost { get; set; }
-        decimal? OtherMaterialCost { get; set; }
+        decimal? MaterialsCost { get; set; }
         decimal? FreightCost { get; set; }
         decimal? HandlingCost { get; set; }
         decimal? LaborCost { get; set; }

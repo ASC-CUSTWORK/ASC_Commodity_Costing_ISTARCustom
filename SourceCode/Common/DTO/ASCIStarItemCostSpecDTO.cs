@@ -28,7 +28,7 @@ namespace ASCISTARCustom.Common.DTO
         public decimal? FabricationCost { get; set; }
         public decimal? LandedCost { get; set; }
         public decimal? PackagingCost { get; set; }
-        public decimal? OtherMaterialCost { get; set; }
+        public decimal? MaterialsCost { get; set; }
         public decimal? FreightCost { get; set; }
         public decimal? HandlingCost { get; set; }
         public decimal? LaborCost { get; set; }
@@ -58,7 +58,7 @@ namespace ASCISTARCustom.Common.DTO
                 FabricationCost = valueExt.UsrFabricationCost,
                 LandedCost = valueExt.UsrUnitCost,
                 PackagingCost = valueExt.UsrPackagingCost,
-                OtherMaterialCost = valueExt.UsrMaterialsCost,
+                MaterialsCost = valueExt.UsrMaterialsCost,
                 FreightCost = valueExt.UsrFreightCost,
                 HandlingCost = valueExt.UsrHandlingCost,
                 LaborCost = valueExt.UsrLaborCost,
@@ -69,30 +69,36 @@ namespace ASCISTARCustom.Common.DTO
         }
             
 
-        public static implicit operator ASCIStarItemCostSpecDTO(ASCIStarItemWeightCostSpec value) =>
-            new ASCIStarItemCostSpecDTO
+        public static implicit operator ASCIStarItemCostSpecDTO(INKitSpecHdr value)
+        {
+            if (value == null) return null;
+
+            var valueExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(value);
+            return new ASCIStarItemCostSpecDTO
             {
-                InventoryID = value.InventoryID,
+                InventoryID = value.KitInventoryID,
                 RevisionID = value.RevisionID,
-                GoldGrams = value.GoldGrams,
-                SilverGrams = value.SilverGrams,
-                FineGoldGrams = value.FineGoldGrams,
-                FineSilverGrams = value.FineSilverGrams,
-                MetalLossPct = value.MetalLossPct,
-                SurchargePct = value.SurchargePct,
-                Increment = value.Increment,
-                MatrixStep = value.MatrixStep,
-                UnitCost = value.UnitCost,
-                PreciousMetalCost = value.PreciousMetalCost,
-                FabricationCost = value.FabricationCost,
-                LandedCost = value.UnitCost,
-                PackagingCost = value.PackagingCost,
-                OtherMaterialCost = value.MaterialCost,
-                FreightCost = value.FreightCost,
-                HandlingCost = value.HandlingCost,
-                LaborCost = value.LaborCost,
-                DutyCost = value.DutyCost,
-                DutyCostPct = value.DutyCostPct
+                GoldGrams = valueExt.UsrGoldGrams,
+                SilverGrams = valueExt.UsrSilverGrams,
+                FineGoldGrams = valueExt.UsrFineGoldGrams,
+                FineSilverGrams = valueExt.UsrFineSilverGrams,
+                MetalLossPct = valueExt.UsrMetalLossPct,
+                SurchargePct = valueExt.UsrSurchargePct,
+                Increment = valueExt.UsrIncrement,
+                MatrixStep = valueExt.UsrMatrixStep,
+                UnitCost = valueExt.UsrUnitCost,
+                PreciousMetalCost = valueExt.UsrPreciousMetalCost,
+                FabricationCost = valueExt.UsrFabricationCost,
+                LandedCost = valueExt.UsrUnitCost,
+                PackagingCost = valueExt.UsrPackagingCost,
+                MaterialsCost = valueExt.UsrMaterialCost,
+                FreightCost = valueExt.UsrFreightCost,
+                HandlingCost = valueExt.UsrHandlingCost,
+                LaborCost = valueExt.UsrLaborCost,
+                DutyCost = valueExt.UsrDutyCost,
+                DutyCostPct = valueExt.UsrDutyCostPct
             };
+        }
+            
     }
 }

@@ -1,5 +1,7 @@
+using ASCISTARCustom.Cost.Descriptor;
 using PX.Data;
 using PX.Objects.IN;
+using System;
 
 namespace ASCISTARCustom
 {
@@ -14,224 +16,194 @@ namespace ASCISTARCustom
         public abstract class usrVQuoteLineCtr : PX.Data.BQL.BqlInt.Field<usrVQuoteLineCtr> { }
         #endregion
 
-        //TODO Check if this fields are exists in data base table or not, if so then remove them all!
-        #region Decpracated 
-        //        //#region UsrPricingDate
-        //        //[PXDBDate]
-        //        //[PXUIField(DisplayName = "Date Value")]
-        //        //public DateTime? usrPricingDate { get; set; }
-        //        //public abstract class UsrPricingDate : IBqlField { }
-        //        //#endregion
+        #region LegacyID
+        [PXDBString(30, IsUnicode = true)]
+        [PXUIField(DisplayName = "Legacy ID")]
+        public string UsrLegacyID { get; set; }
+        public abstract class usrLegacyID : PX.Data.BQL.BqlString.Field<usrLegacyID> { }
+        #endregion
 
-        //        #region UsrCommodityID
-        //        public abstract class usrCommodityID : PX.Data.BQL.BqlInt.Field<usrCommodityID> { }
-        //        protected Int32? _CommodityID;
-        //        [PXDBInt()]
-        //        [PXUIField(DisplayName = "Metal/Type")]
-        //        [PXSelector(
-        //        typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>,
-        //            Where<INItemClass.itemClassCD, Equal<CommodityClass>>>),
-        //            typeof(InventoryItem.inventoryCD),
-        //            typeof(InventoryItem.descr)
+        #region LegacyShortRef
+        [PXDBString(30, IsUnicode = true)]
+        [PXUIField(DisplayName = "Legacy Short Ref")]
+        public string UsrLegacyShortRef { get; set; }
+        public abstract class usrlegacyShortRef : PX.Data.BQL.BqlString.Field<usrlegacyShortRef> { }
+        #endregion
 
-        //            , SubstituteKey = typeof(InventoryItem.inventoryCD)
-        //            , DescriptionField = typeof(InventoryItem.descr))]
-        //        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
-        //        public virtual Int32? UsrCommodityID
-        //        {
-        //            get
-        //            {
-        //                return this._CommodityID;
-        //            }
-        //            set
-        //            {
-        //                this._CommodityID = value;
-        //            }
-        //        }
-        //        #endregion
+        #region GoldGrams
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Gold, Grams")]
+        public decimal? UsrGoldGrams { get; set; }
+        public abstract class usrGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrGoldGrams> { }
+        #endregion
 
-        //        #region UsrPricingGRAMGold
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Intrinsic Gold (g)", Enabled = true)]
-        //        public virtual Decimal? UsrPricingGRAMGold { get; set; }
-        //        public abstract class usrPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMGold> { }
-        //        #endregion
+        #region FineGoldGrams
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Fine Gold, Grams")]
+        public decimal? UsrFineGoldGrams { get; set; }
+        public abstract class usrFineGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrFineGoldGrams> { }
+        #endregion
 
-        //        #region UsrPricingGRAMSilver
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Fine Silver (g)", Enabled = true)]
-        //        public virtual Decimal? UsrPricingGRAMSilver { get; set; }
-        //        public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
-        //        #endregion
+        #region SilverGrams
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Silver, Grams")]
+        public decimal? UsrSilverGrams { get; set; }
+        public abstract class usrSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrSilverGrams> { }
+        #endregion
 
-        //        #region UsrPricingGRAMPlatinum
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Fine Platinum (g)", Enabled = true)]
-        //        public virtual Decimal? UsrPricingGRAMPlatinum { get; set; }
-        //        public abstract class usrPricingGRAMPlatinum : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMPlatinum> { }
-        //        #endregion
+        #region FineSilverGrams
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Fine Silver, Grams")]
+        public decimal? UsrFineSilverGrams { get; set; }
+        public abstract class usrFineSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrFineSilverGrams> { }
+        #endregion
 
-        //        #region UsrActualGRAMGold
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Gold (g)", Enabled = true)]
-        //        public virtual Decimal? UsrActualGRAMGold { get; set; }
-        //        public abstract class usrActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
-        //        #endregion
+        #region MetalLossPct
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Metal Loss, %")]
+        public decimal? UsrMetalLossPct { get; set; }
+        public abstract class usrMetalLossPct : PX.Data.BQL.BqlDecimal.Field<usrMetalLossPct> { }
+        #endregion
 
-        //        #region UsrActualGRAMSilver
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Silver (g)", Enabled = true)]
-        //        public virtual Decimal? UsrActualGRAMSilver { get; set; }
-        //        public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
-        //        #endregion
+        #region SurchargePct
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Surcharge %", Visible = true)]
+        public decimal? UsrSurchargePct { get; set; }
+        public abstract class usrSurchargePct : PX.Data.BQL.BqlDecimal.Field<usrSurchargePct> { }
+        #endregion
 
-        //        #region UsrActualGRAMPlatinum
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Platinum (g)", Enabled = true)]
-        //        public virtual Decimal? UsrActualGRAMPlatinum { get; set; }
-        //        public abstract class usrActualGRAMPlatinum : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMPlatinum> { }
-        //        #endregion
+        #region Increment
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Increment")]
+        public decimal? UsrIncrement { get; set; }
+        public abstract class usrIncrement : PX.Data.BQL.BqlDecimal.Field<usrIncrement> { }
+        #endregion
 
-        //        #region UsrContractWgt
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Contract Wgt (g)")]
-        //        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        //        public virtual decimal? UsrContractWgt { get; set; }
-        //        public abstract class usrContractWgt : PX.Data.BQL.BqlDecimal.Field<usrContractWgt> { }
-        //        #endregion
+        #region MatrixStep
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Matrix Step")]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrMatrixStep { get; set; }
+        public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
+        #endregion
 
-        //        #region UsrContractPrice
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Contract Price")]
-        //        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        //        public virtual decimal? UsrContractPrice { get; set; }
-        //        public abstract class usrContractPrice : PX.Data.BQL.BqlDecimal.Field<usrContractPrice> { }
-        //        #endregion
+        #region RollupType
+        [PXDBString(1, IsFixed = true, InputMask = "")]
+        [ASCIStarCostRollupType.List]
+        [PXUIField(DisplayName = "Rollup Type")]
+        public string UsrRollupType { get; set; }
+        public abstract class usrRollupType : PX.Data.BQL.BqlString.Field<usrRollupType> { }
+        #endregion
 
-        //        #region UsrContractLossPct
-        //        [PXDBDecimal(4)]
-        //        [PXUIField(DisplayName = "Metal Loss Pct")]
-        //        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        //        public virtual decimal? UsrContractLossPct { get; set; }
-        //        public abstract class usrContractLossPct : PX.Data.BQL.BqlDecimal.Field<usrContractLossPct> { }
-        //        #endregion
+        #region CostingType
+        [PXDBString(1, IsUnicode = true, InputMask = "")]
+        [ASCIStarCostingType.List]
+        [PXUIField(DisplayName = "Costing Type")]
+        public string UsrCostingType { get; set; }
+        public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
+        #endregion
 
-        //        #region UsrContractIncrement
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Increment", Visible = true)]
-        //        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        //        public virtual decimal? UsrContractIncrement { get; set; }
-        //        public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
-        //        #endregion
+        #region UnitCost
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        public decimal? UsrUnitCost { get; set; }
+        public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
+        #endregion
 
-        //        #region UsrContractSurcharge
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Surcharge", Visible = true)]
-        //        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        //        public virtual decimal? UsrContractSurcharge { get; set; }
-        //        public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
-        //        #endregion
+        #region CommodityCost
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Precious Metal Cost")]
+        public decimal? UsrPreciousMetalCost { get; set; }
+        public abstract class usrPreciousMetalCost : PX.Data.BQL.BqlDecimal.Field<usrPreciousMetalCost> { }
+        #endregion
 
-        //        #region UsrContractSurchargeType
-        //        [PXDBString(1, IsUnicode = true, InputMask = "")]
-        //        [PXUIField(DisplayName = "Surcharge Type")]
-        //        [ContractSurchargeType.List]
-        //        [PXDefault(ContractSurchargeType.FixedAmt)]
-        //        public virtual string UsrContractSurchargeType { get; set; }
-        //        public abstract class usrContractSurchargeType : PX.Data.BQL.BqlString.Field<usrContractSurchargeType> { }
-        //        #endregion
+        #region FabricationCost
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Fabrication Cost")]
+        public decimal? UsrFabricationCost { get; set; }
+        public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
+        #endregion
 
-        //        #region UsrCommodityCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Metal Cost")]
-        //        public virtual Decimal? UsrCommodityCost { get; set; }
-        //        public abstract class usrCommodityCost : PX.Data.BQL.BqlDecimal.Field<usrCommodityCost> { }
-        //        #endregion
+        #region PackagingCost
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Packaging Cost")]
+        public decimal? UsrPackagingCost { get; set; }
+        public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
+        #endregion
 
-        //        #region UsrFabricationCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Fabrication Cost")]
-        //        public virtual Decimal? UsrFabricationCost { get; set; }
-        //        public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
-        //        #endregion
+        #region LaborCost
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "In-house Labor Cost")]
+        public decimal? UsrLaborCost { get; set; }
+        public abstract class usrLaborCost : PX.Data.BQL.BqlDecimal.Field<usrLaborCost> { }
+        #endregion
 
-        //        #region UsrLaborCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Labor Cost")]
-        //        public virtual Decimal? UsrLaborCost { get; set; }
-        //        public abstract class usrLaborCost : PX.Data.BQL.BqlDecimal.Field<usrLaborCost> { }
-        //        #endregion
+        #region MaterialCost
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Materials Cost")]
+        public decimal? UsrMaterialCost { get; set; }
+        public abstract class usrMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrMaterialCost> { }
+        #endregion
 
-        //        #region UsrHandlingCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Handling Cost")]
-        //        public virtual Decimal? UsrHandlingCost { get; set; }
-        //        public abstract class usrHandlingCost : PX.Data.BQL.BqlDecimal.Field<usrHandlingCost> { }
-        //        #endregion
+        #region OtherCost
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Other Cost", Visible = false)]
+        public decimal? UsrOtherCost { get; set; }
+        public abstract class usrOtherCost : PX.Data.BQL.BqlDecimal.Field<usrOtherCost> { }
+        #endregion
 
-        //        #region UsrFreightCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Freight Cost")]
-        //        public virtual Decimal? UsrFreightCost { get; set; }
-        //        public abstract class usrFreightCost : PX.Data.BQL.BqlDecimal.Field<usrFreightCost> { }
-        //        #endregion
+        #region UnitCost
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        public decimal? UsrLandedCost { get; set; }
+        public abstract class usrLandedCost : PX.Data.BQL.BqlDecimal.Field<usrLandedCost> { }
+        #endregion
 
-        //        #region UsrDutyCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Duty Cost")]
-        //        public virtual Decimal? UsrDutyCost { get; set; }
-        //        public abstract class usrDutyCost : PX.Data.BQL.BqlDecimal.Field<usrDutyCost> { }
-        //        #endregion
+        #region FreightCost
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Freight Cost")]
+        public decimal? UsrFreightCost { get; set; }
+        public abstract class usrFreightCost : PX.Data.BQL.BqlDecimal.Field<usrFreightCost> { }
+        #endregion
 
-        //        #region UsrOtherCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Other Cost")]
-        //        public virtual Decimal? UsrOtherCost { get; set; }
-        //        public abstract class usrOtherCost : PX.Data.BQL.BqlDecimal.Field<usrOtherCost> { }
-        //        #endregion
+        #region HandlingCost
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Handling Cost")]
+        public decimal? UsrHandlingCost { get; set; }
+        public abstract class usrHandlingCost : PX.Data.BQL.BqlDecimal.Field<usrHandlingCost> { }
+        #endregion
 
-        //        #region UsrPackagingCost
-        //        [PXDBDecimal(6)]
-        //        [PXUIField(DisplayName = "Packaging Cost")]
-        //        public virtual Decimal? UsrPackagingCost { get; set; }
-        //        public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
-        //        #endregion
+        #region DutyCost
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Duty Cost")]
+        public decimal? UsrDutyCost { get; set; }
+        public abstract class usrDutyCost : PX.Data.BQL.BqlDecimal.Field<usrDutyCost> { }
+        #endregion
 
-        //        #region UsrContractCost
-        //        [PXDecimal(6)]
-        //        [PXUIField(DisplayName = "Contract Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        //        [PXFormula(typeof(Add<Add<Add<Add<Add<
-        //                            ASCIStarINKitSpecHdrExt.usrCommodityCost
-        //                           , ASCIStarINKitSpecHdrExt.usrFabricationCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrLaborCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrHandlingCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrPackagingCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrOtherCost>
-        //                           ))]
-
-        //        public virtual Decimal? UsrContractCost { get; set; }
-        //        public abstract class usrContractCost : PX.Data.BQL.BqlDecimal.Field<usrContractCost> { }
-        //        #endregion
-
-        //        #region UsrUnitCost
-        //        [PXDecimal(6)]
-        //        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        //        [PXFormula(typeof(Add<Add<Add<Add<Add<Add<Add<
-        //                            ASCIStarINKitSpecHdrExt.usrCommodityCost
-        //                           , ASCIStarINKitSpecHdrExt.usrFabricationCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrLaborCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrHandlingCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrFreightCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrDutyCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrPackagingCost>
-        //                           , ASCIStarINKitSpecHdrExt.usrOtherCost>
-        //                           ))]
-        //        public virtual Decimal? UsrUnitCost { get; set; }
-        //        public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
-        //        #endregion
-
-        #endregion Decpracated 
-
-
+        #region DutyCostPct
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Duty %")]
+        public decimal? UsrDutyCostPct { get; set; }
+        public abstract class usrDutyCostPct : PX.Data.BQL.BqlDecimal.Field<usrDutyCostPct> { }
+        #endregion
     }
 }

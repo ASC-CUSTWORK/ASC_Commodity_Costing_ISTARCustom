@@ -196,7 +196,10 @@ namespace ASCISTARCustom.Common.Builder
 
         public static decimal? CalculateUnitCost(ASCIStarItemCostSpecDTO costSpecDTO)
         {
-            return costSpecDTO.PreciousMetalCost + costSpecDTO.OtherMaterialCost + costSpecDTO.FabricationCost + costSpecDTO.PackagingCost; ;
+            return (costSpecDTO.PreciousMetalCost  ?? 0m)
+                 + (costSpecDTO.MaterialsCost      ?? 0m) 
+                 + (costSpecDTO.FabricationCost    ?? 0m) 
+                 + (costSpecDTO.PackagingCost      ?? 0m);
         }
 
         public static decimal? CalculateDutyCost(ASCIStarItemCostSpecDTO costSpecDTO, decimal? newValue)
@@ -218,7 +221,11 @@ namespace ASCISTARCustom.Common.Builder
 
         public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
         {
-            return costSpecDTO.UnitCost + costSpecDTO.HandlingCost + costSpecDTO.FreightCost + costSpecDTO.LaborCost + costSpecDTO.DutyCost;
+            return (costSpecDTO.UnitCost      ?? 0m) 
+                 + (costSpecDTO.HandlingCost  ?? 0m) 
+                 + (costSpecDTO.FreightCost   ?? 0m) 
+                 + (costSpecDTO.LaborCost     ?? 0m) 
+                 + (costSpecDTO.DutyCost      ?? 0m);
         }
 
         public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? incrementNullable)

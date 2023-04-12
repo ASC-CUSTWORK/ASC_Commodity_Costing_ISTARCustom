@@ -107,7 +107,9 @@
     <Compile Include="Common\Models\ASCIStarHistoricalRatesModel.cs" />
     <Compile Include="Common\Models\ASCIStarLatestRatesModel.cs" />
     <Compile Include="Common\Models\IASCIStarModel.cs" />
+    <Compile Include="Common\Services\DataProvider\ASCIStarInventoryItemDataProvider.cs" />
     <Compile Include="Common\Services\DataProvider\ASCIStarVendorDataProvider.cs" />
+    <Compile Include="Common\Services\DataProvider\Interfaces\IASCIStarInventoryItemDataProvider.cs" />
     <Compile Include="Common\Services\DataProvider\Interfaces\IASCIStarVendorDataProvider.cs" />
     <Compile Include="Common\Services\REST\ASCIStarMetalsAPILatestRateService.cs" />
     <Compile Include="Common\Services\REST\ASCIStarRESTService.cs" />
@@ -142,7 +144,6 @@
     <Compile Include="Inventory\CacheExt\ASCIStarInventoryItemCommodity.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINCompliance.cs" />
     <Compile Include="Inventory\DAC\ASCIStarINJewelryItem.cs" />
-    <Compile Include="Inventory\DAC\ASCIStarItemWeightCostSpec.cs" />
     <Compile Include="Inventory\GraphExt\InventoryItemMaintExt.cs" />
     <Compile Include="Inventory\Descriptor\Constants\INConstants.cs" />
     <Compile Include="PDS\ASCIStarINKitSpecMaintExt.cs" />

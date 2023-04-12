@@ -16,6 +16,8 @@ namespace ASCISTARCustom.Common.Services
             builder.RegisterType<ASCIStarMetalsAPILatestRateService>().As<IASCIStarMetalsAPILatestRateService>();
 
            // builder.RegisterType<ASCIStarVendorDataProvider>().As<IASCIStarVendorDataProvider>();
+
+            builder.RegisterType<ASCIStarInventoryItemDataProvider>().As<IASCIStarInventoryItemDataProvider>();
         }
     }
 }
