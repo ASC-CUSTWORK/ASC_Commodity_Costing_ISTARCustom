@@ -3,6 +3,7 @@ using PX.Data.BQL.Fluent;
 using PX.Objects.IN;
 using PX.Objects.AP;
 using PX.Objects.PO;
+using PX.Objects.CR.Standalone;
 using System.Collections;
 using ASCISTARCustom.PDS.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
@@ -10,8 +11,14 @@ using ASCISTARCustom.Inventory.CacheExt;
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
 using ASCISTARCustom.Cost.Descriptor;
-using System;
 using PX.Common;
+using ASCISTARCustom.Common.Helper;
+using PX.Data.BQL;
+using System.Collections.Generic;
+using System.Linq;
+using PX.Objects.CS;
+using PX.TM;
+using System;
 
 namespace ASCISTARCustom.PDS
 {
@@ -53,6 +60,9 @@ namespace ASCISTARCustom.PDS
         #region Dependency Injection
         [InjectDependency]
         public IASCIStarInventoryItemDataProvider _itemDataProvider { get; set; }
+
+        [InjectDependency]
+        public IASCIStarVendorDataProvider _vendorDataProvider { get; set; }
         #endregion
 
         #region CacheAttached
@@ -120,6 +130,15 @@ namespace ASCISTARCustom.PDS
             if (e.Row is INKitSpecHdr row)
             {
                 SetVisibleRevisionID();
+                SetEnabledMetalWeightFields(e, row);
+            }
+        }
+        protected virtual void _(Events.RowUpdated<INKitSpecHdr> e)
+        {
+            if (e.Row is INKitSpecHdr row)
+            {
+                var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
+                rowExt.UsrIsManualChanged = true;
             }
         }
         protected virtual void _(Events.FieldSelecting<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrUnitCost> e)
@@ -141,15 +160,6 @@ namespace ASCISTARCustom.PDS
         #endregion
 
         #region INKitSpecStkDet Events
-        protected virtual void _(Events.RowInserted<INKitSpecStkDet> e)
-        {
-            if (e.Row is INKitSpecStkDet row)
-            {
-                var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
-                var result = ASCIStarCostBuilder.CalculateUnitCost(inventoryItem);
-                e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, result);
-            }
-        }
         protected virtual void _(Events.RowSelected<INKitSpecStkDet> e)
         {
             if (e.Row is INKitSpecStkDet row)
@@ -195,6 +205,55 @@ namespace ASCISTARCustom.PDS
                         }
                     });
                 }
+            }
+        }
+        protected virtual void _(Events.FieldDefaulting<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrCostingType> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                if (jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem.MetalType)))
+                {
+                    var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
+                    var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
+                    e.NewValue = inventoryItemExt.UsrCostingType;
+                }
+                else
+                {
+                    e.NewValue = ASCIStarCostingType.StandardCost;
+                }
+            }
+        }
+        protected virtual void _(Events.FieldDefaulting<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrUnitCost> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
+                e.NewValue = ASCIStarCostBuilder.CalculateUnitCost(inventoryItem);
+            }
+        }
+        protected virtual void _(Events.FieldDefaulting<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrSalesPrice> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                decimal? salesPrice = 0m;
+                var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+                if (defaultVendor != null)
+                {
+                    
+                    var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                    if (jewelryItem != null && ASCIStarMetalType.IsGold(jewelryItem.MetalType))
+                    {
+                        var preciousMetalItem = GetInventoryItemByInvenctoryCD("24K");
+                        salesPrice = GetAPVendorPrice(defaultVendor.VendorID, preciousMetalItem.InventoryID, PXTimeZoneInfo.Now).SalesPrice;
+                    }
+                    else if (jewelryItem != null && ASCIStarMetalType.IsSilver(jewelryItem.MetalType))
+                    {
+                        var preciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
+                        salesPrice = GetAPVendorPrice(defaultVendor.VendorID, preciousMetalItem.InventoryID, PXTimeZoneInfo.Now).SalesPrice;
+                    }
+                }
+                e.NewValue = salesPrice;
             }
         }
         #endregion
@@ -340,6 +399,27 @@ namespace ASCISTARCustom.PDS
         {
             PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrCostRollupType>(cache, line, false);
         }
+        protected virtual void SetEnabledMetalWeightFields(Events.RowSelected<INKitSpecHdr> e, INKitSpecHdr row)
+        {
+            var jewelryItem = GetASCIStarINJewelryItem(row.KitInventoryID);
+            var result = ASCIStarMetalType.GetMetalType(jewelryItem?.MetalType);
+            if (result == true)
+            {
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrGoldGrams>(e.Cache, row, true);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineGoldGrams>(e.Cache, row, true);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrMatrixStep>(e.Cache, row, false);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrSilverGrams>(e.Cache, row, false);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineSilverGrams>(e.Cache, row, false);
+            }
+            else if (result == false)
+            {
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrGoldGrams>(e.Cache, row, false);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineGoldGrams>(e.Cache, row, false);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrMatrixStep>(e.Cache, row, true);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrSilverGrams>(e.Cache, row, true);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineSilverGrams>(e.Cache, row, true);
+            }
+        }
         #endregion
 
         #region ServiceQueries
@@ -350,6 +430,16 @@ namespace ASCISTARCustom.PDS
                 Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>
                 .Select(Base, inventoryID);
         }
+        private InventoryItem GetInventoryItemByInvenctoryCD(string inventiryCD)
+           => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(Base, inventiryCD)?.TopFirst;
+        private APVendorPrice GetAPVendorPrice(int? vendorID, int? inventoryID, DateTime effectiveDate)
+            => new PXSelect<APVendorPrice,
+                Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
+                    And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
+                    And<APVendorPrice.uOM, Equal<Required<APVendorPrice.uOM>>,
+                    And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>,
+                    And<APVendorPrice.expirationDate, GreaterEqual<Required<APVendorPrice.effectiveDate>>>>>>>,
+                OrderBy<Desc<APVendorPrice.effectiveDate>>>(Base).SelectSingle(vendorID, inventoryID, "TOZ", effectiveDate, effectiveDate);
         #endregion
     }
 }

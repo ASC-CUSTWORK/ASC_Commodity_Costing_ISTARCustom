@@ -166,7 +166,7 @@ namespace ASCISTARCustom.Common.Builder
 
         public virtual decimal? GetVendorPricePerTOZ(int? vendorID, int? inventoryID)
         {
-            var result = GetAPVendorPrice(vendorID, inventoryID, UOM, PricingDate);
+            var result = GetAPVendorPrice(vendorID, inventoryID, UOM ?? "TOZ", PricingDate);
             if (result == null)
             {
                 var vendor = Vendor.PK.Find(_graph, vendorID);
@@ -196,19 +196,19 @@ namespace ASCISTARCustom.Common.Builder
 
         public static decimal? CalculateUnitCost(ASCIStarItemCostSpecDTO costSpecDTO)
         {
-            return (costSpecDTO.PreciousMetalCost  ?? 0m)
-                 + (costSpecDTO.MaterialsCost      ?? 0m) 
-                 + (costSpecDTO.FabricationCost    ?? 0m) 
-                 + (costSpecDTO.PackagingCost      ?? 0m);
+            return (costSpecDTO?.PreciousMetalCost ?? 0m)
+                 + (costSpecDTO?.MaterialsCost ?? 0m)
+                 + (costSpecDTO?.FabricationCost ?? 0m)
+                 + (costSpecDTO?.PackagingCost ?? 0m);
         }
 
         public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
         {
-            return (costSpecDTO.UnitCost ?? 0m) 
-                + (costSpecDTO.HandlingCost ?? 0m) 
-                + (costSpecDTO.FreightCost ?? 0m) 
-                + (costSpecDTO.LaborCost ?? 0m) 
-                + (costSpecDTO.DutyCost ?? 0m);
+            return (costSpecDTO?.UnitCost ?? 0m) 
+                + (costSpecDTO?.HandlingCost ?? 0m) 
+                + (costSpecDTO?.FreightCost ?? 0m) 
+                + (costSpecDTO?.LaborCost ?? 0m) 
+                + (costSpecDTO?.DutyCost ?? 0m);
         }
 
         public static decimal? CalculateDutyCost(ASCIStarItemCostSpecDTO costSpecDTO, decimal? newValue)
@@ -270,7 +270,7 @@ namespace ASCISTARCustom.Common.Builder
                     And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
                     And<APVendorPrice.uOM, Equal<Required<APVendorPrice.uOM>>,
                     And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>,
-                    And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>>>>>>,
+                    And<APVendorPrice.expirationDate, GreaterEqual<Required<APVendorPrice.effectiveDate>>>>>>>,
                 OrderBy<Desc<APVendorPrice.effectiveDate>>>(_graph).SelectSingle(vendorID, inventoryID, "TOZ", effectiveDate, effectiveDate);
         #endregion
     }

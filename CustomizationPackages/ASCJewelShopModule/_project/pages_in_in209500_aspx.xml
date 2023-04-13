@@ -3,7 +3,7 @@
         <Children Key="Items">
             <AddItem>
                 <PXTabItem TypeFullName="PX.Web.UI.PXTabItem">
-                    <Prop Key="Text" Value="JEWELRY" />
+                    <Prop Key="Text" Value="Jewelry Attributes" />
                     <Children Key="Template">
                         <AddItem>
                             <PXFormView TypeFullName="PX.Web.UI.PXFormView">
@@ -643,6 +643,12 @@
             <PXGridColumn DataField="CompSubItemID" OriginalIndex="2" />
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrSalesPrice" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrUnitCost" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="CommitChanges" Value="True" />
@@ -853,6 +859,14 @@
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
+                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
+                                <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                <Prop Key="ID" Value="CstPXNumberEdit220" />
+                                <Prop Key="DataField" Value="UsrHandlingCost" />
+                                <Prop Key="CommitChanges" Value="True" />
+                            </PXNumberEdit>
+                        </AddItem>
+                        <AddItem>
                             <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXLayoutRule209" />
@@ -876,14 +890,6 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit219" />
                                 <Prop Key="DataField" Value="UsrFreightCost" />
-                                <Prop Key="CommitChanges" Value="True" />
-                            </PXNumberEdit>
-                        </AddItem>
-                        <AddItem>
-                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit220" />
-                                <Prop Key="DataField" Value="UsrHandlingCost" />
                                 <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>

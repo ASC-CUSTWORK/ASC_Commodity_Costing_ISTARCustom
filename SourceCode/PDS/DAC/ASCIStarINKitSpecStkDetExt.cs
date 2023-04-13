@@ -38,7 +38,6 @@ namespace ASCISTARCustom
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [ASCIStarCostingType.List]
         [PXUIField(DisplayName = "Costing Type")]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostingType>))]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion
@@ -49,6 +48,14 @@ namespace ASCISTARCustom
         [ASCIStarCostRollupType.List]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
-        #endregion   
+        #endregion
+
+        #region UsrSalesPrice
+        [PXDBPriceCost]
+        [PXDefault(TypeCode.Decimal, "0.0", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Vendor Price", Visibility = PXUIVisibility.Visible, Enabled = true)]
+        public decimal? UsrSalesPrice { get; set; }
+        public abstract class usrSalesPrice : PX.Data.BQL.BqlDecimal.Field<usrSalesPrice> { }
+        #endregion
     }
 }

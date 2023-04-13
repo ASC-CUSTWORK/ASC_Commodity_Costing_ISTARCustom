@@ -163,7 +163,7 @@ namespace ASCISTARCustom
 
         #region UsrFabricationCost
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Fabrication Cost")]
+        [PXUIField(DisplayName = "Fabrication/Value Add")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public Decimal? UsrFabricationCost { get; set; }
         public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }

@@ -10,7 +10,7 @@ namespace ASCISTARCustom.Cost.Descriptor
         public const string PercentageCost = "P"; // SUM(All Non PercentageCost) * 
                                                   // public const string WeightCost = "W"; // GRAMS * Unit
 
-        public const string MessageStandard = "ERP Valuation";
+        public const string MessageStandard = "Avg. Actual Valuation";
         public const string MessageMarket = "Market";
         public const string MessageContract = "Contract";
         public const string MessagePercentage = "Percentage";

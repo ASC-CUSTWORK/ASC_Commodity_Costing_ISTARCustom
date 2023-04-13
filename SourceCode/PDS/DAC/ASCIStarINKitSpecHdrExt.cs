@@ -129,7 +129,7 @@ namespace ASCISTARCustom
         #region FabricationCost
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Fabrication Cost")]
+        [PXUIField(DisplayName = "Fabrication/Value Add")]
         public decimal? UsrFabricationCost { get; set; }
         public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
         #endregion
@@ -204,6 +204,13 @@ namespace ASCISTARCustom
         [PXUIField(DisplayName = "Duty %")]
         public decimal? UsrDutyCostPct { get; set; }
         public abstract class usrDutyCostPct : PX.Data.BQL.BqlDecimal.Field<usrDutyCostPct> { }
+        #endregion
+
+        #region UsrIsManualChanged
+        [PXBool]
+        [PXDefault(false, PersistingCheck = PXPersistingCheck.Nothing)]
+        public bool? UsrIsManualChanged { get; set; }
+        public abstract class usrIsManualChanged : PX.Data.BQL.BqlBool.Field<usrIsManualChanged> { }
         #endregion
     }
 }
