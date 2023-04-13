@@ -130,7 +130,7 @@ namespace ASCISTARCustom.PDS
             if (e.Row is INKitSpecHdr row)
             {
                 SetVisibleRevisionID();
-                SetEnabledMetalWeightFields(e, row);
+                //SetEnabledMetalWeightFields(e, row);
             }
         }
         protected virtual void _(Events.RowUpdated<INKitSpecHdr> e)
@@ -168,7 +168,6 @@ namespace ASCISTARCustom.PDS
                 {
                     var specHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(Base.Hdr.Current);
                     SetZeroForCustomFields(specHdrExt);
-
                     Base.StockDet.Select().RowCast<INKitSpecStkDet>().ForEach(currentLine =>
                     {
                         var quantity = GetQuantity(currentLine);
@@ -178,14 +177,14 @@ namespace ASCISTARCustom.PDS
                             var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
                             var jewelryItem = GetASCIStarINJewelryItem(inventoryItem.InventoryID);
 
-                            if (jewelryItem != null && jewelryItem.MetalType == "24K")
+                            if (jewelryItem != null && ASCIStarMetalType.IsGold(jewelryItem?.MetalType))
                             {
                                 CalculateAndAssignGoldGrams(specHdrExt, quantity, inventoryItemExt);
                                 CalculateAndAssignItemCosts(specHdrExt, quantity, inventoryItemExt);
 
                                 DisableRollupType(e.Cache, currentLine);
                             }
-                            else if (jewelryItem != null && jewelryItem.MetalType == "SSS")
+                            else if (jewelryItem != null && ASCIStarMetalType.IsSilver(jewelryItem?.MetalType))
                             {
                                 CalculateAndAssignSilverGrams(specHdrExt, currentLine, inventoryItemExt);
                                 CalculateAndAssignItemCosts(specHdrExt, quantity, inventoryItemExt);
@@ -245,12 +244,12 @@ namespace ASCISTARCustom.PDS
                     if (jewelryItem != null && ASCIStarMetalType.IsGold(jewelryItem.MetalType))
                     {
                         var preciousMetalItem = GetInventoryItemByInvenctoryCD("24K");
-                        salesPrice = GetAPVendorPrice(defaultVendor.VendorID, preciousMetalItem.InventoryID, PXTimeZoneInfo.Now).SalesPrice;
+                        salesPrice = GetAPVendorPrice(defaultVendor.VendorID, preciousMetalItem.InventoryID, PXTimeZoneInfo.Now)?.SalesPrice ?? 0m;
                     }
                     else if (jewelryItem != null && ASCIStarMetalType.IsSilver(jewelryItem.MetalType))
                     {
                         var preciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
-                        salesPrice = GetAPVendorPrice(defaultVendor.VendorID, preciousMetalItem.InventoryID, PXTimeZoneInfo.Now).SalesPrice;
+                        salesPrice = GetAPVendorPrice(defaultVendor.VendorID, preciousMetalItem.InventoryID, PXTimeZoneInfo.Now)?.SalesPrice ?? 0m;
                     }
                 }
                 e.NewValue = salesPrice;
@@ -399,27 +398,27 @@ namespace ASCISTARCustom.PDS
         {
             PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrCostRollupType>(cache, line, false);
         }
-        protected virtual void SetEnabledMetalWeightFields(Events.RowSelected<INKitSpecHdr> e, INKitSpecHdr row)
-        {
-            var jewelryItem = GetASCIStarINJewelryItem(row.KitInventoryID);
-            var result = ASCIStarMetalType.GetMetalType(jewelryItem?.MetalType);
-            if (result == true)
-            {
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrGoldGrams>(e.Cache, row, true);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineGoldGrams>(e.Cache, row, true);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrMatrixStep>(e.Cache, row, false);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrSilverGrams>(e.Cache, row, false);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineSilverGrams>(e.Cache, row, false);
-            }
-            else if (result == false)
-            {
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrGoldGrams>(e.Cache, row, false);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineGoldGrams>(e.Cache, row, false);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrMatrixStep>(e.Cache, row, true);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrSilverGrams>(e.Cache, row, true);
-                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineSilverGrams>(e.Cache, row, true);
-            }
-        }
+        //protected virtual void SetEnabledMetalWeightFields(Events.RowSelected<INKitSpecHdr> e, INKitSpecHdr row)
+        //{
+        //    var jewelryItem = GetASCIStarINJewelryItem(row.KitInventoryID);
+        //    var result = ASCIStarMetalType.GetMetalType(jewelryItem?.MetalType);
+        //    if (result == true)
+        //    {
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrGoldGrams>(e.Cache, row, true);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineGoldGrams>(e.Cache, row, true);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrMatrixStep>(e.Cache, row, false);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrSilverGrams>(e.Cache, row, false);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineSilverGrams>(e.Cache, row, false);
+        //    }
+        //    else if (result == false)
+        //    {
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrGoldGrams>(e.Cache, row, false);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineGoldGrams>(e.Cache, row, false);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrMatrixStep>(e.Cache, row, true);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrSilverGrams>(e.Cache, row, true);
+        //        PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecHdrExt.usrFineSilverGrams>(e.Cache, row, true);
+        //    }
+        //}
         #endregion
 
         #region ServiceQueries
