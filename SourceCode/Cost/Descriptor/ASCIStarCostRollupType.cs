@@ -17,7 +17,7 @@ namespace ASCISTARCustom.Cost.Descriptor
 
         public const string MessagePreciousMetal = "Precious Metal";
         public const string MessageMaterials = "Other Materials";
-        public const string MessageFabrication = "Value Add Fabrication";
+        public const string MessageFabrication = "Fabrication/Value Add";
         public const string MessageLabor = "In-house Labor";
         public const string MessageHandling = "Handling";
         public const string MessageFreight = "Freight";

@@ -15,6 +15,7 @@ using PX.Objects;
 using System.Collections.Generic;
 using System;
 using PX.Data.BQL.Fluent;
+using ASCISTARCustom.Common.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -35,7 +36,7 @@ namespace ASCISTARCustom
         #region UsrCommodityID
         [PXDBInt()]
         [PXUIField(DisplayName = "Metal")]
-        [PXSelector(typeof(Search2<InventoryItem.inventoryID, InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<CommodityClass>>>),
+        [PXSelector(typeof(Search2<InventoryItem.inventoryID, InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
             , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
         public virtual int? UsrCommodityID { get; set; }

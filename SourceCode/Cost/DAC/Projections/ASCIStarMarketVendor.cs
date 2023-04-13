@@ -4,6 +4,7 @@ using PX.Objects.IN;
 using PX.Objects.CM;
 using System;
 using PX.Data.EP;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Cost.DAC.Projections
 {
@@ -95,7 +96,7 @@ namespace ASCISTARCustom.Cost.DAC.Projections
 
         #region Commodity
         [PXDBString(1, BqlField = typeof(ASCIStarAPVendorPriceExt.usrCommodity))]
-        [PXUIField(DisplayName = "Metal")]
+        [PXUIField(DisplayName = "Commodity Metal Type")]
         [CommodityType.List]
         [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Null)]
         public virtual string Commodity { get; set; }

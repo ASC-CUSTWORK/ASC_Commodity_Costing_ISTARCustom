@@ -288,6 +288,7 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXDropDown71" />
                                 <Prop Key="DataField" Value="UsrCostingType" />
+                                <Prop Key="CommitChanges" Value="True" />
                             </PXDropDown>
                         </AddItem>
                         <AddItem>
@@ -304,6 +305,7 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXDropDown72" />
                                 <Prop Key="DataField" Value="UsrCostRollupType" />
+                                <Prop Key="CommitChanges" Value="True" />
                             </PXDropDown>
                         </AddItem>
                     </Children>

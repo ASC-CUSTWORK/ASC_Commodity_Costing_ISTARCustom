@@ -128,7 +128,6 @@
     <Compile Include="Cost\DAC\Unbounds\ASCIStarMarketVendorFilter.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarItemPrice.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarMarket.cs" />
-    <Compile Include="Cost\Descriptor\CommodityType.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarContractSurchargeType.cs" />
     <Compile Include="Cost\Descriptor\CostBasisType.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarCostingType.cs" />

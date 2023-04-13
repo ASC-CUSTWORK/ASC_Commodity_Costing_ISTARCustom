@@ -19,6 +19,7 @@ using PX.Objects.TX;
 using PX.Objects;
 using System.Collections.Generic;
 using System;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom 
 {
@@ -33,9 +34,8 @@ namespace ASCISTARCustom
 
         #region UsrCommodity 
         [PXDBString(1)]
-        [PXUIField(DisplayName = "Commodity")]
+        [PXUIField(DisplayName = "Commodity Type")]
         [CommodityType.List]
-        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual string UsrCommodity { get; set; }
         public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
         #endregion

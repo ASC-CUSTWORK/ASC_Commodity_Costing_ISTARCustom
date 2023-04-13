@@ -10,6 +10,7 @@ using PX.Objects.CR;
 using PX.Objects.IN;
 using PX.Objects.SO;
 using PX.Objects.CS;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -115,7 +116,7 @@ namespace ASCISTARCustom
 		#endregion
 		#region Commodity
 		[PXDBString(1, IsKey = true)]
-		[PXUIField(DisplayName = "Commodity")]
+		[PXUIField(DisplayName = "Commodity Type")]
 		[CommodityType.List]
 		[PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.NullOrBlank)]
 		public virtual string Commodity { get; set; }

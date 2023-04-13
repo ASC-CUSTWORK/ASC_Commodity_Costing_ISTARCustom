@@ -1,6 +1,7 @@
 ﻿using PX.Data;
 using PX.Objects.AP;
 using System;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -72,7 +73,7 @@ namespace ASCISTARCustom
 
         #region UsrCommodity
         [PXDBString(1)]
-        [PXUIField(DisplayName = "Metal")]
+        [PXUIField(DisplayName = "Commodity Metal Type")]
         [CommodityType.List]
         [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
         public string UsrCommodity { get; set; }
