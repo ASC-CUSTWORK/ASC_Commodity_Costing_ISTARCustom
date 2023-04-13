@@ -21,7 +21,7 @@ namespace ASCISTARCustom.Common.Builder
         private string Currency { get; set; } = "USD";
         private bool IsEnabledOverrideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
-        
+
         public ASCIStarINJewelryItem INJewelryItem { get; set; }
         public ASCIStarItemCostSpecDTO ItemCostSpecification { get; set; }
         public POVendorInventory POVendorInventory { get; set; }
@@ -162,9 +162,21 @@ namespace ASCISTARCustom.Common.Builder
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
             {
+                switch (costingType ?? ItemCostSpecification.CostingType)
+                {
+                    case ASCIStarCostingType.ContractCost:
+                        //preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.MatrixStep);
+                        break;
+                    case ASCIStarCostingType.MarketCost:
+                        //preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.MatrixStep);
+                        break;
+                    case ASCIStarCostingType.StandardCost:
+                        return AvrPreciousMetalUnitCost - ItemCostSpecification.FabricationCost - ItemCostSpecification.MaterialsCost - ItemCostSpecification.PackagingCost;
+
+                    default: break;
+                }
                 preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.MatrixStep)
-                    * priciousMetalMultFactor
-                    * ItemCostSpecification.SilverGrams;
+                                        * priciousMetalMultFactor * ItemCostSpecification.SilverGrams;
             }
 
             decimal surchargeValue = (100m + ItemCostSpecification.SurchargePct ?? 0.0m) / 100m;
@@ -288,7 +300,7 @@ namespace ASCISTARCustom.Common.Builder
                 .And<APVendorPrice.inventoryID.IsEqual<P.AsInt>
                     .And<APVendorPrice.uOM.IsEqual<P.AsString>
                        .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>.Or<APVendorPrice.effectiveDate.IsNull>>
-                         .And<Brackets< APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>
+                         .And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>
             .OrderBy<APVendorPrice.effectiveDate.Desc>
             .View.Select(graph, vendorID, inventoryID, UOM, effectiveDate, effectiveDate)?.TopFirst;
         #endregion

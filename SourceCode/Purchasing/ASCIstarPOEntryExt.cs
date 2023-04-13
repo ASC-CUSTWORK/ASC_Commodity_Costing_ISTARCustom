@@ -178,7 +178,8 @@ namespace ASCISTARCustom
                                 .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
                                 .Build();
 
-                poLine.CuryUnitCost = jewelryCostProvider.GetPurchaseUnitCost(inventoryItemExt?.UsrCostingType);
+                poLine.CuryUnitCost = jewelryCostProvider.GetPurchaseUnitCost( 
+                    inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost ? ASCIStarCostingType.StandardCost : ASCIStarCostingType.MarketCost);
 
                 cache.SetValueExt<POLine.curyUnitCost>(poLine, poLine.CuryUnitCost);
 
