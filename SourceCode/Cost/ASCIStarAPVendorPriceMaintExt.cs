@@ -1,22 +1,6 @@
-﻿
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using PX.Data;
-using PX.Objects.CR;
-using PX.Objects.CS;
-using PX.Objects.CM;
-using PX.Objects.GL;
-using PX.Objects.IN;
-using PX.SM;
-using PX.TM;
-using PX.Objects.PO;
-using PX.Common;
-using PX.Data.BQL;
-using PX.Objects;
+﻿using PX.Data;
 using PX.Objects.AP;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -25,7 +9,7 @@ namespace ASCISTARCustom
         #region CacheAttached
 
         [PXMergeAttributes(Method = MergeMethod.Append)]
-        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM>>))]
+        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
         protected void APVendorPrice_UsrCommodityPerGram_CacheAttached(PXCache sender) { }
 
         //[PXMergeAttributes(Method = MergeMethod.Append)]

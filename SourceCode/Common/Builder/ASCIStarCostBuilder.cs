@@ -11,28 +11,28 @@ using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
-using System.Collections.Generic;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Common.Builder
 {
     public class ASCIStarCostBuilder
     {
         #region Properies
-        private string UOM { get; set; }
         private string Currency { get; set; } = "USD";
-        public DateTime PricingDate { get; set; } = PXTimeZoneInfo.Now;
-        private bool IsEnabledOverideVendor { get; set; }
+        private bool IsEnabledOverrideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
+        
         public ASCIStarINJewelryItem INJewelryItem { get; set; }
-
         public ASCIStarItemCostSpecDTO ItemCostSpecification { get; set; }
         public POVendorInventory POVendorInventory { get; set; }
         public ASCIStarPOVendorInventoryExt POVendorInventoryExt { get; set; }
+        public DateTime PricingDate { get; set; } = PXTimeZoneInfo.Today;
         public decimal? PreciousMetalContractCostPerTOZ { get; set; }
         public decimal? PreciousMetalMarketCostPerTOZ { get; set; }
         public decimal? PreciousMetalContractCostPerGram { get; private set; }
         public decimal? PreciousMetalMarketCostPerGram { get; private set; }
         public decimal? PreciousMetalUnitCost { get; private set; }
+        public decimal? AvrPreciousMetalUnitCost { get; private set; }
         #endregion 
 
         private readonly PXGraph _graph;
@@ -54,7 +54,7 @@ namespace ASCISTARCustom.Common.Builder
         {
             POVendorInventory = vendorInventory;
             POVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(vendorInventory);
-            IsEnabledOverideVendor = POVendorInventoryExt.UsrIsOverrideVendor == true;
+            IsEnabledOverrideVendor = POVendorInventoryExt.UsrIsOverrideVendor == true;
             return this;
         }
         public ASCIStarCostBuilder WithINJewelryItem(ASCIStarINJewelryItem inJewelryItem)
@@ -69,7 +69,7 @@ namespace ASCISTARCustom.Common.Builder
         }
         public ASCIStarCostBuilder WithPricingData(DateTime pricingData)
         {
-            PricingDate = pricingData > PXTimeZoneInfo.Today ? PXTimeZoneInfo.Now : pricingData;
+            PricingDate = pricingData > PXTimeZoneInfo.Today ? PXTimeZoneInfo.Today : pricingData;
             return this;
         }
         public ASCIStarCostBuilder Build()
@@ -81,26 +81,34 @@ namespace ASCISTARCustom.Common.Builder
 
         public virtual void Initialize()
         {
-            if (INJewelryItem == null) INJewelryItem = GetASCIStarINJewelryItem(ItemCostSpecification.InventoryID);
+            INJewelryItem = GetASCIStarINJewelryItem(ItemCostSpecification.InventoryID);
 
             if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
                 PreciousMetalItem = GetInventoryItemByInvenctoryCD("24K");
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
                 PreciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
 
-            PreciousMetalContractCostPerTOZ = IsEnabledOverideVendor ? POVendorInventoryExt.UsrCommodityPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID);
-            PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("SSS");
-
+            PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID);
             PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
-            PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24");
+
+            if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
+            {
+                PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24");
+                PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24");
+            }
+            else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
+            {
+                PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("SSS");
+                PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("SSS");
+            }
+            AvrPreciousMetalUnitCost = GetPresiousMetalAvrCost();
         }
 
         public virtual decimal? CalculateSurchargeValue(ASCIStarItemCostSpecDTO itemCostSpecification)
         {
-            decimal? temp1 = itemCostSpecification.Increment;
-            decimal? temp2 = (temp1 * 31.10348m);
+            decimal? tempValue = itemCostSpecification.Increment * TOZ2GRAM_31_10348.value;
 
-            decimal? surchargeNewValue = (temp2 - 1.0m) * 100.0m;
+            decimal? surchargeNewValue = (tempValue - 1.0m) * 100.0m;
 
             return surchargeNewValue;
         }
@@ -145,8 +153,8 @@ namespace ASCISTARCustom.Common.Builder
                         preciousMetalCost = PreciousMetalMarketCostPerTOZ;
                         break;
                     case ASCIStarCostingType.StandardCost:
+                        return AvrPreciousMetalUnitCost - ItemCostSpecification.FabricationCost - ItemCostSpecification.MaterialsCost - ItemCostSpecification.PackagingCost;
 
-                        break;
                     default: break;
                 }
                 preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * ItemCostSpecification.GoldGrams.Value;
@@ -166,11 +174,12 @@ namespace ASCISTARCustom.Common.Builder
 
         public virtual decimal? GetVendorPricePerTOZ(int? vendorID, int? inventoryID)
         {
-            var result = GetAPVendorPrice(vendorID, inventoryID, UOM ?? "TOZ", PricingDate);
+            var result = GetAPVendorPrice(_graph, vendorID, inventoryID, TOZ.value, PricingDate);
             if (result == null)
             {
-                var vendor = Vendor.PK.Find(_graph, vendorID);
-                throw new PXException(PXLocalizer.LocalizeFormat(ASCIStarMessages.Error.VendorDoesNotContainValidPrice, vendor?.AcctCD, ItemCostSpecification.InventoryCD, PricingDate.ToString("MM/dd/yyyy")));
+                return 0.0m;
+                //var vendor = Vendor.PK.Find(_graph, vendorID);
+                //throw new PXSetPropertyException(PXLocalizer.LocalizeFormat(ASCIStarMessages.Error.VendorDoesNotContainValidPrice, vendor?.AcctName, PreciousMetalItem.InventoryCD, PricingDate.ToString("MM/dd/yyyy")));
             }
 
             return result.SalesPrice;
@@ -204,10 +213,10 @@ namespace ASCISTARCustom.Common.Builder
 
         public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
         {
-            return (costSpecDTO?.UnitCost ?? 0m) 
-                + (costSpecDTO?.HandlingCost ?? 0m) 
-                + (costSpecDTO?.FreightCost ?? 0m) 
-                + (costSpecDTO?.LaborCost ?? 0m) 
+            return (costSpecDTO?.UnitCost ?? 0m)
+                + (costSpecDTO?.HandlingCost ?? 0m)
+                + (costSpecDTO?.FreightCost ?? 0m)
+                + (costSpecDTO?.LaborCost ?? 0m)
                 + (costSpecDTO?.DutyCost ?? 0m);
         }
 
@@ -227,7 +236,7 @@ namespace ASCISTARCustom.Common.Builder
 
             return value;
         }
-   
+
         public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? matrixStep)
         {
             if (matrixStep <= 0.0m || matrixStep == null)
@@ -247,6 +256,15 @@ namespace ASCISTARCustom.Common.Builder
             return costPerOz;
         }
 
+        private decimal? GetPresiousMetalAvrCost()
+        {
+            var inItemCost = INItemCost.PK.Find(_graph, ItemCostSpecification.InventoryID, Currency);
+
+            if (inItemCost.QtyOnHand == 0.0m) return 0.0m;
+
+            return inItemCost.TotalCost / inItemCost.QtyOnHand;
+        }
+
         public decimal? GetPurchaseUnitCost(string costingType)
         {
             ItemCostSpecification.PreciousMetalCost = CalculatePreciousMetalCost(costingType);
@@ -254,24 +272,25 @@ namespace ASCISTARCustom.Common.Builder
             return CalculateUnitCost(ItemCostSpecification);
         }
         #region ServiceQueries
-        private ASCIStarINJewelryItem GetASCIStarINJewelryItem(int? inventoryID) =>
-            PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>.Select(_graph, inventoryID);
+        private ASCIStarINJewelryItem GetASCIStarINJewelryItem(int? inventoryID)
+            => PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>.Select(_graph, inventoryID);
 
         private INUnit GetINUnit(string fromUnit, string toUnit)
             => PXSelect<INUnit,
                 Where<INUnit.fromUnit, Equal<Required<INUnit.fromUnit>>, And<INUnit.toUnit, Equal<Required<INUnit.toUnit>>>>>.Select(_graph, fromUnit, toUnit);
 
-        private InventoryItem GetInventoryItemByInvenctoryCD(string inventiryCD)
-            => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventiryCD)?.TopFirst;
+        private InventoryItem GetInventoryItemByInvenctoryCD(string inventoryCD)
+            => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
 
-        private APVendorPrice GetAPVendorPrice(int? vendorID, int? inventoryID, string UOM, DateTime effectiveDate)
-            => new PXSelect<APVendorPrice,
-                Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
-                    And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-                    And<APVendorPrice.uOM, Equal<Required<APVendorPrice.uOM>>,
-                    And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>,
-                    And<APVendorPrice.expirationDate, GreaterEqual<Required<APVendorPrice.effectiveDate>>>>>>>,
-                OrderBy<Desc<APVendorPrice.effectiveDate>>>(_graph).SelectSingle(vendorID, inventoryID, "TOZ", effectiveDate, effectiveDate);
+        public static APVendorPrice GetAPVendorPrice(PXGraph graph, int? vendorID, int? inventoryID, string UOM, DateTime effectiveDate)
+            => SelectFrom<APVendorPrice>
+            .Where<APVendorPrice.vendorID.IsEqual<P.AsInt>
+                .And<APVendorPrice.inventoryID.IsEqual<P.AsInt>
+                    .And<APVendorPrice.uOM.IsEqual<P.AsString>
+                       .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>.Or<APVendorPrice.effectiveDate.IsNull>>
+                         .And<Brackets< APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>
+            .OrderBy<APVendorPrice.effectiveDate.Desc>
+            .View.Select(graph, vendorID, inventoryID, UOM, effectiveDate, effectiveDate)?.TopFirst;
         #endregion
     }
 }

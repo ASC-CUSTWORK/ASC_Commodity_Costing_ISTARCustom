@@ -1,7 +1,8 @@
+using ASCISTARCustom.Common.Descriptor;
+using ASCISTARCustom.Cost.Descriptor;
 using PX.Data;
 using PX.Objects.IN;
 using System;
-using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -26,8 +27,8 @@ namespace ASCISTARCustom
         #region UsrCommodity
         [PXDBString(1)]
         [PXUIField(DisplayName = "Metal")]
-        [CommodityType.List]
-        [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
+        [ASCIStarConstants.CommodityType.List]
+        [PXDefault(ASCIStarConstants.CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
         public string UsrCommodity { get; set; }
         public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
         #endregion
@@ -35,7 +36,7 @@ namespace ASCISTARCustom
         #region UsrPriceAsID
         [PXDBInt()]
         [PXUIField(DisplayName = "Price as Item")]
-        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<CommodityClass>>>),
+        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
                         , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
         public int? UsrPriceAsID { get; set; }

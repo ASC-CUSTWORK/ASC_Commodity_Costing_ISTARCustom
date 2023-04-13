@@ -17,6 +17,7 @@ using ASCISTARCustom.Cost.Descriptor;
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Common.Descriptor;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Inventory.GraphExt
 {
@@ -370,6 +371,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
         #endregion InventoryItem Events
 
         #region JewelryItem Events
+
         protected virtual void _(Events.FieldUpdated<ASCIStarINJewelryItem, ASCIStarINJewelryItem.metalType> e)
         {
             var row = e.Row;
@@ -378,7 +380,9 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
             //   SetReadOnlyJewelFields(this.Base.Item.Cache, this.Base.Item.Current, result);
             SetMetalGramsToZero(result);
+            UpdateCommodityCostMetal(this.Base.Item.Cache, this.Base.Item.Current, PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current));
         }
+
         #endregion JewelryItem Events
 
         #region POVendorInventory Events
@@ -402,18 +406,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var inventoryID = SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(Base, inventoryCD)?.TopFirst.InventoryID;
 
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrMarketID>(e.Row, vendorExt.UsrMarketID);
-            var apVendorPrice = new PXSelect<APVendorPrice,
-                Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
-                    And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-                    And<APVendorPrice.uOM, Equal<Required<APVendorPrice.uOM>>,
-                    And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>,
-                    And<APVendorPrice.effectiveDate, LessEqual<Required<APVendorPrice.effectiveDate>>>>>>>,
-                OrderBy<Desc<APVendorPrice.effectiveDate>>>(Base).SelectSingle(
-                    e.Row.VendorID,
-                    inventoryID,
-                    "TOZ",
-                    PXTimeZoneInfo.Today,
-                    PXTimeZoneInfo.Today);
+            var apVendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(this.Base, e.Row.VendorID, inventoryID, TOZ.value, PXTimeZoneInfo.Today);
             if (apVendorPrice == null) return;
             var apVendorPriceExt = apVendorPrice.GetExtension<ASCIStarAPVendorPriceExt>();
             this.Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractSurcharge>(this.Base.Item.Current, apVendorPriceExt.UsrCommoditySurchargePct);
@@ -513,7 +506,6 @@ namespace ASCISTARCustom.Inventory.GraphExt
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrDutyCostPct>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrHandlingCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPackagingCost>(cache, row, isVisible);
-            //  PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrOtherCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrMaterialsCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, isVisible);
@@ -532,10 +524,10 @@ namespace ASCISTARCustom.Inventory.GraphExt
         {
             if (baseMetalType == null)
             {
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, true);
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, true);
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, true);
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(cache, row, true);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, false);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, false);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, false);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(cache, row, false);
             }
             else
             {
@@ -603,6 +595,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
             this.Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrCommodityCost>(this.Base.Item.Current, decimal.Zero);
             this.Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractLossPct>(this.Base.Item.Current, decimal.Zero);
             this.Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractSurcharge>(this.Base.Item.Current, decimal.Zero);
+            this.Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(this.Base.Item.Current, PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current).UsrActualGRAMGold);
+            this.Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrActualGRAMGold>(this.Base.Item.Current, PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current).UsrActualGRAMSilver);
         }
 
         private void UpdateCommodityCostMetal(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
@@ -661,6 +655,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
                             .WithInventoryItem(currentRow)
                             .WithPOVendorInventory(defaultVendor)
                             .WithINJewelryItem(this.JewelryItemView.Current)
+                            .WithPricingData(PXTimeZoneInfo.Today)
                             .Build();
             }
 

@@ -12,6 +12,7 @@ using PX.Objects.Common;
 using PX.Objects.PO;
 using ASCISTARCustom.Cost.Descriptor;
 using ASCISTARCustom.Common.Builder;
+using PX.Data.BQL;
 
 namespace ASCISTARCustom
 {
@@ -31,7 +32,6 @@ namespace ASCISTARCustom
                And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
                    And<APVendorPrice.effectiveDate, Equal<Required<APVendorPrice.effectiveDate>>>>>> vendorPrice;
 
-        public SelectFrom<InventoryItem>.Where<InventoryItem.inventoryID.IsEqual<POLine.inventoryID.FromCurrent>>.View InventoryItemView;
         #endregion
 
         #region Actions
@@ -113,49 +113,20 @@ namespace ASCISTARCustom
             e.Cache.SetValueExt<ASCIStarPOOrderExt.usrMarketID>(row, vendor.GetExtension<ASCIStarVendorExt>().UsrMarketID);
         }
 
-        protected virtual void _(Events.FieldUpdated<POLine, POLine.orderQty> e)
-        {
-            var row = e.Row;
-            if (row == null || row.InventoryID == null) return;
-            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
-            if (InventoryItemView.Current == null)
-                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, row.InventoryID);
-            if (InventoryItemView.Current == null) return;
-
-            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
-            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
-
-            SetNewCosts(e.Cache, row, InventoryItemView.Current, inventoryItemExt);
-        }
-
         protected virtual void _(Events.FieldUpdated<POOrder, POOrder.orderDate> e)
         {
             var row = e.Row;
             if (row == null) return;
-            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
-            if (InventoryItemView.Current == null)
-                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, this.Base.Transactions.Current?.InventoryID);
-            if (InventoryItemView.Current == null) return;
 
-            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
-            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
-
-            SetNewCosts(e.Cache, this.Base.Transactions.Current, InventoryItemView.Current, inventoryItemExt);
+            SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, this.Base.Transactions.Select()?.FirstTableItems.ToList());
         }
 
         protected virtual void _(Events.FieldUpdated<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
         {
             var row = e.Row;
             if (row == null) return;
-            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
-            if (InventoryItemView.Current == null)
-                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, this.Base.Transactions.Current?.InventoryID);
-            if (InventoryItemView.Current == null) return;
 
-            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
-            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
-
-            SetNewCosts(e.Cache, this.Base.Transactions.Current, InventoryItemView.Current, inventoryItemExt);
+            SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, this.Base.Transactions.Select()?.FirstTableItems.ToList());
         }
 
         protected virtual void _(Events.FieldUpdated<POLine, POLine.inventoryID> e, PXFieldUpdated baseEvent)
@@ -165,23 +136,21 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null || row.InventoryID == null) return;
 
-            InventoryItemView.Current = InventoryItemView.Select().TopFirst;
-            if (InventoryItemView.Current == null)
-                InventoryItemView.Current = InventoryItem.PK.Find(this.Base, row.InventoryID);
-            if (InventoryItemView.Current == null) return;
-
-            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(InventoryItemView.Current);
-            if (inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost) return;
-
-            SetNewCosts(e.Cache, row, InventoryItemView.Current, inventoryItemExt);
-            SetInventoryItemCustomFields(e.Cache, row, inventoryItemExt);
+            SetNewUnitCostOnPOLines(e.Cache, new List<POLine>() { row });
         }
 
+        protected virtual void _(Events.FieldUpdated<POLine, POLine.orderQty> e)
+        {
+            var row = e.Row;
+            if (row == null || row.InventoryID == null) return;
+
+            SetNewUnitCostOnPOLines(e.Cache, new List<POLine>() { row });
+        }
         #endregion
 
 
         #region Helper Methods
-        private void SetNewCosts(PXCache cache, POLine row, InventoryItem inventoryItem, ASCIStarINInventoryItemExt inventoryItemExt)
+        private void SetNewUnitCostOnPOLines(PXCache cache, List<POLine> poLineList)
         {
             if (this.Base.Document.Current == null || this.Base.Document.Current.VendorID == null) return;
 
@@ -189,29 +158,43 @@ namespace ASCISTARCustom
 
             if (poOrderExt == null || poOrderExt.UsrMarketID == null)
             {
-                this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null, new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
+                this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null,
+                    new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
                 return;
             }
-            var vendor = vendorItemSelect.Select().TopFirst;
-            var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
-                            .WithInventoryItem(inventoryItem)
-                            .WithPOVendorInventory(vendor)
-                            .Build();
 
-            row.CuryUnitCost = jewelryCostProvider.GetPurchaseUnitCost(ASCIStarCostingType.MarketCost);
+            foreach (var poLine in poLineList)
+            {
+                var inventoryItem = InventoryItem.PK.Find(Base, poLine.InventoryID);
+                var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
 
-            cache.SetValueExt<POLine.curyUnitCost>(row, row.CuryUnitCost);
+                var poVendorInventory = SelectFrom<POVendorInventory>
+                    .Where<POVendorInventory.vendorID.IsEqual<P.AsInt>
+                    .And<POVendorInventory.inventoryID.IsEqual<P.AsInt>>>.View.Select(this.Base, this.Base.Document.Current.VendorID, poLine.InventoryID)?.TopFirst;
 
-            cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(row, jewelryCostProvider.PreciousMetalMarketCostPerTOZ);
+                var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
+                                .WithInventoryItem(inventoryItem)
+                                .WithPOVendorInventory(poVendorInventory)
+                                .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
+                                .Build();
+
+                poLine.CuryUnitCost = jewelryCostProvider.GetPurchaseUnitCost(inventoryItemExt?.UsrCostingType);
+
+                cache.SetValueExt<POLine.curyUnitCost>(poLine, poLine.CuryUnitCost);
+
+                cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(poLine, jewelryCostProvider.PreciousMetalMarketCostPerTOZ);
+
+                SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);
+            }
         }
 
-        private void SetInventoryItemCustomFields(PXCache cache, POLine row, ASCIStarINInventoryItemExt inventoryItemExt)
+        private void SetInventoryItemCustomFields(PXCache cache, POLine row, ASCIStarCostBuilder costBuilder)
         {
-            cache.SetValueExt<ASCIStarPOLineExt.usrContractIncrement>(row, inventoryItemExt.UsrContractIncrement);
-            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMGold>(row, inventoryItemExt.UsrActualGRAMGold);
-            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMGold>(row, inventoryItemExt.UsrPricingGRAMGold);
-            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMSilver>(row, inventoryItemExt.UsrActualGRAMSilver);
-            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMSilver>(row, inventoryItemExt.UsrPricingGRAMSilver);
+            cache.SetValueExt<ASCIStarPOLineExt.usrContractIncrement>(row, costBuilder.ItemCostSpecification.Increment);
+            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMGold>(row, costBuilder.ItemCostSpecification.GoldGrams);
+            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMGold>(row, costBuilder.ItemCostSpecification.FineGoldGrams);
+            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMSilver>(row, costBuilder.ItemCostSpecification.SilverGrams);
+            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMSilver>(row, costBuilder.ItemCostSpecification.FineSilverGrams);
         }
 
         #endregion

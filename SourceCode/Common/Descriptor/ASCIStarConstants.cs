@@ -1,8 +1,9 @@
-﻿using System.Security.Permissions;
+﻿using PX.Data;
+using System.Security.Permissions;
 
 namespace ASCISTARCustom.Common.Descriptor
 {
-    public class ASCIStarConstants
+    public static class ASCIStarConstants
     {
         public class MetalType
         {
@@ -49,9 +50,55 @@ namespace ASCISTARCustom.Common.Descriptor
             public const string Type_FSS = "FSS";
             public const string Type_SSS = "SSS";
         }
-        public class MetalFactor
-        {
 
+        public class CommodityClass : PX.Data.BQL.BqlString.Constant<CommodityClass>
+        {
+            public static readonly string value = "COMMODITY";
+            public CommodityClass() : base(value) { }
+        }
+
+        public class TOZ : PX.Data.BQL.BqlString.Constant<TOZ>
+        {
+            public static readonly string value = "TOZ";
+            public TOZ() : base(value) { }
+        }
+        public class TOZ2GRAM_31_10348 : PX.Data.BQL.BqlDecimal.Constant<TOZ2GRAM_31_10348>
+        {
+            public static readonly decimal value = 31.10348m;
+            public TOZ2GRAM_31_10348() : base(value) { }
+        }
+
+        public class CommodityType
+        {
+            public class ListAttribute : PXStringListAttribute
+            {
+                public ListAttribute() : base(
+                    new[] { Undefined, Gold, Silver, Platinum, Costume, Brass },
+                    new[] { MessageUndefined, MessageGold, MessageSilver, MessagePlatinum, MessageCostume, MessageBrass })
+                { }
+            }
+
+            //ADD BRASS HERE
+            public const string Undefined = "U";    // (U)ndefined
+            public const string Gold = "G";         // (G)mporting
+            public const string Silver = "S";       // (S)ilver
+            public const string Platinum = "P";     // (P)latinum
+            public const string Costume = "C";      // (C)ostume
+            public const string Brass = "B";        // (C)ostume
+
+            public const string MessageUndefined = "  ";
+            public const string MessageGold = "Gold";
+            public const string MessageSilver = "Silver";
+            public const string MessagePlatinum = "Platinum";
+            public const string MessageCostume = "Costume";
+            public const string MessageBrass = "Brass";
+
+            public class undefined : PX.Data.BQL.BqlString.Constant<undefined> { public undefined() : base(Undefined) { } }
+            public class gold : PX.Data.BQL.BqlString.Constant<gold> { public gold() : base(Gold) { } }
+            public class silver : PX.Data.BQL.BqlString.Constant<silver> { public silver() : base(Silver) { } }
+            public class platinum : PX.Data.BQL.BqlString.Constant<platinum> { public platinum() : base(Platinum) { } }
+            public class costume : PX.Data.BQL.BqlString.Constant<costume> { public costume() : base(Costume) { } }
+            public class brass : PX.Data.BQL.BqlString.Constant<brass> { public brass() : base(Brass) { } }
         }
     }
 }

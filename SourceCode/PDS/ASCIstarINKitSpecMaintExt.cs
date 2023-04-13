@@ -19,6 +19,8 @@ using System.Linq;
 using PX.Objects.CS;
 using PX.TM;
 using System;
+using ASCISTARCustom.Common.Descriptor;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.PDS
 {
@@ -50,7 +52,7 @@ namespace ASCISTARCustom.PDS
             InnerJoin<INItemClass, 
                 On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>>>,
             Where<APVendorPrice.vendorID, Equal<InventoryItemCurySettings.preferredVendorID>,
-                And<INItemClass.itemClassCD, Equal<CommodityClass>,
+                And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>,
                 And<APVendorPrice.effectiveDate, LessEqual<AccessInfo.businessDate>,
                 And<APVendorPrice.expirationDate, GreaterEqual<AccessInfo.businessDate>>>>>,
             OrderBy<
@@ -67,11 +69,11 @@ namespace ASCISTARCustom.PDS
 
         #region CacheAttached
         [PXMergeAttributes(Method = MergeMethod.Append)]
-        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM>>))]
+        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
         protected void _(Events.CacheAttached<ASCIStarAPVendorPriceExt.usrCommodityPerGram> cacheAttached) { }
 
         [PXMergeAttributes(Method = MergeMethod.Append)]
-        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<Div<APVendorPrice.salesPrice, ASCIStarAPVendorPriceExt.usrCommodityPrice>, TOZ2GRAM>>))]
+        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<Div<APVendorPrice.salesPrice, ASCIStarAPVendorPriceExt.usrCommodityPrice>, TOZ2GRAM_31_10348>>))]
         protected void _(Events.CacheAttached<ASCIStarAPVendorPriceExt.usrIncrementPerGram> cacheAttached) { }
 
         [PXMergeAttributes(Method = MergeMethod.Append)]

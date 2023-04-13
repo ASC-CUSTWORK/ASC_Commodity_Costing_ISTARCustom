@@ -28,6 +28,7 @@ using PX.Objects.Common.GraphExtensions;
 using PX.Objects.CM;
 using PX.Objects;
 using PX.Objects.IN;
+using ASCISTARCustom.Common.Descriptor;
 //using InfoSmartSearch;
 
 namespace ASCISTARCustom.Cost
@@ -71,7 +72,7 @@ namespace ASCISTARCustom.Cost
         InnerJoin<InventoryItem, On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
         InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>,
         Where<APVendorPrice.vendorID, Equal<Current<Vendor.bAccountID>>,
-            And<INItemClass.itemClassCD, Equal<CommodityClass>>>,
+            And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>,
         OrderBy<Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
 
         #endregion Select
