@@ -70,7 +70,7 @@ namespace ASCISTARCustom.Common.Builder
         }
         public ASCIStarCostBuilder WithPricingData(DateTime pricingData)
         {
-            PricingDate = pricingData > PXTimeZoneInfo.Today ? PXTimeZoneInfo.Today : pricingData;
+            PricingDate = pricingData;
             return this;
         }
         public ASCIStarCostBuilder Build()

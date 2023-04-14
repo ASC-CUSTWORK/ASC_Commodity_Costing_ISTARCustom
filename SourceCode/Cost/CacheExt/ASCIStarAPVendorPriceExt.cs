@@ -27,7 +27,6 @@ namespace ASCISTARCustom.Cost.CacheExt
             , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
         public int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlDecimal.Field<usrMarketID> { }
-
         #endregion
 
         #region UsrCommodityPrice

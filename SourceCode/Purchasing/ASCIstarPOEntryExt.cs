@@ -107,13 +107,13 @@ namespace ASCISTARCustom
 
         #region Event Handlers
 
-        protected virtual void _(Events.FieldVerifying<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
-        {
-            var row = e.Row;
-            if (row == null) return;
+        //protected virtual void _(Events.FieldVerifying<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
+        //{
+        //    var row = e.Row;
+        //    if (row == null) return;
 
-            if ((DateTime?)e.NewValue > DateTime.Today || e.NewValue == null) throw new PXSetPropertyException<ASCIStarPOOrderExt.usrPricingDate>("Pricing date can not be from future or empty!");
-        }
+        //    if ((DateTime?)e.NewValue > DateTime.Today || e.NewValue == null) throw new PXSetPropertyException<ASCIStarPOOrderExt.usrPricingDate>("Pricing date can not be from future or empty!");
+        //}
 
         protected virtual void _(Events.FieldUpdated<POOrder, POOrder.vendorID> e)
         {
@@ -183,13 +183,21 @@ namespace ASCISTARCustom
 
                 var poVendorInventory = SelectFrom<POVendorInventory>
                     .Where<POVendorInventory.vendorID.IsEqual<P.AsInt>
-                    .And<POVendorInventory.inventoryID.IsEqual<P.AsInt>>>.View.Select(this.Base, this.Base.Document.Current.VendorID, poLine.InventoryID)?.TopFirst;
+                        .And<POVendorInventory.inventoryID.IsEqual<P.AsInt>
+                            .And<POVendorInventory.isDefault.IsEqual<True>>>>
+                    .View.Select(this.Base, this.Base.Document.Current.VendorID, poLine.InventoryID)?.TopFirst;
 
-                var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
-                                .WithInventoryItem(inventoryItem)
-                                .WithPOVendorInventory(poVendorInventory)
-                                .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
-                                .Build();
+                if (poVendorInventory == null)
+                {
+                    poVendorInventory = new POVendorInventory() { VendorID = this.Base.Document.Current.VendorID };
+                    PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory).UsrMarketID = poOrderExt.UsrMarketID;
+                }
+
+                    var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
+                                    .WithInventoryItem(inventoryItem)
+                                    .WithPOVendorInventory(poVendorInventory)
+                                    .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
+                                    .Build();
 
                 poLine.CuryUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
                     inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost ? ASCIStarCostingType.StandardCost : ASCIStarCostingType.MarketCost);
