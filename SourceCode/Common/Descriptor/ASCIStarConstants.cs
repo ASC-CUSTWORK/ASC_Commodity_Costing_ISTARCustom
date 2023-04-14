@@ -1,5 +1,4 @@
 ﻿using PX.Data;
-using System.Security.Permissions;
 
 namespace ASCISTARCustom.Common.Descriptor
 {
@@ -57,6 +56,11 @@ namespace ASCISTARCustom.Common.Descriptor
             public CommodityClass() : base(value) { }
         }
 
+        public class MarketClass : PX.Data.BQL.BqlString.Constant<MarketClass>
+        {
+            public static readonly string value = "MARKET";
+            public MarketClass() : base(value) { }
+        }
         public class TOZ : PX.Data.BQL.BqlString.Constant<TOZ>
         {
             public static readonly string value = "TOZ";
@@ -99,6 +103,30 @@ namespace ASCISTARCustom.Common.Descriptor
             public class platinum : PX.Data.BQL.BqlString.Constant<platinum> { public platinum() : base(Platinum) { } }
             public class costume : PX.Data.BQL.BqlString.Constant<costume> { public costume() : base(Costume) { } }
             public class brass : PX.Data.BQL.BqlString.Constant<brass> { public brass() : base(Brass) { } }
+        }
+
+        public class MarketList
+        {
+            public const string NewYork = "NY";
+            public const string LondonAM = "LA";
+            public const string LondonPM = "LP";
+
+            public const string MessageNewYork = "NEW YORK";
+            public const string MessageLondonAM = "LONDON AM";
+            public const string MessageLondonPM = "LONDON PM";
+
+            public class ListAttribute : PXStringListAttribute
+            {
+                public ListAttribute() : base(
+                    new[] { NewYork, LondonAM, LondonPM },
+                    new[] { MessageNewYork, MessageLondonAM, MessageLondonPM })
+                { }
+            }
+
+            public class newYork : PX.Data.BQL.BqlString.Constant<newYork> { public newYork() : base(NewYork) { } }
+            public class londonAM : PX.Data.BQL.BqlString.Constant<londonAM> { public londonAM() : base(LondonAM) { } }
+            public class londonPM : PX.Data.BQL.BqlString.Constant<londonPM> { public londonPM() : base(LondonPM) { } }
+            public class defaultMarket : PX.Data.BQL.BqlString.Constant<defaultMarket> { public defaultMarket() : base(MessageLondonPM) { } }
         }
     }
 }

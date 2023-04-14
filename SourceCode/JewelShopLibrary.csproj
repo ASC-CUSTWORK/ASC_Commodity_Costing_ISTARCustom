@@ -119,24 +119,22 @@
     <Compile Include="Cost\ASCIStarAPVendorPriceMaintExt.cs" />
     <Compile Include="Cost\ASCIStarCostHelper.cs" />
     <Compile Include="Cost\ASCIStarVendorMaintExt.cs" />
-    <Compile Include="Cost\DAC\ASCIStarAPVendorPriceExt.cs" />
-    <Compile Include="Cost\DAC\ASCIStarINUnitExt.cs" />
+    <Compile Include="Cost\CacheExt\ASCIStarAPVendorPriceExt.cs" />
+    <Compile Include="Inventory\CacheExt\ASCIStarINUnitExt.cs" />
     <Compile Include="Cost\DAC\ASCIStarItemCostRollup.cs" />
-    <Compile Include="Cost\DAC\ASCIStarPOVendorInventoryExt.cs" />
+    <Compile Include="Cost\CacheExt\ASCIStarPOVendorInventoryExt.cs" />
     <Compile Include="Cost\DAC\ASCIStarVendorPricingConfig.cs" />
     <Compile Include="Cost\DAC\Projections\ASCIStarMarketVendor.cs" />
     <Compile Include="Cost\DAC\Unbounds\ASCIStarMarketVendorFilter.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarItemPrice.cs" />
-    <Compile Include="Cost\Descriptor\ASCIStarMarket.cs" />
-    <Compile Include="Cost\Descriptor\ASCIStarContractSurchargeType.cs" />
     <Compile Include="Cost\Descriptor\CostBasisType.cs" />
-    <Compile Include="Cost\Descriptor\ASCIStarCostingType.cs" />
-    <Compile Include="Cost\Descriptor\ASCIStarCostRollupType.cs" />
+    <Compile Include="Inventory\Descriptor\Constants\ASCIStarCostingType.cs" />
+    <Compile Include="Inventory\Descriptor\Constants\ASCIStarCostRollupType.cs" />
     <Compile Include="CustomerAllowance\ASCIStarCustomerAllowanceMaint.cs" />
     <Compile Include="CustomerAllowance\ASCIStarCustomerMaintAllowanceExt.cs" />
     <Compile Include="CustomerAllowance\DAC\ASCIStarCustomerAllowance.cs" />
     <Compile Include="DCLocation\DAC\ASCIStarCRLocationExt.cs" />
-    <Compile Include="DCLocation\DAC\ASCIStarSOLineExt.cs" />
+    <Compile Include="SalesOrder\CacheExt\ASCIStarSOLineExt.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINInventoryItemExt.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINItemClassExt.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINSetupExt.cs" />
@@ -158,9 +156,9 @@
     <Compile Include="Purchasing\ASCIstarPOEntryExt.cs" />
     <Compile Include="Purchasing\DAC\ASCIStarPOLineExt.cs" />
     <Compile Include="Purchasing\DAC\ASCIStarPOOrderExt.cs" />
-    <Compile Include="Purchasing\DAC\ASCIStarVendorExt.cs" />
+    <Compile Include="Cost\CacheExt\ASCIStarVendorExt.cs" />
     <Compile Include="Cost\ASCIStarMetalRatesSyncProcessing.cs" />
-    <Compile Include="SalesOrder\DAC\ASCIStarSOOrderExt.cs" />
+    <Compile Include="SalesOrder\CacheExt\ASCIStarSOOrderExt.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

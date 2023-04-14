@@ -1,10 +1,10 @@
-﻿using System;
-using ASCISTARCustom.Common.DAC;
+﻿using ASCISTARCustom.Common.DAC;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.CS;
 using PX.Objects.IN;
+using System;
 using static ASCISTARCustom.Inventory.Descriptor.Constants.ASCIStarINConstants;
 
 namespace ASCISTARCustom.PDS.CacheExt

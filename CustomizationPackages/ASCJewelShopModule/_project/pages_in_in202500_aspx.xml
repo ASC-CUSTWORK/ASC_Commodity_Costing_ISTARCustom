@@ -378,7 +378,8 @@
         </Prop>
     </PXButton>
     <PXLayoutRule ParentId="phF_form_PXLayoutRule#0" TypeFullName="PX.Web.UI.PXLayoutRule">
-        <Prop Key="ControlSize" Value="SM" />
+        <Prop Key="ControlSize" Value="M" />
+        <Prop Key="LabelsWidth" Value="S" />
     </PXLayoutRule>
     <PXLayoutRule ParentId="phF_form_PXLayoutRule#5" TypeFullName="PX.Web.UI.PXLayoutRule">
         <Prop Key="ControlSize" Value="SM" />
@@ -520,7 +521,7 @@
         <Children Key="Items">
             <AddItem>
                 <PXTabItem TypeFullName="PX.Web.UI.PXTabItem">
-                    <Prop Key="Text" Value="JEWELRY" />
+                    <Prop Key="Text" Value="Jewelry Attributes" />
                     <Children Key="Template">
                         <AddItem>
                             <PXFormView TypeFullName="PX.Web.UI.PXFormView">

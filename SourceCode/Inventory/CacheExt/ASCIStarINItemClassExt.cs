@@ -1,6 +1,6 @@
+using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
 using PX.Objects.IN;
-using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
@@ -15,8 +15,8 @@ namespace ASCISTARCustom
         [PXDefault(ASCIStarCostingType.StandardCost, PersistingCheck = PXPersistingCheck.Null)]
         public virtual string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
-        #endregion 
-        
+        #endregion
+
         #region UsrCostRollupType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type")]

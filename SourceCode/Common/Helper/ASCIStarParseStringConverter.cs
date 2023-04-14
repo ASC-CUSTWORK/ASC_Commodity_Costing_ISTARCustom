@@ -13,7 +13,7 @@ namespace ASCISTARCustom.Common.Helper
         /// </summary>
         /// <param name="type">The type to check for compatibility with this converter.</param>
         /// <returns>True if the type can be converted to/from JSON, false otherwise.</returns>
-        public override bool CanConvert(Type type) => 
+        public override bool CanConvert(Type type) =>
             type == typeof(long) || type == typeof(long?);
 
         /// <summary>

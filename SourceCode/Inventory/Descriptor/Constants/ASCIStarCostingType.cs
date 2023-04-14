@@ -1,6 +1,6 @@
 ﻿using PX.Data;
 
-namespace ASCISTARCustom.Cost.Descriptor
+namespace ASCISTARCustom.Inventory.Descriptor.Constants
 {
     public class ASCIStarCostingType
     {

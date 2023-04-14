@@ -1,5 +1,4 @@
 ﻿using ASCISTARCustom.Common.DTO.Interfaces;
-using ASCISTARCustom.Inventory.DAC;
 using PX.Data;
 using PX.Objects.IN;
 
@@ -67,7 +66,7 @@ namespace ASCISTARCustom.Common.DTO
                 CostingType = valueExt.UsrCostingType,
             };
         }
-            
+
 
         public static implicit operator ASCIStarItemCostSpecDTO(INKitSpecHdr value)
         {
@@ -99,6 +98,6 @@ namespace ASCISTARCustom.Common.DTO
                 DutyCostPct = valueExt.UsrDutyCostPct
             };
         }
-            
+
     }
 }

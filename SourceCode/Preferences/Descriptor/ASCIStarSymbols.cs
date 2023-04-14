@@ -56,17 +56,17 @@ namespace ASCISTARCustom.Preferences.Descriptor
 
         public class lBXAUPM : PX.Data.BQL.BqlString.Constant<lBXAUPM>
         {
-            public lBXAUPM() : base(LBXAUPM) { }        
+            public lBXAUPM() : base(LBXAUPM) { }
         }
 
         public class xAU : PX.Data.BQL.BqlString.Constant<xAU>
         {
-            public xAU() : base(XAU) { }        
+            public xAU() : base(XAU) { }
         }
 
         public class xAG : PX.Data.BQL.BqlString.Constant<xAG>
         {
-            public xAG() : base(XAG) { }        
+            public xAG() : base(XAG) { }
         }
     }
 }

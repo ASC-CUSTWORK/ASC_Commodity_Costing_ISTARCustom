@@ -1,25 +1,22 @@
-using PX.Data;
-using PX.Data.BQL.Fluent;
-using PX.Objects.IN;
-using PX.Objects.AP;
-using PX.Objects.PO;
-using PX.Objects.CR.Standalone;
-using System.Collections;
-using ASCISTARCustom.PDS.CacheExt;
-using ASCISTARCustom.Inventory.DAC;
-using ASCISTARCustom.Inventory.CacheExt;
 using ASCISTARCustom.Common.Builder;
-using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
-using ASCISTARCustom.Cost.Descriptor;
-using PX.Common;
-using ASCISTARCustom.Common.Helper;
-using PX.Data.BQL;
-using System.Collections.Generic;
-using System.Linq;
-using PX.Objects.CS;
-using PX.TM;
-using System;
 using ASCISTARCustom.Common.Descriptor;
+using ASCISTARCustom.Common.Helper;
+using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
+using ASCISTARCustom.Cost.CacheExt;
+using ASCISTARCustom.Inventory.CacheExt;
+using ASCISTARCustom.Inventory.DAC;
+using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.PDS.CacheExt;
+using PX.Common;
+using PX.Data;
+using PX.Data.BQL;
+using PX.Data.BQL.Fluent;
+using PX.Objects.AP;
+using PX.Objects.IN;
+using PX.Objects.PO;
+using System;
+using System.Collections;
+using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.PDS
@@ -41,15 +38,15 @@ namespace ASCISTARCustom.PDS
         [PXFilterable]
         public PXSelectJoin<
             APVendorPrice,
-            InnerJoin<POVendorInventory, 
+            InnerJoin<POVendorInventory,
                 On<POVendorInventory.vendorID, Equal<Current<APVendorPrice.vendorID>>,
                 And<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>>,
-            InnerJoin<InventoryItemCurySettings, 
+            InnerJoin<InventoryItemCurySettings,
                 On<InventoryItemCurySettings.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>,
                 And<InventoryItemCurySettings.preferredVendorID, Equal<POVendorInventory.vendorID>>>,
-            InnerJoin<InventoryItem, 
+            InnerJoin<InventoryItem,
                 On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
-            InnerJoin<INItemClass, 
+            InnerJoin<INItemClass,
                 On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>>>,
             Where<APVendorPrice.vendorID, Equal<InventoryItemCurySettings.preferredVendorID>,
                 And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>,
@@ -242,7 +239,7 @@ namespace ASCISTARCustom.PDS
                 var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
                 if (defaultVendor != null)
                 {
-                    
+
                     var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
                     if (jewelryItem != null && ASCIStarMetalType.IsGold(jewelryItem.MetalType))
                     {
@@ -428,7 +425,7 @@ namespace ASCISTARCustom.PDS
         private ASCIStarINJewelryItem GetASCIStarINJewelryItem(int? inventoryID)
         {
             return PXSelect<
-                ASCIStarINJewelryItem, 
+                ASCIStarINJewelryItem,
                 Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>
                 .Select(Base, inventoryID);
         }

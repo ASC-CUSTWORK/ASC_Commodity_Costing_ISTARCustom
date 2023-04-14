@@ -1,5 +1,4 @@
-﻿using System;
-using PX.Data;
+﻿using PX.Data;
 
 namespace ASCISTARCustom
 {

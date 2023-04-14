@@ -17,7 +17,7 @@ namespace ASCISTARCustom.Common.Services.DataProvider
         public InventoryItem GetInventoryItemByCD(string inventoryCD)
         {
             return PXSelect<
-                InventoryItem, 
+                InventoryItem,
                 Where<InventoryItem.inventoryCD, Equal<Required<InventoryItem.inventoryCD>>>>
                 .Select(_graph, inventoryCD);
         }

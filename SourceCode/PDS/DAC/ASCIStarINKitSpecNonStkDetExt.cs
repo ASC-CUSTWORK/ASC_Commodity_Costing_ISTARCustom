@@ -1,21 +1,17 @@
-using PX.Data.ReferentialIntegrity.Attributes;
+using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
-using PX.Objects.CS;
 using PX.Objects.IN;
-using PX.Objects;
-using System.Collections.Generic;
 using System;
-using ASCISTARCustom.Cost.Descriptor;
 
 namespace ASCISTARCustom
 {
     public class ASCIStarINKitSpecNonStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecNonStkDet>
     {
         public static bool IsActive() => true;
-        
+
         #region UsrItemClassID
         [PXInt]
-        [PXParent(typeof(Select<        InventoryItem,        Where<            InventoryItem.inventoryID, Equal<Current<INKitSpecNonStkDet.compInventoryID>>>>))]
+        [PXParent(typeof(Select<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecNonStkDet.compInventoryID>>>>))]
         [PXFormula(typeof(Parent<InventoryItem.itemClassID>))]
         public virtual int? UsrItemClassID { get; set; }
         public abstract class usrItemClassID : PX.Data.BQL.BqlInt.Field<usrItemClassID> { }

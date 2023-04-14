@@ -1,27 +1,11 @@
-﻿using PX.Common;
-using PX.Data.BQL;
-using PX.Data.ReferentialIntegrity.Attributes;
-using PX.Data;
+﻿using PX.Data;
 using PX.Objects.AP;
 using PX.Objects.CA;
-using PX.SM;
-using PX.Objects.Common.Bql;
-using PX.Objects.Common.Discount.Attributes;
-using PX.Objects.Common.Discount;
-using PX.Objects.Common;
-using PX.Objects.CR;
 using PX.Objects.CS;
-using PX.Objects.GL;
-using PX.Objects.IN.Matrix.Interfaces;
-using PX.Objects.IN;
-using PX.Objects.PM;
-using PX.Objects.PO;
-using PX.Objects.TX;
-using PX.Objects;
-using System.Collections.Generic;
 using System;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.Cost.CacheExt
 {
     public class ASCIStarVendorExt : PXCacheExtension<PX.Objects.AP.Vendor>
     {
@@ -29,12 +13,13 @@ namespace ASCISTARCustom
 
         #region UsrMarketID
         [PXDBInt()]
-        [PXUIField(DisplayName = "Market")]
+        [PXUIField(DisplayName = "Market", Required = true)]
         [PXSelector(
         typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>,
             Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
                         , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
+        [PXDefault()]
         public virtual int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
         #endregion

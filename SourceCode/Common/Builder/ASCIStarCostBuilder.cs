@@ -1,8 +1,9 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.DTO;
 using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Cost.Descriptor;
+using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
+using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
