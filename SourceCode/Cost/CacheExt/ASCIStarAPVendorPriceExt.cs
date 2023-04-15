@@ -1,9 +1,10 @@
 ﻿using PX.Data;
+using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.Cost.CacheExt
 {
     public sealed class ASCIStarAPVendorPriceExt : PXCacheExtension<APVendorPrice>
     {
@@ -11,9 +12,8 @@ namespace ASCISTARCustom
 
         #region UsrMarket
         [PXDBString(2, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Market", Required = true)]
+        [PXUIField(DisplayName = "Market")]
         [MarketList.List]
-        [PXDefault(MarketList.LondonPM, PersistingCheck = PXPersistingCheck.Nothing)]
         public string UsrMarket { get; set; }
         public abstract class usrMarket : PX.Data.BQL.BqlString.Field<usrMarket> { }
         #endregion
@@ -27,7 +27,6 @@ namespace ASCISTARCustom
             , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
         public int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlDecimal.Field<usrMarketID> { }
-
         #endregion
 
         #region UsrCommodityPrice
@@ -54,19 +53,12 @@ namespace ASCISTARCustom
         public abstract class usrCommoditySurchargePct : PX.Data.BQL.BqlDecimal.Field<usrCommoditySurchargePct> { }
         #endregion 
 
-        //#region UsrIncrement
-        //[PXDBDecimal(6)]
-        //[PXUIField(DisplayName = "Increment", Visible = true, Enabled = false)]
-        //public virtual decimal? UsrIncrement { get; set; }
-        //public abstract class usrIncrement : PX.Data.BQL.BqlDecimal.Field<usrIncrement> { }
-        //#endregion
-
         #region UsrCommodityIncrement
-        /* CHECK HERE MATT */
-        /* CONVERT TO STANDARD FIELD AND DEFAULT TO MARKET INCREMENT LOOKUP PERCENTAGE FOR VENDOR MARKUP */
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Metal Increment", Visible = true)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Metal Increment", IsReadOnly = true)]
+        [PXFormula(typeof(Switch<Case<
+            Where<APVendorPrice.uOM.IsNotEqual<TOZ>.And<APVendorPrice.salesPrice.IsNotNull.And<APVendorPrice.salesPrice.IsNotEqual<PX.Objects.CS.decimal0>>>>, Null>,
+            Div<usrCommodityPerGram, APVendorPrice.salesPrice>>))]
         public decimal? UsrCommodityIncrement { get; set; }
         public abstract class usrCommodityIncrement : PX.Data.BQL.BqlDecimal.Field<usrCommodityIncrement> { }
         #endregion
@@ -82,7 +74,8 @@ namespace ASCISTARCustom
 
         #region UsrCommodityPerGram
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Price/Gram", Visible = true, Enabled = false)]
+        [PXUIField(DisplayName = "Price/Gram", IsReadOnly = true)]
+        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
         public decimal? UsrCommodityPerGram { get; set; }
         public abstract class usrCommodityPerGram : PX.Data.BQL.BqlDecimal.Field<usrCommodityPerGram> { }
         #endregion

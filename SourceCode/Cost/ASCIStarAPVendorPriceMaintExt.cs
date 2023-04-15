@@ -1,4 +1,5 @@
-﻿using PX.Data;
+﻿using ASCISTARCustom.Cost.CacheExt;
+using PX.Data;
 using PX.Objects.AP;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
@@ -8,9 +9,9 @@ namespace ASCISTARCustom
     {
         #region CacheAttached
 
-        [PXMergeAttributes(Method = MergeMethod.Append)]
-        [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
-        protected void APVendorPrice_UsrCommodityPerGram_CacheAttached(PXCache sender) { }
+        //[PXMergeAttributes(Method = MergeMethod.Merge)]
+        //[PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
+     //   protected void APVendorPrice_UsrCommodityPerGram_CacheAttached(PXCache sender) { }
 
         //[PXMergeAttributes(Method = MergeMethod.Append)]
         //[PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, ASCIStarAPVendorPriceExt.usrCommodityPrice>>))]
@@ -25,6 +26,14 @@ namespace ASCISTARCustom
         #endregion CacheAttached
 
         #region Event Handlers
+        protected virtual void _(Events.FieldUpdated<APVendorPrice, APVendorPrice.vendorID> e)
+                    { 
+            var row = e.Row;
+            if (row == null) return;
+            Vendor vendor = Vendor.PK.Find(this.Base, row.VendorID);
+
+            e.Cache.SetValueExt<ASCIStarAPVendorPriceExt.usrMarketID>(row, vendor?.GetExtension<ASCIStarVendorExt>().UsrMarketID);
+        }
 
         //protected void APVendorPrice_VendorID_FieldUpdating(PXCache cache, PXFieldUpdatingEventArgs e, PXFieldUpdating InvokeBaseHandler)
         //{

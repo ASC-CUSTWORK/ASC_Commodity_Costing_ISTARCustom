@@ -34,13 +34,14 @@
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrCommodity" />
-                                                        <Prop Key="Width" Value="70" />
+                                                        <Prop Key="DataField" Value="InventoryID" />
+                                                        <Prop Key="Width" Value="120" />
+                                                        <Prop Key="CommitChanges" Value="True" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="InventoryID" />
+                                                        <Prop Key="DataField" Value="UsrCommodity" />
                                                         <Prop Key="Width" Value="70" />
                                                     </PXGridColumn>
                                                 </AddItem>
@@ -58,19 +59,7 @@
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrCommodityPrice" />
-                                                        <Prop Key="Width" Value="100" />
-                                                    </PXGridColumn>
-                                                </AddItem>
-                                                <AddItem>
-                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="SalesPrice" />
-                                                        <Prop Key="Width" Value="100" />
-                                                    </PXGridColumn>
-                                                </AddItem>
-                                                <AddItem>
-                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrCommodityIncrement" />
                                                         <Prop Key="Width" Value="100" />
                                                     </PXGridColumn>
                                                 </AddItem>
@@ -82,13 +71,27 @@
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrIncrementPerGram" />
+                                                        <Prop Key="DataField" Value="UsrCommodityLossPct" />
+                                                        <Prop Key="Width" Value="100" />
+                                                        <Prop Key="DisplayFormat" Value="P" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="UsrCommoditySurchargePct" />
+                                                        <Prop Key="Width" Value="100" />
+                                                        <Prop Key="DisplayFormat" Value="P" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="UsrCommodityIncrement" />
                                                         <Prop Key="Width" Value="100" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrCommodityLossPct" />
+                                                        <Prop Key="DataField" Value="UsrIncrementPerGram" />
                                                         <Prop Key="Width" Value="100" />
                                                     </PXGridColumn>
                                                 </AddItem>
@@ -96,17 +99,19 @@
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="IsPromotionalPrice" />
                                                         <Prop Key="Width" Value="60" />
-                                                    </PXGridColumn>
-                                                </AddItem>
-                                                <AddItem>
-                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="ExpirationDate" />
-                                                        <Prop Key="Width" Value="90" />
+                                                        <Prop Key="Type" Value="CheckBox" />
+                                                        <Prop Key="TextAlign" Value="Center" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="EffectiveDate" />
+                                                        <Prop Key="Width" Value="90" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="ExpirationDate" />
                                                         <Prop Key="Width" Value="90" />
                                                     </PXGridColumn>
                                                 </AddItem>
@@ -117,6 +122,8 @@
                                 <Prop Key="Width" Value="100%" />
                                 <Prop Key="AutoSize.Enabled" Value="True" />
                                 <Prop Key="AutoSize.MinHeight" Value="150" />
+                                <Prop Key="SkinID" Value="Details" />
+                                <Prop Key="SyncPosition" Value="True" />
                             </PXGrid>
                         </AddItem>
                     </Children>

@@ -1,5 +1,5 @@
-﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.Services.REST.Interfaces;
+﻿using ASCISTARCustom.Common.Services.REST.Interfaces;
+using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Cost.DAC.Projections;
 using ASCISTARCustom.Cost.DAC.Unbounds;
 using ASCISTARCustom.Preferences.DAC;
@@ -250,10 +250,10 @@ namespace ASCISTARCustom.Cost
         }
         public PXSelectBase<APVendorPrice> GetAPVendorPrice(PXGraph graph)
         {
-            return new PXSelect<APVendorPrice, 
-                Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>, 
-                    And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>, 
-                    And<APVendorPrice.effectiveDate, Equal<Required<APVendorPrice.effectiveDate>>, 
+            return new PXSelect<APVendorPrice,
+                Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
+                    And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
+                    And<APVendorPrice.effectiveDate, Equal<Required<APVendorPrice.effectiveDate>>,
                     And<APVendorPrice.expirationDate, Equal<Required<APVendorPrice.expirationDate>>>>>>>(graph);
         }
         #endregion

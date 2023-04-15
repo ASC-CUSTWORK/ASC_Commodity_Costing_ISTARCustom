@@ -1,34 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using PX.Api;
-using PX.Api.Models;
-using PX.Common;
-using PX.Data;
-using PX.Data.BQL;
-using PX.Data.WorkflowAPI;
-using PX.Objects.AP;
-using PX.Objects.AR;
-using PX.Objects.CR;
-using PX.Objects.CS;
-using PX.Objects.DR;
-using PX.Objects.GL;
-using PX.Objects.PO;
-using PX.Objects.SO;
-using PX.Objects.RUTROT;
-using PX.Objects.Common.Discount;
-using PX.SM;
-using CRLocation = PX.Objects.CR.Standalone.Location;
-using ItemStats = PX.Objects.IN.Overrides.INDocumentRelease.ItemStats;
-using ItemCost = PX.Objects.IN.Overrides.INDocumentRelease.ItemCost;
-using SiteStatus = PX.Objects.IN.Overrides.INDocumentRelease.SiteStatus;
-using PX.Objects.Common.GraphExtensions;
-using PX.Objects.CM;
-using PX.Objects;
-using PX.Objects.IN;
 using ASCISTARCustom.Common.Descriptor;
+using PX.Data;
+using PX.Data.BQL.Fluent;
+using PX.Objects.AP;
+using PX.Objects.IN;
+using System;
 //using InfoSmartSearch;
 
 namespace ASCISTARCustom.Cost
@@ -68,6 +43,7 @@ namespace ASCISTARCustom.Cost
         //        OrderBy<Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
 
         [PXFilterable]
+        [PXCopyPasteHiddenView]
         public PXSelectJoin<APVendorPrice,
         InnerJoin<InventoryItem, On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
         InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>,
@@ -77,5 +53,27 @@ namespace ASCISTARCustom.Cost
 
         #endregion Select
 
+        [PXMergeAttributes(Method = MergeMethod.Merge)]
+        [PXUIField(DisplayName = "Basis Price", Visibility = PXUIVisibility.Visible)]
+        protected virtual void _(Events.CacheAttached<APVendorPrice.salesPrice> e) { }
+
+        [PXMergeAttributes(Method = MergeMethod.Merge)]
+
+        //    [APCrossItem(BAccountField = typeof(APVendorPrice.vendorID), WarningOnNonUniqueSubstitution = true, AllowTemplateItems = true)]
+        //[PXParent(typeof(Select<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<APVendorPrice.inventoryID>>
+        //    , And<InventoryItem.itemClassID, Equal<Current<INItemClass.itemClassID>>>>>))]
+
+        [PXSelector(typeof(SearchFor<InventoryItem.inventoryID>.In<
+                            SelectFrom<InventoryItem>.InnerJoin<INItemClass>
+                                .On<InventoryItem.itemClassID.IsEqual<INItemClass.itemClassID>>
+            .Where<INItemClass.itemClassCD.IsEqual<ASCIStarConstants.CommodityClass>>>), SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
+        protected virtual void _(Events.CacheAttached<APVendorPrice.inventoryID> e) { }
+
+        protected virtual void _(Events.RowInserted<APVendorPrice> e)
+        {
+            if (e.Row == null) return;
+
+            e.Cache.SetValueExt<APVendorPrice.vendorID>(e.Row, this.Base.BAccount.Current.BAccountID);
+        }
     }
 }

@@ -1,23 +1,12 @@
-﻿using CRLocation = PX.Objects.CR.Standalone.Location;
-using PX.Common;
-//using PX.Data.BQL.Fluent;
-using PX.Data.ReferentialIntegrity.Attributes;
+﻿using ASCISTARCustom.Common.Descriptor;
 using PX.Data;
 using PX.Objects.AP;
-using PX.Objects.AR;
-using PX.Objects.CM;
-using PX.Objects.CR;
-using PX.Objects.CS;
-using PX.Objects.GL;
 using PX.Objects.IN;
 using PX.Objects.PO;
-using PX.Objects;
-using System.Collections.Generic;
 using System;
-using PX.Data.BQL.Fluent;
-using ASCISTARCustom.Common.Descriptor;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.Cost.CacheExt
 {
     public class ASCIStarPOVendorInventoryExt : PXCacheExtension<POVendorInventory>
     {

@@ -1,5 +1,5 @@
 using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Cost.Descriptor;
+using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
 using PX.Objects.IN;
 using System;

@@ -1,22 +1,21 @@
-using System;
-using System.Collections;
+using ASCISTARCustom.Common.Builder;
+using ASCISTARCustom.Common.Descriptor;
+using ASCISTARCustom.Common.Helper;
+using ASCISTARCustom.Cost.CacheExt;
+using ASCISTARCustom.Inventory.DAC;
+using ASCISTARCustom.Inventory.Descriptor.Constants;
+using PX.Common;
+using PX.CS;
 using PX.Data;
+using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
-using PX.Objects.PO;
-using PX.Objects.IN;
-using ASCISTARCustom.Inventory.DAC;
-using System.Collections.Generic;
-using PX.Data.BQL;
-using PX.Common;
 using PX.Objects.CR.Standalone;
-using PX.CS;
+using PX.Objects.IN;
+using PX.Objects.PO;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
-using ASCISTARCustom.Cost.Descriptor;
-using ASCISTARCustom.Common.Builder;
-using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Common.Descriptor;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Inventory.GraphExt
@@ -524,10 +523,10 @@ namespace ASCISTARCustom.Inventory.GraphExt
         {
             if (baseMetalType == null)
             {
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, false);
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, false);
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, false);
-                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(cache, row, false);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, true);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, true);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, true);
+                PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(cache, row, true);
             }
             else
             {

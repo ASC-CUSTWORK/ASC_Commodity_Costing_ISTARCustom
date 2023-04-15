@@ -1,9 +1,10 @@
-﻿using PX.Data;
-using PX.Objects.AP;
-using PX.Objects.IN;
-using PX.Objects.CM;
-using System;
+﻿using ASCISTARCustom.Cost.CacheExt;
+using PX.Data;
 using PX.Data.EP;
+using PX.Objects.AP;
+using PX.Objects.CM;
+using PX.Objects.IN;
+using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Cost.DAC.Projections
@@ -11,16 +12,16 @@ namespace ASCISTARCustom.Cost.DAC.Projections
     [Serializable]
     [PXCacheName(_cacheName)]
     [PXProjection(typeof(Select5<
-        APVendorPrice, 
-        InnerJoin<InventoryItem, 
-            On<InventoryItem.inventoryID, Equal<APVendorPrice.inventoryID>>, 
-        InnerJoin<INItemClass, 
-            On<INItemClass.itemClassID, Equal<InventoryItem.itemClassID>>, 
-        InnerJoin<Vendor, 
-            On<Vendor.bAccountID, Equal<APVendorPrice.vendorID>>>>>, 
-        Where<Vendor.vendorClassID, Equal<MarketClass>>, 
+        APVendorPrice,
+        InnerJoin<InventoryItem,
+            On<InventoryItem.inventoryID, Equal<APVendorPrice.inventoryID>>,
+        InnerJoin<INItemClass,
+            On<INItemClass.itemClassID, Equal<InventoryItem.itemClassID>>,
+        InnerJoin<Vendor,
+            On<Vendor.bAccountID, Equal<APVendorPrice.vendorID>>>>>,
+        Where<Vendor.vendorClassID, Equal<MarketClass>>,
         Aggregate<
-            GroupBy<Vendor.bAccountID, 
+            GroupBy<Vendor.bAccountID,
             GroupBy<APVendorPrice.inventoryID>>>>), Persistent = false)]
     public class ASCIStarMarketVendor : IBqlTable
     {

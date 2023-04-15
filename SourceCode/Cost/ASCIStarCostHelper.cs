@@ -1,17 +1,4 @@
-﻿using PX.Data;
-using PX.Data.BQL;
-using PX.Data.BQL.Fluent;
-using PX.Objects.AP;
-using PX.Objects.PO;
-using PX.Objects.IN;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using ASCISTARCustom.Inventory.DAC;
-using PX.Common;
-using ASCISTARCustom.Cost.Descriptor;
-
-namespace ASCISTARCustom
+﻿namespace ASCISTARCustom
 {
     //[Serializable]
     //public static class ASCIStarMarketCostProvider
@@ -1365,7 +1352,7 @@ namespace ASCISTARCustom
     //                //    + CostRollupTotal[ASCIStarCostRollupType.Fabrication]
     //                //    + CostRollupTotal[ASCIStarCostRollupType.Packaging]
     //                //    + CostRollupTotal[ASCIStarCostRollupType.Materials];
-                    
+
     //            }
     //            return value;
     //        }

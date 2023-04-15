@@ -2,8 +2,9 @@
 using ASCISTARCustom.Common.DTO;
 using ASCISTARCustom.Common.DTO.Interfaces;
 using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Cost.Descriptor;
+using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
+using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
@@ -67,7 +68,7 @@ namespace ASCISTARCustom.Common.Builder
         }
         public ASCIStarCostBuilder WithPricingData(DateTime pricingData)
         {
-            PricingDate = pricingData > PXTimeZoneInfo.Today ? PXTimeZoneInfo.Today : pricingData;
+            PricingDate = pricingData;
             return this;
         }
         public ASCIStarCostBuilder Build()
