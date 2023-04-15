@@ -609,7 +609,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             rowExt.UsrCommodityCost = jewelryCostBuilder.CalculatePreciousMetalCost();
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrCommodityCost>(row, rowExt.UsrCommodityCost);
 
-            if (ASCIStarMetalType.IsGold(jewelryCostBuilder.INJewelryItem.MetalType))
+            if (ASCIStarMetalType.IsGold(jewelryCostBuilder.INJewelryItem?.MetalType))
             {
                 rowExt.UsrContractIncrement = jewelryCostBuilder.CalculateGoldIncrementValue(row);
             }
@@ -654,12 +654,11 @@ namespace ASCISTARCustom.Inventory.GraphExt
                 return new ASCIStarCostBuilder(this.Base)
                             .WithInventoryItem(currentRow)
                             .WithPOVendorInventory(defaultVendor)
-                            .WithINJewelryItem(this.JewelryItemView.Current)
                             .WithPricingData(PXTimeZoneInfo.Today)
                             .Build();
             }
 
-            throw new PXSetPropertyException("No default vendor on Vendors tab");
+            throw new PXSetPropertyException(ASCIStarMessages.Error.NoDefaultVendor);
         }
 
         private POVendorInventory GetDefaultOverrideVendor() => this.VendorItems.Select().FirstTableItems

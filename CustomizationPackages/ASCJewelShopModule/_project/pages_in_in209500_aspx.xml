@@ -472,7 +472,7 @@
                                 <Children Key="Levels">
                                     <AddItem>
                                         <PXGridLevel TypeFullName="PX.Web.UI.PXGridLevel">
-                                            <Prop Key="DataMember" Value="VendorPriceBasis" />
+                                            <Prop Key="DataMember" />
                                             <Children Key="Columns">
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
@@ -668,6 +668,54 @@
                     <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrGoldGrams" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrFineGoldGrams" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrSilverGrams" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrFineSilverGrams" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrMetalLossPct" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrSurchargePct" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrMatrixStep" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrIncrement" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
             <PXGridColumn DataField="AllowQtyVariation" OriginalIndex="5" />
         </Children>
     </PXGridLevel>
@@ -695,7 +743,7 @@
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit196" />
-                                <Prop Key="DataField" Value="UsrGoldGrams" />
+                                <Prop Key="DataField" Value="UsrTotalGoldGrams" />
                                 <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>
@@ -703,26 +751,8 @@
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit197" />
-                                <Prop Key="DataField" Value="UsrFineGoldGrams" />
+                                <Prop Key="DataField" Value="UsrTotalFineGoldGrams" />
                                 <Prop Key="CommitChanges" Value="True" />
-                            </PXNumberEdit>
-                        </AddItem>
-                        <AddItem>
-                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit198" />
-                                <Prop Key="DataField" Value="UsrMetalLossPct" />
-                                <Prop Key="CommitChanges" Value="True" />
-                                <Prop Key="DisplayFormat" Value="P" />
-                            </PXNumberEdit>
-                        </AddItem>
-                        <AddItem>
-                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit199" />
-                                <Prop Key="DataField" Value="UsrSurchargePct" />
-                                <Prop Key="CommitChanges" Value="True" />
-                                <Prop Key="DisplayFormat" Value="P" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -738,7 +768,7 @@
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit200" />
-                                <Prop Key="DataField" Value="UsrSilverGrams" />
+                                <Prop Key="DataField" Value="UsrTotalSilverGrams" />
                                 <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>
@@ -746,23 +776,7 @@
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit201" />
-                                <Prop Key="DataField" Value="UsrFineSilverGrams" />
-                                <Prop Key="CommitChanges" Value="True" />
-                            </PXNumberEdit>
-                        </AddItem>
-                        <AddItem>
-                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit202" />
-                                <Prop Key="DataField" Value="UsrMatrixStep" />
-                                <Prop Key="CommitChanges" Value="True" />
-                            </PXNumberEdit>
-                        </AddItem>
-                        <AddItem>
-                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit203" />
-                                <Prop Key="DataField" Value="UsrIncrement" />
+                                <Prop Key="DataField" Value="UsrTotalFineSilverGrams" />
                                 <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>

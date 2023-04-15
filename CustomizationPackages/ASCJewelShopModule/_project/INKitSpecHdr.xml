@@ -2,16 +2,6 @@
     <Column TableName="INKitSpecHdr" ColumnName="UsrVQuoteLineCtr" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecHdr" ColumnName="UsrLegacyID" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecHdr" ColumnName="UsrLegacyShortRef" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrFineGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrFineSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrMetalLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrSurchargePct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrRollupType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="INKitSpecHdr" ColumnName="UsrCostingType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecHdr" ColumnName="UsrPreciousMetalCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecHdr" ColumnName="UsrFabricationCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecHdr" ColumnName="UsrPackagingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
@@ -22,4 +12,8 @@
     <Column TableName="INKitSpecHdr" ColumnName="UsrHandlingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecHdr" ColumnName="UsrDutyCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecHdr" ColumnName="UsrDutyCostPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecHdr" ColumnName="UsrTotalGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecHdr" ColumnName="UsrTotalFineGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecHdr" ColumnName="UsrTotalSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecHdr" ColumnName="UsrTotalFineSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
 </Table>

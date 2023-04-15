@@ -4,4 +4,12 @@
     <Column TableName="INKitSpecStkDet" ColumnName="UsrExtCost" ColumnType="decimal" AllowNull="True" MaxLength="10" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecStkDet" ColumnName="UsrUnitPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecStkDet" ColumnName="UsrSalesPrice" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrFineGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrFineSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrMetalLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrSurchargePct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
 </Table>

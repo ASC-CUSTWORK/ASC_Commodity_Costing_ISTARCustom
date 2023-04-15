@@ -32,6 +32,11 @@ namespace ASCISTARCustom.Common.Helper
         /// <returns>True if the metal type is gold, false if metal type is silver, and null if it cannot be determined.</returns>
         public static bool? GetMetalType(string metalType)
         {
+            if (metalType == null)
+            {
+                return null;
+            }
+
             switch (metalType?.ToUpper())
             {
                 case ASCIStarConstants.MetalType.Type_24K: return true;
@@ -90,7 +95,7 @@ namespace ASCISTARCustom.Common.Helper
         public static decimal GetMultFactorConvertTOZtoGram(string metalType)
         {
             if (metalType == null)
-                throw new PXException(ASCIStarMessages.Error.MissingMetalType);
+                return decimal.Zero;
 
             switch (metalType)
             {
@@ -119,7 +124,7 @@ namespace ASCISTARCustom.Common.Helper
         public static decimal GetGoldTypeValue(string metalType)
         {
             if (metalType == null)
-                throw new PXException(ASCIStarMessages.Error.MissingMetalType);
+                return decimal.Zero;
 
             switch (metalType)
             {
@@ -148,7 +153,7 @@ namespace ASCISTARCustom.Common.Helper
         public static decimal GetSilverTypeValue(string metalType)
         {
             if (metalType == null)
-                throw new PXException(ASCIStarMessages.Error.MissingMetalType);
+                return decimal.Zero;
 
             switch (metalType)
             {
