@@ -77,8 +77,8 @@ namespace ASCISTARCustom.PDS
             if (setup != null)
             {
                 var setupExt = PXCache<INSetup>.GetExtension<ASCIStarINSetupExt>(setup);
-                ASCIStarCreateProdItem.SetVisible(setupExt.UsrIsPDSTenant ?? false);
-                ASCIStarCreateProdItem.SetEnabled(setupExt.UsrIsPDSTenant ?? false);
+                ASCIStarCreateProdItem.SetVisible(!setupExt.UsrIsPDSTenant ?? false);
+                ASCIStarCreateProdItem.SetEnabled(!setupExt.UsrIsPDSTenant ?? false);
             }
         }
         #endregion
