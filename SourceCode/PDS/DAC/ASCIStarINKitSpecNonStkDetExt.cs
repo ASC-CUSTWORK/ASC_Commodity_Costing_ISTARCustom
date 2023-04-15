@@ -1,11 +1,13 @@
 using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.PDS.Descriptor;
+using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System;
 
 namespace ASCISTARCustom
 {
-    public class ASCIStarINKitSpecNonStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecNonStkDet>
+    public sealed class ASCIStarINKitSpecNonStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecNonStkDet>, IASCIStarCostRollup
     {
         public static bool IsActive() => true;
 
@@ -13,15 +15,15 @@ namespace ASCISTARCustom
         [PXInt]
         [PXParent(typeof(Select<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecNonStkDet.compInventoryID>>>>))]
         [PXFormula(typeof(Parent<InventoryItem.itemClassID>))]
-        public virtual int? UsrItemClassID { get; set; }
+        public int? UsrItemClassID { get; set; }
         public abstract class usrItemClassID : PX.Data.BQL.BqlInt.Field<usrItemClassID> { }
         #endregion
 
         #region UsrUnitCost
         [PXDBDecimal()]
         [PXUIField(DisplayName = "Unit Cost")]
-        [PXDefault(TypeCode.Decimal, "0.00")]
-        public virtual decimal? UsrUnitCost { get; set; }
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrUnitCost { get; set; }
         public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
         #endregion
 
@@ -29,35 +31,34 @@ namespace ASCISTARCustom
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Unit Pct")]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        public virtual decimal? UsrUnitPct { get; set; }
+        public decimal? UsrUnitPct { get; set; }
         public abstract class usrUnitPct : PX.Data.BQL.BqlDecimal.Field<usrUnitPct> { }
         #endregion
 
         #region UsrExtCost
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Ext Cost")]
-        [PXDefault(TypeCode.Decimal, "0.00")]
-        /*[PXFormula(typeof(Mult<INKitSpecNonStkDet.baseDfltCompQty, usrUnitCost>))]*/
-        [PXFormula(typeof(Mult<INKitSpecNonStkDet.dfltCompQty, usrUnitCost>), typeof(SumCalc<ASCIStarINKitSpecNonStkDetExt.usrExtCost>))]
-
-        public virtual decimal? UsrExtCost { get; set; }
+        [PXUIField(DisplayName = "Ext Cost", Enabled = false)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Mult<INKitSpecNonStkDet.dfltCompQty, usrUnitCost>))]
+        [ASCIStarCostAssignment]
+        public decimal? UsrExtCost { get; set; }
         public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
         #endregion
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Costing Type")]
+        [PXUIField(DisplayName = "Costing Type", Enabled = false, Visible = false)]
         [ASCIStarCostingType.List]
-        [PXDefault("F")]
-        public virtual string UsrCostingType { get; set; }
+        public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion   
 
         #region UsrCostRollupType
-        [PXString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Rollup Type", Enabled = false)]
+        [PXDBString(1, IsUnicode = true, InputMask = "")]
         [ASCIStarCostRollupType.List]
-        public virtual string UsrCostRollupType { get; set; }
+        [PXDefault(ASCIStarCostRollupType.Fabrication, PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Rollup Type", Enabled = true)]
+        public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion          
     }

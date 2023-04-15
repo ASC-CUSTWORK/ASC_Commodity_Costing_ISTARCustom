@@ -1,11 +1,13 @@
 using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.PDS.Descriptor;
+using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System;
 
 namespace ASCISTARCustom
 {
-    public sealed class ASCIStarINKitSpecStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecStkDet>
+    public sealed class ASCIStarINKitSpecStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecStkDet>, IASCIStarCostRollup
     {
         public static bool IsActive() => true;
 
@@ -29,7 +31,8 @@ namespace ASCISTARCustom
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Ext Cost", Enabled = false)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrUnitCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPreciousMetalCost>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrUnitCost>))]
+        [ASCIStarCostAssignment]
         public decimal? UsrExtCost { get; set; }
         public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
         #endregion
@@ -43,10 +46,9 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrCostRollupType
-        [PXString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Rollup Type")]
+        [PXDBString(1, IsUnicode = true, InputMask = "")]
+        [PXUIField(DisplayName = "Rollup Type", Required = true)]
         [ASCIStarCostRollupType.List]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion
@@ -134,9 +136,9 @@ namespace ASCISTARCustom
         public decimal? UsrSalesPrice { get; set; }
         public abstract class usrSalesPrice : PX.Data.BQL.BqlDecimal.Field<usrSalesPrice> { }
         #endregion
-
+        
         #region FabricationCost
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fabrication/Value Add", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrFabricationCost>))]
@@ -146,7 +148,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region PackagingCost
-        [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Packaging Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPackagingCost>))]
@@ -156,7 +158,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region LaborCost
-        [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "In-house Labor Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrLaborCost>))]
@@ -166,7 +168,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region MaterialCost
-        [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Materials Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrMaterialsCost>))]
@@ -176,7 +178,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region OtherCost
-        [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Cost", Enabled = false, Visible = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrOtherCost>))]
@@ -186,7 +188,7 @@ namespace ASCISTARCustom
         #endregion
                 
         #region FreightCost
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Freight Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrFreightCost>))]
@@ -196,7 +198,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region HandlingCost
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Handling Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrHandlingCost>))]
@@ -206,13 +208,20 @@ namespace ASCISTARCustom
         #endregion
 
         #region DutyCost
-        [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Duty Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrDutyCost>))]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrDutyCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrDutyCost>))]
         public decimal? UsrDutyCost { get; set; }
         public abstract class usrDutyCost : PX.Data.BQL.BqlDecimal.Field<usrDutyCost> { }
+        #endregion
+
+        #region UsrIsMetal 
+        [PXDBBool]
+        [PXUIField(DisplayName = "Is Metal", Visible = false, Enabled = false)]
+        public bool? UsrIsMetal { get; set; }
+        public abstract class usrIsMetal : PX.Data.BQL.BqlBool.Field<usrIsMetal> { }
         #endregion
     }
 }

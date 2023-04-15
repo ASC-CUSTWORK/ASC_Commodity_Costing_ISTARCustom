@@ -86,7 +86,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region PackagingCost
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Packaging Cost")]
         public decimal? UsrPackagingCost { get; set; }
@@ -94,7 +94,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region LaborCost
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "In-house Labor Cost")]
         public decimal? UsrLaborCost { get; set; }
@@ -102,7 +102,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region MaterialCost
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Materials Cost")]
         public decimal? UsrMaterialCost { get; set; }
@@ -110,7 +110,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region OtherCost
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Cost", Visible = false)]
         public decimal? UsrOtherCost { get; set; }

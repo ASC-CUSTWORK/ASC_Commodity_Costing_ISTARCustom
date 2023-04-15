@@ -594,12 +594,14 @@
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrCostRollupType" />
                     <Prop Key="Width" Value="70" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrCostingType" />
                     <Prop Key="Width" Value="70" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <PXGridColumn DataField="UOM" OriginalIndex="2" />
@@ -607,18 +609,21 @@
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrUnitCost" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrUnitPct" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrExtCost" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <PXGridColumn DataField="AllowQtyVariation" OriginalIndex="4" />
@@ -980,4 +985,7 @@
         <Prop Key="LabelWidth" Value="80px" />
         <Prop Key="Width" Value="350px" />
     </PXTextEdit>
+    <PXGridColumn DataField="CompInventoryID" ParentId="phG_tab_Items#1_gridNonStock_Levels#0_Columns#0" TypeFullName="PX.Web.UI.PXGridColumn">
+        <Prop Key="CommitChanges" Value="True" />
+    </PXGridColumn>
 </Page>

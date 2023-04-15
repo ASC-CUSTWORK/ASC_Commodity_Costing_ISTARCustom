@@ -134,7 +134,7 @@ namespace ASCISTARCustom
         #region UsrMatrixStep
         [PXDBDecimal(6, MinValue = 0, MaxValue = 100)]
         [PXUIField(DisplayName = "Matrix Step")]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.NullOrBlank)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMatrixStep { get; set; }
         public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
         #endregion

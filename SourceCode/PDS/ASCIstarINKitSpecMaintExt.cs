@@ -2,22 +2,18 @@ using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
-using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.PDS.CacheExt;
 using PX.Common;
 using PX.Data;
-using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
-using System;
 using System.Collections;
 using System.Linq;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.PDS
 {
@@ -185,7 +181,7 @@ namespace ASCISTARCustom.PDS
             {
                 var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
                 var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
-                if (jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem.MetalType)))
+                if (jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem?.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem?.MetalType)))
                 {
                     e.NewValue = ASCIStarCostBuilder.CalculateUnitCost(inventoryItem);
                 }
@@ -219,6 +215,14 @@ namespace ASCISTARCustom.PDS
                 e.NewValue = salesPrice;
             }
         }
+        protected virtual void _(Events.FieldDefaulting<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrIsMetal> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                e.NewValue = jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem?.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem?.MetalType));
+            }
+        }
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrCostingType> e)
         {
             if (e.Row is INKitSpecStkDet row)
@@ -239,65 +243,48 @@ namespace ASCISTARCustom.PDS
                 }
             }
         }
-        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrCostRollupType> e)
+        protected virtual void _(Events.RowPersisting<INKitSpecStkDet> e)
         {
             if (e.Row is INKitSpecStkDet row)
             {
-                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
-                if (ASCIStarMetalType.GetMetalType(jewelryItem?.MetalType) == null)
+                var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                if (rowExt.UsrCostRollupType == null)
                 {
-                    var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
-
+                    e.Cache.RaiseExceptionHandling<ASCIStarINKitSpecStkDetExt.usrCostRollupType>(row, rowExt.UsrCostRollupType, new PXSetPropertyException(ASCIStarMessages.Error.CostRollupTypeNotSet, PXErrorLevel.Error));
+                    e.Cancel = true;
+                    throw new PXException(ASCIStarMessages.Error.CostRollupTypeNotSet);
                 }
             }
         }
         #endregion
 
         #region INKitSpecNonStkDet Events
-        protected virtual void _(Events.RowSelected<INKitSpecNonStkDet> e)
+        protected virtual void _(Events.FieldDefaulting<INKitSpecNonStkDet, ASCIStarINKitSpecNonStkDetExt.usrUnitCost> e)
         {
-            //TODO Clarify with the product owner what the behavior should be for Non-Stock components.
+            if (e.Row is INKitSpecNonStkDet row)
+            {
+                var result = InventoryItemCurySettings.PK.Find(Base, row.CompInventoryID, Base.Accessinfo.BaseCuryID);
+                e.NewValue = result?.StdCost ?? 0m;
+            }
+        }
+        protected virtual void _(Events.RowPersisting<INKitSpecNonStkDet> e)
+        {
+            if (e.Row is INKitSpecNonStkDet row)
+            {
+                var rowExt = PXCache<INKitSpecNonStkDet>.GetExtension<ASCIStarINKitSpecNonStkDetExt>(row);
+                if (rowExt.UsrCostRollupType == null)
+                {
+                    e.Cache.RaiseExceptionHandling<ASCIStarINKitSpecNonStkDetExt.usrCostRollupType>(row, rowExt.UsrCostRollupType, new PXSetPropertyException(ASCIStarMessages.Error.CostRollupTypeNotSet, PXErrorLevel.Error));
+                    e.Cancel = true;
+                    throw new PXException(ASCIStarMessages.Error.CostRollupTypeNotSet);
+                }
+            }
         }
         #endregion
 
         #endregion
 
         #region ServiceMethods
-        protected virtual void AssignCost(string rollupType, ASCIStarINKitSpecHdrExt rowExt, decimal? value)
-        {
-            switch (rollupType)
-            {
-                case ASCIStarCostRollupType.PreciousMetal:
-                    rowExt.UsrPreciousMetalCost += value;
-                    break;
-                case ASCIStarCostRollupType.Fabrication:
-                    rowExt.UsrFabricationCost += value;
-                    break;
-                case ASCIStarCostRollupType.Packaging:
-                    rowExt.UsrPackagingCost += value;
-                    break;
-                case ASCIStarCostRollupType.Labor:
-                    rowExt.UsrLaborCost += value;
-                    break;
-                case ASCIStarCostRollupType.Materials:
-                    rowExt.UsrMaterialCost += value;
-                    break;
-                case ASCIStarCostRollupType.Blank:
-                    rowExt.UsrOtherCost += value;
-                    break;
-                case ASCIStarCostRollupType.Freight:
-                    rowExt.UsrFreightCost += value;
-                    break;
-                case ASCIStarCostRollupType.Handling:
-                    rowExt.UsrHandlingCost += value;
-                    break;
-                case ASCIStarCostRollupType.Duty:
-                    rowExt.UsrDutyCost += value;
-                    break;
-                default:
-                    break;
-            }
-        }
         protected virtual void CopyJewelryItemFields(INKitSpecHdr kitSpecHdr)
         {
             var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr.KitInventoryID)?.TopFirst;
