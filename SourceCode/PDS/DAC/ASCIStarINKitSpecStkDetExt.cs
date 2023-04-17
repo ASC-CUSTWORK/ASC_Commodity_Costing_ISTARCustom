@@ -56,7 +56,7 @@ namespace ASCISTARCustom
         #region GoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Gold, Grams", Enabled = false)]
+        [PXUIField(DisplayName = "Gold, Grams", Enabled = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMGold>))]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalGoldGrams>))]
         public decimal? UsrGoldGrams { get; set; }
@@ -66,7 +66,7 @@ namespace ASCISTARCustom
         #region FineGoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Fine Gold, Grams", Enabled = false)]
+        [PXUIField(DisplayName = "Fine Gold, Grams", Enabled = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMGold>))]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrFineGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalFineGoldGrams>))]
         public decimal? UsrFineGoldGrams { get; set; }
@@ -76,7 +76,7 @@ namespace ASCISTARCustom
         #region SilverGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Silver, Grams", Enabled = false)]
+        [PXUIField(DisplayName = "Silver, Grams", Enabled = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMSilver>))]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalSilverGrams>))]
         public decimal? UsrSilverGrams { get; set; }
@@ -86,7 +86,7 @@ namespace ASCISTARCustom
         #region FineSilverGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Fine Silver, Grams", Enabled = false)]
+        [PXUIField(DisplayName = "Fine Silver, Grams", Enabled = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMSilver>))]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrFineSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalFineSilverGrams>))]
         public decimal? UsrFineSilverGrams { get; set; }
