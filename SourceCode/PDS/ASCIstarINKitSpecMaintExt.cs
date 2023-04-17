@@ -13,6 +13,7 @@ using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.CN.CacheExtensions;
+using PX.Objects.FA;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
@@ -307,6 +308,108 @@ namespace ASCISTARCustom.PDS
                 }
             }
         }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrGoldGrams> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                if (jewelryItem != null)
+                {
+                    var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                    var metalTypeValue = ASCIStarMetalType.GetGoldTypeValue(jewelryItem.MetalType);
+                    var result = rowExt?.UsrGoldGrams * metalTypeValue / 24;
+                    e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineGoldGrams>(row, result);
+                }
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrFineGoldGrams> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                var metalTypeValue = ASCIStarMetalType.GetGoldTypeValue(jewelryItem.MetalType);
+                var result = (decimal?)e.NewValue / metalTypeValue * 24;
+                if (result != rowExt.UsrGoldGrams)
+                {
+                    rowExt.UsrGoldGrams = result;
+                }
+
+                UpdateCommodityCostMetal(e.Cache, row, rowExt);
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrSilverGrams> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                if (jewelryItem != null)
+                {
+                    var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                    var value = ASCIStarMetalType.GetSilverTypeValue(jewelryItem?.MetalType);
+                    e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineSilverGrams>(row, rowExt?.UsrSilverGrams * value);
+                }
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrFineSilverGrams> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                if (jewelryItem != null)
+                {
+                    var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                    UpdateCommodityCostMetal(e.Cache, row, rowExt);
+                    var valueMult = ASCIStarMetalType.GetSilverTypeValue(jewelryItem?.MetalType);
+                    
+                    decimal? actualGRAMSilver = 0.0m;
+                    if (valueMult != 0.0m)
+                    {
+                        actualGRAMSilver = (decimal?)e.NewValue / valueMult;
+                    }
+                    if (actualGRAMSilver != rowExt.UsrSilverGrams)
+                    {
+                        rowExt.UsrSilverGrams = actualGRAMSilver;
+                    }
+                }
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrMetalLossPct> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                UpdateCommodityCostMetal(e.Cache, row, rowExt);
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrSurchargePct> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                UpdateCommodityCostMetal(e.Cache, row, rowExt);
+            }
+        }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrIncrement> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+                if (jewelryItem != null)
+                {
+                    var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
+                    var result = ASCIStarMetalType.IsGold(jewelryItem?.MetalType);
+                    if (result)
+                    {
+                        UpdateSurcharge(e.Cache, row, rowExt);
+                    }
+                    else
+                    {
+                        UpdateCommodityCostMetal(e.Cache, row, rowExt);
+                    }
+                }
+            }
+        }
         protected virtual void _(Events.RowPersisting<INKitSpecStkDet> e)
         {
             if (e.Row is INKitSpecStkDet row)
@@ -317,6 +420,16 @@ namespace ASCISTARCustom.PDS
                     e.Cache.RaiseExceptionHandling<ASCIStarINKitSpecStkDetExt.usrCostRollupType>(row, rowExt.UsrCostRollupType, new PXSetPropertyException(ASCIStarMessages.Error.CostRollupTypeNotSet, PXErrorLevel.Error));
                     e.Cancel = true;
                     throw new PXException(ASCIStarMessages.Error.CostRollupTypeNotSet);
+                }
+            }
+        }
+        protected virtual void _(Events.RowSelected<INKitSpecStkDet> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                if (IsCommodityItem(row))
+                {
+                    DisableCommodityCorrespondingFields(e.Cache, row);
                 }
             }
         }
@@ -461,6 +574,25 @@ namespace ASCISTARCustom.PDS
             var salesPrice = rowExt.UsrCostingType == ASCIStarCostingType.MarketCost ? jewelryCostBuilder.PreciousMetalMarketCostPerTOZ : jewelryCostBuilder.PreciousMetalContractCostPerTOZ;
             e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, salesPrice);
         }
+        private void UpdateCommodityCostMetal(PXCache cache, INKitSpecStkDet row, ASCIStarINKitSpecStkDetExt rowExt)
+        {
+            if ((rowExt.UsrSilverGrams == null || rowExt.UsrSilverGrams == 0.0m) && (rowExt.UsrGoldGrams == null || rowExt.UsrGoldGrams == 0.0m)) return;
+
+            var jewelryCostBuilder = CreateCostBuilder(row);
+            rowExt.UsrUnitCost = jewelryCostBuilder.CalculatePreciousMetalCost();
+
+            if (ASCIStarMetalType.IsGold(jewelryCostBuilder.INJewelryItem?.MetalType))
+            {
+                rowExt.UsrIncrement = jewelryCostBuilder.CalculateGoldIncrementValue(row);
+            }
+        }
+        private void UpdateSurcharge(PXCache cache, INKitSpecStkDet row, ASCIStarINKitSpecStkDetExt rowExt)
+        {
+            if ((rowExt.UsrSilverGrams == null || rowExt.UsrSilverGrams == 0.0m) && (rowExt.UsrGoldGrams == null || rowExt.UsrGoldGrams == 0.0m)) return;
+            var costBuilder = CreateCostBuilder(row);
+            var surchargeValue = costBuilder.CalculateSurchargeValue(row);
+            cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSurchargePct>(row, surchargeValue);
+        }
         protected virtual decimal SetCostForCommodityClassItem(INKitSpecStkDet row)
         {
             var value = 0m;
@@ -502,6 +634,24 @@ namespace ASCISTARCustom.PDS
             {
                 cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrGoldGrams>(row, 1m);
                 cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineGoldGrams>(row, 1m);
+            }
+        }
+        private void DisableCommodityCorrespondingFields(PXCache cache, INKitSpecStkDet row)
+        {
+            var item = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
+            if (item?.InventoryCD.NormalizeCD() == "SSS")
+            {
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrSilverGrams>(cache, row, true);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrFineSilverGrams>(cache, row, true);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrGoldGrams>(cache, row, false);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrFineGoldGrams>(cache, row, false);
+            }
+            else if (item?.InventoryCD.NormalizeCD() == "24K")
+            {
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrSilverGrams>(cache, row, false);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrFineSilverGrams>(cache, row, false);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrGoldGrams>(cache, row, true);
+                PXUIFieldAttribute.SetEnabled<ASCIStarINKitSpecStkDetExt.usrFineGoldGrams>(cache, row, true);
             }
         }
         #endregion
