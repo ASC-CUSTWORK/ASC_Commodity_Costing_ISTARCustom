@@ -3,6 +3,7 @@ using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
 using PX.Objects.IN;
 using System;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -24,14 +25,14 @@ namespace ASCISTARCustom
         public abstract class usrLegacyID : PX.Data.BQL.BqlString.Field<usrLegacyID> { }
         #endregion
 
-        #region UsrCommodity
-        [PXDBString(1)]
-        [PXUIField(DisplayName = "Metal")]
-        [ASCIStarConstants.CommodityType.List]
-        [PXDefault(ASCIStarConstants.CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
-        public string UsrCommodity { get; set; }
-        public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
-        #endregion
+        //#region UsrCommodity
+        //[PXDBString(1)]
+        //[PXUIField(DisplayName = "Metal")]
+        //[ASCIStarConstants.CommodityType.List]
+        //[PXDefault(ASCIStarConstants.CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
+        //public string UsrCommodity { get; set; }
+        //public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
+        //#endregion
 
         #region UsrPriceAsID
         [PXDBInt()]
@@ -244,5 +245,13 @@ namespace ASCISTARCustom
         public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
         #endregion
 
+        #region UsrCommodityType
+        [PXDBString(1)]
+        [PXUIField(DisplayName = "Commodity Type")]
+        [CommodityType.List]
+        [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.NullOrBlank)]
+        public virtual string UsrCommodityType { get; set; }
+        public abstract class usrCommodityType : PX.Data.BQL.BqlString.Field<usrCommodityType> { }
+        #endregion
     }
 }

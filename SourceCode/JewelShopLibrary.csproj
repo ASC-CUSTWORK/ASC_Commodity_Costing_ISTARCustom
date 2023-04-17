@@ -120,6 +120,7 @@
     <Compile Include="Cost\ASCIStarCostHelper.cs" />
     <Compile Include="Cost\ASCIStarVendorMaintExt.cs" />
     <Compile Include="Cost\CacheExt\ASCIStarAPVendorPriceExt.cs" />
+    <Compile Include="CustomerAllowance\Descriptor\ASCIStarARConstants.cs" />
     <Compile Include="Inventory\CacheExt\ASCIStarINUnitExt.cs" />
     <Compile Include="Cost\DAC\ASCIStarItemCostRollup.cs" />
     <Compile Include="Cost\CacheExt\ASCIStarPOVendorInventoryExt.cs" />
@@ -131,7 +132,7 @@
     <Compile Include="Inventory\Descriptor\Constants\ASCIStarCostingType.cs" />
     <Compile Include="Inventory\Descriptor\Constants\ASCIStarCostRollupType.cs" />
     <Compile Include="CustomerAllowance\ASCIStarCustomerAllowanceMaint.cs" />
-    <Compile Include="CustomerAllowance\ASCIStarCustomerMaintAllowanceExt.cs" />
+    <Compile Include="CustomerAllowance\ASCIStarCustomerMaintExt.cs" />
     <Compile Include="CustomerAllowance\DAC\ASCIStarCustomerAllowance.cs" />
     <Compile Include="DCLocation\DAC\ASCIStarCRLocationExt.cs" />
     <Compile Include="PDS\Descriptor\ASCIStarCostAssignmentAttribute.cs" />
