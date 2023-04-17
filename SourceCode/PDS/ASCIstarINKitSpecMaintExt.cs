@@ -12,12 +12,14 @@ using PX.Common;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
+using PX.Objects.CN.CacheExtensions;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
 using System.Collections;
 using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static PX.Data.BQL.BqlPlaceholder;
 
 namespace ASCISTARCustom.PDS
 {
@@ -257,6 +259,26 @@ namespace ASCISTARCustom.PDS
                 e.NewValue = jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem?.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem?.MetalType));
             }
         }
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, INKitSpecStkDet.compInventoryID> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                e.Cache.RaiseFieldDefaulting<ASCIStarINKitSpecStkDetExt.usrCostingType>(row, out object _costType);
+                e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrCostingType>(row, _costType);
+
+                e.Cache.RaiseFieldDefaulting<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, out object _costUnit);
+                e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, _costUnit);
+
+                e.Cache.RaiseFieldDefaulting<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, out object _salesPrice);
+                e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, _salesPrice);
+
+                if (IsCommodityItem(row))
+                {
+                    DfltGramsForCommodityItemType(e.Cache, row);
+                    
+                }
+            }
+        }
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrCostingType> e)
         {
             if (e.Row is INKitSpecStkDet row)
@@ -264,7 +286,7 @@ namespace ASCISTARCustom.PDS
                 var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
                 if (IsCommodityItem(row))
                 {
-                    var value = SetCostForCommodityClassItem(row); 
+                    var value = SetCostForCommodityClassItem(row);
                     e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, value);
                 }
                 else
@@ -467,6 +489,20 @@ namespace ASCISTARCustom.PDS
             var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
             var itemClass = _itemDataProvider.GetItemClassByID(inventoryItem?.ItemClassID);
             return itemClass?.ItemClassCD.NormalizeCD() == CommodityClass.value;
+        }
+        protected virtual void DfltGramsForCommodityItemType(PXCache cache, INKitSpecStkDet row)
+        {
+            var item = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
+            if (item?.InventoryCD.NormalizeCD() == "SSS")
+            {
+                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSilverGrams>(row, 1m);
+                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineSilverGrams>(row, 1m);
+            }
+            else if (item?.InventoryCD.NormalizeCD() == "24K")
+            {
+                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrGoldGrams>(row, 1m);
+                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineGoldGrams>(row, 1m);
+            }
         }
         #endregion
 
