@@ -1,6 +1,7 @@
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Helper;
+using ASCISTARCustom.Common.Helper.Extensions;
 using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
 using ASCISTARCustom.Inventory.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
@@ -176,15 +177,24 @@ namespace ASCISTARCustom.PDS
             if (e.Row is INKitSpecStkDet row)
             {
                 var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
-                if (jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem.MetalType)))
+                var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
+                var itemClass = _itemDataProvider.GetItemClassByID(inventoryItem?.ItemClassID);
+                if (itemClass?.ItemClassCD.NormalizeCD() == ASCIStarConstants.CommodityClass.value)
                 {
-                    var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
-                    var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
-                    e.NewValue = inventoryItemExt.UsrCostingType;
+                    e.NewValue = ASCIStarCostingType.MarketCost;
                 }
                 else
                 {
-                    e.NewValue = ASCIStarCostingType.StandardCost;
+                    if (jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem.MetalType)))
+                    {
+
+                        var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
+                        e.NewValue = inventoryItemExt.UsrCostingType;
+                    }
+                    else
+                    {
+                        e.NewValue = ASCIStarCostingType.StandardCost;
+                    }
                 }
             }
         }

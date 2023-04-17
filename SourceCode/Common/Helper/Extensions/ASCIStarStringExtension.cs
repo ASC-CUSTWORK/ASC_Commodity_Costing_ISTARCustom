@@ -16,5 +16,10 @@ namespace ASCISTARCustom.Common.Helper.Extensions
             var errorModel = ASCIStarJsonConverter<TModel>.FromJson(value);
             return errorModel.ToString();
         }
+
+        public static string NormalizeCD(this string value)
+        {
+            return value.Trim();
+        }
     }
 }
