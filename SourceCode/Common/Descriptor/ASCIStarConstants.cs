@@ -66,6 +66,11 @@ namespace ASCISTARCustom.Common.Descriptor
             public static readonly string value = "TOZ";
             public TOZ() : base(value) { }
         }
+        public class GRAM : PX.Data.BQL.BqlString.Constant<GRAM>
+        {
+            public static readonly string value = "GRAM";
+            public GRAM() : base(value) { }
+        }
         public class TOZ2GRAM_31_10348 : PX.Data.BQL.BqlDecimal.Constant<TOZ2GRAM_31_10348>
         {
             public static readonly decimal value = 31.10348m;
