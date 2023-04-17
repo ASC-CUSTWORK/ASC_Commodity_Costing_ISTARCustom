@@ -12,6 +12,7 @@ using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
+using System;
 using System.Collections;
 using System.Linq;
 
@@ -126,7 +127,9 @@ namespace ASCISTARCustom.PDS
             if (row == null || this.Base.Hdr.Current == null) return;
 
             CopyJewelryItemFields(this.Base.Hdr.Current);
+            CopyFieldsValueFromStockItem(this.Base.Hdr.Current);
         }
+
         protected virtual void _(Events.RowSelected<INKitSpecHdr> e)
         {
             if (e.Row is INKitSpecHdr row)
@@ -328,6 +331,33 @@ namespace ASCISTARCustom.PDS
 
             this.JewelryItemView.Insert(jewelryKitItem);
         }
+
+        protected virtual void CopyFieldsValueFromStockItem(INKitSpecHdr kitSpecHdr)
+        {
+            var item = _itemDataProvider.GetInventoryItemByID(kitSpecHdr.KitInventoryID);
+            if (item != null && kitSpecHdr != null)
+            {
+                var itemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(item);
+                var kitSpecHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(kitSpecHdr);
+                kitSpecHdrExt.UsrTotalGoldGrams = itemExt.UsrActualGRAMGold;
+                kitSpecHdrExt.UsrTotalFineGoldGrams = itemExt.UsrPricingGRAMGold;
+                kitSpecHdrExt.UsrTotalSilverGrams = itemExt.UsrActualGRAMSilver;
+                kitSpecHdrExt.UsrTotalFineSilverGrams = itemExt.UsrPricingGRAMSilver;
+                kitSpecHdrExt.UsrPreciousMetalCost = itemExt.UsrCommodityCost;
+                kitSpecHdrExt.UsrFabricationCost = itemExt.UsrFabricationCost;
+                kitSpecHdrExt.UsrOtherCost = itemExt.UsrOtherCost;
+                kitSpecHdrExt.UsrPackagingCost = itemExt.UsrPackagingCost;
+                kitSpecHdrExt.UsrLaborCost = itemExt.UsrLaborCost;
+                kitSpecHdrExt.UsrHandlingCost = itemExt.UsrHandlingCost;
+                kitSpecHdrExt.UsrFreightCost = itemExt.UsrFreightCost;
+                kitSpecHdrExt.UsrDutyCost = itemExt.UsrDutyCost;
+                kitSpecHdrExt.UsrDutyCostPct = itemExt.UsrDutyCostPct;
+                kitSpecHdrExt.UsrLegacyID = itemExt.UsrLegacyID;
+                kitSpecHdrExt.UsrLegacyShortRef = itemExt.UsrLegacyShortRef;
+                Base.Hdr.Update(kitSpecHdr);
+            }
+        }
+
         private ASCIStarCostBuilder CreateCostBuilder(INKitSpecStkDet currentRow)
         {
             var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
