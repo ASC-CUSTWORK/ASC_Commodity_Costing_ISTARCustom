@@ -15,6 +15,7 @@ using PX.Objects.PO;
 using System;
 using System.Collections;
 using System.Linq;
+using static ASCISTARCustom.ASCIStarINKitSpecHdrExt;
 
 namespace ASCISTARCustom.PDS
 {
@@ -53,6 +54,8 @@ namespace ASCISTARCustom.PDS
                 Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
 
         public PXSetup<INSetup> ASCIStarINSetup;
+
+        public PXSelect<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCIStarInventoryItem;
         #endregion
 
         #region Dependency Injection
@@ -77,6 +80,13 @@ namespace ASCISTARCustom.PDS
                 ASCIStarCreateProdItem.SetVisible(!setupExt.UsrIsPDSTenant ?? false);
                 ASCIStarCreateProdItem.SetEnabled(!setupExt.UsrIsPDSTenant ?? false);
             }
+        }
+        public delegate void PersistDelegate();
+        [PXOverride]
+        public void Persist(PersistDelegate baseMethod)
+        {
+            CopyFieldsValueToStockItem(Base.Hdr.Current);
+            baseMethod();
         }
         #endregion
 
@@ -355,6 +365,32 @@ namespace ASCISTARCustom.PDS
                 kitSpecHdrExt.UsrLegacyID = itemExt.UsrLegacyID;
                 kitSpecHdrExt.UsrLegacyShortRef = itemExt.UsrLegacyShortRef;
                 Base.Hdr.Update(kitSpecHdr);
+            }
+        }
+
+        protected virtual void CopyFieldsValueToStockItem(INKitSpecHdr kitSpecHdr)
+        {
+            var item = _itemDataProvider.GetInventoryItemByID(kitSpecHdr.KitInventoryID);
+            if (item != null && kitSpecHdr != null)
+            {
+                var itemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(item);
+                var kitSpecHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(kitSpecHdr);
+                itemExt.UsrActualGRAMGold = kitSpecHdrExt.UsrTotalGoldGrams;
+                itemExt.UsrPricingGRAMGold = kitSpecHdrExt.UsrTotalFineGoldGrams;
+                itemExt.UsrActualGRAMSilver = kitSpecHdrExt.UsrTotalSilverGrams;
+                itemExt.UsrPricingGRAMSilver = kitSpecHdrExt.UsrTotalFineSilverGrams;
+                itemExt.UsrCommodityCost = kitSpecHdrExt.UsrPreciousMetalCost;
+                itemExt.UsrFabricationCost = kitSpecHdrExt.UsrFabricationCost;
+                itemExt.UsrOtherCost = kitSpecHdrExt.UsrOtherCost;
+                itemExt.UsrPackagingCost = kitSpecHdrExt.UsrPackagingCost;
+                itemExt.UsrLaborCost = kitSpecHdrExt.UsrLaborCost;
+                itemExt.UsrHandlingCost = kitSpecHdrExt.UsrHandlingCost;
+                itemExt.UsrFreightCost = kitSpecHdrExt.UsrFreightCost;
+                itemExt.UsrDutyCost = kitSpecHdrExt.UsrDutyCost;
+                itemExt.UsrDutyCostPct = kitSpecHdrExt.UsrDutyCostPct;
+                itemExt.UsrLegacyID = kitSpecHdrExt.UsrLegacyID;
+                itemExt.UsrLegacyShortRef = kitSpecHdrExt.UsrLegacyShortRef;
+                ASCIStarInventoryItem.Update(item);
             }
         }
 
