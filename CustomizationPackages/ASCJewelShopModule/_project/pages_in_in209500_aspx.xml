@@ -356,43 +356,42 @@
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="UsrUnitCost" />
                                                         <Prop Key="Width" Value="100" />
-                                                    </PXGridColumn>
-                                                </AddItem>
-                                                <AddItem>
-                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrVendorDefault" />
-                                                        <Prop Key="Width" Value="60" />
-                                                        <Prop Key="Type" Value="CheckBox" />
-                                                    </PXGridColumn>
-                                                </AddItem>
-                                                <AddItem>
-                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrCommoditySurchargePct" />
-                                                        <Prop Key="Width" Value="100" />
-                                                    </PXGridColumn>
-                                                </AddItem>
-                                                <AddItem>
-                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                                                        <Prop Key="DataField" Value="UsrCommodityLossPct" />
-                                                        <Prop Key="Width" Value="100" />
+                                                        <Prop Key="CommitChanges" Value="True" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="UsrCommodityCost" />
                                                         <Prop Key="Width" Value="100" />
+                                                        <Prop Key="CommitChanges" Value="True" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="UsrFabricationCost" />
                                                         <Prop Key="Width" Value="100" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="UsrOtherMaterialCost" />
+                                                        <Prop Key="Width" Value="100" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="UsrPackagingCost" />
+                                                        <Prop Key="Width" Value="100" />
+                                                        <Prop Key="CommitChanges" Value="True" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="UsrLaborCost" />
                                                         <Prop Key="Width" Value="100" />
+                                                        <Prop Key="CommitChanges" Value="True" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
@@ -404,6 +403,12 @@
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="UsrFreightCost" />
+                                                        <Prop Key="Width" Value="100" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="UsrCommodityLossPct" />
                                                         <Prop Key="Width" Value="100" />
                                                     </PXGridColumn>
                                                 </AddItem>
@@ -423,6 +428,7 @@
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="VLeadTime" />
                                                         <Prop Key="Width" Value="70" />
+                                                        <Prop Key="CommitChanges" Value="True" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>

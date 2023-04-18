@@ -100,6 +100,8 @@ namespace ASCISTARCustom.PDS
         #endregion
 
         #region CacheAttached
+
+        #region INKitSpecHdrCacheAttaches
         [PXRemoveBaseAttribute(typeof(PXDBStringAttribute))]
         [PXRemoveBaseAttribute(typeof(PXDefaultAttribute))]
         [PXMergeAttributes(Method = MergeMethod.Append)]
@@ -107,6 +109,12 @@ namespace ASCISTARCustom.PDS
         [PXDefault("01")]
         [PXUIField(DisplayName = "Variant")]
         protected void _(Events.CacheAttached<INKitSpecHdr.revisionID> cacheAttached) { }
+        #endregion
+
+        #region POVendorInventoryCacheAttaches
+
+        #endregion
+
         #endregion
 
         #region Actions
