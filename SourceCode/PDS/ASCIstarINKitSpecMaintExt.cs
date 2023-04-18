@@ -21,6 +21,7 @@ using System.Collections;
 using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 using static PX.Data.BQL.BqlPlaceholder;
+using static PX.Objects.IN.INKitSpecNonStkDet.FK;
 
 namespace ASCISTARCustom.PDS
 {
@@ -61,6 +62,8 @@ namespace ASCISTARCustom.PDS
         public PXSetup<INSetup> ASCIStarINSetup;
 
         public PXSelect<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCIStarInventoryItem;
+
+        public PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCIStarJewelryItem;
         #endregion
 
         #region Dependency Injection
@@ -90,7 +93,8 @@ namespace ASCISTARCustom.PDS
         [PXOverride]
         public void Persist(PersistDelegate baseMethod)
         {
-            CopyFieldsValueToStockItem(Base.Hdr.Current);
+            CopyFieldsValueToStockItem(Base.Hdr.Current); 
+            CopyJewelryItemFieldsToStockItem(Base.Hdr.Current);
             baseMethod();
         }
         #endregion
@@ -392,6 +396,43 @@ namespace ASCISTARCustom.PDS
             };
 
             this.JewelryItemView.Insert(jewelryKitItem);
+        }
+        protected virtual void CopyJewelryItemFieldsToStockItem(INKitSpecHdr kitSpecHdr)
+        {
+            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr.KitInventoryID)?.TopFirst;
+
+            if (jewelItem == null) return;
+
+            jewelItem.ShortDesc = JewelryItemView.Current?.ShortDesc;
+            jewelItem.LongDesc = JewelryItemView.Current?.LongDesc;
+            jewelItem.StyleStatus = JewelryItemView.Current?.StyleStatus;
+            jewelItem.CustomerCode = JewelryItemView.Current?.CustomerCode;
+            jewelItem.InvCategory = JewelryItemView.Current?.InvCategory;
+            jewelItem.ItemType = JewelryItemView.Current?.ItemType;
+            jewelItem.ItemSubType = JewelryItemView.Current?.ItemSubType;
+            jewelItem.Collection = JewelryItemView.Current?.Collection;
+            jewelItem.MetalType = JewelryItemView.Current?.MetalType;
+            jewelItem.MetalNote = JewelryItemView.Current?.MetalNote;
+            jewelItem.MetalColor = JewelryItemView.Current?.MetalColor;
+            jewelItem.Plating = JewelryItemView.Current?.Plating;
+            jewelItem.Finishes = JewelryItemView.Current?.Finishes;
+            jewelItem.VendorMaker = JewelryItemView.Current?.VendorMaker;
+            jewelItem.OrgCountry = JewelryItemView.Current?.OrgCountry;
+            jewelItem.StoneType = JewelryItemView.Current?.StoneType;
+            jewelItem.WebNotesComment = JewelryItemView.Current?.WebNotesComment;
+            jewelItem.StoneComment = JewelryItemView.Current?.StoneComment;
+            jewelItem.StoneColor = JewelryItemView.Current?.StoneColor;
+            jewelItem.StoneShape = JewelryItemView.Current?.StoneShape;
+            jewelItem.StoneCreation = JewelryItemView.Current?.StoneCreation;
+            jewelItem.GemstoneTreatment = JewelryItemView.Current?.GemstoneTreatment;
+            jewelItem.SettingType = JewelryItemView.Current?.SettingType;
+            jewelItem.Findings = JewelryItemView.Current?.Findings;
+            jewelItem.FindingsSubType = JewelryItemView.Current?.FindingsSubType;
+            jewelItem.ChainType = JewelryItemView.Current?.ChainType;
+            jewelItem.RingLength = JewelryItemView.Current?.RingLength;
+            jewelItem.RingSize = JewelryItemView.Current?.RingSize;
+            jewelItem.OD = JewelryItemView.Current?.OD;
+            ASCIStarJewelryItem.Update(jewelItem);
         }
         protected virtual void CopyFieldsValueFromStockItem(INKitSpecHdr kitSpecHdr)
         {

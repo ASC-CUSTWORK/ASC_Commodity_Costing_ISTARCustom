@@ -699,24 +699,28 @@
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrGoldGrams" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrFineGoldGrams" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrSilverGrams" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrFineSilverGrams" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
