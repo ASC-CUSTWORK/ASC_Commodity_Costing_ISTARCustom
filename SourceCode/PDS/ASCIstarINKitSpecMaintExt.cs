@@ -105,6 +105,7 @@ namespace ASCISTARCustom.PDS
         [PXMergeAttributes(Method = MergeMethod.Append)]
         [PXDBString(10, IsUnicode = true, IsKey = true, InputMask = ">##")]
         [PXDefault("01")]
+        [PXUIField(DisplayName = "Variant")]
         protected void _(Events.CacheAttached<INKitSpecHdr.revisionID> cacheAttached) { }
         #endregion
 
