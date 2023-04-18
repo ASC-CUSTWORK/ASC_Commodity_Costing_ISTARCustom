@@ -8,5 +8,6 @@ namespace ASCISTARCustom.Common.Services.DataProvider.Interfaces
         InventoryItem GetInventoryItemByID(int? inventoryID);
         InventoryItem GetInventoryItemByCD(string inventoryCD);
         IEnumerable<InventoryItem> GetInventoryItems();
+        INItemClass GetItemClassByID(int? itemClassID);
     }
 }

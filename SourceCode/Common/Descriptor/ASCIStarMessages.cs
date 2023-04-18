@@ -47,6 +47,8 @@ namespace ASCISTARCustom.Common.Descriptor
             public const string UnitConversionNotFound = "Unit conversion record from {0} to {1} not found";
             public const string POVendorInventoryMetalItemEmpty = "Metal Item can not be empty.";
             public const string POVendorInventoryVendorPriceEmpty = "Vendor Price can not be empty.";
+            public const string NoDefaultVendor = "To proceed, please add a default vendor or select one on the Vendors tab.";
+            public const string CostRollupTypeNotSet = "Cost Rollup Type is not set. Please select Rollup Type before saving.";
         }
         #endregion
 

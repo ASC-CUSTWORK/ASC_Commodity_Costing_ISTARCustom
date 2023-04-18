@@ -67,15 +67,14 @@ namespace ASCISTARCustom.Common.DTO
             };
         }
 
-
-        public static implicit operator ASCIStarItemCostSpecDTO(INKitSpecHdr value)
+        public static implicit operator ASCIStarItemCostSpecDTO(INKitSpecStkDet value)
         {
             if (value == null) return null;
 
-            var valueExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(value);
+            var valueExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(value);
             return new ASCIStarItemCostSpecDTO
             {
-                InventoryID = value.KitInventoryID,
+                InventoryID = value.CompInventoryID,
                 RevisionID = value.RevisionID,
                 GoldGrams = valueExt.UsrGoldGrams,
                 SilverGrams = valueExt.UsrSilverGrams,
@@ -86,7 +85,7 @@ namespace ASCISTARCustom.Common.DTO
                 Increment = valueExt.UsrIncrement,
                 MatrixStep = valueExt.UsrMatrixStep,
                 UnitCost = valueExt.UsrUnitCost,
-                PreciousMetalCost = valueExt.UsrPreciousMetalCost,
+                //PreciousMetalCost = valueExt.UsrPreciousMetalCost,
                 FabricationCost = valueExt.UsrFabricationCost,
                 LandedCost = valueExt.UsrUnitCost,
                 PackagingCost = valueExt.UsrPackagingCost,
@@ -95,9 +94,9 @@ namespace ASCISTARCustom.Common.DTO
                 HandlingCost = valueExt.UsrHandlingCost,
                 LaborCost = valueExt.UsrLaborCost,
                 DutyCost = valueExt.UsrDutyCost,
-                DutyCostPct = valueExt.UsrDutyCostPct
+                CostingType = valueExt.UsrCostingType,
+                //DutyCostPct = valueExt.UsrDutyCostPct
             };
         }
-
     }
 }

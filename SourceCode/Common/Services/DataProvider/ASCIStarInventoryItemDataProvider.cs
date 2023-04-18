@@ -14,6 +14,14 @@ namespace ASCISTARCustom.Common.Services.DataProvider
             _graph = graph;
         }
 
+        public INItemClass GetItemClassByID(int? itemClassID)
+        {
+            return PXSelect<
+                INItemClass, 
+                Where<INItemClass.itemClassID, Equal<Required<INItemClass.itemClassID>>>>
+                .Select(_graph, itemClassID);
+        }
+
         public InventoryItem GetInventoryItemByCD(string inventoryCD)
         {
             return PXSelect<
