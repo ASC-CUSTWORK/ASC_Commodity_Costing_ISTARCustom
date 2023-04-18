@@ -254,7 +254,7 @@ namespace ASCISTARCustom
 
         #region UsrUnitCost
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         public Decimal? UsrUnitCost { get; set; }
         public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
         #endregion

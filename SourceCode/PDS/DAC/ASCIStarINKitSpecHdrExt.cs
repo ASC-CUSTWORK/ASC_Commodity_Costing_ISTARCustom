@@ -120,7 +120,7 @@ namespace ASCISTARCustom
         #region UsrLandedCost
         [PXDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         public decimal? UsrLandedCost { get; set; }
         public abstract class usrLandedCost : PX.Data.BQL.BqlDecimal.Field<usrLandedCost> { }
         #endregion
