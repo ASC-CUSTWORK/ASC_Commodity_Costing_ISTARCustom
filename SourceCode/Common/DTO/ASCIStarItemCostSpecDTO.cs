@@ -22,6 +22,8 @@ namespace ASCISTARCustom.Common.DTO
         public decimal? SurchargePct { get; set; }
         public decimal? Increment { get; set; }
         public decimal? MatrixStep { get; set; }
+        public decimal? Floor { get; set; }
+        public decimal? Ceiling { get; set; }
         public decimal? UnitCost { get; set; }
         public decimal? PreciousMetalCost { get; set; }
         public decimal? FabricationCost { get; set; }
@@ -52,6 +54,8 @@ namespace ASCISTARCustom.Common.DTO
                 SurchargePct = valueExt.UsrContractSurcharge,
                 Increment = valueExt.UsrContractIncrement,
                 MatrixStep = valueExt.UsrMatrixStep,
+                Floor = valueExt.UsrFloor,
+                Ceiling = valueExt.UsrCeiling,
                 UnitCost = valueExt.UsrContractCost,
                 PreciousMetalCost = valueExt.UsrCommodityCost,
                 FabricationCost = valueExt.UsrFabricationCost,

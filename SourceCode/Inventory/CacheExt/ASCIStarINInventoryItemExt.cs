@@ -133,11 +133,25 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrMatrixStep
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 100)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
         [PXUIField(DisplayName = "Matrix Step")]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMatrixStep { get; set; }
         public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
+        #endregion
+
+        #region UsrFloor
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Floor", IsReadOnly = true)]
+        public decimal? UsrFloor { get; set; }
+        public abstract class usrFloor : PX.Data.BQL.BqlDecimal.Field<usrFloor> { }
+        #endregion
+
+        #region UsrCeiling
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Ceiling", IsReadOnly = true)]
+        public decimal? UsrCeiling { get; set; }
+        public abstract class usrCeiling : PX.Data.BQL.BqlDecimal.Field<usrCeiling> { }
         #endregion
 
         #region UsrContractSurcharge

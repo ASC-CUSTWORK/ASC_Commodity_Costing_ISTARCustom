@@ -23,7 +23,7 @@
 					<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="SM" ControlSize="M" ></px:PXLayoutRule>
 					<px:PXSelector AutoRefresh="True" AllowEdit="True" ID="edCustomerID" runat="server" DataField="CustomerID"  AutoCallBack="True" RenderEditorText="True" ></px:PXSelector>
 					<px:PXSelector ID="edOrderType" runat="server" DataField="OrderType" DisplayMode="Hint" AutoCallBack="True" RenderEditorText="True" ></px:PXSelector>
-					<px:PXSelector ID="edInventoryID" runat="server" DataField="InventoryID" DisplayMode="Hint" DisplayFormat="&gt;AAAAAAAAAA" AutoCallBack="True" RenderEditorText="True" ></px:PXSelector>
+					<px:PXSelector AllowEdit="True" AutoRefresh="True" ID="edInventoryID" runat="server" DataField="InventoryID" DisplayMode="Hint" DisplayFormat="&gt;AAAAAAAAAA" AutoCallBack="True" RenderEditorText="True" ></px:PXSelector>
 					<px:PXDropDown ID="edCommodity" runat="server" AllowNull="False" DataField="Commodity" Enabled="True"></px:PXDropDown>
 					<px:PXDateTimeEdit runat="server" CommitChanges="true" ID="edEffectiveAsOfDate" DataField="EffectiveAsOfDate" ></px:PXDateTimeEdit>
 					<px:PXNumberEdit ID="edAllowancePct" runat="server" DataField="AllowancePct" ></px:PXNumberEdit>
@@ -31,13 +31,13 @@
 				</RowTemplate>
 				<Columns>
 					<px:PXGridColumn DataField="CustomerID" ></px:PXGridColumn>
+					<px:PXGridColumn DataField="CustomerID_description" Width="280" />
 					<px:PXGridColumn DataField="OrderType" ></px:PXGridColumn>
-					<px:PXGridColumn DataField="InventoryID" ></px:PXGridColumn>
+					<px:PXGridColumn CommitChanges="True" DataField="InventoryID" ></px:PXGridColumn>
 					<px:PXGridColumn DisplayFormat="" DataField="AllowancePct" ></px:PXGridColumn>
                     <px:PXGridColumn DataField="Commodity" RenderEditorText="True" ></px:PXGridColumn>
 					<px:PXGridColumn DataField="EffectiveDate" AutoCallBack="true" CommitChanges="true"></px:PXGridColumn>
-					<px:PXGridColumn AllowNull="False" DataField="Active" TextAlign="Center" Type="CheckBox" AutoCallBack="True" ></px:PXGridColumn>
-				</Columns>
+					<px:PXGridColumn AllowNull="False" DataField="Active" TextAlign="Center" Type="CheckBox" AutoCallBack="True" ></px:PXGridColumn></Columns>
 				<Styles>
 					<RowForm Height="250px">
 					</RowForm>

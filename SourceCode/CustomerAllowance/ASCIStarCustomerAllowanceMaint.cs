@@ -8,6 +8,7 @@ namespace ASCISTARCustom.CustomerAllowance
     {
         [PXImport]
         public PXSelect<ASCIStarCustomerAllowance> CustomerAllowance;
+       
         #region Events
 
         protected virtual void _(Events. FieldVerifying<ASCIStarCustomerAllowance, ASCIStarCustomerAllowance.allowancePct> e)
