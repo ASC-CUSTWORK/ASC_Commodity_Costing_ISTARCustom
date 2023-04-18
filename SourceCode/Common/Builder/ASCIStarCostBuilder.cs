@@ -160,7 +160,7 @@ namespace ASCISTARCustom.Common.Builder
 
                     default: break;
                 }
-                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * ItemCostSpecification.GoldGrams.Value;
+                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * ItemCostSpecification.GoldGrams ?? 0m;
                 metalLossValue = (100m + ItemCostSpecification.MetalLossPct.Value) / 100m;
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))

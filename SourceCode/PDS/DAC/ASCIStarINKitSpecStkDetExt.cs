@@ -53,42 +53,70 @@ namespace ASCISTARCustom
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion
 
+        #region UsrBaseGoldGrams
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMGold>))]
+        public decimal? UsrBaseGoldGrams { get; set; }
+        public abstract class usrBaseGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseGoldGrams> { }
+        #endregion
+
         #region GoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Gold, Grams", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMGold>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalGoldGrams>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalGoldGrams>))]
         public decimal? UsrGoldGrams { get; set; }
         public abstract class usrGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrGoldGrams> { }
         #endregion
 
         #region FineGoldGrams
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMGold>))]
+        public decimal? UsrBaseFineGoldGrams { get; set; }
+        public abstract class usrBaseFineGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseFineGoldGrams> { }
+        #endregion
+
+        #region UsrFineGoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fine Gold, Grams", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMGold>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrFineGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalFineGoldGrams>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFineGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalFineGoldGrams>))]
         public decimal? UsrFineGoldGrams { get; set; }
         public abstract class usrFineGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrFineGoldGrams> { }
         #endregion
 
-        #region SilverGrams
+        #region UsrBaseSilverGrams
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMSilver>))]
+        public decimal? UsrBaseSilverGrams { get; set; }
+        public abstract class usrBaseSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseSilverGrams> { }
+        #endregion
+
+        #region UsrSilverGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Silver, Grams", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMSilver>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalSilverGrams>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalSilverGrams>))]
         public decimal? UsrSilverGrams { get; set; }
         public abstract class usrSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrSilverGrams> { }
         #endregion
 
-        #region FineSilverGrams
+        #region UsrBaseFineSilverGrams
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMSilver>))]
+        public decimal? UsrBaseFineSilverGrams { get; set; }
+        public abstract class usrBaseFineSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseFineSilverGrams> { }
+        #endregion
+
+        #region UsrFineSilverGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fine Silver, Grams", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMSilver>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrFineSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalFineSilverGrams>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFineSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalFineSilverGrams>))]
         public decimal? UsrFineSilverGrams { get; set; }
         public abstract class usrFineSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrFineSilverGrams> { }
         #endregion
@@ -142,7 +170,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fabrication/Value Add", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrFabricationCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrFabricationCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrFabricationCost>))]
         public decimal? UsrFabricationCost { get; set; }
         public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
         #endregion
@@ -152,7 +179,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Packaging Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPackagingCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrPackagingCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPackagingCost>))]
         public decimal? UsrPackagingCost { get; set; }
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
@@ -162,7 +188,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "In-house Labor Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrLaborCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrLaborCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrLaborCost>))]
         public decimal? UsrLaborCost { get; set; }
         public abstract class usrLaborCost : PX.Data.BQL.BqlDecimal.Field<usrLaborCost> { }
         #endregion
@@ -172,7 +197,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Materials Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrMaterialsCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrMaterialCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrMaterialCost>))]
         public decimal? UsrMaterialCost { get; set; }
         public abstract class usrMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrMaterialCost> { }
         #endregion
@@ -182,7 +206,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Cost", Enabled = false, Visible = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrOtherCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrOtherCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrOtherCost>))]
         public decimal? UsrOtherCost { get; set; }
         public abstract class usrOtherCost : PX.Data.BQL.BqlDecimal.Field<usrOtherCost> { }
         #endregion
@@ -192,7 +215,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Freight Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrFreightCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrFreightCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrFreightCost>))]
         public decimal? UsrFreightCost { get; set; }
         public abstract class usrFreightCost : PX.Data.BQL.BqlDecimal.Field<usrFreightCost> { }
         #endregion
@@ -202,7 +224,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Handling Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrHandlingCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrHandlingCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrHandlingCost>))]
         public decimal? UsrHandlingCost { get; set; }
         public abstract class usrHandlingCost : PX.Data.BQL.BqlDecimal.Field<usrHandlingCost> { }
         #endregion
@@ -212,7 +233,6 @@ namespace ASCISTARCustom
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Duty Cost", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrDutyCost>))]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrDutyCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrDutyCost>))]
         public decimal? UsrDutyCost { get; set; }
         public abstract class usrDutyCost : PX.Data.BQL.BqlDecimal.Field<usrDutyCost> { }
         #endregion
