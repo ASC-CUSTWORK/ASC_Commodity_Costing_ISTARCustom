@@ -56,7 +56,7 @@ namespace ASCISTARCustom
         #region GoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Gold, Grams", Enabled = true)]
+        [PXUIField(DisplayName = "Gold, Grams", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMGold>))]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrTotalGoldGrams>))]
         public decimal? UsrGoldGrams { get; set; }
