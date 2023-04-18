@@ -20,6 +20,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static PX.CS.RMReport.FK;
 using static PX.Data.BQL.BqlPlaceholder;
 using static PX.Objects.IN.INKitSpecNonStkDet.FK;
 
@@ -368,6 +369,19 @@ namespace ASCISTARCustom.PDS
         #endregion
 
         #region POVendorInventory Events
+        protected virtual void _(Events.RowPersisting<POVendorInventory> e)
+        {
+            if (e.Row is POVendorInventory row)
+            {
+                var result = VendorItems.Select().RowCast<POVendorInventory>().Where(_ => _.IsDefault == true);
+                if (result.Count() > 1)
+                {
+                    e.Cache.RaiseExceptionHandling<POVendorInventory.isDefault>(row, row.IsDefault, new PXSetPropertyException(ASCIStarMessages.Error.MoreThenOneDefaultVendor, PXErrorLevel.Error));
+                    e.Cancel = true;
+                    throw new PXException(ASCIStarMessages.Error.MoreThenOneDefaultVendor);
+                }
+            }
+        }
         #endregion
 
         #endregion
