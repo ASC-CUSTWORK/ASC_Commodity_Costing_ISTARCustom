@@ -573,6 +573,14 @@
                                         </PXLayoutRule>
                                     </AddItem>
                                     <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector20" />
+                                            <Prop Key="DataField" Value="MetalType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
                                         <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
                                             <Prop Key="DataField" Value="ShortDesc" />
@@ -636,14 +644,6 @@
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
                                             <Prop Key="ID" Value="CstPXSelector11" />
                                             <Prop Key="DataField" Value="Collection" />
-                                            <Prop Key="CommitChanges" Value="True" />
-                                        </PXSelector>
-                                    </AddItem>
-                                    <AddItem>
-                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
-                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                            <Prop Key="ID" Value="CstPXSelector20" />
-                                            <Prop Key="DataField" Value="MetalType" />
                                             <Prop Key="CommitChanges" Value="True" />
                                         </PXSelector>
                                     </AddItem>
