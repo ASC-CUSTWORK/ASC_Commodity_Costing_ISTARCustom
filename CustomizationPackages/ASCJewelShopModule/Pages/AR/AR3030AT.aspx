@@ -31,13 +31,13 @@
 				</RowTemplate>
 				<Columns>
 					<px:PXGridColumn DataField="CustomerID" ></px:PXGridColumn>
+					<px:PXGridColumn DataField="CustomerID_description" Width="280" />
 					<px:PXGridColumn DataField="OrderType" ></px:PXGridColumn>
 					<px:PXGridColumn DataField="InventoryID" ></px:PXGridColumn>
 					<px:PXGridColumn DisplayFormat="" DataField="AllowancePct" ></px:PXGridColumn>
                     <px:PXGridColumn DataField="Commodity" RenderEditorText="True" ></px:PXGridColumn>
 					<px:PXGridColumn DataField="EffectiveDate" AutoCallBack="true" CommitChanges="true"></px:PXGridColumn>
-					<px:PXGridColumn AllowNull="False" DataField="Active" TextAlign="Center" Type="CheckBox" AutoCallBack="True" ></px:PXGridColumn>
-				</Columns>
+					<px:PXGridColumn AllowNull="False" DataField="Active" TextAlign="Center" Type="CheckBox" AutoCallBack="True" ></px:PXGridColumn></Columns>
 				<Styles>
 					<RowForm Height="250px">
 					</RowForm>

@@ -57,7 +57,6 @@ namespace ASCISTARCustom.DAC
         #endregion
 
         #region InventoryID
-        //  [ARTranInventoryItem(Filterable = true, IsKey = true)]
         [PXDBInt(IsKey = true)]
         [PXUIField(DisplayName = "Allowance ID", Required =true)]
         [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<AllowanceClass>>>),
