@@ -44,6 +44,7 @@ namespace ASCISTARCustom.Common.Descriptor
             public const string VendorDoesNotContainValidPrice = "{0} does not contain a valid price for {1} on {2}";
             public const string VendorRecordNotFound = "Vendor record not found";
             public const string VendorPriceNotFound = "Vendor price record not found";
+            public const string MarketPriceNotFound = "Market price record not found";
             public const string UnitConversionNotFound = "Unit conversion record from {0} to {1} not found";
             public const string POVendorInventoryMetalItemEmpty = "Metal Item can not be empty.";
             public const string POVendorInventoryVendorPriceEmpty = "Vendor Price can not be empty.";

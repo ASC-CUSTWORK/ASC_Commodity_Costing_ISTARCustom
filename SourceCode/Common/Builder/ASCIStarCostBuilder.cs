@@ -37,6 +37,8 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? PreciousMetalMarketCostPerGram { get; private set; }
         public decimal? PreciousMetalUnitCost { get; private set; }
         public decimal? AvrPreciousMetalUnitCost { get; private set; }
+        public decimal? Floor { get; private set; }
+        public decimal? Ceiling { get; private set; }
         #endregion 
 
         private readonly PXGraph _graph;
@@ -253,21 +255,26 @@ namespace ASCISTARCustom.Common.Builder
 
         public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? matrixStep)
         {
+            if (basisCost == null || basisCost == 0.0m)
+                throw new PXException(ASCIStarMessages.Error.VendorPriceNotFound);
+
+            if (marketCost == null || marketCost == 0.0m)
+                throw new PXException(ASCIStarMessages.Error.MarketPriceNotFound);
+
             if (matrixStep <= 0.0m || matrixStep == null)
             {
+                Floor = marketCost;
+                Ceiling = marketCost;
                 return marketCost;
             }
-            // decimal? increment = (decimal)matrixStep;
-            decimal? costPerOz = marketCost;
-            decimal? temp = (marketCost / matrixStep) - (basisCost / matrixStep);
 
+            decimal? temp = (marketCost / matrixStep) - (basisCost / matrixStep);
             decimal steps = Math.Truncate(temp ?? 0.0m);
 
-            decimal? floor = basisCost + (steps * matrixStep);
-            decimal? ceiling = floor + matrixStep;
-            costPerOz = (floor + ceiling) / 2.000000m;
+            Floor = basisCost + (steps * matrixStep);
+            Ceiling = Floor + matrixStep;
 
-            return costPerOz;
+            return (Floor + Ceiling) / 2.000000m; 
         }
 
         private decimal? GetPresiousMetalAvrCost()

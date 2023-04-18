@@ -356,7 +356,7 @@ namespace ASCISTARCustom.PDS
         #region ServiceMethods
         protected virtual void CopyJewelryItemFields(INKitSpecHdr kitSpecHdr)
         {
-            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr.KitInventoryID)?.TopFirst;
+            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr?.KitInventoryID)?.TopFirst;
 
             if (jewelItem == null) return;
 
@@ -399,7 +399,7 @@ namespace ASCISTARCustom.PDS
         }
         protected virtual void CopyJewelryItemFieldsToStockItem(INKitSpecHdr kitSpecHdr)
         {
-            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr.KitInventoryID)?.TopFirst;
+            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr?.KitInventoryID)?.TopFirst;
 
             if (jewelItem == null) return;
 
@@ -436,7 +436,7 @@ namespace ASCISTARCustom.PDS
         }
         protected virtual void CopyFieldsValueFromStockItem(INKitSpecHdr kitSpecHdr)
         {
-            var item = _itemDataProvider.GetInventoryItemByID(kitSpecHdr.KitInventoryID);
+            var item = _itemDataProvider.GetInventoryItemByID(kitSpecHdr?.KitInventoryID);
             if (item != null && kitSpecHdr != null)
             {
                 var itemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(item);
@@ -461,7 +461,7 @@ namespace ASCISTARCustom.PDS
         }
         protected virtual void CopyFieldsValueToStockItem(INKitSpecHdr kitSpecHdr)
         {
-            var item = _itemDataProvider.GetInventoryItemByID(kitSpecHdr.KitInventoryID);
+            var item = _itemDataProvider.GetInventoryItemByID(kitSpecHdr?.KitInventoryID);
             if (item != null && kitSpecHdr != null)
             {
                 var itemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(item);
