@@ -13,13 +13,13 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrMarketID
         [PXDBInt()]
-        [PXUIField(DisplayName = "Market", Required = true)]
+        [PXUIField(DisplayName = "Market")]
         [PXSelector(
         typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>,
             Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
                         , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
-        [PXDefault()]
+        //[PXDefault()]
         public virtual int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
         #endregion
