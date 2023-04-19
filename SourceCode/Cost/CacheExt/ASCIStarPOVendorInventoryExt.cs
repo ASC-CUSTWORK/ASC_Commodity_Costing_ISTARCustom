@@ -14,10 +14,11 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrMarketID
         [PXDBInt()]
-        [PXUIField(DisplayName = "Market")]
+        [PXUIField(DisplayName = "Market", Required = true)]
         [PXSelector(typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
             , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
+        [PXDefault()]
         public int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
         #endregion
@@ -91,7 +92,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrFabricationCost
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Fabrication/Value Add")]
+        [PXUIField(DisplayName = "Fabrication / Value Add")]
         public Decimal? UsrFabricationCost { get; set; }
         public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
         #endregion

@@ -7,7 +7,7 @@ using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Cost.CacheExt
 {
-    public class ASCIStarVendorExt : PXCacheExtension<PX.Objects.AP.Vendor>
+    public class ASCIStarVendorExt : PXCacheExtension<Vendor>
     {
         public static bool IsActive() => true;
 
@@ -19,7 +19,6 @@ namespace ASCISTARCustom.Cost.CacheExt
             Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
                         , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
-        //[PXDefault()]
         public virtual int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
         #endregion

@@ -274,14 +274,14 @@ namespace ASCISTARCustom.Common.Builder
             Floor = basisCost + (steps * matrixStep);
             Ceiling = Floor + matrixStep;
 
-            return (Floor + Ceiling) / 2.000000m; 
+            return (Floor + Ceiling) / 2.000000m;
         }
 
         private decimal? GetPresiousMetalAvrCost()
         {
             var inItemCost = INItemCost.PK.Find(_graph, ItemCostSpecification.InventoryID, Currency);
 
-            if (inItemCost.QtyOnHand == 0.0m) return 0.0m;
+            if (inItemCost == null || inItemCost.QtyOnHand == 0.0m) return 0.0m;
 
             return inItemCost.TotalCost / inItemCost.QtyOnHand;
         }

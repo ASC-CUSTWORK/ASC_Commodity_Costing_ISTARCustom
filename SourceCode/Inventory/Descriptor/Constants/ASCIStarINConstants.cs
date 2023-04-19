@@ -8,6 +8,12 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
     [PXLocalizable]
     public static class ASCIStarINConstants
     {
+        public class Errors
+        {
+            public const string ERPTakeMarketPrice = "ERP is taking Market price, Matrix Step cannot be zero!";
+            public const string NullInCacheSaveItemFirst = "Save Item first!";
+            public const string MarketEmpty = "Market can not be empty!";
+        }
         public class INTestType
         {
             public const string Material = "Material";
