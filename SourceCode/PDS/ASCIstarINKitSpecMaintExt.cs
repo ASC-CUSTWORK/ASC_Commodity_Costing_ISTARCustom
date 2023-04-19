@@ -321,8 +321,8 @@ namespace ASCISTARCustom.PDS
                     else if (rowExt.UsrCostingType == ASCIStarCostingType.MarketCost || rowExt.UsrCostingType == ASCIStarCostingType.ContractCost)
                     {
                         var jewelryCostBuilder = CreateCostBuilder(row);
-                        var result = jewelryCostBuilder.CalculatePreciousMetalCost();
-                        e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, result ?? 0m);
+                        var result = CalculateUnitCost(jewelryCostBuilder.CalculatePreciousMetalCost(), row.CompInventoryID);
+                        e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, result);
 
                         UpdateVendorPrice(e, row, rowExt, jewelryCostBuilder);
                     }
@@ -578,6 +578,17 @@ namespace ASCISTARCustom.PDS
                 cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrGoldGrams>(row, 1m);
                 cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineGoldGrams>(row, 1m);
             }
+        }
+        private decimal CalculateUnitCost(decimal? preciousMetalCost, int? inventoryID) //<-- this is a alternate way to calculate unit cost
+        {
+            decimal? value = 0m;
+            var inventoryItem = _itemDataProvider.GetInventoryItemByID(inventoryID);
+            if (inventoryItem != null)
+            {
+                var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
+                value = preciousMetalCost + inventoryItemExt.UsrMaterialsCost + inventoryItemExt.UsrFabricationCost + inventoryItemExt.UsrPackagingCost;
+            }
+            return value ?? 0m;
         }
         #endregion
 
