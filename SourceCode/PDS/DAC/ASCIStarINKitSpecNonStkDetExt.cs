@@ -47,8 +47,9 @@ namespace ASCISTARCustom
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Costing Type", Enabled = false, Visible = false)]
+        [PXUIField(DisplayName = "Costing Type", Enabled = true, Visible = true)]
         [ASCIStarCostingType.List]
+        [PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostingType>))]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion   
@@ -58,6 +59,7 @@ namespace ASCISTARCustom
         [ASCIStarCostRollupType.List]
         [PXDefault(ASCIStarCostRollupType.Fabrication, PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Rollup Type", Enabled = true)]
+        [PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion          

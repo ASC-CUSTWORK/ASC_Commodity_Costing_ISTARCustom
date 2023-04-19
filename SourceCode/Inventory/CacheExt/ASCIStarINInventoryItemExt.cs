@@ -263,7 +263,7 @@ namespace ASCISTARCustom
         [PXDBString(1)]
         [PXUIField(DisplayName = "Commodity Type")]
         [CommodityType.List]
-        [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.NullOrBlank)]
+        [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual string UsrCommodityType { get; set; }
         public abstract class usrCommodityType : PX.Data.BQL.BqlString.Field<usrCommodityType> { }
         #endregion
