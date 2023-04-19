@@ -22,7 +22,9 @@ using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 using static PX.CS.RMReport.FK;
 using static PX.Data.BQL.BqlPlaceholder;
+using static PX.Objects.GL.GLWorkBook.FK;
 using static PX.Objects.IN.INKitSpecNonStkDet.FK;
+using static PX.SM.WZAddField.operation;
 
 namespace ASCISTARCustom.PDS
 {
@@ -79,8 +81,6 @@ namespace ASCISTARCustom.PDS
         public override void Initialize()
         {
             base.Initialize();
-            ASCIStarUpdateMetalCost.SetEnabled(false);
-            ASCIStarUpdateMetalCost.SetVisible(false);
 
             var setup = ASCIStarINSetup.Current;
             if (setup != null)
@@ -122,6 +122,14 @@ namespace ASCISTARCustom.PDS
         [PXMergeAttributes(Method = MergeMethod.Append)]
         [PXDBDefault(typeof(INKitSpecHdr.kitInventoryID))]
         protected virtual void _(Events.CacheAttached<POVendorInventory.inventoryID> cacheAttached) { }
+
+        [PXMergeAttributes(Method = MergeMethod.Merge)]
+        [PXFormula(typeof(Add<Add<Add<
+            ASCIStarPOVendorInventoryExt.usrCommodityCost,
+            ASCIStarPOVendorInventoryExt.usrOtherMaterialCost>, 
+            ASCIStarPOVendorInventoryExt.usrFabricationCost>, 
+            ASCIStarPOVendorInventoryExt.usrPackagingCost>))]
+        protected virtual void _(Events.CacheAttached<ASCIStarPOVendorInventoryExt.usrUnitCost> cacheAttached) { }
         #endregion
 
         #endregion
@@ -140,16 +148,26 @@ namespace ASCISTARCustom.PDS
         [PXButton(CommitChanges = true)]
         public virtual IEnumerable aSCIStarUpdateMetalCost(PXAdapter adapter)
         {
-            Base.StockDet.Select().RowCast<INKitSpecStkDet>().ForEach(currentLine =>
+            var currentHdr = Base.Hdr.Current;
+            if (currentHdr != null)
             {
-                //TODO create logic for updateing metal costs
-            });
-
-            Base.NonStockDet.Select().RowCast<INKitSpecNonStkDet>().ForEach(currentLine =>
-            {
-                //TODO create logic for updateing metal costs based on non stock component.
-                //NOTE! this loop might not be needed
-            });
+                VendorItems.Select().RowCast<POVendorInventory>().ForEach(row =>
+                {
+                    
+                    var jewelryItem = GetASCIStarINJewelryItem(currentHdr.KitInventoryID);
+                    if (ASCIStarMetalType.IsGold(jewelryItem?.MetalType))
+                    {
+                        var item = _itemDataProvider.GetInventoryItemByCD("24K");
+                        SetOrUpdatePreciousMetalCost(row, item, jewelryItem);
+                    }
+                    else if (ASCIStarMetalType.IsSilver(jewelryItem?.MetalType))
+                    {
+                        var item = _itemDataProvider.GetInventoryItemByCD("SSS");
+                        SetOrUpdatePreciousMetalCost(row, item, jewelryItem);
+                    }
+                });
+                Base.Save.PressButton();
+            }
 
             return adapter.Get();
         }
@@ -589,6 +607,37 @@ namespace ASCISTARCustom.PDS
                 value = preciousMetalCost + inventoryItemExt.UsrMaterialsCost + inventoryItemExt.UsrFabricationCost + inventoryItemExt.UsrPackagingCost;
             }
             return value ?? 0m;
+        }
+        private void SetOrUpdatePreciousMetalCost(POVendorInventory row, InventoryItem item, ASCIStarINJewelryItem jewelryItem)
+        {
+            var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
+            var marketID = GetVendorMarketID(row, rowExt);
+
+            var vendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(Base, marketID, item.InventoryID, TOZ.value, PXTimeZoneInfo.Today);
+            if (vendorPrice != null)
+            {
+                var result = vendorPrice.SalesPrice * ASCIStarMetalType.GetMultFactorConvertTOZtoGram(jewelryItem.MetalType);
+                rowExt.UsrCommodityCost = result;
+                VendorItems.Update(row);
+            }
+        }
+        private int? GetVendorMarketID(POVendorInventory row,  ASCIStarPOVendorInventoryExt rowExt)
+        {
+            int? marketID = null;
+            if (rowExt.UsrMarketID == null)
+            {
+                var vendor = _vendorDataProvider.GetVendor(row.VendorID);
+                if (vendor != null)
+                {
+                    marketID = PXCache<Vendor>.GetExtension<ASCIStarVendorExt>(vendor)?.UsrMarketID;
+                }
+            }
+            else
+            {
+                marketID = rowExt.UsrMarketID;
+            }
+
+            return marketID;
         }
         #endregion
 

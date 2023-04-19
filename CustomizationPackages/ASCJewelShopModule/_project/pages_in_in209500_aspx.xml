@@ -320,6 +320,7 @@
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="VendorID" />
                                                         <Prop Key="Width" Value="140" />
+                                                        <Prop Key="CommitChanges" Value="True" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
@@ -485,6 +486,16 @@
                                 <Prop Key="DataSourceID" Value="ds" />
                                 <Prop Key="SyncPosition" Value="True" />
                                 <Prop Key="KeepPosition" Value="True" />
+                                <Children Key="ActionBar.CustomItems">
+                                    <AddItem>
+                                        <PXToolBarButton TypeFullName="PX.Web.UI.PXToolBarButton">
+                                            <Prop Key="Text" Value="Update Metal Cost" />
+                                            <Prop Key="CommandSourceID" Value="ds" />
+                                            <Prop Key="CommandName" Value="aSCIStarUpdateMetalCost" />
+                                            <Prop Key="DependOnGrid" Value="ASCIStarVendorPrice" />
+                                        </PXToolBarButton>
+                                    </AddItem>
+                                </Children>
                             </PXGrid>
                         </AddItem>
                     </Children>
@@ -1020,4 +1031,14 @@
     <PXGridColumn DataField="CompInventoryID" ParentId="phG_tab_Items#1_gridNonStock_Levels#0_Columns#0" TypeFullName="PX.Web.UI.PXGridColumn">
         <Prop Key="CommitChanges" Value="True" />
     </PXGridColumn>
+    <PXDataSource ID="ds" ParentId="phDS_ds" TypeFullName="PX.Web.UI.PXDataSource">
+        <Children Key="CallbackCommands">
+            <AddItem>
+                <PXDSCallbackCommand TypeFullName="PX.Web.UI.PXDSCallbackCommand">
+                    <Prop Key="Name" Value="aSCIStarUpdateMetalCost" />
+                    <Prop Key="Visible" Value="False" />
+                </PXDSCallbackCommand>
+            </AddItem>
+        </Children>
+    </PXDataSource>
 </Page>

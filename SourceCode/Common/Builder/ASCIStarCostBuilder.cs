@@ -95,8 +95,8 @@ namespace ASCISTARCustom.Common.Builder
 
                 if (ASCIStarMetalType.IsGold(INJewelryItem?.MetalType))
                 {
-                    PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24");
-                    PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24");
+                    PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24K");
+                    PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24K");
                 }
                 else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
                 {
