@@ -13,6 +13,7 @@ using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.CN.CacheExtensions;
+using PX.Objects.CN.Common.Extensions;
 using PX.Objects.FA;
 using PX.Objects.IN;
 using PX.Objects.PO;
@@ -30,6 +31,11 @@ namespace ASCISTARCustom.PDS
 {
     public class ASCIStarINKitSpecMaintExt : PXGraphExtension<INKitSpecMaint>
     {
+        #region Constants
+        private const decimal One_Gram = 1m;
+        private const decimal One_Ounce = 31.1034768m;
+        #endregion
+
         #region Static Functions
         public static bool IsActive() => true;
         #endregion
@@ -585,16 +591,27 @@ namespace ASCISTARCustom.PDS
         }
         protected virtual void DfltGramsForCommodityItemType(PXCache cache, INKitSpecStkDet row)
         {
-            var item = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
-            if (item?.InventoryCD.NormalizeCD() == "SSS")
+            var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
+            if (!string.IsNullOrEmpty(jewelryItem?.MetalType))
             {
-                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSilverGrams>(row, 1m);
-                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineSilverGrams>(row, 1m);
+                if (ASCIStarMetalType.IsGold(jewelryItem?.MetalType))
+                {
+                    var multFactor = ASCIStarMetalType.GetSilverTypeValue(jewelryItem?.MetalType);
+                    var fineGrams = (One_Gram * multFactor) / 24;
+                    cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrBaseGoldGrams>(row, One_Gram);
+                    cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrBaseFineGoldGrams>(row, fineGrams);
+                }
+                else if (ASCIStarMetalType.IsSilver(jewelryItem?.MetalType))
+                {
+                    var multFactor = ASCIStarMetalType.GetSilverTypeValue(jewelryItem?.MetalType);
+                    var fineGrams = One_Gram * multFactor;
+                    cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrBaseSilverGrams>(row, One_Gram);
+                    cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrBaseFineSilverGrams>(row, fineGrams);
+                }
             }
-            else if (item?.InventoryCD.NormalizeCD() == "24K")
+            else
             {
-                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrGoldGrams>(row, 1m);
-                cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrFineGoldGrams>(row, 1m);
+                cache.RaiseExceptionHandling<INKitSpecStkDet.compInventoryID>(row, row.CompInventoryID, new PXSetPropertyException(ASCIStarMessages.Error.MissingMetalType, PXErrorLevel.RowWarning));
             }
         }
         private decimal CalculateUnitCost(decimal? preciousMetalCost, int? inventoryID) //<-- this is a alternate way to calculate unit cost

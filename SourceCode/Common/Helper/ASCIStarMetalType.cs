@@ -138,8 +138,6 @@ namespace ASCISTARCustom.Common.Helper
                 case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
                 case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
                 case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
-                case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m;
-                case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m;
                 default: return decimal.Zero;
             }
         }

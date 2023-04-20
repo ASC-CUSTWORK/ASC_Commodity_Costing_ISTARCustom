@@ -49,12 +49,13 @@ namespace ASCISTARCustom
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type", Required = true)]
         [ASCIStarCostRollupType.List]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion
 
         #region UsrBaseGoldGrams
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMGold>))]
         public decimal? UsrBaseGoldGrams { get; set; }
@@ -71,7 +72,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region FineGoldGrams
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMGold>))]
         public decimal? UsrBaseFineGoldGrams { get; set; }
@@ -88,7 +89,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrBaseSilverGrams
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMSilver>))]
         public decimal? UsrBaseSilverGrams { get; set; }
@@ -105,7 +106,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrBaseFineSilverGrams
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMSilver>))]
         public decimal? UsrBaseFineSilverGrams { get; set; }

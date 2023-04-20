@@ -22,4 +22,8 @@
     <Column TableName="INKitSpecStkDet" ColumnName="UsrFreightCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecStkDet" ColumnName="UsrHandlingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecStkDet" ColumnName="UsrDutyCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrBaseGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrBaseFineGoldGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrBaseSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrBaseFineSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
 </Table>
