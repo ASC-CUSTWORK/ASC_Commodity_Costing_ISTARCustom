@@ -12,20 +12,11 @@ using PX.Common;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
-using PX.Objects.CN.CacheExtensions;
-using PX.Objects.CN.Common.Extensions;
-using PX.Objects.FA;
 using PX.Objects.IN;
 using PX.Objects.PO;
-using System;
 using System.Collections;
 using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
-using static PX.CS.RMReport.FK;
-using static PX.Data.BQL.BqlPlaceholder;
-using static PX.Objects.GL.GLWorkBook.FK;
-using static PX.Objects.IN.INKitSpecNonStkDet.FK;
-using static PX.SM.WZAddField.operation;
 
 namespace ASCISTARCustom.PDS
 {
@@ -41,6 +32,10 @@ namespace ASCISTARCustom.PDS
         #endregion
 
         #region DataView
+        [PXCopyPasteHiddenView]
+        public PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Optional<INKitSpecHdr.kitInventoryID>>>> Hdr;
+
+        [PXCopyPasteHiddenView]
         public PXSelect<POVendorInventory, Where<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> VendorItems;
 
         public SelectFrom<ASCIStarINKitSpecJewelryItem>
@@ -68,10 +63,13 @@ namespace ASCISTARCustom.PDS
             OrderBy<
                 Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
 
+        [PXCopyPasteHiddenView]
         public PXSetup<INSetup> ASCIStarINSetup;
 
+        [PXCopyPasteHiddenView]
         public PXSelect<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCIStarInventoryItem;
 
+        [PXCopyPasteHiddenView]
         public PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCIStarJewelryItem;
         #endregion
 
@@ -87,7 +85,6 @@ namespace ASCISTARCustom.PDS
         public override void Initialize()
         {
             base.Initialize();
-
             var setup = ASCIStarINSetup.Current;
             if (setup != null)
             {
