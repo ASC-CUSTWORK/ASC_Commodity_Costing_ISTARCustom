@@ -51,6 +51,7 @@ namespace ASCISTARCustom.Common.Descriptor
             public const string NoDefaultVendor = "To proceed, please add a default vendor or select one on the Vendors tab.";
             public const string CostRollupTypeNotSet = "Cost Rollup Type is not set. Please select Rollup Type before saving.";
             public const string MoreThenOneDefaultVendor = "You have more than one default vendor. Please select one on the Vendors tab.";
+            public const string MarketNotFound = "Market field cannot be empty";
         }
         #endregion
 

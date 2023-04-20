@@ -14,7 +14,9 @@ using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
@@ -394,14 +396,28 @@ namespace ASCISTARCustom.PDS
         {
             if (e.Row is POVendorInventory row)
             {
-                var result = VendorItems.Select().RowCast<POVendorInventory>().Where(_ => _.IsDefault == true);
-                if (result.Count() > 1)
+                var result = VendorItems.Select().RowCast<POVendorInventory>();
+                if (result.Any(_ => _.GetExtension<ASCIStarPOVendorInventoryExt>().UsrMarketID == null))
                 {
-                    e.Cache.RaiseExceptionHandling<POVendorInventory.isDefault>(row, row.IsDefault, new PXSetPropertyException(ASCIStarMessages.Error.MoreThenOneDefaultVendor, PXErrorLevel.Error));
+                    e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMarketID>(row, row.IsDefault, new PXSetPropertyException(ASCIStarMessages.Error.MarketNotFound, PXErrorLevel.Error));
                     e.Cancel = true;
-                    throw new PXException(ASCIStarMessages.Error.MoreThenOneDefaultVendor);
+                    throw new PXException(ASCIStarMessages.Error.MarketNotFound);
                 }
             }
+        }
+        protected virtual void _(Events.RowUpdated<POVendorInventory> e)
+        {
+            foreach (PXResult<POVendorInventory> row in VendorItems.Select())
+            {
+                POVendorInventory pOVendorInventory = row;
+                if (pOVendorInventory.RecordID != e.Row.RecordID && pOVendorInventory.IsDefault == true)
+                {
+                    VendorItems.Cache.SetValue<POVendorInventory.isDefault>(pOVendorInventory, false);
+                }
+            }
+
+            VendorItems.Cache.ClearQueryCacheObsolete();
+            VendorItems.View.RequestRefresh();
         }
         #endregion
 

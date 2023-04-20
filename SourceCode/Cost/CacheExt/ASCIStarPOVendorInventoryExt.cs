@@ -15,10 +15,19 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrMarketID
         [PXDBInt()]
         [PXUIField(DisplayName = "Market", Required = true)]
-        [PXSelector(typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
-            typeof(Vendor.acctCD), typeof(Vendor.acctName)
-            , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
-        [PXDefault()]
+        [PXSelector(typeof(Search2<
+            Vendor.bAccountID, 
+            InnerJoin<VendorClass, 
+                On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, 
+            Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
+            typeof(Vendor.acctCD), 
+            typeof(Vendor.acctName)
+            , SubstituteKey = typeof(Vendor.acctCD)
+            , DescriptionField = typeof(Vendor.acctName))]
+        [PXDefault(typeof(Search<
+            ASCIStarVendorExt.usrMarketID, 
+            Where<Vendor.bAccountID, Equal<Current<POVendorInventory.vendorID>>>>), 
+            PersistingCheck = PXPersistingCheck.Nothing)]
         public int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
         #endregion
@@ -26,7 +35,11 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrCommodityID
         [PXDBInt()]
         [PXUIField(DisplayName = "Metal")]
-        [PXSelector(typeof(Search2<InventoryItem.inventoryID, InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
+        [PXSelector(typeof(Search2<
+            InventoryItem.inventoryID, 
+            InnerJoin<INItemClass, 
+                On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, 
+            Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
             , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
         public int? UsrCommodityID { get; set; }
