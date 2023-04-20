@@ -142,6 +142,12 @@ namespace ASCISTARCustom.PDS.Descriptor
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, result);
                     }
                     break;
+                case ASCIStarCostRollupType.PackagingForLabor:
+                    {
+                        var result = rowExt.UsrPackagingLaborCost + value;
+                        cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, result);
+                    }
+                    break;
                 case ASCIStarCostRollupType.Labor:
                     {
                         var result = rowExt.UsrLaborCost + value;
@@ -206,6 +212,12 @@ namespace ASCISTARCustom.PDS.Descriptor
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, result);
                     }
                     break;
+                case ASCIStarCostRollupType.PackagingForLabor:
+                    {
+                        var result = rowExt.UsrPackagingLaborCost + value;
+                        cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, result);
+                    }
+                    break;
                 case ASCIStarCostRollupType.Labor:
                     {
                         var result = rowExt.UsrLaborCost - value;
@@ -254,6 +266,9 @@ namespace ASCISTARCustom.PDS.Descriptor
                 case ASCIStarCostRollupType.Packaging:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, 0m);
 
+                    break;
+                case ASCIStarCostRollupType.PackagingForLabor:
+                    cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, 0m);
                     break;
                 case ASCIStarCostRollupType.Labor:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrLaborCost>(currentRow, 0m);

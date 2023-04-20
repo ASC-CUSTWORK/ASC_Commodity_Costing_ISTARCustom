@@ -604,7 +604,11 @@ namespace ASCISTARCustom.PDS
             if (inventoryItem != null)
             {
                 var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
-                value = preciousMetalCost + inventoryItemExt.UsrMaterialsCost + inventoryItemExt.UsrFabricationCost + inventoryItemExt.UsrPackagingCost;
+                value = preciousMetalCost 
+                        + inventoryItemExt.UsrMaterialsCost 
+                        + inventoryItemExt.UsrFabricationCost 
+                        + inventoryItemExt.UsrPackagingCost 
+                        + inventoryItemExt.UsrPackagingLaborCost;
             }
             return value ?? 0m;
         }

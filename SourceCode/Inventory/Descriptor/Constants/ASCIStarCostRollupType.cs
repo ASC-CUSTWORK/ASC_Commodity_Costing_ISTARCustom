@@ -13,6 +13,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         public const string Freight = "S";
         public const string Duty = "D";
         public const string Packaging = "P";
+        public const string PackagingForLabor = "B";
         public const string Blank = "";
 
         public const string MessagePreciousMetal = "Precious Metal";
@@ -23,6 +24,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         public const string MessageFreight = "Freight";
         public const string MessageDuty = "Duty";
         public const string MessagePackaging = "Packaging";
+        public const string MessagePackagingForLabor = "Packaging for labor";
         public const string MessageBlank = "<Blank>";
 
         public class ListAttribute : PXStringListAttribute
@@ -33,6 +35,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
                 Fabrication,
                 Materials,
                 Packaging,
+                PackagingForLabor,
                 Freight,
                 Handling,
                 Duty,
@@ -46,6 +49,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
                 MessageFabrication,
                 MessageMaterials,
                 MessagePackaging,
+                MessagePackagingForLabor,
                 MessageFreight,
                 MessageHandling,
                 MessageDuty,
@@ -94,6 +98,11 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         public class packaging : PX.Data.BQL.BqlString.Constant<packaging>
         {
             public packaging() : base(Packaging) { }
+        }
+
+        public class packagingForLabor : PX.Data.BQL.BqlString.Constant<packagingForLabor>
+        {
+            public packagingForLabor() : base(PackagingForLabor) { }
         }
 
         public class other : PX.Data.BQL.BqlString.Constant<other>

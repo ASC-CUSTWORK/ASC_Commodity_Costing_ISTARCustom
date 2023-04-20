@@ -101,6 +101,14 @@ namespace ASCISTARCustom
         public abstract class usrLaborCost : PX.Data.BQL.BqlDecimal.Field<usrLaborCost> { }
         #endregion
 
+        #region UsrPackagingLaborCost
+        [PXDBDecimal(6, MinValue = 0)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Labor for packaging")]
+        public decimal? UsrPackagingLaborCost { get; set; }
+        public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
+        #endregion
+
         #region MaterialCost
         [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]

@@ -203,7 +203,8 @@ namespace ASCISTARCustom.Common.Builder
             return (costSpecDTO?.PreciousMetalCost ?? 0m)
                 + (costSpecDTO?.MaterialsCost ?? 0m)
                 + (costSpecDTO?.FabricationCost ?? 0m)
-                + (costSpecDTO?.PackagingCost ?? 0m);
+                + (costSpecDTO?.PackagingCost ?? 0m)
+                + (costSpecDTO?.PackagingLaborCost ?? 0m);
         }
 
         public static decimal? CalculateUnitCost(INKitSpecHdr kitSpecHdr)
@@ -214,7 +215,8 @@ namespace ASCISTARCustom.Common.Builder
             return (kitSpecHdrExt?.UsrPreciousMetalCost ?? 0m)
                  + (kitSpecHdrExt?.UsrMaterialCost ?? 0m)
                  + (kitSpecHdrExt?.UsrFabricationCost ?? 0m)
-                 + (kitSpecHdrExt?.UsrPackagingCost ?? 0m);
+                 + (kitSpecHdrExt?.UsrPackagingCost ?? 0m) 
+                 + (kitSpecHdrExt?.UsrPackagingLaborCost ?? 0m);
         }
 
         public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)

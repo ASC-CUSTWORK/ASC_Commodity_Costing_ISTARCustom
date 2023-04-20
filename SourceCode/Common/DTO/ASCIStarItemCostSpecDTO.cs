@@ -29,6 +29,7 @@ namespace ASCISTARCustom.Common.DTO
         public decimal? FabricationCost { get; set; }
         public decimal? LandedCost { get; set; }
         public decimal? PackagingCost { get; set; }
+        public decimal? PackagingLaborCost { get; set; }
         public decimal? MaterialsCost { get; set; }
         public decimal? FreightCost { get; set; }
         public decimal? HandlingCost { get; set; }
@@ -36,6 +37,7 @@ namespace ASCISTARCustom.Common.DTO
         public decimal? DutyCost { get; set; }
         public decimal? DutyCostPct { get; set; }
         public string CostingType { get; set; }
+        
 
         public static implicit operator ASCIStarItemCostSpecDTO(InventoryItem value)
         {
@@ -61,6 +63,7 @@ namespace ASCISTARCustom.Common.DTO
                 FabricationCost = valueExt.UsrFabricationCost,
                 LandedCost = valueExt.UsrUnitCost,
                 PackagingCost = valueExt.UsrPackagingCost,
+                PackagingLaborCost = valueExt.UsrPackagingLaborCost,
                 MaterialsCost = valueExt.UsrMaterialsCost,
                 FreightCost = valueExt.UsrFreightCost,
                 HandlingCost = valueExt.UsrHandlingCost,
@@ -89,7 +92,6 @@ namespace ASCISTARCustom.Common.DTO
                 Increment = valueExt.UsrIncrement,
                 MatrixStep = valueExt.UsrMatrixStep,
                 UnitCost = valueExt.UsrUnitCost,
-                //PreciousMetalCost = valueExt.UsrPreciousMetalCost,
                 FabricationCost = valueExt.UsrFabricationCost,
                 LandedCost = valueExt.UsrUnitCost,
                 PackagingCost = valueExt.UsrPackagingCost,
@@ -99,7 +101,6 @@ namespace ASCISTARCustom.Common.DTO
                 LaborCost = valueExt.UsrLaborCost,
                 DutyCost = valueExt.UsrDutyCost,
                 CostingType = valueExt.UsrCostingType,
-                //DutyCostPct = valueExt.UsrDutyCostPct
             };
         }
     }
