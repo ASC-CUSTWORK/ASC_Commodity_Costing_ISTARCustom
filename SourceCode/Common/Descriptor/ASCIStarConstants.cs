@@ -77,6 +77,12 @@ namespace ASCISTARCustom.Common.Descriptor
             public TOZ2GRAM_31_10348() : base(value) { }
         }
 
+        public class DecimalTwo : PX.Data.BQL.BqlDecimal.Constant<DecimalTwo>
+        {
+            public static readonly decimal value = 2.0m;
+            public DecimalTwo() : base(value) { }
+        }
+
         public class CommodityType
         {
             public class ListAttribute : PXStringListAttribute

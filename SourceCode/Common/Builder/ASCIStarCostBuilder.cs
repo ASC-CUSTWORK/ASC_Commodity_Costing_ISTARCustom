@@ -141,9 +141,8 @@ namespace ASCISTARCustom.Common.Builder
         public virtual decimal? CalculatePreciousMetalCost(string costingType = null)
         {
             decimal? preciousMetalCost = decimal.Zero;
-            var metalLossValue = 1.00m;
 
-            var priciousMetalMultFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
+            decimal priciousMetalMultFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
 
             if (ASCIStarMetalType.IsGold(INJewelryItem?.MetalType))
             {
@@ -161,7 +160,7 @@ namespace ASCISTARCustom.Common.Builder
                     default: break;
                 }
                 preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * ItemCostSpecification.GoldGrams ?? 0m;
-                metalLossValue = (100m + ItemCostSpecification.MetalLossPct.Value) / 100m;
+
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
             {
@@ -183,6 +182,7 @@ namespace ASCISTARCustom.Common.Builder
             }
 
             decimal surchargeValue = (100m + ItemCostSpecification.SurchargePct ?? 0.0m) / 100m;
+            decimal metalLossValue = (100m + ItemCostSpecification.MetalLossPct.Value) / 100m;
             PreciousMetalUnitCost = preciousMetalCost * metalLossValue * surchargeValue;
             return PreciousMetalUnitCost;
         }
@@ -215,8 +215,20 @@ namespace ASCISTARCustom.Common.Builder
             return (kitSpecHdrExt?.UsrPreciousMetalCost ?? 0m)
                  + (kitSpecHdrExt?.UsrMaterialCost ?? 0m)
                  + (kitSpecHdrExt?.UsrFabricationCost ?? 0m)
-                 + (kitSpecHdrExt?.UsrPackagingCost ?? 0m) 
+                 + (kitSpecHdrExt?.UsrPackagingCost ?? 0m)
                  + (kitSpecHdrExt?.UsrPackagingLaborCost ?? 0m);
+        }
+
+        public static decimal? CalculateUnitCost(POVendorInventory poVendorInventory)
+        {
+            if (poVendorInventory == null) return 0;
+
+            var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory);
+            return (poVendorInventoryExt?.UsrCommodityCost ?? 0m)
+                 + (poVendorInventoryExt?.UsrOtherMaterialCost ?? 0m)
+                 + (poVendorInventoryExt?.UsrFabricationCost ?? 0m)
+                 + (poVendorInventoryExt?.UsrPackagingCost ?? 0m)
+                 + (poVendorInventoryExt?.UsrPackagingLaborCost ?? 0m);
         }
 
         public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
@@ -257,11 +269,11 @@ namespace ASCISTARCustom.Common.Builder
 
         public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? matrixStep)
         {
-            if (basisCost == null || basisCost == 0.0m)
-                throw new PXException(ASCIStarMessages.Error.VendorPriceNotFound);
+            if (basisCost == null || basisCost == 0.0m || marketCost == null || marketCost == 0.0m) return 0.0m;
+            //    throw new PXException(ASCIStarMessages.Error.VendorPriceNotFound);
 
-            if (marketCost == null || marketCost == 0.0m)
-                throw new PXException(ASCIStarMessages.Error.MarketPriceNotFound);
+            //if (marketCost == null || marketCost == 0.0m)
+            //    throw new PXException(ASCIStarMessages.Error.MarketPriceNotFound);
 
             if (matrixStep <= 0.0m || matrixStep == null)
             {
@@ -270,11 +282,20 @@ namespace ASCISTARCustom.Common.Builder
                 return marketCost;
             }
 
+            // first aproach
+
+            //decimal? temp = (marketCost / matrixStep) - (basisCost / matrixStep);
+            //decimal steps = Math.Truncate(temp ?? 0.0m);
+
+            //Floor = basisCost + (steps * matrixStep);
+            //Ceiling = Floor + matrixStep;
+
+            //second approach
             decimal? temp = (marketCost / matrixStep) - (basisCost / matrixStep);
             decimal steps = Math.Truncate(temp ?? 0.0m);
 
-            Floor = basisCost + (steps * matrixStep);
-            Ceiling = Floor + matrixStep;
+            Floor = (steps + (basisCost / matrixStep)) * matrixStep;
+            Ceiling = (1 + steps + (basisCost / matrixStep)) * matrixStep;
 
             return (Floor + Ceiling) / 2.000000m;
         }

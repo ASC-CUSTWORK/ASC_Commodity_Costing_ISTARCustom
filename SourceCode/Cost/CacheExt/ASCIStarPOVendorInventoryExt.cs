@@ -90,7 +90,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #endregion
 
         #region UsrFabricationCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fabrication / Value Add")]
         public Decimal? UsrFabricationCost { get; set; }
@@ -105,8 +105,16 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
 
+        #region UsrPackagingLaborCost
+        [PXDBDecimal(6, MinValue = 0)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Labor for packaging")]
+        public decimal? UsrPackagingLaborCost { get; set; }
+        public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
+        #endregion
+
         #region UsrLaborCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "In-house Labor Cost", Visible = false)]
         public Decimal? UsrLaborCost { get; set; }

@@ -1,4 +1,5 @@
-﻿using PX.Data;
+﻿using ASCISTARCustom.Common.Descriptor;
+using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using System;
@@ -37,6 +38,14 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrCommodityPrice : PX.Data.BQL.BqlDecimal.Field<usrCommodityPrice> { }
         #endregion
 
+        #region UsrBasisValue
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
+        [PXFormula(typeof(Div<Add<APVendorPrice.salesPrice, Add<APVendorPrice.salesPrice, usrMatrixStep>>, ASCIStarConstants.DecimalTwo>))]
+        public decimal? UsrBasisValue { get; set; }
+        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
+        #endregion
+
         #region UsrCommodityLossPct
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Loss Pct")]
@@ -61,6 +70,14 @@ namespace ASCISTARCustom.Cost.CacheExt
             Div<usrCommodityPerGram, APVendorPrice.salesPrice>>))]
         public decimal? UsrCommodityIncrement { get; set; }
         public abstract class usrCommodityIncrement : PX.Data.BQL.BqlDecimal.Field<usrCommodityIncrement> { }
+        #endregion
+
+        #region UsrMatrixStep
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
+        [PXUIField(DisplayName = "Matrix Step")]
+        [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrMatrixStep { get; set; }
+        public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
         #endregion
 
         #region UsrCommodity

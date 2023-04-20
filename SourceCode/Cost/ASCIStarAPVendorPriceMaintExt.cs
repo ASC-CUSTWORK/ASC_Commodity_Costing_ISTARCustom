@@ -34,7 +34,14 @@ namespace ASCISTARCustom
 
             e.Cache.SetValueExt<ASCIStarAPVendorPriceExt.usrMarketID>(row, vendor?.GetExtension<ASCIStarVendorExt>().UsrMarketID);
         }
+        //protected virtual void _(Events.FieldUpdated<APVendorPrice, APVendorPrice.salesPrice> e)
+        //{
+        //    var row = e.Row;
+        //    if (row == null) return;
+        //    Vendor vendor = Vendor.PK.Find(this.Base, row.VendorID);
 
+        //    e.Cache.SetValueExt<ASCIStarAPVendorPriceExt.usrMarketID>(row, vendor?.GetExtension<ASCIStarVendorExt>().UsrMarketID);
+        //}
         //protected void APVendorPrice_VendorID_FieldUpdating(PXCache cache, PXFieldUpdatingEventArgs e, PXFieldUpdating InvokeBaseHandler)
         //{
         //    if (InvokeBaseHandler != null)
