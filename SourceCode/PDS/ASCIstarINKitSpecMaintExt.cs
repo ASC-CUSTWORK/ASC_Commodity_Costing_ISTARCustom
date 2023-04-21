@@ -449,10 +449,10 @@ namespace ASCISTARCustom.PDS
             }
 
             GetCurySettings(e.Row.InventoryID);
-            var enumerable = ASCIStarAllItemCurySettings.Select(e.Row.InventoryID).RowCast<InventoryItemCurySettings>();
+            var itemCorySettings = ASCIStarAllItemCurySettings.Select(e.Row.InventoryID).RowCast<InventoryItemCurySettings>();
             var vendor = Vendor.PK.Find(Base, e.Row.VendorID);
             bool flag = false;
-            foreach (InventoryItemCurySettings item in enumerable)
+            foreach (var item in itemCorySettings)
             {
                 var prefferedVendor = Vendor.PK.Find(Base, item.PreferredVendorID);
                 if (vendor.BaseCuryID == null || string.Equals(item.CuryID, vendor.BaseCuryID, StringComparison.OrdinalIgnoreCase))
@@ -480,20 +480,16 @@ namespace ASCISTARCustom.PDS
                 return;
             }
 
-            if (e.Row is POVendorInventory row)
+            foreach (var currentRow in VendorItems.Select().RowCast<POVendorInventory>())
             {
-                foreach (PXResult<POVendorInventory> currentRow in VendorItems.Select())
+                if (currentRow.RecordID != e.Row.RecordID && currentRow.IsDefault == true)
                 {
-                    POVendorInventory pOVendorInventory = currentRow;
-                    if (pOVendorInventory.RecordID != row.RecordID && pOVendorInventory.IsDefault == true)
-                    {
-                        VendorItems.Cache.SetValue<POVendorInventory.isDefault>(pOVendorInventory, false);
-                    }
+                    VendorItems.Cache.SetValue<POVendorInventory.isDefault>(currentRow, false);
                 }
-
-                VendorItems.Cache.ClearQueryCacheObsolete();
-                VendorItems.View.RequestRefresh();
             }
+
+            VendorItems.Cache.ClearQueryCacheObsolete();
+            VendorItems.View.RequestRefresh();
         }
         #endregion
 
