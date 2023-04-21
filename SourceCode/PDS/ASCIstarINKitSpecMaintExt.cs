@@ -110,33 +110,16 @@ namespace ASCISTARCustom.PDS
         [PXOverride]
         public void Persist(PersistDelegate baseMethod)
         {
-            CopyFieldsValueToStockItem(Base.Hdr.Current); 
+            CopyFieldsValueToStockItem(Base.Hdr.Current);
+
+            var setup = ASCIStarINSetup.Current;
+            if (setup!= null)
+            {
+                var setupExt = PXCache<INSetup>.GetExtension<ASCIStarINSetupExt>(setup);
+            }
             CopyJewelryItemFieldsToStockItem(Base.Hdr.Current);
             
             baseMethod();
-
-            //{
-            //    using (var transactionScope = new PXTransactionScope())
-            //    {
-            //        var inventoryItemMaint = PXGraph.CreateInstance<InventoryItemMaint>();
-            //        inventoryItemMaint.Item.Current = inventoryItemMaint.Item.Search<InventoryItem.inventoryID>(Hdr.Current.KitInventoryID);
-            //        inventoryItemMaint.Item.UpdateCurrent();
-
-            //        var kitVendorItem = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
-            //        if (kitVendorItem != null)
-            //        {
-            //            var invVendorItem = inventoryItemMaint.VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.RecordID == kitVendorItem.RecordID);
-            //            if (invVendorItem != null)
-            //            {
-            //                inventoryItemMaint.VendorItems.Current = invVendorItem;
-            //                inventoryItemMaint.VendorItems.Current.IsDefault = true;
-            //                inventoryItemMaint.VendorItems.Update(inventoryItemMaint.VendorItems.Current);
-            //                inventoryItemMaint.Save.PressButton();
-            //                transactionScope.Complete();
-            //            }
-            //        }
-            //    }
-            //}
         }
         #endregion
 
@@ -267,7 +250,9 @@ namespace ASCISTARCustom.PDS
                         var baseItem = _itemDataProvider.GetInventoryItemByCD(MetalType.Type_24K);
                         if (baseItem != null)
                         {
-                            value = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendor.GetExtension<ASCIStarPOVendorInventoryExt>().UsrMarketID, baseItem.InventoryID, TOZ.value, PXTimeZoneInfo.Now)?.SalesPrice;
+                            //var vendor = _vendorDataProvider.GetVendor
+                            value = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendor.VendorID, baseItem.InventoryID, TOZ.value, PXTimeZoneInfo.Now)?.SalesPrice;
+                            var result = value;
                         }
                     }
                     else if (ASCIStarMetalType.IsSilver(jewelryItem?.MetalType))
@@ -275,7 +260,7 @@ namespace ASCISTARCustom.PDS
                         var baseItem = _itemDataProvider.GetInventoryItemByCD(MetalType.Type_SSS);
                         if (baseItem != null)
                         {
-                            value = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendor.GetExtension<ASCIStarPOVendorInventoryExt>().UsrMarketID, baseItem.InventoryID, TOZ.value, PXTimeZoneInfo.Now)?.SalesPrice;
+                            value = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendor.VendorID, baseItem.InventoryID, TOZ.value, PXTimeZoneInfo.Now)?.SalesPrice;
                         }
                     }
                     e.ReturnValue = value;
