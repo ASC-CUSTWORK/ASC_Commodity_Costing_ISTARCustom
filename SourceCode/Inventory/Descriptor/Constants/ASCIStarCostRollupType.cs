@@ -24,7 +24,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         public const string MessageFreight = "Freight";
         public const string MessageDuty = "Duty";
         public const string MessagePackaging = "Packaging";
-        public const string MessagePackagingForLabor = "Packaging for labor";
+        public const string MessagePackagingForLabor = "Packaging For Labor";
         public const string MessageBlank = "<Blank>";
 
         public class ListAttribute : PXStringListAttribute
@@ -36,10 +36,11 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
                 Materials,
                 Packaging,
                 PackagingForLabor,
+                Labor,
                 Freight,
                 Handling,
                 Duty,
-             //   Labor, 
+                
            //     Blank
             };
 
@@ -50,10 +51,10 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
                 MessageMaterials,
                 MessagePackaging,
                 MessagePackagingForLabor,
+                MessageLabor,
                 MessageFreight,
                 MessageHandling,
                 MessageDuty,
-             //   MessageLabor, 
              //   MessageBlank
             };
 
