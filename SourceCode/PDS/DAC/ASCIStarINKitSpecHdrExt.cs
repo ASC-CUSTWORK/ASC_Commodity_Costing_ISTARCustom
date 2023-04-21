@@ -164,5 +164,22 @@ namespace ASCISTARCustom
         public decimal? UsrDutyCostPct { get; set; }
         public abstract class usrDutyCostPct : PX.Data.BQL.BqlDecimal.Field<usrDutyCostPct> { }
         #endregion
+
+        #region UsrSalesPrice
+        [PXPriceCost]
+        [PXDefault(TypeCode.Decimal, "0.0", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Basis Value", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        public decimal? UsrSalesPrice { get; set; }
+        public abstract class usrSalesPrice : PX.Data.BQL.BqlDecimal.Field<usrSalesPrice> { }
+        #endregion
+
+        #region UsrMatrixStep
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
+        [PXUIField(DisplayName = "Matrix Step")]
+        [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Selector<INKitSpecHdr.kitInventoryID, ASCIStarINInventoryItemExt.usrMatrixStep>))]
+        public decimal? UsrMatrixStep { get; set; }
+        public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
+        #endregion
     }
 }

@@ -53,6 +53,7 @@ namespace ASCISTARCustom.Common.Descriptor
             public const string MoreThenOneDefaultVendor = "You have more than one default vendor. Please select one on the Vendors tab.";
             public const string MarketNotFound = "Market field cannot be empty";
             public const string CannotCreateItself = "Unable to create {0} using {0} as a source.";
+            public const string BaseItemNotSpecifyed = "System is missing the base items. Please ensure 'SSS' and '24K' items are created before proceeding.";
         }
         #endregion
 
