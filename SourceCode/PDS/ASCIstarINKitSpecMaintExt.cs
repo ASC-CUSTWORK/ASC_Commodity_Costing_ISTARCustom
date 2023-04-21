@@ -10,6 +10,7 @@ using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.PDS.CacheExt;
 using PX.Common;
 using PX.Data;
+using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
@@ -73,6 +74,17 @@ namespace ASCISTARCustom.PDS
 
         [PXCopyPasteHiddenView]
         public PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCIStarJewelryItem;
+
+        [PXCopyPasteHiddenView]
+        public FbqlSelect<SelectFromBase<InventoryItemCurySettings, 
+            TypeArrayOf<IFbqlJoin>.Empty>.Where<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>.FilledWith<And<Compare<InventoryItemCurySettings.inventoryID, 
+                Equal<P.AsInt>>>>>.And<BqlOperand<InventoryItemCurySettings.curyID, IBqlString>.IsEqual<BqlField<AccessInfo.baseCuryID, IBqlString>.AsOptional>>>, 
+            InventoryItemCurySettings>.View ASCIStarItemCurySettings;
+
+        [PXCopyPasteHiddenView]
+        public FbqlSelect<SelectFromBase<InventoryItemCurySettings, 
+            TypeArrayOf<IFbqlJoin>.Empty>.Where<BqlOperand<InventoryItemCurySettings.inventoryID, IBqlInt>.IsEqual<P.AsInt>>, 
+            InventoryItemCurySettings>.View ASCIStarAllItemCurySettings;
         #endregion
 
         #region Dependency Injection
@@ -101,7 +113,31 @@ namespace ASCISTARCustom.PDS
         {
             CopyFieldsValueToStockItem(Base.Hdr.Current); 
             CopyJewelryItemFieldsToStockItem(Base.Hdr.Current);
+            
             baseMethod();
+
+            //{
+            //    using (var transactionScope = new PXTransactionScope())
+            //    {
+            //        var inventoryItemMaint = PXGraph.CreateInstance<InventoryItemMaint>();
+            //        inventoryItemMaint.Item.Current = inventoryItemMaint.Item.Search<InventoryItem.inventoryID>(Hdr.Current.KitInventoryID);
+            //        inventoryItemMaint.Item.UpdateCurrent();
+
+            //        var kitVendorItem = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+            //        if (kitVendorItem != null)
+            //        {
+            //            var invVendorItem = inventoryItemMaint.VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.RecordID == kitVendorItem.RecordID);
+            //            if (invVendorItem != null)
+            //            {
+            //                inventoryItemMaint.VendorItems.Current = invVendorItem;
+            //                inventoryItemMaint.VendorItems.Current.IsDefault = true;
+            //                inventoryItemMaint.VendorItems.Update(inventoryItemMaint.VendorItems.Current);
+            //                inventoryItemMaint.Save.PressButton();
+            //                transactionScope.Complete();
+            //            }
+            //        }
+            //    }
+            //}
         }
         #endregion
 
@@ -184,9 +220,9 @@ namespace ASCISTARCustom.PDS
         protected virtual void _(Events.RowInserted<INKitSpecHdr> e)
         {
             var row = e.Row;
-            if (row == null || this.Base.Hdr.Current == null) return;
+            if (row == null || Base.Hdr.Current == null) return;
 
-            CopyJewelryItemFields(this.Base.Hdr.Current);
+            CopyJewelryItemFields(Base.Hdr.Current);
             //CopyFieldsValueFromStockItem(this.Base.Hdr.Current);
         }
         protected virtual void _(Events.RowSelected<INKitSpecHdr> e)
@@ -407,17 +443,57 @@ namespace ASCISTARCustom.PDS
         }
         protected virtual void _(Events.RowUpdated<POVendorInventory> e)
         {
-            foreach (PXResult<POVendorInventory> row in VendorItems.Select())
+            if (e.OldRow == null || e.Row == null || !e.Row.VendorID.HasValue)
             {
-                POVendorInventory pOVendorInventory = row;
-                if (pOVendorInventory.RecordID != e.Row.RecordID && pOVendorInventory.IsDefault == true)
+                return;
+            }
+
+            GetCurySettings(e.Row.InventoryID);
+            var enumerable = ASCIStarAllItemCurySettings.Select(e.Row.InventoryID).RowCast<InventoryItemCurySettings>();
+            var vendor = Vendor.PK.Find(Base, e.Row.VendorID);
+            bool flag = false;
+            foreach (InventoryItemCurySettings item in enumerable)
+            {
+                var prefferedVendor = Vendor.PK.Find(Base, item.PreferredVendorID);
+                if (vendor.BaseCuryID == null || string.Equals(item.CuryID, vendor.BaseCuryID, StringComparison.OrdinalIgnoreCase))
                 {
-                    VendorItems.Cache.SetValue<POVendorInventory.isDefault>(pOVendorInventory, false);
+                    var conditionResult = (e.Row.IsDefault == true && (item.PreferredVendorID != e.Row.VendorID || item.PreferredVendorLocationID != e.Row.VendorLocationID)) ||
+                                          (e.Row.IsDefault != true && item.PreferredVendorID == e.Row.VendorID && item.PreferredVendorLocationID == e.Row.VendorLocationID);
+                    if (conditionResult)
+                    {
+                        item.PreferredVendorID = ((e.Row.IsDefault == true) ? e.Row.VendorID : null);
+                        item.PreferredVendorLocationID = ((e.Row.IsDefault == true) ? e.Row.VendorLocationID : null);
+                        ASCIStarItemCurySettings.Update(item);
+                        flag = true;
+                    }
+                }
+                else if (prefferedVendor != null && prefferedVendor.BaseCuryID == null)
+                {
+                    item.PreferredVendorID = null;
+                    item.PreferredVendorLocationID = null;
+                    ASCIStarItemCurySettings.Update(item);
                 }
             }
 
-            VendorItems.Cache.ClearQueryCacheObsolete();
-            VendorItems.View.RequestRefresh();
+            if (!(e.Row.IsDefault == true && flag))
+            {
+                return;
+            }
+
+            if (e.Row is POVendorInventory row)
+            {
+                foreach (PXResult<POVendorInventory> currentRow in VendorItems.Select())
+                {
+                    POVendorInventory pOVendorInventory = currentRow;
+                    if (pOVendorInventory.RecordID != row.RecordID && pOVendorInventory.IsDefault == true)
+                    {
+                        VendorItems.Cache.SetValue<POVendorInventory.isDefault>(pOVendorInventory, false);
+                    }
+                }
+
+                VendorItems.Cache.ClearQueryCacheObsolete();
+                VendorItems.View.RequestRefresh();
+            }
         }
         #endregion
 
@@ -426,7 +502,7 @@ namespace ASCISTARCustom.PDS
         #region ServiceMethods
         protected virtual void CopyJewelryItemFields(INKitSpecHdr kitSpecHdr)
         {
-            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr?.KitInventoryID)?.TopFirst;
+            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(Base, kitSpecHdr?.KitInventoryID)?.TopFirst;
 
             if (jewelItem == null) return;
 
@@ -465,11 +541,11 @@ namespace ASCISTARCustom.PDS
                 OD = jewelItem.OD,
             };
 
-            this.JewelryItemView.Insert(jewelryKitItem);
+            JewelryItemView.Insert(jewelryKitItem);
         }
         protected virtual void CopyJewelryItemFieldsToStockItem(INKitSpecHdr kitSpecHdr)
         {
-            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(this.Base, kitSpecHdr?.KitInventoryID)?.TopFirst;
+            var jewelItem = SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<PX.Data.BQL.P.AsInt>>.View.Select(Base, kitSpecHdr?.KitInventoryID)?.TopFirst;
 
             if (jewelItem == null) return;
 
@@ -672,6 +748,19 @@ namespace ASCISTARCustom.PDS
             }
 
             return marketID;
+        }
+        public virtual InventoryItemCurySettings GetCurySettings(int? inventoryID, string curyID = null)
+        {
+            if (curyID == null)
+            {
+                curyID = Base.Accessinfo.BaseCuryID;
+            }
+
+            return ASCIStarItemCurySettings.SelectSingle(inventoryID, curyID) ?? ASCIStarItemCurySettings.Insert(new InventoryItemCurySettings
+            {
+                InventoryID = inventoryID,
+                CuryID = curyID
+            });
         }
         #endregion
 
