@@ -124,7 +124,7 @@ namespace ASCISTARCustom.Common.Helper
         public static decimal GetGoldTypeValue(string metalType)
         {
             if (metalType == null)
-                return decimal.Zero;
+                return 24.0m;
 
             switch (metalType)
             {
@@ -138,7 +138,7 @@ namespace ASCISTARCustom.Common.Helper
                 case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
                 case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
                 case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
-                default: return decimal.Zero;
+                default: return 24.0m;
             }
         }
 
@@ -151,13 +151,13 @@ namespace ASCISTARCustom.Common.Helper
         public static decimal GetSilverTypeValue(string metalType)
         {
             if (metalType == null)
-                return decimal.Zero;
+                return 1.0m;
 
             switch (metalType)
             {
                 case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m;
                 case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m;
-                default: return decimal.Zero;
+                default: return 1.0m;
             }
         }
     }
