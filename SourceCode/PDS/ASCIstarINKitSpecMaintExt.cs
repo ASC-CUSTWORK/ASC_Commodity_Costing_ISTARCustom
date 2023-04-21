@@ -341,6 +341,18 @@ namespace ASCISTARCustom.PDS
                 e.NewValue = jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem?.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem?.MetalType));
             }
         }
+        protected virtual void _(Events.FieldVerifying<INKitSpecStkDet, INKitSpecStkDet.compInventoryID> e)
+        {
+            if (e.Row is INKitSpecStkDet row)
+            {
+                if (Hdr.Current?.KitInventoryID == (int)e.NewValue)
+                {
+                    var invItem = _itemDataProvider.GetInventoryItemByID(Hdr.Current?.KitInventoryID);
+                    e.Cancel = true;
+                    throw new PXSetPropertyException(ASCIStarMessages.Error.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
+                }
+            }
+        }
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, INKitSpecStkDet.compInventoryID> e)
         {
             if (e.Row is INKitSpecStkDet row)
