@@ -335,7 +335,9 @@ namespace ASCISTARCustom.PDS
                     var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
                     if (jewelryItem != null && (ASCIStarMetalType.IsGold(jewelryItem?.MetalType) || ASCIStarMetalType.IsSilver(jewelryItem?.MetalType)))
                     {
-                        e.NewValue = ASCIStarCostBuilder.CalculateUnitCost(inventoryItem);
+                        //e.NewValue = ASCIStarCostBuilder.CalculateUnitCost(inventoryItem);
+                        var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
+                        e.NewValue = inventoryItemExt.UsrCommodityCost;
                     }
                     else
                     {
@@ -432,7 +434,8 @@ namespace ASCISTARCustom.PDS
                     else if (rowExt.UsrCostingType == ASCIStarCostingType.MarketCost || rowExt.UsrCostingType == ASCIStarCostingType.ContractCost)
                     {
                         var jewelryCostBuilder = CreateCostBuilder(row);
-                        var result = CalculateUnitCost(jewelryCostBuilder.CalculatePreciousMetalCost(), row.CompInventoryID);
+                        //var result = CalculateUnitCost(jewelryCostBuilder.CalculatePreciousMetalCost(), row.CompInventoryID);
+                        var result = jewelryCostBuilder.CalculatePreciousMetalCost();
                         e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, result);
 
                         UpdateVendorPrice(e, row, rowExt, jewelryCostBuilder);

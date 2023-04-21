@@ -178,7 +178,7 @@ namespace ASCISTARCustom.PDS.CacheExt
 
         #region StoneType
         [PXDBString(10, IsUnicode = true)]
-        [PXUIField(DisplayName = "Stone Type")]
+        [PXUIField(DisplayName = "Stone Type.")]
         [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<INAttributesID.stoneType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
@@ -212,7 +212,7 @@ namespace ASCISTARCustom.PDS.CacheExt
 
         #region StoneShape
         [PXDBString(10, IsUnicode = true)]
-        [PXUIField(DisplayName = "Stone Shape")]
+        [PXUIField(DisplayName = "Stone Shape.")]
         [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<INAttributesID.stoneShapes>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
@@ -282,7 +282,7 @@ namespace ASCISTARCustom.PDS.CacheExt
 
         #region RingLength
         [PXDBString(10, IsUnicode = true)]
-        [PXUIField(DisplayName = "Ring Length")]
+        [PXUIField(DisplayName = "Ring Length.")]
         [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<INAttributesID.ringLength>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
