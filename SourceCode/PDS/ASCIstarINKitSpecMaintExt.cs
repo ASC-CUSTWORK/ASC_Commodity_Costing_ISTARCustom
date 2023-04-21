@@ -116,9 +116,11 @@ namespace ASCISTARCustom.PDS
             if (setup!= null)
             {
                 var setupExt = PXCache<INSetup>.GetExtension<ASCIStarINSetupExt>(setup);
+                if (setupExt.UsrIsPDSTenant == false)
+                {
+                    CopyJewelryItemFieldsToStockItem(Base.Hdr.Current);
+                }
             }
-            CopyJewelryItemFieldsToStockItem(Base.Hdr.Current);
-            
             baseMethod();
         }
         #endregion
