@@ -857,7 +857,7 @@
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit229" />
-                                <Prop Key="DataField" Value="UsrSalesPrice" />
+                                <Prop Key="DataField" Value="UsrBasisValue" />
                                 <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>

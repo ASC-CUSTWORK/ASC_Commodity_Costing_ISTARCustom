@@ -39,6 +39,7 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? AvrPreciousMetalUnitCost { get; private set; }
         public decimal? Floor { get; private set; }
         public decimal? Ceiling { get; private set; }
+        public decimal? BasisValue { get; private set; } = decimal.Zero;
         #endregion 
 
         private readonly PXGraph _graph;
@@ -97,11 +98,13 @@ namespace ASCISTARCustom.Common.Builder
                 {
                     PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24K");
                     PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24K");
+                    BasisValue = PreciousMetalMarketCostPerTOZ;
                 }
                 else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
                 {
                     PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("SSS");
                     PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("SSS");
+                    BasisValue = (PreciousMetalMarketCostPerTOZ + (PreciousMetalMarketCostPerTOZ + ItemCostSpecification.MatrixStep)) / 2;
                 }
                 AvrPreciousMetalUnitCost = GetPresiousMetalAvrCost();
             }

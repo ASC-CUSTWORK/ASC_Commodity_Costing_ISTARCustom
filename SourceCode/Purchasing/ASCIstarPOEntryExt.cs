@@ -206,6 +206,8 @@ namespace ASCISTARCustom
 
                 cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(poLine, jewelryCostProvider.PreciousMetalMarketCostPerTOZ);
 
+                cache.SetValueExt<ASCIStarPOLineExt.usrBasisValue>(poLine, jewelryCostProvider.BasisValue);
+
                 SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);
             }
         }

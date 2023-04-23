@@ -9,4 +9,5 @@
     <Column TableName="POLine" ColumnName="UsrPricingGRAMGold" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POLine" ColumnName="UsrActualGRAMSilver" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POLine" ColumnName="UsrPricingGRAMSilver" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrBasisValue" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
 </Table>

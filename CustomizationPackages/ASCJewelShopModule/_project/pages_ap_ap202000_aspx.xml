@@ -30,6 +30,7 @@
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrCommodity" />
                     <Prop Key="Width" Value="70" />
+                    <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>

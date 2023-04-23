@@ -1,6 +1,9 @@
-﻿using PX.Data;
+﻿using ASCISTARCustom.Common.Descriptor;
+using PX.Data;
+using PX.Objects.AP;
 using PX.Objects.PO;
 using System;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -85,6 +88,13 @@ namespace ASCISTARCustom
         [PXUIField(DisplayName = "Material Cost", IsReadOnly = true)]
         public decimal? UsrMaterialCost { get; set; }
         public abstract class usrMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrMaterialCost> { }
+        #endregion
+
+        #region UsrBasisValue
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
+        public decimal? UsrBasisValue { get; set; }
+        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
     }
 }
