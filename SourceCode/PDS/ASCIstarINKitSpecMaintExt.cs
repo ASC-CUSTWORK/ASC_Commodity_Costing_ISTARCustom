@@ -106,6 +106,7 @@ namespace ASCISTARCustom.PDS
                 ASCIStarCreateProdItem.SetEnabled(!setupExt.UsrIsPDSTenant ?? false);
             }
         }
+
         public delegate void PersistDelegate();
         [PXOverride]
         public void Persist(PersistDelegate baseMethod)
@@ -238,45 +239,53 @@ namespace ASCISTARCustom.PDS
                 e.ReturnValue = result;
             }
         }
-        protected virtual void _(Events.FieldSelecting<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrSalesPrice> e)
+        protected virtual void _(Events.FieldSelecting<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrBasisValue> e)
         {
             if (e.Row is INKitSpecHdr row)
             {
                 var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+
                 if (defaultVendor != null)
                 {
                     decimal? value = 0m;
                     var jewelryItem = GetASCIStarINJewelryItem(row.KitInventoryID);
-                    if (ASCIStarMetalType.IsGold(jewelryItem?.MetalType))
+                    var metalType = jewelryItem?.MetalType;
+
+                    if (ASCIStarMetalType.IsGold(metalType) || ASCIStarMetalType.IsSilver(metalType))
                     {
-                        var baseItem = _itemDataProvider.GetInventoryItemByCD(MetalType.Type_24K);
+                        var baseItemCd = ASCIStarMetalType.IsGold(metalType) ? MetalType.Type_24K : MetalType.Type_SSS;
+                        var baseItem = _itemDataProvider.GetInventoryItemByCD(baseItemCd);
+
                         if (baseItem != null)
                         {
-                            //var vendor = _vendorDataProvider.GetVendor
-                            value = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendor.VendorID, baseItem.InventoryID, TOZ.value, PXTimeZoneInfo.Now)?.SalesPrice;
-                            var result = value;
-                        }
-                    }
-                    else if (ASCIStarMetalType.IsSilver(jewelryItem?.MetalType))
-                    {
-                        var baseItem = _itemDataProvider.GetInventoryItemByCD(MetalType.Type_SSS);
-                        if (baseItem != null)
-                        {
-                            value = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendor.VendorID, baseItem.InventoryID, TOZ.value, PXTimeZoneInfo.Now)?.SalesPrice;
+                            var vendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendor.VendorID, baseItem.InventoryID, TOZ.value, PXTimeZoneInfo.Now);
+
+                            if (vendorPrice != null)
+                            {
+                                if (ASCIStarMetalType.IsGold(metalType))
+                                {
+                                    value = vendorPrice.SalesPrice;
+                                }
+                                else
+                                {
+                                    var roxExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
+                                    value = (vendorPrice.SalesPrice + (vendorPrice.SalesPrice + (roxExt.UsrMatrixStep ?? 0.5m))) / 2m;
+                                }
+                            }
                         }
                     }
                     e.ReturnValue = value;
                 }
             }
         }
-        protected virtual void _(Events.FieldVerifying<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrSalesPrice> e)
+        protected virtual void _(Events.FieldVerifying<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrBasisValue> e)
         {
             if (e.Row is INKitSpecHdr row)
             {
                 var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
                 if (!IsBaseItemsExists())
                 {
-                    e.Cache.RaiseExceptionHandling<ASCIStarINKitSpecHdrExt.usrSalesPrice>(row, rowExt.UsrSalesPrice, new PXSetPropertyException(ASCIStarMessages.Error.BaseItemNotSpecifyed, PXErrorLevel.Warning));
+                    e.Cache.RaiseExceptionHandling<ASCIStarINKitSpecHdrExt.usrBasisValue>(row, rowExt.UsrBasisValue, new PXSetPropertyException(ASCIStarMessages.Error.BaseItemNotSpecifyed, PXErrorLevel.Warning));
                 }
             }
         }

@@ -2,6 +2,7 @@
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
+using PX.Objects.IN;
 using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
@@ -21,7 +22,7 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrMarketID
         [PXDBInt()]
-        [PXUIField(DisplayName = "Market Vendor")]
+        [PXUIField(DisplayName = "Market Vendor", Visible = false)]
         [PXSelector(
         typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
@@ -38,12 +39,14 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrCommodityPrice : PX.Data.BQL.BqlDecimal.Field<usrCommodityPrice> { }
         #endregion
 
-        #region UsrBasisValue
-        [PXDecimal(6)]
-        [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
-        [PXFormula(typeof(Div<Add<APVendorPrice.salesPrice, Add<APVendorPrice.salesPrice, usrMatrixStep>>, ASCIStarConstants.DecimalTwo>))]
-        public decimal? UsrBasisValue { get; set; }
-        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
+        #region UsrCommodity
+        [PXDBString(1)]
+        [PXUIField(DisplayName = "Commodity Metal Type", Enabled = false)]
+        [CommodityType.List]
+        [PXDefault(typeof(Search<ASCIStarINInventoryItemExt.usrCommodityType, Where<InventoryItem.inventoryID, Equal<Current<APVendorPrice.inventoryID>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Default<APVendorPrice.inventoryID>))]
+        public string UsrCommodity { get; set; }
+        public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
         #endregion
 
         #region UsrCommodityLossPct
@@ -80,13 +83,14 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
         #endregion
 
-        #region UsrCommodity
-        [PXDBString(1)]
-        [PXUIField(DisplayName = "Commodity Metal Type")]
-        [CommodityType.List]
-        [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
-        public string UsrCommodity { get; set; }
-        public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
+        #region UsrBasisValue
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
+        [PXFormula(typeof(Switch<
+            Case<Where<Current<usrCommodity>, Equal<CommodityType.gold>>, APVendorPrice.salesPrice,
+            Case<Where<Current<usrCommodity>, Equal<CommodityType.silver>>, Div<Add<APVendorPrice.salesPrice, Add<APVendorPrice.salesPrice, usrMatrixStep>>, ASCIStarConstants.DecimalTwo>>>>))]
+        public decimal? UsrBasisValue { get; set; }
+        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
 
         #region UsrCommodityPerGram
