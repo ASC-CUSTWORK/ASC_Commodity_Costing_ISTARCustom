@@ -133,7 +133,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             var mult = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
 
-            decimal? pricingGRAMGold = (decimal)e.NewValue * mult / 24;
+            decimal? pricingGRAMGold = (decimal?)e.NewValue * mult / 24;
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(row, pricingGRAMGold);
         }
 
@@ -145,7 +145,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
 
           //  var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
-            e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(row, (decimal)e.NewValue * value);
+            e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(row, (decimal?)e.NewValue * value);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrPricingGRAMGold> e)
