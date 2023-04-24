@@ -1,9 +1,10 @@
 ﻿using ASCISTARCustom.Common.DAC;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.IN;
 using System;
+using static ASCISTARCustom.Inventory.Descriptor.Constants.ASCIStarINConstants;
+using static ASCISTARCustom.Inventory.Descriptor.Constants.ASCIStarINConstants.ASCIStarINComplianceType;
 
 namespace ASCISTARCustom.Inventory.DAC
 {

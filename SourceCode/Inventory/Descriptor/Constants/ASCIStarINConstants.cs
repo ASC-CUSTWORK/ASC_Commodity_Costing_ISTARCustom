@@ -14,30 +14,8 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public const string NullInCacheSaveItemFirst = "Save Item first!";
             public const string MarketEmpty = "Market can not be empty!";
         }
-        public class INTestType
-        {
-            public const string Material = "Material";
-            public const string Assay = "Assay";
-            public const string Plating = "Plating";
-            public const string TarnishTesting = "Tarnish Testing";
-            public const string PreProduction = "Pre-Production";
-            public const string Production = "Production";
-            public const string InStore = "In-Store";
-            public const string InFactoryInspection = "In-Factory Inspection";
-            public const string SpecialTest = "Special Test";
-        }
-        public class INPassStatus
-        {
-            public const string Pass = "Pass";
-            public const string Fail = "Fail";
-            public const string ConditionalFailed = "Failed w/Conditional Approval";
 
-            public const string P = "P";
-            public const string F = "F";
-            public const string C = "C";
-        }
-
-        public class INAttributesID
+        public class INJewelryAttributesID
         {
             public const string CPTESTTYPE = "CPTESTTYPE";
             public const string CPPROTOCOL = "CPPROTOCOL";
@@ -55,9 +33,9 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public const string Finishes = "JSFINISHES";
             public const string VendorMaker = "JSMAKERS";
             public const string CountryOfOrigion = "JSORGCNTRY";
-            public const string StoneType = "JSWRSHAPE";
+            public const string StoneType = "JSSTONES";
             public const string StoneColor = "JSGEMTYP";
-            public const string StoneShapes = "JSGEMSHP";
+            public const string StoneShapes = "JSWRSHAPE";
             public const string StoneCreations = "JSSTNMTD";
             public const string GemstoneTreatment = "JSGENTRT";
             public const string SettingType = "JSWRSETTYP";
@@ -93,31 +71,55 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public class ringSize : BqlString.Constant<ringSize> { public ringSize() : base(RingSize) { } }
             public class od : BqlString.Constant<od> { public od() : base(OD) { } }
         }
-    }
 
-    public class ASCIStarINComplianceType
-    {
-        public static readonly string[] Values = { INTestType.Material, INTestType.Assay, INTestType.Plating,
+        public class ASCIStarINComplianceType
+        {
+            public class TestTypeListAttribute : PXStringListAttribute
+            {
+                public class INTestType
+                {
+                    public const string Material = "Material";
+                    public const string Assay = "Assay";
+                    public const string Plating = "Plating";
+                    public const string TarnishTesting = "Tarnish Testing";
+                    public const string PreProduction = "Pre-Production";
+                    public const string Production = "Production";
+                    public const string InStore = "In-Store";
+                    public const string InFactoryInspection = "In-Factory Inspection";
+                    public const string SpecialTest = "Special Test";
+                }
+
+                public static readonly string[] Values = { INTestType.Material, INTestType.Assay, INTestType.Plating,
                                                    INTestType.TarnishTesting, INTestType.PreProduction, INTestType.Production,
                                                    INTestType.InStore, INTestType.InFactoryInspection, INTestType.SpecialTest };
 
-        public static readonly string[] Labels =  { INTestType.Material, INTestType.Assay, INTestType.Plating,
+                public static readonly string[] Labels =  { INTestType.Material, INTestType.Assay, INTestType.Plating,
                                                    INTestType.TarnishTesting, INTestType.PreProduction, INTestType.Production,
                                                    INTestType.InStore, INTestType.InFactoryInspection, INTestType.SpecialTest };
-        public class TestTypeListAttribute : PXStringListAttribute
-        {
-            public TestTypeListAttribute() : base(Values, Labels) { }
-        }
-    }
+                public TestTypeListAttribute() : base(Values, Labels) { }
+            }
 
-    public class ASCIStarINCompliancePassStatus
-    {
-        public static readonly string[] Labels = { INPassStatus.Pass, INPassStatus.Fail, INPassStatus.ConditionalFailed };
-        public static readonly string[] Values = { INPassStatus.P, INPassStatus.F, INPassStatus.C };
+            public class ASCIStarINCompliancePassStatus
+            {
+                public class INPassStatus
+                {
+                    public const string Pass = "Pass";
+                    public const string Fail = "Fail";
+                    public const string ConditionalFailed = "Failed w/Conditional Approval";
 
-        public class PassStatusListAttribute : PXStringListAttribute
-        {
-            public PassStatusListAttribute() : base(Values, Labels) { }
+                    public const string P = "P";
+                    public const string F = "F";
+                    public const string C = "C";
+                }
+
+                public static readonly string[] Labels = { INPassStatus.Pass, INPassStatus.Fail, INPassStatus.ConditionalFailed };
+                public static readonly string[] Values = { INPassStatus.P, INPassStatus.F, INPassStatus.C };
+
+                public class PassStatusListAttribute : PXStringListAttribute
+                {
+                    public PassStatusListAttribute() : base(Values, Labels) { }
+                }
+            }
         }
     }
 }
