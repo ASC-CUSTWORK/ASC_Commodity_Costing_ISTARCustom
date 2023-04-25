@@ -15,6 +15,11 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public const string MarketEmpty = "Market can not be empty!";
         }
 
+        public class Warnings
+        {
+            public const string BasisOrMarketPriceEmpty = "Basis or Market price is empty, enter value or check Vendor Prices screen.";
+        }
+
         public class INJewelryAttributesID
         {
             public const string CPTESTTYPE = "CPTESTTYPE";

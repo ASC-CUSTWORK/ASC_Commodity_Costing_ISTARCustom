@@ -144,7 +144,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
 
-          //  var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
+            //  var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(row, (decimal?)e.NewValue * value);
         }
 
@@ -767,7 +767,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             if (rowExt.UsrCommodityPrice == decimal.Zero)
             {
                 cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrCommodityPrice>(row, rowExt.UsrCommodityPrice,
-                    new PXSetPropertyException("Basis or Market price is empty, enter value or check Vendor Prices screen.", PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCIStarINConstants.Warnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
             }
 
             var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current);
@@ -780,18 +780,15 @@ namespace ASCISTARCustom.Inventory.GraphExt
             if (this.Base.VendorItems.Current == null)
             {
                 this.Base.VendorItems.Current = GetDefaultOverrideVendor();
-            }
-            else
-            {
-                if (this.Base.VendorItems.Current.IsDefault != true && this.Base.VendorItems.Current.GetExtension<ASCIStarPOVendorInventoryExt>().UsrIsOverrideVendor != true)
-                {
-                    return;
-                }
+                if (this.Base.VendorItems.Current == null) return;
             }
 
-            this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityCost>(this.Base.VendorItems.Current, inventoryItemExt.UsrCommodityCost);
-            this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrUnitCost>(this.Base.VendorItems.Current, inventoryItemExt.UsrContractCost);
-            this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityIncrement>(this.Base.VendorItems.Current, inventoryItemExt.UsrContractIncrement);
+            if (this.Base.VendorItems.Current.IsDefault == true && this.Base.VendorItems.Current.GetExtension<ASCIStarPOVendorInventoryExt>().UsrIsOverrideVendor == true)
+            {
+                this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityCost>(this.Base.VendorItems.Current, inventoryItemExt.UsrCommodityCost);
+                this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrUnitCost>(this.Base.VendorItems.Current, inventoryItemExt.UsrContractCost);
+                this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityIncrement>(this.Base.VendorItems.Current, inventoryItemExt.UsrContractIncrement);
+            }
         }
 
         private void CopyPOVendorInventoryToItem(POVendorInventory row)

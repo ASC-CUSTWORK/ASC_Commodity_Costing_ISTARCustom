@@ -130,7 +130,7 @@ namespace ASCISTARCustom.Common.Builder
         {
             var goldMetalFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
 
-            decimal? incrementValue = goldMetalFactor * (1.0m + itemCostSpecification.SurchargePct / 100.0m);
+            decimal? incrementValue = goldMetalFactor * (1.0m + (itemCostSpecification.SurchargePct ?? 0.0m)/ 100.0m);
 
             return incrementValue;
         }
@@ -184,8 +184,8 @@ namespace ASCISTARCustom.Common.Builder
                                         * priciousMetalMultFactor * ItemCostSpecification.SilverGrams;
             }
 
-            decimal surchargeValue = (100m + ItemCostSpecification.SurchargePct ?? 0.0m) / 100m;
-            decimal metalLossValue = (100m + ItemCostSpecification.MetalLossPct.Value) / 100m;
+            decimal? surchargeValue = (100.0m + (ItemCostSpecification.SurchargePct ?? 0.0m)) / 100.0m;
+            decimal? metalLossValue = (100.0m + (ItemCostSpecification.MetalLossPct ?? 0.0m)) / 100.0m;
             PreciousMetalUnitCost = preciousMetalCost * metalLossValue * surchargeValue;
             return PreciousMetalUnitCost;
         }

@@ -118,7 +118,7 @@ namespace ASCISTARCustom
 
         #region UsrMarketPriceTOZ
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Market Price per TOZ",IsReadOnly =true)]
+        [PXUIField(DisplayName = "Market Price per TOZ", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMarketPriceTOZ { get; set; }
         public abstract class usrMarketPriceTOZ : PX.Data.BQL.BqlDecimal.Field<usrMarketPriceTOZ> { }
@@ -135,7 +135,7 @@ namespace ASCISTARCustom
         #region UsrContractLossPct
         [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
         [PXUIField(DisplayName = "Metal Loss, %")]
-     //   [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrContractLossPct { get; set; }
         public abstract class usrContractLossPct : PX.Data.BQL.BqlDecimal.Field<usrContractLossPct> { }
         #endregion
@@ -143,7 +143,7 @@ namespace ASCISTARCustom
         #region UsrContractIncrement
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Increment")]
-      //  [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        //  [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
         #endregion
@@ -171,8 +171,8 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 100)]
-      //  [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDBDecimal(6, MinValue = -100, MaxValue = 100)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge %")]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
