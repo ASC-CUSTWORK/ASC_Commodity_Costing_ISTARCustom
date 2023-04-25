@@ -84,23 +84,25 @@ namespace ASCISTARCustom.Common.Builder
         public virtual void Initialize()
         {
             INJewelryItem = GetASCIStarINJewelryItem(ItemCostSpecification.InventoryID);
-            if (INJewelryItem != null)
+            if (INJewelryItem != null && INJewelryItem.MetalType != null)
             {
-                if (ASCIStarMetalType.IsGold(INJewelryItem?.MetalType))
+                if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
                     PreciousMetalItem = GetInventoryItemByInvenctoryCD("24K");
-                else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
+                else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
                     PreciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
+
+                if (PreciousMetalItem == null) return;
 
                 PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID);
                 PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
 
-                if (ASCIStarMetalType.IsGold(INJewelryItem?.MetalType))
+                if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
                 {
                     PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24K");
                     PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("24K");
                     BasisValue = PreciousMetalContractCostPerTOZ;
                 }
-                else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
+                else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
                 {
                     PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("SSS");
                     PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCIStarMetalType.GetMultFactorConvertTOZtoGram("SSS");
@@ -130,7 +132,7 @@ namespace ASCISTARCustom.Common.Builder
         {
             var goldMetalFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
 
-            decimal? incrementValue = goldMetalFactor * (1.0m + (itemCostSpecification.SurchargePct ?? 0.0m)/ 100.0m);
+            decimal? incrementValue = goldMetalFactor * (1.0m + (itemCostSpecification.SurchargePct ?? 0.0m) / 100.0m);
 
             return incrementValue;
         }

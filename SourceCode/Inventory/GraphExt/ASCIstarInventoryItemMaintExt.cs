@@ -106,6 +106,17 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
         }
 
+        protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrContractSurcharge> e)
+        {
+            if (e.Row == null) return;
+
+            if ((decimal?)e.NewValue < 0.0m)
+            {
+                e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractSurcharge>(e.Row, e.NewValue,
+                    new PXSetPropertyException(ASCIStarINConstants.Warnings.SurchargeIsNegative, PXErrorLevel.Warning));
+            }
+        }
+
         protected virtual void _(Events.FieldUpdated<InventoryItem, InventoryItem.itemClassID> e)
         {
             var row = e.Row;
@@ -144,7 +155,6 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             var value = ASCIStarMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
 
-            //  var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(row, (decimal?)e.NewValue * value);
         }
 
@@ -363,7 +373,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrCommodityType> e)
         {
             var row = e.Row;
-            if (row == null) return;
+            if (row == null || e.NewValue == null) return;
 
             this.JewelryItemView.SetValueExt<ASCIStarINJewelryItem.metalType>(this.JewelryItemView.Current, null);
         }
@@ -710,7 +720,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             UpdatUnitCost(cache, row);
 
-            UpdatePOVendorItem(rowExt);
+            UpdateCurrentPOVendorItem(rowExt);
         }
 
         private void UpdatUnitCost(PXCache cache, InventoryItem row)
@@ -731,16 +741,10 @@ namespace ASCISTARCustom.Inventory.GraphExt
         {
             if ((rowExt.UsrActualGRAMSilver == null || rowExt.UsrActualGRAMSilver == 0.0m) && (rowExt.UsrActualGRAMGold == null || rowExt.UsrActualGRAMGold == 0.0m)) return;
 
-            //if (rowExt.UsrContractIncrement == null || rowExt.UsrContractIncrement == 0.0m)
-            //{
-            //    cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, 0.0m,
-            //        new PXSetPropertyException<ASCIStarINInventoryItemExt.usrContractSurcharge>("Surcharge will be negative, uncrease Increment!"));
-            //}
-
             var costBuilder = CreateCostBuilder(row);
             if (costBuilder == null) return;
 
-            var surchargeValue = costBuilder.CalculateSurchargeValue(row);
+            decimal? surchargeValue = costBuilder.CalculateSurchargeValue(row);
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, surchargeValue);
         }
 
@@ -775,7 +779,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             UpdateCommodityCostMetal(this.Base.Item.Cache, this.Base.Item.Current, inventoryItemExt);
         }
 
-        private void UpdatePOVendorItem(ASCIStarINInventoryItemExt inventoryItemExt)
+        private void UpdateCurrentPOVendorItem(ASCIStarINInventoryItemExt inventoryItemExt)
         {
             if (this.Base.VendorItems.Current == null)
             {

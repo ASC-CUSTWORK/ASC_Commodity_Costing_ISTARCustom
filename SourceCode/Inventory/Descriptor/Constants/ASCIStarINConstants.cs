@@ -18,6 +18,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         public class Warnings
         {
             public const string BasisOrMarketPriceEmpty = "Basis or Market price is empty, enter value or check Vendor Prices screen.";
+            public const string SurchargeIsNegative = "Surcharge can not be negative.";
         }
 
         public class INJewelryAttributesID

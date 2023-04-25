@@ -57,7 +57,7 @@ namespace ASCISTARCustom
         #region UsrPricingGRAMGold
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Fine Gold, Grams")]
-        public Decimal? UsrPricingGRAMGold { get; set; }
+        public decimal? UsrPricingGRAMGold { get; set; }
         public abstract class usrPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMGold> { }
         #endregion
 
@@ -71,14 +71,14 @@ namespace ASCISTARCustom
         #region UsrActualGRAMGold
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Gold, Grams")]
-        public Decimal? UsrActualGRAMGold { get; set; }
+        public decimal? UsrActualGRAMGold { get; set; }
         public abstract class usrActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
         #endregion
 
         #region UsrActualGRAMSilver
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Silver, Grams")]
-        public Decimal? UsrActualGRAMSilver { get; set; }
+        public decimal? UsrActualGRAMSilver { get; set; }
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
         #endregion
 
@@ -143,7 +143,6 @@ namespace ASCISTARCustom
         #region UsrContractIncrement
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Increment")]
-        //  [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
         #endregion
@@ -171,7 +170,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(6, MinValue = -100, MaxValue = 100)]
+        [PXDBDecimal(6, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge %")]
         public decimal? UsrContractSurcharge { get; set; }
