@@ -161,7 +161,7 @@ namespace ASCISTARCustom
         #region UsrSalesPrice
         [PXDBPriceCost]
         [PXDefault(TypeCode.Decimal, "0.0", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Basis Value", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Vendor Price", Visibility = PXUIVisibility.Visible, Enabled = false)]
         public decimal? UsrSalesPrice { get; set; }
         public abstract class usrSalesPrice : PX.Data.BQL.BqlDecimal.Field<usrSalesPrice> { }
         #endregion
