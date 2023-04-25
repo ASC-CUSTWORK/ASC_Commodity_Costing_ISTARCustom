@@ -492,8 +492,12 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             var apVendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(this.Base, vendor.BAccountID, inventoryID, TOZ.value, PXTimeZoneInfo.Today);
 
-            if (apVendorPrice == null) return;
-
+            if (apVendorPrice == null)
+            {
+                e.Cache.RaiseExceptionHandling<POVendorInventory.vendorID>(row, e.NewValue,
+                    new PXSetPropertyException("Vendor doen't have available prices for today.", PXErrorLevel.Warning));
+                return;
+        }
             var apVendorPriceExt = apVendorPrice.GetExtension<ASCIStarAPVendorPriceExt>();
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommoditySurchargePct>(row, apVendorPriceExt.UsrCommoditySurchargePct ?? 0.0m);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityLossPct>(row, apVendorPriceExt.UsrCommodityLossPct ?? 0.0m);
