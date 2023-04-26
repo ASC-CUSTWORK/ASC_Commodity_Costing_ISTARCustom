@@ -150,6 +150,8 @@
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXSelector12" />
                     <Prop Key="DataField" Value="UsrMarketID" />
+                    <Prop Key="AllowEdit" Value="True" />
+                    <Prop Key="AutoRefresh" Value="True" />
                 </PXSelector>
             </AddItem>
             <AddItem>

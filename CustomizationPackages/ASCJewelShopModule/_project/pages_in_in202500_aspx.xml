@@ -484,6 +484,13 @@
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrBasisPrice" />
+                    <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrCommodityIncrement" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
@@ -496,6 +503,7 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
+                    <Prop Key="DisplayFormat" Value="P" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
@@ -504,6 +512,7 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
+                    <Prop Key="DisplayFormat" Value="P" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>

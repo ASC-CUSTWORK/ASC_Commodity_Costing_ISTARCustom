@@ -16,17 +16,17 @@ namespace ASCISTARCustom.Cost.CacheExt
         [PXDBInt()]
         [PXUIField(DisplayName = "Market", Required = true)]
         [PXSelector(typeof(Search2<
-            Vendor.bAccountID, 
-            InnerJoin<VendorClass, 
-                On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, 
+            Vendor.bAccountID,
+            InnerJoin<VendorClass,
+                On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>,
             Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
-            typeof(Vendor.acctCD), 
+            typeof(Vendor.acctCD),
             typeof(Vendor.acctName)
             , SubstituteKey = typeof(Vendor.acctCD)
             , DescriptionField = typeof(Vendor.acctName))]
         [PXDefault(typeof(Search<
-            ASCIStarVendorExt.usrMarketID, 
-            Where<Vendor.bAccountID, Equal<Current<POVendorInventory.vendorID>>>>), 
+            ASCIStarVendorExt.usrMarketID,
+            Where<Vendor.bAccountID, Equal<Current<POVendorInventory.vendorID>>>>),
             PersistingCheck = PXPersistingCheck.Nothing)]
         public int? UsrMarketID { get; set; }
         public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
@@ -36,9 +36,9 @@ namespace ASCISTARCustom.Cost.CacheExt
         [PXDBInt()]
         [PXUIField(DisplayName = "Metal")]
         [PXSelector(typeof(Search2<
-            InventoryItem.inventoryID, 
-            InnerJoin<INItemClass, 
-                On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, 
+            InventoryItem.inventoryID,
+            InnerJoin<INItemClass,
+                On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>,
             Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
             , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
@@ -62,6 +62,14 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrCommodityPrice : PX.Data.BQL.BqlDecimal.Field<usrCommodityPrice> { }
         #endregion
 
+        #region UsrBasisPrice
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Basis Price", IsReadOnly = true)]
+        public decimal? UsrBasisPrice { get; set; }
+        public abstract class usrBasisPrice : PX.Data.BQL.BqlDecimal.Field<usrBasisPrice> { }
+        #endregion
+
         #region UsrCommodityIncrement
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
@@ -69,6 +77,14 @@ namespace ASCISTARCustom.Cost.CacheExt
         public decimal? UsrCommodityIncrement { get; set; }
         public abstract class usrCommodityIncrement : PX.Data.BQL.BqlDecimal.Field<usrCommodityIncrement> { }
         #endregion
+
+        //#region UsrMatrixStep
+        //[PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
+        //[PXUIField(DisplayName = "Matrix Step")]
+        //[PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
+        //public decimal? UsrMatrixStep { get; set; }
+        //public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
+        //#endregion
 
         #region UsrCommodityLossPct
         [PXDBDecimal(4)]

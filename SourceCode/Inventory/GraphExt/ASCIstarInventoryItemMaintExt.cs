@@ -401,8 +401,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var row = e.Row;
             if (row == null) return;
 
-            bool isDefaultVendor = row.IsDefault == true && row.GetExtension<ASCIStarPOVendorInventoryExt>().UsrIsOverrideVendor == true;
-            SetReadOnlyPOVendorInventoryFields(e.Cache, row, isDefaultVendor);
+            bool isDefaultOverridenVendor = row.IsDefault == true && PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row).UsrIsOverrideVendor == true;
+            SetReadOnlyPOVendorInventoryFields(e.Cache, row, isDefaultOverridenVendor);
         }
 
         protected virtual void _(Events.FieldVerifying<POVendorInventory, POVendorInventory.isDefault> e)
@@ -460,22 +460,25 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             if (row.IsDefault == true)
             {
+                var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
+
                 CopyPOVendorInventoryToItem(row);
-                UpdateItemAndPOVendorInventory(e.Cache, row);
+                UpdateItemAndPOVendorInventory(e.Cache, row, rowExt);
             }
         }
 
         protected virtual void _(Events.FieldUpdated<POVendorInventory, POVendorInventory.isDefault> e)
         {
             var row = e.Row;
-            if (row == null || (bool)e.NewValue == false) return;
+            if (row == null /*|| (bool)e.NewValue == false*/) return;
 
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
             if (rowExt.UsrIsOverrideVendor == true)
             {
                 CopyPOVendorInventoryToItem(row);
-                UpdateItemAndPOVendorInventory(e.Cache, row);
             }
+
+            UpdateItemAndPOVendorInventory(e.Cache, row, rowExt);
         }
 
         protected virtual void _(Events.FieldUpdated<POVendorInventory, POVendorInventory.vendorID> e)
@@ -497,11 +500,13 @@ namespace ASCISTARCustom.Inventory.GraphExt
                 e.Cache.RaiseExceptionHandling<POVendorInventory.vendorID>(row, e.NewValue,
                     new PXSetPropertyException("Vendor doen't have available prices for today.", PXErrorLevel.Warning));
                 return;
-        }
+            }
+
             var apVendorPriceExt = apVendorPrice.GetExtension<ASCIStarAPVendorPriceExt>();
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommoditySurchargePct>(row, apVendorPriceExt.UsrCommoditySurchargePct ?? 0.0m);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityLossPct>(row, apVendorPriceExt.UsrCommodityLossPct ?? 0.0m);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityPrice>(row, apVendorPrice.SalesPrice ?? 0.0m);
+            e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrBasisPrice>(row, apVendorPrice.SalesPrice ?? 0.0m);
         }
 
         protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrCommodityPrice> e)
@@ -511,7 +516,9 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             if (row.IsDefault == true)
             {
-                UpdateItemAndPOVendorInventory(e.Cache, row);
+                var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
+
+                UpdateItemAndPOVendorInventory(e.Cache, row, rowExt);
             }
         }
 
@@ -644,21 +651,21 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
         }
 
-        private void SetReadOnlyPOVendorInventoryFields(PXCache cache, POVendorInventory row, bool isDefaultVendor)
+        private void SetReadOnlyPOVendorInventoryFields(PXCache cache, POVendorInventory row, bool isDefaultOverridenVendor)
         {
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityPrice>(cache, row, !isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityIncrement>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityLossPct>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommoditySurchargePct>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrOtherMaterialCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFabricationCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrPackagingCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrLaborCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrHandlingCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFreightCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrDutyCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrUnitCost>(cache, row, isDefaultVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityIncrement>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityLossPct>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommoditySurchargePct>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrOtherMaterialCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFabricationCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrPackagingCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrLaborCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrPackagingLaborCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrHandlingCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFreightCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrDutyCost>(cache, row, isDefaultOverridenVendor);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrUnitCost>(cache, row, isDefaultOverridenVendor);
         }
 
         private void SetValueExtPOVendorInventory<Field>(object newValue) where Field : IBqlField
@@ -704,8 +711,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var jewelryCostBuilder = CreateCostBuilder(row);
             if (jewelryCostBuilder == null) return;
 
-            string metalType = jewelryCostBuilder.INJewelryItem?.MetalType == ASCIStarCostingType.StandardCost ? ASCIStarCostingType.StandardCost : ASCIStarCostingType.ContractCost;
-            rowExt.UsrCommodityCost = jewelryCostBuilder.CalculatePreciousMetalCost(metalType);
+            rowExt.UsrCommodityCost = jewelryCostBuilder.CalculatePreciousMetalCost(rowExt.UsrCostingType);
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrCommodityCost>(row, rowExt.UsrCommodityCost);
 
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceTOZ>(row, jewelryCostBuilder.PreciousMetalMarketCostPerTOZ);
@@ -769,9 +775,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
             return null;
         }
 
-        private void UpdateItemAndPOVendorInventory(PXCache cache, POVendorInventory row)
+        private void UpdateItemAndPOVendorInventory(PXCache cache, POVendorInventory row, ASCIStarPOVendorInventoryExt rowExt)
         {
-            var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
             if (rowExt.UsrCommodityPrice == decimal.Zero)
             {
                 cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrCommodityPrice>(row, rowExt.UsrCommodityPrice,
@@ -779,8 +784,19 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
 
             var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current);
+            if (row.IsDefault == true)
+            {
+                UpdateCommodityCostMetal(this.Base.Item.Cache, this.Base.Item.Current, inventoryItemExt);
+            }
+            else
+            {
+                UpdateCurrentPOVendorItem();
+            }
+        }
 
-            UpdateCommodityCostMetal(this.Base.Item.Cache, this.Base.Item.Current, inventoryItemExt);
+        private void UpdateCurrentPOVendorItem()
+        {
+
         }
 
         private void UpdateCurrentPOVendorItem(ASCIStarINInventoryItemExt inventoryItemExt)
@@ -795,7 +811,6 @@ namespace ASCISTARCustom.Inventory.GraphExt
             {
                 this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityCost>(this.Base.VendorItems.Current, inventoryItemExt.UsrCommodityCost);
                 this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrUnitCost>(this.Base.VendorItems.Current, inventoryItemExt.UsrContractCost);
-                this.Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityIncrement>(this.Base.VendorItems.Current, inventoryItemExt.UsrContractIncrement);
             }
         }
 
@@ -807,7 +822,13 @@ namespace ASCISTARCustom.Inventory.GraphExt
             inventoryItemExt.UsrFabricationCost = poVendorInventoryExt.UsrFabricationCost;
             inventoryItemExt.UsrMaterialsCost = poVendorInventoryExt.UsrOtherMaterialCost;
             inventoryItemExt.UsrPackagingCost = poVendorInventoryExt.UsrPackagingCost;
-            inventoryItemExt.UsrPackagingCost = poVendorInventoryExt.UsrPackagingLaborCost;
+            inventoryItemExt.UsrPackagingLaborCost = poVendorInventoryExt.UsrPackagingLaborCost;
+
+            inventoryItemExt.UsrLaborCost = poVendorInventoryExt.UsrLaborCost;
+            inventoryItemExt.UsrHandlingCost = poVendorInventoryExt.UsrHandlingCost;
+
+            inventoryItemExt.UsrFreightCost = poVendorInventoryExt.UsrFreightCost;
+            inventoryItemExt.UsrDutyCost = poVendorInventoryExt.UsrDutyCost;
 
             inventoryItemExt.UsrContractSurcharge = poVendorInventoryExt.UsrCommoditySurchargePct;
             inventoryItemExt.UsrContractLossPct = poVendorInventoryExt.UsrCommodityLossPct;

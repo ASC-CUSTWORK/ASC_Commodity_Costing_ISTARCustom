@@ -62,7 +62,7 @@ namespace ASCISTARCustom
         public abstract class usrBaseGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseGoldGrams> { }
         #endregion
 
-        #region GoldGrams
+        #region UsrGoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Gold, Grams", Enabled = false)]
@@ -71,7 +71,7 @@ namespace ASCISTARCustom
         public abstract class usrGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrGoldGrams> { }
         #endregion
 
-        #region FineGoldGrams
+        #region UsrFineGoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMGold>))]
@@ -122,7 +122,7 @@ namespace ASCISTARCustom
         public abstract class usrFineSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrFineSilverGrams> { }
         #endregion
 
-        #region MetalLossPct
+        #region UsrMetalLossPct
         [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Metal Loss, %", Enabled = false)]
@@ -131,7 +131,7 @@ namespace ASCISTARCustom
         public abstract class usrMetalLossPct : PX.Data.BQL.BqlDecimal.Field<usrMetalLossPct> { }
         #endregion
 
-        #region SurchargePct
+        #region UsrSurchargePct
         [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge %", Enabled = false, Visible = true)]
@@ -140,7 +140,7 @@ namespace ASCISTARCustom
         public abstract class usrSurchargePct : PX.Data.BQL.BqlDecimal.Field<usrSurchargePct> { }
         #endregion
 
-        #region Increment
+        #region UsrIncrement
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Increment", Enabled = false)]
@@ -149,7 +149,7 @@ namespace ASCISTARCustom
         public abstract class usrIncrement : PX.Data.BQL.BqlDecimal.Field<usrIncrement> { }
         #endregion
 
-        #region MatrixStep
+        #region UsrMatrixStep
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Matrix Step", Enabled = false)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
@@ -164,6 +164,14 @@ namespace ASCISTARCustom
         [PXUIField(DisplayName = "Vendor Price", Visibility = PXUIVisibility.Visible, Enabled = false)]
         public decimal? UsrSalesPrice { get; set; }
         public abstract class usrSalesPrice : PX.Data.BQL.BqlDecimal.Field<usrSalesPrice> { }
+        #endregion
+
+        #region UsrBasisPrice
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Basis Price", IsReadOnly = true)]
+        public decimal? UsrBasisPrice { get; set; }
+        public abstract class usrBasisPrice : PX.Data.BQL.BqlDecimal.Field<usrBasisPrice> { }
         #endregion
 
         #region UsrBaseFabricationCost
@@ -183,7 +191,7 @@ namespace ASCISTARCustom
         public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
         #endregion
 
-        #region PackagingCost
+        #region UsrBasePackagingCost
         [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPackagingCost>))]
@@ -191,7 +199,7 @@ namespace ASCISTARCustom
         public abstract class usrBasePackagingCost : PX.Data.BQL.BqlDecimal.Field<usrBasePackagingCost> { }
         #endregion
 
-        #region PackagingCost
+        #region UsrPackagingCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Packaging Cost", Enabled = false)]
@@ -200,7 +208,7 @@ namespace ASCISTARCustom
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
 
-        #region LaborCost
+        #region UsrLaborCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "In-house Labor Cost", Enabled = false)]
@@ -226,7 +234,7 @@ namespace ASCISTARCustom
         public abstract class usrMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrMaterialCost> { }
         #endregion
 
-        #region OtherCost
+        #region UsrOtherCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Cost", Enabled = false, Visible = false)]
@@ -235,7 +243,7 @@ namespace ASCISTARCustom
         public abstract class usrOtherCost : PX.Data.BQL.BqlDecimal.Field<usrOtherCost> { }
         #endregion
                 
-        #region FreightCost
+        #region UsrFreightCost
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Freight Cost", Enabled = false)]
@@ -244,7 +252,7 @@ namespace ASCISTARCustom
         public abstract class usrFreightCost : PX.Data.BQL.BqlDecimal.Field<usrFreightCost> { }
         #endregion
 
-        #region HandlingCost
+        #region UsrHandlingCost
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Handling Cost", Enabled = false)]
@@ -253,7 +261,7 @@ namespace ASCISTARCustom
         public abstract class usrHandlingCost : PX.Data.BQL.BqlDecimal.Field<usrHandlingCost> { }
         #endregion
 
-        #region DutyCost
+        #region UsrDutyCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Duty Cost", Enabled = false)]
