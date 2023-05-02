@@ -1,4 +1,5 @@
-﻿using ASCISTARCustom.Inventory.Descriptor.Constants;
+﻿using ASCISTARCustom.Common.DTO.Interfaces;
+using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
@@ -62,7 +63,7 @@ namespace ASCISTARCustom.PDS.Descriptor
         /// <typeparam name="TDacExt">The DAC extension type that implements the IASCIStarCostRollup interface.</typeparam>
         /// <param name="hdrCache">The cache of the INKitSpecHdr DAC.</param>
         /// <param name="row">The inserted row of type TDac.</param>
-        public static void ProcessRowInserted<TDac, TDacExt>(PXCache hdrCache, TDac row) 
+        public static void ProcessRowInserted<TDac, TDacExt>(PXCache hdrCache, TDac row)
             where TDac : class, IBqlTable, new()
             where TDacExt : PXCacheExtension<TDac>, IASCIStarCostRollup
         {
@@ -79,7 +80,7 @@ namespace ASCISTARCustom.PDS.Descriptor
         /// <param name="row">The updated row of type TDac.</param>
         /// <param name="oldRow">The original row of type TDac before the update.</param>
         public static void ProcessRowUpdated<TDac, TDacExt>(PXCache hdrCache, TDac row, TDac oldRow)
-            where TDac : class, IBqlTable, new ()
+            where TDac : class, IBqlTable, new()
             where TDacExt : PXCacheExtension<TDac>, IASCIStarCostRollup
         {
             var oldRowExt = PXCache<TDac>.GetExtension<TDacExt>(oldRow);
@@ -121,6 +122,7 @@ namespace ASCISTARCustom.PDS.Descriptor
         /// <param name="value">The value being added to the cost field</param>
         public static void CostAddition(PXCache cache, INKitSpecHdr currentRow, string rollupType, decimal? value)
         {
+            if (currentRow == null) return;
             var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(currentRow);
             switch (rollupType)
             {
@@ -156,8 +158,8 @@ namespace ASCISTARCustom.PDS.Descriptor
                     break;
                 case ASCIStarCostRollupType.Materials:
                     {
-                        var result = rowExt.UsrMaterialCost + value;
-                        cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrMaterialCost>(currentRow, result);
+                        var result = rowExt.UsrOtherMaterialsCost + value;
+                        cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>(currentRow, result);
                     }
                     break;
                 case ASCIStarCostRollupType.Freight:
@@ -191,6 +193,7 @@ namespace ASCISTARCustom.PDS.Descriptor
         ///<param name="value">The value to be deducted from the kit cost</param>
         public static void CostDeduction(PXCache cache, INKitSpecHdr currentRow, string rollupType, decimal? value)
         {
+            if (currentRow == null) return;
             var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(currentRow);
             switch (rollupType)
             {
@@ -226,8 +229,8 @@ namespace ASCISTARCustom.PDS.Descriptor
                     break;
                 case ASCIStarCostRollupType.Materials:
                     {
-                        var result = rowExt.UsrMaterialCost - value;
-                        cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrMaterialCost>(currentRow, result);
+                        var result = rowExt.UsrOtherMaterialsCost - value;
+                        cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>(currentRow, result);
                     }
                     break;
                 case ASCIStarCostRollupType.Freight:
@@ -275,7 +278,7 @@ namespace ASCISTARCustom.PDS.Descriptor
 
                     break;
                 case ASCIStarCostRollupType.Materials:
-                    cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrMaterialCost>(currentRow, 0m);
+                    cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>(currentRow, 0m);
 
                     break;
                 case ASCIStarCostRollupType.Freight:

@@ -156,7 +156,7 @@
     <Compile Include="Preferences\DAC\ASCIStarSetup.cs" />
     <Compile Include="Preferences\Descriptor\ASCIStarSymbols.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Purchasing\ASCIstarPOEntryExt.cs" />
+    <Compile Include="Purchasing\ASCIStarPOEntryExt.cs" />
     <Compile Include="Purchasing\DAC\ASCIStarPOLineExt.cs" />
     <Compile Include="Purchasing\DAC\ASCIStarPOOrderExt.cs" />
     <Compile Include="Cost\CacheExt\ASCIStarVendorExt.cs" />

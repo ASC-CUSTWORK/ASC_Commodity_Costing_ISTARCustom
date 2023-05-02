@@ -1,30 +1,37 @@
-﻿namespace ASCISTARCustom.Common.DTO.Interfaces
+﻿using ASCISTARCustom.PDS.Interfaces;
+using PX.Data;
+
+namespace ASCISTARCustom.Common.DTO.Interfaces
 {
-    public interface IASCIStarItemCostSpecDTO
+    public interface IASCIStarItemCostSpecDTO : IASCIStarCostRollup
     {
         int? InventoryID { get; set; }
-        string InventoryCD { get; set; }
-        string RevisionID { get; set; }
-        decimal? GoldGrams { get; set; }
-        decimal? SilverGrams { get; set; }
-        decimal? FineGoldGrams { get; set; }
-        decimal? FineSilverGrams { get; set; }
-        decimal? MetalLossPct { get; set; }
-        decimal? SurchargePct { get; set; }
-        decimal? Increment { get; set; }
-        decimal? MatrixStep { get; set; }
-        decimal? UnitCost { get; set; }
-        decimal? PreciousMetalCost { get; set; }
-        decimal? FabricationCost { get; set; }
-        decimal? LandedCost { get; set; }
-        decimal? PackagingCost { get; set; }
-        decimal? PackagingLaborCost { get; set; }
-        decimal? MaterialsCost { get; set; }
-        decimal? FreightCost { get; set; }
-        decimal? HandlingCost { get; set; }
-        decimal? LaborCost { get; set; }
-        decimal? DutyCost { get; set; }
-        decimal? DutyCostPct { get; set; }
-        string CostingType { get; set; }
+        //string InventoryCD { get; set; }
+        //string RevisionID { get; set; }
+        decimal? UsrActualGRAMGold { get; set; }
+        decimal? UsrPricingGRAMSilver { get; set; }
+        decimal? UsrPricingGRAMGold { get; set; }
+        decimal? UsrActualGRAMSilver { get; set; }
+        decimal? UsrContractLossPct { get; set; }
+        decimal? UsrContractSurcharge { get; set; }
+        decimal? UsrContractIncrement { get; set; }
+        decimal? UsrMatrixStep { get; set; }
+        decimal? UsrUnitCost { get; set; }
+        decimal? UsrEstLandedCost { get; set; }
+        decimal? UsrPreciousMetalCost { get; set; }
+        decimal? UsrFabricationCost { get; set; }
+        decimal? UsrPackagingCost { get; set; }
+        decimal? UsrPackagingLaborCost { get; set; }
+        decimal? UsrOtherMaterialsCost { get; set; }
+        decimal? UsrOtherCost { get; set; }
+        decimal? UsrFreightCost { get; set; }
+        decimal? UsrHandlingCost { get; set; }
+        decimal? UsrLaborCost { get; set; }
+        decimal? UsrDutyCost { get; set; }
+        decimal? UsrDutyCostPct { get; set; }
+        decimal? UsrExtCost { get; set; }
+        string UsrCostingType { get; set; }
+        string UsrCostRollupType { get; set; }
+        string UsrCommodityType { get; set; }
     }
 }

@@ -194,7 +194,7 @@ namespace ASCISTARCustom
                 }
 
                     var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
-                                    .WithInventoryItem(inventoryItem)
+                                    .WithInventoryItem(inventoryItemExt)
                                     .WithPOVendorInventory(poVendorInventory)
                                     .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
                                     .Build();
@@ -214,11 +214,11 @@ namespace ASCISTARCustom
 
         private void SetInventoryItemCustomFields(PXCache cache, POLine row, ASCIStarCostBuilder costBuilder)
         {
-            cache.SetValueExt<ASCIStarPOLineExt.usrContractIncrement>(row, costBuilder.ItemCostSpecification.Increment);
-            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMGold>(row, costBuilder.ItemCostSpecification.GoldGrams);
-            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMGold>(row, costBuilder.ItemCostSpecification.FineGoldGrams);
-            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMSilver>(row, costBuilder.ItemCostSpecification.SilverGrams);
-            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMSilver>(row, costBuilder.ItemCostSpecification.FineSilverGrams);
+            cache.SetValueExt<ASCIStarPOLineExt.usrContractIncrement>(row, costBuilder.ItemCostSpecification.UsrContractIncrement);
+            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMGold>(row, costBuilder.ItemCostSpecification.UsrActualGRAMGold);
+            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMGold>(row, costBuilder.ItemCostSpecification.UsrPricingGRAMGold);
+            cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrActualGRAMSilver);
+            cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrPricingGRAMSilver);
         }
 
         #endregion
