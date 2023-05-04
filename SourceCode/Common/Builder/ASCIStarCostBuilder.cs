@@ -1,6 +1,4 @@
-﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.DTO;
-using ASCISTARCustom.Common.DTO.Interfaces;
+﻿using ASCISTARCustom.Common.DTO.Interfaces;
 using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
@@ -125,8 +123,6 @@ namespace ASCISTARCustom.Common.Builder
         /// Calculates the value of gold increment based on the effective base price per ounce, the metal type and the item cost specification.
         /// </summary>
         /// <param name="itemCostSpecification">The item cost specification</param>
-        /// <param name="effectiveBasePricePerOz">The effective base price per ounce</param>
-        /// <param name="metalType">The metal type</param>
         /// <returns>The value of gold increment</returns>
         public virtual decimal? CalculateGoldIncrementValue(IASCIStarItemCostSpecDTO itemCostSpecification)
         {
@@ -137,11 +133,9 @@ namespace ASCISTARCustom.Common.Builder
             return incrementValue;
         }
 
-        ///<summary>Calculates the precious metal cost for an item based on its cost specification, effective base price per ounce, and metal type. 
+        ///<summary>Calculates the precious metal cost for an item based on its cost specification, effective base price per gram and metal type. 
         ///It uses the ASCIStarMetalType class to determine if the metal type is gold or silver and calculates the precious metal cost accordingly. The metal loss and surcharge values are also factored in.</summary>
-        ///<param name="costSpecDTO">The data transfer object containing the item's cost specifications.</param>
-        ///<param name="effectivePricePerOz">The effective base price per ounce of the metal in the item.</param>
-        ///<param name="metalType">The type of metal in the item.</param>
+        ///<param name="costingType">The data transfer object containing the item's cost specifications.</param>
         ///<returns>The cost of the precious metals in the item.</returns>
         public virtual decimal? CalculatePreciousMetalCost(string costingType = null)
         {
@@ -164,7 +158,7 @@ namespace ASCISTARCustom.Common.Builder
 
                     default: break;
                 }
-                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * ItemCostSpecification.UsrActualGRAMGold ?? 0m;
+                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0m);
 
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
@@ -172,18 +166,17 @@ namespace ASCISTARCustom.Common.Builder
                 switch (costingType ?? ItemCostSpecification.UsrCostingType)
                 {
                     case ASCIStarCostingType.ContractCost:
-                        //preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.MatrixStep);
+                        preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalContractCostPerTOZ, ItemCostSpecification.UsrMatrixStep);
                         break;
                     case ASCIStarCostingType.MarketCost:
-                        //preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.MatrixStep);
+                        preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.UsrMatrixStep); ;
                         break;
                     case ASCIStarCostingType.StandardCost:
                         return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrFabricationCost - ItemCostSpecification.UsrOtherMaterialsCost - ItemCostSpecification.UsrPackagingCost;
 
                     default: break;
                 }
-                preciousMetalCost = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.UsrMatrixStep)
-                                        * priciousMetalMultFactor * ItemCostSpecification.UsrActualGRAMSilver;
+                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMSilver ?? 0.0m);
             }
 
             decimal? surchargeValue = (100.0m + (ItemCostSpecification.UsrContractSurcharge ?? 0.0m)) / 100.0m;
@@ -285,10 +278,6 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? GetSilverMetalCostPerOZ(decimal? basisCost, decimal? marketCost, decimal? matrixStep)
         {
             if (basisCost == null || basisCost == 0.0m || marketCost == null || marketCost == 0.0m) return 0.0m;
-            //    throw new PXException(ASCIStarMessages.Error.VendorPriceNotFound);
-
-            //if (marketCost == null || marketCost == 0.0m)
-            //    throw new PXException(ASCIStarMessages.Error.MarketPriceNotFound);
 
             if (matrixStep <= 0.0m || matrixStep == null)
             {
@@ -328,7 +317,6 @@ namespace ASCISTARCustom.Common.Builder
         {
             ItemCostSpecification.UsrPreciousMetalCost = CalculatePreciousMetalCost(costingType);
 
-            // return CalculateUnitCost(ItemCostSpecification);
             return (ItemCostSpecification.UsrPreciousMetalCost ?? 0m)
                  + (ItemCostSpecification.UsrOtherMaterialsCost ?? 0m)
                  + (ItemCostSpecification.UsrFabricationCost ?? 0m)

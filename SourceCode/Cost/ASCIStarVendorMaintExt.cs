@@ -5,7 +5,6 @@ using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
-using System;
 
 namespace ASCISTARCustom.Cost
 {
@@ -13,21 +12,16 @@ namespace ASCISTARCustom.Cost
     {
         public static bool IsActive() => true;
 
-        public class today : PX.Data.BQL.BqlDateTime.Constant<today>
-        {
-            public today() : base(DateTime.Today) { }
-        }
-
         #region Selects
         [PXFilterable]
         [PXCopyPasteHiddenView]
         public PXSelectJoin<APVendorPrice,
-        InnerJoin<InventoryItem, On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
-        InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>,
-        Where<APVendorPrice.vendorID, Equal<Current<Vendor.bAccountID>>,
-            And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>,
-        OrderBy<Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
-        #endregion Select
+                           InnerJoin<InventoryItem, On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
+                           InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>,
+                                    Where<APVendorPrice.vendorID, Equal<Current<Vendor.bAccountID>>,
+                                        And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>,
+                            OrderBy<Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
+        #endregion 
 
         #region CacheAttached
         [PXMergeAttributes(Method = MergeMethod.Merge)]
@@ -43,11 +37,14 @@ namespace ASCISTARCustom.Cost
         #endregion
 
         #region EventHandlers
-        protected virtual void _(Events.RowInserted<APVendorPrice> e)
+        protected virtual void _(Events.FieldDefaulting<APVendorPrice, APVendorPrice.vendorID> e)
         {
-            if (e.Row == null) return;
+            if (e.Row == null || this.Base.BAccount.Current == null) return;
 
-            e.Cache.SetValueExt<APVendorPrice.vendorID>(e.Row, this.Base.BAccount.Current.BAccountID);
+            if (this.Base.BAccount.Current.BAccountID > 0)
+                e.NewValue = this.Base.BAccount.Current.BAccountID;
+            else
+                throw new PXException("Save Vendor first!");
         }
 
         protected virtual void _(Events.RowSelected<VendorR> e)
@@ -57,6 +54,7 @@ namespace ASCISTARCustom.Cost
                 PXUIFieldAttribute.SetRequired<ASCIStarVendorExt.usrMarketID>(e.Cache, row.VendorClassID?.NormalizeCD() != "MARKET");
             }
         }
+
         protected virtual void _(Events.RowPersisting<VendorR> e)
         {
             if (e.Row is VendorR row)

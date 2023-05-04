@@ -25,8 +25,22 @@
         </layout>
         <data>
             <SiteMap>
-                <row Position="21531" Title="Jewelshop Preferences" Url="~/Pages/AS/ASCI1000.aspx" ScreenID="ASCI1000" NodeID="8683f921-49ff-4ad7-af8f-fc741b268915" ParentID="00000000-0000-0000-0000-000000000000" />
+                <row Title="JewelShop Attributes" Url="~/GenericInquiry/GenericInquiry.aspx?id=0871275a-0efa-4fc4-a7b9-70c3575294ce" ScreenID="GIJS0010" NodeID="e29c2a9e-8f4b-4ec3-81dd-1c405d923671" ParentID="00000000-0000-0000-0000-000000000000">
+                    <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="45" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
+                        <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
+                    </MUIScreen>
+                </row>
             </SiteMap>
+            <MUIWorkspace>
+                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
+            </MUIWorkspace>
+            <MUISubcategory>
+                <row IsPortal="1" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+                <row IsPortal="0" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+            </MUISubcategory>
+            <MUIArea>
+                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
+            </MUIArea>
         </data>
     </data-set>
 </SiteMapNode>

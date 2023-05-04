@@ -35,18 +35,6 @@
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommodityPrice" />
-                    <Prop Key="Width" Value="100" />
-                </PXGridColumn>
-            </AddItem>
-            <AddItem>
-                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommodityIncrement" />
-                    <Prop Key="Width" Value="100" />
-                </PXGridColumn>
-            </AddItem>
-            <AddItem>
-                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrMatrixStep" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="CommitChanges" Value="True" />
@@ -55,6 +43,12 @@
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrCommoditySurchargePct" />
+                    <Prop Key="Width" Value="100" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrCommodityIncrement" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>

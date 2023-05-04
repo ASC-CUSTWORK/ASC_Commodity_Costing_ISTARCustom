@@ -100,7 +100,7 @@ namespace ASCISTARCustom
         {
             var poLines = this.Base.Transactions.Select().FirstTableItems.ToList();
             SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, poLines);
-
+            this.Base.Document.View.RequestRefresh();
             return adapter.Get<POOrder>();
         }
         #endregion
@@ -203,9 +203,9 @@ namespace ASCISTARCustom
                     inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost ? ASCIStarCostingType.StandardCost : ASCIStarCostingType.MarketCost);
 
                 cache.SetValueExt<POLine.curyUnitCost>(poLine, poLine.CuryUnitCost);
+                cache.SetValueExt<POLine.unitCost>(poLine, poLine.CuryUnitCost);
 
                 cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(poLine, jewelryCostProvider.PreciousMetalMarketCostPerTOZ);
-
                 cache.SetValueExt<ASCIStarPOLineExt.usrBasisValue>(poLine, jewelryCostProvider.BasisValue);
 
                 SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);

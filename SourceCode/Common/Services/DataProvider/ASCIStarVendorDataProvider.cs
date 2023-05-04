@@ -16,7 +16,7 @@ namespace ASCISTARCustom.Common.Services.DataProvider
             _graph = graph;
         }
 
-        public APVendorPrice GetAPVendorPrice(int? bAccountID, int? inventoryID, string UOM, DateTime effectiveDate, bool withException = false)
+        public APVendorPrice GetAPVendorPrice(int? bAccountID, int? inventoryID, string UOM, DateTime? effectiveDate, bool withException = false)
         {
             var result = SelectFrom<APVendorPrice>
             .Where<APVendorPrice.vendorID.IsEqual<P.AsInt>

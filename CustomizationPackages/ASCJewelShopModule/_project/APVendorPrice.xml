@@ -1,7 +1,6 @@
 ﻿<Table TableName="APVendorPrice">
     <Column TableName="APVendorPrice" ColumnName="UsrMarketID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrMarket" ColumnType="string" AllowNull="True" MaxLength="2" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="APVendorPrice" ColumnName="UsrCommodityPrice" ColumnType="decimal" AllowNull="True" MaxLength="10" DecimalPrecision="2" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrCommodityLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="usrCommoditySurchargePct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrCommodityIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
