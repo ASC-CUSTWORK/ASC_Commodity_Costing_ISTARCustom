@@ -68,9 +68,13 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrCommodityIncrement
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Metal Increment", IsReadOnly = true)]
-        [PXFormula(typeof(Switch<Case<
-            Where<APVendorPrice.uOM.IsNotEqual<TOZ>.Or<APVendorPrice.salesPrice.IsNotNull.And<APVendorPrice.salesPrice.IsEqual<PX.Objects.CS.decimal0>>>>, Null>,
-            Div<usrCommodityPerGram, APVendorPrice.salesPrice>>))]
+        [PXFormula(typeof(Switch<
+            Case<Where<APVendorPrice.uOM.IsNotEqual<TOZ>.Or<APVendorPrice.salesPrice.IsNotNull.And<APVendorPrice.salesPrice.IsEqual<PX.Objects.CS.decimal0>>>>,
+                        Null>,
+            Case<Where<ASCIStarAPVendorPriceExt.usrCommodity.IsEqual<CommodityType.silver>>,
+                        Div<usrCommodityPerGram, APVendorPrice.salesPrice>,
+            Case<Where<ASCIStarAPVendorPriceExt.usrCommodity.IsEqual<CommodityType.gold>>,
+                        Mult<Div<usrCommodityPerGram, APVendorPrice.salesPrice>, Add<ASCIStarConstants.DecimalOne, Div<usrCommoditySurchargePct, ASCIStarConstants.DecimalOneHundred>>>>>>))]
         public decimal? UsrCommodityIncrement { get; set; }
         public abstract class usrCommodityIncrement : PX.Data.BQL.BqlDecimal.Field<usrCommodityIncrement> { }
         #endregion

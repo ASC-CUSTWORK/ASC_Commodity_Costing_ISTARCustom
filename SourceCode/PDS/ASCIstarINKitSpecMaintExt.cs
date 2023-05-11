@@ -40,25 +40,25 @@ namespace ASCISTARCustom.PDS
                     .And<ASCIStarINKitSpecJewelryItem.revisionID.IsEqual<INKitSpecHdr.revisionID.FromCurrent>>>
                         .View JewelryItemView;
 
-        [PXFilterable]
-        public PXSelectJoin<
-            APVendorPrice,
-            InnerJoin<POVendorInventory,
-                On<POVendorInventory.vendorID, Equal<Current<APVendorPrice.vendorID>>,
-                And<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>>,
-            InnerJoin<InventoryItemCurySettings,
-                On<InventoryItemCurySettings.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>,
-                And<InventoryItemCurySettings.preferredVendorID, Equal<POVendorInventory.vendorID>>>,
-            InnerJoin<InventoryItem,
-                On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
-            InnerJoin<INItemClass,
-                On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>>>,
-            Where<APVendorPrice.vendorID, Equal<InventoryItemCurySettings.preferredVendorID>,
-                And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>,
-                And<APVendorPrice.effectiveDate, LessEqual<AccessInfo.businessDate>,
-                And<APVendorPrice.expirationDate, GreaterEqual<AccessInfo.businessDate>>>>>,
-            OrderBy<
-                Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
+        //[PXFilterable]
+        //public PXSelectJoin<
+        //    APVendorPrice,
+        //    InnerJoin<POVendorInventory,
+        //        On<POVendorInventory.vendorID, Equal<Current<APVendorPrice.vendorID>>,
+        //        And<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>>,
+        //    InnerJoin<InventoryItemCurySettings,
+        //        On<InventoryItemCurySettings.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>,
+        //        And<InventoryItemCurySettings.preferredVendorID, Equal<POVendorInventory.vendorID>>>,
+        //    InnerJoin<InventoryItem,
+        //        On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
+        //    InnerJoin<INItemClass,
+        //        On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>>>,
+        //    Where<APVendorPrice.vendorID, Equal<InventoryItemCurySettings.preferredVendorID>,
+        //        And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>,
+        //        And<APVendorPrice.effectiveDate, LessEqual<AccessInfo.businessDate>,
+        //        And<APVendorPrice.expirationDate, GreaterEqual<AccessInfo.businessDate>>>>>,
+        //    OrderBy<
+        //        Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
 
         [PXCopyPasteHiddenView]
         public PXSetup<INSetup> ASCIStarINSetup;
@@ -280,6 +280,14 @@ namespace ASCISTARCustom.PDS
         #endregion
 
         #region INKitSpecStkDet Events
+        protected virtual void _(Events.RowSelecting<INKitSpecStkDet> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            SetVisibleINKitSpecStkDet(e.Cache, row);
+
+        }
         protected virtual void _(Events.FieldDefaulting<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrCostingType> e)
         {
             if (e.Row is INKitSpecStkDet row)
@@ -312,7 +320,8 @@ namespace ASCISTARCustom.PDS
                 var jewelryItem = GetASCIStarINJewelryItem(row.CompInventoryID);
                 if (IsCommodityItem(row))
                 {
-                    e.NewValue = SetCostForCommodityClassItem(row);
+                    e.NewValue = GetUnitCostForCommodityItem(row);
+
                 }
                 else
                 {
@@ -405,7 +414,7 @@ namespace ASCISTARCustom.PDS
                 var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
                 if (IsCommodityItem(row))
                 {
-                    var value = SetCostForCommodityClassItem(row);
+                    var value = GetUnitCostForCommodityItem(row);
                     e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(row, value);
                 }
                 else
@@ -473,12 +482,15 @@ namespace ASCISTARCustom.PDS
         {
             if (e.Row is POVendorInventory row)
             {
-                var result = VendorItems.Select().RowCast<POVendorInventory>();
-                if (result.Any(_ => _.GetExtension<ASCIStarPOVendorInventoryExt>().UsrMarketID == null))
+                if (e.Row.IsDefault == true)
                 {
-                    e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMarketID>(row, row.IsDefault, new PXSetPropertyException(ASCIStarMessages.Error.MarketNotFound, PXErrorLevel.Error));
-                    e.Cancel = true;
-                    throw new PXException(ASCIStarMessages.Error.MarketNotFound);
+                    var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(e.Row);
+                    if (rowExt.UsrMarketID == null)
+                    {
+                        e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMarketID>(row, row.IsDefault, new PXSetPropertyException(ASCIStarMessages.Error.MarketNotFound, PXErrorLevel.Error));
+                        e.Cancel = true;
+                        throw new PXException(ASCIStarMessages.Error.MarketNotFound);
+                    }
                 }
             }
         }
@@ -653,7 +665,7 @@ namespace ASCISTARCustom.PDS
                 itemExt.UsrActualGRAMGold = kitSpecHdrExt.UsrActualGRAMGold;
                 itemExt.UsrPricingGRAMGold = kitSpecHdrExt.UsrPricingGRAMGold;
                 itemExt.UsrActualGRAMSilver = kitSpecHdrExt.UsrActualGRAMSilver;
-                itemExt.UsrActualGRAMSilver = kitSpecHdrExt.UsrActualGRAMSilver;
+                itemExt.UsrPricingGRAMSilver = kitSpecHdrExt.UsrPricingGRAMSilver;
                 itemExt.UsrPreciousMetalCost = kitSpecHdrExt.UsrPreciousMetalCost;
                 itemExt.UsrFabricationCost = kitSpecHdrExt.UsrFabricationCost;
                 itemExt.UsrOtherCost = kitSpecHdrExt.UsrOtherCost;
@@ -711,7 +723,7 @@ namespace ASCISTARCustom.PDS
             e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, salesPrice);
             e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrBasisPrice>(row, jewelryCostBuilder.PreciousMetalContractCostPerTOZ);
         }
-        protected virtual decimal SetCostForCommodityClassItem(INKitSpecStkDet row)
+        protected virtual decimal GetUnitCostForCommodityItem(INKitSpecStkDet row)
         {
             var value = 0m;
             var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
@@ -727,28 +739,47 @@ namespace ASCISTARCustom.PDS
 
             int? metalInventoryID = null;
             decimal multCoef = 24;
-            if (ASCIStarMetalType.IsGold(JewelryItemView.Current.MetalType))
+
+            bool isGold = ASCIStarMetalType.IsGold(JewelryItemView.Current.MetalType);
+            if (isGold)
             {
                 metalInventoryID = _itemDataProvider.GetInventoryItemByCD("24K").InventoryID;
-                multCoef = ASCIStarMetalType.GetGoldTypeValue(JewelryItemView.Current.MetalType);
+                multCoef = ASCIStarMetalType.GetGoldTypeValue(JewelryItemView.Current.MetalType) / 24;
             }
-            if (ASCIStarMetalType.IsSilver(JewelryItemView.Current.MetalType))
+
+            bool isSilver = ASCIStarMetalType.IsSilver(JewelryItemView.Current.MetalType);
+            if (isSilver)
             {
                 metalInventoryID = _itemDataProvider.GetInventoryItemByCD("SSS").InventoryID;
+                multCoef = ASCIStarMetalType.GetSilverTypeValue(JewelryItemView.Current.MetalType);
             }
 
             var vendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(Base, defaultVendorExt.UsrMarketID, metalInventoryID, TOZ.value, PXTimeZoneInfo.Now);
 
             if (vendorPrice == null) return value;
 
+
             var vendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(vendorPrice);
             if (row.UOM == GRAM.value)
             {
-                value = (vendorPriceExt?.UsrCommodityPerGram ?? 0m) * multCoef / 24;
+                if (isSilver)
+                {
+                    var jewelryCostBuilder = CreateCostBuilder(row);
+                    if (jewelryCostBuilder == null) return value;
+
+                    var tempValue = jewelryCostBuilder.CalculatePreciousMetalCost(jewelryCostBuilder.ItemCostSpecification.UsrCostingType);
+                    value = (jewelryCostBuilder.PreciousMetalAvrSilverMarketCostPerTOZ ?? 0.0m) / TOZ2GRAM_31_10348.value;
+                    return value;
+                }
+                if (isGold)
+                {
+                    value = (vendorPriceExt?.UsrCommodityPerGram ?? 0m) * multCoef;
+                    return value;
+                }
             }
             else if (row.UOM == TOZ.value)
             {
-                value = vendorPrice?.SalesPrice ?? 0m;
+                return vendorPrice?.SalesPrice ?? 0m;
             }
 
             return value;
@@ -840,6 +871,19 @@ namespace ASCISTARCustom.PDS
             PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMSilver>(cache, row, isVisibleSilver);
             PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilver>(cache, row, isVisibleSilver);
             PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrMatrixStep>(cache, row, isVisibleSilver);
+        }
+        protected virtual void SetVisibleINKitSpecStkDet(PXCache cache, INKitSpecStkDet inKitSpecStkDet)
+        {
+            var jewelryItem = GetASCIStarINJewelryItem(inKitSpecStkDet.KitInventoryID);
+            bool isVisibleGold = ASCIStarMetalType.IsGold(jewelryItem?.MetalType);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrActualGRAMGold>(cache, null, isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrPricingGRAMGold>(cache, null, isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrContractIncrement>(cache, null, isVisibleGold);
+
+            bool isVisibleSilver = ASCIStarMetalType.IsSilver(jewelryItem?.MetalType);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrActualGRAMSilver>(cache, null, isVisibleSilver);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrPricingGRAMSilver>(cache, null, isVisibleSilver);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrMatrixStep>(cache, null, isVisibleSilver);
         }
         private bool IsBaseItemsExists()
         {

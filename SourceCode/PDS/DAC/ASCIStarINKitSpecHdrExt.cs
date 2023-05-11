@@ -46,20 +46,20 @@ namespace ASCISTARCustom
         public abstract class usrPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMGold> { }
         #endregion
 
-        #region UsrActualGRAMSilver
-        [PXDBDecimal(6)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Total Silver Grams", Enabled = false)]
-        public decimal? UsrPricingGRAMSilver { get; set; }
-        public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
-        #endregion
-
         #region UsrPricingGRAMSilver
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Total Fine Silver Grams", Enabled = false)]
-        public decimal? UsrActualGRAMSilver { get; set; }
+        public decimal? UsrPricingGRAMSilver { get; set; }
         public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
+        #endregion
+
+        #region UsrActualGRAMSilver
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Total Silver Grams", Enabled = false)]
+        public decimal? UsrActualGRAMSilver { get; set; }
+        public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
         #endregion
 
         #region UnitCost

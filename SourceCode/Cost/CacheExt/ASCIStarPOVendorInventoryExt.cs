@@ -90,7 +90,7 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrContractLossPct
         [PXDBDecimal(4)]
-   //     [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Metal Loss %", Visible = false)]
         public decimal? UsrContractLossPct { get; set; }
         public abstract class usrContractLossPct : PX.Data.BQL.BqlDecimal.Field<usrContractLossPct> { }
@@ -98,7 +98,7 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrContractSurcharge
         [PXDBDecimal(6)]
-     //   [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge %", Visible = false)]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }

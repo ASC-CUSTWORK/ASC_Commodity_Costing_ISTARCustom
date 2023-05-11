@@ -169,7 +169,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 100)]
+        [PXDBDecimal(6, MinValue = -100, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge %")]
         public decimal? UsrContractSurcharge { get; set; }
@@ -259,7 +259,7 @@ namespace ASCISTARCustom
         #region UsrUnitCost
         [PXDecimal(6)]
         [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        [PXFormula(typeof(Add<Add<Add<Add<usrPreciousMetalCost, usrOtherMaterialsCost>, usrFabricationCost>, usrPackagingCost>, usrPackagingLaborCost>))]
+        [PXFormula(typeof(Add<Add<Add<Add<usrPackagingLaborCost, usrOtherMaterialsCost>, usrFabricationCost>, usrPackagingCost>, usrPreciousMetalCost>))]
         public decimal? UsrUnitCost { get; set; }
         public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
         #endregion
@@ -267,7 +267,7 @@ namespace ASCISTARCustom
         #region UsrEstLandedCost
         [PXDecimal(6)]
         [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        [PXFormula(typeof(Add<Add<Add<Add<usrUnitCost, usrHandlingCost>, usrFreightCost>, usrLaborCost>, usrDutyCost>))]
+        [PXFormula(typeof(Add<Add<Add<Add<usrDutyCost, usrHandlingCost>, usrFreightCost>, usrLaborCost>, usrUnitCost>))]
         public decimal? UsrEstLandedCost { get; set; }
         public abstract class usrEstLandedCost : PX.Data.BQL.BqlDecimal.Field<usrEstLandedCost> { }
         #endregion

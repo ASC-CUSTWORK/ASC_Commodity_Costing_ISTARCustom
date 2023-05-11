@@ -75,6 +75,14 @@
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
+                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
+                                <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                <Prop Key="ID" Value="CstPXNumberEdit79" />
+                                <Prop Key="DataField" Value="UsrMatrixStep" />
+                                <Prop Key="CommitChanges" Value="True" />
+                            </PXNumberEdit>
+                        </AddItem>
+                        <AddItem>
                             <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXLayoutRule43" />
@@ -94,8 +102,8 @@
                         <AddItem>
                             <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit79" />
-                                <Prop Key="DataField" Value="UsrMatrixStep" />
+                                <Prop Key="ID" Value="CstPXNumberEdit45" />
+                                <Prop Key="DataField" Value="UsrContractIncrement" />
                                 <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>
@@ -111,14 +119,6 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit83" />
                                 <Prop Key="DataField" Value="UsrCeiling" />
-                            </PXNumberEdit>
-                        </AddItem>
-                        <AddItem>
-                            <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXNumberEdit45" />
-                                <Prop Key="DataField" Value="UsrContractIncrement" />
-                                <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>
                     </Children>

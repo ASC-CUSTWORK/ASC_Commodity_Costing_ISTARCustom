@@ -29,7 +29,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
         // public PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Current<InventoryItem.inventoryID>>>> KitCostRollup;
 
-        [PXCopyPasteHiddenFields(typeof(POVendorInventory.isDefault))]
+        //  [PXCopyPasteHiddenFields(typeof(POVendorInventory.isDefault))]
         public POVendorInventorySelect<POVendorInventory,
             InnerJoin<Vendor, On<BqlOperand<Vendor.bAccountID, IBqlInt>.IsEqual<POVendorInventory.vendorID>>,
             LeftJoin<Location, On<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>
@@ -101,7 +101,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             if ((decimal?)e.NewValue <= 0.0m)
             {
-                e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrMatrixStep>(e.Row, 0.0m,
+                e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrMatrixStep>(e.Row, 0.5m,
                     new PXSetPropertyException(ASCIStarINConstants.Errors.ERPTakeMarketPrice, PXErrorLevel.Warning));
             }
         }
@@ -109,6 +109,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
         protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrContractSurcharge> e)
         {
             if (e.Row == null) return;
+            //    var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(e.Row);
 
             if ((decimal?)e.NewValue < 0.0m)
             {
@@ -157,6 +158,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
         {
             var row = e.Row;
             if (row == null || Base.IsCopyPasteContext) return;
+
+            //  this.JewelryItemView.Current = JewelryItemView.Select().TopFirst;
 
             var mult = ASCIStarMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
 
@@ -241,7 +244,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             if (result == true)
             {
-                UpdateSurcharge(e.Cache, row, rowExt);
+                UpdateSurcharge<ASCIStarINInventoryItemExt.usrContractSurcharge>(e.Cache, row, rowExt, this.JewelryItemView.Current?.MetalType);
             }
             else
             {
@@ -496,10 +499,9 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var row = e.Row;
             if (row == null) return;
 
-            var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
-            if (rowExt.UsrBasisPrice == decimal.Zero)
+            if ((decimal?)e.NewValue == decimal.Zero)
             {
-                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrBasisPrice>(row, rowExt.UsrBasisPrice,
+                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrBasisPrice>(row, e.NewValue,
                     new PXSetPropertyException(ASCIStarINConstants.Warnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
             }
         }
@@ -510,7 +512,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             if ((decimal?)e.NewValue <= 0.0m)
             {
-                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMatrixStep>(e.Row, 0.0m,
+                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMatrixStep>(e.Row, 0.5m,
                     new PXSetPropertyException(ASCIStarINConstants.Errors.ERPTakeMarketPrice, PXErrorLevel.Warning));
             }
         }
@@ -539,10 +541,10 @@ namespace ASCISTARCustom.Inventory.GraphExt
         protected virtual void _(Events.FieldUpdated<POVendorInventory, POVendorInventory.isDefault> e)
         {
             var row = e.Row;
-            if (row == null) return;
+            if (row == null || Base.IsCopyPasteContext) return;
 
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
-            if (rowExt.UsrIsOverrideVendor == true || (bool)e.NewValue == true)
+            if ((bool)e.NewValue == true)
             {
                 CopyPOVendorInventoryToItem(row);
             }
@@ -567,7 +569,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             if (apVendorPrice == null)
             {
                 e.Cache.RaiseExceptionHandling<POVendorInventory.vendorID>(row, e.NewValue,
-                    new PXSetPropertyException("Vendor doen't have available prices for today.", PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCIStarINConstants.Warnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
                 return;
             }
 
@@ -594,15 +596,18 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
 
-            var result = ASCIStarMetalType.GetMetalType(this.JewelryItemView.Current?.MetalType);
-
-            if (result == true)
+            var isGold = ASCIStarMetalType.IsGold(this.JewelryItemView.Current?.MetalType);
+            if (isGold == true)
             {
-                //    UpdateSurcharge(e.Cache, row, rowExt);
+                UpdateSurcharge<ASCIStarPOVendorInventoryExt.usrContractSurcharge>(e.Cache, row, rowExt, this.JewelryItemView.Current?.MetalType);
             }
             else
             {
-                UpdateMetalCalcPOVendorItem(e.Cache, row, rowExt);
+                var isSilver = ASCIStarMetalType.IsSilver(this.JewelryItemView.Current?.MetalType);
+                if (isSilver)
+                {
+                    UpdateMetalCalcPOVendorItem(e.Cache, row, rowExt);
+                }
             }
         }
 
@@ -674,14 +679,14 @@ namespace ASCISTARCustom.Inventory.GraphExt
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrOtherMaterialsCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPackagingLaborCost>(cache, row, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrContractLossPct>(cache, row, isVisible);
-            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrContractSurcharge>(cache, row, isVisible);
+            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrContractIncrement>(cache, row, isVisible);
 
             var rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
 
             bool isVisibleGold = isVisible && rowExt.UsrCommodityType == CommodityType.Gold;
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, isVisibleGold);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, isVisibleGold);
-            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrContractIncrement>(cache, row, isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrContractSurcharge>(cache, row, isVisibleGold);
 
             bool isVisibleSilver = isVisible && rowExt.UsrCommodityType == CommodityType.Silver;
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(cache, row, isVisibleSilver);
@@ -749,10 +754,14 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
         private void SetValueExtPOVendorInventory<TField>(object newValue) where TField : IBqlField
         {
+            //     if (Base.IsCopyPasteContext) return;
+
             POVendorInventory vendorInventory = GetDefaultVendor();
             if (vendorInventory == null) return;
 
             this.VendorItems.Cache.SetValueExt<TField>(vendorInventory, newValue);
+            this.VendorItems.Cache.SetStatus(vendorInventory, vendorInventory.InventoryID < 0 ? PXEntryStatus.Inserted : PXEntryStatus.Updated);
+            //this.VendorItems.Update(vendorInventory);
         }
 
         private void UpdateMetalGrams(bool? baseMetalType)
@@ -785,7 +794,6 @@ namespace ASCISTARCustom.Inventory.GraphExt
         private void UpdateCommodityCostMetal(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
         {
             if (rowExt == null) throw new PXException(ASCIStarINConstants.Errors.NullInCacheSaveItemFirst);
-            if ((rowExt.UsrActualGRAMSilver == null || rowExt.UsrActualGRAMSilver == 0.0m) && (rowExt.UsrActualGRAMGold == null || rowExt.UsrActualGRAMGold == 0.0m)) return;
 
             var jewelCostBuilder = CreateCostBuilder(rowExt);
             if (jewelCostBuilder == null) return;
@@ -793,19 +801,23 @@ namespace ASCISTARCustom.Inventory.GraphExt
             rowExt.UsrPreciousMetalCost = jewelCostBuilder.CalculatePreciousMetalCost(rowExt.UsrCostingType);
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrPreciousMetalCost>(row, rowExt.UsrPreciousMetalCost);
 
-            cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceTOZ>(row, jewelCostBuilder.PreciousMetalMarketCostPerTOZ);
-            cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceGram>(row, jewelCostBuilder.PreciousMetalMarketCostPerGram);
-
             if (ASCIStarMetalType.IsGold(jewelCostBuilder.INJewelryItem?.MetalType))
             {
-                rowExt.UsrContractIncrement = jewelCostBuilder.CalculateGoldIncrementValue(rowExt);
-                SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrContractIncrement>(rowExt.UsrContractIncrement);
+                //rowExt.UsrContractIncrement = jewelCostBuilder.CalculateGoldIncrementValue(rowExt);
+                //SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrContractIncrement>(rowExt.UsrContractIncrement);
+
+                cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceTOZ>(row, jewelCostBuilder.PreciousMetalMarketCostPerTOZ);
+                cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceGram>(row, jewelCostBuilder.PreciousMetalMarketCostPerGram);
             }
+            rowExt.UsrContractIncrement = jewelCostBuilder.CalculateIncrementValue(rowExt);
+            SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrContractIncrement>(rowExt.UsrContractIncrement);
 
             if (ASCIStarMetalType.IsSilver(jewelCostBuilder.INJewelryItem?.MetalType))
             {
                 cache.SetValueExt<ASCIStarINInventoryItemExt.usrFloor>(row, jewelCostBuilder.Floor);
                 cache.SetValueExt<ASCIStarINInventoryItemExt.usrCeiling>(row, jewelCostBuilder.Ceiling);
+                cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceTOZ>(row, jewelCostBuilder.PreciousMetalAvrSilverMarketCostPerTOZ);
+                cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceGram>(row, jewelCostBuilder.PreciousMetalAvrSilverMarketCostPerTOZ / TOZ2GRAM_31_10348.value);
             }
 
             UpdateCostsCurrentOverridenPOVendorItem(rowExt);
@@ -828,15 +840,15 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
         }
 
-        private void UpdateSurcharge(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
+        private void UpdateSurcharge<TField>(PXCache cache, object row, IASCIStarItemCostSpecDTO rowExt, string metalType) where TField : IBqlField
         {
             if ((rowExt.UsrActualGRAMSilver == null || rowExt.UsrActualGRAMSilver == 0.0m) && (rowExt.UsrActualGRAMGold == null || rowExt.UsrActualGRAMGold == 0.0m)) return;
 
-            var jewelCostBuilder = CreateCostBuilder(rowExt);
-            if (jewelCostBuilder == null) return;
+            //var jewelCostBuilder = CreateCostBuilder(rowExt);
+            //if (jewelCostBuilder == null) return;
 
-            decimal? surchargeValue = jewelCostBuilder.CalculateSurchargeValue(rowExt);
-            cache.SetValueExt<ASCIStarINInventoryItemExt.usrContractSurcharge>(row, surchargeValue);
+            decimal? surchargeValue = ASCIStarCostBuilder.CalculateSurchargeValue(rowExt.UsrContractIncrement, metalType);
+            cache.SetValueExt<TField>(row, surchargeValue);
         }
 
         private void UpdateItemAndPOVendorInventory(PXCache cache, POVendorInventory row, ASCIStarPOVendorInventoryExt rowExt)
@@ -868,19 +880,32 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             if (ASCIStarMetalType.IsGold(jewelCostBuilder.INJewelryItem?.MetalType))
             {
-                rowExt.UsrContractIncrement = jewelCostBuilder.CalculateGoldIncrementValue(rowExt);
+                rowExt.UsrContractIncrement = jewelCostBuilder.CalculateIncrementValue(rowExt);
                 SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrContractIncrement>(rowExt.UsrContractIncrement);
             }
         }
 
         private ASCIStarCostBuilder CreateCostBuilder(IASCIStarItemCostSpecDTO currentRow, POVendorInventory defaultVendor = null)
         {
+            if ((currentRow.UsrActualGRAMSilver == null || currentRow.UsrActualGRAMSilver == 0.0m)
+                && (currentRow.UsrActualGRAMGold == null || currentRow.UsrActualGRAMGold == 0.0m)) return null;
+
             if (defaultVendor == null)
                 defaultVendor = VendorItems.Select()?.FirstTableItems.FirstOrDefault(_ => _.IsDefault == true);
-
             if (defaultVendor == null) return null;
 
-            return new ASCIStarCostBuilder(this.Base).WithInventoryItem(currentRow).WithPOVendorInventory(defaultVendor).WithPricingData(PXTimeZoneInfo.Today).Build();
+            if (this.JewelryItemView.Current == null)
+                this.JewelryItemView.Current = JewelryItemView.Select().TopFirst;
+            if (this.JewelryItemView.Current == null && Base.IsCopyPasteContext) // it is fix of copy-paste bug, missing Precious Metal value
+                this.JewelryItemView.Current = this.JewelryItemView.Cache.Cached.RowCast<ASCIStarINJewelryItem>().FirstOrDefault();
+            if (this.JewelryItemView.Current == null) return null;
+
+            return new ASCIStarCostBuilder(this.Base)
+                        .WithInventoryItem(currentRow)
+                        .WithPOVendorInventory(defaultVendor)
+                        .WithJewelryAttrData(this.JewelryItemView.Current)
+                        .WithPricingData(PXTimeZoneInfo.Today)
+                        .Build();
         }
 
         private void CopyPOVendorInventoryToItem(POVendorInventory row)

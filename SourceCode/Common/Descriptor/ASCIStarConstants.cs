@@ -61,26 +61,41 @@ namespace ASCISTARCustom.Common.Descriptor
             public static readonly string value = "MARKET";
             public MarketClass() : base(value) { }
         }
+
         public class TOZ : PX.Data.BQL.BqlString.Constant<TOZ>
         {
             public static readonly string value = "TOZ";
             public TOZ() : base(value) { }
         }
+
         public class GRAM : PX.Data.BQL.BqlString.Constant<GRAM>
         {
             public static readonly string value = "GRAM";
             public GRAM() : base(value) { }
         }
+
         public class TOZ2GRAM_31_10348 : PX.Data.BQL.BqlDecimal.Constant<TOZ2GRAM_31_10348>
         {
             public static readonly decimal value = 31.10348m;
             public TOZ2GRAM_31_10348() : base(value) { }
         }
 
+        public class DecimalOne : PX.Data.BQL.BqlDecimal.Constant<DecimalOne>
+        {
+            public static readonly decimal value = 1.0m;
+            public DecimalOne() : base(value) { }
+        }
+
         public class DecimalTwo : PX.Data.BQL.BqlDecimal.Constant<DecimalTwo>
         {
             public static readonly decimal value = 2.0m;
             public DecimalTwo() : base(value) { }
+        }
+
+        public class DecimalOneHundred : PX.Data.BQL.BqlDecimal.Constant<DecimalOneHundred>
+        {
+            public static readonly decimal value = 100.0m;
+            public DecimalOneHundred() : base(value) { }
         }
 
         public class CommodityType

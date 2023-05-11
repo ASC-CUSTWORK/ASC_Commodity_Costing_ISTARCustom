@@ -193,17 +193,17 @@ namespace ASCISTARCustom
                     PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory).UsrMarketID = poOrderExt.UsrMarketID;
                 }
 
-                    var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
-                                    .WithInventoryItem(inventoryItemExt)
-                                    .WithPOVendorInventory(poVendorInventory)
-                                    .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
-                                    .Build();
+                var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
+                                .WithInventoryItem(inventoryItemExt)
+                                .WithPOVendorInventory(poVendorInventory)
+                                .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
+                                .Build();
 
-                poLine.CuryUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
+                var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
                     inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost ? ASCIStarCostingType.StandardCost : ASCIStarCostingType.MarketCost);
 
-                cache.SetValueExt<POLine.curyUnitCost>(poLine, poLine.CuryUnitCost);
-                cache.SetValueExt<POLine.unitCost>(poLine, poLine.CuryUnitCost);
+                cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);
+                cache.SetValueExt<POLine.unitCost>(poLine, newUnitCost);
 
                 cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(poLine, jewelryCostProvider.PreciousMetalMarketCostPerTOZ);
                 cache.SetValueExt<ASCIStarPOLineExt.usrBasisValue>(poLine, jewelryCostProvider.BasisValue);

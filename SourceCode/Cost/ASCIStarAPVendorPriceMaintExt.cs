@@ -1,7 +1,6 @@
 ﻿using ASCISTARCustom.Cost.CacheExt;
 using PX.Data;
 using PX.Objects.AP;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -9,9 +8,12 @@ namespace ASCISTARCustom
     {
         #region CacheAttached
 
+        [PXMergeAttributes(Method = MergeMethod.Merge)]
+        [PXUIField(DisplayName = "Basis Price", Visibility = PXUIVisibility.Visible)]
+        protected virtual void _(Events.CacheAttached<APVendorPrice.salesPrice> e) { }
         //[PXMergeAttributes(Method = MergeMethod.Merge)]
         //[PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
-     //   protected void APVendorPrice_UsrCommodityPerGram_CacheAttached(PXCache sender) { }
+        //   protected void APVendorPrice_UsrCommodityPerGram_CacheAttached(PXCache sender) { }
 
         //[PXMergeAttributes(Method = MergeMethod.Append)]
         //[PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, ASCIStarAPVendorPriceExt.usrCommodityPrice>>))]
@@ -27,7 +29,7 @@ namespace ASCISTARCustom
 
         #region Event Handlers
         protected virtual void _(Events.FieldUpdated<APVendorPrice, APVendorPrice.vendorID> e)
-                    { 
+        {
             var row = e.Row;
             if (row == null) return;
             Vendor vendor = Vendor.PK.Find(this.Base, row.VendorID);
