@@ -42,6 +42,7 @@ namespace ASCISTARCustom
         #region UsrCostRollupType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type", Required = true)]
+        [PXDefault()]
         [ASCIStarCostRollupType.List]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
@@ -202,6 +203,23 @@ namespace ASCISTARCustom
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
 
+        #region UsrBasePackagingLaborCost
+        [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPackagingLaborCost>))]
+        public decimal? UsrBasePackagingLaborCost { get; set; }
+        public abstract class usrBasePackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrBasePackagingLaborCost> { }
+        #endregion
+
+        #region UsrPackagingLaborCost
+        [PXDBDecimal(6, MinValue = 0)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Labor For Packaging")]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBasePackagingLaborCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPackagingLaborCost>))]
+        public decimal? UsrPackagingLaborCost { get; set; }
+        public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
+        #endregion
+
         #region UsrLaborCost
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
@@ -285,10 +303,6 @@ namespace ASCISTARCustom
         [PXDecimal]
         public decimal? UsrPreciousMetalCost { get; set; }
         public abstract class usrPreciousMetalCost : PX.Data.BQL.BqlBool.Field<usrPreciousMetalCost> { }
-
-        [PXDecimal]
-        public decimal? UsrPackagingLaborCost { get; set; }
-        public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlBool.Field<usrPackagingLaborCost> { }
 
         [PXDecimal]
         public decimal? UsrDutyCostPct { get; set; }

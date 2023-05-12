@@ -62,7 +62,30 @@ namespace ASCISTARCustom
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
         #endregion
 
-        #region UnitCost
+        #region UsrContractIncrement
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Increment", IsReadOnly = true)]
+        public decimal? UsrContractIncrement { get; set; }
+        public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
+        #endregion
+
+        #region UsrContractSurcharge
+        [PXDBDecimal(6, MinValue = -100, MaxValue = 100)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Total Surcharge %")]
+        public decimal? UsrContractSurcharge { get; set; }
+        public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
+        #endregion
+
+        #region UsrContractLossPct
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
+        [PXUIField(DisplayName = "Total Metal Loss, %")]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrContractLossPct { get; set; }
+        public abstract class usrContractLossPct : PX.Data.BQL.BqlDecimal.Field<usrContractLossPct> { }
+        #endregion
+
+        #region UsrUnitCost
         [PXDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
@@ -119,7 +142,7 @@ namespace ASCISTARCustom
         public abstract class usrOtherMaterialsCost : PX.Data.BQL.BqlDecimal.Field<usrOtherMaterialsCost> { }
         #endregion
 
-        #region OtherCost
+        #region UsrOtherCost
         [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Cost", Visible = false)]
@@ -192,18 +215,6 @@ namespace ASCISTARCustom
         public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
 
         [PXDecimal]
-        public decimal? UsrContractLossPct { get; set; }
-        public abstract class usrContractLossPct : PX.Data.BQL.BqlDecimal.Field<usrContractLossPct> { }
-
-        [PXDecimal]
-        public decimal? UsrContractSurcharge { get; set; }
-        public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
-
-        [PXDecimal]
-        public decimal? UsrContractIncrement { get; set; }
-        public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
-
-        [PXDecimal]
         public decimal? UsrExtCost { get; set; }
         public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
 
@@ -217,8 +228,6 @@ namespace ASCISTARCustom
 
         [PXString]
         public string UsrCommodityType { get; set; }
-
-
         public abstract class usrCommodityType : PX.Data.BQL.BqlDecimal.Field<usrCommodityType> { }
         #endregion
     }

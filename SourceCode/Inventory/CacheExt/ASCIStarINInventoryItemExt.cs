@@ -1,5 +1,6 @@
 using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.DTO.Interfaces;
+using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
 using PX.Data.ReferentialIntegrity.Attributes;
@@ -115,6 +116,25 @@ namespace ASCISTARCustom
         //public abstract class usrContractPrice : PX.Data.BQL.BqlDecimal.Field<usrContractPrice> { }
         //#endregion
 
+     
+
+        #region UsrBasisValue
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXFormula(typeof(Selector<InventoryItem.inventoryID, ASCIStarPOVendorInventoryExt.usrBasisPrice>))]
+        public decimal? UsrBasisValue { get; set; }
+        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
+        #endregion
+
+        #region UsrMarketPriceGram
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Market Price per Gram", IsReadOnly = true)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrMarketPriceGram { get; set; }
+        public abstract class usrMarketPriceGram : PX.Data.BQL.BqlDecimal.Field<usrMarketPriceGram> { }
+        #endregion
+
         #region UsrMarketPriceTOZ
         [PXDecimal(6)]
         [PXUIField(DisplayName = "Market Price per TOZ", IsReadOnly = true)]
@@ -123,14 +143,21 @@ namespace ASCISTARCustom
         public abstract class usrMarketPriceTOZ : PX.Data.BQL.BqlDecimal.Field<usrMarketPriceTOZ> { }
         #endregion
 
-        #region UsrMarketPriceGram
+        #region UsrMatrixPriceGram
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Market Price per Gram ", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Matrix Price per Gram", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        public decimal? UsrMarketPriceGram { get; set; }
-        public abstract class usrMarketPriceGram : PX.Data.BQL.BqlDecimal.Field<usrMarketPriceGram> { }
+        public decimal? UsrMatrixPriceGram { get; set; }
+        public abstract class usrMatrixPriceGram : PX.Data.BQL.BqlDecimal.Field<usrMatrixPriceGram> { }
         #endregion
 
+        #region UsrMatrixPriceTOZ
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Matrix Price per TOZ", IsReadOnly = true)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrMatrixPriceTOZ { get; set; }
+        public abstract class usrMatrixPriceTOZ : PX.Data.BQL.BqlDecimal.Field<usrMatrixPriceTOZ> { }
+        #endregion
         #region UsrContractLossPct
         [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
         [PXUIField(DisplayName = "Metal Loss, %")]
@@ -156,14 +183,14 @@ namespace ASCISTARCustom
 
         #region UsrFloor
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Floor", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Floor", IsReadOnly = true, Visible = false)]
         public decimal? UsrFloor { get; set; }
         public abstract class usrFloor : PX.Data.BQL.BqlDecimal.Field<usrFloor> { }
         #endregion
 
         #region UsrCeiling
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Ceiling", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Ceiling", IsReadOnly = true, Visible = false)]
         public decimal? UsrCeiling { get; set; }
         public abstract class usrCeiling : PX.Data.BQL.BqlDecimal.Field<usrCeiling> { }
         #endregion

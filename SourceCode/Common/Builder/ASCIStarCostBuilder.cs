@@ -124,22 +124,6 @@ namespace ASCISTARCustom.Common.Builder
 
         }
 
-
-
-        /// <summary>
-        /// Calculates the value of gold increment based on the effective base price per ounce, the metal type and the item cost specification.
-        /// </summary>
-        /// <param name="itemCostSpecification">The item cost specification</param>
-        /// <returns>The value of gold increment</returns>
-        public virtual decimal? CalculateIncrementValue(IASCIStarItemCostSpecDTO itemCostSpecification)
-        {
-            var metalFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
-
-            decimal? incrementValue = metalFactor * (1.0m + (itemCostSpecification.UsrContractSurcharge ?? 0.0m) / 100.0m);
-
-            return incrementValue;
-        }
-
         ///<summary>Calculates the precious metal cost for an item based on its cost specification, effective base price per gram and metal type. 
         ///It uses the ASCIStarMetalType class to determine if the metal type is gold or silver and calculates the precious metal cost accordingly. The metal loss and surcharge values are also factored in.</summary>
         ///<param name="costingType">The data transfer object containing the item's cost specifications.</param>
@@ -264,6 +248,15 @@ namespace ASCISTARCustom.Common.Builder
         //        + (kitSpecHdrExt?.UsrLaborCost ?? 0m)
         //        + (kitSpecHdrExt?.UsrDutyCost ?? 0m);
         //}
+
+        public virtual decimal? CalculateIncrementValue(IASCIStarItemCostSpecDTO itemCostSpecification)
+        {
+            var metalFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
+
+            decimal? incrementValue = metalFactor * (1.0m + (itemCostSpecification.UsrContractSurcharge ?? 0.0m) / 100.0m);
+
+            return incrementValue;
+        }
 
         public static decimal? CalculateSurchargeValue(decimal? increment, string metalType)
         {

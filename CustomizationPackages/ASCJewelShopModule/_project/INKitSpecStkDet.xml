@@ -26,4 +26,5 @@
     <Column TableName="INKitSpecStkDet" ColumnName="UsrBaseSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecStkDet" ColumnName="UsrBaseFineSilverGrams" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="INKitSpecStkDet" ColumnName="UsrBasisPrice" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="INKitSpecStkDet" ColumnName="UsrPackagingLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
 </Table>
