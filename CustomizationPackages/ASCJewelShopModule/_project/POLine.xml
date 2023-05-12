@@ -1,0 +1,13 @@
+﻿<Table TableName="POLine">
+    <Column TableName="POLine" ColumnName="UsrPurity" ColumnType="string" AllowNull="True" MaxLength="20" DecimalPrecision="2" DecimalLength="20" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrWeight" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrRatePerGram" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrMaterialCost" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="2" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrMarketPrice" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrContractIncrement" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrActualGRAMGold" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrPricingGRAMGold" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrActualGRAMSilver" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrPricingGRAMSilver" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrBasisValue" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+</Table>
