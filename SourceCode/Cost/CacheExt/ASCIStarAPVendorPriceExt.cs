@@ -103,7 +103,7 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrBasisValue
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
         [PXFormula(typeof(Switch<
             Case<Where<Current<usrCommodity>, Equal<CommodityType.gold>>, APVendorPrice.salesPrice,
             Case<Where<Current<usrCommodity>, Equal<CommodityType.silver>>, Div<Add<APVendorPrice.salesPrice, Add<APVendorPrice.salesPrice, usrMatrixStep>>, ASCIStarConstants.DecimalTwo>>>>))]

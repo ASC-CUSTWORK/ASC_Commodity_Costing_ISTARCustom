@@ -82,14 +82,6 @@ namespace ASCISTARCustom
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
         #endregion
 
-        //#region UsrContractWgt
-        //[PXDBDecimal(6)]
-        //[PXUIField(DisplayName = "Contract Wgt (g)")]
-        //[PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        //public decimal? UsrContractWgt { get; set; }
-        //public abstract class usrContractWgt : PX.Data.BQL.BqlDecimal.Field<usrContractWgt> { }
-        //#endregion
-
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
@@ -108,21 +100,11 @@ namespace ASCISTARCustom
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion
 
-        //#region UsrContractPrice
-        //[PXDBDecimal(6)]
-        //[PXUIField(DisplayName = "Contract Price")]
-        //[PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        //public decimal? UsrContractPrice { get; set; }
-        //public abstract class usrContractPrice : PX.Data.BQL.BqlDecimal.Field<usrContractPrice> { }
-        //#endregion
-
-     
-
         #region UsrBasisValue
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<InventoryItem.inventoryID, ASCIStarPOVendorInventoryExt.usrBasisPrice>))]
+        [PXFormula(typeof(Selector<InventoryItem.inventoryID, ASCIStarPOVendorInventoryExt.usrBasisValue>))]
         public decimal? UsrBasisValue { get; set; }
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
@@ -158,6 +140,7 @@ namespace ASCISTARCustom
         public decimal? UsrMatrixPriceTOZ { get; set; }
         public abstract class usrMatrixPriceTOZ : PX.Data.BQL.BqlDecimal.Field<usrMatrixPriceTOZ> { }
         #endregion
+
         #region UsrContractLossPct
         [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
         [PXUIField(DisplayName = "Metal Loss, %")]

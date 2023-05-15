@@ -28,7 +28,7 @@ namespace ASCISTARCustom.Cost
 
         #region CacheAttached
         [PXMergeAttributes(Method = MergeMethod.Merge)]
-        [PXUIField(DisplayName = "Basis Price", Visibility = PXUIVisibility.Visible)]
+        [PXUIField(DisplayName = "Basis Floor", Visibility = PXUIVisibility.Visible)]
         protected virtual void _(Events.CacheAttached<APVendorPrice.salesPrice> e) { }
 
         [PXMergeAttributes(Method = MergeMethod.Merge)]

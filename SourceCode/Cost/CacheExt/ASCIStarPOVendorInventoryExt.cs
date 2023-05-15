@@ -59,7 +59,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrCommodityVendorPrice
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Vendor Price")]
+        [PXUIField(DisplayName = "Custom Vendor Price")]
         public decimal? UsrCommodityVendorPrice { get; set; }
         public abstract class usrCommodityVendorPrice : PX.Data.BQL.BqlDecimal.Field<usrCommodityVendorPrice> { }
         #endregion
@@ -70,6 +70,14 @@ namespace ASCISTARCustom.Cost.CacheExt
         [PXUIField(DisplayName = "Basis Price", IsReadOnly = true)]
         public decimal? UsrBasisPrice { get; set; }
         public abstract class usrBasisPrice : PX.Data.BQL.BqlDecimal.Field<usrBasisPrice> { }
+        #endregion
+
+        #region UsrBasisValue
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
+        public decimal? UsrBasisValue { get; set; }
+        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
 
         #region UsrContractIncrement
