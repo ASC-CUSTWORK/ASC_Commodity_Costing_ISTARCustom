@@ -83,7 +83,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
             ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
-            e.NewValue = classExt.UsrCostingType ?? ASCIStarCostingType.MarketCost;
+            e.NewValue = classExt?.UsrCostingType ?? ASCIStarCostingType.MarketCost;
         }
 
         protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCIStarINInventoryItemExt.usrCostRollupType> e)
@@ -92,7 +92,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
             ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
-            e.NewValue = classExt.UsrCostRollupType ?? ASCIStarCostRollupType.Blank;
+            e.NewValue = classExt?.UsrCostRollupType ?? ASCIStarCostRollupType.Blank;
         }
 
         protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrMatrixStep> e)
