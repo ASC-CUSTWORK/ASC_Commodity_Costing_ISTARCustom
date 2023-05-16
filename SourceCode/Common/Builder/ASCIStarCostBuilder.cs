@@ -41,7 +41,7 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? BasisValue { get; private set; } = decimal.Zero;
         #endregion 
 
-        private readonly PXGraph _graph;
+        private PXGraph _graph;
 
         #region ctor
         public ASCIStarCostBuilder(PXGraph graph)
@@ -82,20 +82,13 @@ namespace ASCISTARCustom.Common.Builder
             PricingDate = pricingData;
             return this;
         }
-        public ASCIStarCostBuilder Build()
-        {
-            Initialize();
-            return this;
-        }
-        #endregion
-
-        public virtual void Initialize()
+        public virtual ASCIStarCostBuilder Build()
         {
             if (INJewelryItem == null || INJewelryItem.MetalType == null)
             {
                 INJewelryItem = GetASCIStarINJewelryItem(ItemCostSpecification.InventoryID);
 
-                if (INJewelryItem == null || INJewelryItem.MetalType == null) return;
+                if (INJewelryItem == null || INJewelryItem.MetalType == null) return null;
             }
 
             if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
@@ -103,7 +96,7 @@ namespace ASCISTARCustom.Common.Builder
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
                 PreciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
 
-            if (PreciousMetalItem == null) return;
+            if (PreciousMetalItem == null) return null;
 
             PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID);
             PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
@@ -122,7 +115,10 @@ namespace ASCISTARCustom.Common.Builder
             }
             AvrPreciousMetalUnitCost = GetPresiousMetalAvrCost();
 
+            return this;
         }
+        #endregion
+
 
         ///<summary>Calculates the precious metal cost for an item based on its cost specification, effective base price per gram and metal type. 
         ///It uses the ASCIStarMetalType class to determine if the metal type is gold or silver and calculates the precious metal cost accordingly. The metal loss and surcharge values are also factored in.</summary>
@@ -342,8 +338,8 @@ namespace ASCISTARCustom.Common.Builder
         private ASCIStarINJewelryItem GetASCIStarINJewelryItem(int? inventoryID)
             => PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>.Select(_graph, inventoryID);
 
-        private InventoryItem GetInventoryItemByInvenctoryCD(string inventoryCD)
-            => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
+        private InventoryItem GetInventoryItemByInvenctoryCD(string inventoryCD) =>
+            SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
 
         public static APVendorPrice GetAPVendorPrice(PXGraph graph, int? vendorID, int? inventoryID, string UOM, DateTime effectiveDate)
             => SelectFrom<APVendorPrice>

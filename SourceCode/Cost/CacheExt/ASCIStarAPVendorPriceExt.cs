@@ -88,14 +88,14 @@ namespace ASCISTARCustom.Cost.CacheExt
         #endregion
 
         #region UsrFloor
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Floor", IsReadOnly = true)]
         public decimal? UsrFloor { get; set; }
         public abstract class usrFloor : PX.Data.BQL.BqlDecimal.Field<usrFloor> { }
         #endregion
 
         #region UsrCeiling
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Ceiling", IsReadOnly = true)]
         public decimal? UsrCeiling { get; set; }
         public abstract class usrCeiling : PX.Data.BQL.BqlDecimal.Field<usrCeiling> { }
@@ -111,12 +111,12 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
 
-        #region UsrIncrementPerGram
-        [PXDecimal(6)]
-        [PXUIField(DisplayName = "Increment/G", Visible = false, Enabled = false)]
-        public decimal? UsrIncrementPerGram { get; set; }
-        public abstract class usrIncrementPerGram : PX.Data.BQL.BqlDecimal.Field<usrIncrementPerGram> { }
-        #endregion
+        //#region UsrIncrementPerGram
+        //[PXDecimal(6)]
+        //[PXUIField(DisplayName = "Increment/G", Visible = false, Enabled = false)]
+        //public decimal? UsrIncrementPerGram { get; set; }
+        //public abstract class usrIncrementPerGram : PX.Data.BQL.BqlDecimal.Field<usrIncrementPerGram> { }
+        //#endregion
 
         #region UsrFormAPI
         [PXDBBool]

@@ -104,7 +104,6 @@ namespace ASCISTARCustom
         [PXDecimal(6)]
         [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<InventoryItem.inventoryID, ASCIStarPOVendorInventoryExt.usrBasisValue>))]
         public decimal? UsrBasisValue { get; set; }
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion

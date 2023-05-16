@@ -24,7 +24,7 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrMarketID
         [PXDBInt()]
-        [PXUIField(DisplayName = "Market", Required = true)]
+        [PXUIField(DisplayName = "Market")]
         [PXSelector(typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass,
                 On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
@@ -82,7 +82,6 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrContractIncrement
         [PXDBDecimal(6)]
-      //  [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Market Increment")]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
@@ -94,6 +93,20 @@ namespace ASCISTARCustom.Cost.CacheExt
         [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMatrixStep { get; set; }
         public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
+        #endregion
+
+        #region UsrFloor
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Floor", IsReadOnly = true)]
+        public decimal? UsrFloor { get; set; }
+        public abstract class usrFloor : PX.Data.BQL.BqlDecimal.Field<usrFloor> { }
+        #endregion
+
+        #region UsrCeiling
+        [PXDBDecimal(6)]
+        [PXUIField(DisplayName = "Ceiling", IsReadOnly = true)]
+        public decimal? UsrCeiling { get; set; }
+        public abstract class usrCeiling : PX.Data.BQL.BqlDecimal.Field<usrCeiling> { }
         #endregion
 
         #region UsrContractLossPct
