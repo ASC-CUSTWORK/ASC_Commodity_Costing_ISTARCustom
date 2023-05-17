@@ -131,6 +131,7 @@ namespace ASCISTARCustom
 
 
         #endregion
+     
         #region Methods
         private void UpdateFloorCeilingFields(PXCache cache, APVendorPrice row)
         {

@@ -1,5 +1,4 @@
-﻿using ASCISTARCustom.Common.DTO.Interfaces;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
+﻿using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
