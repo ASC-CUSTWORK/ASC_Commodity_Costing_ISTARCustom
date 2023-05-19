@@ -10,8 +10,10 @@ using PX.CS;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
+using PX.Data.EP;
 using PX.Objects.AP;
 using PX.Objects.CR.Standalone;
+using PX.Objects.EP;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System.Collections;
@@ -60,16 +62,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             return adapter.Get();
         }
 
-        public PXAction<InventoryItem> SendEmailToVendor;
-        [PXUIField(DisplayName = "Update Metal Cost", MapEnableRights = PXCacheRights.Select, MapViewRights = PXCacheRights.Select)]
-        [PXButton]
-        public virtual void sendEmailToVendor()
-        {
-            if (this.Base.Item.Current == null) return;
-
-
-
-        }
+       
         #endregion Action
 
         #region Event Handlers
@@ -970,6 +963,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
         {
             return SelectFrom<CSAttributeDetail>.Where<CSAttributeDetail.attributeID.IsEqual<@P.AsString>>.View.Select(this.Base, attributeID)?.FirstTableItems.ToList();
         }
+
+     
         #endregion Helper Methods
     }
 }

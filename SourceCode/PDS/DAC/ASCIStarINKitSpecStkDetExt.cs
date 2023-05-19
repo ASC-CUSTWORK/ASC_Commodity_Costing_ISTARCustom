@@ -169,6 +169,14 @@ namespace ASCISTARCustom
         public abstract class usrBasisPrice : PX.Data.BQL.BqlDecimal.Field<usrBasisPrice> { }
         #endregion
 
+        #region UsrBasisValue
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
+        public decimal? UsrBasisValue { get; set; }
+        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
+        #endregion
+
         #region UsrBaseFabricationCost
         [PXDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]

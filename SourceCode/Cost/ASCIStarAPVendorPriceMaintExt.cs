@@ -33,7 +33,7 @@ namespace ASCISTARCustom
         #endregion CacheAttached
 
         #region Event Handlers
-        protected virtual void _(Events.FieldUpdating<APVendorPrice, APVendorPrice.vendorID> e)
+        protected virtual void _(Events.FieldUpdated<APVendorPrice, APVendorPrice.vendorID> e)
         {
             var row = e.Row;
             if (row == null) return;
