@@ -108,7 +108,7 @@ namespace ASCISTARCustom.Cost
                             .WithPOVendorInventory(poVendorInventory)
                             .Build();
             if (jewelryCostProvider == null) return;
-            jewelryCostProvider.CalculatePreciousMetalCost(ASCIStarCostingType.ContractCost);
+            jewelryCostProvider.CalculatePreciousMetalCost(CostingType.ContractCost);
 
             cache.SetValueExt<ASCIStarAPVendorPriceExt.usrFloor>(row, jewelryCostProvider.Floor);
             cache.SetValueExt<ASCIStarAPVendorPriceExt.usrCeiling>(row, jewelryCostProvider.Ceiling);

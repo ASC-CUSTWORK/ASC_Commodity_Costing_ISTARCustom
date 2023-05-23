@@ -160,7 +160,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrPackagingLaborCost
         [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Labor for packaging")]
+        [PXUIField(DisplayName = "Labor packaging")]
         public decimal? UsrPackagingLaborCost { get; set; }
         public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
         #endregion

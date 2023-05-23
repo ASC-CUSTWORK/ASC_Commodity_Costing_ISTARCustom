@@ -1,7 +1,6 @@
 ﻿using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
-using static ASCISTARCustom.Inventory.Descriptor.Constants.ASCIStarINConstants;
 
 namespace ASCISTARCustom.Inventory.Descriptor.Constants
 {

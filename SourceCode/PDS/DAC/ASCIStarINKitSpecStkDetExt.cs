@@ -1,10 +1,10 @@
 using ASCISTARCustom.Common.DTO.Interfaces;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.PDS.Descriptor;
 using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -33,7 +33,7 @@ namespace ASCISTARCustom
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [ASCIStarCostingType.List]
+        [CostingType.List]
         [PXUIField(DisplayName = "Costing Type")]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
@@ -43,7 +43,7 @@ namespace ASCISTARCustom
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type", Required = true)]
         [PXDefault()]
-        [ASCIStarCostRollupType.List]
+        [CostRollupType.List]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }

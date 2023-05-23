@@ -134,31 +134,31 @@ namespace ASCISTARCustom.Common.Builder
             {
                 switch (costingType ?? ItemCostSpecification.UsrCostingType)
                 {
-                    case ASCIStarCostingType.ContractCost:
+                    case CostingType.ContractCost:
                         preciousMetalCost = PreciousMetalContractCostPerTOZ;
                         break;
-                    case ASCIStarCostingType.MarketCost:
+                    case CostingType.MarketCost:
                         preciousMetalCost = PreciousMetalMarketCostPerTOZ;
                         break;
-                    case ASCIStarCostingType.StandardCost:
+                    case CostingType.StandardCost:
                         return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrFabricationCost - ItemCostSpecification.UsrOtherMaterialsCost - ItemCostSpecification.UsrPackagingCost;
 
                     default: break;
                 }
-                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0m);
+                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0.0m);
 
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
             {
                 switch (costingType ?? ItemCostSpecification.UsrCostingType)
                 {
-                    case ASCIStarCostingType.ContractCost:
+                    case CostingType.ContractCost:
                         PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalContractCostPerTOZ, ItemCostSpecification.UsrMatrixStep);
                         break;
-                    case ASCIStarCostingType.MarketCost:
+                    case CostingType.MarketCost:
                         PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.UsrMatrixStep); ;
                         break;
-                    case ASCIStarCostingType.StandardCost:
+                    case CostingType.StandardCost:
                         return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrFabricationCost - ItemCostSpecification.UsrOtherMaterialsCost - ItemCostSpecification.UsrPackagingCost;
 
                     default: break;
@@ -183,68 +183,6 @@ namespace ASCISTARCustom.Common.Builder
             return result.SalesPrice;
         }
 
-        //public static decimal? CalculateUnitCost(IASCIStarItemCostSpecDTO itemCostSpecification)
-        //{
-        //    if (itemCostSpecification == null) return 0;
-
-        //    return (itemCostSpecification?.UsrPreciousMetalCost ?? 0m)
-        //         + (itemCostSpecification?.UsrOtherMaterialsCost ?? 0m)
-        //         + (itemCostSpecification?.UsrFabricationCost ?? 0m)
-        //         + (itemCostSpecification?.UsrPackagingCost ?? 0m)
-        //         + (itemCostSpecification?.UsrPackagingLaborCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateEstLandedCost(IASCIStarItemCostSpecDTO itemCostSpecification)
-        //{
-        //    return (itemCostSpecification?.UsrUnitCost ?? 0m)
-        //        + (itemCostSpecification?.UsrHandlingCost ?? 0m)
-        //        + (itemCostSpecification?.UsrFreightCost ?? 0m)
-        //        + (itemCostSpecification?.UsrLaborCost ?? 0m)
-        //        + (itemCostSpecification?.UsrDutyCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateUnitCost(ASCIStarItemCostSpecDTO costSpecDTO)
-        //{
-        //    return (costSpecDTO?.PreciousMetalCost ?? 0m)
-        //        + (costSpecDTO?.MaterialsCost ?? 0m)
-        //        + (costSpecDTO?.FabricationCost ?? 0m)
-        //        + (costSpecDTO?.PackagingCost ?? 0m)
-        //        + (costSpecDTO?.PackagingLaborCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
-        //{
-        //    return (costSpecDTO?.UnitCost ?? 0m)
-        //        + (costSpecDTO?.HandlingCost ?? 0m)
-        //        + (costSpecDTO?.FreightCost ?? 0m)
-        //        + (costSpecDTO?.LaborCost ?? 0m)
-        //        + (costSpecDTO?.DutyCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateUnitCost(INKitSpecHdr kitSpecHdr)
-        //{
-        //    if (kitSpecHdr == null) return 0;
-
-        //    var kitSpecHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(kitSpecHdr);
-        //    return (kitSpecHdrExt?.UsrPreciousMetalCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrOtherMaterialsCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrFabricationCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrPackagingCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrPackagingLaborCost ?? 0m);
-        //}
-
-
-
-        //public static decimal? CalculateLandedCost(INKitSpecHdr kitSpecHdr)
-        //{
-        //    var kitSpecHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(kitSpecHdr);
-        //    return (kitSpecHdrExt?.UsrUnitCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrHandlingCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrFreightCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrLaborCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrDutyCost ?? 0m);
-        //}
-
         public virtual decimal? CalculateIncrementValue(IASCIStarItemCostSpecDTO itemCostSpecification)
         {
             var metalFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
@@ -257,13 +195,7 @@ namespace ASCISTARCustom.Common.Builder
         public static decimal? CalculateSurchargeValue(decimal? increment, string metalType)
         {
             decimal convFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(metalType);
-            decimal? tempValue = increment / convFactor;
-
-            decimal? surchargeNewValue = (tempValue - 1.0m) * 100.0m;
-
-            //decimal? tempValue = increment * TOZ2GRAM_31_10348.value;
-
-            //decimal? surchargeNewValue = (tempValue - 1.0m) * 100.0m;
+            decimal? surchargeNewValue = (increment / convFactor - 1.0m) * 100.0m;
 
             return surchargeNewValue;
         }

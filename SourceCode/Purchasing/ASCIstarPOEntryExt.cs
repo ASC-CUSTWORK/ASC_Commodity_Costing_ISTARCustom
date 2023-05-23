@@ -14,6 +14,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -195,7 +196,7 @@ namespace ASCISTARCustom
                                 .Build();
 
                 var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
-                    inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost ? ASCIStarCostingType.StandardCost : ASCIStarCostingType.MarketCost);
+                    inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
 
                 // cache.SetValueExt<POLine.manualPrice>(poLine, true);
                 cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);

@@ -85,8 +85,8 @@ namespace ASCISTARCustom
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
-        [ASCIStarCostingType.List]
-        [PXDefault(ASCIStarCostingType.ContractCost, PersistingCheck = PXPersistingCheck.Nothing)]
+        [CostingType.List]
+        [PXDefault(CostingType.ContractCost, PersistingCheck = PXPersistingCheck.Nothing)]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion
@@ -94,8 +94,8 @@ namespace ASCISTARCustom
         #region UsrCostRollupType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type")]
-        [ASCIStarCostRollupType.List]
-        [PXDefault(ASCIStarCostRollupType.Blank, PersistingCheck = PXPersistingCheck.Nothing)]
+        [CostRollupType.List]
+        [PXDefault(CostRollupType.Blank, PersistingCheck = PXPersistingCheck.Nothing)]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion
@@ -265,6 +265,14 @@ namespace ASCISTARCustom
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
 
+        #region UsrPackagingLaborCost
+        [PXDBDecimal(6, MinValue = 0)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Labor Packaging")]
+        public decimal? UsrPackagingLaborCost { get; set; }
+        public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
+        #endregion
+
         #region UsrUnitCost
         [PXDecimal(6)]
         [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
@@ -290,13 +298,7 @@ namespace ASCISTARCustom
         public abstract class usrCommodityType : PX.Data.BQL.BqlString.Field<usrCommodityType> { }
         #endregion
 
-        #region UsrPackagingLaborCost
-        [PXDBDecimal(6, MinValue = 0)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Labor For Packaging")]
-        public decimal? UsrPackagingLaborCost { get; set; }
-        public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
-        #endregion
+
 
         #region Implementation Unneeded Interface's fields
         [PXDecimal(6)]

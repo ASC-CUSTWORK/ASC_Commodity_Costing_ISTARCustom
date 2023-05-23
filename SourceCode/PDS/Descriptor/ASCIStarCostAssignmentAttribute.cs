@@ -1,7 +1,7 @@
-﻿using ASCISTARCustom.Inventory.Descriptor.Constants;
-using ASCISTARCustom.PDS.Interfaces;
+﻿using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.PDS.Descriptor
 {
@@ -125,55 +125,55 @@ namespace ASCISTARCustom.PDS.Descriptor
             var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(currentRow);
             switch (rollupType)
             {
-                case ASCIStarCostRollupType.PreciousMetal:
+                case CostRollupType.PreciousMetal:
                     {
                         var result = rowExt.UsrPreciousMetalCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPreciousMetalCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Fabrication:
+                case CostRollupType.Fabrication:
                     {
                         var result = rowExt.UsrFabricationCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrFabricationCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Packaging:
+                case CostRollupType.Packaging:
                     {
                         var result = rowExt.UsrPackagingCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.PackagingForLabor:
+                case CostRollupType.PackagingForLabor:
                     {
                         var result = rowExt.UsrPackagingLaborCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingLaborCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Labor:
+                case CostRollupType.Labor:
                     {
                         var result = rowExt.UsrLaborCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrLaborCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Materials:
+                case CostRollupType.Materials:
                     {
                         var result = rowExt.UsrOtherMaterialsCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Freight:
+                case CostRollupType.Freight:
                     {
                         var result = rowExt.UsrFreightCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrFreightCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Handling:
+                case CostRollupType.Handling:
                     {
                         var result = rowExt.UsrHandlingCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrHandlingCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Duty:
+                case CostRollupType.Duty:
                     {
                         var result = rowExt.UsrDutyCost + value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrDutyCost>(currentRow, result);
@@ -196,55 +196,55 @@ namespace ASCISTARCustom.PDS.Descriptor
             var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(currentRow);
             switch (rollupType)
             {
-                case ASCIStarCostRollupType.PreciousMetal:
+                case CostRollupType.PreciousMetal:
                     {
                         var result = rowExt.UsrPreciousMetalCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPreciousMetalCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Fabrication:
+                case CostRollupType.Fabrication:
                     {
                         var result = rowExt.UsrFabricationCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrFabricationCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Packaging:
+                case CostRollupType.Packaging:
                     {
                         var result = rowExt.UsrPackagingCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.PackagingForLabor:
+                case CostRollupType.PackagingForLabor:
                     {
                         var result = rowExt.UsrPackagingLaborCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingLaborCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Labor:
+                case CostRollupType.Labor:
                     {
                         var result = rowExt.UsrLaborCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrLaborCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Materials:
+                case CostRollupType.Materials:
                     {
                         var result = rowExt.UsrOtherMaterialsCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Freight:
+                case CostRollupType.Freight:
                     {
                         var result = rowExt.UsrFreightCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrFreightCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Handling:
+                case CostRollupType.Handling:
                     {
                         var result = rowExt.UsrHandlingCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrHandlingCost>(currentRow, result);
                     }
                     break;
-                case ASCIStarCostRollupType.Duty:
+                case CostRollupType.Duty:
                     {
                         var result = rowExt.UsrDutyCost - value;
                         cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrDutyCost>(currentRow, result);
@@ -258,37 +258,37 @@ namespace ASCISTARCustom.PDS.Descriptor
         {
             switch (rollupType)
             {
-                case ASCIStarCostRollupType.PreciousMetal:
+                case CostRollupType.PreciousMetal:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPreciousMetalCost>(currentRow, 0m);
                     break;
-                case ASCIStarCostRollupType.Fabrication:
+                case CostRollupType.Fabrication:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrFabricationCost>(currentRow, 0m);
 
                     break;
-                case ASCIStarCostRollupType.Packaging:
+                case CostRollupType.Packaging:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingCost>(currentRow, 0m);
 
                     break;
-                case ASCIStarCostRollupType.PackagingForLabor:
+                case CostRollupType.PackagingForLabor:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrPackagingLaborCost>(currentRow, 0m);
                     break;
-                case ASCIStarCostRollupType.Labor:
+                case CostRollupType.Labor:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrLaborCost>(currentRow, 0m);
 
                     break;
-                case ASCIStarCostRollupType.Materials:
+                case CostRollupType.Materials:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>(currentRow, 0m);
 
                     break;
-                case ASCIStarCostRollupType.Freight:
+                case CostRollupType.Freight:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrFreightCost>(currentRow, 0m);
 
                     break;
-                case ASCIStarCostRollupType.Handling:
+                case CostRollupType.Handling:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrHandlingCost>(currentRow, 0m);
 
                     break;
-                case ASCIStarCostRollupType.Duty:
+                case CostRollupType.Duty:
                     cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrDutyCost>(currentRow, 0m);
                     break;
                 default:
