@@ -3,6 +3,7 @@ using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.DTO.Interfaces;
 using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Cost.CacheExt;
+using ASCISTARCustom.Cost.DAC;
 using ASCISTARCustom.Inventory.DAC;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Common;
@@ -42,11 +43,20 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
         public SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View JewelryItemView;
 
+        public SelectFrom<ASCIStarINVendorDuty>.Where<ASCIStarINVendorDuty.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View VendorDutyView;
+
         [PXFilterable]
         [PXCopyPasteHiddenView(IsHidden = true)]
         public SelectFrom<ASCIStarINCompliance>.Where<ASCIStarINCompliance.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View ComplianceView;
 
         #endregion Selects
+
+        #region Cache Attached
+        [PXMergeAttributes(Method = MergeMethod.Replace)]
+        [PXDBString(30, IsUnicode = true, InputMask = "####.##.####")]
+        [PXSelector(typeof(SearchFor<ASCIStarAPTariffHTSCode.hSTariffCode>))]
+        protected virtual void _(Events.CacheAttached<InventoryItem.hSTariffCode> e) { }
+        #endregion
 
         #region Actions
 
@@ -531,7 +541,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
         {
             if (e.Row == null) return;
 
-            e.NewValue = (decimal?)e.NewValue / 100;
+            //if (!e.ExternalCall)
+            //    e.NewValue = (decimal?)e.NewValue / 100;
 
             if ((decimal?)e.NewValue < 0.0m)
             {
@@ -543,7 +554,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
         protected virtual void _(Events.FieldVerifying<POVendorInventory, ASCIStarPOVendorInventoryExt.usrContractLossPct> e)
         {
             if (e.Row == null) return;
-            e.NewValue = (decimal?)e.NewValue / 100;
+            //  e.NewValue = (decimal?)e.NewValue / 100;
         }
 
         protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrIsOverrideVendor> e)
@@ -677,6 +688,15 @@ namespace ASCISTARCustom.Inventory.GraphExt
         }
         #endregion Compliance Events
 
+        #region VendorDuty Events
+        protected virtual void _(Events.FieldUpdated<ASCIStarINVendorDuty, ASCIStarINVendorDuty.vendorID> e)
+        {
+            if (e.Row == null) return;
+
+            e.Cache.RaiseFieldDefaulting<ASCIStarINVendorDuty.countryID>(e.Row, out object countryID);
+            e.Cache.SetValueExt<ASCIStarINVendorDuty.countryID>(e.Row, countryID);
+        }
+        #endregion
         #endregion Event Handlers
 
         #region Helper Methods

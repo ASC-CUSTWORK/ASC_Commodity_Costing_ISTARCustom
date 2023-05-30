@@ -1,11 +1,8 @@
-﻿using ASCISTARCustom.Common.Descriptor;
-using PX.Data;
-using PX.Objects.AP;
+﻿using PX.Data;
 using PX.Objects.PO;
 using System;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.Purchasing.DAC
 {
     [Serializable]
     [PXCacheName("ASC POLine Extension")]

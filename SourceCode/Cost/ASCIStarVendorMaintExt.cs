@@ -2,9 +2,7 @@ using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Helper.Extensions;
 using ASCISTARCustom.Cost.CacheExt;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
-using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
@@ -26,7 +24,7 @@ namespace ASCISTARCustom.Cost
                                     Where<APVendorPrice.vendorID, Equal<Current<Vendor.bAccountID>>,
                                         And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>,
                             OrderBy<Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
-        #endregion 
+        #endregion
 
         #region CacheAttached
         [PXMergeAttributes(Method = MergeMethod.Merge)]
@@ -50,7 +48,7 @@ namespace ASCISTARCustom.Cost
             if (this.Base.BAccount.Current.BAccountID > 0)
                 e.NewValue = this.Base.BAccount.Current.BAccountID;
             else
-                throw new PXException("Save Vendor first!");
+                throw new PXException("Save Vendor first and then add Costing information.");
         }
 
         protected virtual void _(Events.RowSelected<VendorR> e)
@@ -91,6 +89,7 @@ namespace ASCISTARCustom.Cost
         }
         #endregion
 
+        #region Methods
         protected virtual void UpdateFloorCellingFields(PXCache cache, APVendorPrice row)
         {
             var rowExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(row);
@@ -113,7 +112,7 @@ namespace ASCISTARCustom.Cost
             cache.SetValueExt<ASCIStarAPVendorPriceExt.usrFloor>(row, jewelryCostProvider.Floor);
             cache.SetValueExt<ASCIStarAPVendorPriceExt.usrCeiling>(row, jewelryCostProvider.Ceiling);
         }
-
+        #endregion
 
     }
 }

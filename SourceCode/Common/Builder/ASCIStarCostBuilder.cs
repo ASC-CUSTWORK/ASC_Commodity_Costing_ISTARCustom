@@ -2,7 +2,6 @@
 using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
@@ -11,8 +10,6 @@ using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Common.Builder
@@ -20,6 +17,8 @@ namespace ASCISTARCustom.Common.Builder
     public class ASCIStarCostBuilder
     {
         #region Properies
+        private PXGraph _graph;
+
         private string Currency { get; set; } = "USD";
         private bool IsEnabledOverrideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
@@ -41,14 +40,10 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? BasisValue { get; private set; } = decimal.Zero;
         #endregion 
 
-        private PXGraph _graph;
-
-        #region ctor
         public ASCIStarCostBuilder(PXGraph graph)
         {
             _graph = graph;
         }
-        #endregion
 
         #region Chain Method Calls
         public ASCIStarCostBuilder WithInventoryItem(IASCIStarItemCostSpecDTO inventory)

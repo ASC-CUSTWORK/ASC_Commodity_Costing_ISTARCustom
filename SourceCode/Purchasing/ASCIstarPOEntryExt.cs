@@ -1,6 +1,8 @@
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.Purchasing.DAC;
+using ASCISTARCustom.Purchasing.Helpers;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
@@ -22,25 +24,11 @@ namespace ASCISTARCustom
     {
         public static bool IsActive() => true;
 
-        //#region DataViews
-        //PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Required<INKitSpecHdr.kitInventoryID>>>> CostItem;
-
-        //[PXCopyPasteHiddenView]
-        //public PXSelect<POVendorInventory,
-        //    Where<POVendorInventory.vendorID, Equal<Current<POOrder.vendorID>>,
-        //        And<POVendorInventory.inventoryID, Equal<Current<POLine.inventoryID>>>>> POVendorInventoryView;
-
         [PXCopyPasteHiddenView]
         public FbqlSelect<SelectFromBase<InventoryItemCurySettings,
           TypeArrayOf<IFbqlJoin>.Empty>.Where<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>.FilledWith<And<Compare<InventoryItemCurySettings.inventoryID,
               Equal<P.AsInt>>>>>.And<BqlOperand<InventoryItemCurySettings.curyID, IBqlString>.IsEqual<BqlField<AccessInfo.baseCuryID, IBqlString>.AsOptional>>>,
           InventoryItemCurySettings>.View ASCIStarItemCurySettings;
-        //PXSelect<APVendorPrice,
-        //   Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
-        //       And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-        //           And<APVendorPrice.effectiveDate, Equal<Required<APVendorPrice.effectiveDate>>>>>> vendorPrice;
-
-        //#endregion
 
         #region Actions
         public PXAction<POOrder> emailPurchaseOrder;
@@ -49,8 +37,7 @@ namespace ASCISTARCustom
         public virtual IEnumerable EmailPurchaseOrder(PXAdapter adapter, [PXString] string notificationCD = null)
         {
             bool massProcess = adapter.MassProcess;
-            // Acuminator disable once PX1008 LongOperationDelegateSynchronousExecution [Justification]
-            // TODO: DEV NOTE: This long operation should be modifyed to fit Acumatica standarts 
+
             PXLongOperation.StartOperation(Base.UID, () =>
             {
                 bool flag = false;
@@ -95,7 +82,7 @@ namespace ASCISTARCustom
                     }
                 }
                 if (flag)
-                    throw new PXOperationCompletedWithErrorException("At least one item has not been processed.");
+                    throw new PXOperationCompletedWithErrorException(ASCIStarPOMessages.Errors.ProcessingWithErrorMessages);
             });
             return adapter.Get<POOrder>();
         }
@@ -113,14 +100,6 @@ namespace ASCISTARCustom
         #endregion
 
         #region Event Handlers
-
-        //protected virtual void _(Events.FieldVerifying<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
-        //{
-        //    var row = e.Row;
-        //    if (row == null) return;
-
-        //    if ((DateTime?)e.NewValue > DateTime.Today || e.NewValue == null) throw new PXSetPropertyException<ASCIStarPOOrderExt.usrPricingDate>("Pricing date can not be from future or empty!");
-        //}
 
         protected virtual void _(Events.FieldUpdated<POOrder, POOrder.vendorID> e)
         {
@@ -178,7 +157,7 @@ namespace ASCISTARCustom
             if (poOrderExt == null || poOrderExt.UsrMarketID == null)
             {
                 this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null,
-                    new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
+                    new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>(ASCIStarPOMessages.Errors.MarketEmpty, PXErrorLevel.RowError));
                 return;
             }
 
