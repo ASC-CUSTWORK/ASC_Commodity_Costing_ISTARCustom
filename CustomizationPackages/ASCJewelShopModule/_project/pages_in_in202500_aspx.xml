@@ -62,7 +62,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit49" />
                                 <Prop Key="DataField" Value="UsrContractSurcharge" />
                                 <Prop Key="CommitChanges" Value="True" />
-                                <Prop Key="DisplayFormat" Value="P" />
+                                <Prop Key="DisplayFormat" Value="##0.00'%" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -71,7 +71,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit48" />
                                 <Prop Key="DataField" Value="UsrContractLossPct" />
                                 <Prop Key="CommitChanges" Value="True" />
-                                <Prop Key="DisplayFormat" Value="P" />
+                                <Prop Key="DisplayFormat" Value="##0.00'%" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -244,7 +244,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit61" />
                                 <Prop Key="DataField" Value="UsrDutyCostPct" />
                                 <Prop Key="CommitChanges" Value="True" />
-                                <Prop Key="DisplayFormat" Value="P" />
+                                <Prop Key="DisplayFormat" Value="##0.00'%" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -549,7 +549,7 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
-                    <Prop Key="DisplayFormat" Value="P" />
+                    <Prop Key="DisplayFormat" Value="##0.00'%" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
@@ -558,7 +558,7 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
-                    <Prop Key="DisplayFormat" Value="P" />
+                    <Prop Key="DisplayFormat" Value="##0.00'%" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
@@ -1006,6 +1006,7 @@
                                                         <Prop Key="DataField" Value="DutyPct" />
                                                         <Prop Key="Width" Value="100" />
                                                         <Prop Key="CommitChanges" Value="True" />
+                                                        <Prop Key="DisplayFormat" Value="##0.00'%" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>

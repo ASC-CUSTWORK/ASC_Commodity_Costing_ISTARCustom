@@ -163,7 +163,7 @@ namespace ASCISTARCustom.PDS
                 var defaultVendorInventory = GetDefaultPOVendorInventory();
                 if (defaultVendorInventory == null)
                     throw new PXException(ASCIStarINKitMessages.Error.NoDefaultVendor);
-                // var 
+          
                 SendEmailNotification(this.Base.Hdr.Current);
             });
         }

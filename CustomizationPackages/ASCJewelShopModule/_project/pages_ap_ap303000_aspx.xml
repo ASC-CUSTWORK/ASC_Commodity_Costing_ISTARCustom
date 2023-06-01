@@ -89,7 +89,7 @@
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="UsrCommodityLossPct" />
                                                         <Prop Key="Width" Value="100" />
-                                                        <Prop Key="DisplayFormat" Value="P" />
+                                                        <Prop Key="DisplayFormat" Value="##0.00'%" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>
@@ -108,7 +108,7 @@
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="UsrCommoditySurchargePct" />
                                                         <Prop Key="Width" Value="100" />
-                                                        <Prop Key="DisplayFormat" Value="P" />
+                                                        <Prop Key="DisplayFormat" Value="##0.00'%" />
                                                     </PXGridColumn>
                                                 </AddItem>
                                                 <AddItem>

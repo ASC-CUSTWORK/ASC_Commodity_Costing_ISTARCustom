@@ -1,6 +1,5 @@
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Cost.CacheExt;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.Purchasing.DAC;
 using ASCISTARCustom.Purchasing.Helpers;
 using PX.Common;
