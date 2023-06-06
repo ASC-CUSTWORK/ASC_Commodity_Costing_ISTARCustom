@@ -110,7 +110,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #endregion
 
         #region UsrContractLossPct
-        [PXDBDecimal(4)]
+        [PXDBDecimal(2)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Metal Loss %", Visible = false)]
         public decimal? UsrContractLossPct { get; set; }
@@ -118,9 +118,9 @@ namespace ASCISTARCustom.Cost.CacheExt
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(6)]
+        [PXDBDecimal(2)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Surcharge %", Visible = false)]
+        [PXUIField(DisplayName = "Surcharge, %", Visible = false)]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
         #endregion
@@ -225,10 +225,6 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region Implementation Unneeded Interface's fields
 
-        //[PXInt]
-        //public int? InventoryID { get; set; }
-        //public abstract class InventoryID : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
-
         [PXDecimal(6)]
         public decimal? UsrActualGRAMGold { get; set; }
         public abstract class usrActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
@@ -263,7 +259,6 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         [PXString]
         public string UsrCommodityType { get; set; }
-
         public abstract class usrCommodityType : PX.Data.BQL.BqlDecimal.Field<usrCommodityType> { }
 
         #endregion

@@ -24,7 +24,7 @@ using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Inventory.GraphExt
 {
-    public class ASCIstarInventoryItemMaintExt : PXGraphExtension<InventoryItemMaint>
+    public class ASCIStarInventoryItemMaintExt : PXGraphExtension<InventoryItemMaint>
     {
         public static bool IsActive() => true;
 

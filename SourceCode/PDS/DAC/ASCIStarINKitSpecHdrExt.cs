@@ -70,15 +70,15 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(6, MinValue = -100, MaxValue = 100)]
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Total Surcharge %")]
+        [PXUIField(DisplayName = "Total Surcharge, %")]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
         #endregion
 
         #region UsrContractLossPct
-        [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
         [PXUIField(DisplayName = "Total Metal Loss, %")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrContractLossPct { get; set; }
@@ -184,9 +184,9 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrDutyCostPct
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Duty %")]
+        [PXUIField(DisplayName = "Duty, %")]
         public decimal? UsrDutyCostPct { get; set; }
         public abstract class usrDutyCostPct : PX.Data.BQL.BqlDecimal.Field<usrDutyCostPct> { }
         #endregion

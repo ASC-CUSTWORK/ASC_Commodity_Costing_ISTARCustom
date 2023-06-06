@@ -50,8 +50,8 @@ namespace ASCISTARCustom.Inventory.DAC
         #endregion
 
         #region DutyPct
-        [PXUIField(DisplayName = "Duty %")]
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXUIField(DisplayName = "Duty, %")]
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? DutyPct { get; set; }
         public abstract class dutyPct : PX.Data.BQL.BqlDecimal.Field<dutyPct> { }

@@ -42,16 +42,16 @@ namespace ASCISTARCustom.Cost.CacheExt
         #endregion
 
         #region UsrCommodityLossPct
-        [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Loss")]
+        [PXDBDecimal(2)]
+        [PXUIField(DisplayName = "Loss, %")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrCommodityLossPct { get; set; }
         public abstract class usrCommodityLossPct : PX.Data.BQL.BqlDecimal.Field<usrCommodityLossPct> { }
         #endregion
 
         #region UsrCommoditySurchargePct
-        [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Surcharge")]
+        [PXDBDecimal(2)]
+        [PXUIField(DisplayName = "Surcharge, %")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrCommoditySurchargePct { get; set; }
         public abstract class usrCommoditySurchargePct : PX.Data.BQL.BqlDecimal.Field<usrCommoditySurchargePct> { }
