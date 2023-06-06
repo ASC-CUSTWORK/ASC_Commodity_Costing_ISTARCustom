@@ -2,7 +2,6 @@
 using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
@@ -11,8 +10,6 @@ using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Common.Builder
@@ -20,6 +17,8 @@ namespace ASCISTARCustom.Common.Builder
     public class ASCIStarCostBuilder
     {
         #region Properies
+        private PXGraph _graph;
+
         private string Currency { get; set; } = "USD";
         private bool IsEnabledOverrideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
@@ -41,14 +40,10 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? BasisValue { get; private set; } = decimal.Zero;
         #endregion 
 
-        private readonly PXGraph _graph;
-
-        #region ctor
         public ASCIStarCostBuilder(PXGraph graph)
         {
             _graph = graph;
         }
-        #endregion
 
         #region Chain Method Calls
         public ASCIStarCostBuilder WithInventoryItem(IASCIStarItemCostSpecDTO inventory)
@@ -82,20 +77,13 @@ namespace ASCISTARCustom.Common.Builder
             PricingDate = pricingData;
             return this;
         }
-        public ASCIStarCostBuilder Build()
-        {
-            Initialize();
-            return this;
-        }
-        #endregion
-
-        public virtual void Initialize()
+        public virtual ASCIStarCostBuilder Build()
         {
             if (INJewelryItem == null || INJewelryItem.MetalType == null)
             {
                 INJewelryItem = GetASCIStarINJewelryItem(ItemCostSpecification.InventoryID);
 
-                if (INJewelryItem == null || INJewelryItem.MetalType == null) return;
+                if (INJewelryItem == null || INJewelryItem.MetalType == null) return null;
             }
 
             if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
@@ -103,7 +91,7 @@ namespace ASCISTARCustom.Common.Builder
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
                 PreciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
 
-            if (PreciousMetalItem == null) return;
+            if (PreciousMetalItem == null) return null;
 
             PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID);
             PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
@@ -122,7 +110,10 @@ namespace ASCISTARCustom.Common.Builder
             }
             AvrPreciousMetalUnitCost = GetPresiousMetalAvrCost();
 
+            return this;
         }
+        #endregion
+
 
         ///<summary>Calculates the precious metal cost for an item based on its cost specification, effective base price per gram and metal type. 
         ///It uses the ASCIStarMetalType class to determine if the metal type is gold or silver and calculates the precious metal cost accordingly. The metal loss and surcharge values are also factored in.</summary>
@@ -138,31 +129,31 @@ namespace ASCISTARCustom.Common.Builder
             {
                 switch (costingType ?? ItemCostSpecification.UsrCostingType)
                 {
-                    case ASCIStarCostingType.ContractCost:
+                    case CostingType.ContractCost:
                         preciousMetalCost = PreciousMetalContractCostPerTOZ;
                         break;
-                    case ASCIStarCostingType.MarketCost:
+                    case CostingType.MarketCost:
                         preciousMetalCost = PreciousMetalMarketCostPerTOZ;
                         break;
-                    case ASCIStarCostingType.StandardCost:
+                    case CostingType.StandardCost:
                         return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrFabricationCost - ItemCostSpecification.UsrOtherMaterialsCost - ItemCostSpecification.UsrPackagingCost;
 
                     default: break;
                 }
-                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0m);
+                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0.0m);
 
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
             {
                 switch (costingType ?? ItemCostSpecification.UsrCostingType)
                 {
-                    case ASCIStarCostingType.ContractCost:
+                    case CostingType.ContractCost:
                         PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalContractCostPerTOZ, ItemCostSpecification.UsrMatrixStep);
                         break;
-                    case ASCIStarCostingType.MarketCost:
+                    case CostingType.MarketCost:
                         PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.UsrMatrixStep); ;
                         break;
-                    case ASCIStarCostingType.StandardCost:
+                    case CostingType.StandardCost:
                         return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrFabricationCost - ItemCostSpecification.UsrOtherMaterialsCost - ItemCostSpecification.UsrPackagingCost;
 
                     default: break;
@@ -187,68 +178,6 @@ namespace ASCISTARCustom.Common.Builder
             return result.SalesPrice;
         }
 
-        //public static decimal? CalculateUnitCost(IASCIStarItemCostSpecDTO itemCostSpecification)
-        //{
-        //    if (itemCostSpecification == null) return 0;
-
-        //    return (itemCostSpecification?.UsrPreciousMetalCost ?? 0m)
-        //         + (itemCostSpecification?.UsrOtherMaterialsCost ?? 0m)
-        //         + (itemCostSpecification?.UsrFabricationCost ?? 0m)
-        //         + (itemCostSpecification?.UsrPackagingCost ?? 0m)
-        //         + (itemCostSpecification?.UsrPackagingLaborCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateEstLandedCost(IASCIStarItemCostSpecDTO itemCostSpecification)
-        //{
-        //    return (itemCostSpecification?.UsrUnitCost ?? 0m)
-        //        + (itemCostSpecification?.UsrHandlingCost ?? 0m)
-        //        + (itemCostSpecification?.UsrFreightCost ?? 0m)
-        //        + (itemCostSpecification?.UsrLaborCost ?? 0m)
-        //        + (itemCostSpecification?.UsrDutyCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateUnitCost(ASCIStarItemCostSpecDTO costSpecDTO)
-        //{
-        //    return (costSpecDTO?.PreciousMetalCost ?? 0m)
-        //        + (costSpecDTO?.MaterialsCost ?? 0m)
-        //        + (costSpecDTO?.FabricationCost ?? 0m)
-        //        + (costSpecDTO?.PackagingCost ?? 0m)
-        //        + (costSpecDTO?.PackagingLaborCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateLandedCost(ASCIStarItemCostSpecDTO costSpecDTO)
-        //{
-        //    return (costSpecDTO?.UnitCost ?? 0m)
-        //        + (costSpecDTO?.HandlingCost ?? 0m)
-        //        + (costSpecDTO?.FreightCost ?? 0m)
-        //        + (costSpecDTO?.LaborCost ?? 0m)
-        //        + (costSpecDTO?.DutyCost ?? 0m);
-        //}
-
-        //public static decimal? CalculateUnitCost(INKitSpecHdr kitSpecHdr)
-        //{
-        //    if (kitSpecHdr == null) return 0;
-
-        //    var kitSpecHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(kitSpecHdr);
-        //    return (kitSpecHdrExt?.UsrPreciousMetalCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrOtherMaterialsCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrFabricationCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrPackagingCost ?? 0m)
-        //         + (kitSpecHdrExt?.UsrPackagingLaborCost ?? 0m);
-        //}
-
-
-
-        //public static decimal? CalculateLandedCost(INKitSpecHdr kitSpecHdr)
-        //{
-        //    var kitSpecHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(kitSpecHdr);
-        //    return (kitSpecHdrExt?.UsrUnitCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrHandlingCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrFreightCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrLaborCost ?? 0m)
-        //        + (kitSpecHdrExt?.UsrDutyCost ?? 0m);
-        //}
-
         public virtual decimal? CalculateIncrementValue(IASCIStarItemCostSpecDTO itemCostSpecification)
         {
             var metalFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
@@ -261,13 +190,7 @@ namespace ASCISTARCustom.Common.Builder
         public static decimal? CalculateSurchargeValue(decimal? increment, string metalType)
         {
             decimal convFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(metalType);
-            decimal? tempValue = increment / convFactor;
-
-            decimal? surchargeNewValue = (tempValue - 1.0m) * 100.0m;
-
-            //decimal? tempValue = increment * TOZ2GRAM_31_10348.value;
-
-            //decimal? surchargeNewValue = (tempValue - 1.0m) * 100.0m;
+            decimal? surchargeNewValue = (increment / convFactor - 1.0m) * 100.0m;
 
             return surchargeNewValue;
         }
@@ -342,8 +265,8 @@ namespace ASCISTARCustom.Common.Builder
         private ASCIStarINJewelryItem GetASCIStarINJewelryItem(int? inventoryID)
             => PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>.Select(_graph, inventoryID);
 
-        private InventoryItem GetInventoryItemByInvenctoryCD(string inventoryCD)
-            => SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
+        private InventoryItem GetInventoryItemByInvenctoryCD(string inventoryCD) =>
+            SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
 
         public static APVendorPrice GetAPVendorPrice(PXGraph graph, int? vendorID, int? inventoryID, string UOM, DateTime effectiveDate)
             => SelectFrom<APVendorPrice>

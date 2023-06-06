@@ -1,6 +1,7 @@
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Cost.CacheExt;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.Purchasing.DAC;
+using ASCISTARCustom.Purchasing.Helpers;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
@@ -14,6 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -21,19 +23,11 @@ namespace ASCISTARCustom
     {
         public static bool IsActive() => true;
 
-        //#region DataViews
-        //PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Required<INKitSpecHdr.kitInventoryID>>>> CostItem;
-
-        //PXSelect<POVendorInventory,
-        //    Where<POVendorInventory.vendorID, Equal<Current<POOrder.vendorID>>,
-        //        And<POVendorInventory.inventoryID, Equal<Current<POLine.inventoryID>>>>> vendorItemSelect;
-
-        //PXSelect<APVendorPrice,
-        //   Where<APVendorPrice.vendorID, Equal<Required<APVendorPrice.vendorID>>,
-        //       And<APVendorPrice.inventoryID, Equal<Required<APVendorPrice.inventoryID>>,
-        //           And<APVendorPrice.effectiveDate, Equal<Required<APVendorPrice.effectiveDate>>>>>> vendorPrice;
-
-        //#endregion
+        [PXCopyPasteHiddenView]
+        public FbqlSelect<SelectFromBase<InventoryItemCurySettings,
+          TypeArrayOf<IFbqlJoin>.Empty>.Where<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>.FilledWith<And<Compare<InventoryItemCurySettings.inventoryID,
+              Equal<P.AsInt>>>>>.And<BqlOperand<InventoryItemCurySettings.curyID, IBqlString>.IsEqual<BqlField<AccessInfo.baseCuryID, IBqlString>.AsOptional>>>,
+          InventoryItemCurySettings>.View ASCIStarItemCurySettings;
 
         #region Actions
         public PXAction<POOrder> emailPurchaseOrder;
@@ -42,8 +36,7 @@ namespace ASCISTARCustom
         public virtual IEnumerable EmailPurchaseOrder(PXAdapter adapter, [PXString] string notificationCD = null)
         {
             bool massProcess = adapter.MassProcess;
-            // Acuminator disable once PX1008 LongOperationDelegateSynchronousExecution [Justification]
-            // TODO: DEV NOTE: This long operation should be modifyed to fit Acumatica standarts 
+
             PXLongOperation.StartOperation(Base.UID, () =>
             {
                 bool flag = false;
@@ -88,7 +81,7 @@ namespace ASCISTARCustom
                     }
                 }
                 if (flag)
-                    throw new PXOperationCompletedWithErrorException("At least one item has not been processed.");
+                    throw new PXOperationCompletedWithErrorException(ASCIStarPOMessages.Errors.ProcessingWithErrorMessages);
             });
             return adapter.Get<POOrder>();
         }
@@ -99,21 +92,13 @@ namespace ASCISTARCustom
         public virtual IEnumerable UpdateUnitCost(PXAdapter adapter)
         {
             var poLines = this.Base.Transactions.Select().FirstTableItems.ToList();
-            SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, poLines);
+            SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, poLines, true);
             this.Base.Document.View.RequestRefresh();
             return adapter.Get<POOrder>();
         }
         #endregion
 
         #region Event Handlers
-
-        //protected virtual void _(Events.FieldVerifying<POOrder, ASCIStarPOOrderExt.usrPricingDate> e)
-        //{
-        //    var row = e.Row;
-        //    if (row == null) return;
-
-        //    if ((DateTime?)e.NewValue > DateTime.Today || e.NewValue == null) throw new PXSetPropertyException<ASCIStarPOOrderExt.usrPricingDate>("Pricing date can not be from future or empty!");
-        //}
 
         protected virtual void _(Events.FieldUpdated<POOrder, POOrder.vendorID> e)
         {
@@ -139,15 +124,14 @@ namespace ASCISTARCustom
             var row = e.Row;
             if (row == null) return;
 
-            SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, this.Base.Transactions.Select()?.FirstTableItems.ToList());
+            SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, this.Base.Transactions.Select()?.FirstTableItems.ToList(), true);
         }
 
         protected virtual void _(Events.FieldUpdated<POLine, POLine.inventoryID> e, PXFieldUpdated baseEvent)
         {
-            baseEvent(e.Cache, e.Args);
-
             var row = e.Row;
             if (row == null || row.InventoryID == null) return;
+            baseEvent.Invoke(e.Cache, e.Args);
 
             SetNewUnitCostOnPOLines(e.Cache, new List<POLine>() { row });
         }
@@ -163,7 +147,7 @@ namespace ASCISTARCustom
 
 
         #region Helper Methods
-        private void SetNewUnitCostOnPOLines(PXCache cache, List<POLine> poLineList)
+        private void SetNewUnitCostOnPOLines(PXCache cache, List<POLine> poLineList, bool toUpdate = false)
         {
             if (!poLineList.Any() || this.Base.Document.Current?.VendorID == null) return;
 
@@ -172,7 +156,7 @@ namespace ASCISTARCustom
             if (poOrderExt == null || poOrderExt.UsrMarketID == null)
             {
                 this.Base.Document.Cache.RaiseExceptionHandling<ASCIStarPOOrderExt.usrMarketID>(this.Base.Document.Current, null,
-                    new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>("Select Market first."));
+                    new PXSetPropertyException<ASCIStarPOOrderExt.usrMarketID>(ASCIStarPOMessages.Errors.MarketEmpty, PXErrorLevel.RowError));
                 return;
             }
 
@@ -181,17 +165,7 @@ namespace ASCISTARCustom
                 var inventoryItem = InventoryItem.PK.Find(Base, poLine.InventoryID);
                 var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
 
-                var poVendorInventory = SelectFrom<POVendorInventory>
-                    .Where<POVendorInventory.vendorID.IsEqual<P.AsInt>
-                        .And<POVendorInventory.inventoryID.IsEqual<P.AsInt>
-                            .And<POVendorInventory.isDefault.IsEqual<True>>>>
-                    .View.Select(this.Base, this.Base.Document.Current.VendorID, poLine.InventoryID)?.TopFirst;
-
-                if (poVendorInventory == null)
-                {
-                    poVendorInventory = new POVendorInventory() { VendorID = this.Base.Document.Current.VendorID };
-                    PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory).UsrMarketID = poOrderExt.UsrMarketID;
-                }
+                var poVendorInventory = GetDefaultPOVendorInventory(this.Base.Document.Current.VendorID, poLine.InventoryID);
 
                 var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
                                 .WithInventoryItem(inventoryItemExt)
@@ -200,15 +174,15 @@ namespace ASCISTARCustom
                                 .Build();
 
                 var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
-                    inventoryItemExt?.UsrCostingType == ASCIStarCostingType.StandardCost ? ASCIStarCostingType.StandardCost : ASCIStarCostingType.MarketCost);
+                    inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
 
+                // cache.SetValueExt<POLine.manualPrice>(poLine, true);
                 cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);
                 cache.SetValueExt<POLine.unitCost>(poLine, newUnitCost);
 
-                cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(poLine, jewelryCostProvider.PreciousMetalMarketCostPerTOZ);
-                cache.SetValueExt<ASCIStarPOLineExt.usrBasisValue>(poLine, jewelryCostProvider.BasisValue);
-
                 SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);
+
+                if (toUpdate) this.Base.Transactions.Update(poLine);
             }
         }
 
@@ -219,8 +193,25 @@ namespace ASCISTARCustom
             cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMGold>(row, costBuilder.ItemCostSpecification.UsrPricingGRAMGold);
             cache.SetValueExt<ASCIStarPOLineExt.usrActualGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrActualGRAMSilver);
             cache.SetValueExt<ASCIStarPOLineExt.usrPricingGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrPricingGRAMSilver);
+            cache.SetValueExt<ASCIStarPOLineExt.usrMarketPrice>(row, costBuilder.PreciousMetalMarketCostPerTOZ);
+            cache.SetValueExt<ASCIStarPOLineExt.usrBasisValue>(row, costBuilder.BasisValue);
         }
 
+        private POVendorInventory GetDefaultPOVendorInventory(int? vendorID, int? inventoryID)
+        {
+            var inventoryCurySettings = this.ASCIStarItemCurySettings.Select(inventoryID)?.FirstTableItems?.ToList();
+            foreach (var line in inventoryCurySettings)
+            {
+                var prefferedVendor = Vendor.PK.Find(Base, line.PreferredVendorID);
+
+                var poVendorInventory = SelectFrom<POVendorInventory>
+                    .Where<POVendorInventory.vendorID.IsEqual<P.AsInt>.And<POVendorInventory.inventoryID.IsEqual<P.AsInt>>>
+                    .View.Select(Base, prefferedVendor.BAccountID, inventoryID)?.TopFirst;
+
+                return poVendorInventory;
+            }
+            return null;
+        }
         #endregion
     }
 }

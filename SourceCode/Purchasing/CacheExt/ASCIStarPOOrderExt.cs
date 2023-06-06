@@ -6,7 +6,7 @@ using PX.Objects.CS;
 using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.Purchasing.DAC
 {
     [Serializable]
     [PXCacheName("ASC POOrder Extension")]

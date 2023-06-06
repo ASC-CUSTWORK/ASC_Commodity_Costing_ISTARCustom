@@ -1,10 +1,10 @@
 using ASCISTARCustom.Common.DTO.Interfaces;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
 using ASCISTARCustom.PDS.Descriptor;
 using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom
 {
@@ -33,7 +33,7 @@ namespace ASCISTARCustom
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [ASCIStarCostingType.List]
+        [CostingType.List]
         [PXUIField(DisplayName = "Costing Type")]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
@@ -43,7 +43,7 @@ namespace ASCISTARCustom
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type", Required = true)]
         [PXDefault()]
-        [ASCIStarCostRollupType.List]
+        [CostRollupType.List]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
@@ -129,7 +129,7 @@ namespace ASCISTARCustom
         #region UsrContractSurcharge
         [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Surcharge %", Enabled = false, Visible = true)]
+        [PXUIField(DisplayName = "Surcharge, %", Enabled = false, Visible = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrContractSurcharge>))]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
@@ -167,6 +167,14 @@ namespace ASCISTARCustom
         [PXUIField(DisplayName = "Basis Price", IsReadOnly = true)]
         public decimal? UsrBasisPrice { get; set; }
         public abstract class usrBasisPrice : PX.Data.BQL.BqlDecimal.Field<usrBasisPrice> { }
+        #endregion
+
+        #region UsrBasisValue
+        [PXDBDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
+        public decimal? UsrBasisValue { get; set; }
+        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
 
         #region UsrBaseFabricationCost

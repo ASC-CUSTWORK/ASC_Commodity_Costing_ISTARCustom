@@ -17,6 +17,7 @@ namespace ASCISTARCustom.Common.DTO.Interfaces
         decimal? UsrContractIncrement { get; set; }
         decimal? UsrMatrixStep { get; set; }
         decimal? UsrUnitCost { get; set; }
+        decimal? UsrBasisValue { get; set; }
         decimal? UsrEstLandedCost { get; set; }
         decimal? UsrPreciousMetalCost { get; set; }
         decimal? UsrFabricationCost { get; set; }

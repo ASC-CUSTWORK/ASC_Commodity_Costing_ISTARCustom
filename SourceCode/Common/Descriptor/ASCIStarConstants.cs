@@ -1,7 +1,9 @@
-﻿using PX.Data;
+﻿using PX.Common;
+using PX.Data;
 
 namespace ASCISTARCustom.Common.Descriptor
 {
+    [PXLocalizable]
     public static class ASCIStarConstants
     {
         public class MetalType
@@ -129,6 +131,143 @@ namespace ASCISTARCustom.Common.Descriptor
             public class platinum : PX.Data.BQL.BqlString.Constant<platinum> { public platinum() : base(Platinum) { } }
             public class costume : PX.Data.BQL.BqlString.Constant<costume> { public costume() : base(Costume) { } }
             public class brass : PX.Data.BQL.BqlString.Constant<brass> { public brass() : base(Brass) { } }
+        }
+
+        public class CostRollupType
+        {
+            public const string PreciousMetal = "C";
+            public const string Materials = "M";
+            public const string Fabrication = "F";
+            public const string Labor = "L";
+            public const string Handling = "H";
+            public const string Freight = "S";
+            public const string Duty = "D";
+            public const string Packaging = "P";
+            public const string PackagingForLabor = "B";
+            public const string Blank = "";
+
+            public const string MessagePreciousMetal = "Precious Metal";
+            public const string MessageMaterials = "Other Materials";
+            public const string MessageFabrication = "Fabrication/Value Add";
+            public const string MessageLabor = "In-house Labor";
+            public const string MessageHandling = "Handling";
+            public const string MessageFreight = "Freight";
+            public const string MessageDuty = "Duty";
+            public const string MessagePackaging = "Packaging";
+            public const string MessagePackagingForLabor = "Packaging Labor";
+            public const string MessageBlank = "<Blank>";
+
+            public class ListAttribute : PXStringListAttribute
+            {
+                private static readonly string[] _values = new string[]
+                {
+                PreciousMetal,
+                Fabrication,
+                Materials,
+                Packaging,
+                PackagingForLabor,
+                Labor,
+                Freight,
+                Handling,
+                Duty,
+
+                    //     Blank
+                };
+
+                private static readonly string[] _lables = new string[]
+                {
+                MessagePreciousMetal,
+                MessageFabrication,
+                MessageMaterials,
+                MessagePackaging,
+                MessagePackagingForLabor,
+                MessageLabor,
+                MessageFreight,
+                MessageHandling,
+                MessageDuty,
+                    //   MessageBlank
+                };
+
+                public ListAttribute() : base(_values, _lables) { }
+            }
+
+            public class commodity : PX.Data.BQL.BqlString.Constant<commodity>
+            {
+                public commodity() : base(PreciousMetal) { }
+            }
+
+            public class materials : PX.Data.BQL.BqlString.Constant<materials>
+            {
+                public materials() : base(Materials) { }
+            }
+
+            public class fabrication : PX.Data.BQL.BqlString.Constant<fabrication>
+            {
+                public fabrication() : base(Fabrication) { }
+            }
+
+            public class labor : PX.Data.BQL.BqlString.Constant<labor>
+            {
+                public labor() : base(Labor) { }
+            }
+
+            public class handling : PX.Data.BQL.BqlString.Constant<handling>
+            {
+                public handling() : base(Handling) { }
+            }
+
+            public class freight : PX.Data.BQL.BqlString.Constant<freight>
+            {
+                public freight() : base(Freight) { }
+            }
+
+            public class duty : PX.Data.BQL.BqlString.Constant<duty>
+            {
+                public duty() : base(Duty) { }
+            }
+
+            public class packaging : PX.Data.BQL.BqlString.Constant<packaging>
+            {
+                public packaging() : base(Packaging) { }
+            }
+
+            public class packagingForLabor : PX.Data.BQL.BqlString.Constant<packagingForLabor>
+            {
+                public packagingForLabor() : base(PackagingForLabor) { }
+            }
+
+            public class other : PX.Data.BQL.BqlString.Constant<other>
+            {
+                public other() : base(Blank) { }
+            }
+        }
+
+        public class CostingType
+        {
+            public const string StandardCost = "S";
+            public const string MarketCost = "M"; // GRAMS * Market Price from Matrix * (1 + Surcharge) * (1 + Loss Percentage)
+            public const string ContractCost = "C"; // Get Fixed Price from Assembly
+            public const string PercentageCost = "P"; // SUM(All Non PercentageCost) * 
+                                                      // public const string WeightCost = "W"; // GRAMS * Unit
+
+            public const string MessageStandard = "Avg. Actual Valuation";
+            public const string MessageMarket = "Market";
+            public const string MessageContract = "Contract";
+            public const string MessagePercentage = "Percentage";
+            //   public const string MessageWeight = "By Weight";
+
+            public class ListAttribute : PXStringListAttribute
+            {
+                private static readonly string[] values = new string[] { MarketCost, ContractCost, StandardCost, PercentageCost/*, WeightCost*/ };
+                private static readonly string[] lables = new string[] { MessageMarket, MessageContract, MessageStandard, MessagePercentage/*, MessageWeight */};
+                public ListAttribute() : base(values, lables) { }
+            }
+
+            public class standardCost : PX.Data.BQL.BqlString.Constant<standardCost> { public standardCost() : base(StandardCost) { } }
+            public class marketCost : PX.Data.BQL.BqlString.Constant<marketCost> { public marketCost() : base(MarketCost) { } }
+            public class contractCost : PX.Data.BQL.BqlString.Constant<contractCost> { public contractCost() : base(ContractCost) { } }
+            public class percentageCost : PX.Data.BQL.BqlString.Constant<percentageCost> { public percentageCost() : base(PercentageCost) { } }
+            //  public class weightCost : PX.Data.BQL.BqlString.Constant<weightCost> { public weightCost() : base(WeightCost) { } }
         }
 
         public class MarketList

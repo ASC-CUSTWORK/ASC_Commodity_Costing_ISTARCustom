@@ -3,11 +3,11 @@ using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Helper.Extensions;
 using ASCISTARCustom.Cost.CacheExt;
 using PX.Data;
-using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Cost
 {
@@ -24,15 +24,15 @@ namespace ASCISTARCustom.Cost
                                     Where<APVendorPrice.vendorID, Equal<Current<Vendor.bAccountID>>,
                                         And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>,
                             OrderBy<Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
-        #endregion 
+        #endregion
 
         #region CacheAttached
         [PXMergeAttributes(Method = MergeMethod.Merge)]
-        [PXUIField(DisplayName = "Basis Price", Visibility = PXUIVisibility.Visible)]
+        [PXUIField(DisplayName = "Basis Floor", Visibility = PXUIVisibility.Visible)]
         protected virtual void _(Events.CacheAttached<APVendorPrice.salesPrice> e) { }
 
         [PXMergeAttributes(Method = MergeMethod.Merge)]
-        [PXUIField(DisplayName ="Commodity Type Item")]
+        [PXUIField(DisplayName = "Commodity Type Item")]
         [PXSelector(typeof(SearchFor<InventoryItem.inventoryID>.In<
                             SelectFrom<InventoryItem>.InnerJoin<INItemClass>
                                 .On<InventoryItem.itemClassID.IsEqual<INItemClass.itemClassID>>
@@ -48,7 +48,7 @@ namespace ASCISTARCustom.Cost
             if (this.Base.BAccount.Current.BAccountID > 0)
                 e.NewValue = this.Base.BAccount.Current.BAccountID;
             else
-                throw new PXException("Save Vendor first!");
+                throw new PXException("Save Vendor first and then add Costing information.");
         }
 
         protected virtual void _(Events.RowSelected<VendorR> e)
@@ -71,32 +71,48 @@ namespace ASCISTARCustom.Cost
                 }
             }
         }
-        #endregion
 
-        protected virtual void UpdateFlorCellingFields(APVendorPrice row)
+        protected virtual void _(Events.FieldUpdated<APVendorPrice, APVendorPrice.salesPrice> e)
         {
-            var rowExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(row);
+            var row = e.Row;
+            if (row == null) return;
 
-            var poVendorInventory = SelectFrom<POVendorInventory>
-                .Where<POVendorInventory.vendorID.IsEqual<P.AsInt>
-                    .And<POVendorInventory.inventoryID.IsEqual<P.AsInt>
-                        .And<POVendorInventory.isDefault.IsEqual<True>>>>
-                .View.Select(this.Base, this.Base.BAccount.Current?.BAccountID, row.InventoryID)?.TopFirst;
-
-            //if (poVendorInventory == null)
-            //{
-            //    poVendorInventory = new POVendorInventory() { VendorID = this.Base.BAccount.Current.BAccountID };
-            //    PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory).UsrMarketID = row;
-            //}
-
-            //var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
-            //                .WithInventoryItem(inventoryItemExt)
-            //                .WithPOVendorInventory(poVendorInventory)
-            //                .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
-            //                .Build();
-
+            UpdateFloorCellingFields(e.Cache, row);
         }
 
-       // private asc
+        protected virtual void _(Events.FieldUpdated<APVendorPrice, ASCIStarAPVendorPriceExt.usrMatrixStep> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            UpdateFloorCellingFields(e.Cache, row);
+        }
+        #endregion
+
+        #region Methods
+        protected virtual void UpdateFloorCellingFields(PXCache cache, APVendorPrice row)
+        {
+            var rowExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(row);
+            if (rowExt?.UsrCommodity != CommodityType.Silver) return;
+
+            var poVendorInventory = new POVendorInventory() { VendorID = row.VendorID };
+            PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory).UsrMarketID = rowExt.UsrMarketID;
+
+            var inventoryItem = InventoryItem.PK.Find(Base, row.InventoryID);
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
+            inventoryItemExt.UsrMatrixStep = rowExt.UsrMatrixStep;
+
+            var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
+                            .WithInventoryItem(inventoryItemExt)
+                            .WithPOVendorInventory(poVendorInventory)
+                            .Build();
+            if (jewelryCostProvider == null) return;
+            jewelryCostProvider.CalculatePreciousMetalCost(CostingType.ContractCost);
+
+            cache.SetValueExt<ASCIStarAPVendorPriceExt.usrFloor>(row, jewelryCostProvider.Floor);
+            cache.SetValueExt<ASCIStarAPVendorPriceExt.usrCeiling>(row, jewelryCostProvider.Ceiling);
+        }
+        #endregion
+
     }
 }
