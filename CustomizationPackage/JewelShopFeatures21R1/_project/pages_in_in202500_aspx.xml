@@ -1,0 +1,423 @@
+﻿<Page path="~/pages/in/in202500.aspx" ControlId="39" pageSource="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">
+    <PXTab ID="tab" ParentId="phG_tab" TypeFullName="PX.Web.UI.PXTab">
+        <Children Key="Items">
+            <AddItem>
+                <PXTabItem TypeFullName="PX.Web.UI.PXTabItem">
+                    <Prop Key="Text" Value="JEWELRY" />
+                    <Children Key="Template">
+                        <AddItem>
+                            <PXFormView TypeFullName="PX.Web.UI.PXFormView">
+                                <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                <Prop Key="ID" Value="CstFormView6" />
+                                <Children Key="Template">
+                                    <AddItem>
+                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXLayoutRule7" />
+                                            <Prop Key="StartColumn" Value="True" />
+                                            <Prop Key="LabelsWidth" Value="SM" />
+                                            <Prop Key="ControlSize" Value="XM" />
+                                        </PXLayoutRule>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXLayoutRule9" />
+                                            <Prop Key="StartGroup" Value="True" />
+                                            <Prop Key="GroupCaption" Value="CLASSIFICATION" />
+                                        </PXLayoutRule>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXTextEdit23" />
+                                            <Prop Key="DataField" Value="ShortDesc" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXTextEdit>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXTextEdit17" />
+                                            <Prop Key="DataField" Value="LongDesc" />
+                                            <Prop Key="Height" Value="50" />
+                                            <Prop Key="Wrap" Value="True" />
+                                            <Prop Key="TextMode" Value="MultiLine" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXTextEdit>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector24" />
+                                            <Prop Key="DataField" Value="StyleStatus" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector12" />
+                                            <Prop Key="DataField" Value="CustomerCode" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector14" />
+                                            <Prop Key="DataField" Value="InvCategory" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector16" />
+                                            <Prop Key="DataField" Value="ItemType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector15" />
+                                            <Prop Key="DataField" Value="ItemSubType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector11" />
+                                            <Prop Key="DataField" Value="Collection" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector20" />
+                                            <Prop Key="DataField" Value="MetalType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXTextEdit19" />
+                                            <Prop Key="DataField" Value="MetalNote" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXTextEdit>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector18" />
+                                            <Prop Key="DataField" Value="MetalColor" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector22" />
+                                            <Prop Key="DataField" Value="Plating" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector13" />
+                                            <Prop Key="DataField" Value="Finishes" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector25" />
+                                            <Prop Key="DataField" Value="VendorMaker" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector21" />
+                                            <Prop Key="DataField" Value="OrgCountry" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXLayoutRule8" />
+                                            <Prop Key="StartColumn" Value="True" />
+                                            <Prop Key="LabelsWidth" Value="SM" />
+                                            <Prop Key="ControlSize" Value="XM" />
+                                        </PXLayoutRule>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXLayoutRule10" />
+                                            <Prop Key="StartGroup" Value="True" />
+                                            <Prop Key="GroupCaption" Value="STONE" />
+                                        </PXLayoutRule>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector38" />
+                                            <Prop Key="DataField" Value="StoneType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXTextEdit39" />
+                                            <Prop Key="DataField" Value="WebNotesComment" />
+                                            <Prop Key="TextMode" Value="MultiLine" />
+                                            <Prop Key="Height" Value="50" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXTextEdit>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXTextEdit35" />
+                                            <Prop Key="DataField" Value="StoneComment" />
+                                            <Prop Key="Height" Value="50" />
+                                            <Prop Key="TextMode" Value="MultiLine" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXTextEdit>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector34" />
+                                            <Prop Key="DataField" Value="StoneColor" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector37" />
+                                            <Prop Key="DataField" Value="StoneShape" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector36" />
+                                            <Prop Key="DataField" Value="StoneCreation" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector29" />
+                                            <Prop Key="DataField" Value="GemstoneTreatment" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector33" />
+                                            <Prop Key="DataField" Value="SettingType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector27" />
+                                            <Prop Key="DataField" Value="Findings" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector28" />
+                                            <Prop Key="DataField" Value="FindingsSubType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector26" />
+                                            <Prop Key="DataField" Value="ChainType" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector31" />
+                                            <Prop Key="DataField" Value="RingLength" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector32" />
+                                            <Prop Key="DataField" Value="RingSize" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstPXSelector30" />
+                                            <Prop Key="DataField" Value="OD" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                        </PXSelector>
+                                    </AddItem>
+                                </Children>
+                                <Prop Key="DataMember" Value="JewelryItemView" />
+                                <Prop Key="DataSourceID" Value="ds" />
+                                <Prop Key="RenderStyle" Value="Simple" />
+                            </PXFormView>
+                        </AddItem>
+                    </Children>
+                </PXTabItem>
+            </AddItem>
+            <PXTabItem Text="Subitems" OriginalIndex="1" />
+            <AddItem>
+                <PXTabItem TypeFullName="PX.Web.UI.PXTabItem">
+                    <Prop Key="Text" Value="Compliance" />
+                    <Children Key="Template">
+                        <AddItem>
+                            <PXGrid TypeFullName="PX.Web.UI.PXGrid">
+                                <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                <Prop Key="ID" Value="CstPXGrid1" />
+                                <Children Key="Levels">
+                                    <AddItem>
+                                        <PXGridLevel TypeFullName="PX.Web.UI.PXGridLevel">
+                                            <Prop Key="DataMember" Value="ComplianceView" />
+                                            <Children Key="Columns">
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="TestType" />
+                                                        <Prop Key="Width" Value="140" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                        <Prop Key="Type" Value="DropDownList" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="CustomerAlphaCode" />
+                                                        <Prop Key="Width" Value="180" />
+                                                        <Prop Key="Type" Value="DropDownList" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="Division" />
+                                                        <Prop Key="Width" Value="180" />
+                                                        <Prop Key="Type" Value="DropDownList" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="ReportNumber" />
+                                                        <Prop Key="Width" Value="140" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="Pass" />
+                                                        <Prop Key="Width" Value="120" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="TestingLab" />
+                                                        <Prop Key="Width" Value="180" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="GroupReportTest" />
+                                                        <Prop Key="Width" Value="90" />
+                                                        <Prop Key="Type" Value="CheckBox" />
+                                                        <Prop Key="TextAlign" Value="Center" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="TestingDate" />
+                                                        <Prop Key="Width" Value="90" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="ProtocolTestedTo" />
+                                                        <Prop Key="Width" Value="180" />
+                                                        <Prop Key="Type" Value="DropDownList" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="ReportDate" />
+                                                        <Prop Key="Width" Value="90" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="ReportExpirationDate" />
+                                                        <Prop Key="Width" Value="90" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="WaiverReasonCode" />
+                                                        <Prop Key="Width" Value="180" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                        <Prop Key="Type" Value="DropDownList" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="WaiverChangeReason" />
+                                                        <Prop Key="Width" Value="280" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                            </Children>
+                                        </PXGridLevel>
+                                    </AddItem>
+                                </Children>
+                                <Prop Key="SyncPosition" Value="True" />
+                                <Prop Key="AutoSize.Enabled" Value="True" />
+                                <Prop Key="AutoSize.MinHeight" Value="500" />
+                                <Prop Key="SkinID" Value="Details" />
+                                <Prop Key="Width" Value="100%" />
+                            </PXGrid>
+                        </AddItem>
+                    </Children>
+                </PXTabItem>
+            </AddItem>
+        </Children>
+    </PXTab>
+</Page>

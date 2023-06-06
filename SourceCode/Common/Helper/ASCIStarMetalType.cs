@@ -1,5 +1,5 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
-using PX.Data;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Common.Helper
 {
@@ -12,7 +12,7 @@ namespace ASCISTARCustom.Common.Helper
         /// <returns>True if the metal type is gold, false if it is not, or null if it is not defined in the list.</returns>
         public static bool IsGold(string metalType)
         {
-            return GetMetalType(metalType) == true;
+            return GetBoolableMetalType(metalType) == true;
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace ASCISTARCustom.Common.Helper
         /// <returns>True if the metal type is silver, false if it is not silver, and null if the metal type is not defined in the list.</returns>
         public static bool IsSilver(string metalType)
         {
-            return GetMetalType(metalType) == false;
+            return GetBoolableMetalType(metalType) == false;
         }
 
         /// <summary>
@@ -30,12 +30,9 @@ namespace ASCISTARCustom.Common.Helper
         /// </summary>
         /// <param name="metalType">The metal type to check.</param>
         /// <returns>True if the metal type is gold, false if metal type is silver, and null if it cannot be determined.</returns>
-        public static bool? GetMetalType(string metalType)
+        public static bool? GetBoolableMetalType(string metalType)
         {
-            if (metalType == null)
-            {
-                return null;
-            }
+            if (metalType == null) return null;
 
             switch (metalType?.ToUpper())
             {
@@ -94,25 +91,13 @@ namespace ASCISTARCustom.Common.Helper
         ///<returns>The gold value for the provided metal type.</returns>
         public static decimal GetMultFactorConvertTOZtoGram(string metalType)
         {
-            if (metalType == null)
-                return decimal.Zero;
+            if (metalType == null) return decimal.Zero;
 
-            switch (metalType)
-            {
-                case ASCIStarConstants.MetalType.Type_24K: return 24.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_22K: return 22.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_20K: return 20.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_18K: return 18.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_16K: return 16.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_14K: return 14.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_12K: return 12.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_10K: return 10.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_08K: return 8.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_06K: return 6.000000m / 24.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m / 31.10348m;
-                case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m / 31.10348m;
-                default: return decimal.Zero;
-            }
+            if (IsGold(metalType)) return GetGoldTypeValue(metalType) / 24.0m / TOZ2GRAM_31_10348.value;
+
+            if (IsSilver(metalType)) return GetSilverTypeValue(metalType) / TOZ2GRAM_31_10348.value;
+
+            return decimal.Zero;
         }
 
         ///<summary>
@@ -123,8 +108,7 @@ namespace ASCISTARCustom.Common.Helper
         ///<returns>The gold value for the provided metal type.</returns>
         public static decimal GetGoldTypeValue(string metalType)
         {
-            if (metalType == null)
-                return 24.0m;
+            if (metalType == null) return 24.0m;
 
             switch (metalType)
             {
@@ -150,8 +134,7 @@ namespace ASCISTARCustom.Common.Helper
         ///<returns>Decimal value representing the silver type value. </returns>
         public static decimal GetSilverTypeValue(string metalType)
         {
-            if (metalType == null)
-                return 1.0m;
+            if (metalType == null) return 1.0m;
 
             switch (metalType)
             {

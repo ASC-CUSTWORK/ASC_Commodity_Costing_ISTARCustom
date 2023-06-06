@@ -1,7 +1,6 @@
 ﻿using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
-using static ASCISTARCustom.Inventory.Descriptor.Constants.ASCIStarINConstants;
 
 namespace ASCISTARCustom.Inventory.Descriptor.Constants
 {
@@ -19,6 +18,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         {
             public const string BasisOrMarketPriceEmpty = "Basis or Market price is empty, enter value or check Vendor Prices screen.";
             public const string SurchargeIsNegative = "Surcharge can not be negative.";
+            public const string CostingTypeIsNotContract = "To see how Unit Cost depends from Vendor Price select Contract type!";
         }
 
         public class INJewelryAttributesID

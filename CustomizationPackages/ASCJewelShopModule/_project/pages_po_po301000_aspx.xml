@@ -3,14 +3,6 @@
         <Children Key="Columns">
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCostingType" />
-                    <Prop Key="Width" Value="70" />
-                    <Prop Key="CommitChanges" Value="True" />
-                </PXGridColumn>
-            </AddItem>
-            <PXGridColumn DataField="OrderQty" OriginalIndex="7" />
-            <AddItem>
-                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrMarketPrice" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>

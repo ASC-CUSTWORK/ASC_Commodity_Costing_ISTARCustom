@@ -7,11 +7,11 @@ namespace ASCISTARCustom.Inventory.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrIsPDSTenant
+        #region UsrIsActiveKitVersion
         [PXDBBool()]
-        [PXUIField(DisplayName = "Is PDS Tenant")]
-        public virtual bool? UsrIsPDSTenant { get; set; }
-        public abstract class usrIsPDSTenant : PX.Data.BQL.BqlBool.Field<usrIsPDSTenant> { }
+        [PXUIField(DisplayName = "Kit Versions Activation")]
+        public virtual bool? UsrIsActiveKitVersion { get; set; }
+        public abstract class usrIsActiveKitVersion : PX.Data.BQL.BqlBool.Field<usrIsActiveKitVersion> { }
         #endregion
     }
 }

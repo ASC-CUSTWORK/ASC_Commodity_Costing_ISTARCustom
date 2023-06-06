@@ -1,0 +1,32 @@
+﻿<Sql TableName="INCompliance" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="INCompliance">
+  <col name="CompanyID" type="Int" default="Zero" />
+  <col name="InventoryID" type="Int" />
+  <col name="ComplianceID" type="Int" identity="true" />
+  <col name="CustomerAlphaCode" type="NVarChar(50)" nullable="true" />
+  <col name="Division" type="NVarChar(50)" nullable="true" />
+  <col name="TestType" type="NVarChar(20)" nullable="true" />
+  <col name="ReportNumber" type="NVarChar(20)" nullable="true" />
+  <col name="Pass" type="NVarChar(10)" nullable="true" />
+  <col name="TestingLab" type="NVarChar(50)" nullable="true" />
+  <col name="GroupReportTest" type="Bit" nullable="true" />
+  <col name="TestingDate" type="DateTime" nullable="true" />
+  <col name="ProtocolTestedTo" type="NVarChar(50)" nullable="true" />
+  <col name="ReportDate" type="DateTime" nullable="true" />
+  <col name="ReportExpirationDate" type="DateTime" nullable="true" />
+  <col name="WaiverReasonCode" type="NVarChar(50)" nullable="true" />
+  <col name="WaiverChangeReason" type="NVarChar(200)" nullable="true" />
+  <col name="tstamp" type="Timestamp" />
+  <col name="NoteID" type="UniqueIdentifier" />
+  <col name="CreatedByID" type="UniqueIdentifier" />
+  <col name="CreatedByScreenID" type="Char(8)" />
+  <col name="CreatedDateTime" type="DateTime" />
+  <col name="LastModifiedByID" type="UniqueIdentifier" />
+  <col name="LastModifiedByScreenID" type="Char(8)" />
+  <col name="LastModifiedDateTime" type="DateTime" />
+  <index name="INCompliance_PK" clustered="true" primary="true" unique="true">
+    <col name="CompanyID" />
+    <col name="ComplianceID" />
+  </index>
+</table>]]></CDATA>
+</Sql>

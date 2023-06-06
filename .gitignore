@@ -372,5 +372,9 @@ MigrationBackup/
 FodyWeavers.xsd
 /SourceCode/bin
 /.vs
+/JewelShopLibrary/bin/Debug
+/JewelShopLibrary/obj/Debug
 /.vs/ASC_ISTARCustom/v17/.suo
 /SourceCode/.vs
+/SourceCode/bin
+/SourceCode/obj

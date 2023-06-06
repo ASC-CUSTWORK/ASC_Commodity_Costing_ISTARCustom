@@ -18,7 +18,7 @@ namespace ASCISTARCustom.Common.Services.DataProvider.Interfaces
         /// <param name="withException">Whether to throw an exception if the result is null. Default is false.</param>
         /// <returns>The APVendorPrice record if found, or null if not found and withException is false.</returns>
         /// <exception cref="PXException">Thrown when the specified APVendorPrice record is not found and the withException parameter is set to true.</exception>
-        APVendorPrice GetAPVendorPrice(int? bAccountID, int? inventoryID, string UOM, DateTime effectiveDate, bool withException = false);
+        APVendorPrice GetAPVendorPrice(int? bAccountID, int? inventoryID, string UOM, DateTime? effectiveDate, bool withException = false);
 
         /// <summary>
         /// Retrieves a Vendor record with the specified Business Account ID from the database.
