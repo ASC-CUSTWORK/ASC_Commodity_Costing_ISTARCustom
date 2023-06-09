@@ -50,7 +50,7 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrIsOverrideVendor
         [PXDBBool()]
-        [PXUIField(DisplayName = "Override Vendor")]
+        [PXUIField(DisplayName = "Override Vendor", Visible = false)]
         [PXDefault(false, PersistingCheck = PXPersistingCheck.Nothing)]
         public bool? UsrIsOverrideVendor { get; set; }
         public abstract class usrIsOverrideVendor : PX.Data.BQL.BqlBool.Field<usrIsOverrideVendor> { }
@@ -59,7 +59,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrCommodityVendorPrice
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Custom Vendor Price")]
+        [PXUIField(DisplayName = "Custom Price", Visible = false)]
         public decimal? UsrCommodityVendorPrice { get; set; }
         public abstract class usrCommodityVendorPrice : PX.Data.BQL.BqlDecimal.Field<usrCommodityVendorPrice> { }
         #endregion
