@@ -110,6 +110,7 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit99" />
                                 <Prop Key="DataField" Value="UsrBasisValue" />
+                                <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
