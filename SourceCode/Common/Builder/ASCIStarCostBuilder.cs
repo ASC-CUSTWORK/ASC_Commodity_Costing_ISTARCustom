@@ -38,6 +38,8 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? Floor { get; private set; }
         public decimal? Ceiling { get; private set; }
         public decimal? BasisValue { get; private set; } = decimal.Zero;
+
+        public APVendorPrice APVendorPriceContract { get; set; }
         #endregion 
 
         public ASCIStarCostBuilder(PXGraph graph)
@@ -93,7 +95,7 @@ namespace ASCISTARCustom.Common.Builder
 
             if (PreciousMetalItem == null) return null;
 
-            PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID);
+            PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID, true);
             PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
 
             if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
@@ -167,12 +169,17 @@ namespace ASCISTARCustom.Common.Builder
             return PreciousMetalUnitCost;
         }
 
-        public virtual decimal? GetVendorPricePerTOZ(int? vendorID, int? inventoryID)
+        public virtual decimal? GetVendorPricePerTOZ(int? vendorID, int? inventoryID, bool isContract = false)
         {
             var result = GetAPVendorPrice(_graph, vendorID, inventoryID, TOZ.value, PricingDate);
             if (result == null)
             {
                 return 0.0m;
+            }
+
+            if (isContract)
+            {
+                APVendorPriceContract = result;
             }
 
             return result.SalesPrice;

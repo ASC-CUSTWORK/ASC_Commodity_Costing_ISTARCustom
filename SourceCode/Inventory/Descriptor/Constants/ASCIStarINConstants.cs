@@ -7,6 +7,8 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
     [PXLocalizable]
     public static class ASCIStarINConstants
     {
+
+        [PXLocalizable]
         public class Errors
         {
             public const string ERPTakeMarketPrice = "ERP is taking Market price, Matrix Step cannot be zero!";
@@ -14,6 +16,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public const string MarketEmpty = "Market can not be empty!";
         }
 
+        [PXLocalizable]
         public class Warnings
         {
             public const string BasisOrMarketPriceEmpty = "Basis or Market price is empty, enter value or check Vendor Prices screen.";
@@ -21,6 +24,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public const string CostingTypeIsNotContract = "To see how Unit Cost depends from Vendor Price select Contract type!";
             public const string SelectMetalType = "As Commodity Type was changes, select new Metal Type";
             public const string MetalTypeEmpty = "Metal Type is empty on Jewelry Attributes tab";
+            public const string MissingMatchesLossOrSurcharge = "Vendor has anouther contracted value";
         }
 
         public class INJewelryAttributesID
