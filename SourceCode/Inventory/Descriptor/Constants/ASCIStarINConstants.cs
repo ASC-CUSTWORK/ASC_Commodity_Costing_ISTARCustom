@@ -24,7 +24,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public const string CostingTypeIsNotContract = "To see how Unit Cost depends from Vendor Price select Contract type!";
             public const string SelectMetalType = "As Commodity Type was changes, select new Metal Type";
             public const string MetalTypeEmpty = "Metal Type is empty on Jewelry Attributes tab";
-            public const string MissingMatchesLossOrSurcharge = "Vendor has anouther contracted value";
+            public const string MissingMatchesLossOrSurcharge = "Vendor has another contracted value";
         }
 
         public class INJewelryAttributesID
