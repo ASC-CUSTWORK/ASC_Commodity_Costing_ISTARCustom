@@ -89,9 +89,9 @@ namespace ASCISTARCustom.Common.Builder
             }
 
             if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
-                PreciousMetalItem = GetInventoryItemByInvenctoryCD("24K");
+                PreciousMetalItem = ASCIStarMetalType.GetInventoryItemByInvenctoryCD(_graph, "24K");
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
-                PreciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
+                PreciousMetalItem = ASCIStarMetalType.GetInventoryItemByInvenctoryCD(_graph, "SSS");
 
             if (PreciousMetalItem == null) return null;
 
@@ -271,9 +271,6 @@ namespace ASCISTARCustom.Common.Builder
         #region ServiceQueries
         private ASCIStarINJewelryItem GetASCIStarINJewelryItem(int? inventoryID)
             => PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>.Select(_graph, inventoryID);
-
-        private InventoryItem GetInventoryItemByInvenctoryCD(string inventoryCD) =>
-            SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
 
         public static APVendorPrice GetAPVendorPrice(PXGraph graph, int? vendorID, int? inventoryID, string UOM, DateTime effectiveDate)
             => SelectFrom<APVendorPrice>

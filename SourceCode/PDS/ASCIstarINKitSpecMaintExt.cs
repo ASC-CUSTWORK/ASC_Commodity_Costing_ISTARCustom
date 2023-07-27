@@ -163,7 +163,7 @@ namespace ASCISTARCustom.PDS
                 var defaultVendorInventory = GetDefaultPOVendorInventory();
                 if (defaultVendorInventory == null)
                     throw new PXException(ASCIStarINKitMessages.Error.NoDefaultVendor);
-          
+
                 SendEmailNotification(this.Base.Hdr.Current);
             });
         }
@@ -470,14 +470,12 @@ namespace ASCISTARCustom.PDS
                 throw new PXSetPropertyException(ASCIStarMessages.Error.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
             }
 
-            var inJewelryItem = GetASCIStarINJewelryItem(newValue);
-            var boolableMEtalType = ASCIStarMetalType.GetBoolableMetalType(inJewelryItem?.MetalType);
+            var inJewelryItemDB = GetASCIStarINJewelryItem(newValue);
 
             if (JewelryItemView.Current == null)
                 JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
-            var boolableMetalTypeMain = ASCIStarMetalType.GetBoolableMetalType(JewelryItemView.Current?.MetalType);
 
-            if (inJewelryItem?.MetalType != null && boolableMEtalType != boolableMetalTypeMain)
+            if (inJewelryItemDB?.MetalType != null && inJewelryItemDB?.MetalType != JewelryItemView.Current?.MetalType)
             {
                 e.Cancel = true;
                 throw new PXSetPropertyException(ASCIStarINKitMessages.Error.ItemWrongMetalType, PXErrorLevel.RowError);
@@ -612,8 +610,7 @@ namespace ASCISTARCustom.PDS
                 e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMarketID>(e.Row, false, new PXSetPropertyException(ASCIStarINConstants.Errors.MarketEmpty, PXErrorLevel.RowError));
             }
 
-            var inventoryCD = ASCIStarMetalType.GetBoolableMetalType(this.JewelryItemView.Current?.MetalType) == true ? "24K" : "SSS";
-            var inventoryID = SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(Base, inventoryCD)?.TopFirst.InventoryID;
+            var inventoryID = ASCIStarMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
 
             var apVendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(this.Base, row.VendorID, inventoryID, TOZ.value, PXTimeZoneInfo.Today);
 
@@ -652,9 +649,7 @@ namespace ASCISTARCustom.PDS
             var row = e.Row;
             if (row == null) return;
 
-
-            var inventoryCD = ASCIStarMetalType.GetBoolableMetalType(this.JewelryItemView.Current?.MetalType) == true ? "24K" : "SSS";
-            var inventoryID = SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(Base, inventoryCD)?.TopFirst.InventoryID;
+            var inventoryID = ASCIStarMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
             var apVendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(this.Base, row.VendorID, inventoryID, TOZ.value, PXTimeZoneInfo.Today);
             var apVendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(apVendorPrice);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrBasisValue>(row, apVendorPriceExt.UsrBasisValue);

@@ -1,4 +1,8 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
+using PX.Objects.IN;
+using PX.Data;
+using PX.Data.BQL;
+using PX.Data.BQL.Fluent;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Common.Helper
@@ -12,28 +16,6 @@ namespace ASCISTARCustom.Common.Helper
         /// <returns>True if the metal type is gold, false if it is not, or null if it is not defined in the list.</returns>
         public static bool IsGold(string metalType)
         {
-            return GetBoolableMetalType(metalType) == true;
-        }
-
-        /// <summary>
-        /// Determines if the given metal type is silver or not, based on the defined list of silver metal types.
-        /// </summary>
-        /// <param name="metalType">The metal type to check.</param>
-        /// <returns>True if the metal type is silver, false if it is not silver, and null if the metal type is not defined in the list.</returns>
-        public static bool IsSilver(string metalType)
-        {
-            return GetBoolableMetalType(metalType) == false;
-        }
-
-        /// <summary>
-        /// Determines if a given metal type is valid based on a list of acceptable metal types.
-        /// </summary>
-        /// <param name="metalType">The metal type to check.</param>
-        /// <returns>True if the metal type is gold, false if metal type is silver, and null if it cannot be determined.</returns>
-        public static bool? GetBoolableMetalType(string metalType)
-        {
-            if (metalType == null) return null;
-
             switch (metalType?.ToUpper())
             {
                 case ASCIStarConstants.MetalType.Type_24K: return true;
@@ -75,11 +57,22 @@ namespace ASCISTARCustom.Common.Helper
                 case ASCIStarConstants.MetalType.Type_08F: return true;
                 case ASCIStarConstants.MetalType.Type_07F: return true;
                 case ASCIStarConstants.MetalType.Type_06F: return true;
+                default: return false;
+            }
+        }
 
-                case ASCIStarConstants.MetalType.Type_FSS: return false;
-                case ASCIStarConstants.MetalType.Type_SSS: return false;
-
-                default: return null;
+        /// <summary>
+        /// Determines if the given metal type is silver or not, based on the defined list of silver metal types.
+        /// </summary>
+        /// <param name="metalType">The metal type to check.</param>
+        /// <returns>True if the metal type is silver, false if it is not silver, and null if the metal type is not defined in the list.</returns>
+        public static bool IsSilver(string metalType)
+        {
+            switch (metalType?.ToUpper())
+            {
+                case ASCIStarConstants.MetalType.Type_FSS: return true;
+                case ASCIStarConstants.MetalType.Type_SSS: return true;
+                default: return false;
             }
         }
 
@@ -143,5 +136,26 @@ namespace ASCISTARCustom.Common.Helper
                 default: return 1.0m;
             }
         }
+
+        /// <summary>
+        /// Returns InventoryID that corespond to base inventory item of metal, base InventoryItem - InventoryCD in DB: Gold - 24k, Silver - SSS    
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <param name="metalType">String value representing the metal type. </param>
+        /// <returns>int? value of InventoryID from InventoryItem table.</returns>
+        public static int? GetBaseInventoryID(PXGraph graph, string metalType)
+        {
+            string inventoryCD = string.Empty;
+            bool isGold = ASCIStarMetalType.IsGold(metalType);
+            bool isSilver = ASCIStarMetalType.IsSilver(metalType);
+
+            if (isGold) inventoryCD = "24K";
+            if (isSilver) inventoryCD = "SSS";
+
+            return GetInventoryItemByInvenctoryCD(graph, inventoryCD)?.InventoryID;
+        }
+
+        public static InventoryItem GetInventoryItemByInvenctoryCD(PXGraph graph, string inventoryCD) =>
+          SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(graph, inventoryCD)?.TopFirst;
     }
 }
