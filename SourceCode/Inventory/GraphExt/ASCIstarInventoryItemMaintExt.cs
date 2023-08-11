@@ -419,6 +419,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
             this.JewelryItemView.SetValueExt<ASCIStarINJewelryItem.metalType>(this.JewelryItemView.Current, null);
             JewelryItemView.Cache.RaiseExceptionHandling<ASCIStarINJewelryItem.metalType>(JewelryItemView.Current, null,
                 new PXSetPropertyException(ASCIStarINConstants.Warnings.SelectMetalType, PXErrorLevel.Warning));
+
+            ASCIStarINInventoryItemExt rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
         }
 
         #endregion InventoryItem Events
@@ -444,6 +446,17 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             SetReadOnlyPOVendorInventoryFields(e.Cache, row);
             SetVisiblePOVendorInventoryFields(e.Cache);
+
+            var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
+            if (rowExt?.UsrIsOverrideVendor == true)
+            {
+                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrUnitCost>(row, rowExt.UsrUnitCost,
+                      new PXSetPropertyException(ASCIStarINConstants.Warnings.UnitCostIsCustom, PXErrorLevel.Warning));
+            }
+            else
+            {
+                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrUnitCost>(row, rowExt.UsrUnitCost, null);
+            }
         }
 
         protected virtual void _(Events.FieldVerifying<POVendorInventory, POVendorInventory.isDefault> e)
@@ -454,7 +467,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
             if (rowExt.UsrMarketID == null)
             {
-                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMarketID>(e.Row, false, new PXSetPropertyException(ASCIStarINConstants.Errors.MarketEmpty, PXErrorLevel.RowError));
+                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrMarketID>(row, false, new PXSetPropertyException(ASCIStarINConstants.Errors.MarketEmpty, PXErrorLevel.RowError));
             }
 
             var inventoryID = ASCIStarMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
@@ -485,12 +498,13 @@ namespace ASCISTARCustom.Inventory.GraphExt
             if (row == null || row.IsDefault != true) return;
 
             bool newValue = (bool)e.NewValue;
+            var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
+
             if (newValue == false) return;
 
-            var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
             if (rowExt.UsrCommodityVendorPrice == decimal.Zero)
             {
-                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrCommodityVendorPrice>(e.Row, rowExt.UsrCommodityVendorPrice,
+                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrCommodityVendorPrice>(row, rowExt.UsrCommodityVendorPrice,
                     new PXSetPropertyException(ASCIStarMessages.Error.POVendorInventoryVendorPriceEmpty, PXErrorLevel.Error));
             }
 

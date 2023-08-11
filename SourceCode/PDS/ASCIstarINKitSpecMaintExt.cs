@@ -434,6 +434,18 @@ namespace ASCISTARCustom.PDS
             }
         }
 
+        protected virtual void _(Events.FieldDefaulting<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrBasisPrice> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            var defaultVendor = GetDefaultPOVendorInventory();
+
+            if (defaultVendor == null) return;
+            var defaultVendorExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(defaultVendor);
+            e.NewValue = defaultVendorExt?.UsrBasisPrice;
+        }
+
         protected virtual void _(Events.FieldDefaulting<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrBasisValue> e)
         {
             var row = e.Row;
@@ -494,6 +506,12 @@ namespace ASCISTARCustom.PDS
 
                 e.Cache.RaiseFieldDefaulting<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, out object _salesPrice);
                 e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, _salesPrice);
+
+                e.Cache.RaiseFieldDefaulting<ASCIStarINKitSpecStkDetExt.usrBasisPrice>(row, out object _basisPrice);
+                e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, _basisPrice);
+
+                e.Cache.RaiseFieldDefaulting<ASCIStarINKitSpecStkDetExt.usrBasisValue>(row, out object _basisValue);
+                e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrSalesPrice>(row, _basisValue);
 
                 if (IsCommodityItem(row))
                 {

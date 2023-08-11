@@ -1,0 +1,14 @@
+﻿<Table TableName="APVendorPrice">
+    <Column TableName="APVendorPrice" ColumnName="UsrMarketID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrMarket" ColumnType="string" AllowNull="True" MaxLength="2" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrCommodityLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="usrCommoditySurchargePct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrCommodityIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrCommodity" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="2" DecimalLength="1" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrCommodityPerGram" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrIncrementPerGram" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrFormAPI" ColumnType="bool" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrFloor" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrCeiling" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+</Table>

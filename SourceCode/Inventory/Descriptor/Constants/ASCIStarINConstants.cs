@@ -21,10 +21,11 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
         {
             public const string BasisOrMarketPriceEmpty = "Basis or Market price is empty, enter value or check Vendor Prices screen.";
             public const string SurchargeIsNegative = "Surcharge can not be negative.";
-            public const string CostingTypeIsNotContract = "To see how Unit Cost depends from Vendor Price select Contract type!";
+            public const string CostingTypeIsNotContract = "To see how Unit Cost depends from Vendor Price select \"Contract\" Costing Type!";
             public const string SelectMetalType = "As Commodity Type was changes, select new Metal Type";
             public const string MetalTypeEmpty = "Metal Type is empty on Jewelry Attributes tab";
             public const string MissingMatchesLossOrSurcharge = "Vendor has another contracted value";
+            public const string UnitCostIsCustom = "Unit Cost is custom, the Override Vendor checkBox is enabled";
         }
 
         public class INJewelryAttributesID
