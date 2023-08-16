@@ -549,18 +549,19 @@ namespace ASCISTARCustom.PDS
             }
         }
 
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrCostRollupType> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+            UpdateTotalSurchargeAndLoss();
+        }
+
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecHdrExt.usrExtCost> e)
         {
             var row = e.Row;
-            if (row == null || this.Base.Hdr.Current == null) return;
+            if (row == null) return;
 
-            //var newTotalLoss = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractLossPct>(e.Cache);
-            //var newTotalSurcharge = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractSurcharge>(e.Cache);
-            //var newIncrement = GetIncrementTotalValue();
-
-            //this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractLossPct>(this.Base.Hdr.Current, newTotalLoss);
-            //this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractSurcharge>(this.Base.Hdr.Current, newTotalSurcharge);
-            //this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractIncrement>(this.Base.Hdr.Current, newIncrement);
+            UpdateTotalSurchargeAndLoss();
         }
 
         protected virtual void _(Events.RowPersisting<INKitSpecStkDet> e)
@@ -1163,9 +1164,23 @@ namespace ASCISTARCustom.PDS
             }
         }
 
+        private void UpdateTotalSurchargeAndLoss()
+        {
+            if (this.Base.Hdr.Current == null) return;
+
+            var newTotalLoss = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractLossPct>(this.Base.StockDet.Cache);
+            var newTotalSurcharge = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractSurcharge>(this.Base.StockDet.Cache);
+            var newIncrement = GetIncrementTotalValue();
+
+            this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractLossPct>(this.Base.Hdr.Current, newTotalLoss);
+            this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractSurcharge>(this.Base.Hdr.Current, newTotalSurcharge);
+            this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractIncrement>(this.Base.Hdr.Current, newIncrement);
+        }
+
         private decimal? GetFieldTotalPersentage<TField>(PXCache cache) where TField : IBqlField
         {
-            List<INKitSpecStkDet> stkLineList = this.Base.StockDet.Select()?.FirstTableItems?.ToList();
+            List<INKitSpecStkDet> stkLineList = this.Base.StockDet.Select()?.FirstTableItems?
+                .Where(x => x.GetExtension<ASCIStarINKitSpecStkDetExt>().UsrCostRollupType == CostRollupType.PreciousMetal).ToList();
 
             decimal? totalLossAbsValue = stkLineList.Sum(row =>
             {

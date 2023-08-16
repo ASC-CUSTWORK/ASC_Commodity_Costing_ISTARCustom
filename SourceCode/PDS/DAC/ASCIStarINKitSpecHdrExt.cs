@@ -194,7 +194,7 @@ namespace ASCISTARCustom
         #region UsrBasisValue
         [PXPriceCost]
         [PXDefault(TypeCode.Decimal, "0.0", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Basis Value", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Price / TOZ @ Basis", Visibility = PXUIVisibility.Visible, Enabled = false)]
         public decimal? UsrBasisValue { get; set; }
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
