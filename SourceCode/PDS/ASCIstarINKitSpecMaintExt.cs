@@ -553,7 +553,11 @@ namespace ASCISTARCustom.PDS
         {
             var row = e.Row;
             if (row == null) return;
-            UpdateTotalSurchargeAndLoss();
+
+            if (!IsCommodityItem(row))
+            {
+                UpdateTotalSurchargeAndLoss();
+            }
         }
 
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecHdrExt.usrExtCost> e)
@@ -561,7 +565,10 @@ namespace ASCISTARCustom.PDS
             var row = e.Row;
             if (row == null) return;
 
-            UpdateTotalSurchargeAndLoss();
+            if (!IsCommodityItem(row))
+            {
+                UpdateTotalSurchargeAndLoss();
+            }
         }
 
         protected virtual void _(Events.RowPersisting<INKitSpecStkDet> e)
