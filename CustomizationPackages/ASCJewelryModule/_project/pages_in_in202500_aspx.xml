@@ -665,6 +665,7 @@
     </PXGridLevel>
     <PXGrid ID="PXGridVendorItems" ParentId="phG_tab_Items#5_PXGridVendorItems" TypeFullName="PX.Web.UI.PXGrid">
         <Prop Key="Mode.AllowUpload" Value="True" />
+        <Prop Key="KeepPosition" Value="True" />
     </PXGrid>
     <PXTab ID="tab" ParentId="phG_tab" TypeFullName="PX.Web.UI.PXTab">
         <Children Key="Items">

@@ -26,7 +26,7 @@
         <data>
             <SiteMap>
                 <row Title="Style Inventory Stock Items" Url="~/genericinquiry/genericinquiry.aspx?id=587d10fa-80d3-4b36-92be-b7edf1605340" ScreenID="GI000382" NodeID="5b25a395-507f-4886-bd0d-8cbdad75335f" ParentID="00000000-0000-0000-0000-000000000000">
-                    <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="6.25" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea">
+                    <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="130" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                         <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                     </MUIScreen>
                 </row>
@@ -37,7 +37,8 @@
                 </row>
             </MUIWorkspace>
             <MUISubcategory>
-                <row IsPortal="0" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" Order="128" Name="Profiles" Icon="" IsSystem="0" />
+                <row IsPortal="1" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+                <row IsPortal="0" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
             </MUISubcategory>
             <MUIArea>
                 <row IsPortal="0" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" Order="20" Name="Operations" />

@@ -25,7 +25,7 @@
         </layout>
         <data>
             <SiteMap>
-                <row Position="4" Title="Style &amp; Variants (Kit Specification)" Url="~/Pages/IN/IN209500.aspx" ScreenID="IN209500" NodeID="9296f24d-d968-452d-b1e5-93d17035273f" ParentID="c45494a4-36f3-479f-b2de-d4fd01816970">
+                <row Position="4" Title="Kit Specification" Url="~/Pages/IN/IN209500.aspx" ScreenID="IN209500" NodeID="9296f24d-d968-452d-b1e5-93d17035273f" ParentID="c45494a4-36f3-479f-b2de-d4fd01816970">
                     <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="9.6875" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" />
                 </row>
             </SiteMap>
