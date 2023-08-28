@@ -25,7 +25,7 @@
         </layout>
         <data>
             <SiteMap>
-                <row Position="1" Title="Style Inventory Stock Items" Url="~/Pages/IN/IN202500.aspx" ScreenID="IN202500" NodeID="f21272b4-6f90-4504-96fd-f825b085710b" ParentID="c45494a4-36f3-479f-b2de-d4fd01816970">
+                <row Position="1" Title="Stock Items" Url="~/Pages/IN/IN202500.aspx" ScreenID="IN202500" NodeID="f21272b4-6f90-4504-96fd-f825b085710b" ParentID="c45494a4-36f3-479f-b2de-d4fd01816970">
                     <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="5" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea">
                         <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                     </MUIScreen>

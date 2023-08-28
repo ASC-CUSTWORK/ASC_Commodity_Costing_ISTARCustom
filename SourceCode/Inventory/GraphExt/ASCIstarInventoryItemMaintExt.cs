@@ -626,6 +626,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
                     inventoryItemExt.UsrContractSurcharge = apVendorPriceExt.UsrCommoditySurchargePct;
                     inventoryItemExt.UsrContractLossPct = apVendorPriceExt.UsrCommodityLossPct;
+                    inventoryItemExt.UsrMatrixStep = apVendorPriceExt.UsrMatrixStep;
                 }
             }
         }
@@ -675,16 +676,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             var row = e.Row;
             if (row == null) return;
 
-            if (row.IsDefault == true)
-            {
-                //if (this.Base.Item.Current != null)
-                //{
-                //    var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current);
-
-                //    inventoryItemExt.UsrContractSurcharge = (decimal?)e.NewValue;
-                //}
-            }
-            else
+            if (row.IsDefault != true)
             {
                 var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
                 UpdateMetalCalcPOVendorItem(e.Cache, row, rowExt);
@@ -856,6 +848,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             if (ASCIStarMetalType.IsSilver(jewelCostBuilder.INJewelryItem?.MetalType))
             {
+            //    cache.SetValueExt<ASCIStarINInventoryItemExt.usrMatrixStep>(row, jewelCostBuilder.ma);
                 cache.SetValueExt<ASCIStarINInventoryItemExt.usrFloor>(row, jewelCostBuilder.Floor);
                 cache.SetValueExt<ASCIStarINInventoryItemExt.usrCeiling>(row, jewelCostBuilder.Ceiling);
                 cache.SetValueExt<ASCIStarINInventoryItemExt.usrMatrixPriceTOZ>(row, jewelCostBuilder.PreciousMetalAvrSilverMarketCostPerTOZ);
@@ -1017,6 +1010,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             inventoryItemExt.UsrContractSurcharge = poVendorInventoryExt.UsrContractSurcharge;
             inventoryItemExt.UsrContractLossPct = poVendorInventoryExt.UsrContractLossPct;
             inventoryItemExt.UsrBasisValue = poVendorInventoryExt.UsrBasisValue;
+            inventoryItemExt.UsrMatrixStep = poVendorInventoryExt.UsrMatrixStep;
 
             this.Base.Item.UpdateCurrent();
         }
