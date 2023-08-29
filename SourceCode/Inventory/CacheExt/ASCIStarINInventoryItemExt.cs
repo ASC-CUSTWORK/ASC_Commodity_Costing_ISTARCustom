@@ -38,7 +38,7 @@ namespace ASCISTARCustom
 
         #region UsrPriceAsID
         [PXDBInt()]
-        [PXUIField(DisplayName = "Price as Item")]
+        [PXUIField(DisplayName = "Price as Item", Visible = false, Enabled = false)]
         [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
                         , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
@@ -47,7 +47,7 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrPriceToUnit
-        [INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible)]
+        [INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
         [PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXRestrictor(typeof(Where<ASCIStarINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
         public string UsrPriceToUnit { get; set; }
