@@ -35,7 +35,8 @@ namespace ASCISTARCustom
         public string UsrLegacyID { get; set; }
         public abstract class usrLegacyID : PX.Data.BQL.BqlString.Field<usrLegacyID> { }
         #endregion
-
+        
+        // Hidden field due to logic doesn't need conversion between Commodity Items (logic always use 24K and SSS items)
         #region UsrPriceAsID
         [PXDBInt()]
         [PXUIField(DisplayName = "Price as Item", Visible = false, Enabled = false)]
@@ -46,6 +47,7 @@ namespace ASCISTARCustom
         public abstract class usrPriceAsID : PX.Data.BQL.BqlInt.Field<usrPriceAsID> { }
         #endregion
 
+        // Hidden field due to logic doesn't need conversion between Commodity Items (logic always use 24K and SSS items)
         #region UsrPriceToUnit
         [INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
         [PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
