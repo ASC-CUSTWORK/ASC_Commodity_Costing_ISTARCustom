@@ -82,7 +82,7 @@ namespace ASCISTARCustom.Cost.CacheExt
 
         #region UsrContractIncrement
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Market Increment")]
+        [PXUIField(DisplayName = "Increment")]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
         #endregion

@@ -5,47 +5,27 @@ using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
+using PX.Objects.CS;
+using PX.Objects.IN;
 using PX.Objects.PO;
 using PX.Objects.PO.LandedCosts;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Messages = PX.Objects.PO.Messages;
 
 namespace ASCISTARCustom.Purchasing
 {
     public class ASCIStarPOReceiptEntryExt : PXGraphExtension<POReceiptEntry>
     {
         public static bool IsActive() => true;
-
         [PXOverride]
-        public virtual IEnumerable Release(PXAdapter adapter, Func<PXAdapter, IEnumerable> baseMethod)
+        public virtual void ReleaseReceipt(
+            INReceiptEntry docgraph, PX.Objects.AP.APInvoiceEntry invoiceGraph, POReceipt aDoc, DocumentList<INRegister> aINCreated, DocumentList<PX.Objects.AP.APInvoice> aAPCreated, bool aIsMassProcess,
+            Action<INReceiptEntry, PX.Objects.AP.APInvoiceEntry, POReceipt, DocumentList<INRegister>, DocumentList<PX.Objects.AP.APInvoice>, bool> baseMethod)
         {
-            PXCache cache = this.Base.Document.Cache;
-            List<POReceipt> list = new List<POReceipt>();
-            foreach (POReceipt indoc in adapter.Get<POReceipt>())
-            {
-                if (indoc.Hold == false && indoc.Released == false)
-                {
-                    cache.Update(indoc);
-                    list.Add(indoc);
-                }
-            }
+            baseMethod(docgraph, invoiceGraph, aDoc, aINCreated, aAPCreated, aIsMassProcess);
 
-            if (list.Count == 0)
-            {
-                throw new PXException(Messages.Document_Status_Invalid);
-            }
-            this.Base.Save.Press();
-            PXLongOperation.StartOperation(this.Base, delegate ()
-            {
-                POReleaseReceipt.ReleaseDoc(list, false);
-
-
-                CreateLandedCost(list);
-            });
-            return list;
+            CreateLandedCost(aDoc);
         }
 
         #region Events
@@ -68,33 +48,31 @@ namespace ASCISTARCustom.Purchasing
         #endregion
 
         #region Helper Methods
-        public virtual void CreateLandedCost(List<POReceipt> poReceiptList)
+        public virtual void CreateLandedCost(POReceipt poReceipt)
         {
             var graph = PXGraph.CreateInstance<POLandedCostDocEntry>();
-            foreach (POReceipt poReceipt in poReceiptList)
-            {
-                graph.Document.Current = graph.Document.Insert(
-                    new POLandedCostDoc()
-                    {
-                        VendorID = poReceipt.VendorID,
-                        VendorLocationID = poReceipt.VendorLocationID
-                    });
 
-                var landedCostAmount = GetCostAmountValue(poReceipt);
+            graph.Document.Current = graph.Document.Insert(
+                new POLandedCostDoc()
+                {
+                    VendorID = poReceipt.VendorID,
+                    VendorLocationID = poReceipt.VendorLocationID
+                });
 
-                graph.Details.Current = graph.Details.Insert(
-                    new POLandedCostDetail()
-                    {
-                        LandedCostCodeID = ASCIStarPOMessages.Constants.LandedCostCode,
-                        CuryLineAmt = landedCostAmount
-                    });
+            var landedCostAmount = GetCostAmountValue(poReceipt);
 
-                var receiptLinesAdd = GetPOReceiptLineAddList(poReceipt.ReceiptType, poReceipt.ReceiptNbr);
+            graph.Details.Current = graph.Details.Insert(
+                new POLandedCostDetail()
+                {
+                    LandedCostCodeID = ASCIStarPOMessages.Constants.LandedCostCode,
+                    CuryLineAmt = landedCostAmount
+                });
 
-                graph.AddPurchaseReceiptLines(receiptLinesAdd);
+            var receiptLinesAdd = GetPOReceiptLineAddList(poReceipt.ReceiptType, poReceipt.ReceiptNbr);
 
-                graph.Save.Press();
-            }
+            graph.AddPurchaseReceiptLines(receiptLinesAdd);
+
+            graph.Save.Press();
             graph.Clear();
         }
 
