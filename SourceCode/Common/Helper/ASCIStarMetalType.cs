@@ -3,7 +3,6 @@ using PX.Objects.IN;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Common.Helper
 {
@@ -86,9 +85,9 @@ namespace ASCISTARCustom.Common.Helper
         {
             if (metalType == null) return decimal.Zero;
 
-            if (IsGold(metalType)) return GetGoldTypeValue(metalType) / 24.0m / TOZ2GRAM_31_10348.value;
+            if (IsGold(metalType)) return GetGoldTypeValue(metalType) / 24.0m / ASCIStarConstants.TOZ2GRAM_31_10348.value;
 
-            if (IsSilver(metalType)) return GetSilverTypeValue(metalType) / TOZ2GRAM_31_10348.value;
+            if (IsSilver(metalType)) return GetSilverTypeValue(metalType) / ASCIStarConstants.TOZ2GRAM_31_10348.value;
 
             return decimal.Zero;
         }

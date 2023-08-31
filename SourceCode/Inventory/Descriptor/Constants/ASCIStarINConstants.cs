@@ -5,7 +5,7 @@ using PX.Data.BQL;
 namespace ASCISTARCustom.Inventory.Descriptor.Constants
 {
     [PXLocalizable]
-    public static class ASCIStarINConstants
+    public class ASCIStarINConstants
     {
 
         [PXLocalizable]
