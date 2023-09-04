@@ -11,7 +11,8 @@
 			<px:PXDSCallbackCommand Name="Next" Visible="False" ></px:PXDSCallbackCommand>
 			<px:PXDSCallbackCommand Name="Last" Visible="False" ></px:PXDSCallbackCommand>
 			<px:PXDSCallbackCommand Name="Clipboard" Visible="False" ></px:PXDSCallbackCommand>
-			<px:PXDSCallbackCommand Name="CopyPaste" /></CallbackCommands>
+			<px:PXDSCallbackCommand Visible="False" Name="CopyPaste" ></px:PXDSCallbackCommand>
+			<px:PXDSCallbackCommand Visible="False" Name="Insert" ></px:PXDSCallbackCommand></CallbackCommands>
 	</px:PXDataSource>
 </asp:Content>
 <asp:Content ID="cont2" ContentPlaceHolderID="phL" runat="Server">
@@ -31,7 +32,7 @@
 				</RowTemplate>
 				<Columns>
 					<px:PXGridColumn DataField="CustomerID" ></px:PXGridColumn>
-					<px:PXGridColumn DataField="CustomerID_description" Width="280" />
+					<px:PXGridColumn DataField="CustomerID_description" Width="280" ></px:PXGridColumn>
 					<px:PXGridColumn DataField="OrderType" ></px:PXGridColumn>
 					<px:PXGridColumn CommitChanges="True" DataField="InventoryID" ></px:PXGridColumn>
 					<px:PXGridColumn DisplayFormat="" DataField="AllowancePct" ></px:PXGridColumn>
