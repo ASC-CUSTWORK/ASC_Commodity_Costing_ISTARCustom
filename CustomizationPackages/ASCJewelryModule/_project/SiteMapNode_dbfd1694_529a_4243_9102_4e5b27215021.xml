@@ -25,15 +25,13 @@
         </layout>
         <data>
             <SiteMap>
-                <row Title="Jewelry Items Proposal" Url="~/GenericInquiry/GenericInquiry.aspx?id=47d08673-f429-41e8-ba24-d10721f6f72e" ScreenID="ASC0GI01" NodeID="dbfd1694-529a-4243-9102-4e5b27215021" ParentID="00000000-0000-0000-0000-000000000000">
-                    <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="130" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" />
+                <row Title="Customer Proposal Template" Url="~/genericinquiry/genericinquiry.aspx?id=47d08673-f429-41e8-ba24-d10721f6f72e" ScreenID="ASC0GI01" NodeID="dbfd1694-529a-4243-9102-4e5b27215021" ParentID="00000000-0000-0000-0000-000000000000">
                     <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="140" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                         <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                     </MUIScreen>
                 </row>
             </SiteMap>
             <MUIWorkspace>
-                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
                 <row IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="148.625" Title="Inventory" Icon="local_shipping" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" ScreenID="WSIN0000" IsSystem="0">
                     <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
                 </row>
@@ -44,7 +42,6 @@
             </MUISubcategory>
             <MUIArea>
                 <row IsPortal="0" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" Order="20" Name="Operations" />
-                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
             </MUIArea>
         </data>
     </data-set>
