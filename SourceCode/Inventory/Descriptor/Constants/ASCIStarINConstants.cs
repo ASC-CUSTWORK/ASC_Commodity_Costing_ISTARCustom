@@ -1,12 +1,45 @@
 ﻿using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
+using PX.Objects.IN;
 
 namespace ASCISTARCustom.Inventory.Descriptor.Constants
 {
     [PXLocalizable]
     public class ASCIStarINConstants
     {
+        public class InventoryItemStatusExt
+        {
+            public class ListAttribute : PXStringListAttribute
+            {
+                public ListAttribute() : base(
+                    Pair(Active, Messages.Active),
+                    Pair(NoSales, Messages.NoSales),
+                    Pair(NoPurchases, Style),
+                    Pair(NoRequest, Messages.NoRequest),
+                    Pair(Inactive, Messages.Inactive),
+                    Pair(MarkedForDeletion, Messages.ToDelete))
+                { }
+            }
+
+            public const string Style = "Style";
+
+            public const string Active = "AC";
+            public const string NoSales = "NS";
+            public const string NoPurchases = "NP";
+            public const string NoRequest = "NR";
+            public const string Inactive = "IN";
+            public const string MarkedForDeletion = "DE";
+            public const string Unknown = "XX";
+
+            public class active : BqlString.Constant<active> { public active() : base(Active) { } }
+            public class noSales : BqlString.Constant<noSales> { public noSales() : base(NoSales) { } }
+            public class noPurchases : BqlString.Constant<noPurchases> { public noPurchases() : base(NoPurchases) { } }
+            public class noRequest : BqlString.Constant<noRequest> { public noRequest() : base(NoRequest) { } }
+            public class inactive : BqlString.Constant<inactive> { public inactive() : base(Inactive) { } }
+            public class markedForDeletion : BqlString.Constant<markedForDeletion> { public markedForDeletion() : base(MarkedForDeletion) { } }
+            public class unknown : BqlString.Constant<unknown> { public unknown() : base(Unknown) { } }
+        }
 
         [PXLocalizable]
         public class Errors
