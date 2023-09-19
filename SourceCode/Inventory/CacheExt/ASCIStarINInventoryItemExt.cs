@@ -3,6 +3,7 @@ using ASCISTARCustom.Common.DTO.Interfaces;
 using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
+using PX.Data.BQL;
 using PX.Data.ReferentialIntegrity.Attributes;
 using PX.Objects.IN;
 using System;
@@ -20,6 +21,27 @@ namespace ASCISTARCustom
         [PXReferentialIntegrityCheck]
         public virtual int? InventoryID { get; set; }
         public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
+        #endregion
+
+        #region ItemStatus
+        /// The status of the Inventory Item.
+        /// </summary>
+        /// <value>
+        /// Possible values are:
+        /// <c>"AC"</c> - Active (can be used in inventory operations, such as issues and receipts),
+        /// <c>"NS"</c> - No Sales (cannot be sold),
+        /// <c>"NP"</c> - Style (cannot be purchased),
+        /// <c>"NR"</c> - No Request (cannot be used on requisition requests),
+        /// <c>"IN"</c> - Inactive,
+        /// <c>"DE"</c> - Marked for Deletion.
+        /// Defaults to Active (<c>"AC"</c>).
+        ///// </value>
+        [PXDBString(2, IsFixed = true)]
+        [PXDefault("AC")]
+        [PXUIField(DisplayName = "Item Status", Visibility = PXUIVisibility.SelectorVisible)]
+        [ASCIStarINConstants.InventoryItemStatusExt.List]
+        public virtual String ItemStatus { get; set; }
+        public abstract class itemStatus : BqlString.Field<itemStatus> { }
         #endregion
 
         #region UsrLegacyShortRef

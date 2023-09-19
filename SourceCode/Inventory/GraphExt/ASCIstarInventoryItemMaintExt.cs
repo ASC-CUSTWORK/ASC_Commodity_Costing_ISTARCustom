@@ -50,10 +50,6 @@ namespace ASCISTARCustom.Inventory.GraphExt
         [PXDBString(30, IsUnicode = true, InputMask = "####.##.####")]
         [PXSelector(typeof(SearchFor<ASCIStarAPTariffHTSCode.hSTariffCode>))]
         protected virtual void _(Events.CacheAttached<InventoryItem.hSTariffCode> e) { }
-
-        [PXMergeAttributes(Method = MergeMethod.Merge)]
-        [ASCIStarINConstants.InventoryItemStatusExt.List]
-        protected virtual void _(Events.CacheAttached<InventoryItem.itemStatus> e) { }
         #endregion
 
         #region Actions
@@ -75,6 +71,21 @@ namespace ASCISTARCustom.Inventory.GraphExt
         #region Event Handlers
 
         #region InventoryItem Events
+        protected virtual void _(Events.RowInserting<InventoryItem> e)
+        { 
+         
+        }
+
+        protected virtual void _(Events.RowInserted<InventoryItem> e)
+        {
+
+        }
+
+        protected virtual void _(Events.RowSelecting<InventoryItem> e)
+        { 
+
+        }
+
 
         protected virtual void _(Events.FieldSelecting<InventoryItem, ASCIStarINInventoryItemExt.usrBasisValue> e)
         {
