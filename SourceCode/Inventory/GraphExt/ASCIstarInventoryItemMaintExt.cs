@@ -71,21 +71,6 @@ namespace ASCISTARCustom.Inventory.GraphExt
         #region Event Handlers
 
         #region InventoryItem Events
-        protected virtual void _(Events.RowInserting<InventoryItem> e)
-        { 
-         
-        }
-
-        protected virtual void _(Events.RowInserted<InventoryItem> e)
-        {
-
-        }
-
-        protected virtual void _(Events.RowSelecting<InventoryItem> e)
-        { 
-
-        }
-
 
         protected virtual void _(Events.FieldSelecting<InventoryItem, ASCIStarINInventoryItemExt.usrBasisValue> e)
         {
