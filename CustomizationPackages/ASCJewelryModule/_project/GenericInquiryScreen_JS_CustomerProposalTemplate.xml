@@ -137,7 +137,7 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="47d08673-f429-41e8-ba24-d10721f6f72e" Name="ASCCustomerProposalTemplate" FilterColCount="3" PageSize="50" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
+                <row DesignID="47d08673-f429-41e8-ba24-d10721f6f72e" Name="JS-CustomerProposalTemplate" FilterColCount="3" PageSize="50" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
                     <GIFilter LineNbr="7" IsActive="1" Name="ItemClass" FieldName="InventoryItem.itemClassID" DataType="string" DisplayName="Item Class" IsExpression="0" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="6" IsActive="1" Name="ItemStatus" FieldName="PX.Data.Maintenance.GI.CheckboxCombobox+combobox" DataType="string" DisplayName="Item Status" AvailableValues="AA;All Statuses,AC;Active,DE;Marked For Deletion,IN;Inactive,NP;Style,NR;No Request,NS;No Sales" IsExpression="0" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="4" IsActive="1" Name="VendorID" FieldName="POVendorInventory.vendorID" DataType="string" DisplayName="Vendor ID" IsExpression="0" ColSpan="1" Required="0" />
@@ -210,7 +210,7 @@
                     <GIWhere LineNbr="2" IsActive="1" DataFieldName="[InventoryID]" Condition="NU" IsExpression="0" Operation="O" />
                     <GIWhere LineNbr="1" IsActive="1" OpenBrackets="(        " DataFieldName="InventoryItem.inventoryCD" Condition="E " IsExpression="0" Value1="[InventoryID]" Operation="O" />
                     <SiteMap linkname="toDesignById">
-                        <row Title="Customer Proposal Template" Url="~/genericinquiry/genericinquiry.aspx?id=47d08673-f429-41e8-ba24-d10721f6f72e" ScreenID="ASC0GI01" NodeID="dbfd1694-529a-4243-9102-4e5b27215021" ParentID="00000000-0000-0000-0000-000000000000">
+                        <row Title="Customer Proposal Template" Url="~/genericinquiry/genericinquiry.aspx?id=47d08673-f429-41e8-ba24-d10721f6f72e" ScreenID="GIJS0020" NodeID="dbfd1694-529a-4243-9102-4e5b27215021" ParentID="00000000-0000-0000-0000-000000000000">
                             <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="140" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                                 <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                             </MUIScreen>

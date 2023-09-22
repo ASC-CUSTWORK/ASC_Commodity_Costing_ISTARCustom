@@ -137,36 +137,20 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="587d10fa-80d3-4b36-92be-b7edf1605340" Name="StyleInvItems" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
-                    <GINavigationScreen Link="IN202500" LineNbr="1" SortOrder="1" WindowMode="N" IsActive="1" />
-                    <GISort LineNbr="1" IsActive="1" DataFieldName="InventoryItem.inventoryID" SortOrder="A" />
-                    <GITable Alias="InventoryItem" Name="PX.Objects.IN.InventoryItem">
-                        <GIResult LineNbr="22" SortOrder="21" IsActive="1" Field="ringSize" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="79ad7122-4809-4252-9106-37008ae3a72b" />
-                        <GIResult LineNbr="21" SortOrder="20" IsActive="1" Field="usrSearchGroup" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="c767e008-39f5-431c-9af7-824f80abfaef" />
-                        <GIResult LineNbr="20" SortOrder="19" IsActive="1" Field="searchType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="c1f14a45-77fc-499d-9b63-dbf76a4f31c2" />
-                        <GIResult LineNbr="19" SortOrder="18" IsActive="1" Field="createdDateTime" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e2ffc16c-e403-4130-b6e1-3e69d26e02a3" />
-                        <GIResult LineNbr="18" SortOrder="1" IsActive="1" Field="=LEN([InventoryItem.InventoryCD])" Caption="SKU LENGTH" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e169e06d-b14d-458c-9708-3a5f0b0e2813" />
-                        <GIResult LineNbr="17" SortOrder="17" IsActive="1" Field="metal" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="7e2591bc-a400-480e-b60e-1b04ff648bad" />
-                        <GIResult LineNbr="16" SortOrder="2" IsActive="1" Field="= LEFT( [InventoryItem.InventoryCD] , 6)" Caption="Base Style" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="31f69ccb-8a28-4112-95de-db7b0158ed24" />
-                        <GIResult LineNbr="15" SortOrder="16" IsActive="1" Field="weightUOM" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="01e44469-c251-41a4-8636-99c310b40ff6" />
-                        <GIResult LineNbr="14" SortOrder="15" IsActive="0" Field="taxCategoryID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="60243408-1f09-40f0-944b-642364846259" />
-                        <GIResult LineNbr="13" SortOrder="14" IsActive="1" Field="postClassID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="30618938-840c-4d5f-abd4-2199fe9a720f" />
-                        <GIResult LineNbr="12" SortOrder="13" IsActive="1" Field="signature" Caption="Makers" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="ff64ea23-114d-4121-88a0-bda6d42be273" />
-                        <GIResult LineNbr="11" SortOrder="6" IsActive="1" Field="kItemType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="bfffffaa-6b3a-4ccf-949e-1f1693eca973" />
-                        <GIResult LineNbr="10" SortOrder="12" IsActive="0" Field="lotSerClassID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="3841ca30-b813-4821-90ff-17b3d3831392" />
-                        <GIResult LineNbr="9" SortOrder="11" IsActive="0" Field="retailPrice" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e2e71992-ee5c-4015-aba9-d0015144e434" />
-                        <GIResult LineNbr="8" SortOrder="7" IsActive="1" Field="itemSubType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="6e241058-1bc7-425f-b239-82cd11dbdc38" />
-                        <GIResult LineNbr="7" SortOrder="8" IsActive="1" Field="itemType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="8384af49-70fd-46c6-887e-0f2d23224ef5" />
-                        <GIResult LineNbr="6" SortOrder="10" IsActive="0" Field="usrLongDesc" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="aa7d9a10-cda7-4326-b5f6-844dfae88c80" />
-                        <GIResult LineNbr="4" SortOrder="9" IsActive="1" Field="itemClassID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d2c620e9-70dd-4b4b-9220-b7fd33cc627c" />
-                        <GIResult LineNbr="3" SortOrder="5" IsActive="1" Field="itemStatus" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="821a789b-ea80-4067-94cb-a74c48e5e78c" />
-                        <GIResult LineNbr="2" SortOrder="4" IsActive="1" Field="descr" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d17984dd-b3e2-4707-9afc-102ff0c2872e" />
-                        <GIResult LineNbr="1" SortOrder="3" IsActive="1" Field="inventoryCD" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="9bb92ddc-07e9-4111-9e98-c9591ccd5e32" />
+                <row DesignID="4c00acfb-5150-4775-a090-e04e09b28371" Name="JS-CSAnswers" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0">
+                    <GIFilter LineNbr="1" IsActive="1" Name="JSAttrID" FieldName="CSAttributeDetail.attributeID" DataType="string" DisplayName="Attribute ID" IsExpression="0" ColSpan="1" Required="0" />
+                    <GISort LineNbr="1" IsActive="1" DataFieldName="CSAttributeDetail.sortOrder" SortOrder="A" />
+                    <GITable Alias="CSAttributeDetail" Name="PX.Objects.CS.CSAttributeDetail">
+                        <GIResult LineNbr="9" SortOrder="4" IsActive="1" Field="sortOrder" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="286e6516-c889-4c57-aaf2-9a1b3f31ead3" />
+                        <GIResult LineNbr="8" SortOrder="3" IsActive="1" Field="description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="00c76e64-f329-4887-85b6-42b06e5fdf37" />
+                        <GIResult LineNbr="7" SortOrder="2" IsActive="1" Field="valueID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="ef16e063-cbe4-4a57-b52c-c37df936aabd" />
+                        <GIResult LineNbr="6" SortOrder="1" IsActive="1" Field="attributeID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="c2e4f08a-42aa-475a-b740-b25f6bbf20ca" />
                     </GITable>
-                    <GIWhere LineNbr="1" IsActive="0" DataFieldName="InventoryItem.productWorkgroupID" Condition="E " IsExpression="1" Value1="PDS" Operation="A" />
+                    <GIWhere LineNbr="2" IsActive="1" DataFieldName="[JSAttrID]" Condition="NN" IsExpression="0" CloseBrackets=")        " Operation="A" />
+                    <GIWhere LineNbr="1" IsActive="1" OpenBrackets="(        " DataFieldName="CSAttributeDetail.attributeID" Condition="E " IsExpression="0" Value1="[JSAttrID]" Operation="A" />
                     <SiteMap linkname="toDesignById">
-                        <row Title="Style Inventory Stock Items" Url="~/genericinquiry/genericinquiry.aspx?id=587d10fa-80d3-4b36-92be-b7edf1605340" ScreenID="GIJS0011" NodeID="5b25a395-507f-4886-bd0d-8cbdad75335f" ParentID="00000000-0000-0000-0000-000000000000">
-                            <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="6.25" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea">
+                        <row Title="JS-CSAnswers" Url="~/GenericInquiry/GenericInquiry.aspx?id=4c00acfb-5150-4775-a090-e04e09b28371" ScreenID="GI000262" NodeID="e35e722d-a781-4e2f-aa53-770425611e95" ParentID="00000000-0000-0000-0000-000000000000">
+                            <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="55" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                                 <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                             </MUIScreen>
                         </row>
@@ -174,15 +158,14 @@
                 </row>
             </GIDesign>
             <MUIWorkspace>
-                <row IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="148.625" Title="Inventory" Icon="local_shipping" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" ScreenID="WSIN0000" IsSystem="0">
-                    <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
-                </row>
+                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
             </MUIWorkspace>
             <MUISubcategory>
-                <row IsPortal="0" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" Order="128" Name="Profiles" Icon="" IsSystem="0" />
+                <row IsPortal="1" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+                <row IsPortal="0" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
             </MUISubcategory>
             <MUIArea>
-                <row IsPortal="0" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" Order="20" Name="Operations" />
+                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
             </MUIArea>
         </data>
     </data-set>

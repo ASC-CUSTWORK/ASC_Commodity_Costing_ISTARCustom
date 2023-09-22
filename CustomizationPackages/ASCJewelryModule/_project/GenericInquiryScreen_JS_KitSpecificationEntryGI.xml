@@ -137,11 +137,7 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="PDKIT" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
-                    <GINavigationScreen Link="IN209500" LineNbr="2" SortOrder="2" WindowMode="S" IsActive="1">
-                        <GINavigationParameter LineNbr="2" FieldName="RevisionID" ParameterName="INKitSpecHdr.revisionID" IsExpression="0" />
-                        <GINavigationParameter LineNbr="1" FieldName="KitInventoryID" ParameterName="INKitSpecHdr.kitInventoryID" IsExpression="0" />
-                    </GINavigationScreen>
+                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
                     <GINavigationScreen Link="IN209500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1">
                         <GINavigationParameter LineNbr="2" FieldName="RevisionID" ParameterName="INKitSpecHdr.revisionID" IsExpression="0" />
                         <GINavigationParameter LineNbr="1" FieldName="KitInventoryID" ParameterName="INKitSpecHdr.kitInventoryID" IsExpression="0" />
@@ -166,35 +162,37 @@
                         <GIResult LineNbr="2" SortOrder="6" IsActive="1" Field="allowCompAddition" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="0a84e51c-a3f3-4215-8905-1ec8a1487b2e" />
                     </GITable>
                     <SiteMap linkname="toDesignById">
-                        <row Title="Style &amp; Variants" Url="~/genericinquiry/genericinquiry.aspx?id=b42e06d9-d503-4137-b6a1-b3715b470b10" ScreenID="GIJS0012" NodeID="161b7642-0017-41c4-8381-5cfe6b36849c" ParentID="00000000-0000-0000-0000-000000000000">
+                        <row Title="Kit Specification" Url="~/genericinquiry/genericinquiry.aspx?id=b42e06d9-d503-4137-b6a1-b3715b470b10" ScreenID="GIJS0021" NodeID="161b7642-0017-41c4-8381-5cfe6b36849c" ParentID="00000000-0000-0000-0000-000000000000">
                             <ListEntryPoint EntryScreenID="IN209500" IsActive="1" />
-                            <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="20" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea">
+                            <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="150" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                                 <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                             </MUIScreen>
                         </row>
                     </SiteMap>
                     <SiteMap linkname="to1Screen">
-                        <row Title="Style &amp; Variants (Kit Specification)" Url="~/Pages/IN/IN209500.aspx" NodeID="2bdfbef2-627b-42da-8768-eed5808359a0" ParentID="00000000-0000-0000-0000-000000000000">
+                        <row Title="Kit Specification" Url="~/Pages/IN/IN209500.aspx" NodeID="2bdfbef2-627b-42da-8768-eed5808359a0" ParentID="00000000-0000-0000-0000-000000000000">
                             <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="40" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" />
                         </row>
-                        <row Position="4" Title="Style &amp; Variants (Kit Specification)" Url="~/Pages/IN/IN209500.aspx" NodeID="9296f24d-d968-452d-b1e5-93d17035273f" ParentID="c45494a4-36f3-479f-b2de-d4fd01816970">
+                        <row Position="4" Title="Kit Specification" Url="~/Pages/IN/IN209500.aspx" NodeID="9296f24d-d968-452d-b1e5-93d17035273f" ParentID="c45494a4-36f3-479f-b2de-d4fd01816970">
                             <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="9.6875" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" />
                         </row>
                     </SiteMap>
                 </row>
             </GIDesign>
             <MUIWorkspace>
-                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
                 <row IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="148.625" Title="Inventory" Icon="local_shipping" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" ScreenID="WSIN0000" IsSystem="0">
                     <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
                 </row>
+                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
             </MUIWorkspace>
             <MUISubcategory>
+                <row IsPortal="1" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+                <row IsPortal="0" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
                 <row IsPortal="0" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" Order="128" Name="Profiles" Icon="" IsSystem="0" />
             </MUISubcategory>
             <MUIArea>
-                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
                 <row IsPortal="0" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" Order="20" Name="Operations" />
+                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
             </MUIArea>
         </data>
     </data-set>

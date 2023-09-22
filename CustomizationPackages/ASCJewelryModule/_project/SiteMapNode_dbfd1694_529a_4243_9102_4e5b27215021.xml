@@ -25,7 +25,7 @@
         </layout>
         <data>
             <SiteMap>
-                <row Title="Customer Proposal Template" Url="~/genericinquiry/genericinquiry.aspx?id=47d08673-f429-41e8-ba24-d10721f6f72e" ScreenID="ASC0GI01" NodeID="dbfd1694-529a-4243-9102-4e5b27215021" ParentID="00000000-0000-0000-0000-000000000000">
+                <row Title="Customer Proposal Template" Url="~/genericinquiry/genericinquiry.aspx?id=47d08673-f429-41e8-ba24-d10721f6f72e" ScreenID="GIJS0020" NodeID="dbfd1694-529a-4243-9102-4e5b27215021" ParentID="00000000-0000-0000-0000-000000000000">
                     <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="140" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                         <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                     </MUIScreen>

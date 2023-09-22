@@ -25,7 +25,7 @@
         </layout>
         <data>
             <SiteMap>
-                <row Title="Jewelry Valuation" Url="~/genericinquiry/genericinquiry.aspx?id=d2d341b7-532a-4cd8-aaca-494b4c02cd4c" ScreenID="GI000263" NodeID="bb7fff37-d861-4741-be08-651d4a4aec01" ParentID="00000000-0000-0000-0000-000000000000">
+                <row Title="Jewelry Valuation" Url="~/genericinquiry/genericinquiry.aspx?id=d2d341b7-532a-4cd8-aaca-494b4c02cd4c" ScreenID="GIJS0022" NodeID="bb7fff37-d861-4741-be08-651d4a4aec01" ParentID="00000000-0000-0000-0000-000000000000">
                     <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="110" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                         <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                     </MUIScreen>

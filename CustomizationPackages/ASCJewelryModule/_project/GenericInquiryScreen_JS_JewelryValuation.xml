@@ -137,7 +137,7 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="d2d341b7-532a-4cd8-aaca-494b4c02cd4c" Name="JS-Inv-Valuation" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0">
+                <row DesignID="d2d341b7-532a-4cd8-aaca-494b4c02cd4c" Name="JS-JewelryValuation" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0">
                     <GIFilter LineNbr="6" IsActive="0" Name="InventoryItem" FieldName="InventoryItem.inventoryCD" DataType="string" IsExpression="1" DefaultValue="SSR121292143161" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="5" IsActive="1" Name="ForTony" FieldName="PX.Data.Maintenance.GI.CheckboxCombobox+checkbox" DataType="string" DisplayName="ForTony" IsExpression="0" DefaultValue="=1" ColSpan="1" Required="1" />
                     <GIFilter LineNbr="4" IsActive="1" Name="GoldLoss" FieldName="InventoryItem.markupPct" DataType="string" DisplayName="Gold Loss %:" IsExpression="0" DefaultValue="3.5" ColSpan="1" Required="1" />
@@ -250,16 +250,7 @@
                     <GIWhere LineNbr="2" IsActive="0" DataFieldName="InventoryItem.metal" Condition="E " IsExpression="1" Value1="FSS" CloseBrackets=")        " Operation="A" />
                     <GIWhere LineNbr="1" IsActive="0" OpenBrackets="(        " DataFieldName="InventoryItem.metal" Condition="E " IsExpression="1" Value1="SS" Operation="O" />
                     <SiteMap linkname="toDesignById">
-                        <row Title="Jewelry Valuation" Url="~/genericinquiry/genericinquiry.aspx?id=d2d341b7-532a-4cd8-aaca-494b4c02cd4c" ScreenID="GIJS0013" NodeID="bb7fff37-d861-4741-be08-651d4a4aec01" ParentID="00000000-0000-0000-0000-000000000000">
-                            <FilterHeader FilterID="c761bb42-e506-ec11-8282-00155d73340b" UserName="admin" ViewName="Results" FilterName="Silver Valuation" IsDefault="0" IsShared="0" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="2" RefNoteID="cb61bb42-e506-ec11-8282-00155d73340b">
-                                <PivotTable ScreenID="GIJS0013" PivotTableID="1000037" Name="CB61BB42-E506-EC11-8282-00155D73340B">
-                                    <PivotField PivotFieldID="584" Type="0" Expression="=[InfoInventoryItemCommodityWt_Formula56621a7155a54bf1bf4c61eaec297fe5]" Transformation="" Order="2" Caption="Total Metal Value" Aggregate="0" CalculationType="0" ShowTotal="1" SortOrder="-1" SortType="0" Collapsed="0" Width="100" NoteID="b7870be1-b79c-ec11-8288-00155d73340b" />
-                                    <PivotField PivotFieldID="583" Type="0" Expression="=[InfoInventoryItemCommodityWt_wtInGram]" Transformation="" Order="1" Caption="Wt (Gram)" Aggregate="0" CalculationType="0" ShowTotal="1" SortOrder="-1" SortType="0" Collapsed="0" Width="100" NoteID="b5870be1-b79c-ec11-8288-00155d73340b" />
-                                    <PivotField PivotFieldID="166" Type="2" Expression="=[InventoryItem_itemSubType]" Transformation="" Order="3" Caption="Item Sub-Type" Aggregate="1" CalculationType="0" ShowTotal="1" SortOrder="0" SortType="0" Collapsed="1" Width="100" NoteID="eb342f97-b115-435a-8458-ca77b783f6be" />
-                                    <PivotField PivotFieldID="165" Type="2" Expression="=[InventoryItem_kItemType]" Transformation="" Order="2" Caption="Item Type" Aggregate="1" CalculationType="0" ShowTotal="1" SortOrder="0" SortType="0" Collapsed="1" Width="100" NoteID="2e87af02-7776-4619-b54b-b9b99066c044" />
-                                    <PivotField PivotFieldID="162" Type="2" Expression="=[InventoryItem_metal]" Transformation="" Order="1" Caption="Metal Type" Aggregate="1" CalculationType="0" ShowTotal="1" SortOrder="0" SortType="0" Collapsed="1" Width="100" NoteID="30eb029f-05bf-4ccd-a93a-a7de753585ae" />
-                                </PivotTable>
-                            </FilterHeader>
+                        <row Title="Jewelry Valuation" Url="~/genericinquiry/genericinquiry.aspx?id=d2d341b7-532a-4cd8-aaca-494b4c02cd4c" ScreenID="GIJS0022" NodeID="bb7fff37-d861-4741-be08-651d4a4aec01" ParentID="00000000-0000-0000-0000-000000000000">
                             <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="110" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
                                 <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
                             </MUIScreen>
