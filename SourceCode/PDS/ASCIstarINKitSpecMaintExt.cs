@@ -751,6 +751,35 @@ namespace ASCISTARCustom.PDS
         }
         #endregion
 
+        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrDutyCost> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
+
+            if (rowExt.UsrUnitCost == null || rowExt.UsrUnitCost == 0.0m)
+            {
+                rowExt.UsrDutyCostPct = decimal.Zero;
+                return;
+            }
+            decimal? newCostPctValue = (decimal?)e.NewValue / rowExt.UsrUnitCost * 100.0m;
+            if (newCostPctValue == rowExt.UsrDutyCostPct) return;
+            rowExt.UsrDutyCostPct = newCostPctValue;
+        }
+
+        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrDutyCostPct> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            ASCIStarINKitSpecHdrExt rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
+
+            decimal? newDutyCostValue = rowExt.UsrUnitCost * (decimal?)e.NewValue / 100.00m;
+            if (newDutyCostValue == rowExt.UsrDutyCost) return;
+            e.Cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrDutyCost>(row, newDutyCostValue);
+        }
+
         #endregion
 
         #region ServiceMethods
