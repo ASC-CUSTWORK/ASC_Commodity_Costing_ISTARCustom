@@ -481,16 +481,11 @@ namespace ASCISTARCustom.PDS
                 throw new PXSetPropertyException(ASCIStarMessages.Error.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
             }
 
-            var inJewelryItemDB = GetASCIStarINJewelryItem(newValue);
 
             if (JewelryItemView.Current == null)
                 JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
 
-            if (inJewelryItemDB?.MetalType != null && inJewelryItemDB?.MetalType != JewelryItemView.Current?.MetalType)
-            {
-                e.Cancel = true;
-                throw new PXSetPropertyException(ASCIStarINKitMessages.Error.ItemWrongMetalType, PXErrorLevel.RowError);
-            }
+            
         }
 
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, INKitSpecStkDet.compInventoryID> e)
