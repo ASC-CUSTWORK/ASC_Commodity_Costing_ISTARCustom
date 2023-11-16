@@ -24,6 +24,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static PX.Objects.CM.CMReportTranType.tranType;
 
 namespace ASCISTARCustom.PDS
 {
@@ -118,7 +119,7 @@ namespace ASCISTARCustom.PDS
             if (setup != null)
             {
                 var setupExt = PXCache<INSetup>.GetExtension<ASCIStarINSetupExt>(setup);
-                if (setupExt.UsrIsActiveKitVersion == false)
+                if (setupExt.UsrIsActiveKitVersion == false) // Has to be specified on IN101000 screen
                 {
                     CopyJewelryItemFieldsToStockItem(Base.Hdr.Current);
                 }
@@ -514,6 +515,15 @@ namespace ASCISTARCustom.PDS
                     var inKitHdrExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(this.Base.Hdr.Current);
                     this.Base.StockDet.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrContractLossPct>(row, inKitHdrExt.UsrContractLossPct);
                     this.Base.StockDet.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrContractSurcharge>(row, inKitHdrExt.UsrContractSurcharge);
+                }
+
+                var newValue = (int?)e.NewValue;
+                var inJewelryItemDB = GetASCIStarINJewelryItem(newValue);
+
+                if (inJewelryItemDB?.MetalType != null && inJewelryItemDB?.MetalType != JewelryItemView.Current?.MetalType)
+                {
+                    JewelryItemView.Current.MetalType = null;
+                    JewelryItemView.Update(JewelryItemView.Current);
                 }
             }
         }
@@ -1088,6 +1098,7 @@ namespace ASCISTARCustom.PDS
 
             if (!string.IsNullOrEmpty(jewelryItem?.MetalType))
             {
+
                 if (ASCIStarMetalType.IsGold(jewelryItem?.MetalType))
                 {
                     var multFactor = ASCIStarMetalType.GetGoldTypeValue(jewelryItem?.MetalType);
@@ -1095,7 +1106,7 @@ namespace ASCISTARCustom.PDS
                     cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrBaseGoldGrams>(row, One_Gram);
                     cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrBaseFineGoldGrams>(row, fineGrams);
                 }
-                else if (ASCIStarMetalType.IsSilver(jewelryItem?.MetalType))
+                if (ASCIStarMetalType.IsSilver(jewelryItem?.MetalType))
                 {
                     var multFactor = ASCIStarMetalType.GetSilverTypeValue(jewelryItem?.MetalType);
                     var fineGrams = One_Gram * multFactor;
