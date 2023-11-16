@@ -184,7 +184,7 @@ namespace ASCISTARCustom
                 }
                 else
                 {
-                    newUnitCost = inventoryItem.BasePrice;
+                    newUnitCost = inventoryItem.LastStdCost;
                 }
 
                 // cache.SetValueExt<POLine.manualPrice>(poLine, true);
