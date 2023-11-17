@@ -115,14 +115,7 @@ namespace ASCISTARCustom
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion
 
-        #region UsrCostRollupType
-        [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Rollup Type")]
-        [CostRollupType.List]
-        [PXDefault(CostRollupType.Blank, PersistingCheck = PXPersistingCheck.Nothing)]
-        public string UsrCostRollupType { get; set; }
-        public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
-        #endregion
+        
 
         #region UsrBasisValue
         [PXDecimal(6)]
@@ -325,6 +318,16 @@ namespace ASCISTARCustom
 
 
         #region Implementation Unneeded Interface's fields
+
+
+        #region UsrCostRollupType
+        [PXString(1, IsUnicode = true, InputMask = "")]
+        public string UsrCostRollupType { get; set; }
+        public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
+        #endregion
+
+
+
         [PXDecimal(6)]
         public decimal? UsrExtCost { get; set; }
         public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
