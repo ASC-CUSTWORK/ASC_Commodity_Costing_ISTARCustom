@@ -407,24 +407,6 @@
                                 <Prop Key="DataField" Value="UsrCostingType" />
                             </PXDropDown>
                         </AddItem>
-                        <AddItem>
-                            <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="StartColumn" Value="True" />
-                                <Prop Key="LabelsWidth" Value="S" />
-                                <Prop Key="ControlSize" Value="M" />
-                                <Prop Key="ID" Value="CstPXLayoutRule69" />
-                                <Children Key="Controls" />
-                            </PXLayoutRule>
-                        </AddItem>
-                        <AddItem>
-                            <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="ID" Value="CstPXDropDown72" />
-                                <Prop Key="CommitChanges" Value="True" />
-                                <Prop Key="DataField" Value="UsrCostRollupType" />
-                            </PXDropDown>
-                        </AddItem>
                     </Children>
                 </PXPanel>
             </AddItem>
