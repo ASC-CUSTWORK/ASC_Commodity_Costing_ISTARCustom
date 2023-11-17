@@ -23,4 +23,5 @@
     <Column TableName="POVendorInventory" ColumnName="UsrBasisValue" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POVendorInventory" ColumnName="UsrCeiling" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="POVendorInventory" ColumnName="UsrFloor" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrLaborPerUnit" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
 </Table>

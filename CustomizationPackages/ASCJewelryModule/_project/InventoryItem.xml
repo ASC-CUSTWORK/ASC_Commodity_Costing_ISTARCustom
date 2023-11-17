@@ -8,10 +8,10 @@
     <Column TableName="InventoryItem" ColumnName="UsrFreightCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrPriceAsID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="usrPriceToUnit" ColumnType="string" AllowNull="True" MaxLength="10" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPricingGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPricingGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrActualGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrActualGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrPricingGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="21" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrPricingGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="21" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrActualGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="21" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrActualGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="21" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrLegacyShortRef" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrLegacyID" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrContractLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />

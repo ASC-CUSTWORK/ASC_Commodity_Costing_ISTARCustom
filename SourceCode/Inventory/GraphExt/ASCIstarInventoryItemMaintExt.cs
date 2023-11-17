@@ -187,14 +187,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             decimal? pricingGRAMGold = (decimal?)e.NewValue * mult / 24;
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(row, pricingGRAMGold);
 
-            POVendorInventory vendorInventory = GetDefaultVendor();
-            if (vendorInventory == null) return;
-
-            var vendorInventoryExt = vendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
-
-            decimal? fabricationValueAdd = (decimal?)e.NewValue * vendorInventoryExt.UsrLaborPerUnitVendor;
-            SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrLaborPerUnit>(vendorInventoryExt.UsrLaborPerUnitVendor, vendorInventory);
-            e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(row, fabricationValueAdd);
+            UpdateLaborPerUnit(e.Cache, row, e.NewValue);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrActualGRAMSilver> e)
@@ -223,6 +216,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
             {
                 rowExt.UsrActualGRAMGold = actualGRAMGold;
             }
+
+            UpdateLaborPerUnit(e.Cache, row, actualGRAMGold);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrPricingGRAMSilver> e)
@@ -927,6 +922,18 @@ namespace ASCISTARCustom.Inventory.GraphExt
                     cache.Update(row);
                 }
             }
+        }
+
+        private void UpdateLaborPerUnit(PXCache cache, InventoryItem row, object NewValue)
+        {
+            POVendorInventory vendorInventory = GetDefaultVendor();
+            if (vendorInventory == null) return;
+
+            var vendorInventoryExt = vendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
+
+            decimal? fabricationValueAdd = (decimal?)NewValue * vendorInventoryExt.UsrLaborPerUnitVendor;
+            SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrLaborPerUnit>(vendorInventoryExt.UsrLaborPerUnitVendor, vendorInventory);
+            cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(row, fabricationValueAdd);
         }
 
         private void UpdateCostsCurrentOverridenPOVendorItem(ASCIStarINInventoryItemExt inventoryItemExt)
