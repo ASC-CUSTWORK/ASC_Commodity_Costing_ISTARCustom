@@ -32,7 +32,7 @@ namespace ASCISTARCustom.Common.DTO.Interfaces
         decimal? UsrDutyCostPct { get; set; }
         decimal? UsrExtCost { get; set; }
         string UsrCostingType { get; set; }
-        string UsrCostRollupType { get; set; }
+        //string UsrCostRollupType { get; set; }
         string UsrCommodityType { get; set; }
     }
 }

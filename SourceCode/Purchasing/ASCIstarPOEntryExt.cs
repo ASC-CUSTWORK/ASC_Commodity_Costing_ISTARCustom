@@ -165,8 +165,6 @@ namespace ASCISTARCustom
                 var inventoryItem = InventoryItem.PK.Find(Base, poLine.InventoryID);
                 var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
 
-                decimal? newUnitCost;
-
                 var poVendorInventory = GetDefaultPOVendorInventory(this.Base.Document.Current.VendorID, poLine.InventoryID);
 
                 var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
@@ -174,23 +172,15 @@ namespace ASCISTARCustom
                                 .WithPOVendorInventory(poVendorInventory)
                                 .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
                                 .Build();
-                if(jewelryCostProvider != null)
-                {
 
-                    newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
-                        inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
-
-                    SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);
-                }
-                else
-                {
-                    newUnitCost = inventoryItem.LastStdCost;
-                }
+                var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
+                    inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
 
                 // cache.SetValueExt<POLine.manualPrice>(poLine, true);
                 cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);
                 cache.SetValueExt<POLine.unitCost>(poLine, newUnitCost);
 
+                SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);
 
                 if (toUpdate) this.Base.Transactions.Update(poLine);
             }

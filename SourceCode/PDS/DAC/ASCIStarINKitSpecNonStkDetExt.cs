@@ -59,7 +59,7 @@ namespace ASCISTARCustom
         [CostRollupType.List]
         [PXDefault(CostRollupType.Fabrication, PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Rollup Type", Enabled = true)]
-        [PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
+        //[PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion          

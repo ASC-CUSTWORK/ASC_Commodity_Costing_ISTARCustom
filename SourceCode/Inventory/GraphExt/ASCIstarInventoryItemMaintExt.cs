@@ -110,14 +110,14 @@ namespace ASCISTARCustom.Inventory.GraphExt
             e.NewValue = classExt?.UsrCostingType ?? ASCIStarConstants.CostingType.ContractCost;
         }
 
-        protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCIStarINInventoryItemExt.usrCostRollupType> e)
-        {
-            if (e.Row == null) return;
+        //protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCIStarINInventoryItemExt.usrCostRollupType> e)
+        //{
+        //    if (e.Row == null) return;
 
-            INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
-            ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
-            e.NewValue = classExt?.UsrCostRollupType ?? ASCIStarConstants.CostRollupType.Blank;
-        }
+        //    INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
+        //    ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
+        //    e.NewValue = classExt?.UsrCostRollupType ?? ASCIStarConstants.CostRollupType.Blank;
+        //}
 
         protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrMatrixStep> e)
         {
