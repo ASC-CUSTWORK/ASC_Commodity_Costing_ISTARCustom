@@ -81,28 +81,28 @@ namespace ASCISTARCustom
         #endregion
 
         #region UsrPricingGRAMGold
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Fine Gold, Grams")]
         public decimal? UsrPricingGRAMGold { get; set; }
         public abstract class usrPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMGold> { }
         #endregion
 
         #region UsrPricingGRAMSilver
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Fine Silver, Grams")]
         public decimal? UsrPricingGRAMSilver { get; set; }
         public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
         #endregion
 
         #region UsrActualGRAMGold
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Gold, Grams")]
         public decimal? UsrActualGRAMGold { get; set; }
         public abstract class usrActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
         #endregion
 
         #region UsrActualGRAMSilver
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Silver, Grams")]
         public decimal? UsrActualGRAMSilver { get; set; }
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }

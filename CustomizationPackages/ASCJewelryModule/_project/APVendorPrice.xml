@@ -11,4 +11,5 @@
     <Column TableName="APVendorPrice" ColumnName="UsrMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrFloor" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrCeiling" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrLaborPerUnit" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
 </Table>

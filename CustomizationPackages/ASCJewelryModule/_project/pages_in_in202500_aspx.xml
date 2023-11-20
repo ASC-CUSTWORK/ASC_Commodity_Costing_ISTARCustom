@@ -48,6 +48,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit44" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrActualGRAMGold" />
+                                <Prop Key="DisplayFormat" Value="###.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -56,6 +57,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit46" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrPricingGRAMGold" />
+                                <Prop Key="DisplayFormat" Value="###.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -64,6 +66,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit47" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrActualGRAMSilver" />
+                                <Prop Key="DisplayFormat" Value="###.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -72,6 +75,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit50" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrPricingGRAMSilver" />
+                                <Prop Key="DisplayFormat" Value="###.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -560,6 +564,12 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrLaborPerUnitVendor" />
+                    <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
