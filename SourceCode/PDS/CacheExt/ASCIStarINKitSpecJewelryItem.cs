@@ -112,6 +112,7 @@ namespace ASCISTARCustom.PDS.CacheExt
         #region MetalType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Metal Type")]
+        [PXDefault(PersistingCheck = PXPersistingCheck.NullOrBlank)]
         [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.metalType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]

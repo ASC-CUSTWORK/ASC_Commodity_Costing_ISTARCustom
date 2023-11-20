@@ -37,7 +37,7 @@ namespace ASCISTARCustom
         /// Defaults to Active (<c>"AC"</c>).
         ///// </value>
         [PXDBString(2, IsFixed = true)]
-        [PXDefault("AC")]
+        [PXDefault("NP")]
         [PXUIField(DisplayName = "Item Status", Visibility = PXUIVisibility.SelectorVisible)]
         [ASCIStarINConstants.InventoryItemStatusExt.List]
         public virtual String ItemStatus { get; set; }
@@ -57,12 +57,13 @@ namespace ASCISTARCustom
         public string UsrLegacyID { get; set; }
         public abstract class usrLegacyID : PX.Data.BQL.BqlString.Field<usrLegacyID> { }
         #endregion
-        
+
         // Hidden field due to logic doesn't need conversion between Commodity Items (logic always use 24K and SSS items)
         #region UsrPriceAsID
         [PXDBInt()]
         [PXUIField(DisplayName = "Price as Item", Visible = false, Enabled = false)]
-        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
+        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, 
+            Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
                         , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
         public int? UsrPriceAsID { get; set; }
@@ -71,9 +72,10 @@ namespace ASCISTARCustom
 
         // Hidden field due to logic doesn't need conversion between Commodity Items (logic always use 24K and SSS items)
         #region UsrPriceToUnit
-        [INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
-        [PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXRestrictor(typeof(Where<ASCIStarINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
+        [PXString]
+        //[INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
+        //[PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
+        //  [PXRestrictor(typeof(Where<ASCIStarINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
         public string UsrPriceToUnit { get; set; }
         public abstract class usrPriceToUnit : PX.Data.BQL.BqlString.Field<usrPriceToUnit> { }
         #endregion

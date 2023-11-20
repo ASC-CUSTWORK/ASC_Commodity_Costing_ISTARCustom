@@ -397,8 +397,8 @@
                             <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="StartColumn" Value="True" />
-                                <Prop Key="LabelsWidth" Value="M" />
-                                <Prop Key="ControlSize" Value="XXL" />
+                                <Prop Key="LabelsWidth" Value="SM" />
+                                <Prop Key="ControlSize" Value="S" />
                                 <Prop Key="ID" Value="CstPXLayoutRule68" />
                                 <Children Key="Controls" />
                             </PXLayoutRule>
