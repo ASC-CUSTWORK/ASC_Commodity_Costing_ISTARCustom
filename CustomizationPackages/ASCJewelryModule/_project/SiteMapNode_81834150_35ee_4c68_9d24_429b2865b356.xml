@@ -25,18 +25,20 @@
         </layout>
         <data>
             <SiteMap>
-                <row Position="21532" Title="Metal Rates Synchronization" Url="~/Pages/IS/ISTR5000.aspx" ScreenID="ISTR5000" NodeID="34dadbec-4893-453b-81dd-b32b12f11670" ParentID="00000000-0000-0000-0000-000000000000">
-                    <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="120" SubcategoryID="32130442-2305-4394-9389-cf915b191d2a" />
+                <row Title="Purchase Order Gold" Url="~/Frames/ReportLauncher.aspx?ID=POGOLDEN.rpx" ScreenID="POGOLDEN" NodeID="81834150-35ee-4c68-9d24-429b2865b356" ParentID="00000000-0000-0000-0000-000000000000">
+                    <MUIScreen IsPortal="0" WorkspaceID="5d973d14-a4d0-4193-9a87-7856486c62ee" Order="61" SubcategoryID="b731b346-4d68-4796-b797-3e035ef3497c" />
                 </row>
             </SiteMap>
             <MUIWorkspace>
-                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
+                <row IsPortal="0" WorkspaceID="5d973d14-a4d0-4193-9a87-7856486c62ee" Order="244" Title="Purchases" Icon="shopping_cart" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" ScreenID="WSPO0000" IsSystem="0">
+                    <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
+                </row>
             </MUIWorkspace>
             <MUISubcategory>
-                <row IsPortal="0" SubcategoryID="32130442-2305-4394-9389-cf915b191d2a" Order="24.5" Name="Processes" Icon="" IsSystem="0" />
+                <row IsPortal="0" SubcategoryID="b731b346-4d68-4796-b797-3e035ef3497c" Order="960" Name="Printed Forms" Icon="" IsSystem="0" />
             </MUISubcategory>
             <MUIArea>
-                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
+                <row IsPortal="0" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" Order="20" Name="Operations" />
             </MUIArea>
         </data>
     </data-set>

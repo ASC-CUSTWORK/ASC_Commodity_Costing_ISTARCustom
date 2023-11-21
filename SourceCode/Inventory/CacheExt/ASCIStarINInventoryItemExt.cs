@@ -37,7 +37,7 @@ namespace ASCISTARCustom
         /// Defaults to Active (<c>"AC"</c>).
         ///// </value>
         [PXDBString(2, IsFixed = true)]
-        [PXDefault("AC")]
+        [PXDefault("NP")]
         [PXUIField(DisplayName = "Item Status", Visibility = PXUIVisibility.SelectorVisible)]
         [ASCIStarINConstants.InventoryItemStatusExt.List]
         public virtual String ItemStatus { get; set; }
@@ -57,12 +57,13 @@ namespace ASCISTARCustom
         public string UsrLegacyID { get; set; }
         public abstract class usrLegacyID : PX.Data.BQL.BqlString.Field<usrLegacyID> { }
         #endregion
-        
+
         // Hidden field due to logic doesn't need conversion between Commodity Items (logic always use 24K and SSS items)
         #region UsrPriceAsID
         [PXDBInt()]
         [PXUIField(DisplayName = "Price as Item", Visible = false, Enabled = false)]
-        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
+        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, 
+            Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
                         , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
         public int? UsrPriceAsID { get; set; }
@@ -71,36 +72,37 @@ namespace ASCISTARCustom
 
         // Hidden field due to logic doesn't need conversion between Commodity Items (logic always use 24K and SSS items)
         #region UsrPriceToUnit
-        [INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
-        [PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXRestrictor(typeof(Where<ASCIStarINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
+        [PXString]
+        //[INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
+        //[PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
+        //  [PXRestrictor(typeof(Where<ASCIStarINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
         public string UsrPriceToUnit { get; set; }
         public abstract class usrPriceToUnit : PX.Data.BQL.BqlString.Field<usrPriceToUnit> { }
         #endregion
 
         #region UsrPricingGRAMGold
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Fine Gold, Grams")]
         public decimal? UsrPricingGRAMGold { get; set; }
         public abstract class usrPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMGold> { }
         #endregion
 
         #region UsrPricingGRAMSilver
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Fine Silver, Grams")]
         public decimal? UsrPricingGRAMSilver { get; set; }
         public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
         #endregion
 
         #region UsrActualGRAMGold
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Gold, Grams")]
         public decimal? UsrActualGRAMGold { get; set; }
         public abstract class usrActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
         #endregion
 
         #region UsrActualGRAMSilver
-        [PXDBDecimal(6)]
+        [PXDBDecimal(28)]
         [PXUIField(DisplayName = "Silver, Grams")]
         public decimal? UsrActualGRAMSilver { get; set; }
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
@@ -115,14 +117,7 @@ namespace ASCISTARCustom
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion
 
-        #region UsrCostRollupType
-        [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Rollup Type")]
-        [CostRollupType.List]
-        [PXDefault(CostRollupType.Blank, PersistingCheck = PXPersistingCheck.Nothing)]
-        public string UsrCostRollupType { get; set; }
-        public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
-        #endregion
+        
 
         #region UsrBasisValue
         [PXDecimal(6)]
@@ -325,6 +320,16 @@ namespace ASCISTARCustom
 
 
         #region Implementation Unneeded Interface's fields
+
+
+        #region UsrCostRollupType
+        [PXString(1, IsUnicode = true, InputMask = "")]
+        public string UsrCostRollupType { get; set; }
+        public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
+        #endregion
+
+
+
         [PXDecimal(6)]
         public decimal? UsrExtCost { get; set; }
         public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }

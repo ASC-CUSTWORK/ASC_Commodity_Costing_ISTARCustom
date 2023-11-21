@@ -1,5 +1,6 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.DTO.Interfaces;
+using ASCISTARCustom.Inventory.DAC;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
@@ -221,6 +222,21 @@ namespace ASCISTARCustom.Cost.CacheExt
         [PXFormula(typeof(Add<Add<Add<Add<usrUnitCost, usrHandlingCost>, usrFreightCost>, usrLaborCost>, usrDutyCost>))]
         public decimal? UsrEstLandedCost { get; set; }
         public abstract class usrEstLandedCost : PX.Data.BQL.BqlDecimal.Field<usrEstLandedCost> { }
+        #endregion
+
+        #region UsrLaborPerUnit
+        [PXDBDecimal(2)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrLaborPerUnit { get; set; }
+        public abstract class usrLaborPerUnit : PX.Data.BQL.BqlDecimal.Field<usrLaborPerUnit> { }
+        #endregion
+
+        #region UsrLaborPerUnitVendor
+        [PXDecimal(2)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Labor/Unit", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        public decimal? UsrLaborPerUnitVendor { get; set; }
+        public abstract class usrLaborPerUnitVendor : PX.Data.BQL.BqlDecimal.Field<usrLaborPerUnitVendor> { }
         #endregion
 
         #region Implementation Unneeded Interface's fields

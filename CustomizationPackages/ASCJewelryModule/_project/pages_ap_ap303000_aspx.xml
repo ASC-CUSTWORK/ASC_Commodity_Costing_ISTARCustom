@@ -127,6 +127,12 @@
                                                         <Prop Key="Width" Value="90" />
                                                     </PXGridColumn>
                                                 </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="UsrLaborPerUnit" />
+                                                        <Prop Key="Width" Value="100" />
+                                                    </PXGridColumn>
+                                                </AddItem>
                                             </Children>
                                             <Children Key="RowTemplate">
                                                 <AddItem>

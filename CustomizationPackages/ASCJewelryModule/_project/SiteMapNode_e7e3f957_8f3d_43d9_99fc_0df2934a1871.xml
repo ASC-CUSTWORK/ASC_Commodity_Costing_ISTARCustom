@@ -25,21 +25,20 @@
         </layout>
         <data>
             <SiteMap>
-                <row Title="JewelShop Attributes" Url="~/GenericInquiry/GenericInquiry.aspx?id=0871275a-0efa-4fc4-a7b9-70c3575294ce" ScreenID="GIJS0010" NodeID="e29c2a9e-8f4b-4ec3-81dd-1c405d923671" ParentID="00000000-0000-0000-0000-000000000000">
-                    <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="45" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
-                        <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
-                    </MUIScreen>
+                <row Title="Purchase Order Silver" Url="~/Frames/ReportLauncher.aspx?ID=POSILVER.rpx" ScreenID="POSILVER" NodeID="e7e3f957-8f3d-43d9-99fc-0df2934a1871" ParentID="00000000-0000-0000-0000-000000000000">
+                    <MUIScreen IsPortal="0" WorkspaceID="5d973d14-a4d0-4193-9a87-7856486c62ee" Order="51" SubcategoryID="b731b346-4d68-4796-b797-3e035ef3497c" />
                 </row>
             </SiteMap>
             <MUIWorkspace>
-                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
+                <row IsPortal="0" WorkspaceID="5d973d14-a4d0-4193-9a87-7856486c62ee" Order="244" Title="Purchases" Icon="shopping_cart" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" ScreenID="WSPO0000" IsSystem="0">
+                    <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
+                </row>
             </MUIWorkspace>
             <MUISubcategory>
-                <row IsPortal="1" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
-                <row IsPortal="0" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+                <row IsPortal="0" SubcategoryID="b731b346-4d68-4796-b797-3e035ef3497c" Order="960" Name="Printed Forms" Icon="" IsSystem="0" />
             </MUISubcategory>
             <MUIArea>
-                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
+                <row IsPortal="0" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" Order="20" Name="Operations" />
             </MUIArea>
         </data>
     </data-set>

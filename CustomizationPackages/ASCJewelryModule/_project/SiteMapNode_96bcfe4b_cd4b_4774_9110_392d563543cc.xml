@@ -25,19 +25,8 @@
         </layout>
         <data>
             <SiteMap>
-                <row Title="Customer Allowances" Url="~/Pages/AR/AR3030AT.aspx" ScreenID="AR3030AT" NodeID="a970dd4a-1b99-4931-b9ad-8b66625ab546" ParentID="00000000-0000-0000-0000-000000000000">
-                    <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="10" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" />
-                </row>
+                <row Title="Purchase Order Precious" Url="~/Frames/ReportLauncher.aspx?ID=POPRECIOUS.rpx" ScreenID="POPRECIO" NodeID="96bcfe4b-cd4b-4774-9110-392d563543cc" ParentID="00000000-0000-0000-0000-000000000000" />
             </SiteMap>
-            <MUIWorkspace>
-                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
-            </MUIWorkspace>
-            <MUISubcategory>
-                <row IsPortal="0" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" Order="128" Name="Profiles" Icon="" IsSystem="0" />
-            </MUISubcategory>
-            <MUIArea>
-                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
-            </MUIArea>
         </data>
     </data-set>
 </SiteMapNode>
