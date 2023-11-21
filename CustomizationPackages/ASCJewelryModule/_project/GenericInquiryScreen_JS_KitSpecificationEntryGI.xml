@@ -137,29 +137,30 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
+                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="1" ExposeViaOData="0" ExposeViaMobile="0" RowStyleFormula="=IIF([INKitSpecHdr.AllowCompAddition]=1,'red20','default')" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
                     <GINavigationScreen Link="IN209500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1">
                         <GINavigationParameter LineNbr="2" FieldName="RevisionID" ParameterName="INKitSpecHdr.revisionID" IsExpression="0" />
                         <GINavigationParameter LineNbr="1" FieldName="KitInventoryID" ParameterName="INKitSpecHdr.kitInventoryID" IsExpression="0" />
                     </GINavigationScreen>
+                    <GISort LineNbr="1" IsActive="1" DataFieldName="INKitSpecHdr.kitInventoryID" SortOrder="A" />
                     <GITable Alias="INKitSpecHdr" Name="PX.Objects.IN.INKitSpecHdr">
-                        <GIResult LineNbr="18" SortOrder="4" IsActive="1" Field="revisionID" IsVisible="1" DefaultNav="0" NavigationNbr="1" QuickFilter="0" FastFilter="0" RowID="6c94776f-4f7f-46e1-9ce7-c69f73d24c57" />
-                        <GIResult LineNbr="17" SortOrder="17" IsActive="0" Field="noteID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="78162ecc-6b11-413f-85ac-861b5c19ee96" />
-                        <GIResult LineNbr="16" SortOrder="16" IsActive="1" Field="lastModifiedDateTime" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e28157b7-e05a-4f6b-a573-a2e94f694eff" />
-                        <GIResult LineNbr="15" SortOrder="15" IsActive="0" Field="lastModifiedByScreenID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="ee5a37c6-f24c-4d73-aee4-92d4c4f84eca" />
-                        <GIResult LineNbr="14" SortOrder="14" IsActive="0" Field="lastModifiedByID_description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="9c41dca5-803d-4898-babf-848856cded7c" />
-                        <GIResult LineNbr="13" SortOrder="13" IsActive="1" Field="lastModifiedByID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d9197697-3c06-4367-b490-714400488004" />
-                        <GIResult LineNbr="12" SortOrder="8" IsActive="1" Field="kitSubItemID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="305c896a-db84-48d0-89c2-7937d8419d21" />
-                        <GIResult LineNbr="11" SortOrder="3" IsActive="1" Field="kitInventoryID_description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="67f9d955-bdfd-4f0a-be7e-d5c13b2ee379" />
-                        <GIResult LineNbr="10" SortOrder="2" IsActive="1" Field="kitInventoryID" IsVisible="1" DefaultNav="0" NavigationNbr="1" QuickFilter="0" FastFilter="0" RowID="81ec78df-9a22-4353-b2dd-7e5e59ee2f30" />
-                        <GIResult LineNbr="9" SortOrder="7" IsActive="1" Field="isNonStock" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="1239417f-0e3d-48a9-9ee3-d22e42dc6af9" />
-                        <GIResult LineNbr="8" SortOrder="1" IsActive="1" Field="isActive" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="0375b3c5-4b8e-415a-beb3-23a6828a5e95" />
-                        <GIResult LineNbr="7" SortOrder="5" IsActive="1" Field="descr" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="5b53475b-837b-4ad9-9e7e-870036b82b72" />
-                        <GIResult LineNbr="6" SortOrder="12" IsActive="1" Field="createdDateTime" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="36cd59ab-accc-4991-b248-2bb1392f849e" />
-                        <GIResult LineNbr="5" SortOrder="11" IsActive="0" Field="createdByScreenID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="2f70c32d-4449-44ae-bc85-ce5158179949" />
-                        <GIResult LineNbr="4" SortOrder="10" IsActive="0" Field="createdByID_description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="99fb629a-9306-4eb2-b854-0511130ba532" />
-                        <GIResult LineNbr="3" SortOrder="9" IsActive="1" Field="createdByID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="1657b676-1b96-47cd-a9b4-d43d1ab4cc2c" />
-                        <GIResult LineNbr="2" SortOrder="6" IsActive="1" Field="allowCompAddition" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="0a84e51c-a3f3-4215-8905-1ec8a1487b2e" />
+                        <GIResult LineNbr="18" SortOrder="4" IsActive="1" Field="revisionID" IsVisible="1" DefaultNav="0" NavigationNbr="1" QuickFilter="1" FastFilter="1" RowID="6c94776f-4f7f-46e1-9ce7-c69f73d24c57" />
+                        <GIResult LineNbr="17" SortOrder="17" IsActive="0" Field="noteID" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="78162ecc-6b11-413f-85ac-861b5c19ee96" />
+                        <GIResult LineNbr="16" SortOrder="16" IsActive="1" Field="lastModifiedDateTime" Caption="Last Modified Date" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="e28157b7-e05a-4f6b-a573-a2e94f694eff" />
+                        <GIResult LineNbr="15" SortOrder="15" IsActive="0" Field="lastModifiedByScreenID" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="ee5a37c6-f24c-4d73-aee4-92d4c4f84eca" />
+                        <GIResult LineNbr="14" SortOrder="14" IsActive="0" Field="lastModifiedByID_description" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="9c41dca5-803d-4898-babf-848856cded7c" />
+                        <GIResult LineNbr="13" SortOrder="13" IsActive="1" Field="lastModifiedByID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="d9197697-3c06-4367-b490-714400488004" />
+                        <GIResult LineNbr="12" SortOrder="8" IsActive="1" Field="kitSubItemID" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="1" RowID="305c896a-db84-48d0-89c2-7937d8419d21" />
+                        <GIResult LineNbr="11" SortOrder="3" IsActive="1" Field="kitInventoryID_description" Caption="Item Description" IsVisible="1" DefaultNav="0" QuickFilter="1" FastFilter="1" RowID="67f9d955-bdfd-4f0a-be7e-d5c13b2ee379" />
+                        <GIResult LineNbr="10" SortOrder="2" IsActive="1" Field="kitInventoryID" IsVisible="1" DefaultNav="0" NavigationNbr="1" QuickFilter="1" FastFilter="1" RowID="81ec78df-9a22-4353-b2dd-7e5e59ee2f30" />
+                        <GIResult LineNbr="9" SortOrder="7" IsActive="1" Field="isNonStock" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="1239417f-0e3d-48a9-9ee3-d22e42dc6af9" />
+                        <GIResult LineNbr="8" SortOrder="1" IsActive="1" Field="isActive" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="0375b3c5-4b8e-415a-beb3-23a6828a5e95" />
+                        <GIResult LineNbr="7" SortOrder="5" IsActive="1" Field="descr" Caption="Kit Description" IsVisible="1" DefaultNav="0" QuickFilter="1" FastFilter="1" RowID="5b53475b-837b-4ad9-9e7e-870036b82b72" />
+                        <GIResult LineNbr="6" SortOrder="12" IsActive="1" Field="createdDateTime" Caption="Created Date" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="36cd59ab-accc-4991-b248-2bb1392f849e" />
+                        <GIResult LineNbr="5" SortOrder="11" IsActive="0" Field="createdByScreenID" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="2f70c32d-4449-44ae-bc85-ce5158179949" />
+                        <GIResult LineNbr="4" SortOrder="10" IsActive="0" Field="createdByID_description" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="0" RowID="99fb629a-9306-4eb2-b854-0511130ba532" />
+                        <GIResult LineNbr="3" SortOrder="9" IsActive="1" Field="createdByID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="1657b676-1b96-47cd-a9b4-d43d1ab4cc2c" />
+                        <GIResult LineNbr="2" SortOrder="6" IsActive="1" Field="allowCompAddition" IsVisible="1" DefaultNav="0" QuickFilter="0" FastFilter="1" RowID="0a84e51c-a3f3-4215-8905-1ec8a1487b2e" />
                     </GITable>
                     <SiteMap linkname="toDesignById">
                         <row Title="Kit Specification" Url="~/genericinquiry/genericinquiry.aspx?id=b42e06d9-d503-4137-b6a1-b3715b470b10" ScreenID="GIJS0021" NodeID="161b7642-0017-41c4-8381-5cfe6b36849c" ParentID="00000000-0000-0000-0000-000000000000">
