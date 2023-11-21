@@ -52,12 +52,21 @@ namespace ASCISTARCustom.Purchasing
         {
             var graph = PXGraph.CreateInstance<POLandedCostDocEntry>();
 
-            graph.Document.Current = graph.Document.Insert(
-                new POLandedCostDoc()
-                {
-                    VendorID = poReceipt.VendorID,
-                    VendorLocationID = poReceipt.VendorLocationID
-                });
+            try
+            {
+               graph.Document.Current = graph.Document.Insert(
+               new POLandedCostDoc()
+               {
+                   VendorID = poReceipt.VendorID,
+                   VendorLocationID = poReceipt.VendorLocationID
+               });
+            }
+            catch (PXFieldValueProcessingException ex)
+            {
+
+                if (ex.Message.Contains(PX.Objects.PO.Messages.VendorIsNotLandedCostVendor))
+                    return;
+            }
 
             var landedCostAmount = GetCostAmountValue(poReceipt);
 

@@ -12,6 +12,14 @@
             <AddItem>
                 <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
+                    <Prop Key="ID" Value="CstPXDropDown3" />
+                    <Prop Key="DataField" Value="UsrCostRollupType" />
+                    <Prop Key="CommitChanges" Value="True" />
+                </PXDropDown>
+            </AddItem>
+            <AddItem>
+                <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
+                    <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXDropDown2" />
                     <Prop Key="DataField" Value="UsrCostingType" />
                     <Prop Key="CommitChanges" Value="True" />

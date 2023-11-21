@@ -39,6 +39,13 @@
             </AddItem>
             <PXLayoutRule OriginalIndex="5" />
             <AddItem>
+                <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
+                    <Prop Key="Virtual:ApplyStylesheetSkin" />
+                    <Prop Key="ID" Value="CstPXDropDown5" />
+                    <Prop Key="DataField" Value="UsrCostRollupType" />
+                </PXDropDown>
+            </AddItem>
+            <AddItem>
                 <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXLayoutRule6" />
