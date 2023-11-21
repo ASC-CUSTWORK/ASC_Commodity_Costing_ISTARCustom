@@ -99,7 +99,7 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="StartColumn" Value="True" />
                                 <Prop Key="LabelsWidth" Value="SM" />
-                                <Prop Key="ControlSize" Value="SM" />
+                                <Prop Key="ControlSize" Value="S" />
                                 <Prop Key="ID" Value="CstPXLayoutRule43" />
                                 <Children Key="Controls" />
                             </PXLayoutRule>
@@ -295,16 +295,6 @@
                             </PXLayoutRule>
                         </AddItem>
                         <AddItem>
-                            <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
-                                <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                <Prop Key="StartColumn" Value="True" />
-                                <Prop Key="LabelsWidth" Value="SM" />
-                                <Prop Key="ControlSize" Value="S" />
-                                <Prop Key="ID" Value="CstPXLayoutRule95" />
-                                <Children Key="Controls" />
-                            </PXLayoutRule>
-                        </AddItem>
-                        <AddItem>
                             <PXLabel TypeFullName="PX.Web.UI.PXLabel">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstLabel78" />
@@ -377,14 +367,6 @@
                 </PXPanel>
             </AddItem>
             <AddItem>
-                <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
-                    <Prop Key="Virtual:ApplyStylesheetSkin" />
-                    <Prop Key="ColumnSpan" Value="2" />
-                    <Prop Key="ID" Value="CstLayoutRule70" />
-                    <Children Key="Controls" />
-                </PXLayoutRule>
-            </AddItem>
-            <AddItem>
                 <PXPanel TypeFullName="PX.Web.UI.PXPanel">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPanel67" />
@@ -394,8 +376,8 @@
                             <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="StartColumn" Value="True" />
-                                <Prop Key="LabelsWidth" Value="SM" />
-                                <Prop Key="ControlSize" Value="S" />
+                                <Prop Key="LabelsWidth" Value="XL" />
+                                <Prop Key="ControlSize" Value="M" />
                                 <Prop Key="ID" Value="CstPXLayoutRule68" />
                                 <Children Key="Controls" />
                             </PXLayoutRule>
@@ -416,7 +398,7 @@
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="StartColumn" Value="True" />
                     <Prop Key="LabelsWidth" Value="SM" />
-                    <Prop Key="ControlSize" Value="SM" />
+                    <Prop Key="ControlSize" Value="S" />
                     <Children Key="Controls" />
                 </PXLayoutRule>
             </AddItem>
@@ -427,14 +409,18 @@
                 <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="DataField" Value="UsrLegacyID" />
-                    <Prop Key="ID" Value="CstUsrLegacyID" />
+                    <Prop Key="ID" Value="CstPXTextEdit223" />
+                    <Prop Key="LabelWidth" Value="130px" />
+                    <Prop Key="Width" Value="300px" />
                 </PXTextEdit>
             </AddItem>
             <AddItem>
                 <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="DataField" Value="UsrLegacyShortRef" />
-                    <Prop Key="ID" Value="Cst" />
+                    <Prop Key="ID" Value="CstPXTextEdit224" />
+                    <Prop Key="LabelWidth" Value="130px" />
+                    <Prop Key="Width" Value="300px" />
                 </PXTextEdit>
             </AddItem>
             <AddItem>
@@ -445,8 +431,9 @@
                     <Prop Key="AllowUpload" Value="true" />
                     <Prop Key="ShowComment" Value="true" />
                     <Prop Key="DataMember" Value="ItemSettings" />
-                    <Prop Key="ID" Value="imgUploader" />
+                    <Prop Key="ID" Value="JSimgUploader" />
                     <Prop Key="Width" Value="430px" />
+                    <Prop Key="SuppressLabel" Value="True" />
                 </PXImageUploader>
             </AddItem>
             <PXCheckBox DataField="ChkEquipmentManagement" OriginalIndex="8" />
@@ -1164,13 +1151,18 @@
         </Children>
     </PXTab>
     <PXTextEdit DataField="Descr" ParentId="phF_form_edDescr" TypeFullName="PX.Web.UI.PXTextEdit">
-        <Prop Key="Width" Value="430px" />
+        <Prop Key="LabelWidth" Value="80px" />
+        <Prop Key="Width" Value="350px" />
     </PXTextEdit>
-    <PXLayoutRule ParentId="phF_form_PXLayoutRule#3" TypeFullName="PX.Web.UI.PXLayoutRule">
-        <Prop Key="StartGroup" />
-    </PXLayoutRule>
     <PXLayoutRule ParentId="phF_form_PXLayoutRule#0" TypeFullName="PX.Web.UI.PXLayoutRule">
+        <Prop Key="ControlSize" Value="SM" />
         <Prop Key="LabelsWidth" Value="S" />
-        <Prop Key="ControlSize" Value="M" />
     </PXLayoutRule>
+    <PXSelector DataField="ProductWorkgroupID" ParentId="phF_form_edProductWorkgroupID" TypeFullName="PX.Web.UI.PXSelector">
+        <Prop Key="Width" Value="130" />
+    </PXSelector>
+    <PXSelector DataField="ProductManagerID" ParentId="phF_form_edProductManagerID" TypeFullName="PX.Web.UI.PXSelector">
+        <Prop Key="Width" Value="130" />
+    </PXSelector>
+
 </Page>
