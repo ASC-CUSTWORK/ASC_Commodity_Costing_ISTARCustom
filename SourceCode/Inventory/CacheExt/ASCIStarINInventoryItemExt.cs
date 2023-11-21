@@ -108,6 +108,13 @@ namespace ASCISTARCustom
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
         #endregion
 
+        #region UsrActualGRAMBrass
+        [PXDBDecimal(28)]
+        [PXUIField(DisplayName = "Brass Weight, Grams")]
+        public decimal? UsrActualGRAMBrass { get; set; }
+        public abstract class usrActualGRAMBrass : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMBrass> { }
+        #endregion
+
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
