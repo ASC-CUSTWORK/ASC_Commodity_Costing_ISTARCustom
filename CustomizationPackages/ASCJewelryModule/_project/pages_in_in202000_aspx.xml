@@ -4,14 +4,6 @@
             <AddItem>
                 <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
-                    <Prop Key="ID" Value="CstPXDropDown3" />
-                    <Prop Key="DataField" Value="UsrCostRollupType" />
-                </PXDropDown>
-            </AddItem>
-            <PXSelector DataField="PriceClassID" OriginalIndex="1" />
-            <AddItem>
-                <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
-                    <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="ASCIStarCostingType" />
                     <Prop Key="DataField" Value="UsrCostingType" />
                 </PXDropDown>

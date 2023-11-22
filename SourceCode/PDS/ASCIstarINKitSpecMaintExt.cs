@@ -314,7 +314,6 @@ namespace ASCISTARCustom.PDS
             }
         }
 
-
         protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrContractSurcharge> e)
         {
             var row = e.Row;
@@ -329,6 +328,35 @@ namespace ASCISTARCustom.PDS
             if (row == null) return;
 
             UpdateInKitStkComponents(row);
+        }
+
+        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrDutyCost> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
+
+            if (rowExt.UsrUnitCost == null || rowExt.UsrUnitCost == 0.0m)
+            {
+                rowExt.UsrDutyCostPct = decimal.Zero;
+                return;
+            }
+            decimal? newCostPctValue = (decimal?)e.NewValue / rowExt.UsrUnitCost * 100.0m;
+            if (newCostPctValue == rowExt.UsrDutyCostPct) return;
+            rowExt.UsrDutyCostPct = newCostPctValue;
+        }
+
+        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrDutyCostPct> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            ASCIStarINKitSpecHdrExt rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
+
+            decimal? newDutyCostValue = rowExt.UsrUnitCost * (decimal?)e.NewValue / 100.00m;
+            if (newDutyCostValue == rowExt.UsrDutyCost) return;
+            e.Cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrDutyCost>(row, newDutyCostValue);
         }
 
         #endregion
@@ -486,7 +514,7 @@ namespace ASCISTARCustom.PDS
             if (JewelryItemView.Current == null)
                 JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
 
-            
+
         }
 
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, INKitSpecStkDet.compInventoryID> e)
@@ -564,7 +592,7 @@ namespace ASCISTARCustom.PDS
             }
         }
 
-        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecHdrExt.usrExtCost> e)
+        protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrExtCost> e)
         {
             var row = e.Row;
             if (row == null) return;
@@ -755,35 +783,6 @@ namespace ASCISTARCustom.PDS
             SetBasisValueOnStockComp(rowExt);
         }
         #endregion
-
-        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrDutyCost> e)
-        {
-            var row = e.Row;
-            if (row == null) return;
-
-            var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
-
-            if (rowExt.UsrUnitCost == null || rowExt.UsrUnitCost == 0.0m)
-            {
-                rowExt.UsrDutyCostPct = decimal.Zero;
-                return;
-            }
-            decimal? newCostPctValue = (decimal?)e.NewValue / rowExt.UsrUnitCost * 100.0m;
-            if (newCostPctValue == rowExt.UsrDutyCostPct) return;
-            rowExt.UsrDutyCostPct = newCostPctValue;
-        }
-
-        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrDutyCostPct> e)
-        {
-            var row = e.Row;
-            if (row == null) return;
-
-            ASCIStarINKitSpecHdrExt rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
-
-            decimal? newDutyCostValue = rowExt.UsrUnitCost * (decimal?)e.NewValue / 100.00m;
-            if (newDutyCostValue == rowExt.UsrDutyCost) return;
-            e.Cache.SetValueExt<ASCIStarINKitSpecHdrExt.usrDutyCost>(row, newDutyCostValue);
-        }
 
         #endregion
 
@@ -1167,9 +1166,7 @@ namespace ASCISTARCustom.PDS
                         stkComponentExt.UsrContractSurcharge = inKitSpecHdrExt.UsrContractSurcharge;
 
                         decimal? preciousMetalCost = GetUnitCostForCommodityItem(stkComponent);
-                        //decimal? surchargeValue = (100.0m + (stkComponentExt.UsrContractSurcharge ?? 0.0m)) / 100.0m;
-                        //decimal? metalLossValue = (100.0m + (stkComponentExt.UsrContractLossPct ?? 0.0m)) / 100.0m;
-                        stkComponentExt.UsrUnitCost = preciousMetalCost;// * metalLossValue * surchargeValue;
+                        stkComponentExt.UsrUnitCost = preciousMetalCost;
                         this.Base.StockDet.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrUnitCost>(stkComponent, stkComponentExt.UsrUnitCost);
                         this.Base.StockDet.Update(stkComponent);
                     }

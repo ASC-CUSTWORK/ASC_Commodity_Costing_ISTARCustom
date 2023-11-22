@@ -261,17 +261,9 @@ namespace ASCISTARCustom.Cost.CacheExt
         public decimal? UsrDutyCostPct { get; set; }
         public abstract class usrDutyCostPct : PX.Data.BQL.BqlDecimal.Field<usrDutyCostPct> { }
 
-        [PXDecimal(6)]
-        public decimal? UsrExtCost { get; set; }
-        public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
-
         [PXString]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlDecimal.Field<usrCostingType> { }
-
-        [PXString]
-        public string UsrCostRollupType { get; set; }
-        public abstract class usrCostRollupType : PX.Data.BQL.BqlDecimal.Field<usrCostRollupType> { }
 
         [PXString]
         public string UsrCommodityType { get; set; }

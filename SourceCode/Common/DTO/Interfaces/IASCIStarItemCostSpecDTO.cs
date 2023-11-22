@@ -1,13 +1,8 @@
-﻿using ASCISTARCustom.PDS.Interfaces;
-using PX.Data;
-
-namespace ASCISTARCustom.Common.DTO.Interfaces
+﻿namespace ASCISTARCustom.Common.DTO.Interfaces
 {
-    public interface IASCIStarItemCostSpecDTO : IASCIStarCostRollup
+    public interface IASCIStarItemCostSpecDTO
     {
         int? InventoryID { get; set; }
-        //string InventoryCD { get; set; }
-        //string RevisionID { get; set; }
         decimal? UsrActualGRAMGold { get; set; }
         decimal? UsrPricingGRAMSilver { get; set; }
         decimal? UsrPricingGRAMGold { get; set; }
@@ -30,9 +25,7 @@ namespace ASCISTARCustom.Common.DTO.Interfaces
         decimal? UsrLaborCost { get; set; }
         decimal? UsrDutyCost { get; set; }
         decimal? UsrDutyCostPct { get; set; }
-        decimal? UsrExtCost { get; set; }
         string UsrCostingType { get; set; }
-        //string UsrCostRollupType { get; set; }
         string UsrCommodityType { get; set; }
     }
 }

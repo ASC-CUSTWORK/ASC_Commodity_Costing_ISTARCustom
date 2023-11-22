@@ -323,23 +323,5 @@ namespace ASCISTARCustom
         public virtual string UsrCommodityType { get; set; }
         public abstract class usrCommodityType : PX.Data.BQL.BqlString.Field<usrCommodityType> { }
         #endregion
-
-
-
-        #region Implementation Unneeded Interface's fields
-
-
-        #region UsrCostRollupType
-        [PXString(1, IsUnicode = true, InputMask = "")]
-        public string UsrCostRollupType { get; set; }
-        public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
-        #endregion
-
-
-
-        [PXDecimal(6)]
-        public decimal? UsrExtCost { get; set; }
-        public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
-        #endregion
     }
 }

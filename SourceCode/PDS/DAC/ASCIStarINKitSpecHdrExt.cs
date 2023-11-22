@@ -214,17 +214,9 @@ namespace ASCISTARCustom
         public int? InventoryID { get; set; }
         public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
 
-        [PXDecimal]
-        public decimal? UsrExtCost { get; set; }
-        public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
-
         [PXString]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlDecimal.Field<usrCostingType> { }
-
-        [PXString]
-        public string UsrCostRollupType { get; set; }
-        public abstract class usrCostRollupType : PX.Data.BQL.BqlDecimal.Field<usrCostRollupType> { }
 
         [PXString]
         public string UsrCommodityType { get; set; }
