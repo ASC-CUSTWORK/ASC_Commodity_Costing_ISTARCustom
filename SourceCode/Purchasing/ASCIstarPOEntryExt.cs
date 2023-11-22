@@ -166,6 +166,12 @@ namespace ASCISTARCustom
                 var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(inventoryItem);
 
                 var poVendorInventory = GetDefaultPOVendorInventory(this.Base.Document.Current.VendorID, poLine.InventoryID);
+                if (poVendorInventory == null)
+                {
+                    cache.RaiseExceptionHandling<POLine.inventoryID>(poLine, poLine.InventoryID,
+                        new PXSetPropertyException(string.Format(ASCIStarPOMessages.Warnings.NoDefaultVendorOnItem, Base.Document.Current.VendorID), PXErrorLevel.RowWarning));
+                    continue;
+                }
 
                 var jewelryCostProvider = new ASCIStarCostBuilder(this.Base)
                                 .WithInventoryItem(inventoryItemExt)
@@ -202,6 +208,8 @@ namespace ASCISTARCustom
             var inventoryCurySettings = this.ASCIStarItemCurySettings.Select(inventoryID)?.FirstTableItems?.ToList();
             foreach (var line in inventoryCurySettings)
             {
+                if (line.PreferredVendorID == null) return null;
+
                 var prefferedVendor = Vendor.PK.Find(Base, line.PreferredVendorID);
 
                 var poVendorInventory = SelectFrom<POVendorInventory>
