@@ -48,7 +48,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit44" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrActualGRAMGold" />
-                                <Prop Key="DisplayFormat" Value="###.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -57,7 +57,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit46" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrPricingGRAMGold" />
-                                <Prop Key="DisplayFormat" Value="###.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -66,7 +66,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit47" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrActualGRAMSilver" />
-                                <Prop Key="DisplayFormat" Value="###.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -75,7 +75,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit50" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrPricingGRAMSilver" />
-                                <Prop Key="DisplayFormat" Value="###.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.000000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -939,6 +939,34 @@
                                             <Prop Key="DataField" Value="OD" />
                                             <Prop Key="CommitChanges" Value="True" />
                                         </PXSelector>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="StartColumn" Value="True" />
+                                            <Prop Key="LabelsWidth" Value="SM" />
+                                            <Prop Key="ControlSize" Value="XM" />
+                                            <Prop Key="ID" Value="CstPXLayoutRule4" />
+                                            <Children Key="Controls" />
+                                        </PXLayoutRule>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="StartGroup" Value="True" />
+                                            <Prop Key="GroupCaption" Value="Additional Attributes" />
+                                            <Prop Key="ID" Value="CstPXLayoutRule5" />
+                                            <Children Key="Controls" />
+                                        </PXLayoutRule>
+                                    </AddItem>
+                                    <AddItem>
+                                        <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
+                                            <Prop Key="Virtual:ApplyStylesheetSkin" />
+                                            <Prop Key="ID" Value="CstUsrActualGRAMBrass" />
+                                            <Prop Key="DisplayFormat" Value="##0.000000" />
+                                            <Prop Key="CommitChanges" Value="True" />
+                                            <Prop Key="DataField" Value="Item.UsrActualGRAMBrass" />
+                                        </PXNumberEdit>
                                     </AddItem>
                                 </Children>
                             </PXFormView>
