@@ -962,10 +962,10 @@
                                     <AddItem>
                                         <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                            <Prop Key="ID" Value="CstUsrActualGRAMBrass" />
+                                            <Prop Key="ID" Value="CstUsrProductWeight" />
                                             <Prop Key="DisplayFormat" Value="##0.000000" />
                                             <Prop Key="CommitChanges" Value="True" />
-                                            <Prop Key="DataField" Value="Item.UsrActualGRAMBrass" />
+                                            <Prop Key="DataField" Value="Item.UsrProductWeight" />
                                         </PXNumberEdit>
                                     </AddItem>
                                 </Children>
