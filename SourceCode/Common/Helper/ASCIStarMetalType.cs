@@ -80,25 +80,37 @@ namespace ASCISTARCustom.Common.Helper
         /// </summary>
         /// <param name="metalType">The metal type to check.</param>
         /// <returns>True if the metal type is mixed, false if it is not mixed.</returns>
-        public static bool IsMixed(string metalType)
+        public static string GetMixedTypeValue(string metalType)
         {
-            if (metalType is null) return false;
+            if (metalType is null) return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
 
             metalType = metalType.ToUpper();
-            
             var metalTypes = metalType.Split('-');
+
             if (metalTypes.Length == 2)
             {
                 var firstMetalType = metalTypes[0];
                 var secondMetalType = metalTypes[1];
 
-                var isFirstMetalTypePredefined = IsGold(firstMetalType) || IsSilver(firstMetalType);
-                var isSecondMetalTypePredefined = IsGold(secondMetalType) || IsSilver(secondMetalType);
+                var isFirstMetalTypeGold = IsGold(firstMetalType);
+                var isSecondMetalTypeGold = IsGold(secondMetalType);
 
-                return isFirstMetalTypePredefined && isSecondMetalTypePredefined;
+                var isFirstMetalTypePredefined = isFirstMetalTypeGold || IsSilver(firstMetalType);
+                var isSecondMetalTypePredefined = isSecondMetalTypeGold || IsSilver(secondMetalType);
+
+                if (isFirstMetalTypeGold && isSecondMetalTypeGold)
+                {
+                    return ASCIStarConstants.MixedMetalType.Type_MixedGold;
+                }
+
+                if (isFirstMetalTypePredefined && isSecondMetalTypePredefined)
+                {
+                    return ASCIStarConstants.MixedMetalType.Type_MixedDefault;
+                }
+                
             }
 
-            return false;
+            return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
         }
 
         ///<summary>
