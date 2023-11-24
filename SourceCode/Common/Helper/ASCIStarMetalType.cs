@@ -76,10 +76,16 @@ namespace ASCISTARCustom.Common.Helper
         }
 
         /// <summary>
-        /// Determines if the given metal type is mixed or not, based on the defined list of gold and silver metal types.
+        /// Determines if the given metal type is a mix, based on a predefined list of gold and silver types.
+        /// This method identifies pure gold, a mix of gold and silver, other types of mixes, as well as cases where the metal type is undefined or not a mix.
         /// </summary>
         /// <param name="metalType">The metal type to check.</param>
-        /// <returns>True if the metal type is mixed, false if it is not mixed.</returns>
+        /// <returns>
+        /// Returns a string that represents the type of mix:
+        /// - 'Type_MixedGold' for pure gold (both metal types are gold).
+        /// - 'Type_MixedDefault' for a standard mix of gold and silver.
+        /// - 'Type_MixedUndefined' if the metal type is undefined or not a mix.
+        /// </returns>
         public static string GetMixedTypeValue(string metalType)
         {
             if (metalType is null) return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
