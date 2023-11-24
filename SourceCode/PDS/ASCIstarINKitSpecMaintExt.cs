@@ -831,16 +831,19 @@ namespace ASCISTARCustom.PDS
             if (JewelryItemView.Current == null)
                 JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
 
-            bool isVisibleGold = ASCIStarMetalType.IsGold(JewelryItemView.Current?.MetalType);
-            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMGold>(cache, row, isVisibleGold);
-            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMGold>(cache, row, isVisibleGold);
-            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrContractSurcharge>(cache, row, isVisibleGold);
+            bool isVisibleMixed = ASCIStarMetalType.IsMixed(JewelryItemView.Current?.MetalType) || JewelryItemView.Current?.MetalType == null;
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMSilverRight>(cache, row, isVisibleMixed);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilverRight>(cache, row, isVisibleMixed);
 
+            bool isVisibleGold = ASCIStarMetalType.IsGold(JewelryItemView.Current?.MetalType);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrContractSurcharge>(cache, row, isVisibleMixed || isVisibleGold);
 
             bool isVisibleSilver = ASCIStarMetalType.IsSilver(JewelryItemView.Current?.MetalType);
             PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMSilver>(cache, row, isVisibleSilver);
             PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilver>(cache, row, isVisibleSilver);
-            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrMatrixStep>(cache, row, isVisibleSilver);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrMatrixStep>(cache, row, isVisibleMixed || isVisibleSilver);
         }
 
         protected virtual void SetVisibleINKitSpecStkDet(PXCache cache, INKitSpecStkDet inKitSpecStkDet)

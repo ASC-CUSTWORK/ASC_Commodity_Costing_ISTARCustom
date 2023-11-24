@@ -75,6 +75,32 @@ namespace ASCISTARCustom.Common.Helper
             }
         }
 
+        /// <summary>
+        /// Determines if the given metal type is mixed or not, based on the defined list of gold and silver metal types.
+        /// </summary>
+        /// <param name="metalType">The metal type to check.</param>
+        /// <returns>True if the metal type is mixed, false if it is not mixed.</returns>
+        public static bool IsMixed(string metalType)
+        {
+            if (metalType is null) return false;
+
+            metalType = metalType.ToUpper();
+            
+            var metalTypes = metalType.Split('-');
+            if (metalTypes.Length == 2)
+            {
+                var firstMetalType = metalTypes[0];
+                var secondMetalType = metalTypes[1];
+
+                var isFirstMetalTypePredefined = IsGold(firstMetalType) || IsSilver(firstMetalType);
+                var isSecondMetalTypePredefined = IsGold(secondMetalType) || IsSilver(secondMetalType);
+
+                return isFirstMetalTypePredefined && isSecondMetalTypePredefined;
+            }
+
+            return false;
+        }
+
         ///<summary>
         ///Returns the gold value based on the provided metal type.
         ///Throws an exception if the metal type is null.
