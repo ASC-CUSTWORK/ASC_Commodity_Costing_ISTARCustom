@@ -353,6 +353,13 @@
                                                 </AddItem>
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                                                        <Prop Key="DataField" Value="UsrCommodityID" />
+                                                        <Prop Key="Width" Value="70" />
+                                                        <Prop Key="CommitChanges" Value="True" />
+                                                    </PXGridColumn>
+                                                </AddItem>
+                                                <AddItem>
+                                                    <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                                                         <Prop Key="DataField" Value="CuryID" />
                                                         <Prop Key="Width" Value="70" />
                                                     </PXGridColumn>

@@ -7,6 +7,7 @@ using ASCISTARCustom.Cost.CacheExt;
 using ASCISTARCustom.Inventory.CacheExt;
 using ASCISTARCustom.Inventory.DAC;
 using ASCISTARCustom.Inventory.Descriptor.Constants;
+using ASCISTARCustom.Inventory.GraphExt;
 using ASCISTARCustom.PDS.CacheExt;
 using ASCISTARCustom.PDS.Descriptor;
 using PX.Common;
@@ -15,10 +16,13 @@ using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Data.EP;
 using PX.Objects.AP;
+using PX.Objects.CN.Common.Extensions;
+using PX.Objects.Common;
 using PX.Objects.CR;
 using PX.Objects.EP;
 using PX.Objects.IN;
 using PX.Objects.PO;
+using PX.Objects.SO;
 using PX.SM;
 using System;
 using System.Collections;
@@ -429,7 +433,7 @@ namespace ASCISTARCustom.PDS
             if (e.Row is INKitSpecStkDet row)
             {
                 decimal? salesPrice = 0m;
-                var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+                var defaultVendor = GetItemVendor(row);
                 if (defaultVendor != null)
                 {
                     var rowExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(row);
@@ -439,7 +443,7 @@ namespace ASCISTARCustom.PDS
                     }
                     else
                     {
-                        var jewelryCostBuilder = CreateCostBuilder(rowExt);
+                        var jewelryCostBuilder = CreateCostBuilder(rowExt, row);
                         if (jewelryCostBuilder == null)
                         {
                             e.NewValue = salesPrice;
@@ -467,7 +471,7 @@ namespace ASCISTARCustom.PDS
             var row = e.Row;
             if (row == null) return;
 
-            var defaultVendor = GetDefaultPOVendorInventory();
+            var defaultVendor = GetItemVendor(row);
 
             if (defaultVendor == null) return;
             var defaultVendorExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(defaultVendor);
@@ -479,7 +483,7 @@ namespace ASCISTARCustom.PDS
             var row = e.Row;
             if (row == null) return;
 
-            var defaultVendor = GetDefaultPOVendorInventory();
+            var defaultVendor = GetItemVendor(row);
 
             if (defaultVendor == null) return;
             var defaultVendorExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(defaultVendor);
@@ -513,6 +517,7 @@ namespace ASCISTARCustom.PDS
 
             if (JewelryItemView.Current == null)
                 JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
+
 
 
         }
@@ -553,6 +558,22 @@ namespace ASCISTARCustom.PDS
                     JewelryItemView.Current.MetalType = null;
                     JewelryItemView.Update(JewelryItemView.Current);
                 }
+
+                var itemVendor = GetItemVendor(row);
+                if (!VendorItems.Select().FirstTableItems.Any(x=>x.VendorID == itemVendor.VendorID)) 
+                {
+                    itemVendor.RecordID = null;
+                    itemVendor.IsDefault = false;
+                    itemVendor.InventoryID = row.KitInventoryID;
+
+                    var inventoryID = ASCIStarMetalType.GetBaseInventoryID(this.Base, inJewelryItemDB.MetalType);
+                    var apVendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(this.Base, itemVendor.VendorID, inventoryID, ASCIStarConstants.TOZ.value, PXTimeZoneInfo.Today);
+                    var apVendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(apVendorPrice);
+                    var newVendorExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(itemVendor);
+                    newVendorExt.UsrBasisPrice = apVendorPriceExt.UsrBasisValue;
+
+                    VendorItems.Insert(itemVendor);                    
+                }
             }
         }
 
@@ -575,6 +596,8 @@ namespace ASCISTARCustom.PDS
                     }
                     else if (rowExt.UsrCostingType == ASCIStarConstants.CostingType.MarketCost || rowExt.UsrCostingType == ASCIStarConstants.CostingType.ContractCost)
                     {
+
+
                         UpdateVendorPrice(e, row, rowExt);
                     }
                 }
@@ -702,13 +725,13 @@ namespace ASCISTARCustom.PDS
             }
         }
 
-        protected virtual void _(Events.FieldUpdated<POVendorInventory, POVendorInventory.vendorID> e)
+        protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrCommodityID> e)
         {
             var row = e.Row;
-            if (row == null) return;
-
-            var inventoryID = ASCIStarMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
-            var apVendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(this.Base, row.VendorID, inventoryID, ASCIStarConstants.TOZ.value, PXTimeZoneInfo.Today);
+            if (row == null || !e.ExternalCall) return;
+            var rowExt = row.GetExtension<ASCIStarPOVendorInventoryExt>();
+            var inventoryID = (int?)e.NewValue;
+            var apVendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(this.Base, rowExt?.UsrMarketID, inventoryID, ASCIStarConstants.TOZ.value, PXTimeZoneInfo.Today);
             var apVendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(apVendorPrice);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrBasisValue>(row, apVendorPriceExt.UsrBasisValue);
         }
@@ -1021,9 +1044,10 @@ namespace ASCISTARCustom.PDS
             }
         }
 
-        protected virtual ASCIStarCostBuilder CreateCostBuilder(ASCIStarINKitSpecStkDetExt currentRow)
+        protected virtual ASCIStarCostBuilder CreateCostBuilder(ASCIStarINKitSpecStkDetExt currentRow, INKitSpecStkDet row)
         {
-            var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+            var defaultVendor = GetItemVendor(row);
+
             if (defaultVendor != null)
             {
                 return new ASCIStarCostBuilder(Base)
@@ -1036,10 +1060,18 @@ namespace ASCISTARCustom.PDS
             throw new PXSetPropertyException(ASCIStarMessages.Error.NoDefaultVendor);
         }
 
+        protected virtual POVendorInventory GetItemVendor(INKitSpecStkDet row) =>
+            SelectFrom<POVendorInventory>.
+                    Where<POVendorInventory.inventoryID.
+                        IsEqual<@P.AsInt>>.View.Select(Base, row.CompInventoryID).FirstTableItems.FirstOrDefault(x => x.IsDefault == true);
+
+
+
         protected virtual void UpdateVendorPrice(Events.FieldUpdated<INKitSpecStkDet, ASCIStarINKitSpecStkDetExt.usrCostingType> e,
             INKitSpecStkDet row, ASCIStarINKitSpecStkDetExt rowExt)
         {
-            var jewelryCostBuilder = CreateCostBuilder(rowExt);
+            var inventoryItem = _itemDataProvider.GetInventoryItemByID(row.CompInventoryID);
+            var jewelryCostBuilder = CreateCostBuilder(rowExt, row);
             if (jewelryCostBuilder == null) return;
 
             var result = jewelryCostBuilder.CalculatePreciousMetalCost(e.NewValue?.ToString());
@@ -1053,7 +1085,7 @@ namespace ASCISTARCustom.PDS
         protected virtual decimal? GetUnitCostForCommodityItem(INKitSpecStkDet row)
         {
             var value = 0m;
-            var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+            var defaultVendor = GetItemVendor(row);
             if (defaultVendor == null) return value;
 
             var defaultVendorExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(defaultVendor);
@@ -1091,7 +1123,7 @@ namespace ASCISTARCustom.PDS
             {
                 if (isSilver)
                 {
-                    var jewelryCostBuilder = CreateCostBuilder(rowExt);
+                    var jewelryCostBuilder = CreateCostBuilder(rowExt, row);
                     if (jewelryCostBuilder == null) return value;
 
                     var tempValue = jewelryCostBuilder.CalculatePreciousMetalCost(jewelryCostBuilder.ItemCostSpecification.UsrCostingType);
