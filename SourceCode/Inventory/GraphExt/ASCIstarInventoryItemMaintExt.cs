@@ -820,7 +820,6 @@ namespace ASCISTARCustom.Inventory.GraphExt
             PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, isNotGold);
             PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, isNotGold);
             PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrContractIncrement>(cache, row, isNotGold);
-           // PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrFabricationCost>(cache, row, !isNotGold);
 
             PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(cache, row, isNotSilver);
             PXUIFieldAttribute.SetReadOnly<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(cache, row, isNotSilver);
