@@ -90,6 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AP\CacheExtension\ASCIStarAPVendorPriceFilterExt.cs" />
+    <Compile Include="AP\GraphExt\ASCIStarAPVendorPriceMaintExt.cs" />
     <Compile Include="Common\Builder\ASCIStarCostBuilder.cs" />
     <Compile Include="Common\DAC\AuditSystemFields.cs" />
     <Compile Include="Common\Descriptor\ASCIStarConstants.cs" />
