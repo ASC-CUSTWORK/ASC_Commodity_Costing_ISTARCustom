@@ -52,6 +52,13 @@ namespace ASCISTARCustom.Common.Descriptor
             public const string Type_SSS = "SSS";
         }
 
+        public class MixedMetalType
+        {
+            public const string Type_MixedGold = "MG";
+            public const string Type_MixedDefault = "MD";
+            public const string Type_MixedUndefined = "MU";
+        }
+
         public class CommodityClass : PX.Data.BQL.BqlString.Constant<CommodityClass>
         {
             public static readonly string value = "COMMODITY";

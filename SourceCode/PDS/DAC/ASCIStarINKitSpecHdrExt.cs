@@ -54,12 +54,30 @@ namespace ASCISTARCustom
         public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
         #endregion
 
+        #region UsrPricingGRAMSilverRight
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Total Fine Silver Grams", Enabled = false)]
+        [PXFormula(typeof(usrPricingGRAMSilver))]
+        public decimal? UsrPricingGRAMSilverRight { get; set; }
+        public abstract class usrPricingGRAMSilverRight : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilverRight> { }
+        #endregion
+
         #region UsrActualGRAMSilver
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Total Silver Grams", Enabled = false)]
         public decimal? UsrActualGRAMSilver { get; set; }
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
+        #endregion
+
+        #region UsrActualGRAMSilverRight
+        [PXDecimal(6)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Total Silver Grams", Enabled = false)]
+        [PXFormula(typeof(usrActualGRAMSilver))]
+        public decimal? UsrActualGRAMSilverRight { get; set; }
+        public abstract class usrActualGRAMSilverRight : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilverRight> { }
         #endregion
 
         #region UsrContractIncrement

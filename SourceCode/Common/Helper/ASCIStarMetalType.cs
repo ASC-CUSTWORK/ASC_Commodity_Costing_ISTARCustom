@@ -75,6 +75,50 @@ namespace ASCISTARCustom.Common.Helper
             }
         }
 
+        /// <summary>
+        /// Determines if the given metal type is a mix, based on a predefined list of gold and silver types.
+        /// This method identifies pure gold, a mix of gold and silver, other types of mixes, as well as cases where the metal type is undefined or not a mix.
+        /// </summary>
+        /// <param name="metalType">The metal type to check.</param>
+        /// <returns>
+        /// Returns a string that represents the type of mix:
+        /// - 'Type_MixedGold' for pure gold (both metal types are gold).
+        /// - 'Type_MixedDefault' for a standard mix of gold and silver.
+        /// - 'Type_MixedUndefined' if the metal type is undefined or not a mix.
+        /// </returns>
+        public static string GetMixedTypeValue(string metalType)
+        {
+            if (metalType is null) return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
+
+            metalType = metalType.ToUpper();
+            var metalTypes = metalType.Split('-');
+
+            if (metalTypes.Length == 2)
+            {
+                var firstMetalType = metalTypes[0];
+                var secondMetalType = metalTypes[1];
+
+                var isFirstMetalTypeGold = IsGold(firstMetalType);
+                var isSecondMetalTypeGold = IsGold(secondMetalType);
+
+                var isFirstMetalTypePredefined = isFirstMetalTypeGold || IsSilver(firstMetalType);
+                var isSecondMetalTypePredefined = isSecondMetalTypeGold || IsSilver(secondMetalType);
+
+                if (isFirstMetalTypeGold && isSecondMetalTypeGold)
+                {
+                    return ASCIStarConstants.MixedMetalType.Type_MixedGold;
+                }
+
+                if (isFirstMetalTypePredefined && isSecondMetalTypePredefined)
+                {
+                    return ASCIStarConstants.MixedMetalType.Type_MixedDefault;
+                }
+                
+            }
+
+            return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
+        }
+
         ///<summary>
         ///Returns the gold value based on the provided metal type.
         ///Throws an exception if the metal type is null.
