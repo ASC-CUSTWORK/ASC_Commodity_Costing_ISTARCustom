@@ -234,7 +234,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrLaborPerUnitVendor
         [PXDecimal(2)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Labor/Unit", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Labor/Grams", Visibility = PXUIVisibility.Visible, Enabled = false)]
         public decimal? UsrLaborPerUnitVendor { get; set; }
         public abstract class usrLaborPerUnitVendor : PX.Data.BQL.BqlDecimal.Field<usrLaborPerUnitVendor> { }
         #endregion
