@@ -1,4 +1,4 @@
-﻿<Report Name="po641012.rpx">
+﻿<Report Name="po641013.rpx">
     <Report version="20201103" Name="report1">
         <EmbeddedImages>
             <EmbeddedImage>
@@ -5664,7 +5664,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>10px</Size>
                                     </Font>
                                 </Style>
-                                <Value>PO Confirmation#010;Please acknowledge receipt of this order the date you receive it. We require a Purchase Order confirmation within 72 hours of placing the order. Failure to follow will result in a $50 charge back for each PO. The PO confirmation must include the following information:#010;#010;a) PO numbers#010;b) Style numbers and description mentioning colors (if item includes stones)#010;c) Vendor style numbers#010;d) Quantities#010;e) Silver market for the PO (for silver items only) or Gold market for the PO (reference only)#010;g) Confirm ship date for each item or whole PO#010;#010;Please email your confirmation to iStar (Stanley Creations) Purchasing team.#010;#010;All orders must ship complete and on time. If Stanley Creations is not notified of a delay in a PO ship date at least 14 days prior to original promised date due to a Supply chain issue (packaging, raw material, plating, and or other factories) and a shipment is late/partial over a week without approval, 5% penalty on the balance dollar amount, plus freight on the balance shipment will fall onto factories.#010;#010;All shipments by vendor must be within 5% of the quantity ordered or Stanley Creations has the right to return the over shipment.#010;#010;All shipment to Stanley Creations must follow the 50-pack rule. Failure to follow will result in a $50 charge back for each shipping carton.#010;#010;Product Weight Tolerance#010;Total product weight must fall within a 5% (+/-) tolerance range of the total weight quoted for item. Any discrepancy over 5% can be rejected and replacements requested if deemed necessary. Otherwise, all discrepancy over 5% are legible for refund from factories. Freight and any other charges incurred for replacements will be at the factory expense.#010;#010;Stampings &amp; Trademark#010;a)	All products for Stanley Creations must include trademark and hallmark stamp e.g "S", "SGG", "SV", "CJI" or "D" and "925 S"; "SS S"; "14K S"; "10K S"#010;b)	All Sterling Silver items must be stamped with 925.#010;#010;Compliance#010;#010;Any gold, gold plate, tin, tungsten or tantalum that will be used to fulfill this purchase order must originate from a conflict-free country.#010;All material sent from iStar must be used for this purchase order.#010;Compliance with Customer SOP's, testing protocols, and required labs is defined within our data base.#010;#010;Compliance with NEW LEAD SPECIFICATIONS document (located within our web site) and additional requirements of CA Prop 65/ AB1681#010;#010;Stanley Creations Requirements:#010;#010;All items will be tested and must meet compliance or will be returned.#010;#010;For children's jewelry and all components (stones, parts, surface finishes, etc.) are tested separately and must meet the following standards:#010;&gt; NO MORE THAN 40 PPM LEAD#010;&gt; NO MORE THAN 40 PPM CADMIUM#010;#010;#010;</Value>
+                                <Value>PO Confirmation#010;Please acknowledge receipt of this order the date you receive it. We require a Purchase Order confirmation within 72 hours of placing the order. Failure to follow will result in a $50 charge back for each PO. The PO confirmation must include the following information:#010;#010;a) PO numbers#010;b) Style numbers and description mentioning colors (if item includes stones)#010;c) Vendor style numbers#010;d) Quantities #010;e) Silver market for the PO (for silver items only) or Gold market for the PO (reference only)#010;g) Confirm ship date for each item or whole PO#010;#010;Please email your confirmation to iStar (Stanley Creations) Purchasing team.#010;#010;All orders must ship complete and on time. If Stanley Creations is not notified of a delay in a PO ship date at least 14 days prior to original promised date due to a Supply chain issue (packaging, raw material, plating, and or other factories) and a shipment is late/partial over a week without approval, 5% penalty on the balance dollar amount, plus freight on the balance shipment will fall onto factories.#010;#010;All shipments by vendor must be within 5% of the quantity ordered or Stanley Creations has the right to return the over shipment.#010;#010;All shipment to Stanley Creations must follow the 50-pack rule. Failure to follow will result in a $50 charge back for each shipping carton.#010;#010;Product Weight Tolerance#010;Total product weight must fall within a 5% (+/-) tolerance range of the total weight quoted for item. Any discrepancy over 5% can be rejected and replacements requested if deemed necessary. Otherwise, all discrepancy over 5% are legible for refund from factories. Freight and any other charges incurred for replacements will be at the factory expense.#010;#010;Stampings &amp; Trademark#010;All products for Stanley Creations must include trademark and hallmark stamp#010;e.g “S”, “SGG”, “SV”, “CJI” or “D” and 925 S"; "SS S"; " 14K S"; "10K S"#010;#010;Compliance#010;#010;Any gold, gold plate, tin, tungsten or tantalum that will be used to fulfill this purchase order must originate from a conflict-free country.#010;All material sent from iStar must be used for this purchase order.#010;Compliance with Customer SOP's, testing protocols, and required labs is defined within our data base.#010;#010;Compliance with NEW LEAD SPECIFICATIONS document (located within our web site) and additional requirements of CA Prop 65/ AB1681#010;#010;Stanley Creations Requirements:#010;All items will be tested and must meet compliance or will be returned.#010;(Any styles that contain materials that are not 925 Silver or 316L Stainless Steel or Class 1 as defined in California Prop 65 /AB 1681 will require testing on the Production order)#010;#010;For brass jewelry and all components (catches, joints, bars, cups, surface finishes, resins, etc.) are tested separately. Each part must meet the following standards:#010;      Please note that stones are not tested in brass jewelry.#010;&gt;NO MORE THAN 600 PPM LEAD (BRASS ONLY &amp; SURFACE FINISHES)#010;&gt; NO MORE THAN 75 PPM CADMIUM (BRASS ONLY &amp; SURFACE FINISHES)#010;&gt; NICKEL FREE - MUST PASS SPOT TEST (BRASS ONLY &amp; SURFACE FINISHES)#010;&gt; ALL GOLD PLATE BRASS STYLES MUST BE 1/2 MICRON MINIMUM#010;#010;For children's jewelry and all components (stones, parts, surface finishes, etc.) are tested separately and must meet the following standards:#010;&gt; NO MORE THAN 40 PPM LEAD#010;&gt; NO MORE THAN 40 PPM CADMIUM#010;</Value>
                             </TextBox>
                             <TextBox Name="textBox21">
                                 <Location>72px, 0px</Location>
@@ -5697,46 +5697,23 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>10px</Size>
                                     </Font>
                                 </Style>
-                                <Value>For all new styles, we require Test Request Forms to be submitted to compliance@stanleycreations.com upon confirmation of order or within 48 hours of receipt of PO. Brass items require SGS test; Silver items require Assay test.#010;Any question regarding to compliance, please email compliance@stanleycreations.com.#010;#010;Product/Packaging Instruction#010;All quality standards must be strictly followed:#010;#010;a) Unless otherwise noted, all Sterling Silver and Nonprecious metals earrings with posts must come with BUTTERFLY CLUTCHES.#010;#010;b) Phthalate FREE rubber earring backs / fishhook stoppers are required for earrings.#010;#010;c) Products must be packed properly and securely to prevent damage during shipping. Carded product must be packed so that cards do not bend or get damage during shipping. Responsibility of product replacement and freight cost will fall onto vendors if shipment is not properly packed.#010;#010;d) Label outside of polybag with Stanley Creations style # and quantity.#010;#010;e) Mark outside of each shipping carton with POs # contained in that carton.#010;#010;f) A copy of packing list/invoice must be included in the first carton of the shipment.#010;#010;Commercial Invoice Requirement#010;Following statements are required on each commercial invoice for all Production and all Sample orders:#010;#010;a) THIS PRODUCT NOT INTENDED FOR USE BY, OR ACCESSIBLE TO, CHILDREN 12 YEARS OF AGE OR YOUNGER.#010;b) ALL PRODUCTS INCLUDED IN THIS SHIPMENT ARE INTENDED FOR ADULT USE.#010;c) PRODUCTS HERE WITHIN ARE NOT SUBJECT TO CPSIA. #010;#010;This will assist customs officials in the U.S. because the statement of intent will indicate to customs that they do not need to look for certificates of conformity on these items, and that these items are not required to meet the CPSIA lead requirements.#010;#010;GSP Eligibility - For vendors from Thailand, Indonesia, South Africa, Jordan, and Bolivia only, invoices must state:#010;a) Merchandise meets 35% or more GSP eligibility per CFR 10.171-10.178.#010;b) .925 Silver Jewelry#010;#010;FISH &amp; WILDLIFE REQUIREMENTS - if shipping products containing stones considered to be made from fish (MOP, Abalone, Fresh Pearl, Shell, etc.) vendors are required to include the scientific name (Genus and species) and the COO (country of origin) for the stones in the invoices and documents they send with a shipment. #010;Note: Shipments containing F&amp;W life items need to ship SEPERATELY from regular silver items.#010;#010;Stones requirements - if shipping products containing any kind of stones (crystals, cubic zirconia, turquoise, etc) we require vendors to only state SYNTHETIC STONES in item descriptions if not Genuine stone. Additionally, if any of these stones are Ruby, Jade, or Jadeite, you will need to fill out an Exporter Certification stating that the stones were not mined in Burma (Myanmar).#010;#010;Unit requirement - DO NOT include unit of measure on invoices, only style numbers, quantity and price of each style, and item descriptions need to be on invoices.#010;#010;Examples of item description in invoices:#010;1. Silver style with clear CZ -&gt; SILVER 925 EARRING WITH WHITE SYNTHETIC STONES#010;2. Brass style with blue crystal -&gt; BRASS BRC WITH BLUE SYNTHETIC STONES#010;3. Brass style with MOP -&gt; BRASS EARRING WITH MOTHER OF PEARL#010;#010;All these requirements will help to prevent delays at customs. We will begin to inspect commercial invoices for these statements. Failure to follow the protocol will result in penalties assessed by US Customs, THESE PENALTIES WILL BE PAID BY VENDORS.#010;#010;Please ensure the Air Way Bill or shipping paperwork shows iStar (Roman &amp; Sunstone) is responsible for payment of Freight and Duties.#010;</Value>
+                                <Value>For all new styles, we require Test Request Forms to be submitted to compliance@stanleycreations.com upon confirmation of order or within 48 hours of receipt of PO. Brass items require SGS test; Silver items require Assay test.#010;Any question regarding to compliance, please email compliance@stanleycreations.com.#010;#010;Product/Packaging Instruction#010;All quality standards must be strictly followed:#010;#010;a) Unless otherwise noted, all Sterling Silver and Nonprecious metals earrings with posts must come with BUTTERFLY CLUTCHES.#010;b) Phthalate FREE rubber earring backs / fishhook stoppers are required for earrings.#010;c) Products must be packed properly and securely to prevent damage during shipping. Carded product must be packed so that cards do not bend or get damage during shipping. Responsibility of product replacement and freight cost will fall onto vendors if shipment is not properly packed.#010;d) Label outside of polybag with Stanley Creations style # and quantity.#010;e) Mark outside of each shipping carton with POs # contained in that carton.#010;f) A copy of packing list/invoice must be included in the first carton of the shipment.#010;#010;Commercial Invoice Requirement#010;Following statements are required on each commercial invoice for all Production and all Sample orders:#010;#010;a) THIS PRODUCT NOT INTENDED FOR USE BY, OR ACCESSIBLE TO, CHILDREN 12 YEARS OF AGE OR YOUNGER.#010;b) ALL PRODUCTS INCLUDED IN THIS SHIPMENT ARE INTENDED FOR ADULT USE.#010;c) PRODUCTS HERE WITHIN ARE NOT SUBJECT TO CPSIA. #010;#010;This will assist customs officials in the U.S. because the statement of intent will indicate to customs that they do not need to look for certificates of conformity on these items, and that these items are not required to meet the CPSIA lead requirements.#010;#010;GSP Eligibility - For vendors from Thailand, Indonesia, South Africa, Jordan, and Bolivia only, invoices must state:#010;“Merchandise meets 35% or more GSP eligibility per CFR 10.171-10.178.”#010;#010;FISH &amp; WILDLIFE REQUIREMENTS - if shipping products containing stones considered to be made from fish (MOP, Abalone, Fresh Pearl, Shell, etc.) vendors are required to include the scientific name (Genus and species) and the COO (country of origin) for the stones in the invoices and documents they send with a shipment. #010;Note: Shipments containing F&amp;W life items need to ship SEPERATELY from regular silver items.#010;#010;Stones requirements - if shipping products containing any kind of stones (crystals, cubic zirconia, turquoise, etc.) we require vendors to only state SYNTHETIC STONES in item descriptions if not Genuine stone. Additionally, if any of these stones are Ruby, Jade, or Jadeite, you will need to fill out an Exporter Certification stating that the stones were not mined in Burma (Myanmar).#010;#010;Unit requirement - DO NOT include unit of measure on invoices, only style numbers, quantity and price of each style, and item descriptions need to be on invoices.#010;#010;Examples of item description in invoices:#010;1. Silver style with clear CZ -&gt; SILVER 925 EARRING WITH WHITE SYNTHETIC STONES#010;2. Brass style with blue crystal -&gt; BRASS BRC WITH BLUE SYNTHETIC STONES#010;3. Brass style with MOP -&gt; BRASS EARRING WITH MOTHER OF PEARL#010;#010;All these requirements will help to prevent delays at customs. We will begin to inspect commercial invoices for these statements. Failure to follow the protocol will result in penalties assessed by US Customs, THESE PENALTIES WILL BE PAID BY VENDORS.#010;#010;Please ensure the Air Way Bill or shipping paperwork shows iStar (Roman &amp; Sunstone) is responsible for payment of Freight and Duties.#010;</Value>
                             </TextBox>
                         </Items>
                     </Header>
                     <Header Name="groupHeaderGrid">
-                        <Height>0.66667in</Height>
+                        <Height>0.41667in</Height>
                         <Items>
                             <Line Name="line1">
-                                <Location>0px, 56px</Location>
+                                <Location>0px, 32px</Location>
                                 <Size>696px, 8px</Size>
                             </Line>
                             <Line Name="line3">
-                                <Location>0px, 24px</Location>
+                                <Location>0px, 0px</Location>
                                 <Size>696px, 4px</Size>
                             </Line>
-                            <TextBox Name="textBox11">
-                                <Location>64px, 8px</Location>
-                                <Size>120px, 16px</Size>
-                                <Style>
-                                    <Font>
-                                        <Size>9px</Size>
-                                    </Font>
-                                </Style>
-                                <Value>SILVER Market Price </Value>
-                            </TextBox>
-                            <TextBox Name="textBox13">
-                                <Format>###,##0.0000</Format>
-                                <Location>184px, 8px</Location>
-                                <Size>64px, 16px</Size>
-                                <Style>
-                                    <Font>
-                                        <Size>9px</Size>
-                                    </Font>
-                                    <TextAlign>Left</TextAlign>
-                                </Style>
-                                <StyleName>Normal</StyleName>
-                                <Value>=[POLine.UsrMarketPrice]</Value>
-                            </TextBox>
                             <TextBox Name="textBox16">
-                                <Location>0px, 40px</Location>
+                                <Location>0px, 16px</Location>
                                 <Size>32px, 16px</Size>
                                 <Style>
                                     <Font>
@@ -5745,32 +5722,8 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 </Style>
                                 <Value>Line</Value>
                             </TextBox>
-                            <TextBox Name="textBox37">
-                                <Format>=[POLine.PromisedDate.Format]</Format>
-                                <Location>304px, 8px</Location>
-                                <Size>48px, 16px</Size>
-                                <Style>
-                                    <Font>
-                                        <Size>9px</Size>
-                                    </Font>
-                                    <TextAlign>Right</TextAlign>
-                                </Style>
-                                <StyleName>Normal</StyleName>
-                                <Value>=[POLine.PromisedDate]</Value>
-                            </TextBox>
-                            <TextBox Name="textBox38">
-                                <Location>248px, 8px</Location>
-                                <Size>56px, 16px</Size>
-                                <Style>
-                                    <Font>
-                                        <Size>9px</Size>
-                                    </Font>
-                                    <TextAlign>Right</TextAlign>
-                                </Style>
-                                <Value>Market Date:</Value>
-                            </TextBox>
                             <TextBox Name="textBox70">
-                                <Location>32px, 40px</Location>
+                                <Location>32px, 16px</Location>
                                 <Size>32px, 16px</Size>
                                 <Style>
                                     <Font>
@@ -5780,7 +5733,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>Rev</Value>
                             </TextBox>
                             <TextBox Name="textBox71">
-                                <Location>64px, 40px</Location>
+                                <Location>64px, 16px</Location>
                                 <Size>96px, 16px</Size>
                                 <Style>
                                     <Font>
@@ -5790,7 +5743,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>Item</Value>
                             </TextBox>
                             <TextBox Name="textBox72">
-                                <Location>160px, 40px</Location>
+                                <Location>160px, 16px</Location>
                                 <Size>192px, 16px</Size>
                                 <Style>
                                     <Font>
@@ -5800,7 +5753,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>Description</Value>
                             </TextBox>
                             <TextBox Name="textBox74">
-                                <Location>360px, 40px</Location>
+                                <Location>360px, 16px</Location>
                                 <Size>64px, 16px</Size>
                                 <Style>
                                     <Font>
@@ -5810,7 +5763,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>Vendor Item</Value>
                             </TextBox>
                             <TextBox Name="textBox75">
-                                <Location>424px, 32px</Location>
+                                <Location>424px, 8px</Location>
                                 <Size>48px, 24px</Size>
                                 <Style>
                                     <Font>
@@ -5821,7 +5774,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>Ordered QTY</Value>
                             </TextBox>
                             <TextBox Name="textBox77">
-                                <Location>472px, 40px</Location>
+                                <Location>472px, 16px</Location>
                                 <Size>40px, 16px</Size>
                                 <Style>
                                     <Font>
@@ -5831,7 +5784,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>UOM</Value>
                             </TextBox>
                             <TextBox Name="textBox78">
-                                <Location>512px, 40px</Location>
+                                <Location>512px, 16px</Location>
                                 <Size>56px, 16px</Size>
                                 <Style>
                                     <Font>
@@ -5842,7 +5795,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>PU $ Price</Value>
                             </TextBox>
                             <TextBox Name="textBox79">
-                                <Location>576px, 32px</Location>
+                                <Location>576px, 8px</Location>
                                 <Size>64px, 24px</Size>
                                 <Style>
                                     <Font>
@@ -5853,7 +5806,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Value>Extended $ Price</Value>
                             </TextBox>
                             <TextBox Name="textBox81">
-                                <Location>656px, 32px</Location>
+                                <Location>656px, 8px</Location>
                                 <Size>40px, 24px</Size>
                                 <Style>
                                     <Font>
