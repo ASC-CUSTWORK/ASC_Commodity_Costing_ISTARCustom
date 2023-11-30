@@ -560,7 +560,7 @@ namespace ASCISTARCustom.PDS
                 }
 
                 var itemVendor = GetItemVendor(row);
-                if (!VendorItems.Select().FirstTableItems.Any(x=>x.VendorID == itemVendor.VendorID)) 
+                if (itemVendor != null && !VendorItems.Select().FirstTableItems.Any(x=>x.VendorID == itemVendor.VendorID)) 
                 {
                     itemVendor.RecordID = null;
                     itemVendor.IsDefault = false;
