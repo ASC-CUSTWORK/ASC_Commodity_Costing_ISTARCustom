@@ -1202,4 +1202,7 @@
     <PXSegmentMask DataField="InventoryCD" ParentId="phF_form_edInventoryCD" TypeFullName="PX.Web.UI.PXSegmentMask">
         <Prop Key="DisplayMode" Value="Value" />
     </PXSegmentMask>
+    <PXGridColumn DataField="IsDefault" ParentId="phG_tab_Items#5_PXGridVendorItems_Levels#0_Columns#1" TypeFullName="PX.Web.UI.PXGridColumn">
+        <Prop Key="CommitChanges" Value="True" />
+    </PXGridColumn>
 </Page>
