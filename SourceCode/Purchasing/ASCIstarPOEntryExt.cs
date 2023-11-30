@@ -179,16 +179,19 @@ namespace ASCISTARCustom
                                 .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
                                 .Build();
 
-                var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
-                    inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
+                if (jewelryCostProvider != null)
+                {
+                    var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
+                  inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
 
-                // cache.SetValueExt<POLine.manualPrice>(poLine, true);
-                cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);
-                cache.SetValueExt<POLine.unitCost>(poLine, newUnitCost);
+                    // cache.SetValueExt<POLine.manualPrice>(poLine, true);
+                    cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);
+                    cache.SetValueExt<POLine.unitCost>(poLine, newUnitCost);
 
-                SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);
+                    SetInventoryItemCustomFields(cache, poLine, jewelryCostProvider);
 
-                if (toUpdate) this.Base.Transactions.Update(poLine);
+                    if (toUpdate) this.Base.Transactions.Update(poLine);
+                }
             }
         }
 
