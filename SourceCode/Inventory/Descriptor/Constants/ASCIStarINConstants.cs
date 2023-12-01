@@ -22,7 +22,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
                 { }
             }
 
-            public const string Style = "Style";
+            public const string Style = "Proposed Style";
 
             public const string Active = "AC";
             public const string NoSales = "NS";
