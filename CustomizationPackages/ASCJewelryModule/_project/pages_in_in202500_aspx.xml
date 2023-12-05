@@ -688,6 +688,8 @@
                                             <Prop Key="ID" Value="CstPXSelector20" />
                                             <Prop Key="DataField" Value="MetalType" />
                                             <Prop Key="CommitChanges" Value="True" />
+                                            <Prop Key="AllowEdit" Value="True" />
+                                            <Prop Key="AutoRefresh" Value="True" />
                                         </PXSelector>
                                     </AddItem>
                                     <AddItem>
