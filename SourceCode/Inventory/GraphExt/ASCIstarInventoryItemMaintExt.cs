@@ -71,7 +71,14 @@ namespace ASCISTARCustom.Inventory.GraphExt
         #region Event Handlers
 
         #region InventoryItem Events
+        protected virtual void _(Events.FieldUpdating<InventoryItem, InventoryItem.descr> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
 
+            this.JewelryItemView.SetValueExt<ASCIStarINJewelryItem.shortDesc>(this.JewelryItemView.Current, e.NewValue);
+            this.JewelryItemView.UpdateCurrent();
+        }
         protected virtual void _(Events.FieldSelecting<InventoryItem, ASCIStarINInventoryItemExt.usrBasisValue> e)
         {
             var row = e.Row;
