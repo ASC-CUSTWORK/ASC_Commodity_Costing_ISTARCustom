@@ -5,6 +5,7 @@ using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.ReferentialIntegrity.Attributes;
+using PX.Objects.AP;
 using PX.Objects.IN;
 using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
@@ -176,9 +177,19 @@ namespace ASCISTARCustom
 
         #region UsrContractIncrement
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Increment")]
+        [PXUIField(DisplayName = "Increment/dollar")]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
+        #endregion
+
+        #region UsrIncrement
+        [PXDecimalAttribute(6)]
+        [PXUIField(DisplayName = "Increment", Enabled = false)]
+        [PXFormula(typeof(Switch<
+            Case<Where<Current<usrActualGRAMGold>, NotEqual<PX.Objects.CS.decimal0>>, Mult<usrActualGRAMGold, usrContractIncrement>,
+            Case<Where<Current<usrActualGRAMSilver>, NotEqual<PX.Objects.CS.decimal0>>, Mult<usrActualGRAMSilver, usrContractIncrement>>>>))]
+        public decimal? UsrIncrement { get; set; }
+        public abstract class usrIncrement : PX.Data.BQL.BqlDecimal.Field<usrIncrement> { }
         #endregion
 
         #region UsrMatrixStep
