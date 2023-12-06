@@ -227,16 +227,9 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UsrLaborPerUnit
         [PXDBDecimal(2)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Labor/Grams", Visibility = PXUIVisibility.Visible)]
         public decimal? UsrLaborPerUnit { get; set; }
         public abstract class usrLaborPerUnit : PX.Data.BQL.BqlDecimal.Field<usrLaborPerUnit> { }
-        #endregion
-
-        #region UsrLaborPerUnitVendor
-        [PXDecimal(2)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Labor/Grams", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        public decimal? UsrLaborPerUnitVendor { get; set; }
-        public abstract class usrLaborPerUnitVendor : PX.Data.BQL.BqlDecimal.Field<usrLaborPerUnitVendor> { }
         #endregion
 
         #region Implementation Unneeded Interface's fields
