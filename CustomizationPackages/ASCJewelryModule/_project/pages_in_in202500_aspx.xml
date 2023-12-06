@@ -1207,4 +1207,18 @@
     <PXGridColumn DataField="IsDefault" ParentId="phG_tab_Items#5_PXGridVendorItems_Levels#0_Columns#1" TypeFullName="PX.Web.UI.PXGridColumn">
         <Prop Key="CommitChanges" Value="True" />
     </PXGridColumn>
+    <PXTabItem Text="Packaging" ParentId="phG_tab_Items#7" TypeFullName="PX.Web.UI.PXTabItem">
+        <Children Key="Template">
+            <AddItem>
+                <PXSelector TypeFullName="PX.Web.UI.PXSelector">
+                    <Prop Key="Virtual:ApplyStylesheetSkin" />
+                    <Prop Key="ID" Value="edHSTariffCode" />
+                    <Prop Key="DataField" Value="HSTariffCode" />
+                    <Prop Key="AutoRefresh" Value="True" />
+                </PXSelector>
+            </AddItem>
+            <PXLayoutRule OriginalIndex="8" />
+            <PXTextEdit DataField="HSTariffCode" OriginalIndex="7" Remove="True" />
+        </Children>
+    </PXTabItem>
 </Page>
