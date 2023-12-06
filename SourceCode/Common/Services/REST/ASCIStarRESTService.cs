@@ -7,6 +7,7 @@ using ASCISTARCustom.Common.Services.REST.Interfaces;
 using ASCISTARCustom.Preferences.DAC;
 using PX.Data;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -80,7 +81,7 @@ namespace ASCISTARCustom.Common.Services.REST
                 PXTrace.WriteError($"Error: {ex.Message}");
                 PXTrace.WriteError($"Status Code: {ex.StatusCode}");
                 PXTrace.WriteError($"Content: {ex.Content}");
-                throw new PXException(ASCIStarMessages.StatusCode.RemoteServerError);
+                throw new Exception(ex.Message);
             }
         }
 
