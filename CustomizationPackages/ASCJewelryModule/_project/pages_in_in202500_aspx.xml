@@ -125,6 +125,7 @@
                                 <Prop Key="Virtual:ApplyStylesheetSkin" />
                                 <Prop Key="ID" Value="CstPXNumberEdit5" />
                                 <Prop Key="DataField" Value="UsrIncrement" />
+                                <Prop Key="CommitChanges" Value="True" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -1198,6 +1199,7 @@
     <PXTextEdit DataField="Descr" ParentId="phF_form_edDescr" TypeFullName="PX.Web.UI.PXTextEdit">
         <Prop Key="LabelWidth" Value="80px" />
         <Prop Key="Width" Value="350px" />
+        <Prop Key="CommitChanges" Value="True" />
     </PXTextEdit>
     <PXLayoutRule ParentId="phF_form_PXLayoutRule#0" TypeFullName="PX.Web.UI.PXLayoutRule">
         <Prop Key="ControlSize" Value="SM" />

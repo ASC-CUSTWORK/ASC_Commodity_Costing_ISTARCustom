@@ -209,7 +209,7 @@ namespace ASCISTARCustom.Cost.CacheExt
         #region UnitCost
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Unit Cost", Enabled = false)]
+        [PXUIField(DisplayName = "Unit Cost", IsReadOnly = true)]
         [PXFormula(typeof(Add<Add<Add<Add<usrPreciousMetalCost, usrOtherMaterialsCost>, usrFabricationCost>, usrPackagingCost>, usrPackagingLaborCost>))]
         public decimal? UsrUnitCost { get; set; }
         public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
