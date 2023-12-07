@@ -56,9 +56,10 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrCommoditySurchargePct : PX.Data.BQL.BqlDecimal.Field<usrCommoditySurchargePct> { }
         #endregion
 
+        //Might be deleted in future
         #region UsrLaborPerUnit
         [PXDBDecimal(2)]
-        [PXUIField(DisplayName = "Labor/Grams")]
+        [PXUIField(DisplayName = "Labor/Grams", Enabled = false, Visible = false)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrLaborPerUnit { get; set; }
         public abstract class usrLaborPerUnit : PX.Data.BQL.BqlDecimal.Field<usrLaborPerUnit> { }

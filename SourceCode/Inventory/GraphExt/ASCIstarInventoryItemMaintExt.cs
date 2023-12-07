@@ -186,7 +186,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             decimal? pricingGRAMGold = (decimal?)e.NewValue * mult / 24;
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(row, pricingGRAMGold);
 
-            UpdateInventoryFabricationValue(e.Cache, row, e.NewValue);
+            RecalculateInventoryFabricationValue(row);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrActualGRAMSilver> e)
@@ -198,7 +198,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
 
             e.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrPricingGRAMSilver>(row, (decimal?)e.NewValue * value);
 
-            UpdateInventoryFabricationValue(e.Cache, row, e.NewValue);
+            RecalculateInventoryFabricationValue(row);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrPricingGRAMGold> e)
@@ -218,7 +218,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
                 rowExt.UsrActualGRAMGold = actualGRAMGold;
             }
 
-            UpdateInventoryFabricationValue(e.Cache, row, actualGRAMGold);
+            RecalculateInventoryFabricationValue(row);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrPricingGRAMSilver> e)
@@ -238,7 +238,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
                 rowExt.UsrActualGRAMSilver = actualGramSilver;
             }
 
-            UpdateInventoryFabricationValue(e.Cache, row, actualGramSilver);
+            RecalculateInventoryFabricationValue(row);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCIStarINInventoryItemExt.usrPreciousMetalCost> e)
@@ -622,7 +622,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityVendorPrice>(row, apVendorPrice.SalesPrice ?? 0.0m);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrBasisPrice>(row, apVendorPrice.SalesPrice ?? 0.0m);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrContractSurcharge>(row, apVendorPriceExt.UsrCommoditySurchargePct ?? 0.0m);
-            e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrLaborPerUnit>(row, apVendorPriceExt.UsrLaborPerUnit ?? 0.0m);
+            //e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrFabricationWeight>(row, apVendorPriceExt.UsrLaborPerUnit ?? 0.0m);
 
             if (row.IsDefault == true)
             {
@@ -637,46 +637,40 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
         }
 
-        protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrLaborPerUnit> e)
+        protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrFabricationWeight> e)
         {
             var row = e.Row;
             if (row == null) return;
 
-            var poVendorExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
-
-            var metalWeight = GetMetalWeight();
-            
-            var vendorUsrFabricationCost = metalWeight * poVendorExt.UsrLaborPerUnit;
-
-            if (row.IsDefault == true)
-            {
-                var inventory = Base.Item.Current;
-                Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(inventory, vendorUsrFabricationCost);
-            }
-            else
-            {
-                SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrFabricationCost>(vendorUsrFabricationCost, row);
-            }
+            RecalculatePOVendorFabricationValue(row);
         }
 
-        protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrFabricationCost> e)
+        protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrFabricationPiece> e)
         {
             var row = e.Row;
             if (row == null) return;
 
-            var poVendorExt = row.GetExtension<ASCIStarPOVendorInventoryExt>();
-
-            var metalWeight = GetMetalWeight();
-
-            var usrLaborPerUnit = metalWeight == 0
-                ? (decimal?)e.NewValue
-                : (decimal?)e.NewValue / metalWeight;
-
-            if (usrLaborPerUnit != poVendorExt.UsrLaborPerUnit)
-            {
-                poVendorExt.UsrLaborPerUnit = usrLaborPerUnit;
-            }
+            RecalculatePOVendorFabricationValue(row);
         }
+
+        //protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrFabricationCost> e)
+        //{
+        //    var row = e.Row;
+        //    if (row == null) return;
+
+        //    var poVendorExt = row.GetExtension<ASCIStarPOVendorInventoryExt>();
+
+        //    var metalWeight = GetMetalWeight();
+
+        //    var usrLaborPerUnit = metalWeight == 0
+        //        ? (decimal?)e.NewValue
+        //        : (decimal?)e.NewValue / metalWeight;
+
+        //    if (usrLaborPerUnit != poVendorExt.UsrFabricationWeight)
+        //    {
+        //        poVendorExt.UsrFabricationWeight = usrLaborPerUnit;
+        //    }
+        //}
 
         protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCIStarPOVendorInventoryExt.usrCommodityVendorPrice> e)
         {
@@ -905,15 +899,37 @@ namespace ASCISTARCustom.Inventory.GraphExt
             VerifyLossAndSurcharge(cache, row, rowExt, jewelCostBuilder);
         }
 
-        private void UpdateInventoryFabricationValue(PXCache cache, InventoryItem row, object NewValue)
+        private void RecalculateInventoryFabricationValue(InventoryItem inventoryItem)
         {
-            POVendorInventory vendorInventory = GetDefaultVendor();
-            if (vendorInventory == null) return;
+            POVendorInventory poVendorInventory = GetDefaultVendor();
+            if (poVendorInventory == null) return;
 
-            var vendorInventoryExt = vendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
+            var poVendorInventoryExt = poVendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
 
-            decimal? fabricationValueAdd = (decimal?)NewValue * vendorInventoryExt.UsrLaborPerUnit;
-            cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(row, fabricationValueAdd);
+            var metalWeight = GetMetalWeight();
+
+            var usrFabricationCost = metalWeight * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
+
+            Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(inventoryItem, usrFabricationCost);
+        }
+
+        private void RecalculatePOVendorFabricationValue(POVendorInventory poVendorInventory)
+        {
+            var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory);
+
+            var metalWeight = GetMetalWeight();
+
+            var usrFabricationCost = metalWeight * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
+
+            if (poVendorInventory.IsDefault == true)
+            {
+                var inventory = Base.Item.Current;
+                Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(inventory, usrFabricationCost);
+            }
+            else
+            {
+                SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrFabricationCost>(usrFabricationCost, poVendorInventory);
+            }
         }
 
         private decimal? GetMetalWeight()

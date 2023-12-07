@@ -551,7 +551,14 @@
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrLaborPerUnit" />
+                    <Prop Key="DataField" Value="UsrFabricationWeight" />
+                    <Prop Key="Width" Value="100" />
+                    <Prop Key="CommitChanges" Value="True" />
+                </PXGridColumn>
+            </AddItem>
+            <AddItem>
+                <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
+                    <Prop Key="DataField" Value="UsrFabricationPiece" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
