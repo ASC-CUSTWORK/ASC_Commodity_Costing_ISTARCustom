@@ -169,7 +169,7 @@ namespace ASCISTARCustom
                 if (poVendorInventory == null)
                 {
                     cache.RaiseExceptionHandling<POLine.inventoryID>(poLine, poLine.InventoryID,
-                        new PXSetPropertyException(string.Format(ASCIStarPOMessages.Warnings.NoDefaultVendorOnItem, Base.Document.Current.VendorID), PXErrorLevel.RowWarning));
+                        new PXSetPropertyException(ASCIStarPOMessages.Warnings.NoDefaultVendorOnItem, PXErrorLevel.RowWarning));
                     continue;
                 }
 
@@ -181,10 +181,8 @@ namespace ASCISTARCustom
 
                 if (jewelryCostProvider != null)
                 {
-                    var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(
-                  inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
+                    var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
 
-                    // cache.SetValueExt<POLine.manualPrice>(poLine, true);
                     cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);
                     cache.SetValueExt<POLine.unitCost>(poLine, newUnitCost);
 
