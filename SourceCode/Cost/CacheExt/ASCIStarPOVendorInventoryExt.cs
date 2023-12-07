@@ -224,12 +224,20 @@ namespace ASCISTARCustom.Cost.CacheExt
         public abstract class usrEstLandedCost : PX.Data.BQL.BqlDecimal.Field<usrEstLandedCost> { }
         #endregion
 
-        #region UsrLaborPerUnit
+        #region UsrFabricationWeight
         [PXDBDecimal(2)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Labor/Grams", Visibility = PXUIVisibility.Visible)]
-        public decimal? UsrLaborPerUnit { get; set; }
-        public abstract class usrLaborPerUnit : PX.Data.BQL.BqlDecimal.Field<usrLaborPerUnit> { }
+        [PXUIField(DisplayName = "Fabrication / Weight", Visibility = PXUIVisibility.Visible)]
+        public decimal? UsrFabricationWeight { get; set; }
+        public abstract class usrFabricationWeight : PX.Data.BQL.BqlDecimal.Field<usrFabricationWeight> { }
+        #endregion
+
+        #region UsrFabricationPiece
+        [PXDBDecimal(2)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Fabrication / Piece", Visibility = PXUIVisibility.Visible)]
+        public decimal? UsrFabricationPiece { get; set; }
+        public abstract class usrFabricationPiece : PX.Data.BQL.BqlDecimal.Field<usrFabricationPiece> { }
         #endregion
 
         #region Implementation Unneeded Interface's fields
