@@ -5,6 +5,7 @@ using ASCISTARCustom.Inventory.Descriptor.Constants;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.ReferentialIntegrity.Attributes;
+using PX.Objects.AP;
 using PX.Objects.IN;
 using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
@@ -62,7 +63,7 @@ namespace ASCISTARCustom
         #region UsrPriceAsID
         [PXDBInt()]
         [PXUIField(DisplayName = "Price as Item", Visible = false, Enabled = false)]
-        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>, 
+        [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>,
             Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
                         , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
@@ -124,8 +125,6 @@ namespace ASCISTARCustom
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion
 
-        
-
         #region UsrBasisValue
         [PXDecimal(6)]
         [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
@@ -176,9 +175,19 @@ namespace ASCISTARCustom
 
         #region UsrContractIncrement
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Increment")]
+        [PXUIField(DisplayName = "Increment/Dollar")]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
+        #endregion
+
+        #region UsrIncrement
+        [PXDecimalAttribute(6)]
+        [PXUIField(DisplayName = "Increment", IsReadOnly = true)]
+        [PXFormula(typeof(Switch<
+            Case<Where<usrCommodityType.IsEqual<CommodityType.gold>>, Mult<usrActualGRAMGold, usrContractIncrement>,
+            Case<Where<usrCommodityType.IsEqual<CommodityType.silver>>, Mult<usrActualGRAMSilver, usrContractIncrement>>>>))]
+        public decimal? UsrIncrement { get; set; }
+        public abstract class usrIncrement : PX.Data.BQL.BqlDecimal.Field<usrIncrement> { }
         #endregion
 
         #region UsrMatrixStep

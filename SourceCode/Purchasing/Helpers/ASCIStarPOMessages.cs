@@ -13,7 +13,7 @@ namespace ASCISTARCustom.Purchasing.Helpers
         public static class Warnings
         {
             public const string DisabledLandedCostVendor = "Landed Cost Vendor check box is disabled, click on Vendor and check Vendor Properties group on Vendors screen.";
-            public const string NoDefaultVendorOnItem = "{0} is not selected as Default for current Item, check Stock Item screen (Vendors tab)!";
+            public const string NoDefaultVendorOnItem = "Current Vendor of Purchase Order is not selected as Default for current Item, check Stock Item screen (Vendors tab) and Unit Cost!";
         }
 
         public static class Errors

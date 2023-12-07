@@ -18,6 +18,7 @@ using PX.Objects.PO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Inventory.GraphExt
 {
@@ -158,6 +159,14 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
         }
 
+        protected virtual void _(Events.FieldUpdating<InventoryItem, InventoryItem.descr> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            this.JewelryItemView.SetValueExt<ASCIStarINJewelryItem.shortDesc>(this.JewelryItemView.Current, e.NewValue);
+        }
+
         protected virtual void _(Events.FieldUpdated<InventoryItem, InventoryItem.itemClassID> e)
         {
             var row = e.Row;
@@ -273,13 +282,14 @@ namespace ASCISTARCustom.Inventory.GraphExt
             if (isGold == true)
             {
                 UpdateSurcharge<ASCIStarINInventoryItemExt.usrContractSurcharge>(e.Cache, row, rowExt, this.JewelryItemView.Current?.MetalType);
-            }
-
-            var isSilver = ASCIStarMetalType.IsGold(this.JewelryItemView.Current?.MetalType);
-            if (isSilver)
-            {
                 UpdateCommodityCostMetal(e.Cache, row, rowExt);
             }
+
+            //var isSilver = ASCIStarMetalType.IsGold(this.JewelryItemView.Current?.MetalType);
+            //if (isSilver)
+            //{
+            //    UpdateCommodityCostMetal(e.Cache, row, rowExt);
+            //}
 
             SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrContractIncrement>(e.NewValue);
         }
@@ -724,6 +734,8 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
         }
 
+
+
         #endregion POVendorInventory Events
 
         #region Compliance Events
@@ -844,11 +856,7 @@ namespace ASCISTARCustom.Inventory.GraphExt
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrHandlingCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFreightCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrDutyCost>(cache, row, isDefaultVendor);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrUnitCost>(cache, row, isDefaultVendor);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrMatrixStep>(cache, row, isDefaultVendor);
-
-            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(this.Base.Item.Current);
-            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrUnitCost>(cache, row, isDefaultVendor && inventoryItemExt.UsrCostingType != ASCIStarConstants.CostingType.ContractCost);
 
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(row);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrCommodityVendorPrice>(cache, row, rowExt.UsrIsOverrideVendor != true);
@@ -880,7 +888,17 @@ namespace ASCISTARCustom.Inventory.GraphExt
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrMarketPriceGram>(row, jewelCostBuilder.PreciousMetalMarketCostPerGram);
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrBasisValue>(row, jewelCostBuilder.BasisValue);
 
+
             rowExt.UsrContractIncrement = jewelCostBuilder.CalculateIncrementValue(rowExt);
+            if (rowExt.UsrCommodityType == CommodityType.Gold)
+            {
+                cache.SetValueExt<ASCIStarINInventoryItemExt.usrIncrement>(row, rowExt.UsrContractIncrement * rowExt.UsrActualGRAMGold);
+            }
+            if (rowExt.UsrCommodityType == CommodityType.Silver)
+            {
+                cache.SetValueExt<ASCIStarINInventoryItemExt.usrIncrement>(row, rowExt.UsrContractIncrement * rowExt.UsrActualGRAMSilver);
+            }
+
             SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrContractIncrement>(rowExt.UsrContractIncrement);
             SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrBasisValue>(rowExt.UsrBasisValue);
             SetValueExtPOVendorInventory<ASCIStarPOVendorInventoryExt.usrBasisPrice>(jewelCostBuilder.PreciousMetalContractCostPerTOZ);
