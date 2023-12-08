@@ -59,6 +59,7 @@ namespace ASCISTARCustom.Inventory.Descriptor.Constants
             public const string MetalTypeEmpty = "Metal Type is empty on Jewelry Attributes tab";
             public const string MissingMatchesLossOrSurcharge = "Vendor has another contracted value";
             public const string UnitCostIsCustom = "Unit Cost is custom, the Override Vendor checkBox is enabled";
+            public const string FabricationCostMismatch = "Fabrication Cost Inconsistency.";
         }
 
         public class INJewelryAttributesID

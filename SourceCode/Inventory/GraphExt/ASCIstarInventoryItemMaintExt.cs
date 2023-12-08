@@ -475,6 +475,21 @@ namespace ASCISTARCustom.Inventory.GraphExt
             }
         }
 
+        protected virtual void _(Events.FieldSelecting<POVendorInventory, ASCIStarPOVendorInventoryExt.usrFabricationCost> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            var poVendorInventoryExt = row.GetExtension<ASCIStarPOVendorInventoryExt>();
+            var calculatedFabricationValue = CalculateFabricationValue(row);
+
+            if (poVendorInventoryExt.UsrFabricationCost != calculatedFabricationValue)
+            {
+                e.Cache.RaiseExceptionHandling<ASCIStarPOVendorInventoryExt.usrFabricationCost>(row, poVendorInventoryExt.UsrFabricationCost,
+                    new PXSetPropertyException(ASCIStarINConstants.Warnings.FabricationCostMismatch, PXErrorLevel.Warning));
+            }
+        }
+
         protected virtual void _(Events.FieldVerifying<POVendorInventory, POVendorInventory.isDefault> e)
         {
             var row = e.Row;
@@ -917,27 +932,29 @@ namespace ASCISTARCustom.Inventory.GraphExt
             VerifyLossAndSurcharge(cache, row, rowExt, jewelCostBuilder);
         }
 
+        private decimal? CalculateFabricationValue(POVendorInventory poVendorInventory) {
+            var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory);
+
+            var metalWeight = GetMetalWeight();
+
+            var usrFabricationCost = metalWeight * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
+
+            return usrFabricationCost;
+        }
+
         private void RecalculateInventoryFabricationValue(InventoryItem inventoryItem)
         {
             POVendorInventory poVendorInventory = GetDefaultVendor();
             if (poVendorInventory == null) return;
 
-            var poVendorInventoryExt = poVendorInventory.GetExtension<ASCIStarPOVendorInventoryExt>();
-
-            var metalWeight = GetMetalWeight();
-
-            var usrFabricationCost = metalWeight * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
+            var usrFabricationCost = CalculateFabricationValue(poVendorInventory);
 
             Base.Item.Cache.SetValueExt<ASCIStarINInventoryItemExt.usrFabricationCost>(inventoryItem, usrFabricationCost);
         }
 
         private void RecalculatePOVendorFabricationValue(POVendorInventory poVendorInventory)
         {
-            var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory);
-
-            var metalWeight = GetMetalWeight();
-
-            var usrFabricationCost = metalWeight * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
+            var usrFabricationCost = CalculateFabricationValue(poVendorInventory);
 
             if (poVendorInventory.IsDefault == true)
             {
