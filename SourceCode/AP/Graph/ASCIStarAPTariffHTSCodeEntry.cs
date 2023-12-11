@@ -5,12 +5,9 @@ using PX.Data.BQL.Fluent;
 
 namespace ASCISTARCustom.Cost
 {
-    public class ASCIStarAPTariffHTSCodeEntry : PXGraph<ASCIStarAPTariffHTSCodeEntry>
+    public class ASCIStarAPTariffHTSCodeEntry : PXGraph<ASCIStarAPTariffHTSCodeEntry, ASCIStarAPTariffHTSCode>
     {
         [PXFilterable]
         public SelectFrom<ASCIStarAPTariffHTSCode>.View TariffHTSCodeView;
-
-        public PXSave<ASCIStarAPTariffHTSCode> Save;
-        public PXCancel<ASCIStarAPTariffHTSCode> Cancel;
     }
 }
