@@ -8,9 +8,9 @@ using PX.Objects.IN;
 using PX.Objects.SO;
 using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
-using static ASCISTARCustom.CustomerAllowance.Descriptor.ASCIStarARConstants;
+using static ASCISTARCustom.AR.Descriptor.ASCIStarARConstants;
 
-namespace ASCISTARCustom.DAC
+namespace ASCISTARCustom.AR.DAC
 {
     [Serializable]
     [PXCacheName("Customer Allowance")]

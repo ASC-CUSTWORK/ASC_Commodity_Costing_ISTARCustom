@@ -1,8 +1,8 @@
-﻿using ASCISTARCustom.CustomerAllowance.Descriptor;
-using ASCISTARCustom.DAC;
+﻿using ASCISTARCustom.AR.Descriptor;
+using ASCISTARCustom.AR.DAC;
 using PX.Data;
 
-namespace ASCISTARCustom.CustomerAllowance
+namespace ASCISTARCustom.AR
 {
     public class ASCIStarCustomerAllowanceMaint : PXGraph<ASCIStarCustomerAllowanceMaint, ASCIStarCustomerAllowance>
     {

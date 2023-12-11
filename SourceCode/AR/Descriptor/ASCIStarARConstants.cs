@@ -1,5 +1,5 @@
 ﻿
-namespace ASCISTARCustom.CustomerAllowance.Descriptor
+namespace ASCISTARCustom.AR.Descriptor
 {
     public static class ASCIStarARConstants
     {
