@@ -1,38 +1,28 @@
 ﻿using ASCISTARCustom.Common.DAC;
-using ASCISTARCustom.IN.Descriptor.Constants;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
+using PX.Objects.CR;
 using PX.Objects.CS;
 using PX.Objects.IN;
 using System;
+using ASCISTARCustom.IN.Descriptor.Constants;
 
-namespace ASCISTARCustom.PDS.CacheExt
+namespace ASCISTARCustom.IN.DAC
 {
     [Serializable]
-    [PXCacheName(_cacheName)]
-    public class ASCIStarINKitSpecJewelryItem : AuditSystemFields, IBqlTable
+    [PXCacheName("Jewelry Item Data DAC")]
+    public class ASCIStarINJewelryItem : AuditSystemFields, IBqlTable
     {
-        private const string _cacheName = "ASCIStarINKitSpecJewelryItem";
-
         public static bool IsActive() => true;
 
-        #region KitInventoryID
-        [Inventory(IsKey = true, Visibility = PXUIVisibility.SelectorVisible, DisplayName = "Kit Inventory ID", Visible = false)]
-        [PXRestrictor(typeof(Where<InventoryItem.kitItem, Equal<boolTrue>>), PX.Objects.IN.Messages.InventoryItemIsNotaKit)]
-        [PXDBDefault(typeof(INKitSpecHdr.kitInventoryID))]
-        [PXParent(typeof(SelectFrom<INKitSpecHdr>.Where<INKitSpecHdr.kitInventoryID.IsEqual<kitInventoryID.FromCurrent>.And<INKitSpecHdr.revisionID.IsEqual<revisionID.FromCurrent>>>))]
-        public virtual int? KitInventoryID { get; set; }
-        public abstract class kitInventoryID : PX.Data.BQL.BqlInt.Field<kitInventoryID> { }
-        #endregion
-
-        #region RevisionID
-        [PXDBString(10, IsUnicode = true, IsKey = true, InputMask = ">aaaaaaaaaa")]
-        [PXDBDefault(typeof(INKitSpecHdr.revisionID))]
-        [PXUIField(DisplayName = "Revision", Visibility = PXUIVisibility.SelectorVisible)]
-        [PXSelector(typeof(Search<INKitSpecHdr.revisionID, Where<INKitSpecHdr.kitInventoryID, Equal<Optional<INKitSpecHdr.kitInventoryID>>>>))]
-        public virtual string RevisionID { get; set; }
-        public abstract class revisionID : PX.Data.BQL.BqlString.Field<revisionID> { }
+        #region InventoryID
+        [PXDBInt(IsKey = true)]
+        [PXParent(typeof(SelectFrom<InventoryItem>.Where<InventoryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>))]
+        [PXDBDefault(typeof(InventoryItem.inventoryID))]
+        [PXUIField(DisplayName = "Inventory ID", Visible = false)]
+        public virtual int? InventoryID { get; set; }
+        public abstract class inventoryID : BqlInt.Field<inventoryID> { }
         #endregion
 
         #region ShortDesc
@@ -112,7 +102,6 @@ namespace ASCISTARCustom.PDS.CacheExt
         #region MetalType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Metal Type")]
-        [PXDefault(PersistingCheck = PXPersistingCheck.NullOrBlank)]
         [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.metalType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
@@ -213,7 +202,7 @@ namespace ASCISTARCustom.PDS.CacheExt
 
         #region StoneShape
         [PXDBString(10, IsUnicode = true)]
-        [PXUIField(DisplayName = "Stone Shape.")]
+        [PXUIField(DisplayName = "Stone Shape")]
         [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.stoneShapes>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
@@ -283,7 +272,7 @@ namespace ASCISTARCustom.PDS.CacheExt
 
         #region RingLength
         [PXDBString(10, IsUnicode = true)]
-        [PXUIField(DisplayName = "Ring Length.")]
+        [PXUIField(DisplayName = "Ring Length")]
         [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.ringLength>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]

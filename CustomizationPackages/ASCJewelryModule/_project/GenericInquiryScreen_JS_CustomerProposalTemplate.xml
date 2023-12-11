@@ -197,7 +197,7 @@
                         <GIResult LineNbr="2" SortOrder="2" IsActive="1" Field="inventoryCD_description" Caption="Item Description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="62b36cdb-f17c-4d11-a700-55807134e20c" />
                         <GIResult LineNbr="1" SortOrder="1" IsActive="1" Field="inventoryCD" IsVisible="1" DefaultNav="0" NavigationNbr="1" QuickFilter="0" FastFilter="1" RowID="0ce3b303-0fec-47bd-beea-e69636b4fd1e" />
                     </GITable>
-                    <GITable Alias="INJewelryItem" Name="ASCISTARCustom.Inventory.DAC.ASCIStarINJewelryItem">
+                    <GITable Alias="INJewelryItem" Name="ASCISTARCustom.IN.DAC.ASCIStarINJewelryItem">
                         <GIResult LineNbr="34" SortOrder="27" IsActive="1" Field="vendorMaker_description" Caption="Vendor Maker Description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="f4b82897-136e-44bf-bcbf-306e5c7d71d6" />
                         <GIResult LineNbr="33" SortOrder="26" IsActive="1" Field="vendorMaker" Caption="Vendor Maker" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="5edc56c2-e06f-44f2-b072-63c9ed4aa3d7" />
                         <GIResult LineNbr="28" SortOrder="40" IsActive="1" Field="ringSize_description" Caption="Ring Size Description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="97230464-de82-4a57-876b-d8cec7f9946d" />

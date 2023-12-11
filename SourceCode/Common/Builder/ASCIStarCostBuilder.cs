@@ -1,7 +1,7 @@
 ﻿using ASCISTARCustom.Common.DTO.Interfaces;
 using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Cost.CacheExt;
-using ASCISTARCustom.Inventory.DAC;
+using ASCISTARCustom.PO.CacheExt;
+using ASCISTARCustom.IN.DAC;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;

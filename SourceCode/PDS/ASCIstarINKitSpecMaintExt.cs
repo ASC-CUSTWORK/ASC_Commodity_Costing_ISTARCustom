@@ -1,34 +1,31 @@
+using ASCISTARCustom.AP.CacheExt;
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Helper;
 using ASCISTARCustom.Common.Helper.Extensions;
 using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
-using ASCISTARCustom.Cost.CacheExt;
-using ASCISTARCustom.Inventory.CacheExt;
-using ASCISTARCustom.Inventory.DAC;
-using ASCISTARCustom.Inventory.Descriptor.Constants;
-using ASCISTARCustom.Inventory.GraphExt;
+using ASCISTARCustom.IN.CacheExt;
+using ASCISTARCustom.IN.DAC;
+using ASCISTARCustom.IN.Descriptor.Constants;
 using ASCISTARCustom.PDS.CacheExt;
 using ASCISTARCustom.PDS.Descriptor;
+using ASCISTARCustom.PO.CacheExt;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Data.EP;
 using PX.Objects.AP;
-using PX.Objects.CN.Common.Extensions;
 using PX.Objects.Common;
 using PX.Objects.CR;
 using PX.Objects.EP;
 using PX.Objects.IN;
 using PX.Objects.PO;
-using PX.Objects.SO;
 using PX.SM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using static PX.Objects.CM.CMReportTranType.tranType;
 
 namespace ASCISTARCustom.PDS
 {
@@ -50,25 +47,6 @@ namespace ASCISTARCustom.PDS
                     .And<ASCIStarINKitSpecJewelryItem.revisionID.IsEqual<INKitSpecHdr.revisionID.FromCurrent>>>
                         .View JewelryItemView;
 
-        //[PXFilterable]
-        //public PXSelectJoin<
-        //    APVendorPrice,
-        //    InnerJoin<POVendorInventory,
-        //        On<POVendorInventory.vendorID, Equal<Current<APVendorPrice.vendorID>>,
-        //        And<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>>,
-        //    InnerJoin<InventoryItemCurySettings,
-        //        On<InventoryItemCurySettings.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>,
-        //        And<InventoryItemCurySettings.preferredVendorID, Equal<POVendorInventory.vendorID>>>,
-        //    InnerJoin<InventoryItem,
-        //        On<APVendorPrice.inventoryID, Equal<InventoryItem.inventoryID>>,
-        //    InnerJoin<INItemClass,
-        //        On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>>>,
-        //    Where<APVendorPrice.vendorID, Equal<InventoryItemCurySettings.preferredVendorID>,
-        //        And<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>,
-        //        And<APVendorPrice.effectiveDate, LessEqual<AccessInfo.businessDate>,
-        //        And<APVendorPrice.expirationDate, GreaterEqual<AccessInfo.businessDate>>>>>,
-        //    OrderBy<
-        //        Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
 
         [PXCopyPasteHiddenView]
         public PXSetup<INSetup> ASCIStarINSetup;

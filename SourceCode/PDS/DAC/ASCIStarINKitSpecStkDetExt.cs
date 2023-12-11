@@ -1,4 +1,5 @@
 using ASCISTARCustom.Common.DTO.Interfaces;
+using ASCISTARCustom.IN.CacheExt;
 using ASCISTARCustom.PDS.Descriptor;
 using ASCISTARCustom.PDS.Interfaces;
 using PX.Data;
@@ -129,7 +130,7 @@ namespace ASCISTARCustom
         #region UsrContractSurcharge
         [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Surcharge, %", Enabled = false, Visible = true)]
+        [PXUIField(DisplayName = "Surcharge / Loss, %", Enabled = false, Visible = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrContractSurcharge>))]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
