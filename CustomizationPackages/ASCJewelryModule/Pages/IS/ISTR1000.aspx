@@ -3,7 +3,7 @@
 
 <asp:Content ID="cont1" ContentPlaceHolderID="phDS" Runat="Server">
 	<px:PXDataSource ID="ds" runat="server" Visible="True" Width="100%"
-        TypeName="ASCISTARCustom.Preferences.ASCIStarSetupMaint"
+        TypeName="ASCISTARCustom.Cost.ASCIStarSetupMaint"
         PrimaryView="Setup"
         >
 		<CallbackCommands>

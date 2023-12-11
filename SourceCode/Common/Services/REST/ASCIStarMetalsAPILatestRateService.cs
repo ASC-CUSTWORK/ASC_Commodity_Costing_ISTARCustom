@@ -3,7 +3,7 @@ using ASCISTARCustom.Common.Models;
 using ASCISTARCustom.Common.Services.REST.Interfaces;
 using PX.Data;
 using System.Collections.Generic;
-using static ASCISTARCustom.Preferences.Descriptor.ASCIStarSymbols;
+using static ASCISTARCustom.Cost.Descriptor.ASCIStarSymbols;
 
 namespace ASCISTARCustom.Common.Services.REST
 {

@@ -1,6 +1,6 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Preferences;
-using ASCISTARCustom.Preferences.DAC;
+using ASCISTARCustom.Cost;
+using ASCISTARCustom.Cost.DAC;
 using Customization;
 using PX.Data;
 using System;

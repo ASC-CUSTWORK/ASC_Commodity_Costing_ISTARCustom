@@ -1,5 +1,5 @@
 ﻿using ASCISTARCustom.Common.Models;
-using ASCISTARCustom.Preferences.DAC;
+using ASCISTARCustom.Cost.DAC;
 using System.Collections.Generic;
 
 namespace ASCISTARCustom.Common.Services.REST.Interfaces

@@ -1,6 +1,6 @@
 ﻿<GenericInquiryScreen>
     <data-set>
-        <relations format-version="3" relations-version="20230524" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
+        <relations format-version="3" relations-version="20210225" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
             <link from="GIFilter (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIGroupBy (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIMassAction (DesignID)" to="GIDesign (DesignID)" />
@@ -137,13 +137,13 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="e4352bbd-a53a-42c4-9b96-e9f0fda070c7" Name="IN-StockItem" FilterColCount="3" PageSize="0" PrimaryScreenIDNew="IN202500" NewRecordCreationEnabled="1" MassDeleteEnabled="1" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0">
+                <row DesignID="e4352bbd-a53a-42c4-9b96-e9f0fda070c7" Name="IN-StockItem" FilterColCount="3" PageSize="0" PrimaryScreenIDNew="IN202500" NewRecordCreationEnabled="1" MassDeleteEnabled="1" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0">
                     <GIFilter LineNbr="1" IsActive="1" Name="CurrentBranchID" FieldName="INRegister.branchID" DataType="string" IsExpression="1" ColSpan="1" Required="0" Hidden="1" />
-                    <GINavigationScreen Link="IN202500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1" NoteID="336713ec-4467-42ee-8e2f-b0ac78afcf01">
+                    <GINavigationScreen Link="IN202500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1">
                         <GINavigationParameter LineNbr="1" FieldName="InventoryCD" ParameterName="InventoryItem.InventoryCD" IsExpression="0" />
                     </GINavigationScreen>
                     <GISort LineNbr="1" IsActive="1" DataFieldName="InventoryItem.inventoryCD" SortOrder="A" />
-                    <GITable Alias="JewelryAttributes" Name="ASCISTARCustom.Inventory.DAC.ASCIStarINJewelryItem">
+                    <GITable Alias="JewelryAttributes" Name="ASCISTARCustom.IN.DAC.ASCIStarINJewelryItem">
                         <GIResult LineNbr="32" SortOrder="32" IsActive="1" Field="customerCode_description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="f8f51440-2422-4512-ac53-09b6363c58f6" />
                         <GIResult LineNbr="31" SortOrder="31" IsActive="1" Field="customerCode" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="852f7462-8f35-42c2-b104-8c920d5591f6" />
                     </GITable>
@@ -157,23 +157,23 @@
                     </GITable>
                     <GITable Alias="InventoryItem" Name="PX.Objects.IN.InventoryItem">
                         <GIRelation LineNbr="6" ChildTable="ItemCost" IsActive="1" JoinType="L">
-                            <GIOn LineNbr="7" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
+                            <GIOn LineNbr="7" ParentField="inventoryID" Condition="E " ChildField="inventoryID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="5" ChildTable="JewelryAttributes" IsActive="1" JoinType="L">
-                            <GIOn LineNbr="6" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
+                            <GIOn LineNbr="6" ParentField="inventoryID" Condition="E " ChildField="inventoryID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="4" ChildTable="InventoryItemCurySettings" IsActive="1" JoinType="L">
-                            <GIOn LineNbr="4" ParentField="Branch.BaseCuryID" Condition="E" ChildField="curyID" Operation="A" />
-                            <GIOn LineNbr="3" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
+                            <GIOn LineNbr="4" ParentField="Branch.BaseCuryID" Condition="E " ChildField="curyID" Operation="A" />
+                            <GIOn LineNbr="3" ParentField="inventoryID" Condition="E " ChildField="inventoryID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="3" ChildTable="Branch" IsActive="1" JoinType="L">
-                            <GIOn LineNbr="5" ParentField="[CurrentBranchID]" Condition="E" ChildField="branchID" Operation="A" />
+                            <GIOn LineNbr="5" ParentField="[CurrentBranchID]" Condition="E " ChildField="branchID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="2" ChildTable="BAccountR" IsActive="1" JoinType="L">
-                            <GIOn LineNbr="2" ParentField="preferredVendorID" Condition="E" ChildField="bAccountID" Operation="O" />
+                            <GIOn LineNbr="2" ParentField="preferredVendorID" Condition="E " ChildField="bAccountID" Operation="O" />
                         </GIRelation>
                         <GIRelation LineNbr="1" ChildTable="INItemClass" IsActive="1" JoinType="L">
-                            <GIOn LineNbr="1" ParentField="itemClassID" Condition="E" ChildField="itemClassID" Operation="A" />
+                            <GIOn LineNbr="1" ParentField="itemClassID" Condition="E " ChildField="itemClassID" Operation="A" />
                         </GIRelation>
                         <GIResult LineNbr="37" SortOrder="37" IsActive="1" Field="usrMarketPriceGram" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="379be5b9-906d-47bd-9124-52846b5278aa" />
                         <GIResult LineNbr="36" SortOrder="36" IsActive="1" Field="INVSQ_Attributes" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="8307cf9e-13a7-45f6-be2f-68d5b33f7138" />
@@ -212,7 +212,7 @@
                     <GITable Alias="BAccountR" Name="PX.Objects.CR.BAccount" />
                     <GIWhere LineNbr="3" IsActive="1" DataFieldName="InventoryItem.isTemplate" Condition="NE" IsExpression="0" Value1="true" Operation="A" />
                     <GIWhere LineNbr="2" IsActive="1" DataFieldName="InventoryItem.itemStatus" Condition="NE" IsExpression="0" Value1="XX" Operation="A" />
-                    <GIWhere LineNbr="1" IsActive="1" DataFieldName="InventoryItem.stkItem" Condition="E" IsExpression="0" Value1="1" Operation="A" />
+                    <GIWhere LineNbr="1" IsActive="1" DataFieldName="InventoryItem.stkItem" Condition="E " IsExpression="0" Value1="1" Operation="A" />
                     <SiteMap linkname="toDesignById">
                         <row Position="20" Title="Stock Items" Url="~/GenericInquiry/GenericInquiry.aspx?id=e4352bbd-a53a-42c4-9b96-e9f0fda070c7" ScreenID="IN2025PL" NodeID="a191afac-d5c5-48b3-a450-970d364acb26" ParentID="12167736-ae7e-46ab-8a8c-dd4b86217519">
                             <ListEntryPoint EntryScreenID="IN202500" IsActive="1" />
@@ -256,7 +256,7 @@
                                 <FilterRow FilterRowNbr="2" OpenBrackets="1" DataField="InventoryItem_itemClassID" Condition="7" ValueSt="JWLRY" CloseBrackets="0" Operator="1" IsUsed="1" FilterType="0" />
                                 <FilterRow FilterRowNbr="1" OpenBrackets="0" DataField="InventoryItem_INVSTYLE_Attributes" Condition="1" ValueSt="True" ValueSt2="False" CloseBrackets="0" Operator="0" IsUsed="1" FilterType="0" />
                             </FilterHeader>
-                            <MUIScreen IsPortal="0" WorkspaceID="00000000-0000-0000-0000-000000000000" Order="642202" SubcategoryID="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" />
+                            <MUIScreen IsPortal="0" WorkspaceID="00000000-0000-0000-0000-000000000000" Order="642222" SubcategoryID="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" />
                         </row>
                     </SiteMap>
                     <SiteMap linkname="to1Screen">
