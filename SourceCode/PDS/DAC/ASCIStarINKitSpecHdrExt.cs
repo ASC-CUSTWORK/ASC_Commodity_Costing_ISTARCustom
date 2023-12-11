@@ -90,7 +90,7 @@ namespace ASCISTARCustom
         #region UsrContractSurcharge
         [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Total Surcharge, %")]
+        [PXUIField(DisplayName = "Total Surcharge/Loss %")]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
         #endregion
