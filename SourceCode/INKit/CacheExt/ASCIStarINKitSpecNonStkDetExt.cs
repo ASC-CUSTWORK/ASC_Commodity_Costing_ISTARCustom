@@ -1,12 +1,12 @@
 using ASCISTARCustom.IN.CacheExt;
-using ASCISTARCustom.PDS.Descriptor;
-using ASCISTARCustom.PDS.Interfaces;
+using ASCISTARCustom.INKit.Descriptor;
+using ASCISTARCustom.INKit.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.INKit.CacheExt
 {
     public sealed class ASCIStarINKitSpecNonStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecNonStkDet>, IASCIStarCostRollup
     {

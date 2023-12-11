@@ -7,7 +7,7 @@ using PX.Objects.CS;
 using PX.Objects.IN;
 using System;
 
-namespace ASCISTARCustom.PDS.CacheExt
+namespace ASCISTARCustom.INKit.DAC
 {
     [Serializable]
     [PXCacheName(_cacheName)]

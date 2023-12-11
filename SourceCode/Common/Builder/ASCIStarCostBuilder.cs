@@ -22,7 +22,6 @@ namespace ASCISTARCustom.Common.Builder
         private string Currency { get; set; } = "USD";
         private bool IsEnabledOverrideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
-
         public ASCIStarINJewelryItem INJewelryItem { get; set; }
         public IASCIStarItemCostSpecDTO ItemCostSpecification { get; set; }
         public POVendorInventory POVendorInventory { get; set; }

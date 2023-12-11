@@ -1,9 +1,10 @@
-﻿using ASCISTARCustom.PDS.Interfaces;
+﻿using ASCISTARCustom.INKit.CacheExt;
+using ASCISTARCustom.INKit.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
-namespace ASCISTARCustom.PDS.Descriptor
+namespace ASCISTARCustom.INKit.Descriptor
 {
     /// <summary>
     /// Custom attribute that subscribes to row events (inserted, updated, and deleted) for INKitSpecNonStkDet and INKitSpecStkDet DACs. 

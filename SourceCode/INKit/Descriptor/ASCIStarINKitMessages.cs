@@ -1,6 +1,6 @@
 ﻿using PX.Common;
 
-namespace ASCISTARCustom.PDS.Descriptor
+namespace ASCISTARCustom.INKit.Descriptor
 {
     public class ASCIStarINKitMessages
     {

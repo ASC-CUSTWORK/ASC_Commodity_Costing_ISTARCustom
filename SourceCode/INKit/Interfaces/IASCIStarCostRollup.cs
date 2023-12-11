@@ -1,4 +1,4 @@
-﻿namespace ASCISTARCustom.PDS.Interfaces
+﻿namespace ASCISTARCustom.INKit.Interfaces
 {
     public interface IASCIStarCostRollup
     {

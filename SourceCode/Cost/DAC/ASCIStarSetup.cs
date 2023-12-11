@@ -1,12 +1,12 @@
 ﻿using ASCISTARCustom.Common.DAC;
-using ASCISTARCustom.Preferences.Descriptor;
+using ASCISTARCustom.Cost.Descriptor;
 using PX.Data;
 using PX.Data.EP;
 using PX.Objects.CM;
 using PX.Objects.CS;
 using System;
 
-namespace ASCISTARCustom.Preferences.DAC
+namespace ASCISTARCustom.Cost.DAC
 {
     [Serializable]
     [PXCacheName(_cacheName)]

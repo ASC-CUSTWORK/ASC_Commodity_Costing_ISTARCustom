@@ -7,8 +7,9 @@ using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
 using ASCISTARCustom.IN.CacheExt;
 using ASCISTARCustom.IN.DAC;
 using ASCISTARCustom.IN.Descriptor.Constants;
-using ASCISTARCustom.PDS.CacheExt;
-using ASCISTARCustom.PDS.Descriptor;
+using ASCISTARCustom.INKit.CacheExt;
+using ASCISTARCustom.INKit.DAC;
+using ASCISTARCustom.INKit.Descriptor;
 using ASCISTARCustom.PO.CacheExt;
 using PX.Common;
 using PX.Data;
@@ -27,7 +28,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ASCISTARCustom.PDS
+namespace ASCISTARCustom.INKit
 {
     public class ASCIStarINKitSpecMaintExt : PXGraphExtension<INKitSpecMaint>
     {

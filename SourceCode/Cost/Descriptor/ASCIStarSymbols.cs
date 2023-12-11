@@ -1,6 +1,6 @@
 ﻿using PX.Data;
 
-namespace ASCISTARCustom.Preferences.Descriptor
+namespace ASCISTARCustom.Cost.Descriptor
 {
     public class ASCIStarSymbols
     {

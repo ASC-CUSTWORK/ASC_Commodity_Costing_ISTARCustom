@@ -4,7 +4,7 @@ using PX.Data;
 using PX.Objects.IN;
 using System;
 
-namespace ASCISTARCustom
+namespace ASCISTARCustom.INKit.CacheExt
 {
     public sealed class ASCIStarINKitSpecHdrExt : PXCacheExtension<INKitSpecHdr>, IASCIStarItemCostSpecDTO
     {

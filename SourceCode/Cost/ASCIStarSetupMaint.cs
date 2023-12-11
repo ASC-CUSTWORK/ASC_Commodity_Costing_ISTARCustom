@@ -1,14 +1,14 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
 using ASCISTARCustom.Common.Models;
 using ASCISTARCustom.Common.Services.REST.Interfaces;
-using ASCISTARCustom.Preferences.DAC;
+using ASCISTARCustom.Cost.DAC;
 using PX.Data;
 using PX.Data.WorkflowAPI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ASCISTARCustom.Preferences
+namespace ASCISTARCustom.Cost
 {
     public class ASCIStarSetupMaint : PXGraph<ASCIStarSetupMaint>
     {
