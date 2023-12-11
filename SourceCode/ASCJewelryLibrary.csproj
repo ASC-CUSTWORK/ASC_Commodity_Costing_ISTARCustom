@@ -141,6 +141,7 @@
     <Compile Include="PDS\Descriptor\ASCIStarCostAssignmentAttribute.cs" />
     <Compile Include="PDS\Descriptor\ASCIStarINKitMessages.cs" />
     <Compile Include="PDS\Interfaces\IASCIStarCostRollup.cs" />
+    <Compile Include="Purchasing\ASCIStarPOLandedCostDocEntryExt.cs" />
     <Compile Include="Purchasing\ASCIStarPOReceiptEntryExt.cs" />
     <Compile Include="Purchasing\CacheExt\ASCIStarPOReceiptExt.cs" />
     <Compile Include="Purchasing\Helpers\ASCIStarPOMessages.cs" />
