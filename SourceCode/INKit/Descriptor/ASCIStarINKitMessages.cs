@@ -12,12 +12,21 @@ namespace ASCISTARCustom.INKit.Descriptor
                                         "\r\nBest regards, \r\n" +
                                         "{4}\r\n" + "{5}";
 
+        [PXLocalizable]
+        public class Warning
+        {
+            public const string BaseItemNotSpecifyed = "System is missing the base items. Please ensure 'SSS' and '24K' items are created before proceeding.";
+            public const string MissingMetalType = "The Metal Type is missing!";
+        }
 
         [PXLocalizable]
         public class Error
         {
             public const string ItemWrongMetalType = "Kit has another Metal Type from selected item!";
-            public const string NoDefaultVendor = "Select default Vendor on Vendor tab.";
+            public const string NoDefaultVendor = "To proceed, please add a default vendor or select one on the Vendors tab.";
+            public const string CostRollupTypeNotSet = "Cost Rollup Type is not set. Please select Rollup Type before saving.";
+            public const string MarketNotFound = "Market field cannot be empty";
+            public const string CannotCreateItself = "Unable to create {0} using {0} as a source.";
         }
     }
 }

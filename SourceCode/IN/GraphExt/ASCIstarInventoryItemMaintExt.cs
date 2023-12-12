@@ -791,6 +791,7 @@ namespace ASCISTARCustom.IN.GraphExt
             e.Cache.SetValueExt<ASCIStarINVendorDuty.countryID>(e.Row, countryID);
         }
         #endregion
+       
         #endregion Event Handlers
 
         #region Helper Methods
@@ -819,6 +820,8 @@ namespace ASCISTARCustom.IN.GraphExt
             bool isVisibleGold = isVisible && rowExt.UsrCommodityType == ASCIStarConstants.CommodityType.Gold;
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrActualGRAMGold>(cache, row, isVisibleGold);
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrPricingGRAMGold>(cache, row, isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrContractIncrement>(cache, row, isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrIncrement>(cache, row, isVisibleGold);
 
             bool isVisibleSilver = isVisible && rowExt.UsrCommodityType == ASCIStarConstants.CommodityType.Silver;
             PXUIFieldAttribute.SetVisible<ASCIStarINInventoryItemExt.usrActualGRAMSilver>(cache, row, isVisibleSilver);
