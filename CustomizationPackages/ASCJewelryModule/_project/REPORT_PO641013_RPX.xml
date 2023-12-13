@@ -292,9 +292,17 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
         <Locale>=[Vendor.LocaleName]</Locale>
         <MailSettings>
             <ActivitySource>POOrder.NoteID</ActivitySource>
+            <Bcc>
+            </Bcc>
             <Body>='Dear Vendor, This is an automatic email to notify you that you have a new Purchase Order available on your account.  You will find a copy of Purchase Order #'+[POOrder.OrderNbr]+' '+'attached to this email.  #010;#010;If you have any questions, please don’t hesitate to contact us at email.  #010;#010;Thank you for choosing'+' '+[CompanyContact.FullName]+'.'</Body>
+            <Cc>
+            </Cc>
+            <Format>
+            </Format>
             <ParentSource>Vendor.NoteID</ParentSource>
             <Subject>=[CompanyContact.FullName]+' '+'Purchase Order #'+[POOrder.OrderNbr]+' '+'is now available'</Subject>
+            <TemplateID>
+            </TemplateID>
             <To>=[RemitContact.EMail]</To>
         </MailSettings>
         <PageSettings>
@@ -5238,7 +5246,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                         <Style>
                             <TextAlign>Right</TextAlign>
                         </Style>
-                        <StyleName>Heading 1</StyleName>
+                        <StyleName>Normal</StyleName>
                         <Value>=[POOrder.OrderNbr]</Value>
                     </TextBox>
                     <TextBox Name="textBox2">
@@ -5571,7 +5579,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Style>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
-                                        <StyleName>Heading 1</StyleName>
+                                        <StyleName>Normal</StyleName>
                                         <Value>=[POOrder.ExpectedDate]</Value>
                                     </TextBox>
                                     <TextBox Name="textBox58">
@@ -5592,7 +5600,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Style>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
-                                        <StyleName>Heading 1</StyleName>
+                                        <StyleName>Normal</StyleName>
                                         <Value>=[POOrder.UsrEstArrivalDate]</Value>
                                     </TextBox>
                                     <TextBox Name="textBox61">
@@ -5601,7 +5609,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Style>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
-                                        <StyleName>Heading 1</StyleName>
+                                        <StyleName>Normal</StyleName>
                                         <Value>=[POOrder.UsrCancelDate]</Value>
                                     </TextBox>
                                     <TextBox Name="textBox62">
@@ -5624,6 +5632,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>90px, 16px</Size>
                                         <StyleName>Heading 1</StyleName>
                                         <Value>Order Taken By:</Value>
+                                        <Visible>False</Visible>
                                     </TextBox>
                                     <TextBox Name="textBox67">
                                         <Location>40px, 72px</Location>
@@ -5707,6 +5716,12 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                             <Line Name="line1">
                                 <Location>0px, 32px</Location>
                                 <Size>696px, 8px</Size>
+                                <Style>
+                                    <Font>
+                                        <Size>9px</Size>
+                                        <Style>Bold</Style>
+                                    </Font>
+                                </Style>
                             </Line>
                             <Line Name="line3">
                                 <Location>0px, 0px</Location>
@@ -5718,6 +5733,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
                                 </Style>
                                 <Value>Line</Value>
@@ -5728,6 +5744,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
                                 </Style>
                                 <Value>Rev</Value>
@@ -5738,6 +5755,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
                                 </Style>
                                 <Value>Item</Value>
@@ -5748,6 +5766,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
                                 </Style>
                                 <Value>Description</Value>
@@ -5758,6 +5777,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
                                 </Style>
                                 <Value>Vendor Item</Value>
@@ -5768,8 +5788,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Right</TextAlign>
                                 </Style>
                                 <Value>Ordered QTY</Value>
                             </TextBox>
@@ -5779,7 +5800,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
+                                    <TextAlign>Right</TextAlign>
                                 </Style>
                                 <Value>UOM</Value>
                             </TextBox>
@@ -5789,8 +5812,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Right</TextAlign>
                                 </Style>
                                 <Value>PU $ Price</Value>
                             </TextBox>
@@ -5800,8 +5824,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Right</TextAlign>
                                 </Style>
                                 <Value>Extended $ Price</Value>
                             </TextBox>
@@ -5811,6 +5836,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
+                                        <Style>Bold</Style>
                                     </Font>
                                     <TextAlign>Center</TextAlign>
                                 </Style>
@@ -5835,13 +5861,19 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                     <Line Name="line2">
                                         <Location>0px, 16px</Location>
                                         <Size>696px, 8px</Size>
+                                        <Style>
+                                            <Font>
+                                                <Size>9px</Size>
+                                            </Font>
+                                        </Style>
                                     </Line>
                                     <TextBox Name="textBox35">
                                         <Location>416px, 0px</Location>
                                         <Size>48px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
+                                                <Style>Bold</Style>
                                             </Font>
                                             <TextAlign>Left</TextAlign>
                                         </Style>
@@ -5853,7 +5885,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>56px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
@@ -5865,7 +5897,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>48px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                         </Style>
                                         <Value>Tax Rate:</Value>
@@ -5874,6 +5906,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Location>8px, 40px</Location>
                                         <Size>40px, 24px</Size>
                                         <Style>
+                                            <Font>
+                                                <Size>9px</Size>
+                                            </Font>
                                             <Padding>
                                                 <Top>8px</Top>
                                             </Padding>
@@ -5887,6 +5922,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Location>48px, 40px</Location>
                                         <Size>328px, 32px</Size>
                                         <Style>
+                                            <Font>
+                                                <Size>9px</Size>
+                                            </Font>
                                             <Padding>
                                                 <Top>8px</Top>
                                             </Padding>
@@ -5899,7 +5937,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>48px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                             <TextAlign>Left</TextAlign>
                                         </Style>
@@ -5911,7 +5949,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>48px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                         </Style>
                                         <Value>Terms:</Value>
@@ -5921,7 +5959,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>160px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                         </Style>
                                         <Value>=[POOrder.TermsID_Terms_descr]</Value>
@@ -5932,7 +5970,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>48px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                         </Style>
                                         <Value>=[POOrder.CuryTaxTotal]/[POOrder.CuryLineTotal]</Value>
@@ -5942,7 +5980,8 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>64px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
+                                                <Style>Bold</Style>
                                             </Font>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
@@ -5953,7 +5992,8 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>64px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
+                                                <Style>Bold</Style>
                                             </Font>
                                         </Style>
                                         <Value>Total Sales Tax </Value>
@@ -5963,7 +6003,8 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>72px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
+                                                <Style>Bold</Style>
                                             </Font>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
@@ -5975,7 +6016,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>72px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
@@ -5988,7 +6029,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Size>64px, 16px</Size>
                                         <Style>
                                             <Font>
-                                                <Size>10px</Size>
+                                                <Size>9px</Size>
                                             </Font>
                                             <TextAlign>Right</TextAlign>
                                         </Style>
@@ -6037,7 +6078,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                 </Grouping>
                 <Headers>
                     <Header Name="groupHeaderGridLines">
-                        <Height>0.33333in</Height>
+                        <Height>0.16667in</Height>
                         <Variables>
                             <ReportVariable>
                                 <Name>CstLineNbr</Name>
@@ -6049,6 +6090,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Location>32px, 0px</Location>
                                 <Size>32px, 16px</Size>
                                 <Style>
+                                    <Font>
+                                        <Size>9px</Size>
+                                    </Font>
                                     <TextAlign>Left</TextAlign>
                                 </Style>
                                 <StyleName>Normal</StyleName>
@@ -6062,6 +6106,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                     <Font>
                                         <Size>9px</Size>
                                     </Font>
+                                    <TextAlign>Left</TextAlign>
                                 </Style>
                                 <StyleName>Normal</StyleName>
                                 <Value>=[POLine.InventoryID]</Value>
@@ -6073,7 +6118,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                     <Font>
                                         <Size>9px</Size>
                                     </Font>
-                                    <TextAlign>Left</TextAlign>
+                                    <TextAlign>Right</TextAlign>
                                 </Style>
                                 <StyleName>Normal</StyleName>
                                 <Value>=[POLine.OrderQty]</Value>
@@ -6105,7 +6150,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                             </TextBox>
                             <TextBox Name="textBox73">
                                 <Location>160px, 0px</Location>
-                                <Size>192px, 24px</Size>
+                                <Size>192px, 16px</Size>
                                 <Style>
                                     <Font>
                                         <Size>9px</Size>
@@ -6120,7 +6165,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                     <Font>
                                         <Size>9px</Size>
                                     </Font>
-                                    <TextAlign>Left</TextAlign>
+                                    <TextAlign>Right</TextAlign>
                                 </Style>
                                 <StyleName>Normal</StyleName>
                                 <Value>=[POLine.UOM]</Value>
@@ -6129,6 +6174,9 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                 <Location>0px, 0px</Location>
                                 <Size>32px, 16px</Size>
                                 <Style>
+                                    <Font>
+                                        <Size>9px</Size>
+                                    </Font>
                                     <TextAlign>Left</TextAlign>
                                 </Style>
                                 <StyleName>Normal</StyleName>
