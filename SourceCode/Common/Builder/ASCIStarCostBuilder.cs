@@ -1,7 +1,7 @@
 ﻿using ASCISTARCustom.Common.DTO.Interfaces;
 using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Cost.CacheExt;
-using ASCISTARCustom.Inventory.DAC;
+using ASCISTARCustom.PO.CacheExt;
+using ASCISTARCustom.IN.DAC;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
@@ -22,7 +22,6 @@ namespace ASCISTARCustom.Common.Builder
         private string Currency { get; set; } = "USD";
         private bool IsEnabledOverrideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
-
         public ASCIStarINJewelryItem INJewelryItem { get; set; }
         public IASCIStarItemCostSpecDTO ItemCostSpecification { get; set; }
         public POVendorInventory POVendorInventory { get; set; }
@@ -38,6 +37,8 @@ namespace ASCISTARCustom.Common.Builder
         public decimal? Floor { get; private set; }
         public decimal? Ceiling { get; private set; }
         public decimal? BasisValue { get; private set; } = decimal.Zero;
+
+        public APVendorPrice APVendorPriceContract { get; set; }
         #endregion 
 
         public ASCIStarCostBuilder(PXGraph graph)
@@ -87,13 +88,13 @@ namespace ASCISTARCustom.Common.Builder
             }
 
             if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
-                PreciousMetalItem = GetInventoryItemByInvenctoryCD("24K");
+                PreciousMetalItem = ASCIStarMetalType.GetInventoryItemByInvenctoryCD(_graph, "24K");
             else if (ASCIStarMetalType.IsSilver(INJewelryItem.MetalType))
-                PreciousMetalItem = GetInventoryItemByInvenctoryCD("SSS");
+                PreciousMetalItem = ASCIStarMetalType.GetInventoryItemByInvenctoryCD(_graph, "SSS");
 
             if (PreciousMetalItem == null) return null;
 
-            PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID);
+            PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID, true);
             PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
 
             if (ASCIStarMetalType.IsGold(INJewelryItem.MetalType))
@@ -167,12 +168,17 @@ namespace ASCISTARCustom.Common.Builder
             return PreciousMetalUnitCost;
         }
 
-        public virtual decimal? GetVendorPricePerTOZ(int? vendorID, int? inventoryID)
+        public virtual decimal? GetVendorPricePerTOZ(int? vendorID, int? inventoryID, bool isContract = false)
         {
             var result = GetAPVendorPrice(_graph, vendorID, inventoryID, TOZ.value, PricingDate);
             if (result == null)
             {
                 return 0.0m;
+            }
+
+            if (isContract)
+            {
+                APVendorPriceContract = result;
             }
 
             return result.SalesPrice;
@@ -264,9 +270,6 @@ namespace ASCISTARCustom.Common.Builder
         #region ServiceQueries
         private ASCIStarINJewelryItem GetASCIStarINJewelryItem(int? inventoryID)
             => PXSelect<ASCIStarINJewelryItem, Where<ASCIStarINJewelryItem.inventoryID, Equal<Required<ASCIStarINJewelryItem.inventoryID>>>>.Select(_graph, inventoryID);
-
-        private InventoryItem GetInventoryItemByInvenctoryCD(string inventoryCD) =>
-            SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(_graph, inventoryCD)?.TopFirst;
 
         public static APVendorPrice GetAPVendorPrice(PXGraph graph, int? vendorID, int? inventoryID, string UOM, DateTime effectiveDate)
             => SelectFrom<APVendorPrice>

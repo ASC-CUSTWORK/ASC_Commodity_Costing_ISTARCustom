@@ -1,5 +1,8 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using PX.Objects.IN;
+using PX.Data;
+using PX.Data.BQL;
+using PX.Data.BQL.Fluent;
 
 namespace ASCISTARCustom.Common.Helper
 {
@@ -12,28 +15,6 @@ namespace ASCISTARCustom.Common.Helper
         /// <returns>True if the metal type is gold, false if it is not, or null if it is not defined in the list.</returns>
         public static bool IsGold(string metalType)
         {
-            return GetBoolableMetalType(metalType) == true;
-        }
-
-        /// <summary>
-        /// Determines if the given metal type is silver or not, based on the defined list of silver metal types.
-        /// </summary>
-        /// <param name="metalType">The metal type to check.</param>
-        /// <returns>True if the metal type is silver, false if it is not silver, and null if the metal type is not defined in the list.</returns>
-        public static bool IsSilver(string metalType)
-        {
-            return GetBoolableMetalType(metalType) == false;
-        }
-
-        /// <summary>
-        /// Determines if a given metal type is valid based on a list of acceptable metal types.
-        /// </summary>
-        /// <param name="metalType">The metal type to check.</param>
-        /// <returns>True if the metal type is gold, false if metal type is silver, and null if it cannot be determined.</returns>
-        public static bool? GetBoolableMetalType(string metalType)
-        {
-            if (metalType == null) return null;
-
             switch (metalType?.ToUpper())
             {
                 case ASCIStarConstants.MetalType.Type_24K: return true;
@@ -75,12 +56,67 @@ namespace ASCISTARCustom.Common.Helper
                 case ASCIStarConstants.MetalType.Type_08F: return true;
                 case ASCIStarConstants.MetalType.Type_07F: return true;
                 case ASCIStarConstants.MetalType.Type_06F: return true;
-
-                case ASCIStarConstants.MetalType.Type_FSS: return false;
-                case ASCIStarConstants.MetalType.Type_SSS: return false;
-
-                default: return null;
+                default: return false;
             }
+        }
+
+        /// <summary>
+        /// Determines if the given metal type is silver or not, based on the defined list of silver metal types.
+        /// </summary>
+        /// <param name="metalType">The metal type to check.</param>
+        /// <returns>True if the metal type is silver, false if it is not silver, and null if the metal type is not defined in the list.</returns>
+        public static bool IsSilver(string metalType)
+        {
+            switch (metalType?.ToUpper())
+            {
+                case ASCIStarConstants.MetalType.Type_FSS: return true;
+                case ASCIStarConstants.MetalType.Type_SSS: return true;
+                default: return false;
+            }
+        }
+
+        /// <summary>
+        /// Determines if the given metal type is a mix, based on a predefined list of gold and silver types.
+        /// This method identifies pure gold, a mix of gold and silver, other types of mixes, as well as cases where the metal type is undefined or not a mix.
+        /// </summary>
+        /// <param name="metalType">The metal type to check.</param>
+        /// <returns>
+        /// Returns a string that represents the type of mix:
+        /// - 'Type_MixedGold' for pure gold (both metal types are gold).
+        /// - 'Type_MixedDefault' for a standard mix of gold and silver.
+        /// - 'Type_MixedUndefined' if the metal type is undefined or not a mix.
+        /// </returns>
+        public static string GetMixedTypeValue(string metalType)
+        {
+            if (metalType is null) return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
+
+            metalType = metalType.ToUpper();
+            var metalTypes = metalType.Split('-');
+
+            if (metalTypes.Length == 2)
+            {
+                var firstMetalType = metalTypes[0];
+                var secondMetalType = metalTypes[1];
+
+                var isFirstMetalTypeGold = IsGold(firstMetalType);
+                var isSecondMetalTypeGold = IsGold(secondMetalType);
+
+                var isFirstMetalTypePredefined = isFirstMetalTypeGold || IsSilver(firstMetalType);
+                var isSecondMetalTypePredefined = isSecondMetalTypeGold || IsSilver(secondMetalType);
+
+                if (isFirstMetalTypeGold && isSecondMetalTypeGold)
+                {
+                    return ASCIStarConstants.MixedMetalType.Type_MixedGold;
+                }
+
+                if (isFirstMetalTypePredefined && isSecondMetalTypePredefined)
+                {
+                    return ASCIStarConstants.MixedMetalType.Type_MixedDefault;
+                }
+                
+            }
+
+            return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
         }
 
         ///<summary>
@@ -93,9 +129,9 @@ namespace ASCISTARCustom.Common.Helper
         {
             if (metalType == null) return decimal.Zero;
 
-            if (IsGold(metalType)) return GetGoldTypeValue(metalType) / 24.0m / TOZ2GRAM_31_10348.value;
+            if (IsGold(metalType)) return GetGoldTypeValue(metalType) / 24.0m / ASCIStarConstants.TOZ2GRAM_31_10348.value;
 
-            if (IsSilver(metalType)) return GetSilverTypeValue(metalType) / TOZ2GRAM_31_10348.value;
+            if (IsSilver(metalType)) return GetSilverTypeValue(metalType) / ASCIStarConstants.TOZ2GRAM_31_10348.value;
 
             return decimal.Zero;
         }
@@ -143,5 +179,26 @@ namespace ASCISTARCustom.Common.Helper
                 default: return 1.0m;
             }
         }
+
+        /// <summary>
+        /// Returns InventoryID that corespond to base inventory item of metal, base InventoryItem - InventoryCD in DB: Gold - 24k, Silver - SSS    
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <param name="metalType">String value representing the metal type. </param>
+        /// <returns>int? value of InventoryID from InventoryItem table.</returns>
+        public static int? GetBaseInventoryID(PXGraph graph, string metalType)
+        {
+            string inventoryCD = string.Empty;
+            bool isGold = ASCIStarMetalType.IsGold(metalType);
+            bool isSilver = ASCIStarMetalType.IsSilver(metalType);
+
+            if (isGold) inventoryCD = "24K";
+            if (isSilver) inventoryCD = "SSS";
+
+            return GetInventoryItemByInvenctoryCD(graph, inventoryCD)?.InventoryID;
+        }
+
+        public static InventoryItem GetInventoryItemByInvenctoryCD(PXGraph graph, string inventoryCD) =>
+          SelectFrom<InventoryItem>.Where<InventoryItem.inventoryCD.IsEqual<P.AsString>>.View.Select(graph, inventoryCD)?.TopFirst;
     }
 }
