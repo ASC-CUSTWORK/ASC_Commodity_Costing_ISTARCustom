@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 using ASCISTARCustom.IN.CacheExt;
+using PX.Objects.PO.GraphExtensions.POOrderEntryExt;
 
 namespace ASCISTARCustom.PO
 {
@@ -56,24 +57,16 @@ namespace ASCISTARCustom.PO
                             var list = PXNoteAttribute.GetFileNotes(Base.Document.Cache, Base.Document.Current).Select(attachment => (Guid?)attachment).ToList();
                             ASCIStarPOOrderExt currentExt = currentItem.GetExtension<ASCIStarPOOrderExt>();
                             NotificationSetup ns = NotificationSetup.PK.Find(Base, currentExt.UsrSetupID);
-                            Base.Activity.SendNotification(
-                                "Vendor",
-                                (ns.NotificationCD ?? "PURCHASE ORDER"),
-                                currentItem.BranchID,
-                                parameters,
-                                list);
+                            var baseExt = Base.GetExtension<POOrderEntry_ActivityDetailsExt>();
+                            baseExt?.SendNotification("Vendor", (ns.NotificationCD ?? "PURCHASE ORDER"), currentItem.BranchID, parameters, false, list);
                             Base.Save.Press();
                             transactionScope.Complete();
                         }
-                        if (massProcess)
-                            PXProcessing<POOrder>.SetProcessed();
+                        if (massProcess) PXProcessing<POOrder>.SetProcessed();
                     }
                     catch (Exception ex)
                     {
-                        if (!massProcess)
-                        {
-                            throw;
-                        }
+                        if (!massProcess) throw;
 
                         Base.Document.Cache.SetStatus((object)currentItem, PXEntryStatus.Notchanged);
                         Base.Document.Cache.Remove((object)currentItem);
@@ -81,8 +74,7 @@ namespace ASCISTARCustom.PO
                         flag = true;
                     }
                 }
-                if (flag)
-                    throw new PXOperationCompletedWithErrorException(ASCIStarPOMessages.Errors.ProcessingWithErrorMessages);
+                if (flag) throw new PXOperationCompletedWithErrorException(ASCIStarPOMessages.Errors.ProcessingWithErrorMessages);
             });
             return adapter.Get<POOrder>();
         }

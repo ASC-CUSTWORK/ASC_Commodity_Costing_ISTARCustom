@@ -2,6 +2,7 @@
 using PX.Data;
 using PX.Data.BQL;
 using PX.Objects.IN;
+using Messages = PX.Objects.IN.Messages;
 
 namespace ASCISTARCustom.IN.Descriptor.Constants
 {
