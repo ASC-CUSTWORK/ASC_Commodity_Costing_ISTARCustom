@@ -834,45 +834,45 @@ namespace ASCISTARCustom.INKit
 
         protected virtual void SetVisibleItemWeightFields(PXCache cache, INKitSpecHdr row)
         {
-            //if (JewelryItemView.Current == null)
-            //    JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
+            if (JewelryItemView.Current == null)
+                JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
 
-            //var mixedType = ASCIStarMetalType.GetMixedTypeValue(JewelryItemView.Current?.MetalType);
-            //bool isVisibleMixed = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedDefault || 
-            //    JewelryItemView.Current?.MetalType == null;
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMSilverRight>(cache, row, isVisibleMixed);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilverRight>(cache, row, isVisibleMixed);
+            var mixedType = ASCIStarMetalType.GetMixedTypeValue(JewelryItemView.Current?.MetalType);
+            bool isVisibleMixed = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedDefault ||
+                JewelryItemView.Current?.MetalType == null;
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMSilverRight>(cache, row, isVisibleMixed);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilverRight>(cache, row, isVisibleMixed);
 
-            //bool isVisibleGold = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedGold || 
-            //    ASCIStarMetalType.IsGold(JewelryItemView.Current?.MetalType);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrContractSurcharge>(cache, row, isVisibleMixed || isVisibleGold);
+            bool isVisibleGold = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedGold ||
+                ASCIStarMetalType.IsGold(JewelryItemView.Current?.MetalType);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrContractSurcharge>(cache, row, isVisibleMixed || isVisibleGold);
 
-            //bool isVisibleSilver = ASCIStarMetalType.IsSilver(JewelryItemView.Current?.MetalType);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMSilver>(cache, row, isVisibleSilver);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilver>(cache, row, isVisibleSilver);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrMatrixStep>(cache, row, isVisibleMixed || isVisibleSilver);
+            bool isVisibleSilver = ASCIStarMetalType.IsSilver(JewelryItemView.Current?.MetalType);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrActualGRAMSilver>(cache, row, isVisibleSilver);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilver>(cache, row, isVisibleSilver);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecHdrExt.usrMatrixStep>(cache, row, isVisibleMixed || isVisibleSilver);
         }
 
         protected virtual void SetVisibleINKitSpecStkDet(PXCache cache, INKitSpecStkDet row)
         {
-            //if (JewelryItemView.Current == null)
-            //    JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
+            if (JewelryItemView.Current == null)
+                JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
 
-            //var mixedType = ASCIStarMetalType.GetMixedTypeValue(JewelryItemView.Current?.MetalType);
-            //bool isVisibleMixed = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedDefault ||
-            //    JewelryItemView.Current?.MetalType == null;
+            var mixedType = ASCIStarMetalType.GetMixedTypeValue(JewelryItemView.Current?.MetalType);
+            bool isVisibleMixed = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedDefault ||
+                JewelryItemView.Current?.MetalType == null;
 
-            //bool isVisibleGold = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedGold ||
-            //    ASCIStarMetalType.IsGold(JewelryItemView.Current?.MetalType);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrActualGRAMGold>(cache, null, isVisibleMixed || isVisibleGold);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrPricingGRAMGold>(cache, null, isVisibleMixed || isVisibleGold);
+            bool isVisibleGold = mixedType == ASCIStarConstants.MixedMetalType.Type_MixedGold ||
+                ASCIStarMetalType.IsGold(JewelryItemView.Current?.MetalType);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrActualGRAMGold>(cache, null, isVisibleMixed || isVisibleGold);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrPricingGRAMGold>(cache, null, isVisibleMixed || isVisibleGold);
 
-            //bool isVisibleSilver = ASCIStarMetalType.IsSilver(JewelryItemView.Current?.MetalType);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrActualGRAMSilver>(cache, null, isVisibleMixed || isVisibleSilver);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrPricingGRAMSilver>(cache, null, isVisibleMixed || isVisibleSilver);
-            //PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrMatrixStep>(cache, null, isVisibleMixed || isVisibleSilver);
+            bool isVisibleSilver = ASCIStarMetalType.IsSilver(JewelryItemView.Current?.MetalType);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrActualGRAMSilver>(cache, null, isVisibleMixed || isVisibleSilver);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrPricingGRAMSilver>(cache, null, isVisibleMixed || isVisibleSilver);
+            PXUIFieldAttribute.SetVisible<ASCIStarINKitSpecStkDetExt.usrMatrixStep>(cache, null, isVisibleMixed || isVisibleSilver);
         }
 
         protected virtual void CopyJewelryItemFields(INKitSpecHdr kitSpecHdr)

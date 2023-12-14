@@ -91,7 +91,7 @@ namespace ASCISTARCustom.Common.Helper
             if (metalType is null) return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
 
             metalType = metalType.ToUpper();
-            var metalTypes = metalType.Split('-');
+            var metalTypes = metalType.Split('-', '/', '*', '+', '\\', ',');
 
             if (metalTypes.Length == 2)
             {
