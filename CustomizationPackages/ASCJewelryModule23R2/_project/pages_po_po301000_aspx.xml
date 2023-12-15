@@ -3,75 +3,75 @@
         <Children Key="Columns">
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrMarketPrice" />
+                    <Prop Key="DataField" Value="UsrASCJMarketPrice" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrBasisValue" />
+                    <Prop Key="DataField" Value="UsrASCJBasisValue" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrContractIncrement" />
+                    <Prop Key="DataField" Value="UsrASCJContractIncrement" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrPricingGRAMGold" />
+                    <Prop Key="DataField" Value="UsrASCJPricingGRAMGold" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrActualGRAMGold" />
+                    <Prop Key="DataField" Value="UsrASCJActualGRAMGold" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrActualGRAMSilver" />
+                    <Prop Key="DataField" Value="UsrASCJActualGRAMSilver" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrPricingGRAMSilver" />
+                    <Prop Key="DataField" Value="UsrASCJPricingGRAMSilver" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <PXGridColumn DataField="SOOrderNbr" OriginalIndex="16" />
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrWeight" />
+                    <Prop Key="DataField" Value="UsrASCJWeight" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrRatePerGram" />
+                    <Prop Key="DataField" Value="UsrASCJRatePerGram" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrPurity" />
+                    <Prop Key="DataField" Value="UsrASCJPurity" />
                     <Prop Key="Width" Value="140" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrTotWeight" />
+                    <Prop Key="DataField" Value="UsrASCJTotWeight" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrMaterialCost" />
+                    <Prop Key="DataField" Value="UsrASCJMaterialCost" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
@@ -84,21 +84,21 @@
                 <PXDateTimeEdit TypeFullName="PX.Web.UI.PXDateTimeEdit">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="ASCIStarCancelDateDT" />
-                    <Prop Key="DataField" Value="UsrCancelDate" />
+                    <Prop Key="DataField" Value="UsrASCJCancelDate" />
                 </PXDateTimeEdit>
             </AddItem>
             <AddItem>
                 <PXDateTimeEdit TypeFullName="PX.Web.UI.PXDateTimeEdit">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="ASCIStarEstArrivalDateDT" />
-                    <Prop Key="DataField" Value="UsrEstArrivalDate" />
+                    <Prop Key="DataField" Value="UsrASCJEstArrivalDate" />
                 </PXDateTimeEdit>
             </AddItem>
             <AddItem>
                 <PXDateTimeEdit TypeFullName="PX.Web.UI.PXDateTimeEdit">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXDateTimeEdit9" />
-                    <Prop Key="DataField" Value="UsrPricingDate" />
+                    <Prop Key="DataField" Value="UsrASCJPricingDate" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXDateTimeEdit>
             </AddItem>
@@ -113,23 +113,23 @@
             <AddItem>
                 <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
-                    <Prop Key="ID" Value="ASCIStarUsrProgramTxt" />
-                    <Prop Key="DataField" Value="UsrProgram" />
+                    <Prop Key="ID" Value="ASCIStarUsrASCJProgramTxt" />
+                    <Prop Key="DataField" Value="UsrASCJProgram" />
                 </PXTextEdit>
             </AddItem>
             <PXLayoutRule OriginalIndex="11" />
             <AddItem>
                 <PXSelector TypeFullName="PX.Web.UI.PXSelector">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
-                    <Prop Key="ID" Value="CstUsrMarketID" />
-                    <Prop Key="DataField" Value="UsrMarketID" />
+                    <Prop Key="ID" Value="CstUsrASCJMarketID" />
+                    <Prop Key="DataField" Value="UsrASCJMarketID" />
                 </PXSelector>
             </AddItem>
             <AddItem>
                 <PXSelector TypeFullName="PX.Web.UI.PXSelector">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
-                    <Prop Key="ID" Value="CstUsrSetupID" />
-                    <Prop Key="DataField" Value="UsrSetupID" />
+                    <Prop Key="ID" Value="CstUsrASCJSetupID" />
+                    <Prop Key="DataField" Value="UsrASCJSetupID" />
                 </PXSelector>
             </AddItem>
             <PXLayoutRule OriginalIndex="18" />

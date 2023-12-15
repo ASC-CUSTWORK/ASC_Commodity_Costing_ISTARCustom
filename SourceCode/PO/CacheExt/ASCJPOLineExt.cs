@@ -5,93 +5,93 @@ using System;
 namespace ASCJewelryLibrary.PO.DAC
 {
     [Serializable]
-    [PXCacheName("ASC POLine Extension")]
+    [PXCacheName("POLine Extension")]
     public class ASCJPOLineExt : PXCacheExtension<POLine>
     {
         public static bool IsActive() => true;
 
-        #region UsrPurity
+        #region UsrASCJPurity
         [PXDBString(20)]
         [PXUIField(DisplayName = "Purity", Enabled = false)]
-        public string UsrPurity { get; set; }
-        public abstract class usrPurity : PX.Data.BQL.BqlString.Field<usrPurity> { }
+        public string UsrASCJPurity { get; set; }
+        public abstract class usrASCJPurity : PX.Data.BQL.BqlString.Field<usrASCJPurity> { }
         #endregion
 
-        #region UsrWeight
+        #region UsrASCJWeight
         [PXDBDecimal]
         [PXUIField(DisplayName = "Weight/gram", Enabled = false)]
-        public decimal? UsrWeight { get; set; }
-        public abstract class usrWeight : PX.Data.BQL.BqlDecimal.Field<usrWeight> { }
+        public decimal? UsrASCJWeight { get; set; }
+        public abstract class usrASCJWeight : PX.Data.BQL.BqlDecimal.Field<usrASCJWeight> { }
         #endregion
 
-        #region UsrTotalWeight
+        #region UsrASCJTotalWeight
         [PXDecimal]
         [PXUIField(DisplayName = "Total Weight (g)", Enabled = false)]
-        public virtual decimal? UsrTotWeight { get; set; }
-        public abstract class usrTotWeight : PX.Data.BQL.BqlDecimal.Field<usrTotWeight> { }
+        public virtual decimal? UsrASCJTotWeight { get; set; }
+        public abstract class usrASCJTotWeight : PX.Data.BQL.BqlDecimal.Field<usrASCJTotWeight> { }
         #endregion
 
-        #region UsrMarketPrice
+        #region UsrASCJMarketPrice
         [PXUIField(DisplayName = "Market Price", IsReadOnly = true)]
         [PXDBDecimal(6)]
-        public virtual decimal? UsrMarketPrice { get; set; }
-        public abstract class usrMarketPrice : PX.Data.BQL.BqlDecimal.Field<usrMarketPrice> { }
+        public virtual decimal? UsrASCJMarketPrice { get; set; }
+        public abstract class usrASCJMarketPrice : PX.Data.BQL.BqlDecimal.Field<usrASCJMarketPrice> { }
         #endregion
 
-        #region UsrContractIncrement
+        #region UsrASCJContractIncrement
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Increment", IsReadOnly = true)]
-        public virtual decimal? UsrContractIncrement { get; set; }
-        public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
+        public virtual decimal? UsrASCJContractIncrement { get; set; }
+        public abstract class usrASCJContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrASCJContractIncrement> { }
         #endregion
 
-        #region UsrActualGRAMGold
+        #region UsrASCJActualGRAMGold
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Gold, Grams", IsReadOnly = true)]
-        public virtual decimal? UsrActualGRAMGold { get; set; }
-        public abstract class usrActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
+        public virtual decimal? UsrASCJActualGRAMGold { get; set; }
+        public abstract class usrASCJActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrASCJActualGRAMGold> { }
         #endregion
 
-        #region UsrPricingGRAMGold
+        #region UsrASCJPricingGRAMGold
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Fine Gold, Grams", IsReadOnly = true)]
-        public virtual decimal? UsrPricingGRAMGold { get; set; }
-        public abstract class usrPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMGold> { }
+        public virtual decimal? UsrASCJPricingGRAMGold { get; set; }
+        public abstract class usrASCJPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrASCJPricingGRAMGold> { }
         #endregion
 
-        #region UsrActualGRAMSilver
+        #region UsrASCJActualGRAMSilver
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Silver, Grams", IsReadOnly = true)]
-        public virtual decimal? UsrActualGRAMSilver { get; set; }
-        public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
+        public virtual decimal? UsrASCJActualGRAMSilver { get; set; }
+        public abstract class usrASCJActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrASCJActualGRAMSilver> { }
         #endregion
 
-        #region UsrPricingGRAMSilver
+        #region UsrASCJPricingGRAMSilver
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Fine Silver, Grams", IsReadOnly = true)]
-        public virtual decimal? UsrPricingGRAMSilver { get; set; }
-        public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
+        public virtual decimal? UsrASCJPricingGRAMSilver { get; set; }
+        public abstract class usrASCJPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrASCJPricingGRAMSilver> { }
         #endregion
 
-        #region UsrRatePerGram
+        #region UsrASCJRatePerGram
         [PXDBDecimal]
         [PXUIField(DisplayName = "Rate/gram", IsReadOnly = true)]
-        public decimal? UsrRatePerGram { get; set; }
-        public abstract class usrRatePerGram : PX.Data.BQL.BqlDecimal.Field<usrRatePerGram> { }
+        public decimal? UsrASCJRatePerGram { get; set; }
+        public abstract class usrASCJRatePerGram : PX.Data.BQL.BqlDecimal.Field<usrASCJRatePerGram> { }
         #endregion
 
-        #region UsrMaterialCost
+        #region UsrASCJMaterialCost
         [PXDBDecimal]
         [PXUIField(DisplayName = "Material Cost", IsReadOnly = true)]
-        public decimal? UsrMaterialCost { get; set; }
-        public abstract class usrMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrMaterialCost> { }
+        public decimal? UsrASCJMaterialCost { get; set; }
+        public abstract class usrASCJMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrASCJMaterialCost> { }
         #endregion
 
-        #region UsrBasisValue
+        #region UsrASCJBasisValue
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
-        public decimal? UsrBasisValue { get; set; }
-        public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
+        public decimal? UsrASCJBasisValue { get; set; }
+        public abstract class usrASCJBasisValue : PX.Data.BQL.BqlDecimal.Field<usrASCJBasisValue> { }
         #endregion
     }
 }

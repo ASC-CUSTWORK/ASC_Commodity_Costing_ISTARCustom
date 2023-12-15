@@ -3,7 +3,7 @@
         <Children Key="Columns">
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommodity" />
+                    <Prop Key="DataField" Value="UsrASCJCommodity" />
                     <Prop Key="Width" Value="70" />
                 </PXGridColumn>
             </AddItem>

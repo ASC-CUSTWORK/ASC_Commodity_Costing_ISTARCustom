@@ -14,37 +14,37 @@ namespace ASCJewelryLibrary.PO.DAC
     {
         public static bool IsActive() => true;
 
-        #region UsrCancelDate
+        #region UsrASCJCancelDate
         [PXDBDate]
         [PXUIField(DisplayName = "Cancel Date")]
-        public virtual DateTime? UsrCancelDate { get; set; }
-        public abstract class usrCancelDate : PX.Data.BQL.BqlDateTime.Field<usrCancelDate> { }
+        public virtual DateTime? UsrASCJCancelDate { get; set; }
+        public abstract class usrASCJCancelDate : PX.Data.BQL.BqlDateTime.Field<usrASCJCancelDate> { }
         #endregion
 
-        #region UsrEstArrivalDate
+        #region UsrASCJEstArrivalDate
         [PXDBDate]
         [PXUIField(DisplayName = "Estimated Arrival")]
-        public virtual DateTime? UsrEstArrivalDate { get; set; }
-        public abstract class usrEstArrivalDate : PX.Data.BQL.BqlDateTime.Field<usrEstArrivalDate> { }
+        public virtual DateTime? UsrASCJEstArrivalDate { get; set; }
+        public abstract class usrASCJEstArrivalDate : PX.Data.BQL.BqlDateTime.Field<usrASCJEstArrivalDate> { }
         #endregion
 
-        #region UsrPricingDate
+        #region UsrASCJPricingDate
         [PXDBDate]
         [PXUIField(DisplayName = "Pricing Date", Required = true)]
         [PXDefault(typeof(AccessInfo.businessDate))]
-        public virtual DateTime? UsrPricingDate { get; set; }
-        public abstract class usrPricingDate : PX.Data.BQL.BqlDateTime.Field<usrPricingDate> { }
+        public virtual DateTime? UsrASCJPricingDate { get; set; }
+        public abstract class usrASCJPricingDate : PX.Data.BQL.BqlDateTime.Field<usrASCJPricingDate> { }
         #endregion
 
-        #region UsrProgram
+        #region UsrASCJProgram
         [PXDBString(255)]
         [PXUIField(DisplayName = "Program", Required = true)]
         [PXDefault]
-        public virtual string UsrProgram { get; set; }
-        public abstract class usrProgram : PX.Data.BQL.BqlString.Field<usrProgram> { }
+        public virtual string UsrASCJProgram { get; set; }
+        public abstract class usrASCJProgram : PX.Data.BQL.BqlString.Field<usrASCJProgram> { }
         #endregion
 
-        #region UsrMarketID
+        #region UsrASCJMarketID
         [PXDBInt()]
         [PXUIField(DisplayName = "Market", Required = true)]
         [PXDefault()]
@@ -52,12 +52,12 @@ namespace ASCJewelryLibrary.PO.DAC
                         typeof(Vendor.acctCD), typeof(Vendor.acctName)
                         , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
 
-        public virtual int? UsrMarketID { get; set; }
-        public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
+        public virtual int? UsrASCJMarketID { get; set; }
+        public abstract class usrASCJMarketID : PX.Data.BQL.BqlInt.Field<usrASCJMarketID> { }
 
         #endregion
 
-        #region UsrSetupID
+        #region UsrASCJSetupID
         [PXDBGuid()]
         [PXSelector(typeof(Search<NotificationSetup.setupID,
             Where<NotificationSetup.sourceCD, Equal<APNotificationSource.vendor>,
@@ -65,9 +65,9 @@ namespace ASCJewelryLibrary.PO.DAC
             DescriptionField = typeof(NotificationSetup.notificationCD),
             SelectorMode = PXSelectorMode.DisplayModeText | PXSelectorMode.NoAutocomplete)]
         [PXUIField(DisplayName = "Mailing ID", Required = true)]
-        [PXDefault(typeof(ASCJVendorExt.usrSetupID))]
-        public virtual Guid? UsrSetupID { get; set; }
-        public abstract class usrSetupID : PX.Data.BQL.BqlGuid.Field<usrSetupID> { }
+        [PXDefault(typeof(ASCJVendorExt.usrASCJSetupID))]
+        public virtual Guid? UsrASCJSetupID { get; set; }
+        public abstract class usrASCJSetupID : PX.Data.BQL.BqlGuid.Field<usrASCJSetupID> { }
         #endregion
     }
 }

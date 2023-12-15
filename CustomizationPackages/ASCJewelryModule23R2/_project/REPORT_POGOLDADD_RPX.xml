@@ -3977,494 +3977,494 @@
                     <ReportField Name="UseParentSubID">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="Usr10KTCost">
+                    <ReportField Name="UsrASCJ10KTCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="Usr10KTGram">
+                    <ReportField Name="UsrASCJ10KTGram">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="Usr14KTCost">
+                    <ReportField Name="UsrASCJ14KTCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="Usr14KTGram">
+                    <ReportField Name="UsrASCJ14KTGram">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="Usr18KTCost">
+                    <ReportField Name="UsrASCJ18KTCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="Usr18KTGram">
+                    <ReportField Name="UsrASCJ18KTGram">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrActualGRAMGold">
+                    <ReportField Name="UsrASCJActualGRAMGold">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrActualGRAMPlatinum">
+                    <ReportField Name="UsrASCJActualGRAMPlatinum">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrActualGRAMSilver">
+                    <ReportField Name="UsrASCJActualGRAMSilver">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrAdditionalCost">
+                    <ReportField Name="UsrASCJAdditionalCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrAttribute">
+                    <ReportField Name="UsrASCJAttribute">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrAvailabilityLevel">
+                    <ReportField Name="UsrASCJAvailabilityLevel">
                     </ReportField>
-                    <ReportField Name="UsrCalculateRetailPrice">
+                    <ReportField Name="UsrASCJCalculateRetailPrice">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCalculateWholeSalePrice">
+                    <ReportField Name="UsrASCJCalculateWholeSalePrice">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCaratPricing">
+                    <ReportField Name="UsrASCJCaratPricing">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCastingLaborCost">
+                    <ReportField Name="UsrASCJCastingLaborCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCenterCost">
+                    <ReportField Name="UsrASCJCenterCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCertificateDate">
+                    <ReportField Name="UsrASCJCertificateDate">
                         <DataType>DateTime</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCertificateDate_Day">
+                    <ReportField Name="UsrASCJCertificateDate_Day">
                     </ReportField>
-                    <ReportField Name="UsrCertificateDate_Hour">
+                    <ReportField Name="UsrASCJCertificateDate_Hour">
                     </ReportField>
-                    <ReportField Name="UsrCertificateDate_Month">
+                    <ReportField Name="UsrASCJCertificateDate_Month">
                     </ReportField>
-                    <ReportField Name="UsrCertificateDate_Quarter">
+                    <ReportField Name="UsrASCJCertificateDate_Quarter">
                     </ReportField>
-                    <ReportField Name="UsrCloserType">
+                    <ReportField Name="UsrASCJCloserType">
                     </ReportField>
-                    <ReportField Name="UsrCloserType_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJCloserType_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrCloserType_description">
+                    <ReportField Name="UsrASCJCloserType_description">
                     </ReportField>
-                    <ReportField Name="UsrColor">
+                    <ReportField Name="UsrASCJColor">
                     </ReportField>
-                    <ReportField Name="UsrColor_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJColor_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrColor_description">
+                    <ReportField Name="UsrASCJColor_description">
                     </ReportField>
-                    <ReportField Name="UsrColorComment">
+                    <ReportField Name="UsrASCJColorComment">
                     </ReportField>
-                    <ReportField Name="UsrColorStoneCaratsWeight">
+                    <ReportField Name="UsrASCJColorStoneCaratsWeight">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrColorStoneCaratsWeightTW">
+                    <ReportField Name="UsrASCJColorStoneCaratsWeightTW">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCommodity">
+                    <ReportField Name="UsrASCJCommodity">
                     </ReportField>
-                    <ReportField Name="UsrCommodityCost">
+                    <ReportField Name="UsrASCJCommodityCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrConsignmentCost">
+                    <ReportField Name="UsrASCJConsignmentCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrConsignmentItem">
+                    <ReportField Name="UsrASCJConsignmentItem">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrConsignmentTotalCost">
+                    <ReportField Name="UsrASCJConsignmentTotalCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractCost">
+                    <ReportField Name="UsrASCJContractCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractIncrement">
+                    <ReportField Name="UsrASCJContractIncrement">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractLossPct">
+                    <ReportField Name="UsrASCJContractLossPct">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractPrice">
+                    <ReportField Name="UsrASCJContractPrice">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractSurcharge">
+                    <ReportField Name="UsrASCJContractSurcharge">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractSurchargeType">
+                    <ReportField Name="UsrASCJContractSurchargeType">
                     </ReportField>
-                    <ReportField Name="UsrContractWgt">
+                    <ReportField Name="UsrASCJContractWgt">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCostingMethod">
+                    <ReportField Name="UsrASCJCostingMethod">
                     </ReportField>
-                    <ReportField Name="UsrCostingType">
+                    <ReportField Name="UsrASCJCostingType">
                     </ReportField>
-                    <ReportField Name="UsrCostRollupType">
+                    <ReportField Name="UsrASCJCostRollupType">
                     </ReportField>
-                    <ReportField Name="UsrDepthPercent">
+                    <ReportField Name="UsrASCJDepthPercent">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDiaCaratsTW">
+                    <ReportField Name="UsrASCJDiaCaratsTW">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDiamondClarity">
+                    <ReportField Name="UsrASCJDiamondClarity">
                     </ReportField>
-                    <ReportField Name="UsrDiamondClarity_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJDiamondClarity_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondClarity_description">
+                    <ReportField Name="UsrASCJDiamondClarity_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondCost">
+                    <ReportField Name="UsrASCJDiamondCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDiamondCut">
+                    <ReportField Name="UsrASCJDiamondCut">
                     </ReportField>
-                    <ReportField Name="UsrDiamondCut_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJDiamondCut_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondCut_description">
+                    <ReportField Name="UsrASCJDiamondCut_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondPolish">
+                    <ReportField Name="UsrASCJDiamondPolish">
                     </ReportField>
-                    <ReportField Name="UsrDiamondPolish_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJDiamondPolish_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondPolish_description">
+                    <ReportField Name="UsrASCJDiamondPolish_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondSizeCategory">
+                    <ReportField Name="UsrASCJDiamondSizeCategory">
                     </ReportField>
-                    <ReportField Name="UsrDiamondSizeCategory_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJDiamondSizeCategory_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondSizeCategory_description">
+                    <ReportField Name="UsrASCJDiamondSizeCategory_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondSymmetry">
+                    <ReportField Name="UsrASCJDiamondSymmetry">
                     </ReportField>
-                    <ReportField Name="UsrDiamondSymmetry_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJDiamondSymmetry_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondSymmetry_description">
+                    <ReportField Name="UsrASCJDiamondSymmetry_description">
                     </ReportField>
-                    <ReportField Name="UsrDiamondTiaraIncription">
+                    <ReportField Name="UsrASCJDiamondTiaraIncription">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDiamondTotalCaratWt">
+                    <ReportField Name="UsrASCJDiamondTotalCaratWt">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDiaRetailMarkup">
+                    <ReportField Name="UsrASCJDiaRetailMarkup">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDutyCost">
+                    <ReportField Name="UsrASCJDutyCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDutyCostPct">
+                    <ReportField Name="UsrASCJDutyCostPct">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrEarringType">
+                    <ReportField Name="UsrASCJEarringType">
                     </ReportField>
-                    <ReportField Name="UsrElementDepth">
+                    <ReportField Name="UsrASCJElementDepth">
                     </ReportField>
-                    <ReportField Name="UsrElementLength">
+                    <ReportField Name="UsrASCJElementLength">
                     </ReportField>
-                    <ReportField Name="UsrElementWidth">
+                    <ReportField Name="UsrASCJElementWidth">
                     </ReportField>
-                    <ReportField Name="UsrEngraveLimit">
+                    <ReportField Name="UsrASCJEngraveLimit">
                     </ReportField>
-                    <ReportField Name="UsrFabricationCost">
+                    <ReportField Name="UsrASCJFabricationCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrFinishedItemWt">
+                    <ReportField Name="UsrASCJFinishedItemWt">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrFreightCost">
+                    <ReportField Name="UsrASCJFreightCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrGemStoneCost">
+                    <ReportField Name="UsrASCJGemStoneCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrGoldCostPerOunce">
+                    <ReportField Name="UsrASCJGoldCostPerOunce">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrGradingLab">
+                    <ReportField Name="UsrASCJGradingLab">
                     </ReportField>
-                    <ReportField Name="UsrGradingLab_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJGradingLab_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrGradingLab_description">
+                    <ReportField Name="UsrASCJGradingLab_description">
                     </ReportField>
-                    <ReportField Name="UsrHandlingCost">
+                    <ReportField Name="UsrASCJHandlingCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="Usrhtmldesc">
+                    <ReportField Name="UsrASCJhtmldesc">
                     </ReportField>
-                    <ReportField Name="Usrhtmltitle">
+                    <ReportField Name="UsrASCJhtmltitle">
                     </ReportField>
-                    <ReportField Name="UsrIDT15Price">
+                    <ReportField Name="UsrASCJIDT15Price">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrIDT306090Price">
+                    <ReportField Name="UsrASCJIDT306090Price">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrIDTRapp">
+                    <ReportField Name="UsrASCJIDTRapp">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrInscription">
+                    <ReportField Name="UsrASCJInscription">
                     </ReportField>
-                    <ReportField Name="UsrInternalNotes">
+                    <ReportField Name="UsrASCJInternalNotes">
                     </ReportField>
-                    <ReportField Name="UsrInvCategory">
+                    <ReportField Name="UsrASCJInvCategory">
                     </ReportField>
-                    <ReportField Name="UsrInvCategory_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJInvCategory_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrInvCategory_description">
+                    <ReportField Name="UsrASCJInvCategory_description">
                     </ReportField>
-                    <ReportField Name="UsrIsEommEnabled">
+                    <ReportField Name="UsrASCJIsEommEnabled">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrIsIDT">
+                    <ReportField Name="UsrASCJIsIDT">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrIsWebEnabled">
+                    <ReportField Name="UsrASCJIsWebEnabled">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrItemClasification">
+                    <ReportField Name="UsrASCJItemClasification">
                     </ReportField>
-                    <ReportField Name="UsrJwellerName">
+                    <ReportField Name="UsrASCJJwellerName">
                     </ReportField>
-                    <ReportField Name="UsrLaborCost">
+                    <ReportField Name="UsrASCJLaborCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrLegacyID">
+                    <ReportField Name="UsrASCJLegacyID">
                     </ReportField>
-                    <ReportField Name="UsrLegacyItemCode">
+                    <ReportField Name="UsrASCJLegacyItemCode">
                     </ReportField>
-                    <ReportField Name="UsrLegacyShortRef">
+                    <ReportField Name="UsrASCJLegacyShortRef">
                     </ReportField>
-                    <ReportField Name="UsrLinkedPricing">
+                    <ReportField Name="UsrASCJLinkedPricing">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrLongDesc">
+                    <ReportField Name="UsrASCJLongDesc">
                     </ReportField>
-                    <ReportField Name="UsrManufacturedItem">
+                    <ReportField Name="UsrASCJManufacturedItem">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrManufaturingCost">
+                    <ReportField Name="UsrASCJManufaturingCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrMetalNote">
+                    <ReportField Name="UsrASCJMetalNote">
                     </ReportField>
-                    <ReportField Name="UsrMountedSellPrice">
+                    <ReportField Name="UsrASCJMountedSellPrice">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrOD">
+                    <ReportField Name="UsrASCJOD">
                     </ReportField>
-                    <ReportField Name="UsrOD_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJOD_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrOD_description">
+                    <ReportField Name="UsrASCJOD_description">
                     </ReportField>
-                    <ReportField Name="Usropt">
+                    <ReportField Name="UsrASCJopt">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrOPTPriority">
+                    <ReportField Name="UsrASCJOPTPriority">
                         <DataType>Int32</DataType>
                     </ReportField>
-                    <ReportField Name="UsrOPTStatus">
+                    <ReportField Name="UsrASCJOPTStatus">
                     </ReportField>
-                    <ReportField Name="UsrOrgCountry">
+                    <ReportField Name="UsrASCJOrgCountry">
                     </ReportField>
-                    <ReportField Name="UsrOrgCountry_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJOrgCountry_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrOrgCountry_description">
+                    <ReportField Name="UsrASCJOrgCountry_description">
                     </ReportField>
-                    <ReportField Name="UsrOtherCost">
+                    <ReportField Name="UsrASCJOtherCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrOtherMaterialCost">
+                    <ReportField Name="UsrASCJOtherMaterialCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrOwnerPartner">
+                    <ReportField Name="UsrASCJOwnerPartner">
                     </ReportField>
-                    <ReportField Name="UsrOwnerShipPercent">
+                    <ReportField Name="UsrASCJOwnerShipPercent">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPackagingCost">
+                    <ReportField Name="UsrASCJPackagingCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPartnerPercent">
+                    <ReportField Name="UsrASCJPartnerPercent">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPartwayEternity">
+                    <ReportField Name="UsrASCJPartwayEternity">
                     </ReportField>
-                    <ReportField Name="UsrPennyWeight">
+                    <ReportField Name="UsrASCJPennyWeight">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPlatinumCost">
+                    <ReportField Name="UsrASCJPlatinumCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPlatinumCostPerOunce">
+                    <ReportField Name="UsrASCJPlatinumCostPerOunce">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPlatinumGram">
+                    <ReportField Name="UsrASCJPlatinumGram">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPriceAsID">
+                    <ReportField Name="UsrASCJPriceAsID">
                     </ReportField>
-                    <ReportField Name="UsrPriceAsID_description">
+                    <ReportField Name="UsrASCJPriceAsID_description">
                     </ReportField>
-                    <ReportField Name="UsrPriceAsID_InventoryItem_descr">
+                    <ReportField Name="UsrASCJPriceAsID_InventoryItem_descr">
                     </ReportField>
-                    <ReportField Name="UsrPriceToUnit">
+                    <ReportField Name="UsrASCJPriceToUnit">
                     </ReportField>
-                    <ReportField Name="UsrPriceUpOnRequestFlag">
+                    <ReportField Name="UsrASCJPriceUpOnRequestFlag">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingGRAMGold">
+                    <ReportField Name="UsrASCJPricingGRAMGold">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingGRAMPlatinum">
+                    <ReportField Name="UsrASCJPricingGRAMPlatinum">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingGRAMSilver">
+                    <ReportField Name="UsrASCJPricingGRAMSilver">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingNotes">
+                    <ReportField Name="UsrASCJPricingNotes">
                     </ReportField>
-                    <ReportField Name="UsrPrintImage">
+                    <ReportField Name="UsrASCJPrintImage">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrProvenance">
+                    <ReportField Name="UsrASCJProvenance">
                     </ReportField>
-                    <ReportField Name="UsrPurchaseBy">
+                    <ReportField Name="UsrASCJPurchaseBy">
                     </ReportField>
-                    <ReportField Name="UsrPurchaseFor">
+                    <ReportField Name="UsrASCJPurchaseFor">
                     </ReportField>
-                    <ReportField Name="UsrPurchaseNotes">
+                    <ReportField Name="UsrASCJPurchaseNotes">
                     </ReportField>
-                    <ReportField Name="UsrPurInvReceipts">
+                    <ReportField Name="UsrASCJPurInvReceipts">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrRapLink">
+                    <ReportField Name="UsrASCJRapLink">
                     </ReportField>
-                    <ReportField Name="UsrRapnetPricing">
+                    <ReportField Name="UsrASCJRapnetPricing">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrRetailPriceMarkup">
+                    <ReportField Name="UsrASCJRetailPriceMarkup">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrRingLength">
+                    <ReportField Name="UsrASCJRingLength">
                     </ReportField>
-                    <ReportField Name="UsrRingLength_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJRingLength_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrRingLength_description">
+                    <ReportField Name="UsrASCJRingLength_description">
                     </ReportField>
-                    <ReportField Name="UsrSearchGroup">
+                    <ReportField Name="UsrASCJSearchGroup">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrSemimountType">
+                    <ReportField Name="UsrASCJSemimountType">
                     </ReportField>
-                    <ReportField Name="UsrSetterName">
+                    <ReportField Name="UsrASCJSetterName">
                     </ReportField>
-                    <ReportField Name="UsrSettingType">
+                    <ReportField Name="UsrASCJSettingType">
                     </ReportField>
-                    <ReportField Name="UsrSettingType_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJSettingType_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrSettingType_description">
+                    <ReportField Name="UsrASCJSettingType_description">
                     </ReportField>
-                    <ReportField Name="UsrShortDesc">
+                    <ReportField Name="UsrASCJShortDesc">
                     </ReportField>
-                    <ReportField Name="UsrSideStoneCaratWt">
+                    <ReportField Name="UsrASCJSideStoneCaratWt">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrSilverCostPerOunce">
+                    <ReportField Name="UsrASCJSilverCostPerOunce">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrSterlingCost">
+                    <ReportField Name="UsrASCJSterlingCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrSterlingGram">
+                    <ReportField Name="UsrASCJSterlingGram">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrStoneComment">
+                    <ReportField Name="UsrASCJStoneComment">
                     </ReportField>
-                    <ReportField Name="UsrStoneCulet">
+                    <ReportField Name="UsrASCJStoneCulet">
                     </ReportField>
-                    <ReportField Name="UsrStoneCulet_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJStoneCulet_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrStoneCulet_description">
+                    <ReportField Name="UsrASCJStoneCulet_description">
                     </ReportField>
-                    <ReportField Name="UsrStoneDepth">
+                    <ReportField Name="UsrASCJStoneDepth">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrStoneGirdle">
+                    <ReportField Name="UsrASCJStoneGirdle">
                     </ReportField>
-                    <ReportField Name="UsrStoneLength">
+                    <ReportField Name="UsrASCJStoneLength">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrStoneRatio">
+                    <ReportField Name="UsrASCJStoneRatio">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrStoneType">
+                    <ReportField Name="UsrASCJStoneType">
                     </ReportField>
-                    <ReportField Name="UsrStoneType_CSAttributeDetail_description">
+                    <ReportField Name="UsrASCJStoneType_CSAttributeDetail_description">
                     </ReportField>
-                    <ReportField Name="UsrStoneType_description">
+                    <ReportField Name="UsrASCJStoneType_description">
                     </ReportField>
-                    <ReportField Name="UsrStoneWidth">
+                    <ReportField Name="UsrASCJStoneWidth">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrStyleStatusDate">
+                    <ReportField Name="UsrASCJStyleStatusDate">
                         <DataType>DateTime</DataType>
                     </ReportField>
-                    <ReportField Name="UsrStyleStatusDate_Day">
+                    <ReportField Name="UsrASCJStyleStatusDate_Day">
                     </ReportField>
-                    <ReportField Name="UsrStyleStatusDate_Hour">
+                    <ReportField Name="UsrASCJStyleStatusDate_Hour">
                     </ReportField>
-                    <ReportField Name="UsrStyleStatusDate_Month">
+                    <ReportField Name="UsrASCJStyleStatusDate_Month">
                     </ReportField>
-                    <ReportField Name="UsrStyleStatusDate_Quarter">
+                    <ReportField Name="UsrASCJStyleStatusDate_Quarter">
                     </ReportField>
-                    <ReportField Name="UsrTablePercent">
+                    <ReportField Name="UsrASCJTablePercent">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrTagLine1">
+                    <ReportField Name="UsrASCJTagLine1">
                     </ReportField>
-                    <ReportField Name="UsrTagLine2">
+                    <ReportField Name="UsrASCJTagLine2">
                     </ReportField>
-                    <ReportField Name="UsrTagLine3">
+                    <ReportField Name="UsrASCJTagLine3">
                     </ReportField>
-                    <ReportField Name="UsrTagLine4">
+                    <ReportField Name="UsrASCJTagLine4">
                     </ReportField>
-                    <ReportField Name="UsrTagLine5">
+                    <ReportField Name="UsrASCJTagLine5">
                     </ReportField>
-                    <ReportField Name="UsrTagLine6">
+                    <ReportField Name="UsrASCJTagLine6">
                     </ReportField>
-                    <ReportField Name="UsrTCPackageSize">
+                    <ReportField Name="UsrASCJTCPackageSize">
                         <DataType>Int32</DataType>
                     </ReportField>
-                    <ReportField Name="UsrTicketCost">
+                    <ReportField Name="UsrASCJTicketCost">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrUnitCost">
+                    <ReportField Name="UsrASCJUnitCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="Usrurl">
+                    <ReportField Name="UsrASCJurl">
                     </ReportField>
-                    <ReportField Name="UsrVedorUrl">
+                    <ReportField Name="UsrASCJVedorUrl">
                     </ReportField>
-                    <ReportField Name="UsrWebCategory">
+                    <ReportField Name="UsrASCJWebCategory">
                     </ReportField>
-                    <ReportField Name="UsrWebComment">
+                    <ReportField Name="UsrASCJWebComment">
                     </ReportField>
-                    <ReportField Name="UsrWebPriority">
+                    <ReportField Name="UsrASCJWebPriority">
                         <DataType>Int32</DataType>
                     </ReportField>
-                    <ReportField Name="UsrWeight10k">
+                    <ReportField Name="UsrASCJWeight10k">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrWeight14k">
+                    <ReportField Name="UsrASCJWeight14k">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrWeight18k">
+                    <ReportField Name="UsrASCJWeight18k">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrWeightPlat">
+                    <ReportField Name="UsrASCJWeightPlat">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrWeightSS">
+                    <ReportField Name="UsrASCJWeightSS">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrWholeSalesPriceMarkup">
+                    <ReportField Name="UsrASCJWholeSalesPriceMarkup">
                         <DataType>Decimal</DataType>
                     </ReportField>
                     <ReportField Name="ValMethod">

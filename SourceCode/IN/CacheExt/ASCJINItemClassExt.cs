@@ -11,13 +11,13 @@ namespace ASCJewelryLibrary.IN.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrCostingType
+        #region UsrASCJCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
         [CostingType.List]
         [PXDefault(CostingType.StandardCost, PersistingCheck = PXPersistingCheck.Null)]
-        public virtual string UsrCostingType { get; set; }
-        public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
+        public virtual string UsrASCJCostingType { get; set; }
+        public abstract class usrASCJCostingType : PX.Data.BQL.BqlString.Field<usrASCJCostingType> { }
         #endregion
     }
 }

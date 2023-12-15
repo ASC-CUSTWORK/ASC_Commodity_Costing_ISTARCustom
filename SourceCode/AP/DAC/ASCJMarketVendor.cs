@@ -76,7 +76,7 @@ namespace ASCJewelryLibrary.AP.DAC.Projections
         #endregion
 
         #region Market
-        [PXDBString(2, IsUnicode = true, InputMask = "", BqlField = typeof(ASCJAPVendorPriceExt.usrMarket))]
+        [PXDBString(2, IsUnicode = true, InputMask = "", BqlField = typeof(ASCJAPVendorPriceExt.usrASCJMarket))]
         [PXUIField(DisplayName = "Market", Required = true)]
         [MarketList.List]
         [PXDefault(MarketList.LondonPM)]
@@ -85,7 +85,7 @@ namespace ASCJewelryLibrary.AP.DAC.Projections
         #endregion
 
         #region MarketID
-        [PXDBInt(BqlField = typeof(ASCJAPVendorPriceExt.usrMarketID))]
+        [PXDBInt(BqlField = typeof(ASCJAPVendorPriceExt.usrASCJMarketID))]
         [PXUIField(DisplayName = "Market Vendor")]
         [PXSelector(
         typeof(Search2<Vendor.bAccountID, InnerJoin<VendorClass, On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
@@ -96,7 +96,7 @@ namespace ASCJewelryLibrary.AP.DAC.Projections
         #endregion
 
         #region Commodity
-        [PXDBString(1, BqlField = typeof(ASCJAPVendorPriceExt.usrCommodity))]
+        [PXDBString(1, BqlField = typeof(ASCJAPVendorPriceExt.usrASCJCommodity))]
         [PXUIField(DisplayName = "Commodity Metal Type")]
         [CommodityType.List]
         [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Null)]

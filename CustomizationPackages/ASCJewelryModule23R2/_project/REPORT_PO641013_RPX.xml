@@ -1078,55 +1078,55 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                     <ReportField Name="UpdateVendorCost">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCancelDate">
+                    <ReportField Name="UsrASCJCancelDate">
                         <DataType>DateTime</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCancelDate_Day">
+                    <ReportField Name="UsrASCJCancelDate_Day">
                     </ReportField>
-                    <ReportField Name="UsrCancelDate_Hour">
+                    <ReportField Name="UsrASCJCancelDate_Hour">
                     </ReportField>
-                    <ReportField Name="UsrCancelDate_Month">
+                    <ReportField Name="UsrASCJCancelDate_Month">
                     </ReportField>
-                    <ReportField Name="UsrCancelDate_Quarter">
+                    <ReportField Name="UsrASCJCancelDate_Quarter">
                     </ReportField>
-                    <ReportField Name="UsrEstArrivalDate">
+                    <ReportField Name="UsrASCJEstArrivalDate">
                         <DataType>DateTime</DataType>
                     </ReportField>
-                    <ReportField Name="UsrEstArrivalDate_Day">
+                    <ReportField Name="UsrASCJEstArrivalDate_Day">
                     </ReportField>
-                    <ReportField Name="UsrEstArrivalDate_Hour">
+                    <ReportField Name="UsrASCJEstArrivalDate_Hour">
                     </ReportField>
-                    <ReportField Name="UsrEstArrivalDate_Month">
+                    <ReportField Name="UsrASCJEstArrivalDate_Month">
                     </ReportField>
-                    <ReportField Name="UsrEstArrivalDate_Quarter">
+                    <ReportField Name="UsrASCJEstArrivalDate_Quarter">
                     </ReportField>
-                    <ReportField Name="UsrMarketID">
+                    <ReportField Name="UsrASCJMarketID">
                     </ReportField>
-                    <ReportField Name="UsrMarketID_description">
+                    <ReportField Name="UsrASCJMarketID_description">
                     </ReportField>
-                    <ReportField Name="UsrMarketID_Vendor_acctName">
+                    <ReportField Name="UsrASCJMarketID_Vendor_acctName">
                     </ReportField>
-                    <ReportField Name="UsrPricingDate">
+                    <ReportField Name="UsrASCJPricingDate">
                         <DataType>DateTime</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingDate_Day">
+                    <ReportField Name="UsrASCJPricingDate_Day">
                     </ReportField>
-                    <ReportField Name="UsrPricingDate_Hour">
+                    <ReportField Name="UsrASCJPricingDate_Hour">
                     </ReportField>
-                    <ReportField Name="UsrPricingDate_Month">
+                    <ReportField Name="UsrASCJPricingDate_Month">
                     </ReportField>
-                    <ReportField Name="UsrPricingDate_Quarter">
+                    <ReportField Name="UsrASCJPricingDate_Quarter">
                     </ReportField>
-                    <ReportField Name="UsrProgram">
+                    <ReportField Name="UsrASCJProgram">
                     </ReportField>
-                    <ReportField Name="UsrSetupID">
+                    <ReportField Name="UsrASCJSetupID">
                         <DataType>Object</DataType>
                     </ReportField>
-                    <ReportField Name="UsrSetupID_description">
+                    <ReportField Name="UsrASCJSetupID_description">
                     </ReportField>
-                    <ReportField Name="UsrSetupID_NotificationSetup_notificationCD">
+                    <ReportField Name="UsrASCJSetupID_NotificationSetup_notificationCD">
                     </ReportField>
-                    <ReportField Name="UsrTCStatus">
+                    <ReportField Name="UsrASCJTCStatus">
                     </ReportField>
                     <ReportField Name="VatExemptTotal">
                         <DataType>Decimal</DataType>
@@ -2028,7 +2028,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                     </ReportField>
                     <ReportField Name="tstamp">
                     </ReportField>
-                    <ReportField Name="UsrDCLocation">
+                    <ReportField Name="UsrASCJDCLocation">
                     </ReportField>
                     <ReportField Name="VAllowAPBillBeforeReceipt">
                         <DataType>Boolean</DataType>
@@ -3092,41 +3092,41 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                     </ReportField>
                     <ReportField Name="UOM">
                     </ReportField>
-                    <ReportField Name="UsrActualGRAMGold">
+                    <ReportField Name="UsrASCJActualGRAMGold">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrActualGRAMSilver">
+                    <ReportField Name="UsrASCJActualGRAMSilver">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrBasisValue">
+                    <ReportField Name="UsrASCJBasisValue">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractIncrement">
+                    <ReportField Name="UsrASCJContractIncrement">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrMarketPrice">
+                    <ReportField Name="UsrASCJMarketPrice">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrMaterialCost">
+                    <ReportField Name="UsrASCJMaterialCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingGRAMGold">
+                    <ReportField Name="UsrASCJPricingGRAMGold">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingGRAMSilver">
+                    <ReportField Name="UsrASCJPricingGRAMSilver">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPurity">
+                    <ReportField Name="UsrASCJPurity">
                     </ReportField>
-                    <ReportField Name="UsrRatePerGram">
+                    <ReportField Name="UsrASCJRatePerGram">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrTCStatus">
+                    <ReportField Name="UsrASCJTCStatus">
                     </ReportField>
-                    <ReportField Name="UsrTotWeight">
+                    <ReportField Name="UsrASCJTotWeight">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrWeight">
+                    <ReportField Name="UsrASCJWeight">
                         <DataType>Decimal</DataType>
                     </ReportField>
                     <ReportField Name="VendorID">
@@ -3557,18 +3557,18 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                     <ReportField Name="UpdClosedTaxPeriods">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrMarketID">
+                    <ReportField Name="UsrASCJMarketID">
                     </ReportField>
-                    <ReportField Name="UsrMarketID_description">
+                    <ReportField Name="UsrASCJMarketID_description">
                     </ReportField>
-                    <ReportField Name="UsrMarketID_Vendor_acctName">
+                    <ReportField Name="UsrASCJMarketID_Vendor_acctName">
                     </ReportField>
-                    <ReportField Name="UsrSetupID">
+                    <ReportField Name="UsrASCJSetupID">
                         <DataType>Object</DataType>
                     </ReportField>
-                    <ReportField Name="UsrSetupID_description">
+                    <ReportField Name="UsrASCJSetupID_description">
                     </ReportField>
-                    <ReportField Name="UsrSetupID_NotificationSetup_notificationCD">
+                    <ReportField Name="UsrASCJSetupID_NotificationSetup_notificationCD">
                     </ReportField>
                     <ReportField Name="Vendor1099">
                         <DataType>Boolean</DataType>
@@ -4942,107 +4942,107 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                     </ReportField>
                     <ReportField Name="tstamp">
                     </ReportField>
-                    <ReportField Name="UsrActualGRAMGold">
+                    <ReportField Name="UsrASCJActualGRAMGold">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrActualGRAMSilver">
+                    <ReportField Name="UsrASCJActualGRAMSilver">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrBasisPrice">
+                    <ReportField Name="UsrASCJBasisPrice">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrBasisValue">
+                    <ReportField Name="UsrASCJBasisValue">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCeiling">
+                    <ReportField Name="UsrASCJCeiling">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCommodityID">
+                    <ReportField Name="UsrASCJCommodityID">
                     </ReportField>
-                    <ReportField Name="UsrCommodityID_description">
+                    <ReportField Name="UsrASCJCommodityID_description">
                     </ReportField>
-                    <ReportField Name="UsrCommodityID_InventoryItem_descr">
+                    <ReportField Name="UsrASCJCommodityID_InventoryItem_descr">
                     </ReportField>
-                    <ReportField Name="UsrCommodityType">
+                    <ReportField Name="UsrASCJCommodityType">
                     </ReportField>
-                    <ReportField Name="UsrCommodityVendorPrice">
+                    <ReportField Name="UsrASCJCommodityVendorPrice">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractIncrement">
+                    <ReportField Name="UsrASCJContractIncrement">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractLossPct">
+                    <ReportField Name="UsrASCJContractLossPct">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrContractSurcharge">
+                    <ReportField Name="UsrASCJContractSurcharge">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrCostingType">
+                    <ReportField Name="UsrASCJCostingType">
                     </ReportField>
-                    <ReportField Name="UsrDutyCost">
+                    <ReportField Name="UsrASCJDutyCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrDutyCostPct">
+                    <ReportField Name="UsrASCJDutyCostPct">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrEstLandedCost">
+                    <ReportField Name="UsrASCJEstLandedCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrFabricationCost">
+                    <ReportField Name="UsrASCJFabricationCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrFloor">
+                    <ReportField Name="UsrASCJFloor">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrFreightCost">
+                    <ReportField Name="UsrASCJFreightCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrHandlingCost">
+                    <ReportField Name="UsrASCJHandlingCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrIsOverrideVendor">
+                    <ReportField Name="UsrASCJIsOverrideVendor">
                         <DataType>Boolean</DataType>
                     </ReportField>
-                    <ReportField Name="UsrLaborCost">
+                    <ReportField Name="UsrASCJLaborCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrLaborPerUnit">
+                    <ReportField Name="UsrASCJLaborPerUnit">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrLaborPerUnitVendor">
+                    <ReportField Name="UsrASCJLaborPerUnitVendor">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrMarketID">
+                    <ReportField Name="UsrASCJMarketID">
                     </ReportField>
-                    <ReportField Name="UsrMarketID_description">
+                    <ReportField Name="UsrASCJMarketID_description">
                     </ReportField>
-                    <ReportField Name="UsrMarketID_Vendor_acctName">
+                    <ReportField Name="UsrASCJMarketID_Vendor_acctName">
                     </ReportField>
-                    <ReportField Name="UsrMatrixStep">
+                    <ReportField Name="UsrASCJMatrixStep">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrOtherCost">
+                    <ReportField Name="UsrASCJOtherCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrOtherMaterialsCost">
+                    <ReportField Name="UsrASCJOtherMaterialsCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPackagingCost">
+                    <ReportField Name="UsrASCJPackagingCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPackagingLaborCost">
+                    <ReportField Name="UsrASCJPackagingLaborCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPreciousMetalCost">
+                    <ReportField Name="UsrASCJPreciousMetalCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingGRAMGold">
+                    <ReportField Name="UsrASCJPricingGRAMGold">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrPricingGRAMSilver">
+                    <ReportField Name="UsrASCJPricingGRAMSilver">
                         <DataType>Decimal</DataType>
                     </ReportField>
-                    <ReportField Name="UsrUnitCost">
+                    <ReportField Name="UsrASCJUnitCost">
                         <DataType>Decimal</DataType>
                     </ReportField>
                     <ReportField Name="VendorID">
@@ -5593,7 +5593,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                             <TextAlign>Right</TextAlign>
                                         </Style>
                                         <StyleName>Heading 1</StyleName>
-                                        <Value>=[POOrder.UsrEstArrivalDate]</Value>
+                                        <Value>=[POOrder.UsrASCJEstArrivalDate]</Value>
                                     </TextBox>
                                     <TextBox Name="textBox61">
                                         <Location>96px, 48px</Location>
@@ -5602,7 +5602,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                             <TextAlign>Right</TextAlign>
                                         </Style>
                                         <StyleName>Heading 1</StyleName>
-                                        <Value>=[POOrder.UsrCancelDate]</Value>
+                                        <Value>=[POOrder.UsrASCJCancelDate]</Value>
                                     </TextBox>
                                     <TextBox Name="textBox62">
                                         <Location>504px, 16px</Location>
@@ -5629,7 +5629,7 @@ n1xeGHwXw8KTW5JXdetW3eVXwZksW7wd4iUBnKFTFq0aBEmwOLFi6l8dqwk+amc9NfAJxT8ziCL1QGXM
                                         <Location>40px, 72px</Location>
                                         <Size>168px, 16px</Size>
                                         <StyleName>Heading 1</StyleName>
-                                        <Value>=[POOrder.UsrProgram]</Value>
+                                        <Value>=[POOrder.UsrASCJProgram]</Value>
                                     </TextBox>
                                     <TextBox Name="textBox68">
                                         <Location>208px, 72px</Location>

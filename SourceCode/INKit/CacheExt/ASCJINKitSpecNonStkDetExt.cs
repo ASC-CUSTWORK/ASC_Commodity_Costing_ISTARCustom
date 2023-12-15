@@ -14,57 +14,57 @@ namespace ASCJewelryLibrary.INKit.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrItemClassID
+        #region UsrASCJItemClassID
         [PXInt]
         [PXParent(typeof(Select<InventoryItem, Where<InventoryItem.inventoryID, Equal<Current<INKitSpecNonStkDet.compInventoryID>>>>))]
         [PXFormula(typeof(Parent<InventoryItem.itemClassID>))]
-        public int? UsrItemClassID { get; set; }
-        public abstract class usrItemClassID : PX.Data.BQL.BqlInt.Field<usrItemClassID> { }
+        public int? UsrASCJItemClassID { get; set; }
+        public abstract class usrASCJItemClassID : PX.Data.BQL.BqlInt.Field<usrASCJItemClassID> { }
         #endregion
 
-        #region UsrUnitCost
+        #region UsrASCJUnitCost
         [PXDBDecimal()]
         [PXUIField(DisplayName = "Unit Cost")]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        public decimal? UsrUnitCost { get; set; }
-        public abstract class usrUnitCost : PX.Data.BQL.BqlDecimal.Field<usrUnitCost> { }
+        public decimal? UsrASCJUnitCost { get; set; }
+        public abstract class usrASCJUnitCost : PX.Data.BQL.BqlDecimal.Field<usrASCJUnitCost> { }
         #endregion
 
-        #region UsrUnitPct
+        #region UsrASCJUnitPct
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Unit Pct")]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        public decimal? UsrUnitPct { get; set; }
-        public abstract class usrUnitPct : PX.Data.BQL.BqlDecimal.Field<usrUnitPct> { }
+        public decimal? UsrASCJUnitPct { get; set; }
+        public abstract class usrASCJUnitPct : PX.Data.BQL.BqlDecimal.Field<usrASCJUnitPct> { }
         #endregion
 
-        #region UsrExtCost
+        #region UsrASCJExtCost
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Ext Cost", Enabled = false)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Mult<INKitSpecNonStkDet.dfltCompQty, usrUnitCost>))]
+        [PXFormula(typeof(Mult<INKitSpecNonStkDet.dfltCompQty, usrASCJUnitCost>))]
         [ASCJCostAssignment]
-        public decimal? UsrExtCost { get; set; }
-        public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
+        public decimal? UsrASCJExtCost { get; set; }
+        public abstract class usrASCJExtCost : PX.Data.BQL.BqlDecimal.Field<usrASCJExtCost> { }
         #endregion
 
-        #region UsrCostingType
+        #region UsrASCJCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type", Enabled = true, Visible = true)]
         [CostingType.List]
-        [PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCJINInventoryItemExt.usrCostingType>))]
-        public string UsrCostingType { get; set; }
-        public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
+        [PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCJINInventoryItemExt.usrASCJCostingType>))]
+        public string UsrASCJCostingType { get; set; }
+        public abstract class usrASCJCostingType : PX.Data.BQL.BqlString.Field<usrASCJCostingType> { }
         #endregion   
 
-        #region UsrCostRollupType
+        #region UsrASCJCostRollupType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [CostRollupType.List]
         [PXDefault(CostRollupType.Fabrication, PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Rollup Type", Enabled = true)]
-        //[PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCJINInventoryItemExt.usrCostRollupType>))]
-        public string UsrCostRollupType { get; set; }
-        public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
+        //[PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCJINInventoryItemExt.usrASCJCostRollupType>))]
+        public string UsrASCJCostRollupType { get; set; }
+        public abstract class usrASCJCostRollupType : PX.Data.BQL.BqlString.Field<usrASCJCostRollupType> { }
         #endregion          
     }
 

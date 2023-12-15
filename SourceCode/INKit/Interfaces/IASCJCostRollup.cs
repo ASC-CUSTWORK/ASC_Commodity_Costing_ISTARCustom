@@ -2,7 +2,7 @@
 {
     public interface IASCJCostRollup
     {
-        string UsrCostRollupType { get; set; }
-        decimal? UsrExtCost { get; set; }
+        string UsrASCJCostRollupType { get; set; }
+        decimal? UsrASCJExtCost { get; set; }
     }
 }

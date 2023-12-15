@@ -13,7 +13,7 @@
                 <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXDropDown2" />
-                    <Prop Key="DataField" Value="UsrCostingType" />
+                    <Prop Key="DataField" Value="UsrASCJCostingType" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXDropDown>
             </AddItem>

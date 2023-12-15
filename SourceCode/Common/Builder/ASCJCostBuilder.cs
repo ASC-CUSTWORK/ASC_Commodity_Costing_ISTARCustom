@@ -65,7 +65,7 @@ namespace ASCJewelryLibrary.Common.Builder
         {
             POVendorInventory = vendorInventory;
             POVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(vendorInventory);
-            IsEnabledOverrideVendor = POVendorInventoryExt.UsrIsOverrideVendor == true;
+            IsEnabledOverrideVendor = POVendorInventoryExt.UsrASCJIsOverrideVendor == true;
             return this;
         }
         public ASCJCostBuilder WithCurrency(string currency)
@@ -94,8 +94,8 @@ namespace ASCJewelryLibrary.Common.Builder
 
             if (PreciousMetalItem == null) return null;
 
-            PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID, true);
-            PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrMarketID, PreciousMetalItem.InventoryID);
+            PreciousMetalContractCostPerTOZ = IsEnabledOverrideVendor ? POVendorInventoryExt.UsrASCJCommodityVendorPrice : GetVendorPricePerTOZ(POVendorInventory.VendorID, PreciousMetalItem.InventoryID, true);
+            PreciousMetalMarketCostPerTOZ = GetVendorPricePerTOZ(POVendorInventoryExt.UsrASCJMarketID, PreciousMetalItem.InventoryID);
 
             if (ASCJMetalType.IsGold(INJewelryItem.MetalType))
             {
@@ -107,7 +107,7 @@ namespace ASCJewelryLibrary.Common.Builder
             {
                 PreciousMetalContractCostPerGram = PreciousMetalContractCostPerTOZ * ASCJMetalType.GetMultFactorConvertTOZtoGram("SSS");
                 PreciousMetalMarketCostPerGram = PreciousMetalMarketCostPerTOZ * ASCJMetalType.GetMultFactorConvertTOZtoGram("SSS");
-                BasisValue = (PreciousMetalContractCostPerTOZ + (PreciousMetalContractCostPerTOZ + ItemCostSpecification.UsrMatrixStep)) / 2;
+                BasisValue = (PreciousMetalContractCostPerTOZ + (PreciousMetalContractCostPerTOZ + ItemCostSpecification.UsrASCJMatrixStep)) / 2;
             }
             AvrPreciousMetalUnitCost = GetPresiousMetalAvrCost();
 
@@ -128,7 +128,7 @@ namespace ASCJewelryLibrary.Common.Builder
 
             if (ASCJMetalType.IsGold(INJewelryItem?.MetalType))
             {
-                switch (costingType ?? ItemCostSpecification.UsrCostingType)
+                switch (costingType ?? ItemCostSpecification.UsrASCJCostingType)
                 {
                     case CostingType.ContractCost:
                         preciousMetalCost = PreciousMetalContractCostPerTOZ;
@@ -137,33 +137,33 @@ namespace ASCJewelryLibrary.Common.Builder
                         preciousMetalCost = PreciousMetalMarketCostPerTOZ;
                         break;
                     case CostingType.StandardCost:
-                        return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrFabricationCost - ItemCostSpecification.UsrOtherMaterialsCost - ItemCostSpecification.UsrPackagingCost;
+                        return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrASCJFabricationCost - ItemCostSpecification.UsrASCJOtherMaterialsCost - ItemCostSpecification.UsrASCJPackagingCost;
 
                     default: break;
                 }
-                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0.0m);
+                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrASCJActualGRAMGold ?? 0.0m);
 
             }
             else if (ASCJMetalType.IsSilver(INJewelryItem?.MetalType))
             {
-                switch (costingType ?? ItemCostSpecification.UsrCostingType)
+                switch (costingType ?? ItemCostSpecification.UsrASCJCostingType)
                 {
                     case CostingType.ContractCost:
-                        PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalContractCostPerTOZ, ItemCostSpecification.UsrMatrixStep);
+                        PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalContractCostPerTOZ, ItemCostSpecification.UsrASCJMatrixStep);
                         break;
                     case CostingType.MarketCost:
-                        PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.UsrMatrixStep); ;
+                        PreciousMetalAvrSilverMarketCostPerTOZ = GetSilverMetalCostPerOZ(PreciousMetalContractCostPerTOZ, PreciousMetalMarketCostPerTOZ, ItemCostSpecification.UsrASCJMatrixStep); ;
                         break;
                     case CostingType.StandardCost:
-                        return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrFabricationCost - ItemCostSpecification.UsrOtherMaterialsCost - ItemCostSpecification.UsrPackagingCost;
+                        return AvrPreciousMetalUnitCost - ItemCostSpecification.UsrASCJFabricationCost - ItemCostSpecification.UsrASCJOtherMaterialsCost - ItemCostSpecification.UsrASCJPackagingCost;
 
                     default: break;
                 }
-                preciousMetalCost = PreciousMetalAvrSilverMarketCostPerTOZ * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMSilver ?? 0.0m);
+                preciousMetalCost = PreciousMetalAvrSilverMarketCostPerTOZ * priciousMetalMultFactor * (ItemCostSpecification.UsrASCJActualGRAMSilver ?? 0.0m);
             }
 
-            decimal? surchargeValue = (100.0m + (ItemCostSpecification.UsrContractSurcharge ?? 0.0m)) / 100.0m;
-            decimal? metalLossValue = (100.0m + (ItemCostSpecification.UsrContractLossPct ?? 0.0m)) / 100.0m;
+            decimal? surchargeValue = (100.0m + (ItemCostSpecification.UsrASCJContractSurcharge ?? 0.0m)) / 100.0m;
+            decimal? metalLossValue = (100.0m + (ItemCostSpecification.UsrASCJContractLossPct ?? 0.0m)) / 100.0m;
             PreciousMetalUnitCost = preciousMetalCost * metalLossValue * surchargeValue;
             return PreciousMetalUnitCost;
         }
@@ -188,7 +188,7 @@ namespace ASCJewelryLibrary.Common.Builder
         {
             var metalFactor = ASCJMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
 
-            decimal? incrementValue = metalFactor * (1.0m + (itemCostSpecification.UsrContractSurcharge ?? 0.0m) / 100.0m);
+            decimal? incrementValue = metalFactor * (1.0m + (itemCostSpecification.UsrASCJContractSurcharge ?? 0.0m) / 100.0m);
 
             return incrementValue;
         }
@@ -203,16 +203,16 @@ namespace ASCJewelryLibrary.Common.Builder
 
         public static decimal? CalculateDutyCost(IASCJItemCostSpecDTO costSpecDTO, decimal? newValue)
         {
-            return (costSpecDTO.UsrDutyCostPct + newValue) / 100m;
+            return (costSpecDTO.UsrASCJDutyCostPct + newValue) / 100m;
         }
 
         public static decimal? CalculateDutyCostPct(IASCJItemCostSpecDTO costSpecDTO, decimal? newValue)
         {
             var value = decimal.Zero;
 
-            if (costSpecDTO.UsrUnitCost != 0m)
+            if (costSpecDTO.UsrASCJUnitCost != 0m)
             {
-                value = (decimal)(newValue / costSpecDTO.UsrUnitCost) * 100m;
+                value = (decimal)(newValue / costSpecDTO.UsrASCJUnitCost) * 100m;
             }
 
             return value;
@@ -258,13 +258,13 @@ namespace ASCJewelryLibrary.Common.Builder
 
         public decimal? GetPurchaseUnitCost(string costingType)
         {
-            ItemCostSpecification.UsrPreciousMetalCost = CalculatePreciousMetalCost(costingType);
+            ItemCostSpecification.UsrASCJPreciousMetalCost = CalculatePreciousMetalCost(costingType);
 
-            return (ItemCostSpecification.UsrPreciousMetalCost ?? 0m)
-                 + (ItemCostSpecification.UsrOtherMaterialsCost ?? 0m)
-                 + (ItemCostSpecification.UsrFabricationCost ?? 0m)
-                 + (ItemCostSpecification.UsrPackagingCost ?? 0m)
-                 + (ItemCostSpecification.UsrPackagingLaborCost ?? 0m);
+            return (ItemCostSpecification.UsrASCJPreciousMetalCost ?? 0m)
+                 + (ItemCostSpecification.UsrASCJOtherMaterialsCost ?? 0m)
+                 + (ItemCostSpecification.UsrASCJFabricationCost ?? 0m)
+                 + (ItemCostSpecification.UsrASCJPackagingCost ?? 0m)
+                 + (ItemCostSpecification.UsrASCJPackagingLaborCost ?? 0m);
         }
 
         #region ServiceQueries

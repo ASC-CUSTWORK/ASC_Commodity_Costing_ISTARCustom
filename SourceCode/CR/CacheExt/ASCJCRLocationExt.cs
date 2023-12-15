@@ -10,13 +10,13 @@ namespace ASCJewelryLibrary.CR.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrDCLocation
+        #region UsrASCJDCLocation
         [PXDBInt]
         [PXSelector(typeof(Search<Location.locationID, Where<Location.bAccountID, Equal<Current<Location.bAccountID>>, And<Location.locationID, NotEqual<Current<Location.locationID>>>>>),
             SubstituteKey = typeof(Location.locationCD))]
         [PXUIField(DisplayName = "DC Location")]
-        public virtual int? UsrDCLocation { get; set; }
-        public abstract class usrDCLocation : PX.Data.BQL.BqlInt.Field<usrDCLocation> { }
+        public virtual int? UsrASCJDCLocation { get; set; }
+        public abstract class usrASCJDCLocation : PX.Data.BQL.BqlInt.Field<usrASCJDCLocation> { }
         #endregion
 
     }

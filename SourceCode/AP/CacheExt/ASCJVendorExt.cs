@@ -12,7 +12,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrMarketID
+        #region UsrASCJMarketID
         [PXDBInt()]
         [PXUIField(DisplayName = "Market")]
         [PXSelector(
@@ -20,11 +20,11 @@ namespace ASCJewelryLibrary.AP.CacheExt
             Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
                         , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
-        public virtual int? UsrMarketID { get; set; }
-        public abstract class usrMarketID : PX.Data.BQL.BqlInt.Field<usrMarketID> { }
+        public virtual int? UsrASCJMarketID { get; set; }
+        public abstract class usrASCJMarketID : PX.Data.BQL.BqlInt.Field<usrASCJMarketID> { }
         #endregion
 
-        #region UsrSetupID
+        #region UsrASCJSetupID
         [PXDBGuid()]
         [PXUIField(DisplayName = "Mailing ID")]
         [PXSelector(typeof(Search<NotificationSetup.setupID,
@@ -32,8 +32,8 @@ namespace ASCJewelryLibrary.AP.CacheExt
                 And<NotificationSetup.module, Like<PXModule.po_>>>>),
             DescriptionField = typeof(NotificationSetup.notificationCD),
             SelectorMode = PXSelectorMode.DisplayModeText | PXSelectorMode.NoAutocomplete)]
-        public virtual Guid? UsrSetupID { get; set; }
-        public abstract class usrSetupID : PX.Data.BQL.BqlGuid.Field<usrSetupID> { }
+        public virtual Guid? UsrASCJSetupID { get; set; }
+        public abstract class usrASCJSetupID : PX.Data.BQL.BqlGuid.Field<usrASCJSetupID> { }
         #endregion
     }
 }

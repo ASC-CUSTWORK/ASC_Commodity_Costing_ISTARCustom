@@ -10,11 +10,11 @@ namespace ASCJewelryLibrary.IN.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrIsActiveKitVersion
+        #region UsrASCJIsActiveKitVersion
         [PXDBBool()]
         [PXUIField(DisplayName = "Kit Versions Activation")]
-        public virtual bool? UsrIsActiveKitVersion { get; set; }
-        public abstract class usrIsActiveKitVersion : PX.Data.BQL.BqlBool.Field<usrIsActiveKitVersion> { }
+        public virtual bool? UsrASCJIsActiveKitVersion { get; set; }
+        public abstract class usrASCJIsActiveKitVersion : PX.Data.BQL.BqlBool.Field<usrASCJIsActiveKitVersion> { }
         #endregion
     }
 }

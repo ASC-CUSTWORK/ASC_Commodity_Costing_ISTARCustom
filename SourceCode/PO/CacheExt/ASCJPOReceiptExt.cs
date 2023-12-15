@@ -11,12 +11,12 @@ namespace ASCJewelryLibrary.PO.DAC
     {
         public static bool IsActive() => true;
 
-        #region UsrAccrualLandedCost 
+        #region UsrASCJAccrualLandedCost 
         [PXDBBool()]
         [PXUIField(DisplayName = "Accrual Landed Cost")]
         [PXDefault(false, PersistingCheck = PXPersistingCheck.Nothing)]
-        public virtual bool? UsrAccrualLandedCost { get; set; }
-        public abstract class usrAccrualLandedCost : PX.Data.BQL.BqlBool.Field<usrAccrualLandedCost> { }
+        public virtual bool? UsrASCJAccrualLandedCost { get; set; }
+        public abstract class usrASCJAccrualLandedCost : PX.Data.BQL.BqlBool.Field<usrASCJAccrualLandedCost> { }
         #endregion
     }
 }

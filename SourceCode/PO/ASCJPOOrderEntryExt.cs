@@ -56,7 +56,7 @@ namespace ASCJewelryLibrary.PO
                         {
                             var list = PXNoteAttribute.GetFileNotes(Base.Document.Cache, Base.Document.Current).Select(attachment => (Guid?)attachment).ToList();
                             ASCJPOOrderExt currentExt = currentItem.GetExtension<ASCJPOOrderExt>();
-                            NotificationSetup ns = NotificationSetup.PK.Find(Base, currentExt.UsrSetupID);
+                            NotificationSetup ns = NotificationSetup.PK.Find(Base, currentExt.UsrASCJSetupID);
                             var baseExt = Base.GetExtension<POOrderEntry_ActivityDetailsExt>();
                             baseExt?.SendNotification("Vendor", (ns.NotificationCD ?? "PURCHASE ORDER"), currentItem.BranchID, parameters, false, list);
                             Base.Save.Press();
@@ -101,7 +101,7 @@ namespace ASCJewelryLibrary.PO
             Vendor vendor = Vendor.PK.Find(Base, row.VendorID);
             if (vendor == null) return;
 
-            e.Cache.SetValueExt<ASCJPOOrderExt.usrMarketID>(row, vendor.GetExtension<ASCJVendorExt>().UsrMarketID);
+            e.Cache.SetValueExt<ASCJPOOrderExt.usrASCJMarketID>(row, vendor.GetExtension<ASCJVendorExt>().UsrASCJMarketID);
         }
 
         protected virtual void _(Events.FieldUpdated<POOrder, POOrder.orderDate> e)
@@ -112,7 +112,7 @@ namespace ASCJewelryLibrary.PO
             SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, this.Base.Transactions.Select()?.FirstTableItems.ToList());
         }
 
-        protected virtual void _(Events.FieldUpdated<POOrder, ASCJPOOrderExt.usrPricingDate> e)
+        protected virtual void _(Events.FieldUpdated<POOrder, ASCJPOOrderExt.usrASCJPricingDate> e)
         {
             var row = e.Row;
             if (row == null) return;
@@ -146,10 +146,10 @@ namespace ASCJewelryLibrary.PO
 
             var poOrderExt = PXCache<POOrder>.GetExtension<ASCJPOOrderExt>(this.Base.Document.Current);
 
-            if (poOrderExt == null || poOrderExt.UsrMarketID == null)
+            if (poOrderExt == null || poOrderExt.UsrASCJMarketID == null)
             {
-                this.Base.Document.Cache.RaiseExceptionHandling<ASCJPOOrderExt.usrMarketID>(this.Base.Document.Current, null,
-                    new PXSetPropertyException<ASCJPOOrderExt.usrMarketID>(ASCJPOMessages.Errors.MarketEmpty, PXErrorLevel.RowError));
+                this.Base.Document.Cache.RaiseExceptionHandling<ASCJPOOrderExt.usrASCJMarketID>(this.Base.Document.Current, null,
+                    new PXSetPropertyException<ASCJPOOrderExt.usrASCJMarketID>(ASCJPOMessages.Errors.MarketEmpty, PXErrorLevel.RowError));
                 return;
             }
 
@@ -169,12 +169,12 @@ namespace ASCJewelryLibrary.PO
                 var jewelryCostProvider = new ASCJCostBuilder(this.Base)
                                 .WithInventoryItem(inventoryItemExt)
                                 .WithPOVendorInventory(poVendorInventory)
-                                .WithPricingData(poOrderExt.UsrPricingDate ?? PXTimeZoneInfo.Today)
+                                .WithPricingData(poOrderExt.UsrASCJPricingDate ?? PXTimeZoneInfo.Today)
                                 .Build();
 
                 if (jewelryCostProvider != null)
                 {
-                    var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(inventoryItemExt?.UsrCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
+                    var newUnitCost = jewelryCostProvider.GetPurchaseUnitCost(inventoryItemExt?.UsrASCJCostingType == CostingType.StandardCost ? CostingType.StandardCost : CostingType.MarketCost);
 
                     cache.SetValueExt<POLine.curyUnitCost>(poLine, newUnitCost);
                     cache.SetValueExt<POLine.unitCost>(poLine, newUnitCost);
@@ -188,13 +188,13 @@ namespace ASCJewelryLibrary.PO
 
         private void SetInventoryItemCustomFields(PXCache cache, POLine row, ASCJCostBuilder costBuilder)
         {
-            cache.SetValueExt<ASCJPOLineExt.usrContractIncrement>(row, costBuilder.ItemCostSpecification.UsrContractIncrement);
-            cache.SetValueExt<ASCJPOLineExt.usrActualGRAMGold>(row, costBuilder.ItemCostSpecification.UsrActualGRAMGold);
-            cache.SetValueExt<ASCJPOLineExt.usrPricingGRAMGold>(row, costBuilder.ItemCostSpecification.UsrPricingGRAMGold);
-            cache.SetValueExt<ASCJPOLineExt.usrActualGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrActualGRAMSilver);
-            cache.SetValueExt<ASCJPOLineExt.usrPricingGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrPricingGRAMSilver);
-            cache.SetValueExt<ASCJPOLineExt.usrMarketPrice>(row, costBuilder.PreciousMetalMarketCostPerTOZ);
-            cache.SetValueExt<ASCJPOLineExt.usrBasisValue>(row, costBuilder.BasisValue);
+            cache.SetValueExt<ASCJPOLineExt.usrASCJContractIncrement>(row, costBuilder.ItemCostSpecification.UsrASCJContractIncrement);
+            cache.SetValueExt<ASCJPOLineExt.usrASCJActualGRAMGold>(row, costBuilder.ItemCostSpecification.UsrASCJActualGRAMGold);
+            cache.SetValueExt<ASCJPOLineExt.usrASCJPricingGRAMGold>(row, costBuilder.ItemCostSpecification.UsrASCJPricingGRAMGold);
+            cache.SetValueExt<ASCJPOLineExt.usrASCJActualGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrASCJActualGRAMSilver);
+            cache.SetValueExt<ASCJPOLineExt.usrASCJPricingGRAMSilver>(row, costBuilder.ItemCostSpecification.UsrASCJPricingGRAMSilver);
+            cache.SetValueExt<ASCJPOLineExt.usrASCJMarketPrice>(row, costBuilder.PreciousMetalMarketCostPerTOZ);
+            cache.SetValueExt<ASCJPOLineExt.usrASCJBasisValue>(row, costBuilder.BasisValue);
         }
 
         private POVendorInventory GetDefaultPOVendorInventory(int? vendorID, int? inventoryID)

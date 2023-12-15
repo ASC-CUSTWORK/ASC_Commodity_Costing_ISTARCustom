@@ -19,9 +19,9 @@ namespace ASCJewelryLibrary.AP.GraphExt
         {
             base.Initialize();
             Base.Records.WhereAnd<Where
-                <Brackets<ASCJAPVendorPriceFilterExt.usrOnlyMarkets.FromCurrent.IsEqual<True>
+                <Brackets<ASCJAPVendorPriceFilterExt.usrASCJOnlyMarkets.FromCurrent.IsEqual<True>
                 .And<Vendor.vendorClassID.IsEqual<Common.Descriptor.ASCJConstants.MarketClass>>
-                .Or<ASCJAPVendorPriceFilterExt.usrOnlyMarkets.FromCurrent.IsEqual<False>>>>>();
+                .Or<ASCJAPVendorPriceFilterExt.usrASCJOnlyMarkets.FromCurrent.IsEqual<False>>>>>();
         }
 
         #region CacheAttached
@@ -37,7 +37,7 @@ namespace ASCJewelryLibrary.AP.GraphExt
             if (row == null) return;
             Vendor vendor = Vendor.PK.Find(this.Base, (int?)e.NewValue);
 
-            e.Cache.SetValueExt<ASCJAPVendorPriceExt.usrMarketID>(row, vendor?.GetExtension<ASCJVendorExt>().UsrMarketID);
+            e.Cache.SetValueExt<ASCJAPVendorPriceExt.usrASCJMarketID>(row, vendor?.GetExtension<ASCJVendorExt>().UsrASCJMarketID);
         }
         protected virtual void _(Events.FieldUpdated<APVendorPrice, APVendorPrice.salesPrice> e)
         {
@@ -46,7 +46,7 @@ namespace ASCJewelryLibrary.AP.GraphExt
 
             UpdateFloorCeilingFields(e.Cache, row);
         }
-        protected virtual void _(Events.FieldUpdated<APVendorPrice, ASCJAPVendorPriceExt.usrMatrixStep> e)
+        protected virtual void _(Events.FieldUpdated<APVendorPrice, ASCJAPVendorPriceExt.usrASCJMatrixStep> e)
         {
             var row = e.Row;
             if (row == null) return;
@@ -61,14 +61,14 @@ namespace ASCJewelryLibrary.AP.GraphExt
         private void UpdateFloorCeilingFields(PXCache cache, APVendorPrice row)
         {
             var rowExt = PXCache<APVendorPrice>.GetExtension<ASCJAPVendorPriceExt>(row);
-            if (rowExt?.UsrCommodity != CommodityType.Silver) return;
+            if (rowExt?.UsrASCJCommodity != CommodityType.Silver) return;
 
             var poVendorInventory = new POVendorInventory() { VendorID = row.VendorID };
-            PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(poVendorInventory).UsrMarketID = rowExt.UsrMarketID;
+            PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(poVendorInventory).UsrASCJMarketID = rowExt.UsrASCJMarketID;
 
             var inventoryItem = InventoryItem.PK.Find(Base, row.InventoryID);
             var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(inventoryItem);
-            inventoryItemExt.UsrMatrixStep = rowExt.UsrMatrixStep;
+            inventoryItemExt.UsrASCJMatrixStep = rowExt.UsrASCJMatrixStep;
 
             var jewelryCostProvider = new ASCJCostBuilder(this.Base)
                             .WithInventoryItem(inventoryItemExt)
@@ -78,8 +78,8 @@ namespace ASCJewelryLibrary.AP.GraphExt
 
             jewelryCostProvider.CalculatePreciousMetalCost(CostingType.ContractCost);
 
-            cache.SetValueExt<ASCJAPVendorPriceExt.usrFloor>(row, jewelryCostProvider.Floor);
-            cache.SetValueExt<ASCJAPVendorPriceExt.usrCeiling>(row, jewelryCostProvider.Ceiling);
+            cache.SetValueExt<ASCJAPVendorPriceExt.usrASCJFloor>(row, jewelryCostProvider.Floor);
+            cache.SetValueExt<ASCJAPVendorPriceExt.usrASCJCeiling>(row, jewelryCostProvider.Ceiling);
         }
         #endregion
 

@@ -3,65 +3,65 @@
         <Children Key="Columns">
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommodityPerGram" />
+                    <Prop Key="DataField" Value="UsrASCJCommodityPerGram" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrBasisValue" />
+                    <Prop Key="DataField" Value="UsrASCJBasisValue" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommodityLossPct" />
+                    <Prop Key="DataField" Value="UsrASCJCommodityLossPct" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommoditySurchargePct" />
+                    <Prop Key="DataField" Value="UsrASCJCommoditySurchargePct" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrMarketID" />
+                    <Prop Key="DataField" Value="UsrASCJMarketID" />
                     <Prop Key="Width" Value="140" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommodity" />
+                    <Prop Key="DataField" Value="UsrASCJCommodity" />
                     <Prop Key="Width" Value="70" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrMatrixStep" />
+                    <Prop Key="DataField" Value="UsrASCJMatrixStep" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrFloor" />
+                    <Prop Key="DataField" Value="UsrASCJFloor" />
                     <Prop Key="Width" Value="100" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCeiling" />
+                    <Prop Key="DataField" Value="UsrASCJCeiling" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
-                    <Prop Key="DataField" Value="UsrCommodityIncrement" />
+                    <Prop Key="DataField" Value="UsrASCJCommodityIncrement" />
                     <Prop Key="Width" Value="100" />
                 </PXGridColumn>
             </AddItem>
@@ -94,7 +94,7 @@
                 <PXCheckBox TypeFullName="PX.Web.UI.PXCheckBox">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXCheckBox4" />
-                    <Prop Key="DataField" Value="UsrOnlyMarkets" />
+                    <Prop Key="DataField" Value="UsrASCJOnlyMarkets" />
                     <Prop Key="AlignLeft" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXCheckBox>

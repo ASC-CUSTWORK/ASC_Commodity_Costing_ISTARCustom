@@ -9,12 +9,12 @@ namespace ASCJewelryLibrary.AP.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrOnlyMarkets
+        #region UsrASCJOnlyMarkets
         [PXBool()]
         [PXDefault(false, PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Show Only Markets")]
-        public virtual bool? UsrOnlyMarkets { get; set; }
-        public abstract class usrOnlyMarkets : PX.Data.BQL.BqlBool.Field<usrOnlyMarkets> { }
+        public virtual bool? UsrASCJOnlyMarkets { get; set; }
+        public abstract class usrASCJOnlyMarkets : PX.Data.BQL.BqlBool.Field<usrASCJOnlyMarkets> { }
         #endregion
     }
 }

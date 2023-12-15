@@ -3,29 +3,29 @@
     public interface IASCJItemCostSpecDTO
     {
         int? InventoryID { get; set; }
-        decimal? UsrActualGRAMGold { get; set; }
-        decimal? UsrPricingGRAMSilver { get; set; }
-        decimal? UsrPricingGRAMGold { get; set; }
-        decimal? UsrActualGRAMSilver { get; set; }
-        decimal? UsrContractLossPct { get; set; }
-        decimal? UsrContractSurcharge { get; set; }
-        decimal? UsrContractIncrement { get; set; }
-        decimal? UsrMatrixStep { get; set; }
-        decimal? UsrUnitCost { get; set; }
-        decimal? UsrBasisValue { get; set; }
-        decimal? UsrEstLandedCost { get; set; }
-        decimal? UsrPreciousMetalCost { get; set; }
-        decimal? UsrFabricationCost { get; set; }
-        decimal? UsrPackagingCost { get; set; }
-        decimal? UsrPackagingLaborCost { get; set; }
-        decimal? UsrOtherMaterialsCost { get; set; }
-        decimal? UsrOtherCost { get; set; }
-        decimal? UsrFreightCost { get; set; }
-        decimal? UsrHandlingCost { get; set; }
-        decimal? UsrLaborCost { get; set; }
-        decimal? UsrDutyCost { get; set; }
-        decimal? UsrDutyCostPct { get; set; }
-        string UsrCostingType { get; set; }
-        string UsrCommodityType { get; set; }
+        decimal? UsrASCJActualGRAMGold { get; set; }
+        decimal? UsrASCJPricingGRAMSilver { get; set; }
+        decimal? UsrASCJPricingGRAMGold { get; set; }
+        decimal? UsrASCJActualGRAMSilver { get; set; }
+        decimal? UsrASCJContractLossPct { get; set; }
+        decimal? UsrASCJContractSurcharge { get; set; }
+        decimal? UsrASCJContractIncrement { get; set; }
+        decimal? UsrASCJMatrixStep { get; set; }
+        decimal? UsrASCJUnitCost { get; set; }
+        decimal? UsrASCJBasisValue { get; set; }
+        decimal? UsrASCJEstLandedCost { get; set; }
+        decimal? UsrASCJPreciousMetalCost { get; set; }
+        decimal? UsrASCJFabricationCost { get; set; }
+        decimal? UsrASCJPackagingCost { get; set; }
+        decimal? UsrASCJPackagingLaborCost { get; set; }
+        decimal? UsrASCJOtherMaterialsCost { get; set; }
+        decimal? UsrASCJOtherCost { get; set; }
+        decimal? UsrASCJFreightCost { get; set; }
+        decimal? UsrASCJHandlingCost { get; set; }
+        decimal? UsrASCJLaborCost { get; set; }
+        decimal? UsrASCJDutyCost { get; set; }
+        decimal? UsrASCJDutyCostPct { get; set; }
+        string UsrASCJCostingType { get; set; }
+        string UsrASCJCommodityType { get; set; }
     }
 }

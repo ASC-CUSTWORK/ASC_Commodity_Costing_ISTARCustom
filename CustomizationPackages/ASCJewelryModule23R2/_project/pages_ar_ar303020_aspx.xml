@@ -20,7 +20,7 @@
                 <PXSelector TypeFullName="PX.Web.UI.PXSelector">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXSelector3" />
-                    <Prop Key="DataField" Value="UsrDCLocation" />
+                    <Prop Key="DataField" Value="UsrASCJDCLocation" />
                 </PXSelector>
             </AddItem>
         </Children>

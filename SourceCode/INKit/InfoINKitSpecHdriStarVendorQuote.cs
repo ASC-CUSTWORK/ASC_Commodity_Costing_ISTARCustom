@@ -35,7 +35,7 @@ namespace iStarCustom
         #region LineNbr
         [PXDBInt(IsKey = true)]
         [PXUIField(DisplayName = "Line Nbr",Enabled =false)]
-        [PXLineNbr(typeof(INKitSpecHdriStarExt.usrVQuoteLineCtr))]
+        [PXLineNbr(typeof(INKitSpecHdriStarExt.usrASCJVQuoteLineCtr))]
         public virtual int? LineNbr { get; set; }
         public abstract class lineNbr : PX.Data.BQL.BqlInt.Field<lineNbr> { }
         #endregion

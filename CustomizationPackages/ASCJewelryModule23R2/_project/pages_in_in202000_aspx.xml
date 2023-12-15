@@ -5,7 +5,7 @@
                 <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="ASCIStarCostingType" />
-                    <Prop Key="DataField" Value="UsrCostingType" />
+                    <Prop Key="DataField" Value="UsrASCJCostingType" />
                 </PXDropDown>
             </AddItem>
             <PXSelector DataField="PriceWorkgroupID" OriginalIndex="2" />
@@ -26,7 +26,7 @@
                 <PXDropDown TypeFullName="PX.Web.UI.PXDropDown">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXDropDown4" />
-                    <Prop Key="DataField" Value="UsrCostingType" />
+                    <Prop Key="DataField" Value="UsrASCJCostingType" />
                 </PXDropDown>
             </AddItem>
             <PXLayoutRule OriginalIndex="5" />

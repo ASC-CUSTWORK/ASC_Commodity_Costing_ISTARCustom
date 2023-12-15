@@ -142,7 +142,7 @@
                     <GISort LineNbr="1" IsActive="1" DataFieldName="InventoryItem.inventoryID" SortOrder="A" />
                     <GITable Alias="InventoryItem" Name="PX.Objects.IN.InventoryItem">
                         <GIResult LineNbr="22" SortOrder="21" IsActive="1" Field="ringSize" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="79ad7122-4809-4252-9106-37008ae3a72b" />
-                        <GIResult LineNbr="21" SortOrder="20" IsActive="1" Field="usrSearchGroup" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="c767e008-39f5-431c-9af7-824f80abfaef" />
+                        <GIResult LineNbr="21" SortOrder="20" IsActive="1" Field="usrASCJSearchGroup" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="c767e008-39f5-431c-9af7-824f80abfaef" />
                         <GIResult LineNbr="20" SortOrder="19" IsActive="1" Field="searchType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="c1f14a45-77fc-499d-9b63-dbf76a4f31c2" />
                         <GIResult LineNbr="19" SortOrder="18" IsActive="1" Field="createdDateTime" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e2ffc16c-e403-4130-b6e1-3e69d26e02a3" />
                         <GIResult LineNbr="18" SortOrder="1" IsActive="1" Field="=LEN([InventoryItem.InventoryCD])" Caption="SKU LENGTH" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e169e06d-b14d-458c-9708-3a5f0b0e2813" />
@@ -157,7 +157,7 @@
                         <GIResult LineNbr="9" SortOrder="11" IsActive="0" Field="retailPrice" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e2e71992-ee5c-4015-aba9-d0015144e434" />
                         <GIResult LineNbr="8" SortOrder="7" IsActive="1" Field="itemSubType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="6e241058-1bc7-425f-b239-82cd11dbdc38" />
                         <GIResult LineNbr="7" SortOrder="8" IsActive="1" Field="itemType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="8384af49-70fd-46c6-887e-0f2d23224ef5" />
-                        <GIResult LineNbr="6" SortOrder="10" IsActive="0" Field="usrLongDesc" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="aa7d9a10-cda7-4326-b5f6-844dfae88c80" />
+                        <GIResult LineNbr="6" SortOrder="10" IsActive="0" Field="usrASCJLongDesc" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="aa7d9a10-cda7-4326-b5f6-844dfae88c80" />
                         <GIResult LineNbr="4" SortOrder="9" IsActive="1" Field="itemClassID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d2c620e9-70dd-4b4b-9220-b7fd33cc627c" />
                         <GIResult LineNbr="3" SortOrder="5" IsActive="1" Field="itemStatus" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="821a789b-ea80-4067-94cb-a74c48e5e78c" />
                         <GIResult LineNbr="2" SortOrder="4" IsActive="1" Field="descr" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d17984dd-b3e2-4707-9afc-102ff0c2872e" />

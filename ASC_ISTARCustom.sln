@@ -3,7 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JewelShopLibrary", "SourceCode\JewelShopLibrary.csproj", "{70449770-0133-4BD9-9E2A-68C58ED12298}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASCJewelryLibrary", "SourceCode\ASCJewelryLibrary.csproj", "{37FD6CB6-F946-45BF-8642-2AC0C7573C6A}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ASCIStar23R2", "http://localhost/ASCIStar23R2", "{8EF95B04-9016-4917-9D16-587C7EE7DB78}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "false"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		ProjectReferences = "{37fd6cb6-f946-45bf-8642-2ac0c7573c6a}|ASCJewelryLibrary.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/ASCIStar23R2"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\Sites\23.204.0031\ASCIStar23R2\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ASCIStar23R2\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ASCIStar23R2"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\Sites\23.204.0031\ASCIStar23R2\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ASCIStar23R2\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\..\..\Sites\23.204.0031\ASCIStar23R2\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +33,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70449770-0133-4BD9-9E2A-68C58ED12298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70449770-0133-4BD9-9E2A-68C58ED12298}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70449770-0133-4BD9-9E2A-68C58ED12298}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70449770-0133-4BD9-9E2A-68C58ED12298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37FD6CB6-F946-45BF-8642-2AC0C7573C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37FD6CB6-F946-45BF-8642-2AC0C7573C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37FD6CB6-F946-45BF-8642-2AC0C7573C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37FD6CB6-F946-45BF-8642-2AC0C7573C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF95B04-9016-4917-9D16-587C7EE7DB78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF95B04-9016-4917-9D16-587C7EE7DB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF95B04-9016-4917-9D16-587C7EE7DB78}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF95B04-9016-4917-9D16-587C7EE7DB78}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

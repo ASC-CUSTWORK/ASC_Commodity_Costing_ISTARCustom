@@ -5,7 +5,7 @@
                 <PXCheckBox TypeFullName="PX.Web.UI.PXCheckBox">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXCheckBox1" />
-                    <Prop Key="DataField" Value="UsrAccrualLandedCost" />
+                    <Prop Key="DataField" Value="UsrASCJAccrualLandedCost" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXCheckBox>
             </AddItem>

@@ -10,12 +10,12 @@ namespace ASCJewelryLibrary.IN.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region UsrCommodity 
+        #region UsrASCJCommodity 
         [PXDBString(1)]
         [PXUIField(DisplayName = "Commodity Type")]
         [CommodityType.List]
-        public virtual string UsrCommodity { get; set; }
-        public abstract class usrCommodity : PX.Data.BQL.BqlString.Field<usrCommodity> { }
+        public virtual string UsrASCJCommodity { get; set; }
+        public abstract class usrASCJCommodity : PX.Data.BQL.BqlString.Field<usrASCJCommodity> { }
         #endregion
 
     }

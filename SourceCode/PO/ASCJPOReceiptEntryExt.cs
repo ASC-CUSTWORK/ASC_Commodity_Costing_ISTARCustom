@@ -29,7 +29,7 @@ namespace ASCJewelryLibrary.PO
         }
 
         #region Events
-        protected virtual void _(Events.FieldVerifying<POReceipt, ASCJPOReceiptExt.usrAccrualLandedCost> e)
+        protected virtual void _(Events.FieldVerifying<POReceipt, ASCJPOReceiptExt.usrASCJAccrualLandedCost> e)
         {
             var row = e.Row;
             if (row == null) return;
@@ -40,7 +40,7 @@ namespace ASCJewelryLibrary.PO
             Vendor vendor = Vendor.PK.Find(this.Base, row.VendorID);
             if (vendor?.LandedCostVendor != true)
             {
-                e.Cache.RaiseExceptionHandling<ASCJPOReceiptExt.usrAccrualLandedCost>(row, e.NewValue,
+                e.Cache.RaiseExceptionHandling<ASCJPOReceiptExt.usrASCJAccrualLandedCost>(row, e.NewValue,
                                             new PXSetPropertyException(ASCJPOMessages.Warnings.DisabledLandedCostVendor, PXErrorLevel.Warning));
             }
         }

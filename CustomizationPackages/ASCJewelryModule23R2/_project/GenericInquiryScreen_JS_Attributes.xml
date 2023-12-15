@@ -142,7 +142,7 @@
                         <GINavigationParameter LineNbr="1" FieldName="JSAttrID" ParameterName="CSAttribute.attributeID" IsExpression="0" />
                     </GINavigationScreen>
                     <GITable Alias="CSAttribute" Name="PX.Objects.CS.CSAttribute">
-                        <GIResult LineNbr="4" SortOrder="4" IsActive="1" Field="usrSearchType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d2abff40-5c2e-49f7-96e0-962576c81648" />
+                        <GIResult LineNbr="4" SortOrder="4" IsActive="1" Field="usrASCJSearchType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d2abff40-5c2e-49f7-96e0-962576c81648" />
                         <GIResult LineNbr="3" SortOrder="2" IsActive="1" Field="description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="279dd7a9-a63e-47e2-be6e-1bd578618f11" />
                         <GIResult LineNbr="2" SortOrder="3" IsActive="1" Field="controlType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="be4a5d03-cde1-4de5-be27-a4a580a71086" />
                         <GIResult LineNbr="1" SortOrder="1" IsActive="1" Field="attributeID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="b0695337-b05e-44ea-801a-72a037f8772c" />

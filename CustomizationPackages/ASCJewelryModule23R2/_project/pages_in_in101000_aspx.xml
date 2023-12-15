@@ -13,7 +13,7 @@
                 <PXCheckBox TypeFullName="PX.Web.UI.PXCheckBox">
                     <Prop Key="Virtual:ApplyStylesheetSkin" />
                     <Prop Key="ID" Value="CstPXCheckBox2" />
-                    <Prop Key="DataField" Value="UsrIsActiveKitVersion" />
+                    <Prop Key="DataField" Value="UsrASCJIsActiveKitVersion" />
                     <Prop Key="CommitChanges" Value="True" />
                 </PXCheckBox>
             </AddItem>

@@ -1,28 +1,28 @@
 ﻿<Table TableName="POVendorInventory">
-    <Column TableName="POVendorInventory" ColumnName="UsrPreciousMetalCost" ColumnType="decimal" AllowNull="True" MaxLength="19" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrFabricationCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrHandlingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrFreightCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrDutyCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrUnitCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrEstLandedCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrOtherMaterialsCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrOtherCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrPackagingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrPackagingLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrMarketID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrCommodityVendorPrice" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrContractIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrContractSurcharge" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrContractLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrIsOverrideVendor" ColumnType="bool" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrCommodityID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrBasisPrice" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrBasisValue" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrCeiling" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrFloor" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrFabricationWeight" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="POVendorInventory" ColumnName="UsrFabricationPiece" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJPreciousMetalCost" ColumnType="decimal" AllowNull="True" MaxLength="19" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJFabricationCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJHandlingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJFreightCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJDutyCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJUnitCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJEstLandedCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJOtherMaterialsCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJOtherCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJPackagingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJPackagingLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJMarketID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJCommodityVendorPrice" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJContractIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJContractSurcharge" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJContractLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJIsOverrideVendor" ColumnType="bool" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJCommodityID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJBasisPrice" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJBasisValue" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJCeiling" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJFloor" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJFabricationWeight" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POVendorInventory" ColumnName="UsrASCJFabricationPiece" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
 </Table>

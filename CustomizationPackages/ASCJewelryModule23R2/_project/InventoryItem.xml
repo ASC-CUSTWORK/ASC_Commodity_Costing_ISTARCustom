@@ -1,29 +1,29 @@
 ﻿<Table TableName="InventoryItem">
-    <Column TableName="InventoryItem" ColumnName="UsrCostingType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="2" DecimalLength="1" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrCommodityID" ColumnType="int" AllowNull="True" MaxLength="25" DecimalPrecision="2" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPreciousMetalCost" ColumnType="decimal" AllowNull="True" MaxLength="19" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrFabricationCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrHandlingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrFreightCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPriceAsID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="usrPriceToUnit" ColumnType="string" AllowNull="True" MaxLength="10" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPricingGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPricingGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrActualGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrActualGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrLegacyShortRef" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrLegacyID" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrContractLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrContractIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrContractSurcharge" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrDutyCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrOtherCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPackagingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrDutyCostPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrOtherMaterialsCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrCommodityType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrPackagingLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrProductWeight" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJCostingType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="2" DecimalLength="1" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJCommodityID" ColumnType="int" AllowNull="True" MaxLength="25" DecimalPrecision="2" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJPreciousMetalCost" ColumnType="decimal" AllowNull="True" MaxLength="19" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJFabricationCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJHandlingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJFreightCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJPriceAsID" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="usrASCJPriceToUnit" ColumnType="string" AllowNull="True" MaxLength="10" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJPricingGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJPricingGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJActualGRAMGold" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJActualGRAMSilver" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJLegacyShortRef" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJLegacyID" ColumnType="string" AllowNull="True" MaxLength="30" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJContractLossPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJContractIncrement" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJContractSurcharge" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJDutyCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJOtherCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJPackagingCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJDutyCostPct" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJOtherMaterialsCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJCommodityType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJPackagingLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="InventoryItem" ColumnName="UsrASCJProductWeight" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
 </Table>

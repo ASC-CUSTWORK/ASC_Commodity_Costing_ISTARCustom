@@ -175,7 +175,7 @@ namespace ASCJewelryLibrary.AP
                     {
                         vendorPrice.SalesPrice = salesPrice;
                         var vendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCJAPVendorPriceExt>(vendorPrice);
-                        vendorPriceExt.UsrFormAPI = true;
+                        vendorPriceExt.UsrASCJFormAPI = true;
                         vendorPriceMaint.Value.Records.Update(vendorPrice);
                     }
                     else
@@ -205,7 +205,7 @@ namespace ASCJewelryLibrary.AP
             vendorPrice.EffectiveDate = vendorPriceMaint.Value.Accessinfo.BusinessDate;
 
             var vendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCJAPVendorPriceExt>(vendorPrice);
-            vendorPriceExt.UsrFormAPI = true;
+            vendorPriceExt.UsrASCJFormAPI = true;
 
             vendorPriceMaint.Value.Records.Update(vendorPrice);
         }

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70449770-0133-4BD9-9E2A-68C58ED12298}</ProjectGuid>
+    <ProjectGuid>{37FD6CB6-F946-45BF-8642-2AC0C7573C6A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ASCJewelryLibrary</RootNamespace>
@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\..\Dependencies\VERSION2021R2\Autofac.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -41,43 +41,43 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.Common.Std.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.CS.Contracts">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.CS.Contracts.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.CS.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.DbServices">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.DbServices.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.DbServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Objects.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.Customization">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Web.Customization.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.Web.Customization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.UI">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Web.UI.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\PX.Web.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\Dependencies\VERSION2021R2\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\..\Sites\23.204.0031\ASCIStar23R2\Bin\RestSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
