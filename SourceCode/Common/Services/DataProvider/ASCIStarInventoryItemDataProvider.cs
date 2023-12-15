@@ -1,15 +1,15 @@
-﻿using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
+﻿using ASCJewelryLibrary.Common.Services.DataProvider.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System.Collections.Generic;
 
-namespace ASCISTARCustom.Common.Services.DataProvider
+namespace ASCJewelryLibrary.Common.Services.DataProvider
 {
-    public class ASCIStarInventoryItemDataProvider : IASCIStarInventoryItemDataProvider
+    public class ASCJInventoryItemDataProvider : IASCJInventoryItemDataProvider
     {
         private readonly PXGraph _graph;
 
-        public ASCIStarInventoryItemDataProvider(PXGraph graph)
+        public ASCJInventoryItemDataProvider(PXGraph graph)
         {
             _graph = graph;
         }

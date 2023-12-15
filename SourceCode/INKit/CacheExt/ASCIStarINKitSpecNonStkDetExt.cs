@@ -1,14 +1,14 @@
-using ASCISTARCustom.IN.CacheExt;
-using ASCISTARCustom.INKit.Descriptor;
-using ASCISTARCustom.INKit.Interfaces;
+using ASCJewelryLibrary.IN.CacheExt;
+using ASCJewelryLibrary.INKit.Descriptor;
+using ASCJewelryLibrary.INKit.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
-namespace ASCISTARCustom.INKit.CacheExt
+namespace ASCJewelryLibrary.INKit.CacheExt
 {
-    public sealed class ASCIStarINKitSpecNonStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecNonStkDet>, IASCIStarCostRollup
+    public sealed class ASCJINKitSpecNonStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecNonStkDet>, IASCJCostRollup
     {
         public static bool IsActive() => true;
 
@@ -41,7 +41,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXUIField(DisplayName = "Ext Cost", Enabled = false)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Mult<INKitSpecNonStkDet.dfltCompQty, usrUnitCost>))]
-        [ASCIStarCostAssignment]
+        [ASCJCostAssignment]
         public decimal? UsrExtCost { get; set; }
         public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
         #endregion
@@ -50,7 +50,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type", Enabled = true, Visible = true)]
         [CostingType.List]
-        [PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostingType>))]
+        [PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCJINInventoryItemExt.usrCostingType>))]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion   
@@ -60,7 +60,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [CostRollupType.List]
         [PXDefault(CostRollupType.Fabrication, PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Rollup Type", Enabled = true)]
-        //[PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
+        //[PXFormula(typeof(Selector<INKitSpecNonStkDet.compInventoryID, ASCJINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion          

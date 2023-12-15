@@ -1,8 +1,8 @@
 ﻿using PX.Data;
 
-namespace ASCISTARCustom.Common.Services.REST.Interfaces
+namespace ASCJewelryLibrary.Common.Services.REST.Interfaces
 {
-    public interface IASCIStarMetalsAPILatestRateService
+    public interface IASCJMetalsAPILatestRateService
     {
         /// <summary>
         /// Retrieves the inverse rate value for the LBXAG(LBMA Silver) symbol and the specified currency.

@@ -1,10 +1,10 @@
 using PX.Data;
 using PX.Objects.IN;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
-namespace ASCISTARCustom.IN.CacheExt
+namespace ASCJewelryLibrary.IN.CacheExt
 {
-    public class ASCIStarINItemClassExt : PXCacheExtension<INItemClass>
+    public class ASCJINItemClassExt : PXCacheExtension<INItemClass>
     {
         public static bool IsActive() => true;
 

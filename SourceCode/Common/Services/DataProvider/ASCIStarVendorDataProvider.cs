@@ -1,17 +1,17 @@
-﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
+﻿using ASCJewelryLibrary.Common.Descriptor;
+using ASCJewelryLibrary.Common.Services.DataProvider.Interfaces;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Data.BQL;
 using PX.Objects.AP;
 using System;
-namespace ASCISTARCustom.Common.Services.DataProvider
+namespace ASCJewelryLibrary.Common.Services.DataProvider
 {
-    public class ASCIStarVendorDataProvider : IASCIStarVendorDataProvider
+    public class ASCJVendorDataProvider : IASCJVendorDataProvider
     {
         private readonly PXGraph _graph;
 
-        public ASCIStarVendorDataProvider(PXGraph graph)
+        public ASCJVendorDataProvider(PXGraph graph)
         {
             _graph = graph;
         }
@@ -29,7 +29,7 @@ namespace ASCISTARCustom.Common.Services.DataProvider
 
             if (result == null && withException == true)
             {
-                throw new PXException(ASCIStarMessages.Error.VendorPriceNotFound);
+                throw new PXException(ASCJMessages.Error.VendorPriceNotFound);
             }
 
             return result;
@@ -44,7 +44,7 @@ namespace ASCISTARCustom.Common.Services.DataProvider
                 .Select(_graph, bAccountID);
             if (result == null)
             {
-                throw new PXException(ASCIStarMessages.Error.VendorRecordNotFound);
+                throw new PXException(ASCJMessages.Error.VendorRecordNotFound);
             }
 
             return result;

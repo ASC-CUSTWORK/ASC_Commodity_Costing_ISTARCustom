@@ -1,7 +1,7 @@
 ﻿using PX.Data;
 using System;
 
-namespace ASCISTARCustom.Common.DAC
+namespace ASCJewelryLibrary.Common.DAC
 {
     [Serializable]
     [PXCacheName("Base System Fields")]

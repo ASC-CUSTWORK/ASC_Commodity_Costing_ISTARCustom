@@ -1,6 +1,6 @@
-﻿namespace ASCISTARCustom.Common.Descriptor
+﻿namespace ASCJewelryLibrary.Common.Descriptor
 {
-    public class ASCIStarEndpoints
+    public class ASCJEndpoints
     {
         public const string LatestRates = "latest";
         public const string HistoricalRates = "historical";

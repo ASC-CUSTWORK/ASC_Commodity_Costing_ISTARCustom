@@ -4,10 +4,10 @@ using PX.Data.BQL;
 using PX.Objects.IN;
 using Messages = PX.Objects.IN.Messages;
 
-namespace ASCISTARCustom.IN.Descriptor.Constants
+namespace ASCJewelryLibrary.IN.Descriptor.Constants
 {
     [PXLocalizable]
-    public class ASCIStarINConstants
+    public class ASCJINConstants
     {
         public class InventoryItemStatusExt
         {
@@ -120,7 +120,7 @@ namespace ASCISTARCustom.IN.Descriptor.Constants
             public class od : BqlString.Constant<od> { public od() : base(OD) { } }
         }
 
-        public class ASCIStarINComplianceType
+        public class ASCJINComplianceType
         {
             public class TestTypeListAttribute : PXStringListAttribute
             {
@@ -147,7 +147,7 @@ namespace ASCISTARCustom.IN.Descriptor.Constants
                 public TestTypeListAttribute() : base(Values, Labels) { }
             }
 
-            public class ASCIStarINCompliancePassStatus
+            public class ASCJINCompliancePassStatus
             {
                 public class INPassStatus
                 {

@@ -1,4 +1,4 @@
-﻿using ASCISTARCustom.IN.DAC;
+﻿using ASCJewelryLibrary.IN.DAC;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
@@ -6,9 +6,9 @@ using PX.Objects.PO;
 using System;
 using System.Linq;
 
-namespace ASCISTARCustom.PO
+namespace ASCJewelryLibrary.PO
 {
-    public class ASCIStarPOLandedCostDocEntryExt : PXGraphExtension<POLandedCostDocEntry>
+    public class ASCJPOLandedCostDocEntryExt : PXGraphExtension<POLandedCostDocEntry>
     {
         public static bool IsActive() => true;
 
@@ -35,9 +35,9 @@ namespace ASCISTARCustom.PO
             }
         }
 
-        private ASCIStarINVendorDuty GetVendorDuty(int? inventoryID, int? vendorID) => SelectFrom<ASCIStarINVendorDuty>
-                                        .Where<ASCIStarINVendorDuty.inventoryID.IsEqual<P.AsInt>
-                                        .And<ASCIStarINVendorDuty.vendorID.IsEqual<P.AsInt>>>
+        private ASCJINVendorDuty GetVendorDuty(int? inventoryID, int? vendorID) => SelectFrom<ASCJINVendorDuty>
+                                        .Where<ASCJINVendorDuty.inventoryID.IsEqual<P.AsInt>
+                                        .And<ASCJINVendorDuty.vendorID.IsEqual<P.AsInt>>>
                                         .View.Select(this.Base, inventoryID, vendorID)?.TopFirst;
 
         #endregion

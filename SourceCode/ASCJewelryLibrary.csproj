@@ -7,7 +7,7 @@
     <ProjectGuid>{70449770-0133-4BD9-9E2A-68C58ED12298}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ASCISTARCustom</RootNamespace>
+    <RootNamespace>ASCJewelryLibrary</RootNamespace>
     <AssemblyName>ASCJewelryLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -90,8 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AP\CacheExt\ASCIStarAPVendorPriceFilterExt.cs" />
-    <Compile Include="AP\GraphExt\ASCIStarAPVendorPriceMaintExt.cs" />
+    <Compile Include="AP\CacheExt\ASCJAPVendorPriceFilterExt.cs" />
+    <Compile Include="AP\GraphExt\ASCJAPVendorPriceMaintExt.cs" />
     <Compile Include="Common\Builder\ASCIStarCostBuilder.cs" />
     <Compile Include="Common\DAC\AuditSystemFields.cs" />
     <Compile Include="Common\Descriptor\ASCIStarConstants.cs" />
@@ -118,21 +118,20 @@
     <Compile Include="Common\Services\ASCIStarServiceRegistrator.cs" />
     <Compile Include="Common\Services\REST\Interfaces\IASCIStarMetalsAPILatestRateService.cs" />
     <Compile Include="Common\Services\REST\Interfaces\IASCIStarRESTService.cs" />
-    <Compile Include="AP\Graph\ASCIStarAPTariffHTSCodeEntry.cs" />
-    <Compile Include="Cost\ASCIStarCostHelper.cs" />
-    <Compile Include="AP\GraphExt\ASCIStarVendorMaintExt.cs" />
-    <Compile Include="AP\CacheExt\ASCIStarAPVendorPriceExt.cs" />
-    <Compile Include="AP\DAC\ASCIStarAPTariffHTSCode.cs" />
+    <Compile Include="AP\Graph\ASCJAPTariffHTSCodeEntry.cs" />
+    <Compile Include="AP\GraphExt\ASCJVendorMaintExt.cs" />
+    <Compile Include="AP\CacheExt\ASCJAPVendorPriceExt.cs" />
+    <Compile Include="AP\DAC\ASCJAPTariffHTSCode.cs" />
     <Compile Include="IN\DAC\ASCIStarINVendorDuty.cs" />
     <Compile Include="AR\Descriptor\ASCIStarARConstants.cs" />
     <Compile Include="IN\CacheExt\ASCIStarINUnitExt.cs" />
     <Compile Include="PO\CacheExt\ASCIStarPOVendorInventoryExt.cs" />
-    <Compile Include="Cost\DAC\Projections\ASCIStarMarketVendor.cs" />
-    <Compile Include="Cost\DAC\Unbounds\ASCIStarMarketVendorFilter.cs" />
-    <Compile Include="Cost\Descriptor\CostBasisType.cs" />
+    <Compile Include="AP\DAC\ASCJMarketVendor.cs" />
+    <Compile Include="AP\DAC\ASCJMarketVendorFilter.cs" />
+    <Compile Include="AP\Descriptor\ASCJCostBasisType.cs" />
     <Compile Include="AR\ASCIStarCustomerAllowanceMaint.cs" />
     <Compile Include="AR\ASCIStarCustomerMaintExt.cs" />
-    <Compile Include="AR\DAC\ASCIStarCustomerAllowance.cs" />
+    <Compile Include="AR\DAC\ASCJARCustomerAllowance.cs" />
     <Compile Include="CR\CacheExt\ASCIStarCRLocationExt.cs" />
     <Compile Include="INKit\Descriptor\ASCIStarCostAssignmentAttribute.cs" />
     <Compile Include="INKit\Descriptor\ASCIStarINKitMessages.cs" />
@@ -155,15 +154,15 @@
     <Compile Include="INKit\CacheExt\ASCIStarINKitSpecNonStkDetExt.cs" />
     <Compile Include="INKit\CacheExt\ASCIStarINKitSpecStkDetExt.cs" />
     <Compile Include="Common\Plugins\ASCIStarPlugin.cs" />
-    <Compile Include="Cost\ASCIStarSetupMaint.cs" />
-    <Compile Include="Cost\DAC\ASCIStarSetup.cs" />
-    <Compile Include="Cost\Descriptor\ASCIStarSymbols.cs" />
+    <Compile Include="AP\Graph\ASCJAPMetalRatesSetupMaint.cs" />
+    <Compile Include="AP\DAC\ASCJAPMetalRatesSetup.cs" />
+    <Compile Include="AP\Descriptor\ASCJSymbols.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PO\ASCIStarPOEntryExt.cs" />
     <Compile Include="PO\CacheExt\ASCIStarPOLineExt.cs" />
     <Compile Include="PO\CacheExt\ASCIStarPOOrderExt.cs" />
-    <Compile Include="AP\CacheExt\ASCIStarVendorExt.cs" />
-    <Compile Include="Cost\ASCIStarMetalRatesSyncProcessing.cs" />
+    <Compile Include="AP\CacheExt\ASCJVendorExt.cs" />
+    <Compile Include="AP\Graph\ASCJAPMetalRatesSyncProcessing.cs" />
     <Compile Include="SO\CacheExt\ASCIStarSOOrderExt.cs" />
   </ItemGroup>
   <ItemGroup />

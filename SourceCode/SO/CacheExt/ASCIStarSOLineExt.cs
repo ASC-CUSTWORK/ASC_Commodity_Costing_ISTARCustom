@@ -2,9 +2,9 @@
 using PX.Objects.CR;
 using PX.Objects.SO;
 
-namespace ASCISTARCustom.SO.CacheExt
+namespace ASCJewelryLibrary.SO.CacheExt
 {
-    public class ASCIStarSOLineExt : PXCacheExtension<SOLine>
+    public class ASCJSOLineExt : PXCacheExtension<SOLine>
     {
         public static bool IsActive() => true;
 

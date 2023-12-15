@@ -1,8 +1,8 @@
 ﻿using PX.Common;
 
-namespace ASCISTARCustom.Common.Descriptor
+namespace ASCJewelryLibrary.Common.Descriptor
 {
-    public class ASCIStarMessages
+    public class ASCJMessages
     {
         #region Plugin
         [PXLocalizable]

@@ -1,6 +1,6 @@
-﻿namespace ASCISTARCustom.INKit.Interfaces
+﻿namespace ASCJewelryLibrary.INKit.Interfaces
 {
-    public interface IASCIStarCostRollup
+    public interface IASCJCostRollup
     {
         string UsrCostRollupType { get; set; }
         decimal? UsrExtCost { get; set; }

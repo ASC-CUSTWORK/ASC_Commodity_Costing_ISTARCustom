@@ -1,10 +1,10 @@
 ﻿using PX.Common;
 using PX.Data;
 
-namespace ASCISTARCustom.Common.Descriptor
+namespace ASCJewelryLibrary.Common.Descriptor
 {
     [PXLocalizable]
-    public static class ASCIStarConstants
+    public static class ASCJConstants
     {
         public class MetalType
         {

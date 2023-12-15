@@ -1,30 +1,30 @@
-using ASCISTARCustom.AR.Descriptor;
-using ASCISTARCustom.AR.DAC;
+using ASCJewelryLibrary.AR.Descriptor;
+using ASCJewelryLibrary.AR.DAC;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AR;
 
-namespace ASCISTARCustom.AR
+namespace ASCJewelryLibrary.AR
 {
-    public class ASCIStarCustomerMaintExt : PXGraphExtension<CustomerMaint>
+    public class ASCJCustomerMaintExt : PXGraphExtension<CustomerMaint>
     {
         public static bool IsActive() => true;
 
-        public SelectFrom<ASCIStarCustomerAllowance>.Where<ASCIStarCustomerAllowance.customerID.IsEqual<Customer.bAccountID.FromCurrent>>.View CustomerAllowance;
+        public SelectFrom<ASCJARCustomerAllowance>.Where<ASCJARCustomerAllowance.customerID.IsEqual<Customer.bAccountID.FromCurrent>>.View CustomerAllowance;
 
         #region Events
 
-        protected virtual void _(Events.RowInserted<ASCIStarCustomerAllowance> e)
+        protected virtual void _(Events.RowInserted<ASCJARCustomerAllowance> e)
         {
             if (e.Row == null || this.Base.BAccount.Current?.BAccountID == null) return;
 
-            e.Cache.SetValueExt<ASCIStarCustomerAllowance.customerID>(e.Row, this.Base.BAccount.Current.BAccountID);
+            e.Cache.SetValueExt<ASCJARCustomerAllowance.customerID>(e.Row, this.Base.BAccount.Current.BAccountID);
         }
-        protected virtual void _(Events.FieldVerifying<ASCIStarCustomerAllowance, ASCIStarCustomerAllowance.allowancePct> e)
+        protected virtual void _(Events.FieldVerifying<ASCJARCustomerAllowance, ASCJARCustomerAllowance.allowancePct> e)
         {
             var newValue = (decimal?)e.NewValue;
             if (newValue < -100.0m || newValue > 100.0m)
-                throw new PXSetPropertyException<ASCIStarCustomerAllowance.allowancePct>(ASCIStarARConstants.Errors.AllowancePctCheckValue);
+                throw new PXSetPropertyException<ASCJARCustomerAllowance.allowancePct>(ASCJARConstants.Errors.AllowancePctCheckValue);
         }
 
         #endregion

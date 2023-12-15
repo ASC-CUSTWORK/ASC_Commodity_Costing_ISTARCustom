@@ -1,16 +1,16 @@
-﻿using ASCISTARCustom.AP.CacheExt;
+﻿using ASCJewelryLibrary.AP.CacheExt;
 using PX.Data;
 using PX.Objects.AP;
 using PX.Objects.CA;
 using PX.Objects.CS;
 using System;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
-namespace ASCISTARCustom.PO.DAC
+namespace ASCJewelryLibrary.PO.DAC
 {
     [Serializable]
     [PXCacheName("ASC POOrder Extension")]
-    public class ASCIStarPOOrderExt : PXCacheExtension<PX.Objects.PO.POOrder>
+    public class ASCJPOOrderExt : PXCacheExtension<PX.Objects.PO.POOrder>
     {
         public static bool IsActive() => true;
 
@@ -65,7 +65,7 @@ namespace ASCISTARCustom.PO.DAC
             DescriptionField = typeof(NotificationSetup.notificationCD),
             SelectorMode = PXSelectorMode.DisplayModeText | PXSelectorMode.NoAutocomplete)]
         [PXUIField(DisplayName = "Mailing ID", Required = true)]
-        [PXDefault(typeof(ASCIStarVendorExt.usrSetupID))]
+        [PXDefault(typeof(ASCJVendorExt.usrSetupID))]
         public virtual Guid? UsrSetupID { get; set; }
         public abstract class usrSetupID : PX.Data.BQL.BqlGuid.Field<usrSetupID> { }
         #endregion

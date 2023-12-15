@@ -1,6 +1,6 @@
-﻿namespace ASCISTARCustom.Common.Models
+﻿namespace ASCJewelryLibrary.Common.Models
 {
-    public interface IASCIStarModel
+    public interface IASCJModel
     {
     }
 }

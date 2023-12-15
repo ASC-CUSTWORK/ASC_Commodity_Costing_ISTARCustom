@@ -1,4 +1,4 @@
-﻿using ASCISTARCustom.Common.DAC;
+﻿using ASCJewelryLibrary.Common.DAC;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
@@ -6,13 +6,13 @@ using PX.Objects.CR;
 using PX.Objects.CS;
 using PX.Objects.IN;
 using System;
-using ASCISTARCustom.IN.Descriptor.Constants;
+using ASCJewelryLibrary.IN.Descriptor.Constants;
 
-namespace ASCISTARCustom.IN.DAC
+namespace ASCJewelryLibrary.IN.DAC
 {
     [Serializable]
     [PXCacheName("Jewelry Item Data DAC")]
-    public class ASCIStarINJewelryItem : AuditSystemFields, IBqlTable
+    public class ASCJINJewelryItem : AuditSystemFields, IBqlTable
     {
         public static bool IsActive() => true;
 
@@ -42,7 +42,7 @@ namespace ASCISTARCustom.IN.DAC
         #region StyleStatus
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Style Status")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.styleStatus>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.styleStatus>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string StyleStatus { get; set; }
@@ -52,7 +52,7 @@ namespace ASCISTARCustom.IN.DAC
         #region CustomerCode
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Customer Code")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.customerCode>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.customerCode>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string CustomerCode { get; set; }
@@ -62,7 +62,7 @@ namespace ASCISTARCustom.IN.DAC
         #region InvCategory
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Inventory Category")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.inventoryCategory>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.inventoryCategory>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string InvCategory { get; set; }
@@ -72,7 +72,7 @@ namespace ASCISTARCustom.IN.DAC
         #region ItemType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Item Type")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.itemType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.itemType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string ItemType { get; set; }
@@ -82,7 +82,7 @@ namespace ASCISTARCustom.IN.DAC
         #region ItemSubType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Item Sub-Type")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.itemSubType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.itemSubType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string ItemSubType { get; set; }
@@ -92,7 +92,7 @@ namespace ASCISTARCustom.IN.DAC
         #region Collection
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Collection")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.collections>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.collections>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string Collection { get; set; }
@@ -102,7 +102,7 @@ namespace ASCISTARCustom.IN.DAC
         #region MetalType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Metal Type")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.metalType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.metalType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string MetalType { get; set; }
@@ -119,7 +119,7 @@ namespace ASCISTARCustom.IN.DAC
         #region MetalColor
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Metal Color")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.metalColor>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.metalColor>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string MetalColor { get; set; }
@@ -129,7 +129,7 @@ namespace ASCISTARCustom.IN.DAC
         #region Plating
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Plating")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.plating>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.plating>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string Plating { get; set; }
@@ -139,7 +139,7 @@ namespace ASCISTARCustom.IN.DAC
         #region Finishes
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Finishes")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.finishes>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.finishes>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string Finishes { get; set; }
@@ -149,7 +149,7 @@ namespace ASCISTARCustom.IN.DAC
         #region VendorMaker
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Vendor")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.vendorMaker>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.vendorMaker>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string VendorMaker { get; set; }
@@ -159,7 +159,7 @@ namespace ASCISTARCustom.IN.DAC
         #region OrgCountry
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Country of Origin")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.countryOfOrigion>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.countryOfOrigion>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string OrgCountry { get; set; }
@@ -169,7 +169,7 @@ namespace ASCISTARCustom.IN.DAC
         #region StoneType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Stone Type.")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.stoneType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.stoneType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string StoneType { get; set; }
@@ -193,7 +193,7 @@ namespace ASCISTARCustom.IN.DAC
         #region StoneColor
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Stone Color")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.stoneColor>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.stoneColor>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string StoneColor { get; set; }
@@ -203,7 +203,7 @@ namespace ASCISTARCustom.IN.DAC
         #region StoneShape
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Stone Shape")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.stoneShapes>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.stoneShapes>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string StoneShape { get; set; }
@@ -213,7 +213,7 @@ namespace ASCISTARCustom.IN.DAC
         #region StoneCreation
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Stone Creation")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.stoneCreations>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.stoneCreations>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string StoneCreation { get; set; }
@@ -223,7 +223,7 @@ namespace ASCISTARCustom.IN.DAC
         #region GemstoneTreatment
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Gemstone Treatment")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.gemstoneTreatment>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.gemstoneTreatment>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string GemstoneTreatment { get; set; }
@@ -233,7 +233,7 @@ namespace ASCISTARCustom.IN.DAC
         #region SettingType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Setting Type")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.settingType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.settingType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string SettingType { get; set; }
@@ -243,7 +243,7 @@ namespace ASCISTARCustom.IN.DAC
         #region Findings
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Findings")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.findings>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.findings>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string Findings { get; set; }
@@ -253,7 +253,7 @@ namespace ASCISTARCustom.IN.DAC
         #region FindingsSubType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Finding Sub Type")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.findingsSubType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.findingsSubType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string FindingsSubType { get; set; }
@@ -263,7 +263,7 @@ namespace ASCISTARCustom.IN.DAC
         #region ChainType
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Chain Type")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.chainType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.chainType>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
                DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string ChainType { get; set; }
@@ -273,7 +273,7 @@ namespace ASCISTARCustom.IN.DAC
         #region RingLength
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Ring Length")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.ringLength>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.ringLength>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string RingLength { get; set; }
@@ -283,7 +283,7 @@ namespace ASCISTARCustom.IN.DAC
         #region RingSize
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Ring Size")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.ringSize>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.ringSize>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string RingSize { get; set; }
@@ -293,7 +293,7 @@ namespace ASCISTARCustom.IN.DAC
         #region OD
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "OD")]
-        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCIStarINConstants.INJewelryAttributesID.od>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
+        [PXSelector(typeof(Search<CSAttributeDetail.valueID, Where<CSAttributeDetail.attributeID, Equal<ASCJINConstants.INJewelryAttributesID.od>>, OrderBy<Asc<CSAttributeDetail.sortOrder>>>),
             new Type[] { typeof(CSAttributeDetail.valueID), typeof(CSAttributeDetail.description) },
             DescriptionField = typeof(CSAttributeDetail.description))]
         public virtual string OD { get; set; }

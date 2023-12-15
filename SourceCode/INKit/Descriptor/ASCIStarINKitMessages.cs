@@ -1,8 +1,8 @@
 ﻿using PX.Common;
 
-namespace ASCISTARCustom.INKit.Descriptor
+namespace ASCJewelryLibrary.INKit.Descriptor
 {
-    public class ASCIStarINKitMessages
+    public class ASCJINKitMessages
     {
         public const string EMailSubject = "Purchase Item request: {0}";
         public const string EMailBody = "Dear supplier, {0}\r\n" +

@@ -1,9 +1,9 @@
 ﻿using PX.Data;
 using PX.Objects.SO;
 
-namespace ASCISTARCustom.SO.CacheExt
+namespace ASCJewelryLibrary.SO.CacheExt
 {
-    public class ASCIStarSOOrderExt : PXCacheExtension<SOOrder>
+    public class ASCJSOOrderExt : PXCacheExtension<SOOrder>
     {
         public static bool IsActive() => true;
 

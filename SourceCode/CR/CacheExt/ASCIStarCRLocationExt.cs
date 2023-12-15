@@ -2,11 +2,11 @@
 using PX.Objects.CR;
 using System;
 
-namespace ASCISTARCustom.CR.CacheExt
+namespace ASCJewelryLibrary.CR.CacheExt
 {
     [PXCacheName("CRLocation Extension")]
     [Serializable]
-    public class ASCIStarCRLocationExt : PXCacheExtension<Location>
+    public class ASCJCRLocationExt : PXCacheExtension<Location>
     {
         public static bool IsActive() => true;
 

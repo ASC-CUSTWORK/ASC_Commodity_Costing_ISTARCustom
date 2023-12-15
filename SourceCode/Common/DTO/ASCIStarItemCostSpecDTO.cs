@@ -1,15 +1,15 @@
-﻿using ASCISTARCustom.Common.DTO.Interfaces;
+﻿using ASCJewelryLibrary.Common.DTO.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 
-namespace ASCISTARCustom.Common.DTO
+namespace ASCJewelryLibrary.Common.DTO
 {
     ///<summary>
     /// This class represents a data transfer object (DTO) for the cost specification of an item.
     /// It contains properties for various costs related to the item
-    /// The class also provides two implicit conversion operators for converting from the InventoryItem, ASCIStarINInventoryItemExt and ASCIStarItemWeightCostSpec classes to the ASCIStarItemCostSpecDTO class.
+    /// The class also provides two implicit conversion operators for converting from the InventoryItem, ASCJINInventoryItemExt and ASCJItemWeightCostSpec classes to the ASCJItemCostSpecDTO class.
     ///</summary>
-    //public class ASCIStarItemCostSpecDTO //: IASCIStarItemCostSpecDTO
+    //public class ASCJItemCostSpecDTO //: IASCJItemCostSpecDTO
     //{
     //    public int? InventoryID { get; set; }
     //    public string InventoryCD { get; set; }
@@ -66,12 +66,12 @@ namespace ASCISTARCustom.Common.DTO
 
 
 
-    //    public static implicit operator ASCIStarItemCostSpecDTO(InventoryItem value)
+    //    public static implicit operator ASCJItemCostSpecDTO(InventoryItem value)
     //    {
     //        if (value == null) return null;
 
-    //        var valueExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(value);
-    //        return new ASCIStarItemCostSpecDTO
+    //        var valueExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(value);
+    //        return new ASCJItemCostSpecDTO
     //        {
     //            InventoryID = value.InventoryID,
     //            InventoryCD = value.InventoryCD,
@@ -101,12 +101,12 @@ namespace ASCISTARCustom.Common.DTO
     //        };
     //    }
 
-    //    public static implicit operator ASCIStarItemCostSpecDTO(INKitSpecStkDet value)
+    //    public static implicit operator ASCJItemCostSpecDTO(INKitSpecStkDet value)
     //    {
     //        if (value == null) return null;
 
-    //        var valueExt = PXCache<INKitSpecStkDet>.GetExtension<ASCIStarINKitSpecStkDetExt>(value);
-    //        return new ASCIStarItemCostSpecDTO
+    //        var valueExt = PXCache<INKitSpecStkDet>.GetExtension<ASCJINKitSpecStkDetExt>(value);
+    //        return new ASCJItemCostSpecDTO
     //        {
     //            InventoryID = value.CompInventoryID,
     //            RevisionID = value.RevisionID,

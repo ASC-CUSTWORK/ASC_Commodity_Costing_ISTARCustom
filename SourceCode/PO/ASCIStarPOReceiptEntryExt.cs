@@ -1,6 +1,6 @@
-﻿using ASCISTARCustom.IN.DAC;
-using ASCISTARCustom.PO.DAC;
-using ASCISTARCustom.PO.Helpers;
+﻿using ASCJewelryLibrary.IN.DAC;
+using ASCJewelryLibrary.PO.DAC;
+using ASCJewelryLibrary.PO.Helpers;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
@@ -13,9 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ASCISTARCustom.PO
+namespace ASCJewelryLibrary.PO
 {
-    public class ASCIStarPOReceiptEntryExt : PXGraphExtension<POReceiptEntry>
+    public class ASCJPOReceiptEntryExt : PXGraphExtension<POReceiptEntry>
     {
         public static bool IsActive() => true;
         [PXOverride]
@@ -29,7 +29,7 @@ namespace ASCISTARCustom.PO
         }
 
         #region Events
-        protected virtual void _(Events.FieldVerifying<POReceipt, ASCIStarPOReceiptExt.usrAccrualLandedCost> e)
+        protected virtual void _(Events.FieldVerifying<POReceipt, ASCJPOReceiptExt.usrAccrualLandedCost> e)
         {
             var row = e.Row;
             if (row == null) return;
@@ -40,8 +40,8 @@ namespace ASCISTARCustom.PO
             Vendor vendor = Vendor.PK.Find(this.Base, row.VendorID);
             if (vendor?.LandedCostVendor != true)
             {
-                e.Cache.RaiseExceptionHandling<ASCIStarPOReceiptExt.usrAccrualLandedCost>(row, e.NewValue,
-                                            new PXSetPropertyException(ASCIStarPOMessages.Warnings.DisabledLandedCostVendor, PXErrorLevel.Warning));
+                e.Cache.RaiseExceptionHandling<ASCJPOReceiptExt.usrAccrualLandedCost>(row, e.NewValue,
+                                            new PXSetPropertyException(ASCJPOMessages.Warnings.DisabledLandedCostVendor, PXErrorLevel.Warning));
             }
         }
 
@@ -73,7 +73,7 @@ namespace ASCISTARCustom.PO
             graph.Details.Current = graph.Details.Insert(
                 new POLandedCostDetail()
                 {
-                    LandedCostCodeID = ASCIStarPOMessages.Constants.LandedCostCode,
+                    LandedCostCodeID = ASCJPOMessages.Constants.LandedCostCode,
                     CuryLineAmt = landedCostAmount
                 });
 
@@ -103,9 +103,9 @@ namespace ASCISTARCustom.PO
                                          .And<POReceiptLineAdd.receiptNbr.IsEqual<P.AsString>>>
                                          .View.Select(this.Base, receiptType, receiptNbr)?.FirstTableItems;
 
-        private ASCIStarINVendorDuty GetVendorDuty(int? inventoryID, int? vendorID) => SelectFrom<ASCIStarINVendorDuty>
-                                        .Where<ASCIStarINVendorDuty.inventoryID.IsEqual<P.AsInt>
-                                        .And<ASCIStarINVendorDuty.vendorID.IsEqual<P.AsInt>>>
+        private ASCJINVendorDuty GetVendorDuty(int? inventoryID, int? vendorID) => SelectFrom<ASCJINVendorDuty>
+                                        .Where<ASCJINVendorDuty.inventoryID.IsEqual<P.AsInt>
+                                        .And<ASCJINVendorDuty.vendorID.IsEqual<P.AsInt>>>
                                         .View.Select(this.Base, inventoryID, vendorID)?.TopFirst;
 
         #endregion

@@ -1,22 +1,22 @@
-﻿using ASCISTARCustom.Common.Services.DataProvider;
-using ASCISTARCustom.Common.Services.DataProvider.Interfaces;
-using ASCISTARCustom.Common.Services.REST;
-using ASCISTARCustom.Common.Services.REST.Interfaces;
+﻿using ASCJewelryLibrary.Common.Services.DataProvider;
+using ASCJewelryLibrary.Common.Services.DataProvider.Interfaces;
+using ASCJewelryLibrary.Common.Services.REST;
+using ASCJewelryLibrary.Common.Services.REST.Interfaces;
 using Autofac;
 
-namespace ASCISTARCustom.Common.Services
+namespace ASCJewelryLibrary.Common.Services
 {
-    public class ASCIStarServiceRegistrator : Module
+    public class ASCJServiceRegistrator : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
 
-            builder.RegisterType<ASCIStarRESTService>().As<IASCIStarRESTService>();
-            builder.RegisterType<ASCIStarMetalsAPILatestRateService>().As<IASCIStarMetalsAPILatestRateService>();
+            builder.RegisterType<ASCJRESTService>().As<IASCJRESTService>();
+            builder.RegisterType<ASCJMetalsAPILatestRateService>().As<IASCJMetalsAPILatestRateService>();
 
-            builder.RegisterType<ASCIStarVendorDataProvider>().As<IASCIStarVendorDataProvider>();
-            builder.RegisterType<ASCIStarInventoryItemDataProvider>().As<IASCIStarInventoryItemDataProvider>();
+            builder.RegisterType<ASCJVendorDataProvider>().As<IASCJVendorDataProvider>();
+            builder.RegisterType<ASCJInventoryItemDataProvider>().As<IASCJInventoryItemDataProvider>();
         }
     }
 }

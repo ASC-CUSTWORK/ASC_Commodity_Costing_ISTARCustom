@@ -1,12 +1,12 @@
-﻿using ASCISTARCustom.Common.Models;
+﻿using ASCJewelryLibrary.Common.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace ASCISTARCustom.Common.Helper
+namespace ASCJewelryLibrary.Common.Helper
 {
-    public class ASCIStarJsonConverter<TModel> where TModel : IASCIStarModel
+    public class ASCJJsonConverter<TModel> where TModel : IASCJModel
     {
         /// <summary>
         /// Deserializes a JSON string into a TModel object using the provided JSON serialization settings.

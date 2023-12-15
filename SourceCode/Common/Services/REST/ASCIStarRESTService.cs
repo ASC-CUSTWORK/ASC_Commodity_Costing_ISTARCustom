@@ -1,25 +1,25 @@
-﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Common.Helper.Exceptions;
-using ASCISTARCustom.Common.Helper.Extensions;
-using ASCISTARCustom.Common.Models;
-using ASCISTARCustom.Common.Services.REST.Interfaces;
-using ASCISTARCustom.Cost.DAC;
+﻿using ASCJewelryLibrary.Common.Descriptor;
+using ASCJewelryLibrary.Common.Helper;
+using ASCJewelryLibrary.Common.Helper.Exceptions;
+using ASCJewelryLibrary.Common.Helper.Extensions;
+using ASCJewelryLibrary.Common.Models;
+using ASCJewelryLibrary.Common.Services.REST.Interfaces;
+using ASCJewelryLibrary.AP.DAC;
 using PX.Data;
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ASCISTARCustom.Common.Services.REST
+namespace ASCJewelryLibrary.Common.Services.REST
 {
     /// <summary>
-    /// Implementation of the IASCIStarRESTService interface that provides methods for sending HTTP requests to the ASCIStar API using RestSharp.
+    /// Implementation of the IASCJRESTService interface that provides methods for sending HTTP requests to the ASCJ API using RestSharp.
     /// The class provides a Request method for sending HTTP requests with the specified endpoint, method, body, and parameters.
     /// The class also includes methods for appending a request body and parameters, and a method for executing the request and handling the response.
     /// The Get method sends a GET request with the specified endpoint and parameters, and returns the response as an instance of the specified model class.
-    /// The class also includes a GetASCIStarSetup method for retrieving the ASCIStar setup details from the database.
+    /// The class also includes a GetASCJSetup method for retrieving the ASCJ setup details from the database.
     /// </summary>
-    public class ASCIStarRESTService : IASCIStarRESTService
+    public class ASCJRESTService : IASCJRESTService
     {
         #region Constants
         private const string Accept = "Accept";
@@ -27,15 +27,15 @@ namespace ASCISTARCustom.Common.Services.REST
         #endregion
 
         #region fields
-        private readonly ASCIStarSetup _setup;
+        private readonly ASCJAPMetalRatesSetup _setup;
         private readonly PXGraph _graph;
         #endregion
 
         #region ctor
-        public ASCIStarRESTService(PXGraph graph)
+        public ASCJRESTService(PXGraph graph)
         {
             _graph = graph;
-            _setup = GetASCIStarSetup();
+            _setup = GetASCJSetup();
         }
         #endregion
 
@@ -48,8 +48,8 @@ namespace ASCISTARCustom.Common.Services.REST
         /// <param name="body">The body to include in the request, as an object that will be serialized as JSON.</param>
         /// <param name="parameters">The parameters to include in the request, as an array of dictionaries containing key-value pairs. Default is an empty array.</param>
         /// <returns>A string containing the content of the response.</returns>
-        /// <exception cref="ASCIStarStatusCodeException">Thrown when the response has a non-OK status code.</exception>
-        /// <exception cref="PXException">Thrown when an ASCIStarStatusCodeException is caught, to indicate a remote server error.</exception>
+        /// <exception cref="ASCJStatusCodeException">Thrown when the response has a non-OK status code.</exception>
+        /// <exception cref="PXException">Thrown when an ASCJStatusCodeException is caught, to indicate a remote server error.</exception>
         private string Request(string endpoint, Method httpMethod = Method.Get, object body = null, params Dictionary<string, string>[] parameters)
         {
             var client = new RestClient(_setup.BaseURL);
@@ -71,16 +71,16 @@ namespace ASCISTARCustom.Common.Services.REST
                 var responce = client.Execute(request, httpMethod);
                 if (responce.StatusCode != System.Net.HttpStatusCode.OK || responce.Content.Contains("error"))
                 {
-                    throw new ASCIStarStatusCodeException(responce.StatusCode, responce.Content.ToErrorString<ASCIStarErrorModel>());
+                    throw new ASCJStatusCodeException(responce.StatusCode, responce.Content.ToErrorString<ASCJErrorModel>());
                 }
                 return responce.Content;
             }
-            catch (ASCIStarStatusCodeException ex)
+            catch (ASCJStatusCodeException ex)
             {
                 PXTrace.WriteError($"Error: {ex.Message}");
                 PXTrace.WriteError($"Status Code: {ex.StatusCode}");
                 PXTrace.WriteError($"Content: {ex.Content}");
-                throw new PXException(ASCIStarMessages.StatusCode.RemoteServerError);
+                throw new PXException(ASCJMessages.StatusCode.RemoteServerError);
             }
         }
 
@@ -103,12 +103,12 @@ namespace ASCISTARCustom.Common.Services.REST
             }
         }
 
-        public TModel Get<TModel>(string endpoint, params KeyValuePair<string, string>[] parameters) where TModel : IASCIStarModel
+        public TModel Get<TModel>(string endpoint, params KeyValuePair<string, string>[] parameters) where TModel : IASCJModel
         {
             Dictionary<string, string> mergedDic = null;
             var paramKeyValue = new Dictionary<string, string>()
             {
-                { ASCIStarQueryParams.Access_key, _setup.AccessKey }
+                { ASCJQueryParams.Access_key, _setup.AccessKey }
             };
 
             if (parameters.Any())
@@ -118,19 +118,19 @@ namespace ASCISTARCustom.Common.Services.REST
             }
 
             var responce = Request(endpoint, Method.Get, null, mergedDic ?? paramKeyValue);
-            return ASCIStarJsonConverter<TModel>.FromJson(responce);
+            return ASCJJsonConverter<TModel>.FromJson(responce);
         }
         #endregion
 
         #region ServiceQueries
         /// <summary>
-        /// Gets the ASCIStar setup details from the database using a graph and a query.
+        /// Gets the ASCJ setup details from the database using a graph and a query.
         /// </summary>
-        /// <returns>The ASCIStar setup details as an instance of the ASCIStarSetup class.</returns>
-        public ASCIStarSetup GetASCIStarSetup() =>
+        /// <returns>The ASCJ setup details as an instance of the ASCJSetup class.</returns>
+        public ASCJAPMetalRatesSetup GetASCJSetup() =>
               PXSelectBase<
-                  ASCIStarSetup, PXSelect<
-                  ASCIStarSetup>.Config>
+                  ASCJAPMetalRatesSetup, PXSelect<
+                  ASCJAPMetalRatesSetup>.Config>
                   .Select(_graph);
         #endregion
     }

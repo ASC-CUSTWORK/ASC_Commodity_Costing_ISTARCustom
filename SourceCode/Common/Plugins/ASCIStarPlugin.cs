@@ -1,14 +1,14 @@
-﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Cost;
-using ASCISTARCustom.Cost.DAC;
+﻿using ASCJewelryLibrary.Common.Descriptor;
+using ASCJewelryLibrary.AP;
+using ASCJewelryLibrary.AP.DAC;
 using Customization;
 using PX.Data;
 using System;
 using System.Linq;
 
-namespace ASCISTARCustom.Common.Plugins
+namespace ASCJewelryLibrary.Common.Plugins
 {
-    public class ASCIStarPlugin : CustomizationPlugin
+    public class ASCJPlugin : CustomizationPlugin
     {
         #region Constants
         private const string _baseUrl = "https://metals-api.com/api/";
@@ -21,29 +21,29 @@ namespace ASCISTARCustom.Common.Plugins
 
         public override void UpdateDatabase()
         {
-            WriteLog(ASCIStarMessages.Plugin.PluginStart);
+            WriteLog(ASCJMessages.Plugin.PluginStart);
 
             // Metal API
             MetalAPIConnectionPrefDefaulting();
 
-            WriteLog(ASCIStarMessages.Plugin.PluginEnd);
+            WriteLog(ASCJMessages.Plugin.PluginEnd);
         }
 
         /// <summary>
-        /// Sets default values for connection preferences in the ASCIStar plugin, if the preferences have not already been set.
-        /// Queries the ASCIStarSetup table for existing preferences. If no preferences exist, creates new preferences with default values, saves them to the table, and logs the success.
+        /// Sets default values for connection preferences in the ASCJ plugin, if the preferences have not already been set.
+        /// Queries the ASCJSetup table for existing preferences. If no preferences exist, creates new preferences with default values, saves them to the table, and logs the success.
         /// If an exception occurs during the process, logs the error message.
         /// </summary>
         private void MetalAPIConnectionPrefDefaulting()
         {
             try
             {
-                var setupMaint = PXGraph.CreateInstance<ASCIStarSetupMaint>();
-                var setup = PXSelect<ASCIStarSetup>.Select(setupMaint).RowCast<ASCIStarSetup>();
+                var setupMaint = PXGraph.CreateInstance<ASCJAPMetalRatesSetupMaint>();
+                var setup = PXSelect<ASCJAPMetalRatesSetup>.Select(setupMaint).RowCast<ASCJAPMetalRatesSetup>();
                 if (!setup.Any())
                 {
-                    WriteLog(ASCIStarMessages.Plugin.PluginCreateConnectionPref);
-                    setupMaint.Setup.Insert(new ASCIStarSetup()
+                    WriteLog(ASCJMessages.Plugin.PluginCreateConnectionPref);
+                    setupMaint.Setup.Insert(new ASCJAPMetalRatesSetup()
                     {
                         BaseURL = _baseUrl,
                         BaseCurrency = _currency,
@@ -51,12 +51,12 @@ namespace ASCISTARCustom.Common.Plugins
                         Symbols = _symbols,
                     });
                     setupMaint.Save.PressButton();
-                    WriteLog(ASCIStarMessages.Plugin.PluginCreateConnectionPrefSuccess);
+                    WriteLog(ASCJMessages.Plugin.PluginCreateConnectionPrefSuccess);
                 }
             }
             catch (Exception ex)
             {
-                WriteLog(string.Format(ASCIStarMessages.Plugin.PluginCreateConnectionPrefError, ex.Message));
+                WriteLog(string.Format(ASCJMessages.Plugin.PluginCreateConnectionPrefError, ex.Message));
             }
         }
     }

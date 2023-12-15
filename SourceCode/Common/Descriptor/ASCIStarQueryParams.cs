@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ASCISTARCustom.Common.Descriptor
+namespace ASCJewelryLibrary.Common.Descriptor
 {
-    public class ASCIStarQueryParams
+    public class ASCJQueryParams
     {
         public const string Access_key = "access_key";
         public const string Base = "base";

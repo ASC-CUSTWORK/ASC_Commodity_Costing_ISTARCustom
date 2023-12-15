@@ -1,31 +1,31 @@
-﻿using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.Models;
-using ASCISTARCustom.Common.Services.REST.Interfaces;
+﻿using ASCJewelryLibrary.Common.Descriptor;
+using ASCJewelryLibrary.Common.Models;
+using ASCJewelryLibrary.Common.Services.REST.Interfaces;
 using PX.Data;
 using System.Collections.Generic;
-using static ASCISTARCustom.Cost.Descriptor.ASCIStarSymbols;
+using static ASCJewelryLibrary.AP.Descriptor.ASCJSymbols;
 
-namespace ASCISTARCustom.Common.Services.REST
+namespace ASCJewelryLibrary.Common.Services.REST
 {
     /// <summary>
-    /// A service class that provides methods for retrieving inverse rate values for different metals from the ASCIStar API.
-    /// Implements the IASCIStarMetalsAPILatestRates interface.
-    /// Uses an instance of the ASCIStarRESTService class to send requests to the API.
+    /// A service class that provides methods for retrieving inverse rate values for different metals from the ASCJ API.
+    /// Implements the IASCJMetalsAPILatestRates interface.
+    /// Uses an instance of the ASCJRESTService class to send requests to the API.
     /// Validates that the symbol parameter is specified before sending a request, and throws a PXException if it is not.
     /// Implements a virtual GetInverseRateValue method that retrieves the inverse rate value for a specified currency and symbol from the API by sending a GET request to the Latest Rates endpoint with the specified parameters.
     /// Uses the TryGetValue method to get the rate value for the specified symbol from the Rates collection in the response, and sets the value to zero if the rate is not found.
     /// Returns the inverse of the rate value as a decimal if the value is not zero, and returns 0 if the value is zero.
-    /// Implements private static Parameters and IsSymbolSpecified methods that respectively create an array of key-value pairs representing API request parameters and check whether the specified symbol is included in the symbols list in the ASCIStar setup details.
+    /// Implements private static Parameters and IsSymbolSpecified methods that respectively create an array of key-value pairs representing API request parameters and check whether the specified symbol is included in the symbols list in the ASCJ setup details.
     /// </summary>
-    public class ASCIStarMetalsAPILatestRateService : IASCIStarMetalsAPILatestRateService
+    public class ASCJMetalsAPILatestRateService : IASCJMetalsAPILatestRateService
     {
-        private readonly IASCIStarRESTService _starRESTService;
+        private readonly IASCJRESTService _starRESTService;
         private readonly PXGraph _graph;
 
-        public ASCIStarMetalsAPILatestRateService(PXGraph graph)
+        public ASCJMetalsAPILatestRateService(PXGraph graph)
         {
             _graph = graph;
-            _starRESTService = new ASCIStarRESTService(_graph);
+            _starRESTService = new ASCJRESTService(_graph);
         }
 
         public decimal GetLBXAGRate(string currency)
@@ -54,9 +54,9 @@ namespace ASCISTARCustom.Common.Services.REST
         }
 
         /// <summary>
-        /// Virtual method that gets the inverse rate value of the specified currency and symbol from the ASCIStar API.
+        /// Virtual method that gets the inverse rate value of the specified currency and symbol from the ASCJ API.
         /// Validates that the symbol parameter is specified, and throws a PXException if it is not.
-        /// Sends a GET request to the Latest Rates endpoint with the specified currency and symbol parameters, and retrieves the result as an instance of the ASCIStarLatestRatesModel class.
+        /// Sends a GET request to the Latest Rates endpoint with the specified currency and symbol parameters, and retrieves the result as an instance of the ASCJLatestRatesModel class.
         /// Tries to get the rate value for the specified symbol from the Rates collection in the response using the TryGetValue method, and sets the value to zero if the rate is not found.
         /// If the rate value is not zero, returns the inverse of the value as a decimal.
         /// If the value is zero, returns 0.
@@ -69,17 +69,17 @@ namespace ASCISTARCustom.Common.Services.REST
         {
             if (!IsSymbolSpecified(symbol))
             {
-                throw new PXException(ASCIStarMessages.Error.SymbolNotSpecified);
+                throw new PXException(ASCJMessages.Error.SymbolNotSpecified);
             }
 
-            var result = _starRESTService.Get<ASCIStarLatestRatesModel>(ASCIStarEndpoints.LatestRates, Parameters(currency, symbol));
+            var result = _starRESTService.Get<ASCJLatestRatesModel>(ASCJEndpoints.LatestRates, Parameters(currency, symbol));
             var value = result.Rates.TryGetValue(symbol, out double rateValue) ? rateValue : 0;
 
             return value != 0 ? 1 / (decimal)value : 0;
         }
 
         /// <summary>
-        /// Private static method that creates an array of key-value pairs representing the parameters for an ASCIStar API request.
+        /// Private static method that creates an array of key-value pairs representing the parameters for an ASCJ API request.
         /// The method creates two parameters: Base and Symbols, with the specified currency and symbol values as their respective values.
         /// </summary>
         /// <param name="currency">The currency to use as the base currency parameter.</param>
@@ -88,13 +88,13 @@ namespace ASCISTARCustom.Common.Services.REST
         private static KeyValuePair<string, string>[] Parameters(string currency, string symbol) =>
             new KeyValuePair<string, string>[]
             {
-                new KeyValuePair<string, string>(ASCIStarQueryParams.Base, currency),
-                new KeyValuePair<string, string>(ASCIStarQueryParams.Symbols, symbol),
+                new KeyValuePair<string, string>(ASCJQueryParams.Base, currency),
+                new KeyValuePair<string, string>(ASCJQueryParams.Symbols, symbol),
             };
 
         private bool IsSymbolSpecified(string symbol)
         {
-            var result = _starRESTService.GetASCIStarSetup();
+            var result = _starRESTService.GetASCJSetup();
             if (string.IsNullOrEmpty(symbol) || result?.Symbols == null)
             {
                 return false;

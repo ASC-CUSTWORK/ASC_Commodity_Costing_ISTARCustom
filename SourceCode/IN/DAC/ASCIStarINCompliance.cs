@@ -1,16 +1,16 @@
-﻿using ASCISTARCustom.Common.DAC;
+﻿using ASCJewelryLibrary.Common.DAC;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.IN;
 using System;
-using static ASCISTARCustom.IN.Descriptor.Constants.ASCIStarINConstants;
-using static ASCISTARCustom.IN.Descriptor.Constants.ASCIStarINConstants.ASCIStarINComplianceType;
+using static ASCJewelryLibrary.IN.Descriptor.Constants.ASCJINConstants;
+using static ASCJewelryLibrary.IN.Descriptor.Constants.ASCJINConstants.ASCJINComplianceType;
 
-namespace ASCISTARCustom.IN.DAC
+namespace ASCJewelryLibrary.IN.DAC
 {
     [Serializable]
     [PXCacheName("Compliance DAC")]
-    public class ASCIStarINCompliance : AuditSystemFields, IBqlTable
+    public class ASCJINCompliance : AuditSystemFields, IBqlTable
     {
         #region InventoryID
         [PXDBInt(IsKey = true)]
@@ -30,7 +30,7 @@ namespace ASCISTARCustom.IN.DAC
         #region CustomerAlphaCode
         [PXDBString(50, IsUnicode = true)]
         [PXUIField(DisplayName = "Customer Alpha Code")]
-        [PXDefault(typeof(SearchFor<ASCIStarINJewelryItem.customerCode>.In<SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
+        [PXDefault(typeof(SearchFor<ASCJINJewelryItem.customerCode>.In<SelectFrom<ASCJINJewelryItem>.Where<ASCJINJewelryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
             , PersistingCheck = PXPersistingCheck.Nothing)]
         [PXStringList()]
         public virtual string CustomerAlphaCode { get; set; }
@@ -40,7 +40,7 @@ namespace ASCISTARCustom.IN.DAC
         #region Division 
         [PXDBString(50, IsUnicode = true)]
         [PXUIField(DisplayName = "Division")]
-        [PXDefault(typeof(SearchFor<ASCIStarINJewelryItem.invCategory>.In<SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
+        [PXDefault(typeof(SearchFor<ASCJINJewelryItem.invCategory>.In<SelectFrom<ASCJINJewelryItem>.Where<ASCJINJewelryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>>)
             , PersistingCheck = PXPersistingCheck.Nothing)]
         [PXStringList()]
         public virtual string Division { get; set; }
@@ -50,7 +50,7 @@ namespace ASCISTARCustom.IN.DAC
         #region TestType  
         [PXDBString(20, IsUnicode = true)]
         [PXUIField(DisplayName = "Test Type")]
-        [ASCIStarINComplianceType.TestTypeList()]
+        [ASCJINComplianceType.TestTypeList()]
         public virtual string TestType { get; set; }
         public abstract class testType : PX.Data.BQL.BqlString.Field<testType> { }
         #endregion
@@ -65,7 +65,7 @@ namespace ASCISTARCustom.IN.DAC
         #region Pass 
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Pass")]
-        [ASCIStarINCompliancePassStatus.PassStatusList]
+        [ASCJINCompliancePassStatus.PassStatusList]
         public virtual string Pass { get; set; }
         public abstract class pass : PX.Data.BQL.BqlString.Field<pass> { }
         #endregion

@@ -1,9 +1,9 @@
 ﻿using PX.Common;
 
-namespace ASCISTARCustom.PO.Helpers
+namespace ASCJewelryLibrary.PO.Helpers
 {
     [PXLocalizable]
-    public class ASCIStarPOMessages
+    public class ASCJPOMessages
     {
         public static class Constants
         {

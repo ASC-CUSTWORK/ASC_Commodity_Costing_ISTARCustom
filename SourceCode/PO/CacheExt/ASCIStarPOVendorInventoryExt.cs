@@ -1,17 +1,17 @@
-﻿using ASCISTARCustom.AP.CacheExt;
-using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.DTO.Interfaces;
+﻿using ASCJewelryLibrary.AP.CacheExt;
+using ASCJewelryLibrary.Common.Descriptor;
+using ASCJewelryLibrary.Common.DTO.Interfaces;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
-namespace ASCISTARCustom.PO.CacheExt
+namespace ASCJewelryLibrary.PO.CacheExt
 {
-    public class ASCIStarPOVendorInventoryExt : PXCacheExtension<POVendorInventory>, IASCIStarItemCostSpecDTO
+    public class ASCJPOVendorInventoryExt : PXCacheExtension<POVendorInventory>, IASCJItemCostSpecDTO
     {
         public static bool IsActive() => true;
 
@@ -30,7 +30,7 @@ namespace ASCISTARCustom.PO.CacheExt
                 On<Vendor.vendorClassID, Equal<VendorClass.vendorClassID>>>, Where<VendorClass.vendorClassID, Equal<MarketClass>>>),
             typeof(Vendor.acctCD), typeof(Vendor.acctName)
             , SubstituteKey = typeof(Vendor.acctCD), DescriptionField = typeof(Vendor.acctName))]
-        [PXDefault(typeof(Search<ASCIStarVendorExt.usrMarketID,
+        [PXDefault(typeof(Search<ASCJVendorExt.usrMarketID,
             Where<Vendor.bAccountID, Equal<Current<POVendorInventory.vendorID>>>>),
             PersistingCheck = PXPersistingCheck.Nothing)]
         public int? UsrMarketID { get; set; }
@@ -42,7 +42,7 @@ namespace ASCISTARCustom.PO.CacheExt
         [PXUIField(DisplayName = "Metal")]
         [PXSelector(typeof(Search2<InventoryItem.inventoryID,
             InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>,
-                Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
+                Where<INItemClass.itemClassCD, Equal<ASCJConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
             , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
         public int? UsrCommodityID { get; set; }

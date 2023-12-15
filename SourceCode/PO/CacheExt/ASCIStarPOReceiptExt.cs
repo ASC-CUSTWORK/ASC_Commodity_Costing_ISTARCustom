@@ -3,11 +3,11 @@ using PX.Objects.PO;
 using System;
 
 
-namespace ASCISTARCustom.PO.DAC
+namespace ASCJewelryLibrary.PO.DAC
 {
     [Serializable]
     [PXCacheName("ASC POReceipt Extension")]
-    public class ASCIStarPOReceiptExt : PXCacheExtension<POReceipt>
+    public class ASCJPOReceiptExt : PXCacheExtension<POReceipt>
     {
         public static bool IsActive() => true;
 

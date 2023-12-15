@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace ASCISTARCustom.Common.Helper
+namespace ASCJewelryLibrary.Common.Helper
 {
-    public class ASCIStarParseStringConverter : JsonConverter
+    public class ASCJParseStringConverter : JsonConverter
     {
-        public static readonly ASCIStarParseStringConverter Singleton = new ASCIStarParseStringConverter();
+        public static readonly ASCJParseStringConverter Singleton = new ASCJParseStringConverter();
 
         /// <summary>
         /// Overrides the CanConvert method of JsonConverter to determine if the specified type can be converted to/from JSON.

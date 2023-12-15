@@ -1,5 +1,5 @@
-﻿using ASCISTARCustom.AP.DAC;
-using ASCISTARCustom.Common.DAC;
+﻿using ASCJewelryLibrary.AP.DAC;
+using ASCJewelryLibrary.Common.DAC;
 using PX.Data;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
@@ -8,11 +8,11 @@ using PX.Objects.CS;
 using PX.Objects.IN;
 using System;
 
-namespace ASCISTARCustom.IN.DAC
+namespace ASCJewelryLibrary.IN.DAC
 {
     [Serializable]
     [PXCacheName("Vendor Duty DAC")]
-    public class ASCIStarINVendorDuty : AuditSystemFields, IBqlTable
+    public class ASCJINVendorDuty : AuditSystemFields, IBqlTable
     {
         #region InventoryID
         [PXDBInt(IsKey = true)]
@@ -34,7 +34,7 @@ namespace ASCISTARCustom.IN.DAC
         #region HSTariffCode
         [PXDBString(30, IsUnicode = true)]
         [PXUIField(DisplayName = "Tariff Code")]
-        [PXSelector(typeof(SearchFor<ASCIStarAPTariffHTSCode.hSTariffCode>))]
+        [PXSelector(typeof(SearchFor<ASCJAPTariffHTSCode.hSTariffCode>))]
         [PXDefault(typeof(InventoryItem.hSTariffCode))]
         public virtual string HSTariffCode { get; set; }
         public abstract class hSTariffCode : PX.Data.BQL.BqlString.Field<hSTariffCode> { }

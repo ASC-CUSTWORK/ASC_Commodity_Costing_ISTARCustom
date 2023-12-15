@@ -1,6 +1,6 @@
-﻿namespace ASCISTARCustom.Common.DTO.Interfaces
+﻿namespace ASCJewelryLibrary.Common.DTO.Interfaces
 {
-    public interface IASCIStarItemCostSpecDTO
+    public interface IASCJItemCostSpecDTO
     {
         int? InventoryID { get; set; }
         decimal? UsrActualGRAMGold { get; set; }

@@ -1,19 +1,19 @@
-﻿using ASCISTARCustom.Common.Descriptor;
+﻿using ASCJewelryLibrary.Common.Descriptor;
 using PX.Common;
 using System;
 using System.Net;
 using System.Runtime.Serialization;
 
-namespace ASCISTARCustom.Common.Helper.Exceptions
+namespace ASCJewelryLibrary.Common.Helper.Exceptions
 {
     /// <summary>
-    /// Exception class for handling HTTP status code errors in ASCIStar API requests.
+    /// Exception class for handling HTTP status code errors in ASCJ API requests.
     /// </summary>
     /// <remarks>
-    /// This exception is thrown when an ASCIStar API request returns an HTTP status code other than OK (200).
+    /// This exception is thrown when an ASCJ API request returns an HTTP status code other than OK (200).
     /// It contains the status code and content of the response for error handling.
     /// </remarks>
-    public class ASCIStarStatusCodeException : Exception
+    public class ASCJStatusCodeException : Exception
     {
         /// <summary>
         /// Gets the HTTP status code of the failed request.
@@ -26,22 +26,22 @@ namespace ASCISTARCustom.Common.Helper.Exceptions
         public string Content { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ASCIStarStatusCodeException"/> class with the specified status code and response content.
+        /// Initializes a new instance of the <see cref="ASCJStatusCodeException"/> class with the specified status code and response content.
         /// </summary>
         /// <param name="statusCode">The HTTP status code returned by the failed request.</param>
         /// <param name="content">The content of the failed request response.</param>
-        public ASCIStarStatusCodeException(HttpStatusCode statusCode, string content) : base(string.Format(ASCIStarMessages.StatusCode.StatusCodeError, statusCode.ToString(), content))
+        public ASCJStatusCodeException(HttpStatusCode statusCode, string content) : base(string.Format(ASCJMessages.StatusCode.StatusCodeError, statusCode.ToString(), content))
         {
             StatusCode = statusCode;
             Content = content;
         }
 
         /// <summary>
-        /// Initializes a new instance of the ASCIStarStatusCodeException class with the serialized data and context information.
+        /// Initializes a new instance of the ASCJStatusCodeException class with the serialized data and context information.
         /// </summary>
         /// <param name="info">The SerializationInfo that holds the serialized object data.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
-        protected ASCIStarStatusCodeException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ASCJStatusCodeException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 

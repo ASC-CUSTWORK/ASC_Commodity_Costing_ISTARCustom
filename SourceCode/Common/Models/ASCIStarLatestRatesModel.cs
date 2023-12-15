@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace ASCISTARCustom.Common.Models
+namespace ASCJewelryLibrary.Common.Models
 {
-    public class ASCIStarLatestRatesModel : IASCIStarModel
+    public class ASCJLatestRatesModel : IASCJModel
     {
         [JsonProperty("success")]
         public bool Success { get; set; }

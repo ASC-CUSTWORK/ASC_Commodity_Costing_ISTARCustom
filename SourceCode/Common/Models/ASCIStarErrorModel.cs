@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace ASCISTARCustom.Common.Models
+namespace ASCJewelryLibrary.Common.Models
 {
-    public class ASCIStarErrorModel : IASCIStarModel
+    public class ASCJErrorModel : IASCJModel
     {
         [JsonProperty("data")]
         public Data Data { get; set; }

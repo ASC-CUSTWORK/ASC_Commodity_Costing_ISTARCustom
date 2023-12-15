@@ -1,16 +1,16 @@
-using ASCISTARCustom.Common.Descriptor;
-using ASCISTARCustom.Common.DTO.Interfaces;
-using ASCISTARCustom.IN.Descriptor.Constants;
+using ASCJewelryLibrary.Common.Descriptor;
+using ASCJewelryLibrary.Common.DTO.Interfaces;
+using ASCJewelryLibrary.IN.Descriptor.Constants;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.ReferentialIntegrity.Attributes;
 using PX.Objects.IN;
 using System;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
-namespace ASCISTARCustom.IN.CacheExt
+namespace ASCJewelryLibrary.IN.CacheExt
 {
-    public class ASCIStarINInventoryItemExt : PXCacheExtension<InventoryItem>, IASCIStarItemCostSpecDTO
+    public class ASCJINInventoryItemExt : PXCacheExtension<InventoryItem>, IASCJItemCostSpecDTO
     {
         public static bool IsActive() => true;
 
@@ -38,7 +38,7 @@ namespace ASCISTARCustom.IN.CacheExt
         [PXDBString(2, IsFixed = true)]
         [PXDefault("NP")]
         [PXUIField(DisplayName = "Item Status", Visibility = PXUIVisibility.SelectorVisible)]
-        [ASCIStarINConstants.InventoryItemStatusExt.List]
+        [ASCJINConstants.InventoryItemStatusExt.List]
         public virtual String ItemStatus { get; set; }
         public abstract class itemStatus : BqlString.Field<itemStatus> { }
         #endregion
@@ -62,7 +62,7 @@ namespace ASCISTARCustom.IN.CacheExt
         [PXDBInt()]
         [PXUIField(DisplayName = "Price as Item", Visible = false, Enabled = false)]
         [PXSelector(typeof(Search2<InventoryItem.inventoryID, LeftJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>,
-            Where<INItemClass.itemClassCD, Equal<ASCIStarConstants.CommodityClass>>>),
+            Where<INItemClass.itemClassCD, Equal<ASCJConstants.CommodityClass>>>),
             typeof(InventoryItem.inventoryCD), typeof(InventoryItem.descr)
                         , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
         public int? UsrPriceAsID { get; set; }
@@ -74,7 +74,7 @@ namespace ASCISTARCustom.IN.CacheExt
         [PXString]
         //[INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
         //[PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
-        //  [PXRestrictor(typeof(Where<ASCIStarINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
+        //  [PXRestrictor(typeof(Where<ASCJINUnitExt.usrCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
         public string UsrPriceToUnit { get; set; }
         public abstract class usrPriceToUnit : PX.Data.BQL.BqlString.Field<usrPriceToUnit> { }
         #endregion

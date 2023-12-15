@@ -1,12 +1,12 @@
-using ASCISTARCustom.Common.DTO.Interfaces;
-using ASCISTARCustom.IN.CacheExt;
+using ASCJewelryLibrary.Common.DTO.Interfaces;
+using ASCJewelryLibrary.IN.CacheExt;
 using PX.Data;
 using PX.Objects.IN;
 using System;
 
-namespace ASCISTARCustom.INKit.CacheExt
+namespace ASCJewelryLibrary.INKit.CacheExt
 {
-    public sealed class ASCIStarINKitSpecHdrExt : PXCacheExtension<INKitSpecHdr>, IASCIStarItemCostSpecDTO
+    public sealed class ASCJINKitSpecHdrExt : PXCacheExtension<INKitSpecHdr>, IASCJItemCostSpecDTO
     {
         public static bool IsActive() => true;
 
@@ -222,7 +222,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
         [PXUIField(DisplayName = "Matrix Step")]
         [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecHdr.kitInventoryID, ASCIStarINInventoryItemExt.usrMatrixStep>))]
+        [PXFormula(typeof(Selector<INKitSpecHdr.kitInventoryID, ASCJINInventoryItemExt.usrMatrixStep>))]
         public decimal? UsrMatrixStep { get; set; }
         public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
         #endregion

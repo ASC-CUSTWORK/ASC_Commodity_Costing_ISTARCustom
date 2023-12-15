@@ -2,11 +2,11 @@
 using PX.Objects.PO;
 using System;
 
-namespace ASCISTARCustom.PO.DAC
+namespace ASCJewelryLibrary.PO.DAC
 {
     [Serializable]
     [PXCacheName("ASC POLine Extension")]
-    public class ASCIStarPOLineExt : PXCacheExtension<POLine>
+    public class ASCJPOLineExt : PXCacheExtension<POLine>
     {
         public static bool IsActive() => true;
 

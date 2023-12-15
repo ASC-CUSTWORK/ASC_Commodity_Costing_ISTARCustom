@@ -1,15 +1,15 @@
-using ASCISTARCustom.Common.DTO.Interfaces;
-using ASCISTARCustom.IN.CacheExt;
-using ASCISTARCustom.INKit.Descriptor;
-using ASCISTARCustom.INKit.Interfaces;
+using ASCJewelryLibrary.Common.DTO.Interfaces;
+using ASCJewelryLibrary.IN.CacheExt;
+using ASCJewelryLibrary.INKit.Descriptor;
+using ASCJewelryLibrary.INKit.Interfaces;
 using PX.Data;
 using PX.Objects.IN;
 using System;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
-namespace ASCISTARCustom.INKit.CacheExt
+namespace ASCJewelryLibrary.INKit.CacheExt
 {
-    public class ASCIStarINKitSpecStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecStkDet>, IASCIStarItemCostSpecDTO, IASCIStarCostRollup
+    public class ASCJINKitSpecStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecStkDet>, IASCJItemCostSpecDTO, IASCJCostRollup
     {
         public static bool IsActive() => true;
 
@@ -27,7 +27,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Ext Cost", Enabled = false)]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrUnitCost>))]
-        [ASCIStarCostAssignment]
+        [ASCJCostAssignment]
         public decimal? UsrExtCost { get; set; }
         public abstract class usrExtCost : PX.Data.BQL.BqlDecimal.Field<usrExtCost> { }
         #endregion
@@ -45,7 +45,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXUIField(DisplayName = "Rollup Type", Required = true)]
         [PXDefault(CostRollupType.PreciousMetal)]
         [CostRollupType.List]
-        //[PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCostRollupType>))]
+        //[PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrCostRollupType>))]
         public string UsrCostRollupType { get; set; }
         public abstract class usrCostRollupType : PX.Data.BQL.BqlString.Field<usrCostRollupType> { }
         #endregion
@@ -53,7 +53,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBaseGoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMGold>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrActualGRAMGold>))]
         public decimal? UsrBaseGoldGrams { get; set; }
         public abstract class usrBaseGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseGoldGrams> { }
         #endregion
@@ -62,7 +62,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Gold, Grams", IsReadOnly = true)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrActualGRAMGold>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseGoldGrams>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrActualGRAMGold>))]
         public decimal? UsrActualGRAMGold { get; set; }
         public abstract class usrActualGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMGold> { }
         #endregion
@@ -70,7 +70,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBaseFineGoldGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMGold>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrPricingGRAMGold>))]
         public decimal? UsrBaseFineGoldGrams { get; set; }
         public abstract class usrBaseFineGoldGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseFineGoldGrams> { }
         #endregion
@@ -79,7 +79,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fine Gold, Grams", IsReadOnly = true)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFineGoldGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPricingGRAMGold>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFineGoldGrams>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrPricingGRAMGold>))]
         public decimal? UsrPricingGRAMGold { get; set; }
         public abstract class usrPricingGRAMGold : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMGold> { }
         #endregion
@@ -87,7 +87,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBaseSilverGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrActualGRAMSilver>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrActualGRAMSilver>))]
         public decimal? UsrBaseSilverGrams { get; set; }
         public abstract class usrBaseSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseSilverGrams> { }
         #endregion
@@ -96,7 +96,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Silver, Grams", IsReadOnly =true)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrActualGRAMSilver>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseSilverGrams>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrActualGRAMSilver>))]
         public decimal? UsrActualGRAMSilver { get; set; }
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
         #endregion
@@ -104,7 +104,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBaseFineSilverGrams
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPricingGRAMSilver>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrPricingGRAMSilver>))]
         public decimal? UsrBaseFineSilverGrams { get; set; }
         public abstract class usrBaseFineSilverGrams : PX.Data.BQL.BqlDecimal.Field<usrBaseFineSilverGrams> { }
         #endregion
@@ -113,7 +113,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fine Silver, Grams", IsReadOnly = true)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFineSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPricingGRAMSilver>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFineSilverGrams>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrPricingGRAMSilver>))]
         public decimal? UsrPricingGRAMSilver { get; set; }
         public abstract class usrPricingGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrPricingGRAMSilver> { }
         #endregion
@@ -122,7 +122,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Metal Loss, %", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrContractLossPct>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrContractLossPct>))]
         public decimal? UsrContractLossPct { get; set; }
         public abstract class usrContractLossPct : PX.Data.BQL.BqlDecimal.Field<usrContractLossPct> { }
         #endregion
@@ -131,7 +131,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge / Loss, %", Enabled = false, Visible = true)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrContractSurcharge>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrContractSurcharge>))]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
         #endregion
@@ -140,7 +140,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Increment", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrContractIncrement>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrContractIncrement>))]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
         #endregion
@@ -149,7 +149,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Matrix Step", Enabled = false)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrMatrixStep>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrMatrixStep>))]
         public decimal? UsrMatrixStep { get; set; }
         public abstract class usrMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrMatrixStep> { }
         #endregion
@@ -181,7 +181,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBaseFabricationCost
         [PXDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrFabricationCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrFabricationCost>))]
         public decimal? UsrBaseFabricationCost { get; set; }
         public abstract class usrBaseFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrBaseFabricationCost> { }
         #endregion
@@ -190,7 +190,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fabrication/Value Add", Enabled = false)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFabricationCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrFabricationCost>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseFabricationCost>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrFabricationCost>))]
         public decimal? UsrFabricationCost { get; set; }
         public abstract class usrFabricationCost : PX.Data.BQL.BqlDecimal.Field<usrFabricationCost> { }
         #endregion
@@ -198,7 +198,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBasePackagingCost
         [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPackagingCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrPackagingCost>))]
         public decimal? UsrBasePackagingCost { get; set; }
         public abstract class usrBasePackagingCost : PX.Data.BQL.BqlDecimal.Field<usrBasePackagingCost> { }
         #endregion
@@ -207,7 +207,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Packaging Cost", Enabled = false)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBasePackagingCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPackagingCost>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBasePackagingCost>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrPackagingCost>))]
         public decimal? UsrPackagingCost { get; set; }
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
@@ -215,7 +215,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBasePackagingLaborCost
         [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrPackagingLaborCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrPackagingLaborCost>))]
         public decimal? UsrBasePackagingLaborCost { get; set; }
         public abstract class usrBasePackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrBasePackagingLaborCost> { }
         #endregion
@@ -224,7 +224,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Labor For Packaging")]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBasePackagingLaborCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPackagingLaborCost>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBasePackagingLaborCost>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrPackagingLaborCost>))]
         public decimal? UsrPackagingLaborCost { get; set; }
         public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
         #endregion
@@ -233,7 +233,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "In-house Labor Cost", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrLaborCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrLaborCost>))]
         public decimal? UsrLaborCost { get; set; }
         public abstract class usrLaborCost : PX.Data.BQL.BqlDecimal.Field<usrLaborCost> { }
         #endregion
@@ -241,7 +241,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrBaseMaterialCost
         [PXDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrOtherMaterialsCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrOtherMaterialsCost>))]
         public decimal? UsrBaseMaterialCost { get; set; }
         public abstract class usrBaseMaterialCost : PX.Data.BQL.BqlDecimal.Field<usrBaseMaterialCost> { }
         #endregion
@@ -250,7 +250,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Materials Cost", Enabled = false)]
-        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseMaterialCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>))]
+        [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseMaterialCost>), typeof(SumCalc<ASCJINKitSpecHdrExt.usrOtherMaterialsCost>))]
         public decimal? UsrOtherMaterialsCost { get; set; }
         public abstract class usrOtherMaterialsCost : PX.Data.BQL.BqlDecimal.Field<usrOtherMaterialsCost> { }
         #endregion
@@ -259,7 +259,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Cost", Enabled = false, Visible = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrOtherCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrOtherCost>))]
         public decimal? UsrOtherCost { get; set; }
         public abstract class usrOtherCost : PX.Data.BQL.BqlDecimal.Field<usrOtherCost> { }
         #endregion
@@ -268,7 +268,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Freight Cost", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrFreightCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrFreightCost>))]
         public decimal? UsrFreightCost { get; set; }
         public abstract class usrFreightCost : PX.Data.BQL.BqlDecimal.Field<usrFreightCost> { }
         #endregion
@@ -277,7 +277,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Handling Cost", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrHandlingCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrHandlingCost>))]
         public decimal? UsrHandlingCost { get; set; }
         public abstract class usrHandlingCost : PX.Data.BQL.BqlDecimal.Field<usrHandlingCost> { }
         #endregion
@@ -286,7 +286,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Duty Cost", Enabled = false)]
-        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrDutyCost>))]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrDutyCost>))]
         public decimal? UsrDutyCost { get; set; }
         public abstract class usrDutyCost : PX.Data.BQL.BqlDecimal.Field<usrDutyCost> { }
         #endregion

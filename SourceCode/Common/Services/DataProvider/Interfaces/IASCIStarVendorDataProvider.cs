@@ -2,9 +2,9 @@
 using PX.Objects.AP;
 using System;
 
-namespace ASCISTARCustom.Common.Services.DataProvider.Interfaces
+namespace ASCJewelryLibrary.Common.Services.DataProvider.Interfaces
 {
-    public interface IASCIStarVendorDataProvider
+    public interface IASCJVendorDataProvider
     {
         /// <summary>
         /// Retrieves the APVendorPrice record for the specified vendor, inventory item, unit of measure, and effective date.

@@ -1,9 +1,9 @@
 ﻿using PX.Data;
-using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
-namespace ASCISTARCustom.IN.CacheExt
+namespace ASCJewelryLibrary.IN.CacheExt
 {
-    public class ASCIStarINUnitExt : PXCacheExtension<PX.Objects.IN.INUnit>
+    public class ASCJINUnitExt : PXCacheExtension<PX.Objects.IN.INUnit>
     {
         #region Static Method
         public static bool IsActive()

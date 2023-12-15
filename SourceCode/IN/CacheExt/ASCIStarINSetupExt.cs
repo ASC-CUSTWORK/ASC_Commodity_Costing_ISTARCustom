@@ -1,9 +1,9 @@
 ﻿using PX.Data;
 using PX.Objects.IN;
 
-namespace ASCISTARCustom.IN.CacheExt
+namespace ASCJewelryLibrary.IN.CacheExt
 { 
-    public class ASCIStarINSetupExt : PXCacheExtension<INSetup>
+    public class ASCJINSetupExt : PXCacheExtension<INSetup>
     {
         public static bool IsActive() => true;
 

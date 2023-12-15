@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Commodity Tracking")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Jewelry Commodity Tracking")]
+[assembly: AssemblyDescription("Jewelry Commodity Tracking Software")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Advanced Solutions & Consulting Co.")]
 [assembly: AssemblyProduct("Commodity Tracking")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCopyright("Advanced Solutions & Consulting Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

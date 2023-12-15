@@ -1,12 +1,12 @@
-﻿using ASCISTARCustom.Common.Descriptor;
+﻿using ASCJewelryLibrary.Common.Descriptor;
 using PX.Objects.IN;
 using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 
-namespace ASCISTARCustom.Common.Helper
+namespace ASCJewelryLibrary.Common.Helper
 {
-    public static class ASCIStarMetalType
+    public static class ASCJMetalType
     {
         /// <summary>
         /// Determines if the given metal type is gold or not, based on the defined list of gold metal types.
@@ -17,45 +17,45 @@ namespace ASCISTARCustom.Common.Helper
         {
             switch (metalType?.ToUpper())
             {
-                case ASCIStarConstants.MetalType.Type_24K: return true;
-                case ASCIStarConstants.MetalType.Type_23K: return true;
-                case ASCIStarConstants.MetalType.Type_22K: return true;
-                case ASCIStarConstants.MetalType.Type_21K: return true;
-                case ASCIStarConstants.MetalType.Type_20K: return true;
-                case ASCIStarConstants.MetalType.Type_19K: return true;
-                case ASCIStarConstants.MetalType.Type_18K: return true;
-                case ASCIStarConstants.MetalType.Type_17K: return true;
-                case ASCIStarConstants.MetalType.Type_16K: return true;
-                case ASCIStarConstants.MetalType.Type_15K: return true;
-                case ASCIStarConstants.MetalType.Type_14K: return true;
-                case ASCIStarConstants.MetalType.Type_13K: return true;
-                case ASCIStarConstants.MetalType.Type_12K: return true;
-                case ASCIStarConstants.MetalType.Type_11K: return true;
-                case ASCIStarConstants.MetalType.Type_10K: return true;
-                case ASCIStarConstants.MetalType.Type_09K: return true;
-                case ASCIStarConstants.MetalType.Type_08K: return true;
-                case ASCIStarConstants.MetalType.Type_07K: return true;
-                case ASCIStarConstants.MetalType.Type_06K: return true;
+                case ASCJConstants.MetalType.Type_24K: return true;
+                case ASCJConstants.MetalType.Type_23K: return true;
+                case ASCJConstants.MetalType.Type_22K: return true;
+                case ASCJConstants.MetalType.Type_21K: return true;
+                case ASCJConstants.MetalType.Type_20K: return true;
+                case ASCJConstants.MetalType.Type_19K: return true;
+                case ASCJConstants.MetalType.Type_18K: return true;
+                case ASCJConstants.MetalType.Type_17K: return true;
+                case ASCJConstants.MetalType.Type_16K: return true;
+                case ASCJConstants.MetalType.Type_15K: return true;
+                case ASCJConstants.MetalType.Type_14K: return true;
+                case ASCJConstants.MetalType.Type_13K: return true;
+                case ASCJConstants.MetalType.Type_12K: return true;
+                case ASCJConstants.MetalType.Type_11K: return true;
+                case ASCJConstants.MetalType.Type_10K: return true;
+                case ASCJConstants.MetalType.Type_09K: return true;
+                case ASCJConstants.MetalType.Type_08K: return true;
+                case ASCJConstants.MetalType.Type_07K: return true;
+                case ASCJConstants.MetalType.Type_06K: return true;
 
-                case ASCIStarConstants.MetalType.Type_24F: return true;
-                case ASCIStarConstants.MetalType.Type_23F: return true;
-                case ASCIStarConstants.MetalType.Type_22F: return true;
-                case ASCIStarConstants.MetalType.Type_21F: return true;
-                case ASCIStarConstants.MetalType.Type_20F: return true;
-                case ASCIStarConstants.MetalType.Type_19F: return true;
-                case ASCIStarConstants.MetalType.Type_18F: return true;
-                case ASCIStarConstants.MetalType.Type_17F: return true;
-                case ASCIStarConstants.MetalType.Type_16F: return true;
-                case ASCIStarConstants.MetalType.Type_15F: return true;
-                case ASCIStarConstants.MetalType.Type_14F: return true;
-                case ASCIStarConstants.MetalType.Type_13F: return true;
-                case ASCIStarConstants.MetalType.Type_12F: return true;
-                case ASCIStarConstants.MetalType.Type_11F: return true;
-                case ASCIStarConstants.MetalType.Type_10F: return true;
-                case ASCIStarConstants.MetalType.Type_09F: return true;
-                case ASCIStarConstants.MetalType.Type_08F: return true;
-                case ASCIStarConstants.MetalType.Type_07F: return true;
-                case ASCIStarConstants.MetalType.Type_06F: return true;
+                case ASCJConstants.MetalType.Type_24F: return true;
+                case ASCJConstants.MetalType.Type_23F: return true;
+                case ASCJConstants.MetalType.Type_22F: return true;
+                case ASCJConstants.MetalType.Type_21F: return true;
+                case ASCJConstants.MetalType.Type_20F: return true;
+                case ASCJConstants.MetalType.Type_19F: return true;
+                case ASCJConstants.MetalType.Type_18F: return true;
+                case ASCJConstants.MetalType.Type_17F: return true;
+                case ASCJConstants.MetalType.Type_16F: return true;
+                case ASCJConstants.MetalType.Type_15F: return true;
+                case ASCJConstants.MetalType.Type_14F: return true;
+                case ASCJConstants.MetalType.Type_13F: return true;
+                case ASCJConstants.MetalType.Type_12F: return true;
+                case ASCJConstants.MetalType.Type_11F: return true;
+                case ASCJConstants.MetalType.Type_10F: return true;
+                case ASCJConstants.MetalType.Type_09F: return true;
+                case ASCJConstants.MetalType.Type_08F: return true;
+                case ASCJConstants.MetalType.Type_07F: return true;
+                case ASCJConstants.MetalType.Type_06F: return true;
                 default: return false;
             }
         }
@@ -69,8 +69,8 @@ namespace ASCISTARCustom.Common.Helper
         {
             switch (metalType?.ToUpper())
             {
-                case ASCIStarConstants.MetalType.Type_FSS: return true;
-                case ASCIStarConstants.MetalType.Type_SSS: return true;
+                case ASCJConstants.MetalType.Type_FSS: return true;
+                case ASCJConstants.MetalType.Type_SSS: return true;
                 default: return false;
             }
         }
@@ -88,7 +88,7 @@ namespace ASCISTARCustom.Common.Helper
         /// </returns>
         public static string GetMixedTypeValue(string metalType)
         {
-            if (metalType is null) return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
+            if (metalType is null) return ASCJConstants.MixedMetalType.Type_MixedUndefined;
 
             metalType = metalType.ToUpper();
             var metalTypes = metalType.Split('-');
@@ -106,17 +106,17 @@ namespace ASCISTARCustom.Common.Helper
 
                 if (isFirstMetalTypeGold && isSecondMetalTypeGold)
                 {
-                    return ASCIStarConstants.MixedMetalType.Type_MixedGold;
+                    return ASCJConstants.MixedMetalType.Type_MixedGold;
                 }
 
                 if (isFirstMetalTypePredefined && isSecondMetalTypePredefined)
                 {
-                    return ASCIStarConstants.MixedMetalType.Type_MixedDefault;
+                    return ASCJConstants.MixedMetalType.Type_MixedDefault;
                 }
                 
             }
 
-            return ASCIStarConstants.MixedMetalType.Type_MixedUndefined;
+            return ASCJConstants.MixedMetalType.Type_MixedUndefined;
         }
 
         ///<summary>
@@ -129,9 +129,9 @@ namespace ASCISTARCustom.Common.Helper
         {
             if (metalType == null) return decimal.Zero;
 
-            if (IsGold(metalType)) return GetGoldTypeValue(metalType) / 24.0m / ASCIStarConstants.TOZ2GRAM_31_10348.value;
+            if (IsGold(metalType)) return GetGoldTypeValue(metalType) / 24.0m / ASCJConstants.TOZ2GRAM_31_10348.value;
 
-            if (IsSilver(metalType)) return GetSilverTypeValue(metalType) / ASCIStarConstants.TOZ2GRAM_31_10348.value;
+            if (IsSilver(metalType)) return GetSilverTypeValue(metalType) / ASCJConstants.TOZ2GRAM_31_10348.value;
 
             return decimal.Zero;
         }
@@ -148,16 +148,16 @@ namespace ASCISTARCustom.Common.Helper
 
             switch (metalType)
             {
-                case ASCIStarConstants.MetalType.Type_24K: return 24.000000m;
-                case ASCIStarConstants.MetalType.Type_22K: return 22.000000m;
-                case ASCIStarConstants.MetalType.Type_20K: return 20.000000m;
-                case ASCIStarConstants.MetalType.Type_18K: return 18.000000m;
-                case ASCIStarConstants.MetalType.Type_16K: return 16.000000m;
-                case ASCIStarConstants.MetalType.Type_14K: return 14.000000m;
-                case ASCIStarConstants.MetalType.Type_12K: return 12.000000m;
-                case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
-                case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
-                case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
+                case ASCJConstants.MetalType.Type_24K: return 24.000000m;
+                case ASCJConstants.MetalType.Type_22K: return 22.000000m;
+                case ASCJConstants.MetalType.Type_20K: return 20.000000m;
+                case ASCJConstants.MetalType.Type_18K: return 18.000000m;
+                case ASCJConstants.MetalType.Type_16K: return 16.000000m;
+                case ASCJConstants.MetalType.Type_14K: return 14.000000m;
+                case ASCJConstants.MetalType.Type_12K: return 12.000000m;
+                case ASCJConstants.MetalType.Type_10K: return 10.000000m;
+                case ASCJConstants.MetalType.Type_08K: return 8.000000m;
+                case ASCJConstants.MetalType.Type_06K: return 6.000000m;
                 default: return 24.0m;
             }
         }
@@ -174,8 +174,8 @@ namespace ASCISTARCustom.Common.Helper
 
             switch (metalType)
             {
-                case ASCIStarConstants.MetalType.Type_FSS: return 1.081080m;
-                case ASCIStarConstants.MetalType.Type_SSS: return 1.000000m;
+                case ASCJConstants.MetalType.Type_FSS: return 1.081080m;
+                case ASCJConstants.MetalType.Type_SSS: return 1.000000m;
                 default: return 1.0m;
             }
         }
@@ -189,8 +189,8 @@ namespace ASCISTARCustom.Common.Helper
         public static int? GetBaseInventoryID(PXGraph graph, string metalType)
         {
             string inventoryCD = string.Empty;
-            bool isGold = ASCIStarMetalType.IsGold(metalType);
-            bool isSilver = ASCIStarMetalType.IsSilver(metalType);
+            bool isGold = ASCJMetalType.IsGold(metalType);
+            bool isSilver = ASCJMetalType.IsSilver(metalType);
 
             if (isGold) inventoryCD = "24K";
             if (isSilver) inventoryCD = "SSS";
