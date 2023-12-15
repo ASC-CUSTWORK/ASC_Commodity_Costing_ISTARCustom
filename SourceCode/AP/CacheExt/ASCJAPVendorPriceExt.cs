@@ -16,7 +16,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
         #region UsrASCJMarket
         [PXDBString(2, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Market")]
-        [MarketList.List]
+        [MarketList.ASCJList]
         public string UsrASCJMarket { get; set; }
         public abstract class usrASCJMarket : PX.Data.BQL.BqlString.Field<usrASCJMarket> { }
         #endregion
@@ -35,7 +35,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
         #region UsrASCJCommodity
         [PXDBString(1)]
         [PXUIField(DisplayName = "Commodity Metal Type", Enabled = false)]
-        [CommodityType.List]
+        [CommodityType.ASCJList]
         [PXDefault(typeof(Search<ASCJINInventoryItemExt.usrASCJCommodityType, Where<InventoryItem.inventoryID, Equal<Current<APVendorPrice.inventoryID>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Default<APVendorPrice.inventoryID>))]
         public string UsrASCJCommodity { get; set; }

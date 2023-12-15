@@ -29,7 +29,7 @@ namespace ASCJewelryLibrary.AP.Descriptor
         /// </summary>
         public const string XAG = "XAG";
 
-        public class ListAttribute : PXStringListAttribute
+        public class ASCJListAttribute : PXStringListAttribute
         {
             private static string[] _values = new string[]
             {
@@ -41,7 +41,7 @@ namespace ASCJewelryLibrary.AP.Descriptor
                 nameof(LBXAG), nameof(LBXAUAM), nameof(LBXAUPM), nameof(XAU), nameof(XAG)
             };
 
-            public ListAttribute() : base(_values, _labels) { }
+            public ASCJListAttribute() : base(_values, _labels) { }
         }
 
         public class lBXAG : PX.Data.BQL.BqlString.Constant<lBXAG>

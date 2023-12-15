@@ -14,7 +14,7 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #region UsrASCJCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
-        [CostingType.List]
+        [CostingType.ASCJList]
         [PXDefault(CostingType.StandardCost, PersistingCheck = PXPersistingCheck.Null)]
         public virtual string UsrASCJCostingType { get; set; }
         public abstract class usrASCJCostingType : PX.Data.BQL.BqlString.Field<usrASCJCostingType> { }

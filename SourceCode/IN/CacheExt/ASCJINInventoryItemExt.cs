@@ -40,7 +40,7 @@ namespace ASCJewelryLibrary.IN.CacheExt
         [PXDBString(2, IsFixed = true)]
         [PXDefault("NP")]
         [PXUIField(DisplayName = "Item Status", Visibility = PXUIVisibility.SelectorVisible)]
-        [ASCJINConstants.InventoryItemStatusExt.List]
+        [ASCJINConstants.InventoryItemStatusExt.ASCJList]
         public virtual String ItemStatus { get; set; }
         public abstract class itemStatus : BqlString.Field<itemStatus> { }
         #endregion
@@ -119,7 +119,7 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #region UsrASCJCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type")]
-        [CostingType.List]
+        [CostingType.ASCJList]
         [PXDefault(CostingType.ContractCost, PersistingCheck = PXPersistingCheck.Nothing)]
         public string UsrASCJCostingType { get; set; }
         public abstract class usrASCJCostingType : PX.Data.BQL.BqlString.Field<usrASCJCostingType> { }
@@ -327,7 +327,7 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #region UsrASCJCommodityType
         [PXDBString(1)]
         [PXUIField(DisplayName = "Commodity Type")]
-        [CommodityType.List]
+        [CommodityType.ASCJList]
         [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual string UsrASCJCommodityType { get; set; }
         public abstract class usrASCJCommodityType : PX.Data.BQL.BqlString.Field<usrASCJCommodityType> { }

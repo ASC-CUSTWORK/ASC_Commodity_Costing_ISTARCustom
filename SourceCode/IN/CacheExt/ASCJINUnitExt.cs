@@ -13,7 +13,7 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #region UsrASCJCommodity 
         [PXDBString(1)]
         [PXUIField(DisplayName = "Commodity Type")]
-        [CommodityType.List]
+        [CommodityType.ASCJList]
         public virtual string UsrASCJCommodity { get; set; }
         public abstract class usrASCJCommodity : PX.Data.BQL.BqlString.Field<usrASCJCommodity> { }
         #endregion

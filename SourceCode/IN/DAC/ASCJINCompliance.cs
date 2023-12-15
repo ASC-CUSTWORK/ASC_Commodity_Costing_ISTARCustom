@@ -50,7 +50,7 @@ namespace ASCJewelryLibrary.IN.DAC
         #region TestType  
         [PXDBString(20, IsUnicode = true)]
         [PXUIField(DisplayName = "Test Type")]
-        [ASCJINComplianceType.TestTypeList()]
+        [ASCJINComplianceType.ASCJTestTypeList()]
         public virtual string TestType { get; set; }
         public abstract class testType : PX.Data.BQL.BqlString.Field<testType> { }
         #endregion
@@ -65,7 +65,7 @@ namespace ASCJewelryLibrary.IN.DAC
         #region Pass 
         [PXDBString(10, IsUnicode = true)]
         [PXUIField(DisplayName = "Pass")]
-        [ASCJINCompliancePassStatus.PassStatusList]
+        [ASCJINCompliancePassStatus.ASCJPassStatusList]
         public virtual string Pass { get; set; }
         public abstract class pass : PX.Data.BQL.BqlString.Field<pass> { }
         #endregion

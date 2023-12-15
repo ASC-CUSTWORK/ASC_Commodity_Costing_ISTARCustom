@@ -109,9 +109,9 @@ namespace ASCJewelryLibrary.Common.Descriptor
 
         public class CommodityType
         {
-            public class ListAttribute : PXStringListAttribute
+            public class ASCJListAttribute : PXStringListAttribute
             {
-                public ListAttribute() : base(
+                public ASCJListAttribute() : base(
                     new[] { Undefined, Gold, Silver, Platinum, Costume, Brass },
                     new[] { MessageUndefined, MessageGold, MessageSilver, MessagePlatinum, MessageCostume, MessageBrass })
                 { }
@@ -164,7 +164,7 @@ namespace ASCJewelryLibrary.Common.Descriptor
             public const string MessagePackagingForLabor = "Packaging Labor";
             public const string MessageBlank = "<Blank>";
 
-            public class ListAttribute : PXStringListAttribute
+            public class ASCJListAttribute : PXStringListAttribute
             {
                 private static readonly string[] _values = new string[]
                 {
@@ -195,7 +195,7 @@ namespace ASCJewelryLibrary.Common.Descriptor
                     //   MessageBlank
                 };
 
-                public ListAttribute() : base(_values, _lables) { }
+                public ASCJListAttribute() : base(_values, _lables) { }
             }
 
             public class commodity : PX.Data.BQL.BqlString.Constant<commodity>
@@ -263,11 +263,11 @@ namespace ASCJewelryLibrary.Common.Descriptor
             public const string MessagePercentage = "Percentage";
             //   public const string MessageWeight = "By Weight";
 
-            public class ListAttribute : PXStringListAttribute
+            public class ASCJListAttribute : PXStringListAttribute
             {
                 private static readonly string[] values = new string[] { MarketCost, ContractCost, StandardCost, PercentageCost/*, WeightCost*/ };
                 private static readonly string[] lables = new string[] { MessageMarket, MessageContract, MessageStandard, MessagePercentage/*, MessageWeight */};
-                public ListAttribute() : base(values, lables) { }
+                public ASCJListAttribute() : base(values, lables) { }
             }
 
             public class standardCost : PX.Data.BQL.BqlString.Constant<standardCost> { public standardCost() : base(StandardCost) { } }
@@ -287,9 +287,9 @@ namespace ASCJewelryLibrary.Common.Descriptor
             public const string MessageLondonAM = "LONDON AM";
             public const string MessageLondonPM = "LONDON PM";
 
-            public class ListAttribute : PXStringListAttribute
+            public class ASCJListAttribute : PXStringListAttribute
             {
-                public ListAttribute() : base(
+                public ASCJListAttribute() : base(
                     new[] { NewYork, LondonAM, LondonPM },
                     new[] { MessageNewYork, MessageLondonAM, MessageLondonPM })
                 { }

@@ -42,7 +42,7 @@ namespace ASCJewelryLibrary.AP.DAC
 
         #region Symbols
         [PXDBString(256, IsUnicode = true)]
-        [ASCJSymbols.List(MultiSelect = true)]
+        [ASCJSymbols.ASCJList(MultiSelect = true)]
         [PXDefault()]
         [PXUIField(DisplayName = "Symbols")]
         public virtual string Symbols { get; set; }

@@ -5,9 +5,9 @@ namespace ASCJewelryLibrary
 {
     public class ASCJCostBasisType
     {
-        public class ListAttribute : PXStringListAttribute
+        public class ASCJListAttribute : PXStringListAttribute
         {
-            public ListAttribute() : base(
+            public ASCJListAttribute() : base(
                 new[] { Market.Substring(0, 1), "X", Item.Substring(0, 1), Vendor.Substring(0, 1) },
                 new[] { Market, Matrix, Item, Vendor }
                 )

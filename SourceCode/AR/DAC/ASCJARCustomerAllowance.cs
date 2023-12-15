@@ -70,7 +70,7 @@ namespace ASCJewelryLibrary.AR.DAC
         #region Commodity
         [PXDBString(1, IsKey = true)]
         [PXUIField(DisplayName = "Commodity Type", Required = true)]
-        [CommodityType.List]
+        [CommodityType.ASCJList]
         [PXDefault(CommodityType.Undefined)]
         public virtual string Commodity { get; set; }
         public abstract class commodity : PX.Data.BQL.BqlString.Field<commodity> { }

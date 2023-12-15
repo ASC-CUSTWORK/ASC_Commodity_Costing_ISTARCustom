@@ -78,7 +78,7 @@ namespace ASCJewelryLibrary.AP.DAC.Projections
         #region Market
         [PXDBString(2, IsUnicode = true, InputMask = "", BqlField = typeof(ASCJAPVendorPriceExt.usrASCJMarket))]
         [PXUIField(DisplayName = "Market", Required = true)]
-        [MarketList.List]
+        [MarketList.ASCJList]
         [PXDefault(MarketList.LondonPM)]
         public virtual string Market { get; set; }
         public abstract class market : PX.Data.BQL.BqlString.Field<market> { }
@@ -98,7 +98,7 @@ namespace ASCJewelryLibrary.AP.DAC.Projections
         #region Commodity
         [PXDBString(1, BqlField = typeof(ASCJAPVendorPriceExt.usrASCJCommodity))]
         [PXUIField(DisplayName = "Commodity Metal Type")]
-        [CommodityType.List]
+        [CommodityType.ASCJList]
         [PXDefault(CommodityType.Undefined, PersistingCheck = PXPersistingCheck.Null)]
         public virtual string Commodity { get; set; }
         public abstract class commodity : PX.Data.BQL.BqlString.Field<commodity> { }

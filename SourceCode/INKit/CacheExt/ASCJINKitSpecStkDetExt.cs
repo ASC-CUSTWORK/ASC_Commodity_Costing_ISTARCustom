@@ -36,7 +36,7 @@ namespace ASCJewelryLibrary.INKit.CacheExt
 
         #region UsrASCJCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [CostingType.List]
+        [CostingType.ASCJList]
         [PXUIField(DisplayName = "Costing Type")]
         public string UsrASCJCostingType { get; set; }
         public abstract class usrASCJCostingType : PX.Data.BQL.BqlString.Field<usrASCJCostingType> { }
@@ -46,7 +46,7 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Rollup Type", Required = true)]
         [PXDefault(CostRollupType.PreciousMetal)]
-        [CostRollupType.List]
+        [CostRollupType.ASCJList]
         //[PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrASCJCostRollupType>))]
         public string UsrASCJCostRollupType { get; set; }
         public abstract class usrASCJCostRollupType : PX.Data.BQL.BqlString.Field<usrASCJCostRollupType> { }

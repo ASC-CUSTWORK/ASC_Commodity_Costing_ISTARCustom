@@ -11,9 +11,9 @@ namespace ASCJewelryLibrary.IN.Descriptor.Constants
     {
         public class InventoryItemStatusExt
         {
-            public class ListAttribute : PXStringListAttribute
+            public class ASCJListAttribute : PXStringListAttribute
             {
-                public ListAttribute() : base(
+                public ASCJListAttribute() : base(
                     Pair(Active, Messages.Active),
                     Pair(NoSales, Messages.NoSales),
                     Pair(NoPurchases, Style),
@@ -122,7 +122,7 @@ namespace ASCJewelryLibrary.IN.Descriptor.Constants
 
         public class ASCJINComplianceType
         {
-            public class TestTypeListAttribute : PXStringListAttribute
+            public class ASCJTestTypeListAttribute : PXStringListAttribute
             {
                 public class INTestType
                 {
@@ -144,7 +144,7 @@ namespace ASCJewelryLibrary.IN.Descriptor.Constants
                 public static readonly string[] Labels =  { INTestType.Material, INTestType.Assay, INTestType.Plating,
                                                    INTestType.TarnishTesting, INTestType.PreProduction, INTestType.Production,
                                                    INTestType.InStore, INTestType.InFactoryInspection, INTestType.SpecialTest };
-                public TestTypeListAttribute() : base(Values, Labels) { }
+                public ASCJTestTypeListAttribute() : base(Values, Labels) { }
             }
 
             public class ASCJINCompliancePassStatus
@@ -163,9 +163,9 @@ namespace ASCJewelryLibrary.IN.Descriptor.Constants
                 public static readonly string[] Labels = { INPassStatus.Pass, INPassStatus.Fail, INPassStatus.ConditionalFailed };
                 public static readonly string[] Values = { INPassStatus.P, INPassStatus.F, INPassStatus.C };
 
-                public class PassStatusListAttribute : PXStringListAttribute
+                public class ASCJPassStatusListAttribute : PXStringListAttribute
                 {
-                    public PassStatusListAttribute() : base(Values, Labels) { }
+                    public ASCJPassStatusListAttribute() : base(Values, Labels) { }
                 }
             }
         }
