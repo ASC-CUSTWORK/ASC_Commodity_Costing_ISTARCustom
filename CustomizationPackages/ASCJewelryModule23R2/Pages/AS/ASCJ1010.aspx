@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/MasterPages/ListView.master" AutoEventWireup="true" ValidateRequest="false" CodeFile="ISTR1010.aspx.cs" Inherits="Page_ISTR1010" Title="Untitled Page" %>
+<%@ Page Language="C#" MasterPageFile="~/MasterPages/ListView.master" AutoEventWireup="true" ValidateRequest="false" CodeFile="ASCJ1010.aspx.cs" Inherits="Page_ASCJ1010" Title="Untitled Page" %>
 <%@ MasterType VirtualPath="~/MasterPages/ListView.master" %>
 
 <asp:Content ID="cont1" ContentPlaceHolderID="phDS" Runat="Server">

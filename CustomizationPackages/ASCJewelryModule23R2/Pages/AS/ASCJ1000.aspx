@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/MasterPages/TabView.master" AutoEventWireup="true" ValidateRequest="false" CodeFile="ISTR1000.aspx.cs" Inherits="Page_ISTR1000" Title="Untitled Page" %>
+<%@ Page Language="C#" MasterPageFile="~/MasterPages/TabView.master" AutoEventWireup="true" ValidateRequest="false" CodeFile="ASCJ1000.aspx.cs" Inherits="Page_ASCJ1000" Title="Untitled Page" %>
 <%@ MasterType VirtualPath="~/MasterPages/TabView.master" %>
 
 <asp:Content ID="cont1" ContentPlaceHolderID="phDS" Runat="Server">

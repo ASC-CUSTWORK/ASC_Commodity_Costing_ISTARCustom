@@ -25,15 +25,15 @@
         </layout>
         <data>
             <SiteMap>
-                <row Position="21532" Title="Metal Rates Synchronization" Url="~/Pages/IS/ISTR5000.aspx" ScreenID="ISTR5000" NodeID="34dadbec-4893-453b-81dd-b32b12f11670" ParentID="00000000-0000-0000-0000-000000000000">
-                    <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="120" SubcategoryID="32130442-2305-4394-9389-cf915b191d2a" />
+                <row Title="Metal Rates Preferences" Url="~/Pages/AS/ASCJ1000.aspx" ScreenID="ASCJ1000" NodeID="41f731b6-e882-4915-b44a-3c9b2ee28e89" ParentID="00000000-0000-0000-0000-000000000000" SelectedUI="E">
+                    <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="45" SubcategoryID="8a93637d-b507-4667-a739-adaf6fb5f7ea" />
                 </row>
             </SiteMap>
             <MUIWorkspace>
                 <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
             </MUIWorkspace>
             <MUISubcategory>
-                <row IsPortal="0" SubcategoryID="32130442-2305-4394-9389-cf915b191d2a" Order="24.5" Name="Processes" Icon="" IsSystem="0" />
+                <row IsPortal="0" SubcategoryID="8a93637d-b507-4667-a739-adaf6fb5f7ea" Order="25.75" Name="Preferences" Icon="" IsSystem="0" />
             </MUISubcategory>
             <MUIArea>
                 <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />

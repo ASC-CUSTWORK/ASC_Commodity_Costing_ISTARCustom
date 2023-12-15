@@ -25,23 +25,17 @@
         </layout>
         <data>
             <SiteMap>
-                <row Position="21533" Title="Tariff / HTS Codes" Url="~/Pages/IS/ISTR1010.aspx" ScreenID="ISTR1010" NodeID="b1ff8500-7bcf-4609-b9df-7cfdc4f3820a" ParentID="00000000-0000-0000-0000-000000000000">
-                    <MUIScreen IsPortal="0" WorkspaceID="0e94a05b-c02b-4d18-8181-fb49538a3ead" Order="10" SubcategoryID="8a93637d-b507-4667-a739-adaf6fb5f7ea" />
-                    <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="90" SubcategoryID="8a93637d-b507-4667-a739-adaf6fb5f7ea">
-                        <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
-                    </MUIScreen>
+                <row Title="Tariff HTS Code" Url="~/Pages/AS/ASCJ1010.aspx" ScreenID="ASCJ1010" NodeID="75dce8ff-9705-4511-b00e-0988da2e452f" ParentID="00000000-0000-0000-0000-000000000000" SelectedUI="E">
+                    <MUIScreen IsPortal="0" WorkspaceID="0e94a05b-c02b-4d18-8181-fb49538a3ead" Order="10" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" />
                 </row>
             </SiteMap>
             <MUIWorkspace>
                 <row IsPortal="0" WorkspaceID="0e94a05b-c02b-4d18-8181-fb49538a3ead" Order="26" Title="Inventory " Icon="local_shipping" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" IsSystem="0">
                     <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
                 </row>
-                <row IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="148.625" Title="Inventory" Icon="local_shipping" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" ScreenID="WSIN0000" IsSystem="0">
-                    <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
-                </row>
             </MUIWorkspace>
             <MUISubcategory>
-                <row IsPortal="0" SubcategoryID="8a93637d-b507-4667-a739-adaf6fb5f7ea" Order="25.75" Name="Preferences" Icon="" IsSystem="0" />
+                <row IsPortal="0" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" Order="128" Name="Profiles" Icon="" IsSystem="0" />
             </MUISubcategory>
             <MUIArea>
                 <row IsPortal="0" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" Order="20" Name="Operations" />
