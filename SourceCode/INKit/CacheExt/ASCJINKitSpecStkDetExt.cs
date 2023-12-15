@@ -9,6 +9,8 @@ using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
 namespace ASCJewelryLibrary.INKit.CacheExt
 {
+    [Serializable]
+    [PXCacheName("IN Kit Spec Stock Extension")]
     public class ASCJINKitSpecStkDetExt : PXCacheExtension<PX.Objects.IN.INKitSpecStkDet>, IASCJItemCostSpecDTO, IASCJCostRollup
     {
         public static bool IsActive() => true;

@@ -1,8 +1,11 @@
 ﻿using PX.Data;
 using PX.Objects.IN;
+using System;
 
 namespace ASCJewelryLibrary.IN.CacheExt
-{ 
+{
+    [Serializable]
+    [PXCacheName("IN Setup Extension")]
     public class ASCJINSetupExt : PXCacheExtension<INSetup>
     {
         public static bool IsActive() => true;

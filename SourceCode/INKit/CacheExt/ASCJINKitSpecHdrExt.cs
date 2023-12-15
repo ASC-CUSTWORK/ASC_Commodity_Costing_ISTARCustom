@@ -6,6 +6,8 @@ using System;
 
 namespace ASCJewelryLibrary.INKit.CacheExt
 {
+    [Serializable]
+    [PXCacheName("IN Kit Spec Hdr Extension")]
     public sealed class ASCJINKitSpecHdrExt : PXCacheExtension<INKitSpecHdr>, IASCJItemCostSpecDTO
     {
         public static bool IsActive() => true;

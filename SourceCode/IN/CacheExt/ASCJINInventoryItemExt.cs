@@ -10,6 +10,8 @@ using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
 namespace ASCJewelryLibrary.IN.CacheExt
 {
+    [Serializable]
+    [PXCacheName("Inventory Item Extension")]
     public class ASCJINInventoryItemExt : PXCacheExtension<InventoryItem>, IASCJItemCostSpecDTO
     {
         public static bool IsActive() => true;

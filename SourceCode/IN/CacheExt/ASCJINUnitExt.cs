@@ -1,16 +1,14 @@
 ﻿using PX.Data;
+using System;
 using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
 namespace ASCJewelryLibrary.IN.CacheExt
 {
+    [Serializable]
+    [PXCacheName("IN Unit Extension")]
     public class ASCJINUnitExt : PXCacheExtension<PX.Objects.IN.INUnit>
     {
-        #region Static Method
-        public static bool IsActive()
-        {
-            return true;
-        }
-        #endregion
+        public static bool IsActive() => true;
 
         #region UsrCommodity 
         [PXDBString(1)]

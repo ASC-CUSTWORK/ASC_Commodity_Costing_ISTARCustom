@@ -11,6 +11,8 @@ using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
 namespace ASCJewelryLibrary.PO.CacheExt
 {
+    [Serializable]
+    [PXCacheName("ASC PO Vendor Inventory Extension")]
     public class ASCJPOVendorInventoryExt : PXCacheExtension<POVendorInventory>, IASCJItemCostSpecDTO
     {
         public static bool IsActive() => true;

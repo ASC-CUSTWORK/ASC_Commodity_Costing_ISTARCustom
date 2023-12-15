@@ -2,6 +2,7 @@
 
 namespace ASCJewelryLibrary.INKit.Descriptor
 {
+    [PXLocalizable]
     public class ASCJINKitMessages
     {
         public const string EMailSubject = "Purchase Item request: {0}";

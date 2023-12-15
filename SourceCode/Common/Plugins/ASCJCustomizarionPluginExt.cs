@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ASCJewelryLibrary.Common.Plugins
 {
-    public class ASCJPlugin : CustomizationPlugin
+    public class ASCJCustomizarionPluginExt : CustomizationPlugin
     {
         #region Constants
         private const string _baseUrl = "https://metals-api.com/api/";

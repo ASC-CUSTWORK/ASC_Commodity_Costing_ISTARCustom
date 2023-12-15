@@ -46,6 +46,5 @@ namespace ASCJewelryLibrary.Common.Descriptor
             public const string POVendorInventoryVendorPriceEmpty = "Vendor Price can not be empty.";
         }
         #endregion
-
     }
 }

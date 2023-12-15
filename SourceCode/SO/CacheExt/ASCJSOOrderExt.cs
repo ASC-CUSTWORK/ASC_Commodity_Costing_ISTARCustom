@@ -1,8 +1,11 @@
 ﻿using PX.Data;
 using PX.Objects.SO;
+using System;
 
 namespace ASCJewelryLibrary.SO.CacheExt
 {
+    [Serializable]
+    [PXCacheName("ASC SOOrder Extension")]
     public class ASCJSOOrderExt : PXCacheExtension<SOOrder>
     {
         public static bool IsActive() => true;

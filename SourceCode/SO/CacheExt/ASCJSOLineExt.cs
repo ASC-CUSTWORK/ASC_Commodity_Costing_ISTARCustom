@@ -1,9 +1,12 @@
 ﻿using PX.Data;
 using PX.Objects.CR;
 using PX.Objects.SO;
+using System;
 
 namespace ASCJewelryLibrary.SO.CacheExt
 {
+    [Serializable]
+    [PXCacheName("ASC SOLine Extension")]
     public class ASCJSOLineExt : PXCacheExtension<SOLine>
     {
         public static bool IsActive() => true;
