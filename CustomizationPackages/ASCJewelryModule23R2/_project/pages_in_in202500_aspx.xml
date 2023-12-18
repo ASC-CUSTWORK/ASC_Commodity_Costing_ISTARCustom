@@ -677,7 +677,7 @@
                                 <Prop Key="ID" Value="CstFormView6" />
                                 <Prop Key="RenderStyle" Value="Simple" />
                                 <Prop Key="DataSourceID" Value="ds" />
-                                <Prop Key="DataMember" Value="JewelryItemView" />
+                                <Prop Key="DataMember" Value="ASCJJewelryItemView" />
                                 <Children Key="Template">
                                     <AddItem>
                                         <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
@@ -1009,7 +1009,7 @@
                                 <Children Key="Levels">
                                     <AddItem>
                                         <PXGridLevel TypeFullName="PX.Web.UI.PXGridLevel">
-                                            <Prop Key="DataMember" Value="VendorDutyView" />
+                                            <Prop Key="DataMember" Value="ASCJVendorDutyView" />
                                             <Children Key="RowTemplate">
                                                 <AddItem>
                                                     <PXSegmentMask TypeFullName="PX.Web.UI.PXSegmentMask">
@@ -1092,7 +1092,7 @@
                                 <Children Key="Levels">
                                     <AddItem>
                                         <PXGridLevel TypeFullName="PX.Web.UI.PXGridLevel">
-                                            <Prop Key="DataMember" Value="ComplianceView" />
+                                            <Prop Key="DataMember" Value="ASCJComplianceView" />
                                             <Children Key="Columns">
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">

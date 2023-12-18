@@ -11,7 +11,7 @@
                                 <Prop Key="ID" Value="CstFormView6" />
                                 <Prop Key="RenderStyle" Value="Simple" />
                                 <Prop Key="DataSourceID" Value="ds" />
-                                <Prop Key="DataMember" Value="JewelryItemView" />
+                                <Prop Key="DataMember" Value="ASCJJewelryItemView" />
                                 <Children Key="Template">
                                     <AddItem>
                                         <PXLayoutRule TypeFullName="PX.Web.UI.PXLayoutRule">
@@ -309,7 +309,7 @@
                                 <Children Key="Levels">
                                     <AddItem>
                                         <PXGridLevel TypeFullName="PX.Web.UI.PXGridLevel">
-                                            <Prop Key="DataMember" Value="VendorItems" />
+                                            <Prop Key="DataMember" Value="ASCJVendorItems" />
                                             <Children Key="Columns">
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
@@ -1032,6 +1032,7 @@
             <PXTextEdit DataField="Descr" OriginalIndex="5" />
             <PXLayoutRule OriginalIndex="6" Remove="True" />
         </Children>
+        <Prop Key="DataMember" Value="ASCJHdr" />
     </PXFormView>
     <Content ID="cont2" ParentId="phF" TypeFullName="System.Web.UI.WebControls.Content">
         <Children Key="Controls" />
@@ -1052,5 +1053,6 @@
                 </PXDSCallbackCommand>
             </AddItem>
         </Children>
+        <Prop Key="PrimaryView" Value="ASCJHdr" />
     </PXDataSource>
 </Page>

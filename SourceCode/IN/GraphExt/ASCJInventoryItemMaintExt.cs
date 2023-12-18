@@ -29,13 +29,13 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
         #region Selects
 
-        public SelectFrom<ASCJINJewelryItem>.Where<ASCJINJewelryItem.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View JewelryItemView;
+        public SelectFrom<ASCJINJewelryItem>.Where<ASCJINJewelryItem.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View ASCJJewelryItemView;
 
-        public SelectFrom<ASCJINVendorDuty>.Where<ASCJINVendorDuty.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View VendorDutyView;
+        public SelectFrom<ASCJINVendorDuty>.Where<ASCJINVendorDuty.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View ASCJVendorDutyView;
 
         [PXFilterable]
         [PXCopyPasteHiddenView(IsHidden = true)]
-        public SelectFrom<ASCJINCompliance>.Where<ASCJINCompliance.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View ComplianceView;
+        public SelectFrom<ASCJINCompliance>.Where<ASCJINCompliance.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View ASCJComplianceView;
 
         #endregion Selects
 
@@ -84,13 +84,13 @@ namespace ASCJewelryLibrary.IN.GraphExt
             bool isVisible = IsVisibleFields(row.ItemClassID);
             SetVisibleJewelFields(e.Cache, row, isVisible);
 
-            if (this.JewelryItemView.Current == null)
-                this.JewelryItemView.Current = this.JewelryItemView.Select();
+            if (this.ASCJJewelryItemView.Current == null)
+                this.ASCJJewelryItemView.Current = this.ASCJJewelryItemView.Select();
 
-            SetReadOnlyJewelAttrFields(e.Cache, row, this.JewelryItemView.Current?.MetalType);
+            SetReadOnlyJewelAttrFields(e.Cache, row, this.ASCJJewelryItemView.Current?.MetalType);
 
-            PXUIFieldAttribute.SetRequired<ASCJINJewelryItem.metalType>(this.JewelryItemView.Cache, isVisible);
-            PXDefaultAttribute.SetPersistingCheck<ASCJINJewelryItem.metalType>(this.JewelryItemView.Cache, this.JewelryItemView.Current,
+            PXUIFieldAttribute.SetRequired<ASCJINJewelryItem.metalType>(this.ASCJJewelryItemView.Cache, isVisible);
+            PXDefaultAttribute.SetPersistingCheck<ASCJINJewelryItem.metalType>(this.ASCJJewelryItemView.Cache, this.ASCJJewelryItemView.Current,
                 isVisible ? PXPersistingCheck.NullOrBlank : PXPersistingCheck.Nothing);
         }
 
@@ -157,7 +157,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             var row = e.Row;
             if (row == null) return;
 
-            this.JewelryItemView.SetValueExt<ASCJINJewelryItem.shortDesc>(this.JewelryItemView.Current, e.NewValue);
+            this.ASCJJewelryItemView.SetValueExt<ASCJINJewelryItem.shortDesc>(this.ASCJJewelryItemView.Current, e.NewValue);
         }
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, InventoryItem.itemClassID> e)
@@ -183,7 +183,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             var row = e.Row;
             if (row == null || Base.IsCopyPasteContext) return;
 
-            var mult = ASCJMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
+            var mult = ASCJMetalType.GetGoldTypeValue(this.ASCJJewelryItemView.Current?.MetalType);
 
             decimal? pricingGRAMGold = (decimal?)e.NewValue * mult / 24;
             e.Cache.SetValueExt<ASCJINInventoryItemExt.usrASCJPricingGRAMGold>(row, pricingGRAMGold);
@@ -196,7 +196,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             var row = e.Row;
             if (row == null || Base.IsCopyPasteContext) return;
 
-            var value = ASCJMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
+            var value = ASCJMetalType.GetSilverTypeValue(this.ASCJJewelryItemView.Current?.MetalType);
 
             e.Cache.SetValueExt<ASCJINInventoryItemExt.usrASCJPricingGRAMSilver>(row, (decimal?)e.NewValue * value);
 
@@ -212,7 +212,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             UpdateCommodityCostMetal(e.Cache, row, rowExt);
 
-            var valueMult = ASCJMetalType.GetGoldTypeValue(this.JewelryItemView.Current?.MetalType);
+            var valueMult = ASCJMetalType.GetGoldTypeValue(this.ASCJJewelryItemView.Current?.MetalType);
 
             var actualGRAMGold = (decimal?)e.NewValue / valueMult * 24;
             if (actualGRAMGold != rowExt.UsrASCJActualGRAMGold)
@@ -232,7 +232,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             UpdateCommodityCostMetal(e.Cache, row, rowExt);
 
-            var valueMult = ASCJMetalType.GetSilverTypeValue(this.JewelryItemView.Current?.MetalType);
+            var valueMult = ASCJMetalType.GetSilverTypeValue(this.ASCJJewelryItemView.Current?.MetalType);
 
             var actualGramSilver = (decimal?)e.NewValue / valueMult;
             if (actualGramSilver != rowExt.UsrASCJActualGRAMSilver)
@@ -270,11 +270,11 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             var rowExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(row);
 
-            var isGold = ASCJMetalType.IsGold(this.JewelryItemView.Current?.MetalType);
+            var isGold = ASCJMetalType.IsGold(this.ASCJJewelryItemView.Current?.MetalType);
 
             if (isGold == true)
             {
-                UpdateSurcharge<ASCJINInventoryItemExt.usrASCJContractSurcharge>(e.Cache, row, rowExt, this.JewelryItemView.Current?.MetalType);
+                UpdateSurcharge<ASCJINInventoryItemExt.usrASCJContractSurcharge>(e.Cache, row, rowExt, this.ASCJJewelryItemView.Current?.MetalType);
                 UpdateCommodityCostMetal(e.Cache, row, rowExt);
             }
 
@@ -425,8 +425,8 @@ namespace ASCJewelryLibrary.IN.GraphExt
             e.Cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJCommodityType>(row, e.NewValue,
                 new PXSetPropertyException(ASCJINConstants.ASCJWarnings.MetalTypeEmpty, PXErrorLevel.Warning));
 
-            this.JewelryItemView.SetValueExt<ASCJINJewelryItem.metalType>(this.JewelryItemView.Current, null);
-            JewelryItemView.Cache.RaiseExceptionHandling<ASCJINJewelryItem.metalType>(JewelryItemView.Current, null,
+            this.ASCJJewelryItemView.SetValueExt<ASCJINJewelryItem.metalType>(this.ASCJJewelryItemView.Current, null);
+            ASCJJewelryItemView.Cache.RaiseExceptionHandling<ASCJINJewelryItem.metalType>(ASCJJewelryItemView.Current, null,
                 new PXSetPropertyException(ASCJINConstants.ASCJWarnings.SelectMetalType, PXErrorLevel.Warning));
 
             ASCJINInventoryItemExt rowExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(row);
@@ -494,7 +494,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, false, new PXSetPropertyException(ASCJINConstants.ASCJErrors.MarketEmpty, PXErrorLevel.RowError));
             }
 
-            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
+            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.ASCJJewelryItemView.Current?.MetalType);
 
             var apVendorPrice = ASCJCostBuilder.GetAPVendorPrice(this.Base, row.VendorID, inventoryID, ASCJConstants.TOZ.value, PXTimeZoneInfo.Today);
 
@@ -622,7 +622,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             ASCJVendorExt vendorExt = vendor?.GetExtension<ASCJVendorExt>();
             e.Cache.SetValue<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, vendorExt.UsrASCJMarketID);
 
-            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
+            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.ASCJJewelryItemView.Current?.MetalType);
 
             var apVendorPrice = ASCJCostBuilder.GetAPVendorPrice(this.Base, vendor.BAccountID, inventoryID, ASCJConstants.TOZ.value, PXTimeZoneInfo.Today);
 
@@ -706,14 +706,14 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(row);
 
-            var isGold = ASCJMetalType.IsGold(this.JewelryItemView.Current?.MetalType);
+            var isGold = ASCJMetalType.IsGold(this.ASCJJewelryItemView.Current?.MetalType);
             if (isGold == true)
             {
-                UpdateSurcharge<ASCJPOVendorInventoryExt.usrASCJContractSurcharge>(e.Cache, row, rowExt, this.JewelryItemView.Current?.MetalType);
+                UpdateSurcharge<ASCJPOVendorInventoryExt.usrASCJContractSurcharge>(e.Cache, row, rowExt, this.ASCJJewelryItemView.Current?.MetalType);
             }
             else
             {
-                var isSilver = ASCJMetalType.IsSilver(this.JewelryItemView.Current?.MetalType);
+                var isSilver = ASCJMetalType.IsSilver(this.ASCJJewelryItemView.Current?.MetalType);
                 if (isSilver)
                 {
                     UpdateMetalCalcPOVendorItem(e.Cache, row, rowExt);
@@ -967,7 +967,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
         {
             var inventoryExt = Base.Item.Current.GetExtension<ASCJINInventoryItemExt>();
 
-            var metalType = this.JewelryItemView.Current?.MetalType;
+            var metalType = this.ASCJJewelryItemView.Current?.MetalType;
             decimal? metalWeight;
 
             switch (metalType)
@@ -1107,16 +1107,16 @@ namespace ASCJewelryLibrary.IN.GraphExt
                 defaultVendor = GetDefaultVendor();
             if (defaultVendor == null) return null;
 
-            if (this.JewelryItemView.Current == null)
-                this.JewelryItemView.Current = JewelryItemView.Select().TopFirst;
-            if (this.JewelryItemView.Current == null && Base.IsCopyPasteContext) // it is fix of copy-paste bug, missing Precious Metal value
-                this.JewelryItemView.Current = this.JewelryItemView.Cache.Cached.RowCast<ASCJINJewelryItem>().FirstOrDefault();
-            if (this.JewelryItemView.Current == null) return null;
+            if (this.ASCJJewelryItemView.Current == null)
+                this.ASCJJewelryItemView.Current = ASCJJewelryItemView.Select().TopFirst;
+            if (this.ASCJJewelryItemView.Current == null && Base.IsCopyPasteContext) // it is fix of copy-paste bug, missing Precious Metal value
+                this.ASCJJewelryItemView.Current = this.ASCJJewelryItemView.Cache.Cached.RowCast<ASCJINJewelryItem>().FirstOrDefault();
+            if (this.ASCJJewelryItemView.Current == null) return null;
 
             return new ASCJCostBuilder(this.Base)
                         .WithInventoryItem(currentRow)
                         .WithPOVendorInventory(defaultVendor)
-                        .WithJewelryAttrData(this.JewelryItemView.Current)
+                        .WithJewelryAttrData(this.ASCJJewelryItemView.Current)
                         .WithPricingData(PXTimeZoneInfo.Today)
                         .Build();
         }

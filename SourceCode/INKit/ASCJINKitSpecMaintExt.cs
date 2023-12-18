@@ -38,15 +38,15 @@ namespace ASCJewelryLibrary.INKit
 
         #region DataView
         [PXCopyPasteHiddenView]
-        public PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Optional<INKitSpecHdr.kitInventoryID>>>> Hdr;
+        public PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Optional<INKitSpecHdr.kitInventoryID>>>> ASCJHdr;
 
         [PXCopyPasteHiddenView]
-        public PXSelect<POVendorInventory, Where<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> VendorItems;
+        public PXSelect<POVendorInventory, Where<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCJVendorItems;
 
         public SelectFrom<ASCJINKitSpecJewelryItem>
                  .Where<ASCJINKitSpecJewelryItem.kitInventoryID.IsEqual<INKitSpecHdr.kitInventoryID.FromCurrent>
                     .And<ASCJINKitSpecJewelryItem.revisionID.IsEqual<INKitSpecHdr.revisionID.FromCurrent>>>
-                        .View JewelryItemView;
+                        .View ASCJJewelryItemView;
 
 
         [PXCopyPasteHiddenView]
@@ -134,10 +134,10 @@ namespace ASCJewelryLibrary.INKit
         #endregion
 
         #region Actions
-        public PXAction<INKitSpecHdr> SendEmailToVendor;
+        public PXAction<INKitSpecHdr> ASCJSendEmailToVendor;
         [PXUIField(DisplayName = "Send Email to Vendor", MapEnableRights = PXCacheRights.Select, MapViewRights = PXCacheRights.Select)]
         [PXButton]
-        public virtual void sendEmailToVendor()
+        public virtual void aSCJSendEmailToVendor()
         {
             if (this.Base.Hdr.Current == null) return;
 
@@ -167,14 +167,14 @@ namespace ASCJewelryLibrary.INKit
             var currentHdr = Base.Hdr.Current;
             if (currentHdr != null)
             {
-                VendorItems.Select().RowCast<POVendorInventory>().ForEach(row =>
+                ASCJVendorItems.Select().RowCast<POVendorInventory>().ForEach(row =>
                 {
 
                     // var jewelryItem = GetASCJINJewelryItem(currentHdr.KitInventoryID);
-                    if (JewelryItemView.Current == null)
-                        JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
+                    if (ASCJJewelryItemView.Current == null)
+                        ASCJJewelryItemView.Current = ASCJJewelryItemView.Select()?.TopFirst;
 
-                    var metalType = JewelryItemView.Current?.MetalType;
+                    var metalType = ASCJJewelryItemView.Current?.MetalType;
 
                     if (ASCJMetalType.IsGold(metalType))
                     {
@@ -245,16 +245,16 @@ namespace ASCJewelryLibrary.INKit
         {
             if (e.Row is INKitSpecHdr row)
             {
-                var defaultVendor = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+                var defaultVendor = ASCJVendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
 
                 if (defaultVendor != null)
                 {
                     decimal? value = 0m;
                     // var jewelryItem = GetASCJINJewelryItem(row.KitInventoryID);
-                    if (JewelryItemView.Current == null)
-                        JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
+                    if (ASCJJewelryItemView.Current == null)
+                        ASCJJewelryItemView.Current = ASCJJewelryItemView.Select()?.TopFirst;
 
-                    var metalType = JewelryItemView.Current?.MetalType;
+                    var metalType = ASCJJewelryItemView.Current?.MetalType;
 
                     if (ASCJMetalType.IsGold(metalType) || ASCJMetalType.IsSilver(metalType))
                     {
@@ -486,16 +486,16 @@ namespace ASCJewelryLibrary.INKit
             var newValue = (int?)e.NewValue;
             if (newValue == null) return;
 
-            if (Hdr.Current?.KitInventoryID == newValue)
+            if (ASCJHdr.Current?.KitInventoryID == newValue)
             {
-                var invItem = _itemDataProvider.GetInventoryItemByID(Hdr.Current?.KitInventoryID);
+                var invItem = _itemDataProvider.GetInventoryItemByID(ASCJHdr.Current?.KitInventoryID);
                 e.Cancel = true;
                 throw new PXSetPropertyException(ASCJINKitMessages.ASCJError.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
             }
 
 
-            if (JewelryItemView.Current == null)
-                JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
+            if (ASCJJewelryItemView.Current == null)
+                ASCJJewelryItemView.Current = ASCJJewelryItemView.Select()?.TopFirst;
 
 
 
@@ -533,15 +533,15 @@ namespace ASCJewelryLibrary.INKit
             var newValue = (int?)e.NewValue;
             var inJewelryItemDB = GetASCJINJewelryItem(newValue);
             if (inJewelryItemDB != null
-                    && (inJewelryItemDB.MetalType != null && inJewelryItemDB.MetalType != JewelryItemView.Current?.MetalType
+                    && (inJewelryItemDB.MetalType != null && inJewelryItemDB.MetalType != ASCJJewelryItemView.Current?.MetalType
                     && (ASCJMetalType.IsGold(inJewelryItemDB.MetalType) || ASCJMetalType.IsSilver(inJewelryItemDB.MetalType))))
             {
-                JewelryItemView.Current.MetalType = null;
-                JewelryItemView.Update(JewelryItemView.Current);
+                ASCJJewelryItemView.Current.MetalType = null;
+                ASCJJewelryItemView.Update(ASCJJewelryItemView.Current);
             }
 
             var itemVendor = GetItemVendor(row);
-            if (itemVendor != null && !VendorItems.Select().FirstTableItems.Any(x => x.VendorID == itemVendor.VendorID))
+            if (itemVendor != null && !ASCJVendorItems.Select().FirstTableItems.Any(x => x.VendorID == itemVendor.VendorID))
             {
                 itemVendor.RecordID = null;
                 itemVendor.IsDefault = false;
@@ -556,7 +556,7 @@ namespace ASCJewelryLibrary.INKit
                     newVendorExt.UsrASCJBasisPrice = apVendorPriceExt.UsrASCJBasisValue;
                 }
 
-                VendorItems.Insert(itemVendor);
+                ASCJVendorItems.Insert(itemVendor);
             }
         }
 
@@ -674,7 +674,7 @@ namespace ASCJewelryLibrary.INKit
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(e.Row, false, new PXSetPropertyException(ASCJINConstants.ASCJErrors.MarketEmpty, PXErrorLevel.RowError));
             }
 
-            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
+            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.ASCJJewelryItemView.Current?.MetalType);
 
             var apVendorPrice = ASCJCostBuilder.GetAPVendorPrice(this.Base, row.VendorID, inventoryID, ASCJConstants.TOZ.value, PXTimeZoneInfo.Today);
 
@@ -684,13 +684,13 @@ namespace ASCJewelryLibrary.INKit
                     new PXSetPropertyException(ASCJMessages.ASCJError.VendorPriceNotFound, PXErrorLevel.RowWarning));
             }
 
-            List<POVendorInventory> selectPOVendors = VendorItems.Select()?.FirstTableItems.ToList();
+            List<POVendorInventory> selectPOVendors = ASCJVendorItems.Select()?.FirstTableItems.ToList();
             foreach (var vendorInventory in selectPOVendors)
             {
                 if (vendorInventory.IsDefault == true && vendorInventory != row)
                 {
-                    this.VendorItems.Cache.SetValue<POVendorInventory.isDefault>(vendorInventory, false);
-                    this.VendorItems.View.RequestRefresh();
+                    this.ASCJVendorItems.Cache.SetValue<POVendorInventory.isDefault>(vendorInventory, false);
+                    this.ASCJVendorItems.View.RequestRefresh();
                     break;
                 }
             }
@@ -774,16 +774,16 @@ namespace ASCJewelryLibrary.INKit
                 return;
             }
 
-            foreach (var currentRow in VendorItems.Select().RowCast<POVendorInventory>())
+            foreach (var currentRow in ASCJVendorItems.Select().RowCast<POVendorInventory>())
             {
                 if (currentRow.RecordID != e.Row.RecordID && currentRow.IsDefault == true)
                 {
-                    VendorItems.Cache.SetValue<POVendorInventory.isDefault>(currentRow, false);
+                    ASCJVendorItems.Cache.SetValue<POVendorInventory.isDefault>(currentRow, false);
                 }
             }
 
-            VendorItems.Cache.ClearQueryCacheObsolete();
-            VendorItems.View.RequestRefresh();
+            ASCJVendorItems.Cache.ClearQueryCacheObsolete();
+            ASCJVendorItems.View.RequestRefresh();
 
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(e.Row);
             SetBasisValueOnStockComp(rowExt);
@@ -834,22 +834,22 @@ namespace ASCJewelryLibrary.INKit
 
         protected virtual void SetVisibleItemWeightFields(PXCache cache, INKitSpecHdr row)
         {
-            if (JewelryItemView.Current == null)
-                JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
+            if (ASCJJewelryItemView.Current == null)
+                ASCJJewelryItemView.Current = ASCJJewelryItemView.Select()?.TopFirst;
 
-            var mixedType = ASCJMetalType.GetMixedTypeValue(JewelryItemView.Current?.MetalType);
+            var mixedType = ASCJMetalType.GetMixedTypeValue(ASCJJewelryItemView.Current?.MetalType);
             bool isVisibleMixed = mixedType == ASCJConstants.MixedMetalType.Type_MixedDefault ||
-                JewelryItemView.Current?.MetalType == null;
+                ASCJJewelryItemView.Current?.MetalType == null;
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJActualGRAMSilverRight>(cache, row, isVisibleMixed);
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJPricingGRAMSilverRight>(cache, row, isVisibleMixed);
 
             bool isVisibleGold = mixedType == ASCJConstants.MixedMetalType.Type_MixedGold ||
-                ASCJMetalType.IsGold(JewelryItemView.Current?.MetalType);
+                ASCJMetalType.IsGold(ASCJJewelryItemView.Current?.MetalType);
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJActualGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJPricingGRAMGold>(cache, row, isVisibleMixed || isVisibleGold);
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJContractSurcharge>(cache, row, isVisibleMixed || isVisibleGold);
 
-            bool isVisibleSilver = ASCJMetalType.IsSilver(JewelryItemView.Current?.MetalType);
+            bool isVisibleSilver = ASCJMetalType.IsSilver(ASCJJewelryItemView.Current?.MetalType);
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJActualGRAMSilver>(cache, row, isVisibleSilver);
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJPricingGRAMSilver>(cache, row, isVisibleSilver);
             PXUIFieldAttribute.SetVisible<ASCJINKitSpecHdrExt.usrASCJMatrixStep>(cache, row, isVisibleMixed || isVisibleSilver);
@@ -916,7 +916,7 @@ namespace ASCJewelryLibrary.INKit
                 OD = jewelItem.OD,
             };
 
-            JewelryItemView.Insert(jewelryKitItem);
+            ASCJJewelryItemView.Insert(jewelryKitItem);
         }
 
         protected virtual void CopyJewelryItemFieldsToStockItem(INKitSpecHdr kitSpecHdr)
@@ -925,35 +925,35 @@ namespace ASCJewelryLibrary.INKit
 
             if (jewelItem == null) return;
 
-            jewelItem.ShortDesc = JewelryItemView.Current?.ShortDesc;
-            jewelItem.LongDesc = JewelryItemView.Current?.LongDesc;
-            jewelItem.StyleStatus = JewelryItemView.Current?.StyleStatus;
-            jewelItem.CustomerCode = JewelryItemView.Current?.CustomerCode;
-            jewelItem.InvCategory = JewelryItemView.Current?.InvCategory;
-            jewelItem.ItemType = JewelryItemView.Current?.ItemType;
-            jewelItem.ItemSubType = JewelryItemView.Current?.ItemSubType;
-            jewelItem.Collection = JewelryItemView.Current?.Collection;
-            jewelItem.MetalType = JewelryItemView.Current?.MetalType;
-            jewelItem.MetalNote = JewelryItemView.Current?.MetalNote;
-            jewelItem.MetalColor = JewelryItemView.Current?.MetalColor;
-            jewelItem.Plating = JewelryItemView.Current?.Plating;
-            jewelItem.Finishes = JewelryItemView.Current?.Finishes;
-            jewelItem.VendorMaker = JewelryItemView.Current?.VendorMaker;
-            jewelItem.OrgCountry = JewelryItemView.Current?.OrgCountry;
-            jewelItem.StoneType = JewelryItemView.Current?.StoneType;
-            jewelItem.WebNotesComment = JewelryItemView.Current?.WebNotesComment;
-            jewelItem.StoneComment = JewelryItemView.Current?.StoneComment;
-            jewelItem.StoneColor = JewelryItemView.Current?.StoneColor;
-            jewelItem.StoneShape = JewelryItemView.Current?.StoneShape;
-            jewelItem.StoneCreation = JewelryItemView.Current?.StoneCreation;
-            jewelItem.GemstoneTreatment = JewelryItemView.Current?.GemstoneTreatment;
-            jewelItem.SettingType = JewelryItemView.Current?.SettingType;
-            jewelItem.Findings = JewelryItemView.Current?.Findings;
-            jewelItem.FindingsSubType = JewelryItemView.Current?.FindingsSubType;
-            jewelItem.ChainType = JewelryItemView.Current?.ChainType;
-            jewelItem.RingLength = JewelryItemView.Current?.RingLength;
-            jewelItem.RingSize = JewelryItemView.Current?.RingSize;
-            jewelItem.OD = JewelryItemView.Current?.OD;
+            jewelItem.ShortDesc = ASCJJewelryItemView.Current?.ShortDesc;
+            jewelItem.LongDesc = ASCJJewelryItemView.Current?.LongDesc;
+            jewelItem.StyleStatus = ASCJJewelryItemView.Current?.StyleStatus;
+            jewelItem.CustomerCode = ASCJJewelryItemView.Current?.CustomerCode;
+            jewelItem.InvCategory = ASCJJewelryItemView.Current?.InvCategory;
+            jewelItem.ItemType = ASCJJewelryItemView.Current?.ItemType;
+            jewelItem.ItemSubType = ASCJJewelryItemView.Current?.ItemSubType;
+            jewelItem.Collection = ASCJJewelryItemView.Current?.Collection;
+            jewelItem.MetalType = ASCJJewelryItemView.Current?.MetalType;
+            jewelItem.MetalNote = ASCJJewelryItemView.Current?.MetalNote;
+            jewelItem.MetalColor = ASCJJewelryItemView.Current?.MetalColor;
+            jewelItem.Plating = ASCJJewelryItemView.Current?.Plating;
+            jewelItem.Finishes = ASCJJewelryItemView.Current?.Finishes;
+            jewelItem.VendorMaker = ASCJJewelryItemView.Current?.VendorMaker;
+            jewelItem.OrgCountry = ASCJJewelryItemView.Current?.OrgCountry;
+            jewelItem.StoneType = ASCJJewelryItemView.Current?.StoneType;
+            jewelItem.WebNotesComment = ASCJJewelryItemView.Current?.WebNotesComment;
+            jewelItem.StoneComment = ASCJJewelryItemView.Current?.StoneComment;
+            jewelItem.StoneColor = ASCJJewelryItemView.Current?.StoneColor;
+            jewelItem.StoneShape = ASCJJewelryItemView.Current?.StoneShape;
+            jewelItem.StoneCreation = ASCJJewelryItemView.Current?.StoneCreation;
+            jewelItem.GemstoneTreatment = ASCJJewelryItemView.Current?.GemstoneTreatment;
+            jewelItem.SettingType = ASCJJewelryItemView.Current?.SettingType;
+            jewelItem.Findings = ASCJJewelryItemView.Current?.Findings;
+            jewelItem.FindingsSubType = ASCJJewelryItemView.Current?.FindingsSubType;
+            jewelItem.ChainType = ASCJJewelryItemView.Current?.ChainType;
+            jewelItem.RingLength = ASCJJewelryItemView.Current?.RingLength;
+            jewelItem.RingSize = ASCJJewelryItemView.Current?.RingSize;
+            jewelItem.OD = ASCJJewelryItemView.Current?.OD;
             ASCJJewelryItem.Update(jewelItem);
         }
 
@@ -1015,7 +1015,7 @@ namespace ASCJewelryLibrary.INKit
 
         protected virtual void CopyFieldsValueToPOVendorInventory(INKitSpecHdr kitSpecHdr)
         {
-            var poVendorInventory = VendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
+            var poVendorInventory = ASCJVendorItems.Select().RowCast<POVendorInventory>().FirstOrDefault(_ => _.IsDefault == true);
             if (poVendorInventory != null && kitSpecHdr != null)
             {
                 var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(poVendorInventory);
@@ -1034,7 +1034,7 @@ namespace ASCJewelryLibrary.INKit
                 poVendorInventoryExt.UsrASCJFreightCost = kitSpecHdrExt.UsrASCJFreightCost;
                 poVendorInventoryExt.UsrASCJDutyCost = kitSpecHdrExt.UsrASCJDutyCost;
                 poVendorInventoryExt.UsrASCJDutyCostPct = kitSpecHdrExt.UsrASCJDutyCostPct;
-                VendorItems.Update(poVendorInventory);
+                ASCJVendorItems.Update(poVendorInventory);
             }
         }
 
@@ -1085,26 +1085,26 @@ namespace ASCJewelryLibrary.INKit
             var defaultVendorExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(defaultVendor);
 
 
-            if (JewelryItemView.Current == null)
-                JewelryItemView.Current = JewelryItemView.Select();
+            if (ASCJJewelryItemView.Current == null)
+                ASCJJewelryItemView.Current = ASCJJewelryItemView.Select();
 
-            if (JewelryItemView.Current == null) return value;
+            if (ASCJJewelryItemView.Current == null) return value;
 
             int? metalInventoryID = null;
             decimal multCoef = 24;
 
-            bool isGold = ASCJMetalType.IsGold(JewelryItemView.Current.MetalType);
+            bool isGold = ASCJMetalType.IsGold(ASCJJewelryItemView.Current.MetalType);
             if (isGold)
             {
                 metalInventoryID = _itemDataProvider.GetInventoryItemByCD("24K").InventoryID;
-                multCoef = ASCJMetalType.GetGoldTypeValue(JewelryItemView.Current.MetalType) / 24;
+                multCoef = ASCJMetalType.GetGoldTypeValue(ASCJJewelryItemView.Current.MetalType) / 24;
             }
 
-            bool isSilver = ASCJMetalType.IsSilver(JewelryItemView.Current.MetalType);
+            bool isSilver = ASCJMetalType.IsSilver(ASCJJewelryItemView.Current.MetalType);
             if (isSilver)
             {
                 metalInventoryID = _itemDataProvider.GetInventoryItemByCD("SSS").InventoryID;
-                multCoef = ASCJMetalType.GetSilverTypeValue(JewelryItemView.Current.MetalType);
+                multCoef = ASCJMetalType.GetSilverTypeValue(ASCJJewelryItemView.Current.MetalType);
             }
 
             var vendorPrice = ASCJCostBuilder.GetAPVendorPrice(Base, defaultVendorExt.UsrASCJMarketID, metalInventoryID, ASCJConstants.TOZ.value, PXTimeZoneInfo.Now);
@@ -1225,7 +1225,7 @@ namespace ASCJewelryLibrary.INKit
             {
                 var result = vendorPrice.SalesPrice * ASCJMetalType.GetMultFactorConvertTOZtoGram(metalType);
                 rowExt.UsrASCJPreciousMetalCost = result;
-                VendorItems.Update(row);
+                ASCJVendorItems.Update(row);
             }
         }
 
@@ -1270,13 +1270,13 @@ namespace ASCJewelryLibrary.INKit
                 var rowExt = row.GetExtension<ASCJINKitSpecStkDetExt>();
                 string metalType = GetASCJINJewelryItem(row.CompInventoryID)?.MetalType;
                 totalPerMetalType += ASCJMetalType.GetMultFactorConvertTOZtoGram(metalType) * (rowExt.UsrASCJActualGRAMGold + rowExt.UsrASCJActualGRAMSilver);
-                totalPerPreciousMetalType += ASCJMetalType.GetMultFactorConvertTOZtoGram(JewelryItemView.Select().TopFirst?.MetalType) * (rowExt.UsrASCJActualGRAMGold + rowExt.UsrASCJActualGRAMSilver); ;
+                totalPerPreciousMetalType += ASCJMetalType.GetMultFactorConvertTOZtoGram(ASCJJewelryItemView.Select().TopFirst?.MetalType) * (rowExt.UsrASCJActualGRAMGold + rowExt.UsrASCJActualGRAMSilver); ;
             }
 
 
             return totalPerPreciousMetalType == 0.0m || totalPerPreciousMetalType == null
                 ? decimal.Zero
-                : ASCJMetalType.GetMultFactorConvertTOZtoGram(JewelryItemView.Select().TopFirst?.MetalType) * totalPerMetalType / totalPerPreciousMetalType;
+                : ASCJMetalType.GetMultFactorConvertTOZtoGram(ASCJJewelryItemView.Select().TopFirst?.MetalType) * totalPerMetalType / totalPerPreciousMetalType;
         }
 
         private int? GetVendorMarketID(POVendorInventory row, ASCJPOVendorInventoryExt rowExt)
@@ -1307,18 +1307,18 @@ namespace ASCJewelryLibrary.INKit
         private ASCJINJewelryItem GetASCJINJewelryItem(int? inventoryID) =>
             SelectFrom<ASCJINJewelryItem>.Where<ASCJINJewelryItem.inventoryID.IsEqual<P.AsInt>>.View.Select(Base, inventoryID)?.TopFirst;
 
-        private POVendorInventory GetDefaultPOVendorInventory() => this.VendorItems.Select()?.FirstTableItems.FirstOrDefault(x => x.IsDefault == true);
+        private POVendorInventory GetDefaultPOVendorInventory() => this.ASCJVendorItems.Select()?.FirstTableItems.FirstOrDefault(x => x.IsDefault == true);
 
         #region Emails Methods
         protected virtual void SendEmailNotification(INKitSpecHdr inKitSpecHdr)
         {
 
-            if (this.VendorItems.Current == null)
-                this.VendorItems.Current = this.VendorItems.Select()?.RowCast<POVendorInventory>().FirstOrDefault(x => x.IsDefault == true);
-            if (this.VendorItems.Current == null)
+            if (this.ASCJVendorItems.Current == null)
+                this.ASCJVendorItems.Current = this.ASCJVendorItems.Select()?.RowCast<POVendorInventory>().FirstOrDefault(x => x.IsDefault == true);
+            if (this.ASCJVendorItems.Current == null)
                 throw new PXException(ASCJINKitMessages.ASCJError.NoDefaultVendor);
 
-            var bAccount = BAccount.PK.Find(Base, this.VendorItems.Current.VendorID);
+            var bAccount = BAccount.PK.Find(Base, this.ASCJVendorItems.Current.VendorID);
 
             var inventoryItem = InventoryItem.PK.Find(this.Base, inKitSpecHdr.KitInventoryID);
 
