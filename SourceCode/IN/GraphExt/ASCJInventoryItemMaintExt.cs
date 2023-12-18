@@ -128,7 +128,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if ((decimal?)e.NewValue <= 0.0m)
             {
                 e.Cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJMatrixStep>(e.Row, 0.5m,
-                    new PXSetPropertyException(ASCJINConstants.Errors.ERPTakeMarketPrice, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJErrors.ERPTakeMarketPrice, PXErrorLevel.Warning));
             }
         }
 
@@ -139,7 +139,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if ((decimal?)e.NewValue < 0.0m)
             {
                 e.Cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJContractSurcharge>(e.Row, e.NewValue,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.SurchargeIsNegative, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.SurchargeIsNegative, PXErrorLevel.Warning));
             }
         }
 
@@ -157,7 +157,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (rowExt != null && e.NewValue?.ToString() != ASCJConstants.CostingType.ContractCost && true == defaultVendor.IsDefault == vendorItemExt.UsrASCJIsOverrideVendor)
             {
                 Base.Item.Cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJCostingType>(row, e.NewValue,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.CostingTypeIsNotContract, PXErrorLevel.RowWarning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.CostingTypeIsNotContract, PXErrorLevel.RowWarning));
             }
         }
 
@@ -432,11 +432,11 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (row == null || e.NewValue == null) return;
 
             e.Cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJCommodityType>(row, e.NewValue,
-                new PXSetPropertyException(ASCJINConstants.Warnings.MetalTypeEmpty, PXErrorLevel.Warning));
+                new PXSetPropertyException(ASCJINConstants.ASCJWarnings.MetalTypeEmpty, PXErrorLevel.Warning));
 
             this.JewelryItemView.SetValueExt<ASCJINJewelryItem.metalType>(this.JewelryItemView.Current, null);
             JewelryItemView.Cache.RaiseExceptionHandling<ASCJINJewelryItem.metalType>(JewelryItemView.Current, null,
-                new PXSetPropertyException(ASCJINConstants.Warnings.SelectMetalType, PXErrorLevel.Warning));
+                new PXSetPropertyException(ASCJINConstants.ASCJWarnings.SelectMetalType, PXErrorLevel.Warning));
 
             ASCJINInventoryItemExt rowExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(row);
         }
@@ -469,7 +469,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (rowExt?.UsrASCJIsOverrideVendor == true)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJUnitCost>(row, rowExt.UsrASCJUnitCost,
-                      new PXSetPropertyException(ASCJINConstants.Warnings.UnitCostIsCustom, PXErrorLevel.Warning));
+                      new PXSetPropertyException(ASCJINConstants.ASCJWarnings.UnitCostIsCustom, PXErrorLevel.Warning));
             }
             else
             {
@@ -488,7 +488,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (poVendorInventoryExt.UsrASCJFabricationCost != calculatedFabricationValue)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJFabricationCost>(row, poVendorInventoryExt.UsrASCJFabricationCost,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.FabricationCostMismatch, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.FabricationCostMismatch, PXErrorLevel.Warning));
             }
         }
 
@@ -500,7 +500,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(row);
             if (rowExt.UsrASCJMarketID == null)
             {
-                e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, false, new PXSetPropertyException(ASCJINConstants.Errors.MarketEmpty, PXErrorLevel.RowError));
+                e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, false, new PXSetPropertyException(ASCJINConstants.ASCJErrors.MarketEmpty, PXErrorLevel.RowError));
             }
 
             var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
@@ -510,7 +510,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (apVendorPrice == null && PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(row).UsrASCJIsOverrideVendor != true)
             {
                 e.Cache.RaiseExceptionHandling<POVendorInventory.isDefault>(row, false,
-                    new PXSetPropertyException(ASCJMessages.Error.VendorPriceNotFound, PXErrorLevel.RowWarning));
+                    new PXSetPropertyException(ASCJMessages.ASCJError.VendorPriceNotFound, PXErrorLevel.RowWarning));
             }
 
             List<POVendorInventory> selectPOVendors = VendorItems.Select()?.FirstTableItems.ToList();
@@ -538,14 +538,14 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (rowExt.UsrASCJCommodityVendorPrice == decimal.Zero)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJCommodityVendorPrice>(row, rowExt.UsrASCJCommodityVendorPrice,
-                    new PXSetPropertyException(ASCJMessages.Error.POVendorInventoryVendorPriceEmpty, PXErrorLevel.Error));
+                    new PXSetPropertyException(ASCJMessages.ASCJError.POVendorInventoryVendorPriceEmpty, PXErrorLevel.Error));
             }
 
             var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(Base.Item.Current);
             if (inventoryItemExt != null && inventoryItemExt.UsrASCJCostingType != ASCJConstants.CostingType.ContractCost)
             {
                 Base.Item.Cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJCostingType>(Base.Item.Current, inventoryItemExt.UsrASCJCostingType,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.CostingTypeIsNotContract, PXErrorLevel.RowWarning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.CostingTypeIsNotContract, PXErrorLevel.RowWarning));
             }
         }
 
@@ -558,7 +558,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if ((decimal)e.NewValue == decimal.Zero && rowExt.UsrASCJIsOverrideVendor == true)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJCommodityVendorPrice>(row, rowExt.UsrASCJBasisPrice,
-                    new PXSetPropertyException(ASCJMessages.Error.POVendorInventoryVendorPriceEmpty, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJMessages.ASCJError.POVendorInventoryVendorPriceEmpty, PXErrorLevel.Warning));
             }
         }
 
@@ -570,7 +570,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if ((decimal?)e.NewValue == decimal.Zero)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJBasisPrice>(row, e.NewValue,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
             }
         }
 
@@ -582,7 +582,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if ((decimal?)e.NewValue <= 0.0m && inventoryItemExt.UsrASCJCommodityType == ASCJConstants.CommodityType.Silver)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMatrixStep>(e.Row, 0.5m,
-                    new PXSetPropertyException(ASCJINConstants.Errors.ERPTakeMarketPrice, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJErrors.ERPTakeMarketPrice, PXErrorLevel.Warning));
             }
         }
 
@@ -594,7 +594,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if ((decimal?)e.NewValue < 0.0m)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJContractSurcharge>(e.Row, e.NewValue,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.SurchargeIsNegative, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.SurchargeIsNegative, PXErrorLevel.Warning));
             }
         }
 
@@ -638,7 +638,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (apVendorPrice == null)
             {
                 e.Cache.RaiseExceptionHandling<POVendorInventory.vendorID>(row, e.NewValue,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
                 return;
             }
 
@@ -896,7 +896,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
         protected virtual void UpdateCommodityCostMetal(PXCache cache, InventoryItem row, ASCJINInventoryItemExt rowExt)
         {
-            if (rowExt == null) throw new PXException(ASCJINConstants.Errors.NullInCacheSaveItemFirst);
+            if (rowExt == null) throw new PXException(ASCJINConstants.ASCJErrors.NullInCacheSaveItemFirst);
 
             var jewelCostBuilder = CreateCostBuilder(rowExt);
             if (jewelCostBuilder == null) return;
@@ -1163,7 +1163,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (rowExt.UsrASCJContractLossPct != vendorExt.UsrASCJCommodityLossPct)
             {
                 cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJContractLossPct>(row, rowExt.UsrASCJContractLossPct,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.MissingMatchesLossOrSurcharge, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.MissingMatchesLossOrSurcharge, PXErrorLevel.Warning));
             }
             else
             {
@@ -1172,7 +1172,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             if (rowExt.UsrASCJContractSurcharge != vendorExt.UsrASCJCommoditySurchargePct)
             {
                 cache.RaiseExceptionHandling<ASCJINInventoryItemExt.usrASCJContractSurcharge>(row, rowExt.UsrASCJContractSurcharge,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.MissingMatchesLossOrSurcharge, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.MissingMatchesLossOrSurcharge, PXErrorLevel.Warning));
             }
             else
             {

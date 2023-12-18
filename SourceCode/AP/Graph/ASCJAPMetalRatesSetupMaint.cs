@@ -42,11 +42,11 @@ namespace ASCJewelryLibrary.AP
             catch (Exception ex)
             {
                 PXTrace.WriteError(ex);
-                Setup.Ask("Connection failed", ASCJMessages.Connection.TestConnectionFailed, MessageButtons.OK, MessageIcon.Error);
+                Setup.Ask("Connection failed", ASCJMessages.ASCJConnection.TestConnectionFailed, MessageButtons.OK, MessageIcon.Error);
                 return adapter.Get();
             }
 
-            Setup.Ask("Success", ASCJMessages.Connection.TestConnectionSuccess, MessageButtons.OK, MessageIcon.Information);
+            Setup.Ask("Success", ASCJMessages.ASCJConnection.TestConnectionSuccess, MessageButtons.OK, MessageIcon.Information);
 
             return adapter.Get();
         }

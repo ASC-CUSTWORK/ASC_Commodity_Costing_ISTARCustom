@@ -69,7 +69,7 @@ namespace ASCJewelryLibrary.Common.Services.REST
         {
             if (!IsSymbolSpecified(symbol))
             {
-                throw new PXException(ASCJMessages.Error.SymbolNotSpecified);
+                throw new PXException(ASCJMessages.ASCJError.SymbolNotSpecified);
             }
 
             var result = _starRESTService.Get<ASCJLatestRatesModel>(ASCJEndpoints.LatestRates, Parameters(currency, symbol));

@@ -30,7 +30,7 @@ namespace ASCJewelryLibrary.Common.Helper.Exceptions
         /// </summary>
         /// <param name="statusCode">The HTTP status code returned by the failed request.</param>
         /// <param name="content">The content of the failed request response.</param>
-        public ASCJStatusCodeException(HttpStatusCode statusCode, string content) : base(string.Format(ASCJMessages.StatusCode.StatusCodeError, statusCode.ToString(), content))
+        public ASCJStatusCodeException(HttpStatusCode statusCode, string content) : base(string.Format(ASCJMessages.ASCJStatusCode.StatusCodeError, statusCode.ToString(), content))
         {
             StatusCode = statusCode;
             Content = content;

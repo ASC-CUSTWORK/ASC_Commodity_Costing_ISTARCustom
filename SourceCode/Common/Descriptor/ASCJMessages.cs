@@ -6,7 +6,7 @@ namespace ASCJewelryLibrary.Common.Descriptor
     {
         #region Plugin
         [PXLocalizable]
-        public class Plugin
+        public class ASCJPlugin
         {
             public const string PluginStart = "INFO:......ASC Jewelshop Module Plugin start working...";
             public const string PluginEnd = "INFO:......ASC Jewelshop Module Plugin work completed.";
@@ -18,7 +18,7 @@ namespace ASCJewelryLibrary.Common.Descriptor
 
         #region StatusCode
         [PXLocalizable]
-        public class StatusCode
+        public class ASCJStatusCode
         {
             public const string StatusCodeError = "Error: Received a {0} status code. Content: {1}";
             public const string RemoteServerError = "The remote server returned an error. For more details open trace.";
@@ -27,7 +27,7 @@ namespace ASCJewelryLibrary.Common.Descriptor
 
         #region Connection
         [PXLocalizable]
-        public class Connection
+        public class ASCJConnection
         {
             public const string TestConnectionSuccess = "The connection to the Metals-API was successful.";
             public const string TestConnectionFailed = "Test connection failed. For more details, please refer to the trace log.";
@@ -36,7 +36,7 @@ namespace ASCJewelryLibrary.Common.Descriptor
 
         #region Error
         [PXLocalizable]
-        public class Error
+        public class ASCJError
         {
             public const string SymbolNotSpecified = "Symbol not provided. Please specify the desired symbol in preferences and try again.";
             public const string ProcError = "Error: {0}";

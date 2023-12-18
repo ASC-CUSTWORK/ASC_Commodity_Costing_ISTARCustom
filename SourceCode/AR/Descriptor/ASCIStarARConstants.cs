@@ -12,7 +12,7 @@ namespace ASCJewelryLibrary.AR.Descriptor
         }
 
         [PXLocalizable]
-        public class Errors
+        public class ASCJErrors
         {
             public const string AllowancePctCheckValue = "The Allowance Percetege can not be less then -100 and more then 100";
         }

@@ -145,7 +145,7 @@ namespace ASCJewelryLibrary.INKit
             {
                 var defaultVendorInventory = GetDefaultPOVendorInventory();
                 if (defaultVendorInventory == null)
-                    throw new PXException(ASCJINKitMessages.Error.NoDefaultVendor);
+                    throw new PXException(ASCJINKitMessages.ASCJError.NoDefaultVendor);
 
                 SendEmailNotification(this.Base.Hdr.Current);
             });
@@ -292,7 +292,7 @@ namespace ASCJewelryLibrary.INKit
                 {
                     var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCJINKitSpecHdrExt>(row);
                     e.Cache.RaiseExceptionHandling<ASCJINKitSpecHdrExt.usrASCJBasisValue>(row, rowExt.UsrASCJBasisValue,
-                        new PXSetPropertyException(ASCJINKitMessages.Warning.BaseItemNotSpecifyed, PXErrorLevel.Warning));
+                        new PXSetPropertyException(ASCJINKitMessages.ASCJWarning.BaseItemNotSpecifyed, PXErrorLevel.Warning));
                 }
             }
         }
@@ -490,7 +490,7 @@ namespace ASCJewelryLibrary.INKit
             {
                 var invItem = _itemDataProvider.GetInventoryItemByID(Hdr.Current?.KitInventoryID);
                 e.Cancel = true;
-                throw new PXSetPropertyException(ASCJINKitMessages.Error.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
+                throw new PXSetPropertyException(ASCJINKitMessages.ASCJError.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
             }
 
 
@@ -617,9 +617,9 @@ namespace ASCJewelryLibrary.INKit
                 if (rowExt.UsrASCJCostRollupType == null)
                 {
                     e.Cache.RaiseExceptionHandling<ASCJINKitSpecStkDetExt.usrASCJCostRollupType>(row, rowExt.UsrASCJCostRollupType,
-                        new PXSetPropertyException(ASCJINKitMessages.Error.CostRollupTypeNotSet, PXErrorLevel.Error));
+                        new PXSetPropertyException(ASCJINKitMessages.ASCJError.CostRollupTypeNotSet, PXErrorLevel.Error));
                     e.Cancel = true;
-                    throw new PXException(ASCJINKitMessages.Error.CostRollupTypeNotSet);
+                    throw new PXException(ASCJINKitMessages.ASCJError.CostRollupTypeNotSet);
                 }
             }
         }
@@ -644,9 +644,9 @@ namespace ASCJewelryLibrary.INKit
                 if (rowExt.UsrASCJCostRollupType == null)
                 {
                     e.Cache.RaiseExceptionHandling<ASCJINKitSpecNonStkDetExt.usrASCJCostRollupType>(row, rowExt.UsrASCJCostRollupType,
-                        new PXSetPropertyException(ASCJINKitMessages.Error.CostRollupTypeNotSet, PXErrorLevel.Error));
+                        new PXSetPropertyException(ASCJINKitMessages.ASCJError.CostRollupTypeNotSet, PXErrorLevel.Error));
                     e.Cancel = true;
-                    throw new PXException(ASCJINKitMessages.Error.CostRollupTypeNotSet);
+                    throw new PXException(ASCJINKitMessages.ASCJError.CostRollupTypeNotSet);
                 }
             }
         }
@@ -671,7 +671,7 @@ namespace ASCJewelryLibrary.INKit
             var rowExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(row);
             if (rowExt.UsrASCJMarketID == null)
             {
-                e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(e.Row, false, new PXSetPropertyException(ASCJINConstants.Errors.MarketEmpty, PXErrorLevel.RowError));
+                e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(e.Row, false, new PXSetPropertyException(ASCJINConstants.ASCJErrors.MarketEmpty, PXErrorLevel.RowError));
             }
 
             var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.JewelryItemView.Current?.MetalType);
@@ -681,7 +681,7 @@ namespace ASCJewelryLibrary.INKit
             if (apVendorPrice == null && PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(row).UsrASCJIsOverrideVendor != true)
             {
                 e.Cache.RaiseExceptionHandling<POVendorInventory.isDefault>(row, false,
-                    new PXSetPropertyException(ASCJMessages.Error.VendorPriceNotFound, PXErrorLevel.RowWarning));
+                    new PXSetPropertyException(ASCJMessages.ASCJError.VendorPriceNotFound, PXErrorLevel.RowWarning));
             }
 
             List<POVendorInventory> selectPOVendors = VendorItems.Select()?.FirstTableItems.ToList();
@@ -704,7 +704,7 @@ namespace ASCJewelryLibrary.INKit
             if ((decimal?)e.NewValue == decimal.Zero)
             {
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJBasisPrice>(row, e.NewValue,
-                    new PXSetPropertyException(ASCJINConstants.Warnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
+                    new PXSetPropertyException(ASCJINConstants.ASCJWarnings.BasisOrMarketPriceEmpty, PXErrorLevel.Warning));
             }
         }
 
@@ -728,9 +728,9 @@ namespace ASCJewelryLibrary.INKit
                     var rowExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(e.Row);
                     if (rowExt.UsrASCJMarketID == null)
                     {
-                        e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, row.IsDefault, new PXSetPropertyException(ASCJINKitMessages.Error.MarketNotFound, PXErrorLevel.Error));
+                        e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, row.IsDefault, new PXSetPropertyException(ASCJINKitMessages.ASCJError.MarketNotFound, PXErrorLevel.Error));
                         e.Cancel = true;
-                        throw new PXException(ASCJINKitMessages.Error.MarketNotFound);
+                        throw new PXException(ASCJINKitMessages.ASCJError.MarketNotFound);
                     }
                 }
             }
@@ -1051,7 +1051,7 @@ namespace ASCJewelryLibrary.INKit
                             .Build();
             }
 
-            throw new PXSetPropertyException(ASCJINKitMessages.Error.NoDefaultVendor);
+            throw new PXSetPropertyException(ASCJINKitMessages.ASCJError.NoDefaultVendor);
         }
 
         protected virtual POVendorInventory GetItemVendor(INKitSpecStkDet row) =>
@@ -1171,7 +1171,7 @@ namespace ASCJewelryLibrary.INKit
             else
             {
                 cache.RaiseExceptionHandling<INKitSpecStkDet.compInventoryID>(row, row.CompInventoryID,
-                    new PXSetPropertyException(ASCJINKitMessages.Warning.MissingMetalType, PXErrorLevel.RowWarning));
+                    new PXSetPropertyException(ASCJINKitMessages.ASCJWarning.MissingMetalType, PXErrorLevel.RowWarning));
             }
         }
 
@@ -1316,7 +1316,7 @@ namespace ASCJewelryLibrary.INKit
             if (this.VendorItems.Current == null)
                 this.VendorItems.Current = this.VendorItems.Select()?.RowCast<POVendorInventory>().FirstOrDefault(x => x.IsDefault == true);
             if (this.VendorItems.Current == null)
-                throw new PXException(ASCJINKitMessages.Error.NoDefaultVendor);
+                throw new PXException(ASCJINKitMessages.ASCJError.NoDefaultVendor);
 
             var bAccount = BAccount.PK.Find(Base, this.VendorItems.Current.VendorID);
 

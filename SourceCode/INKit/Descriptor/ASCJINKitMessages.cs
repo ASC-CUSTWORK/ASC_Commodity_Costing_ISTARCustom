@@ -14,14 +14,14 @@ namespace ASCJewelryLibrary.INKit.Descriptor
                                         "{4}\r\n" + "{5}";
 
         [PXLocalizable]
-        public class Warning
+        public class ASCJWarning
         {
             public const string BaseItemNotSpecifyed = "System is missing the base items. Please ensure 'SSS' and '24K' items are created before proceeding.";
             public const string MissingMetalType = "The Metal Type is missing!";
         }
 
         [PXLocalizable]
-        public class Error
+        public class ASCJError
         {
             public const string ItemWrongMetalType = "Kit has another Metal Type from selected item!";
             public const string NoDefaultVendor = "To proceed, please add a default vendor or select one on the Vendors tab.";

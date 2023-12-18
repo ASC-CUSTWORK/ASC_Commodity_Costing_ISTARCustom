@@ -80,7 +80,7 @@ namespace ASCJewelryLibrary.Common.Services.REST
                 PXTrace.WriteError($"Error: {ex.Message}");
                 PXTrace.WriteError($"Status Code: {ex.StatusCode}");
                 PXTrace.WriteError($"Content: {ex.Content}");
-                throw new PXException(ASCJMessages.StatusCode.RemoteServerError);
+                throw new PXException(ASCJMessages.ASCJStatusCode.RemoteServerError);
             }
         }
 

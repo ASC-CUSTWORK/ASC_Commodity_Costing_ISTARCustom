@@ -43,7 +43,7 @@ namespace ASCJewelryLibrary.IN.Descriptor.Constants
         }
 
         [PXLocalizable]
-        public class Errors
+        public class ASCJErrors
         {
             public const string ERPTakeMarketPrice = "ERP is taking Market price, Matrix Step cannot be zero!";
             public const string NullInCacheSaveItemFirst = "Save Item first!";
@@ -51,7 +51,7 @@ namespace ASCJewelryLibrary.IN.Descriptor.Constants
         }
 
         [PXLocalizable]
-        public class Warnings
+        public class ASCJWarnings
         {
             public const string BasisOrMarketPriceEmpty = "Basis or Market price is empty, enter value or check Vendor Prices screen.";
             public const string SurchargeIsNegative = "Surcharge can not be negative.";

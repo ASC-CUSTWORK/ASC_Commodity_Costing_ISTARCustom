@@ -29,7 +29,7 @@ namespace ASCJewelryLibrary.Common.Services.DataProvider
 
             if (result == null && withException == true)
             {
-                throw new PXException(ASCJMessages.Error.VendorPriceNotFound);
+                throw new PXException(ASCJMessages.ASCJError.VendorPriceNotFound);
             }
 
             return result;
@@ -44,7 +44,7 @@ namespace ASCJewelryLibrary.Common.Services.DataProvider
                 .Select(_graph, bAccountID);
             if (result == null)
             {
-                throw new PXException(ASCJMessages.Error.VendorRecordNotFound);
+                throw new PXException(ASCJMessages.ASCJError.VendorRecordNotFound);
             }
 
             return result;

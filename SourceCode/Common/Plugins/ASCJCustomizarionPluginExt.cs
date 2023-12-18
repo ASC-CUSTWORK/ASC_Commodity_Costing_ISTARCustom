@@ -21,12 +21,12 @@ namespace ASCJewelryLibrary.Common.Plugins
 
         public override void UpdateDatabase()
         {
-            WriteLog(ASCJMessages.Plugin.PluginStart);
+            WriteLog(ASCJMessages.ASCJPlugin.PluginStart);
 
             // Metal API
             MetalAPIConnectionPrefDefaulting();
 
-            WriteLog(ASCJMessages.Plugin.PluginEnd);
+            WriteLog(ASCJMessages.ASCJPlugin.PluginEnd);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace ASCJewelryLibrary.Common.Plugins
                 var setup = PXSelect<ASCJAPMetalRatesSetup>.Select(setupMaint).RowCast<ASCJAPMetalRatesSetup>();
                 if (!setup.Any())
                 {
-                    WriteLog(ASCJMessages.Plugin.PluginCreateConnectionPref);
+                    WriteLog(ASCJMessages.ASCJPlugin.PluginCreateConnectionPref);
                     setupMaint.Setup.Insert(new ASCJAPMetalRatesSetup()
                     {
                         BaseURL = _baseUrl,
@@ -51,12 +51,12 @@ namespace ASCJewelryLibrary.Common.Plugins
                         Symbols = _symbols,
                     });
                     setupMaint.Save.PressButton();
-                    WriteLog(ASCJMessages.Plugin.PluginCreateConnectionPrefSuccess);
+                    WriteLog(ASCJMessages.ASCJPlugin.PluginCreateConnectionPrefSuccess);
                 }
             }
             catch (Exception ex)
             {
-                WriteLog(string.Format(ASCJMessages.Plugin.PluginCreateConnectionPrefError, ex.Message));
+                WriteLog(string.Format(ASCJMessages.ASCJPlugin.PluginCreateConnectionPrefError, ex.Message));
             }
         }
     }

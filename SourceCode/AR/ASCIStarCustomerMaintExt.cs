@@ -24,7 +24,7 @@ namespace ASCJewelryLibrary.AR
         {
             var newValue = (decimal?)e.NewValue;
             if (newValue < -100.0m || newValue > 100.0m)
-                throw new PXSetPropertyException<ASCJARCustomerAllowance.allowancePct>(ASCJARConstants.Errors.AllowancePctCheckValue);
+                throw new PXSetPropertyException<ASCJARCustomerAllowance.allowancePct>(ASCJARConstants.ASCJErrors.AllowancePctCheckValue);
         }
 
         #endregion
