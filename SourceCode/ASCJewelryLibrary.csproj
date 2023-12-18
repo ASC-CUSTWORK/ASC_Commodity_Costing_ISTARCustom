@@ -99,11 +99,11 @@
     <Compile Include="Common\Descriptor\ASCJMessages.cs" />
     <Compile Include="Common\Descriptor\ASCJQueryParams.cs" />
     <Compile Include="Common\Interfaces\IASCJItemCostSpecDTO.cs" />
-    <Compile Include="Common\Helper\ASCIStarJsonConverter.cs" />
-    <Compile Include="Common\Helper\ASCIStarMetalType.cs" />
-    <Compile Include="Common\Helper\ASCIStarParseStringConverter.cs" />
-    <Compile Include="Common\Helper\Exceptions\ASCIStarStatusCodeException.cs" />
-    <Compile Include="Common\Helper\Extensions\ASCIStarStringExtension.cs" />
+    <Compile Include="Common\Helper\ASCJJsonConverter.cs" />
+    <Compile Include="Common\Helper\ASCJMetalType.cs" />
+    <Compile Include="Common\Helper\ASCJParseStringConverter.cs" />
+    <Compile Include="Common\Helper\Exceptions\ASCJStatusCodeException.cs" />
+    <Compile Include="Common\Helper\Extensions\ASCJStringExtension.cs" />
     <Compile Include="Common\Models\ASCJErrorModel.cs" />
     <Compile Include="Common\Models\ASCJHistoricalRatesModel.cs" />
     <Compile Include="Common\Models\ASCJLatestRatesModel.cs" />
@@ -129,7 +129,7 @@
     <Compile Include="AP\DAC\ASCJMarketVendorFilter.cs" />
     <Compile Include="AP\Descriptor\ASCJCostBasisType.cs" />
     <Compile Include="AR\ASCJCustomerAllowanceMaint.cs" />
-    <Compile Include="AR\ASCIStarCustomerMaintExt.cs" />
+    <Compile Include="AR\ASCJCustomerMaintExt.cs" />
     <Compile Include="AR\DAC\ASCJARCustomerAllowance.cs" />
     <Compile Include="CR\CacheExt\ASCJCRLocationExt.cs" />
     <Compile Include="INKit\Descriptor\ASCJCostAssignmentAttribute.cs" />
