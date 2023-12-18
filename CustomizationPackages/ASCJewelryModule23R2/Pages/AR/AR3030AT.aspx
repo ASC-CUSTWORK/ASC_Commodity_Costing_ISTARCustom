@@ -31,9 +31,9 @@
 					<px:PXCheckBox CommitChanges="True" ID="chkActive" runat="server" Checked="True" DataField="Active" ></px:PXCheckBox>
 				</RowTemplate>
 				<Columns>
-					<px:PXGridColumn DataField="CustomerID" ></px:PXGridColumn>
+					<px:PXGridColumn CommitChanges="True" DataField="CustomerID" ></px:PXGridColumn>
 					<px:PXGridColumn DataField="CustomerID_description" Width="280" ></px:PXGridColumn>
-					<px:PXGridColumn DataField="OrderType" ></px:PXGridColumn>
+					<px:PXGridColumn CommitChanges="True" DataField="OrderType" ></px:PXGridColumn>
 					<px:PXGridColumn CommitChanges="True" DataField="InventoryID" ></px:PXGridColumn>
 					<px:PXGridColumn DisplayFormat="" DataField="AllowancePct" ></px:PXGridColumn>
                     <px:PXGridColumn DataField="Commodity" RenderEditorText="True" ></px:PXGridColumn>
