@@ -25,7 +25,7 @@ namespace ASCJewelryLibrary.AP
                            InnerJoin<INItemClass, On<InventoryItem.itemClassID, Equal<INItemClass.itemClassID>>>>,
                                     Where<APVendorPrice.vendorID, Equal<Current<Vendor.bAccountID>>,
                                         And<INItemClass.itemClassCD, Equal<ASCJConstants.CommodityClass>>>,
-                            OrderBy<Desc<APVendorPrice.effectiveDate>>> VendorPriceBasis;
+                            OrderBy<Desc<APVendorPrice.effectiveDate>>> ASCJVendorPriceBasis;
         #endregion
 
         #region CacheAttached

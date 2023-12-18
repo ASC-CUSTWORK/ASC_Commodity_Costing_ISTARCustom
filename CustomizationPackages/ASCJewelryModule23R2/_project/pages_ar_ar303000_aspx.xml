@@ -12,7 +12,7 @@
                                 <Children Key="Levels">
                                     <AddItem>
                                         <PXGridLevel TypeFullName="PX.Web.UI.PXGridLevel">
-                                            <Prop Key="DataMember" Value="CustomerAllowance" />
+                                            <Prop Key="DataMember" Value="ASCJCustomerAllowance" />
                                             <Children Key="Columns">
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">

@@ -57,10 +57,10 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
         #region Actions
 
-        public PXAction<InventoryItem> UpdateMetalCost;
+        public PXAction<InventoryItem> ASCJUpdateMetalCost;
         [PXUIField(DisplayName = "Update Metal Cost", MapEnableRights = PXCacheRights.Select, MapViewRights = PXCacheRights.Select)]
         [PXButton]
-        public virtual IEnumerable updateMetalCost(PXAdapter adapter)
+        public virtual IEnumerable aSCJUpdateMetalCost(PXAdapter adapter)
         {
             if (this.Base.Item.Current == null) return adapter.Get();
 

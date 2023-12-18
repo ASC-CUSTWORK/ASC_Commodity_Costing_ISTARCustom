@@ -32,10 +32,10 @@ namespace ASCJewelryLibrary.PO
           InventoryItemCurySettings>.View ASCJItemCurySettings;
 
         #region Actions
-        public PXAction<POOrder> emailPurchaseOrder;
+        public PXAction<POOrder> ASCJEmailPurchaseOrder;
         [PXButton(CommitChanges = true)]
         [PXUIField(DisplayName = "Email Purchase Order", MapEnableRights = PXCacheRights.Select, MapViewRights = PXCacheRights.Select)]
-        public virtual IEnumerable EmailPurchaseOrder(PXAdapter adapter, [PXString] string notificationCD = null)
+        public virtual IEnumerable aSCJEmailPurchaseOrder(PXAdapter adapter, [PXString] string notificationCD = null)
         {
             bool massProcess = adapter.MassProcess;
 
@@ -79,10 +79,10 @@ namespace ASCJewelryLibrary.PO
             return adapter.Get<POOrder>();
         }
 
-        public PXAction<POOrder> updateUnitCost;
+        public PXAction<POOrder> ASCJUpdateUnitCost;
         [PXButton(CommitChanges = true)]
         [PXUIField(DisplayName = "Update Unit Cost", MapEnableRights = PXCacheRights.Update, MapViewRights = PXCacheRights.Update)]
-        public virtual IEnumerable UpdateUnitCost(PXAdapter adapter)
+        public virtual IEnumerable aSCJUpdateUnitCost(PXAdapter adapter)
         {
             var poLines = this.Base.Transactions.Select().FirstTableItems.ToList();
             SetNewUnitCostOnPOLines(this.Base.Transactions.Cache, poLines, true);

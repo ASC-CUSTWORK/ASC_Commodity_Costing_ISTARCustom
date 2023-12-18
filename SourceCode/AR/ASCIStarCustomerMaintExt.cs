@@ -10,7 +10,7 @@ namespace ASCJewelryLibrary.AR
     {
         public static bool IsActive() => true;
 
-        public SelectFrom<ASCJARCustomerAllowance>.Where<ASCJARCustomerAllowance.customerID.IsEqual<Customer.bAccountID.FromCurrent>>.View CustomerAllowance;
+        public SelectFrom<ASCJARCustomerAllowance>.Where<ASCJARCustomerAllowance.customerID.IsEqual<Customer.bAccountID.FromCurrent>>.View ASCJCustomerAllowance;
 
         #region Events
 

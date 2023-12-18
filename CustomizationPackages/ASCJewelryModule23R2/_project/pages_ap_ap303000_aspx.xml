@@ -24,7 +24,7 @@
                                 <Children Key="Levels">
                                     <AddItem>
                                         <PXGridLevel TypeFullName="PX.Web.UI.PXGridLevel">
-                                            <Prop Key="DataMember" Value="VendorPriceBasis" />
+                                            <Prop Key="DataMember" Value="ASCJVendorPriceBasis" />
                                             <Children Key="Columns">
                                                 <AddItem>
                                                     <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
