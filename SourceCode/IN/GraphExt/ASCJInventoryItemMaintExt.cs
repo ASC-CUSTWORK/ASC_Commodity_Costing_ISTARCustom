@@ -14,7 +14,6 @@ using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
-using PX.Objects.CR.Standalone;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System.Collections;
@@ -29,14 +28,6 @@ namespace ASCJewelryLibrary.IN.GraphExt
         public static bool IsActive() => true;
 
         #region Selects
-
-        public POVendorInventorySelect<POVendorInventory,
-            InnerJoin<Vendor, On<BqlOperand<Vendor.bAccountID, IBqlInt>.IsEqual<POVendorInventory.vendorID>>,
-            LeftJoin<Location, On<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>
-                .FilledWith<And<Compare<Location.bAccountID, Equal<POVendorInventory.vendorID>>>>>
-                .And<BqlOperand<Location.locationID, IBqlInt>.IsEqual<POVendorInventory.vendorLocationID>>>>>,
-            Where<POVendorInventory.inventoryID, Equal<Current<InventoryItem.inventoryID>>,
-                And<Where<Vendor.baseCuryID, Equal<Current<AccessInfo.baseCuryID>>, Or<Vendor.baseCuryID, IsNull>>>>, InventoryItem> VendorItems;
 
         public SelectFrom<ASCJINJewelryItem>.Where<ASCJINJewelryItem.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View JewelryItemView;
 
@@ -513,13 +504,13 @@ namespace ASCJewelryLibrary.IN.GraphExt
                     new PXSetPropertyException(ASCJMessages.ASCJError.VendorPriceNotFound, PXErrorLevel.RowWarning));
             }
 
-            List<POVendorInventory> selectPOVendors = VendorItems.Select()?.FirstTableItems.ToList();
+            List<POVendorInventory> selectPOVendors = Base.VendorItems.Select()?.FirstTableItems.ToList();
             foreach (var vendorInventory in selectPOVendors)
             {
                 if (vendorInventory.IsDefault == true && vendorInventory != row)
                 {
-                    this.VendorItems.Cache.SetValue<POVendorInventory.isDefault>(vendorInventory, false);
-                    this.VendorItems.View.RequestRefresh();
+                    this.Base.VendorItems.Cache.SetValue<POVendorInventory.isDefault>(vendorInventory, false);
+                    this.Base.VendorItems.View.RequestRefresh();
                     break;
                 }
             }
@@ -997,24 +988,24 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
         private void UpdateCostsCurrentOverridenPOVendorItem(ASCJINInventoryItemExt inventoryItemExt)
         {
-            if (VendorItems.Current == null)
+            if (Base.VendorItems.Current == null)
             {
-                VendorItems.Current = GetDefaultVendor();
-                if (VendorItems.Current == null) return;
+                Base.VendorItems.Current = GetDefaultVendor();
+                if (Base.VendorItems.Current == null) return;
             }
 
             if (inventoryItemExt.UsrASCJCostingType == ASCJConstants.CostingType.MarketCost)
             {
-                UpdateMetalCalcPOVendorItem(VendorItems.Cache, VendorItems.Current, VendorItems.Current.GetExtension<ASCJPOVendorInventoryExt>());
+                UpdateMetalCalcPOVendorItem(Base.VendorItems.Cache, Base.VendorItems.Current, Base.VendorItems.Current.GetExtension<ASCJPOVendorInventoryExt>());
             }
             else
             {
-                if (VendorItems.Current.IsDefault == true)
+                if (Base.VendorItems.Current.IsDefault == true)
                 {
-                    VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJPreciousMetalCost>(VendorItems.Current, inventoryItemExt.UsrASCJPreciousMetalCost);
-                    VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJUnitCost>(VendorItems.Current, inventoryItemExt.UsrASCJUnitCost);
-                    VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJFloor>(VendorItems.Current, inventoryItemExt.UsrASCJFloor);
-                    VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJCeiling>(VendorItems.Current, inventoryItemExt.UsrASCJCeiling);
+                    Base.VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJPreciousMetalCost>(Base.VendorItems.Current, inventoryItemExt.UsrASCJPreciousMetalCost);
+                    Base.VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJUnitCost>(Base.VendorItems.Current, inventoryItemExt.UsrASCJUnitCost);
+                    Base.VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJFloor>(Base.VendorItems.Current, inventoryItemExt.UsrASCJFloor);
+                    Base.VendorItems.SetValueExt<ASCJPOVendorInventoryExt.usrASCJCeiling>(Base.VendorItems.Current, inventoryItemExt.UsrASCJCeiling);
                 }
             }
         }
@@ -1077,8 +1068,8 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             if (poVendorInventory == null) return;
 
-            this.VendorItems.Cache.SetValueExt<TField>(poVendorInventory, newValue);
-            this.VendorItems.Cache.MarkUpdated(poVendorInventory);
+            this.Base.VendorItems.Cache.SetValueExt<TField>(poVendorInventory, newValue);
+            this.Base.VendorItems.Cache.MarkUpdated(poVendorInventory);
         }
 
         private void UpdateMetalGrams(string metalType)
@@ -1193,7 +1184,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
         }
 
         private POVendorInventory GetDefaultVendor() =>
-            this.VendorItems.Select().FirstTableItems.FirstOrDefault(x => x.IsDefault == true);
+            this.Base.VendorItems.Select().FirstTableItems.FirstOrDefault(x => x.IsDefault == true);
 
         private List<CSAttributeDetail> SelectAttributeDetails(string attributeID) =>
              SelectFrom<CSAttributeDetail>.Where<CSAttributeDetail.attributeID.IsEqual<@P.AsString>>.View.Select(this.Base, attributeID)?.FirstTableItems.ToList();

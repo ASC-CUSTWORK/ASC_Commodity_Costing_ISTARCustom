@@ -74,9 +74,9 @@ namespace ASCJewelryLibrary.IN.CacheExt
         // Hidden field due to logic doesn't need conversion between Commodity Items (logic always use 24K and SSS items)
         #region UsrASCJPriceToUnit
         [PXString]
-        //[INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
-        //[PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
-        //  [PXRestrictor(typeof(Where<ASCJINUnitExt.usrASCJCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
+        [INUnit(DisplayName = "Price To", Visibility = PXUIVisibility.SelectorVisible, Visible = false, Enabled = false)]
+        [PXDefault("EACH", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXRestrictor(typeof(Where<ASCJINUnitExt.usrASCJCommodity, IsNotNull>), "Market Cost requires that a conversion is selected", typeof(INUnit.fromUnit))]
         public string UsrASCJPriceToUnit { get; set; }
         public abstract class usrASCJPriceToUnit : PX.Data.BQL.BqlString.Field<usrASCJPriceToUnit> { }
         #endregion
