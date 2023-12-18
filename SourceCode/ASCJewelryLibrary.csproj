@@ -122,13 +122,13 @@
     <Compile Include="AP\CacheExt\ASCJAPVendorPriceExt.cs" />
     <Compile Include="AP\DAC\ASCJAPTariffHTSCode.cs" />
     <Compile Include="IN\DAC\ASCJINVendorDuty.cs" />
-    <Compile Include="AR\Descriptor\ASCIStarARConstants.cs" />
+    <Compile Include="AR\Descriptor\ASCJARConstants.cs" />
     <Compile Include="IN\CacheExt\ASCJINUnitExt.cs" />
     <Compile Include="PO\CacheExt\ASCJPOVendorInventoryExt.cs" />
     <Compile Include="AP\DAC\ASCJMarketVendor.cs" />
     <Compile Include="AP\DAC\ASCJMarketVendorFilter.cs" />
     <Compile Include="AP\Descriptor\ASCJCostBasisType.cs" />
-    <Compile Include="AR\ASCIStarCustomerAllowanceMaint.cs" />
+    <Compile Include="AR\ASCJCustomerAllowanceMaint.cs" />
     <Compile Include="AR\ASCIStarCustomerMaintExt.cs" />
     <Compile Include="AR\DAC\ASCJARCustomerAllowance.cs" />
     <Compile Include="CR\CacheExt\ASCJCRLocationExt.cs" />
