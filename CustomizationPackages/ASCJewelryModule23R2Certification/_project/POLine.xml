@@ -1,0 +1,13 @@
+﻿<Table TableName="POLine">
+    <Column TableName="POLine" ColumnName="UsrASCJPurity" ColumnType="string" AllowNull="True" MaxLength="20" DecimalPrecision="2" DecimalLength="20" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJWeight" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJRatePerGram" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJMaterialCost" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="2" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJMarketPrice" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJContractIncrement" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJActualGRAMGold" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJPricingGRAMGold" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJActualGRAMSilver" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJPricingGRAMSilver" ColumnType="decimal" AllowNull="True" MaxLength="18" DecimalPrecision="6" DecimalLength="18" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="POLine" ColumnName="UsrASCJBasisValue" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
+</Table>
