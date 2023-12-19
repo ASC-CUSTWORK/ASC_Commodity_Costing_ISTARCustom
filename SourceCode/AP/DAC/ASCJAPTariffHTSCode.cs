@@ -1,5 +1,4 @@
 ﻿using ASCJewelryLibrary.Common.DAC;
-using ASCJewelryLibrary.AP;
 using PX.Data;
 using PX.Data.BQL;
 using System;

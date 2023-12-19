@@ -41,8 +41,6 @@ namespace ASCJewelryLibrary
             public vendor() : base(Vendor) { }
 
         }
-
-
     }
 }
 

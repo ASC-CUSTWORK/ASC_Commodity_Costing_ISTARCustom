@@ -103,15 +103,6 @@ namespace ASCJewelryLibrary.IN.GraphExt
             e.NewValue = classExt?.UsrASCJCostingType ?? ASCJConstants.CostingType.ContractCost;
         }
 
-        //protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCJINInventoryItemExt.usrASCJCostRollupType> e)
-        //{
-        //    if (e.Row == null) return;
-
-        //    INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
-        //    ASCJINItemClassExt classExt = itemClass?.GetExtension<ASCJINItemClassExt>();
-        //    e.NewValue = classExt?.UsrASCJCostRollupType ?? ASCJConstants.CostRollupType.Blank;
-        //}
-
         protected virtual void _(Events.FieldVerifying<InventoryItem, ASCJINInventoryItemExt.usrASCJMatrixStep> e)
         {
             if (e.Row == null) return;
@@ -352,15 +343,6 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             SetValueExtPOVendorInventory<ASCJPOVendorInventoryExt.usrASCJPackagingLaborCost>(e.NewValue);
         }
-
-        //protected virtual void _(Events.FieldUpdated<InventoryItem, ASCJINInventoryItemExt.usrASCJOtherCost> e)
-        //{
-        //    var row = e.Row;
-        //    if (row == null) return;
-
-        //    UpdatUnitCost(e.Cache, row);
-        //    SetValueExtPOVendorInventory<ASCJPOVendorInventoryExt.usrASCJOtherCost>(e.NewValue);
-        //}
 
         protected virtual void _(Events.FieldUpdated<InventoryItem, ASCJINInventoryItemExt.usrASCJLaborCost> e)
         {
@@ -671,25 +653,6 @@ namespace ASCJewelryLibrary.IN.GraphExt
             RecalculatePOVendorFabricationValue(row);
         }
 
-        //protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCJPOVendorInventoryExt.usrASCJFabricationCost> e)
-        //{
-        //    var row = e.Row;
-        //    if (row == null) return;
-
-        //    var poVendorExt = row.GetExtension<ASCJPOVendorInventoryExt>();
-
-        //    var metalWeight = GetMetalWeight();
-
-        //    var usrASCJLaborPerUnit = metalWeight == 0
-        //        ? (decimal?)e.NewValue
-        //        : (decimal?)e.NewValue / metalWeight;
-
-        //    if (usrASCJLaborPerUnit != poVendorExt.UsrASCJFabricationWeight)
-        //    {
-        //        poVendorExt.UsrASCJFabricationWeight = usrASCJLaborPerUnit;
-        //    }
-        //}
-
         protected virtual void _(Events.FieldUpdated<POVendorInventory, ASCJPOVendorInventoryExt.usrASCJCommodityVendorPrice> e)
         {
             var row = e.Row;
@@ -916,7 +879,6 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             if (ASCJMetalType.IsSilver(jewelCostBuilder.INJewelryItem?.MetalType))
             {
-                //    cache.SetValueExt<ASCJINInventoryItemExt.usrASCJMatrixStep>(row, jewelCostBuilder.ma);
                 cache.SetValueExt<ASCJINInventoryItemExt.usrASCJFloor>(row, jewelCostBuilder.Floor);
                 cache.SetValueExt<ASCJINInventoryItemExt.usrASCJCeiling>(row, jewelCostBuilder.Ceiling);
                 cache.SetValueExt<ASCJINInventoryItemExt.usrASCJMatrixPriceTOZ>(row, jewelCostBuilder.PreciousMetalAvrSilverMarketCostPerTOZ);
@@ -1049,7 +1011,6 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             rowExt.UsrASCJContractIncrement = jewelCostBuilder.CalculateIncrementValue(rowExt);
             cache.SetValue<ASCJPOVendorInventoryExt.usrASCJContractIncrement>(row, rowExt.UsrASCJContractIncrement);
-            //SetValueExtPOVendorInventory<ASCJPOVendorInventoryExt.usrASCJContractIncrement>(rowExt.UsrASCJContractIncrement);
 
             if (ASCJMetalType.IsSilver(jewelCostBuilder.INJewelryItem?.MetalType))
             {

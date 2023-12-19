@@ -16,7 +16,7 @@ namespace ASCJewelryLibrary.IN.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region Inventory
+        #region UsrASCJInventory
         [PXInt]
         public virtual int? UsrASCJInventoryID { get; set; }
         public abstract class usrASCJInventoryID : PX.Data.BQL.BqlInt.Field<usrASCJInventoryID> { }

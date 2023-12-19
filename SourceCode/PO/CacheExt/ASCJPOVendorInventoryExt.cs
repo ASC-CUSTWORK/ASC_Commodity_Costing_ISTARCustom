@@ -17,7 +17,7 @@ namespace ASCJewelryLibrary.PO.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region InventoryID
+        #region UsrASCJInventoryID
         [PXInt]
         [PXFormula(typeof(POVendorInventory.inventoryID))]
         public virtual int? UsrASCJInventoryID { get; set; }
