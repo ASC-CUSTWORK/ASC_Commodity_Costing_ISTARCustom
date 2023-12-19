@@ -221,7 +221,7 @@
                         <GIResult LineNbr="16" SortOrder="16" IsActive="0" Field="dfltCompQty" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="dbb66127-5cf7-43f8-9989-4acbbd900a64" />
                         <GIResult LineNbr="15" SortOrder="15" IsActive="0" Field="compInventoryID_description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="59517b31-4247-404b-bdb6-3908317cab65" />
                     </GITable>
-                    <GITable Alias="INJewelryInventoryItem" Name="ASCISTARCustom.IN.DAC.ASCIStarINJewelryItem" />
+                    <GITable Alias="INJewelryInventoryItem" Name="ASCJewelryLibrary.IN.DAC.ASCJINJewelryItem" />
                     <GITable Alias="INItemStats" Name="PX.Objects.IN.INItemStats">
                         <GIRelation LineNbr="11" ChildTable="INSite" IsActive="1" JoinType="I">
                             <GIOn LineNbr="27" ParentField="siteID" Condition="E" ChildField="siteID" Operation="A" />

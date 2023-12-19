@@ -138,13 +138,14 @@
         <data>
             <GIDesign>
                 <row DesignID="47d08673-f429-41e8-ba24-d10721f6f72e" Name="JS-CustomerProposalTemplate" FilterColCount="6" PageSize="50" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
+                    <GIFilter LineNbr="15" IsActive="1" Name="SearchItem" FieldName="InventoryItem.descr" DataType="string" DisplayName="Search Item" IsExpression="0" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="14" IsActive="1" Name="RMU" FieldName="InventoryItem.usrASCJDutyCostPct" DataType="string" DisplayName="RMU, %" IsExpression="0" DefaultValue="75" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="13" IsActive="1" Name="IMU" FieldName="InventoryItem.usrASCJDutyCostPct" DataType="string" DisplayName="IMU, %" IsExpression="0" DefaultValue="40" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="12" IsActive="1" Name="ChinaDuty" FieldName="InventoryItem.usrASCJDutyCost" DataType="string" DisplayName="China Duty" IsExpression="0" DefaultValue="1.2135" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="11" IsActive="1" Name="TL" FieldName="InventoryItem.usrASCJDutyCost" DataType="string" DisplayName="TL" IsExpression="0" DefaultValue="0.47" ColSpan="1" Required="0" />
-                    <GIFilter LineNbr="10" IsActive="1" Name="MarketPrice03" FieldName="InventoryItem.usrASCJBasisValue" DataType="string" DisplayName="Market Price 3" IsExpression="0" DefaultValue="28.25" ColSpan="1" Required="0" />
-                    <GIFilter LineNbr="9" IsActive="1" Name="MarketPrice02" FieldName="InventoryItem.usrASCJBasisValue" DataType="string" DisplayName="Market Price 2" IsExpression="0" DefaultValue="24.25" ColSpan="1" Required="0" />
-                    <GIFilter LineNbr="8" IsActive="1" Name="MarketPrice01" FieldName="InventoryItem.usrASCJBasisValue" DataType="string" DisplayName="Market Price 1" AvailableValues="" IsExpression="0" DefaultValue="20.25" ColSpan="1" Required="0" />
+                    <GIFilter LineNbr="10" IsActive="1" Name="MarketPrice03" FieldName="InventoryItem.usrASCJBasisValue" DataType="string" DisplayName="Market Price 3" IsExpression="0" ColSpan="1" Required="0" />
+                    <GIFilter LineNbr="9" IsActive="1" Name="MarketPrice02" FieldName="InventoryItem.usrASCJBasisValue" DataType="string" DisplayName="Market Price 2" IsExpression="0" ColSpan="1" Required="0" />
+                    <GIFilter LineNbr="8" IsActive="1" Name="MarketPrice01" FieldName="InventoryItem.usrASCJBasisValue" DataType="string" DisplayName="Market Price 1" AvailableValues="" IsExpression="0" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="7" IsActive="1" Name="ItemClass" FieldName="InventoryItem.itemClassID" DataType="string" DisplayName="Item Class" IsExpression="0" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="6" IsActive="1" Name="ItemStatus" FieldName="PX.Data.Maintenance.GI.CheckboxCombobox+combobox" DataType="string" DisplayName="Item Status" AvailableValues="AA;All Statuses,AC;Active,DE;Marked For Deletion,IN;Inactive,NP;Proposed Style,NR;No Request,NS;No Sales" IsExpression="0" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="4" IsActive="1" Name="VendorID" FieldName="POVendorInventory.vendorID" DataType="string" DisplayName="Vendor ID" IsExpression="0" ColSpan="1" Required="0" />
@@ -197,7 +198,7 @@
                         <GIResult LineNbr="2" SortOrder="2" IsActive="1" Field="inventoryCD_description" Caption="Item Description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="62b36cdb-f17c-4d11-a700-55807134e20c" />
                         <GIResult LineNbr="1" SortOrder="1" IsActive="1" Field="inventoryCD" IsVisible="1" DefaultNav="0" NavigationNbr="1" QuickFilter="0" FastFilter="1" RowID="0ce3b303-0fec-47bd-beea-e69636b4fd1e" />
                     </GITable>
-                    <GITable Alias="INJewelryItem" Name="ASCISTARCustom.IN.DAC.ASCIStarINJewelryItem">
+                    <GITable Alias="INJewelryItem" Name="ASCJewelryLibrary.IN.DAC.ASCJINJewelryItem">
                         <GIResult LineNbr="34" SortOrder="27" IsActive="1" Field="vendorMaker_description" Caption="Vendor Maker Description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="f4b82897-136e-44bf-bcbf-306e5c7d71d6" />
                         <GIResult LineNbr="33" SortOrder="26" IsActive="1" Field="vendorMaker" Caption="Vendor Maker" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="5edc56c2-e06f-44f2-b072-63c9ed4aa3d7" />
                         <GIResult LineNbr="28" SortOrder="40" IsActive="1" Field="ringSize_description" Caption="Ring Size Description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="97230464-de82-4a57-876b-d8cec7f9946d" />
@@ -214,6 +215,9 @@
                         <GIResult LineNbr="5" SortOrder="24" IsActive="1" Field="orgCountry" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="9546b84d-9cf4-4356-9d85-66c5d66e1f78" />
                         <GIResult LineNbr="4" SortOrder="5" IsActive="1" Field="metalType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="157d3747-33d1-452a-b59b-a516f6890111" />
                     </GITable>
+                    <GIWhere LineNbr="18" IsActive="1" DataFieldName="[SearchItem]" Condition="NU" IsExpression="0" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="17" IsActive="1" DataFieldName="InventoryItem.descr" Condition="LI" IsExpression="0" Value1="[SearchItem]" Operation="O" />
+                    <GIWhere LineNbr="16" IsActive="1" OpenBrackets="(" DataFieldName="InventoryItem.inventoryCD" Condition="LI" IsExpression="0" Value1="[SearchItem]" Operation="O" />
                     <GIWhere LineNbr="15" IsActive="1" DataFieldName="[ItemClass]" Condition="NU" IsExpression="0" CloseBrackets=")" Operation="A" />
                     <GIWhere LineNbr="14" IsActive="1" OpenBrackets="(" DataFieldName="InventoryItem.itemClassID" Condition="E" IsExpression="0" Value1="[ItemClass]" Operation="O" />
                     <GIWhere LineNbr="13" IsActive="1" DataFieldName="[ItemStatus]" Condition="E" IsExpression="0" Value1="AA" CloseBrackets=")" Operation="A" />
@@ -226,7 +230,7 @@
                     <GIWhere LineNbr="6" IsActive="1" OpenBrackets="(" DataFieldName="InventoryItem.usrASCJCommodityType" Condition="E" IsExpression="0" Value1="[CommodityType]" Operation="O" />
                     <GIWhere LineNbr="5" IsActive="1" DataFieldName="[CustomerCode]" Condition="NU" IsExpression="0" CloseBrackets=")" Operation="A" />
                     <GIWhere LineNbr="4" IsActive="1" OpenBrackets="(" DataFieldName="INJewelryItem.customerCode" Condition="E" IsExpression="0" Value1="[CustomerCode]" Operation="O" />
-                    <GIWhere LineNbr="3" IsActive="1" DataFieldName="[InventoryID]" Condition="E" IsExpression="0" Value1="   &lt;NEW&gt;" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="3" IsActive="1" DataFieldName="[InventoryID]" Condition="LI" IsExpression="0" Value1="   &lt;NEW &gt;" CloseBrackets=")" Operation="A" />
                     <GIWhere LineNbr="2" IsActive="1" DataFieldName="[InventoryID]" Condition="NU" IsExpression="0" Operation="O" />
                     <GIWhere LineNbr="1" IsActive="1" OpenBrackets="(" DataFieldName="InventoryItem.inventoryCD" Condition="E" IsExpression="0" Value1="[InventoryID]" Operation="O" />
                     <SiteMap linkname="toDesignById">
