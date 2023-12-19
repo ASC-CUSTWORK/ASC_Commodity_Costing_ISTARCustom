@@ -38,7 +38,7 @@ namespace ASCJewelryLibrary.INKit
 
         #region DataView
         [PXCopyPasteHiddenView]
-        public PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Optional<INKitSpecHdr.kitInventoryID>>>> ASCJHdr;
+        public PXSelect<INKitSpecHdr, Where<INKitSpecHdr.kitInventoryID, Equal<Optional<INKitSpecHdr.kitInventoryID>>>> Hdr;
 
         [PXCopyPasteHiddenView]
         public PXSelect<POVendorInventory, Where<POVendorInventory.inventoryID, Equal<Current<INKitSpecHdr.kitInventoryID>>>> ASCJVendorItems;
@@ -486,9 +486,9 @@ namespace ASCJewelryLibrary.INKit
             var newValue = (int?)e.NewValue;
             if (newValue == null) return;
 
-            if (ASCJHdr.Current?.KitInventoryID == newValue)
+            if (Hdr.Current?.KitInventoryID == newValue)
             {
-                var invItem = _itemDataProvider.GetInventoryItemByID(ASCJHdr.Current?.KitInventoryID);
+                var invItem = _itemDataProvider.GetInventoryItemByID(Hdr.Current?.KitInventoryID);
                 e.Cancel = true;
                 throw new PXSetPropertyException(ASCJINKitMessages.ASCJError.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
             }

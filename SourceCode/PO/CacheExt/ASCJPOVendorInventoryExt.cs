@@ -18,11 +18,10 @@ namespace ASCJewelryLibrary.PO.CacheExt
         public static bool IsActive() => true;
 
         #region InventoryID
-        [Inventory(Filterable = true, DirtyRead = true, Enabled = false)]
-        [PXParent(typeof(SelectFrom<InventoryItem>.Where<InventoryItem.inventoryID.IsEqual<inventoryID.FromCurrent>>))]
-        [PXDBDefault(typeof(InventoryItem.inventoryID))]
-        public virtual int? InventoryID { get; set; }
-        public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
+        [PXInt]
+        [PXFormula(typeof(POVendorInventory.inventoryID))]
+        public virtual int? UsrASCJInventoryID { get; set; }
+        public abstract class usrASCJInventoryID : PX.Data.BQL.BqlInt.Field<usrASCJInventoryID> { }
         #endregion
 
         #region UsrASCJMarketID

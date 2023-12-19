@@ -138,7 +138,7 @@
         <data>
             <GIDesign>
                 <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="1" ExposeViaOData="0" ExposeViaMobile="0" RowStyleFormula="=IIF([INKitSpecHdr.AllowCompAddition]=1,'red20','default')" ShowDeletedRecords="0" ShowArchivedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
-                    <GINavigationScreen Link="IN209500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1" NoteID="af8e2b4b-6fcd-4e53-8ab7-11253e61433c">
+                    <GINavigationScreen Link="IN209500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1" NoteID="004da255-7184-49ea-8580-98e478c44f22">
                         <GINavigationParameter LineNbr="2" FieldName="RevisionID" ParameterName="INKitSpecHdr.revisionID" IsExpression="0" />
                         <GINavigationParameter LineNbr="1" FieldName="KitInventoryID" ParameterName="INKitSpecHdr.kitInventoryID" IsExpression="0" />
                     </GINavigationScreen>
@@ -177,11 +177,17 @@
                         <row Position="4" Title="Kit Specification" Url="~/Pages/IN/IN209500.aspx" NodeID="9296f24d-d968-452d-b1e5-93d17035273f" ParentID="c45494a4-36f3-479f-b2de-d4fd01816970">
                             <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="9.6875" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea" />
                         </row>
+                        <row Title="Kit Specification" Url="~/Pages/IN/IN209500.aspx" NodeID="01d6fdd5-a44a-4d0c-beff-030db5cc6b37" ParentID="00000000-0000-0000-0000-000000000000" SelectedUI="E">
+                            <MUIScreen IsPortal="0" WorkspaceID="0e94a05b-c02b-4d18-8181-fb49538a3ead" Order="0" SubcategoryID="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" />
+                        </row>
                     </SiteMap>
                 </row>
             </GIDesign>
             <MUIWorkspace>
                 <row IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="148.625" Title="Inventory" Icon="local_shipping" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" ScreenID="WSIN0000" IsSystem="0">
+                    <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
+                </row>
+                <row IsPortal="0" WorkspaceID="0e94a05b-c02b-4d18-8181-fb49538a3ead" Order="26" Title="Inventory " Icon="local_shipping" AreaID="62cfd5dc-8eb9-4e92-bbcd-e0a99eb5e5df" IsSystem="0">
                     <MUIFavoriteWorkspace IsPortal="0" Username="" IsFavorite="1" />
                 </row>
                 <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />

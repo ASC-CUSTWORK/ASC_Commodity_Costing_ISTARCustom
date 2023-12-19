@@ -1032,7 +1032,6 @@
             <PXTextEdit DataField="Descr" OriginalIndex="5" />
             <PXLayoutRule OriginalIndex="6" Remove="True" />
         </Children>
-        <Prop Key="DataMember" Value="ASCJHdr" />
     </PXFormView>
     <Content ID="cont2" ParentId="phF" TypeFullName="System.Web.UI.WebControls.Content">
         <Children Key="Controls" />
@@ -1053,6 +1052,5 @@
                 </PXDSCallbackCommand>
             </AddItem>
         </Children>
-        <Prop Key="PrimaryView" Value="ASCJHdr" />
     </PXDataSource>
 </Page>

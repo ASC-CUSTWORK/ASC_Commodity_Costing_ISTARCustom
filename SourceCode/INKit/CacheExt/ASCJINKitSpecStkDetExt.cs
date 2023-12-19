@@ -304,8 +304,8 @@ namespace ASCJewelryLibrary.INKit.CacheExt
 
         [PXInt]
         [PXFormula(typeof(INKitSpecStkDet.compInventoryID))]
-        public int? InventoryID { get; set; }
-        public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
+        public int? UsrASCJInventoryID { get; set; }
+        public abstract class usrASCJInventoryID : PX.Data.BQL.BqlInt.Field<usrASCJInventoryID> { }
 
         [PXDecimal]
         public decimal? UsrASCJEstLandedCost { get; set; }

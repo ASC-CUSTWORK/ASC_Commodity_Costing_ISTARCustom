@@ -17,11 +17,9 @@ namespace ASCJewelryLibrary.IN.CacheExt
         public static bool IsActive() => true;
 
         #region Inventory
-        [PXDBIdentity]
-        [PXUIField(DisplayName = "Inventory ID", Visibility = PXUIVisibility.Visible, Visible = false)]
-        [PXReferentialIntegrityCheck]
-        public virtual int? InventoryID { get; set; }
-        public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
+        [PXInt]
+        public virtual int? UsrASCJInventoryID { get; set; }
+        public abstract class usrASCJInventoryID : PX.Data.BQL.BqlInt.Field<usrASCJInventoryID> { }
         #endregion
 
         #region ItemStatus

@@ -55,7 +55,7 @@ namespace ASCJewelryLibrary.Common.Builder
         public ASCJCostBuilder WithJewelryAttrData(ASCJINJewelryItem jewelryItem = null)
         {
             if (jewelryItem == null)
-                INJewelryItem = GetASCJINJewelryItem(ItemCostSpecification.InventoryID);
+                INJewelryItem = GetASCJINJewelryItem(ItemCostSpecification.UsrASCJInventoryID);
             else
                 INJewelryItem = jewelryItem;
 
@@ -82,7 +82,7 @@ namespace ASCJewelryLibrary.Common.Builder
         {
             if (INJewelryItem == null || INJewelryItem.MetalType == null)
             {
-                INJewelryItem = GetASCJINJewelryItem(ItemCostSpecification.InventoryID);
+                INJewelryItem = GetASCJINJewelryItem(ItemCostSpecification.UsrASCJInventoryID);
 
                 if (INJewelryItem == null || INJewelryItem.MetalType == null) return null;
             }
@@ -249,7 +249,7 @@ namespace ASCJewelryLibrary.Common.Builder
 
         private decimal? GetPresiousMetalAvrCost()
         {
-            var inItemCost = INItemCost.PK.Find(_graph, ItemCostSpecification.InventoryID, Currency);
+            var inItemCost = INItemCost.PK.Find(_graph, ItemCostSpecification.UsrASCJInventoryID, Currency);
 
             if (inItemCost == null || inItemCost.QtyOnHand == 0.0m) return 0.0m;
 

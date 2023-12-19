@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/MasterPages/ListView.master" %>
 <asp:Content ID="cont1" ContentPlaceHolderID="phDS" Runat="Server">
-	<px:PXDataSource ID="ds" Width="100%" runat="server" PrimaryView="CustomerAllowance" TypeName="ASCJewelryLibrary.AR.ASCIStarCustomerAllowanceMaint" Visible="True">
+	<px:PXDataSource ID="ds" Width="100%" runat="server" PrimaryView="CustomerAllowance" TypeName="ASCJewelryLibrary.AR.ASCJCustomerAllowanceMaint" Visible="True">
 		<CallbackCommands>
 			<px:PXDSCallbackCommand Name="Save" CommitChanges="True" ></px:PXDSCallbackCommand>
 			<px:PXDSCallbackCommand Name="Delete" Visible="False" ></px:PXDSCallbackCommand>

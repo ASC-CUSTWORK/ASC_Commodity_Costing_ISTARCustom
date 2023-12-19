@@ -2,7 +2,7 @@
 {
     public interface IASCJItemCostSpecDTO
     {
-        int? InventoryID { get; set; }
+        int? UsrASCJInventoryID { get; set; }
         decimal? UsrASCJActualGRAMGold { get; set; }
         decimal? UsrASCJPricingGRAMSilver { get; set; }
         decimal? UsrASCJPricingGRAMGold { get; set; }

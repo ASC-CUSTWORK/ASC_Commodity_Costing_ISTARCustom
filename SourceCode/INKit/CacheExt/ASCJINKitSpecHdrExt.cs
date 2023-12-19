@@ -232,8 +232,8 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         #region Implementation Unneeded Interface's fields
 
         [PXInt]
-        public int? InventoryID { get; set; }
-        public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
+        public int? UsrASCJInventoryID { get; set; }
+        public abstract class usrASCJInventoryID : PX.Data.BQL.BqlInt.Field<usrASCJInventoryID> { }
 
         [PXString]
         public string UsrASCJCostingType { get; set; }
