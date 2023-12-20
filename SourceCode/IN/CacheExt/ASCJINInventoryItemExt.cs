@@ -3,7 +3,6 @@ using ASCJewelryLibrary.Common.DTO.Interfaces;
 using ASCJewelryLibrary.IN.Descriptor.Constants;
 using PX.Data;
 using PX.Data.BQL;
-using PX.Data.ReferentialIntegrity.Attributes;
 using PX.Objects.IN;
 using System;
 using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
