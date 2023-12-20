@@ -48,7 +48,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit44" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrASCJActualGRAMGold" />
-                                <Prop Key="DisplayFormat" Value="##0.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.0000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -57,7 +57,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit46" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrASCJPricingGRAMGold" />
-                                <Prop Key="DisplayFormat" Value="##0.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.0000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -66,7 +66,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit47" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrASCJActualGRAMSilver" />
-                                <Prop Key="DisplayFormat" Value="##0.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.0000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -75,7 +75,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit50" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrASCJPricingGRAMSilver" />
-                                <Prop Key="DisplayFormat" Value="##0.000000" />
+                                <Prop Key="DisplayFormat" Value="##0.0000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -981,7 +981,6 @@
                                         <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
                                             <Prop Key="ID" Value="CstUsrASCJProductWeight" />
-                                            <Prop Key="DisplayFormat" Value="##0.000000" />
                                             <Prop Key="CommitChanges" Value="True" />
                                             <Prop Key="DataField" Value="Item.UsrASCJProductWeight" />
                                         </PXNumberEdit>
