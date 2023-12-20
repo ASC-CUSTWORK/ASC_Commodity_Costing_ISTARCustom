@@ -68,7 +68,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
         #endregion
 
         #region UsrASCJCommodityPerGram
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Basis Price/Gram", IsReadOnly = true)]
         [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
         public decimal? UsrASCJCommodityPerGram { get; set; }
@@ -76,7 +76,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
         #endregion
 
         #region UsrASCJCommodityIncrement
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Metal Increment", IsReadOnly = true)]
         [PXFormula(typeof(Switch<
             Case<Where<APVendorPrice.uOM.IsNotEqual<TOZ>.Or<APVendorPrice.salesPrice.IsNotNull.And<APVendorPrice.salesPrice.IsEqual<PX.Objects.CS.decimal0>>>>, Null>,
@@ -86,29 +86,29 @@ namespace ASCJewelryLibrary.AP.CacheExt
         #endregion
 
         #region UsrASCJMatrixStep
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 10)]
         [PXUIField(DisplayName = "Matrix Step")]
-        [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(TypeCode.Decimal, "0.5000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrASCJMatrixStep { get; set; }
         public abstract class usrASCJMatrixStep : PX.Data.BQL.BqlDecimal.Field<usrASCJMatrixStep> { }
         #endregion
 
         #region UsrASCJFloor
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Floor", IsReadOnly = true)]
         public decimal? UsrASCJFloor { get; set; }
         public abstract class usrASCJFloor : PX.Data.BQL.BqlDecimal.Field<usrASCJFloor> { }
         #endregion
 
         #region UsrASCJCeiling
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Ceiling", IsReadOnly = true)]
         public decimal? UsrASCJCeiling { get; set; }
         public abstract class usrASCJCeiling : PX.Data.BQL.BqlDecimal.Field<usrASCJCeiling> { }
         #endregion
 
         #region UsrASCJBasisValue
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
         [PXFormula(typeof(Switch<
             Case<Where<Current<usrASCJCommodity>, Equal<CommodityType.gold>>, APVendorPrice.salesPrice,

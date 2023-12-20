@@ -23,7 +23,7 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         #endregion
 
         #region UsrASCJUnitCost
-        [PXDBDecimal()]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Unit Cost")]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrASCJUnitCost { get; set; }
@@ -39,7 +39,7 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         #endregion
 
         #region UsrASCJExtCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Ext Cost", Enabled = false)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Mult<INKitSpecNonStkDet.dfltCompQty, usrASCJUnitCost>))]
