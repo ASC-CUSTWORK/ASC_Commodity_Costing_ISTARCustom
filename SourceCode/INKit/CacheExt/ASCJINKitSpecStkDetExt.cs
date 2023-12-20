@@ -132,7 +132,7 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         #region UsrASCJContractSurcharge
         [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Surcharge / Loss, %", Enabled = false, Visible = true)]
+        [PXUIField(DisplayName = "Surcharge %", Enabled = false, Visible = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrASCJContractSurcharge>))]
         public decimal? UsrASCJContractSurcharge { get; set; }
         public abstract class usrASCJContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrASCJContractSurcharge> { }

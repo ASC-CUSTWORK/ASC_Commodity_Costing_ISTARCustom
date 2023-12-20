@@ -213,7 +213,7 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #region UsrASCJContractSurcharge
         [PXDBDecimal(2, MinValue = -100, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Surcharge / Loss %")]
+        [PXUIField(DisplayName = "Surcharge %")]
         public decimal? UsrASCJContractSurcharge { get; set; }
         public abstract class usrASCJContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrASCJContractSurcharge> { }
         #endregion

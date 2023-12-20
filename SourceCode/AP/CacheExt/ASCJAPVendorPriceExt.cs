@@ -52,7 +52,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
 
         #region UsrASCJCommoditySurchargePct
         [PXDBDecimal(2)]
-        [PXUIField(DisplayName = "Surcharge / Loss, %")]
+        [PXUIField(DisplayName = "Surcharge %")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrASCJCommoditySurchargePct { get; set; }
         public abstract class usrASCJCommoditySurchargePct : PX.Data.BQL.BqlDecimal.Field<usrASCJCommoditySurchargePct> { }
