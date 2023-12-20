@@ -121,7 +121,7 @@ namespace ASCISTARCustom.PO.CacheExt
         #region UsrContractSurcharge
         [PXDBDecimal(2)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Surcharge / Loss %", Visible = false)]
+        [PXUIField(DisplayName = "Surcharge %", Visible = false)]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
         #endregion

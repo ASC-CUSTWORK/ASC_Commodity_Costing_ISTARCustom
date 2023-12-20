@@ -51,7 +51,7 @@ namespace ASCISTARCustom.AP.CacheExt
 
         #region UsrCommoditySurchargePct
         [PXDBDecimal(2)]
-        [PXUIField(DisplayName = "Surcharge / Loss, %")]
+        [PXUIField(DisplayName = "Surcharge %")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrCommoditySurchargePct { get; set; }
         public abstract class usrCommoditySurchargePct : PX.Data.BQL.BqlDecimal.Field<usrCommoditySurchargePct> { }
