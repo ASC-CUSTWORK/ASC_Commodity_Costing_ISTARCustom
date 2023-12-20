@@ -50,7 +50,7 @@ namespace ASCJewelryLibrary.Common.Services.REST
         /// <returns>A string containing the content of the response.</returns>
         /// <exception cref="ASCJStatusCodeException">Thrown when the response has a non-OK status code.</exception>
         /// <exception cref="PXException">Thrown when an ASCJStatusCodeException is caught, to indicate a remote server error.</exception>
-        private string Request(string endpoint, Method httpMethod = Method.Get, object body = null, params Dictionary<string, string>[] parameters)
+        private string Request(string endpoint, Method httpMethod = Method.GET, object body = null, params Dictionary<string, string>[] parameters)
         {
             var client = new RestClient(_setup.BaseURL);
             var request = new RestRequest(endpoint);
@@ -117,7 +117,7 @@ namespace ASCJewelryLibrary.Common.Services.REST
                 mergedDic = paramKeyValue.Concat(parameters).ToDictionary(x => x.Key, x => x.Value);
             }
 
-            var responce = Request(endpoint, Method.Get, null, mergedDic ?? paramKeyValue);
+            var responce = Request(endpoint, Method.GET, null, mergedDic ?? paramKeyValue);
             return ASCJJsonConverter<TModel>.FromJson(responce);
         }
         #endregion
