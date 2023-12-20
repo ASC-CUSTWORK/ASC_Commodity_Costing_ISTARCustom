@@ -57,7 +57,8 @@ namespace ASCJewelryLibrary.PO
                             var list = PXNoteAttribute.GetFileNotes(Base.Document.Cache, Base.Document.Current).Select(attachment => (Guid?)attachment).ToList();
                             ASCJPOOrderExt currentExt = currentItem.GetExtension<ASCJPOOrderExt>();
                             NotificationSetup ns = NotificationSetup.PK.Find(Base, currentExt.UsrASCJSetupID);
-                            Base.Activity.SendNotification("Vendor", (ns.NotificationCD ?? "PURCHASE ORDER"), currentItem.BranchID, parameters, false, list);
+                            var baseExt = Base.GetExtension<POOrderEntry_ActivityDetailsExt>();
+                            baseExt?.SendNotification("Vendor", (ns.NotificationCD ?? "PURCHASE ORDER"), currentItem.BranchID, parameters, false, list);
                             Base.Save.Press();
                             transactionScope.Complete();
                         }
