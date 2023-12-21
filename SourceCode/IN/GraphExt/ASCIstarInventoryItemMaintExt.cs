@@ -480,7 +480,7 @@ namespace ASCISTARCustom.IN.GraphExt
         protected virtual void _(Events.FieldSelecting<POVendorInventory, ASCIStarPOVendorInventoryExt.usrFabricationCost> e)
         {
             var row = e.Row;
-            if (row == null) return;
+            if (row == null || row.VendorID == null) return;
 
             var poVendorInventoryExt = row.GetExtension<ASCIStarPOVendorInventoryExt>();
             var calculatedFabricationValue = CalculateFabricationValue(row);
@@ -937,12 +937,13 @@ namespace ASCISTARCustom.IN.GraphExt
             VerifyLossAndSurcharge(cache, row, rowExt, jewelCostBuilder);
         }
 
-        private decimal? CalculateFabricationValue(POVendorInventory poVendorInventory) {
+        private decimal? CalculateFabricationValue(POVendorInventory poVendorInventory)
+        {
             var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory);
-
+            
             var metalWeight = GetMetalWeight();
 
-            var usrFabricationCost = metalWeight * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
+            var usrFabricationCost = (metalWeight ?? decimal.Zero) * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
 
             return usrFabricationCost;
         }
