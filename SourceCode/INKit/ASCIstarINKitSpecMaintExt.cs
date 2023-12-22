@@ -20,6 +20,7 @@ using PX.Objects.AP;
 using PX.Objects.Common;
 using PX.Objects.CR;
 using PX.Objects.EP;
+using PX.Objects.FA;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using PX.SM;
@@ -311,6 +312,16 @@ namespace ASCISTARCustom.INKit
             if (row == null) return;
 
             UpdateInKitStkComponents(row);
+        }
+
+        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrUnitCost> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCIStarINKitSpecHdrExt>(row);
+            decimal? newValue = (decimal?)e.NewValue;
+            rowExt.UsrDutyCost = rowExt.UsrDutyCostPct * newValue / 100.0m;
         }
 
         protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCIStarINKitSpecHdrExt.usrDutyCost> e)
