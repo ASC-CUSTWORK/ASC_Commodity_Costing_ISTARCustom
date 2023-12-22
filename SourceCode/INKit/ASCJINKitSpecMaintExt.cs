@@ -313,6 +313,16 @@ namespace ASCJewelryLibrary.INKit
             UpdateInKitStkComponents(row);
         }
 
+        protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCJINKitSpecHdrExt.usrASCJUnitCost> e)
+        {
+            var row = e.Row;
+            if (row == null) return;
+
+            var rowExt = PXCache<INKitSpecHdr>.GetExtension<ASCJINKitSpecHdrExt>(row);
+            decimal? newValue = (decimal?)e.NewValue;
+            rowExt.UsrASCJDutyCost = rowExt.UsrASCJDutyCostPct * newValue / 100.0m;
+        }
+
         protected virtual void _(Events.FieldUpdated<INKitSpecHdr, ASCJINKitSpecHdrExt.usrASCJDutyCost> e)
         {
             var row = e.Row;
