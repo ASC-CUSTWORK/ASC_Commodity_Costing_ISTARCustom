@@ -471,7 +471,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
         protected virtual void _(Events.FieldSelecting<POVendorInventory, ASCJPOVendorInventoryExt.usrASCJFabricationCost> e)
         {
             var row = e.Row;
-            if (row == null) return;
+            if (row == null || row.VendorID == null) return;
 
             var poVendorInventoryExt = row.GetExtension<ASCJPOVendorInventoryExt>();
             var calculatedFabricationValue = CalculateFabricationValue(row);
@@ -933,7 +933,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             var metalWeight = GetMetalWeight();
 
-            var usrASCJFabricationCost = metalWeight * (poVendorInventoryExt.UsrASCJFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrASCJFabricationPiece ?? 0.0m);
+            var usrASCJFabricationCost = (metalWeight ?? decimal.Zero) * (poVendorInventoryExt.UsrASCJFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrASCJFabricationPiece ?? 0.0m);
 
             return usrASCJFabricationCost;
         }
