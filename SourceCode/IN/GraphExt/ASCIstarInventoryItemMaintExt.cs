@@ -29,14 +29,6 @@ namespace ASCISTARCustom.IN.GraphExt
 
         #region Selects
 
-        //public POVendorInventorySelect<POVendorInventory,
-        //    InnerJoin<Vendor, On<BqlOperand<Vendor.bAccountID, IBqlInt>.IsEqual<POVendorInventory.vendorID>>,
-        //    LeftJoin<Location, On<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>
-        //        .FilledWith<And<Compare<Location.bAccountID, Equal<POVendorInventory.vendorID>>>>>
-        //        .And<BqlOperand<Location.locationID, IBqlInt>.IsEqual<POVendorInventory.vendorLocationID>>>>>,
-        //    Where<POVendorInventory.inventoryID, Equal<Current<InventoryItem.inventoryID>>,
-        //        And<Where<Vendor.baseCuryID, Equal<Current<AccessInfo.baseCuryID>>, Or<Vendor.baseCuryID, IsNull>>>>, InventoryItem> Base.VendorItems;
-
         public SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View JewelryItemView;
 
         public SelectFrom<ASCIStarINVendorDuty>.Where<ASCIStarINVendorDuty.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View VendorDutyView;
@@ -110,15 +102,6 @@ namespace ASCISTARCustom.IN.GraphExt
             ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
             e.NewValue = classExt?.UsrCostingType ?? ASCIStarConstants.CostingType.ContractCost;
         }
-
-        //protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCIStarINInventoryItemExt.usrCostRollupType> e)
-        //{
-        //    if (e.Row == null) return;
-
-        //    INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
-        //    ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
-        //    e.NewValue = classExt?.UsrCostRollupType ?? ASCIStarConstants.CostRollupType.Blank;
-        //}
 
         protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrMatrixStep> e)
         {
