@@ -892,6 +892,8 @@ namespace ASCISTARCustom.IN.GraphExt
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrFloor>(cache, null, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrCeiling>(cache, null, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrMatrixStep>(cache, null, isVisible);
+         
+            PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrCommodityID>(cache, null, false);
         }
 
         protected virtual void UpdateCommodityCostMetal(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
