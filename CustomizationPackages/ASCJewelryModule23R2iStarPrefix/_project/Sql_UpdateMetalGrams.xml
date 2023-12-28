@@ -1,0 +1,6 @@
+﻿<Sql TableName="UpdateMetalGrams" CustomScript="#CDATA">
+    <CDATA name="CustomScript"><![CDATA[alter table InventoryItem alter column UsrActualGRAMGold decimal(21, 18) NULL
+alter table InventoryItem alter column UsrPricingGRAMGold decimal(21, 18) NULL
+alter table InventoryItem alter column UsrActualGRAMSilver decimal(21, 18) NULL
+alter table InventoryItem alter column UsrPricingGRAMSilver decimal(21, 18) NULL]]></CDATA>
+</Sql>
