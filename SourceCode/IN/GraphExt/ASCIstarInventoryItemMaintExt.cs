@@ -14,7 +14,6 @@ using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
-using PX.Objects.CR.Standalone;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using System.Collections;
@@ -29,14 +28,6 @@ namespace ASCISTARCustom.IN.GraphExt
         public static bool IsActive() => true;
 
         #region Selects
-
-        public POVendorInventorySelect<POVendorInventory,
-            InnerJoin<Vendor, On<BqlOperand<Vendor.bAccountID, IBqlInt>.IsEqual<POVendorInventory.vendorID>>,
-            LeftJoin<Location, On<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>
-                .FilledWith<And<Compare<Location.bAccountID, Equal<POVendorInventory.vendorID>>>>>
-                .And<BqlOperand<Location.locationID, IBqlInt>.IsEqual<POVendorInventory.vendorLocationID>>>>>,
-            Where<POVendorInventory.inventoryID, Equal<Current<InventoryItem.inventoryID>>,
-                And<Where<Vendor.baseCuryID, Equal<Current<AccessInfo.baseCuryID>>, Or<Vendor.baseCuryID, IsNull>>>>, InventoryItem> VendorItems;
 
         public SelectFrom<ASCIStarINJewelryItem>.Where<ASCIStarINJewelryItem.inventoryID.IsEqual<InventoryItem.inventoryID.FromCurrent>>.View JewelryItemView;
 
@@ -111,15 +102,6 @@ namespace ASCISTARCustom.IN.GraphExt
             ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
             e.NewValue = classExt?.UsrCostingType ?? ASCIStarConstants.CostingType.ContractCost;
         }
-
-        //protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCIStarINInventoryItemExt.usrCostRollupType> e)
-        //{
-        //    if (e.Row == null) return;
-
-        //    INItemClass itemClass = INItemClass.PK.Find(Base, e.Row.ItemClassID);
-        //    ASCIStarINItemClassExt classExt = itemClass?.GetExtension<ASCIStarINItemClassExt>();
-        //    e.NewValue = classExt?.UsrCostRollupType ?? ASCIStarConstants.CostRollupType.Blank;
-        //}
 
         protected virtual void _(Events.FieldVerifying<InventoryItem, ASCIStarINInventoryItemExt.usrMatrixStep> e)
         {
@@ -480,7 +462,7 @@ namespace ASCISTARCustom.IN.GraphExt
         protected virtual void _(Events.FieldSelecting<POVendorInventory, ASCIStarPOVendorInventoryExt.usrFabricationCost> e)
         {
             var row = e.Row;
-            if (row == null || row.VendorID == null) return;
+            if (row == null || row?.VendorID == null) return;
 
             var poVendorInventoryExt = row.GetExtension<ASCIStarPOVendorInventoryExt>();
             var calculatedFabricationValue = CalculateFabricationValue(row);
@@ -513,13 +495,13 @@ namespace ASCISTARCustom.IN.GraphExt
                     new PXSetPropertyException(ASCIStarMessages.Error.VendorPriceNotFound, PXErrorLevel.RowWarning));
             }
 
-            List<POVendorInventory> selectPOVendors = VendorItems.Select()?.FirstTableItems.ToList();
+            List<POVendorInventory> selectPOVendors = Base.VendorItems.Select()?.FirstTableItems.ToList();
             foreach (var vendorInventory in selectPOVendors)
             {
                 if (vendorInventory.IsDefault == true && vendorInventory != row)
                 {
-                    this.VendorItems.Cache.SetValue<POVendorInventory.isDefault>(vendorInventory, false);
-                    this.VendorItems.View.RequestRefresh();
+                    this.Base.VendorItems.Cache.SetValue<POVendorInventory.isDefault>(vendorInventory, false);
+                    this.Base.VendorItems.View.RequestRefresh();
                     break;
                 }
             }
@@ -751,7 +733,20 @@ namespace ASCISTARCustom.IN.GraphExt
             }
         }
 
+        protected virtual void _(Events.RowDeleted<POVendorInventory> e, PXRowDeleted baseEvent)
+        {
+            var row = e.Row;
+            if (row == null) return;
 
+            if (row.VendorID == null)// externalCall check  - it is fix null of reference error from base rowDeleted event, don't need on 23r2
+            {
+                var deletedRows = Base.VendorItems.Cache.Deleted.RowCast<POVendorInventory>().ToList();
+
+                if (deletedRows.Count == 0) return;
+            }
+
+            baseEvent(e.Cache, e.Args);
+        }
 
         #endregion POVendorInventory Events
 
@@ -791,7 +786,7 @@ namespace ASCISTARCustom.IN.GraphExt
             e.Cache.SetValueExt<ASCIStarINVendorDuty.countryID>(e.Row, countryID);
         }
         #endregion
-       
+
         #endregion Event Handlers
 
         #region Helper Methods
@@ -892,6 +887,8 @@ namespace ASCISTARCustom.IN.GraphExt
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrFloor>(cache, null, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrCeiling>(cache, null, isVisible);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrMatrixStep>(cache, null, isVisible);
+
+            PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrCommodityID>(cache, null, false);
         }
 
         protected virtual void UpdateCommodityCostMetal(PXCache cache, InventoryItem row, ASCIStarINInventoryItemExt rowExt)
@@ -940,7 +937,7 @@ namespace ASCISTARCustom.IN.GraphExt
         private decimal? CalculateFabricationValue(POVendorInventory poVendorInventory)
         {
             var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCIStarPOVendorInventoryExt>(poVendorInventory);
-            
+
             var metalWeight = GetMetalWeight();
 
             var usrFabricationCost = (metalWeight ?? decimal.Zero) * (poVendorInventoryExt.UsrFabricationWeight ?? 0.0m) + (poVendorInventoryExt.UsrFabricationPiece ?? 0.0m);
@@ -998,24 +995,24 @@ namespace ASCISTARCustom.IN.GraphExt
 
         private void UpdateCostsCurrentOverridenPOVendorItem(ASCIStarINInventoryItemExt inventoryItemExt)
         {
-            if (VendorItems.Current == null)
+            if (Base.VendorItems.Current == null)
             {
-                VendorItems.Current = GetDefaultVendor();
-                if (VendorItems.Current == null) return;
+                Base.VendorItems.Current = GetDefaultVendor();
+                if (Base.VendorItems.Current == null) return;
             }
 
             if (inventoryItemExt.UsrCostingType == ASCIStarConstants.CostingType.MarketCost)
             {
-                UpdateMetalCalcPOVendorItem(VendorItems.Cache, VendorItems.Current, VendorItems.Current.GetExtension<ASCIStarPOVendorInventoryExt>());
+                UpdateMetalCalcPOVendorItem(Base.VendorItems.Cache, Base.VendorItems.Current, Base.VendorItems.Current.GetExtension<ASCIStarPOVendorInventoryExt>());
             }
             else
             {
-                if (VendorItems.Current.IsDefault == true)
+                if (Base.VendorItems.Current.IsDefault == true)
                 {
-                    VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrPreciousMetalCost>(VendorItems.Current, inventoryItemExt.UsrPreciousMetalCost);
-                    VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrUnitCost>(VendorItems.Current, inventoryItemExt.UsrUnitCost);
-                    VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrFloor>(VendorItems.Current, inventoryItemExt.UsrFloor);
-                    VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCeiling>(VendorItems.Current, inventoryItemExt.UsrCeiling);
+                    Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrPreciousMetalCost>(Base.VendorItems.Current, inventoryItemExt.UsrPreciousMetalCost);
+                    Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrUnitCost>(Base.VendorItems.Current, inventoryItemExt.UsrUnitCost);
+                    Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrFloor>(Base.VendorItems.Current, inventoryItemExt.UsrFloor);
+                    Base.VendorItems.SetValueExt<ASCIStarPOVendorInventoryExt.usrCeiling>(Base.VendorItems.Current, inventoryItemExt.UsrCeiling);
                 }
             }
         }
@@ -1078,8 +1075,8 @@ namespace ASCISTARCustom.IN.GraphExt
 
             if (poVendorInventory == null) return;
 
-            this.VendorItems.Cache.SetValueExt<TField>(poVendorInventory, newValue);
-            this.VendorItems.Cache.MarkUpdated(poVendorInventory);
+            this.Base.VendorItems.Cache.SetValueExt<TField>(poVendorInventory, newValue);
+            this.Base.VendorItems.Cache.MarkUpdated(poVendorInventory);
         }
 
         private void UpdateMetalGrams(string metalType)
@@ -1194,7 +1191,7 @@ namespace ASCISTARCustom.IN.GraphExt
         }
 
         private POVendorInventory GetDefaultVendor() =>
-            this.VendorItems.Select().FirstTableItems.FirstOrDefault(x => x.IsDefault == true);
+            this.Base.VendorItems.Select().FirstTableItems.FirstOrDefault(x => x.IsDefault == true);
 
         private List<CSAttributeDetail> SelectAttributeDetails(string attributeID) =>
              SelectFrom<CSAttributeDetail>.Where<CSAttributeDetail.attributeID.IsEqual<@P.AsString>>.View.Select(this.Base, attributeID)?.FirstTableItems.ToList();
