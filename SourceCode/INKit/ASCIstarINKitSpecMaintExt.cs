@@ -20,7 +20,6 @@ using PX.Objects.AP;
 using PX.Objects.Common;
 using PX.Objects.CR;
 using PX.Objects.EP;
-using PX.Objects.FA;
 using PX.Objects.IN;
 using PX.Objects.PO;
 using PX.SM;

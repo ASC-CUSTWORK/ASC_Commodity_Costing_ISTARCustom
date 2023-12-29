@@ -18,6 +18,7 @@ using System.Linq;
 using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 using ASCISTARCustom.IN.CacheExt;
 using PX.Objects.PO.GraphExtensions.POOrderEntryExt;
+using ASCISTARCustom.Common.Descriptor;
 
 namespace ASCISTARCustom.PO
 {
@@ -30,6 +31,18 @@ namespace ASCISTARCustom.PO
           TypeArrayOf<IFbqlJoin>.Empty>.Where<BqlChainableConditionBase<TypeArrayOf<IBqlBinary>.FilledWith<And<Compare<InventoryItemCurySettings.inventoryID,
               Equal<P.AsInt>>>>>.And<BqlOperand<InventoryItemCurySettings.curyID, IBqlString>.IsEqual<BqlField<AccessInfo.baseCuryID, IBqlString>.AsOptional>>>,
           InventoryItemCurySettings>.View ASCIStarItemCurySettings;
+
+        protected virtual void _(Events.FieldVerifying<POLine, ASCIStarPOLineExt.usrMarketPrice> e)
+        {
+            if (e.Row == null) return;
+            decimal? newValue = (decimal?)e.NewValue;
+            if (newValue == decimal.Zero)
+            {
+                e.Cache.RaiseExceptionHandling<ASCIStarPOLineExt.usrMarketPrice>(e.Row, newValue,
+                    new PXSetPropertyException<ASCIStarPOLineExt.usrMarketPrice>(ASCIStarMessages.Error.MarketPriceNotFound, PXErrorLevel.Warning));
+            }
+        }
+
 
         #region Actions
         public PXAction<POOrder> emailPurchaseOrder;
