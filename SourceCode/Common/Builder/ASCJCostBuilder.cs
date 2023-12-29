@@ -258,6 +258,8 @@ namespace ASCJewelryLibrary.Common.Builder
 
         public decimal? GetPurchaseUnitCost(string costingType)
         {
+            if (PreciousMetalMarketCostPerTOZ == decimal.Zero) return decimal.Zero;
+
             ItemCostSpecification.UsrASCJPreciousMetalCost = CalculatePreciousMetalCost(costingType);
 
             return (ItemCostSpecification.UsrASCJPreciousMetalCost ?? 0m)
@@ -276,8 +278,8 @@ namespace ASCJewelryLibrary.Common.Builder
             .Where<APVendorPrice.vendorID.IsEqual<P.AsInt>
                 .And<APVendorPrice.inventoryID.IsEqual<P.AsInt>
                     .And<APVendorPrice.uOM.IsEqual<P.AsString>
-                       .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>.Or<APVendorPrice.effectiveDate.IsNull>>
-                         .And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>
+                       .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>
+                         .And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>>
             .OrderBy<APVendorPrice.effectiveDate.Desc>
             .View.Select(graph, vendorID, inventoryID, UOM, effectiveDate, effectiveDate)?.TopFirst;
         #endregion

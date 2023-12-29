@@ -498,7 +498,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             var apVendorPrice = ASCJCostBuilder.GetAPVendorPrice(this.Base, row.VendorID, inventoryID, ASCJConstants.TOZ.value, PXTimeZoneInfo.Today);
 
-            if (apVendorPrice == null && PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(row).UsrASCJIsOverrideVendor != true)
+            if (apVendorPrice == null && rowExt?.UsrASCJIsOverrideVendor != true)
             {
                 e.Cache.RaiseExceptionHandling<POVendorInventory.isDefault>(row, false,
                     new PXSetPropertyException(ASCJMessages.ASCJError.VendorPriceNotFound, PXErrorLevel.RowWarning));
@@ -883,6 +883,8 @@ namespace ASCJewelryLibrary.IN.GraphExt
             PXUIFieldAttribute.SetVisible<ASCJPOVendorInventoryExt.usrASCJFloor>(cache, null, isVisible);
             PXUIFieldAttribute.SetVisible<ASCJPOVendorInventoryExt.usrASCJCeiling>(cache, null, isVisible);
             PXUIFieldAttribute.SetVisible<ASCJPOVendorInventoryExt.usrASCJMatrixStep>(cache, null, isVisible);
+
+            PXUIFieldAttribute.SetVisible<ASCJPOVendorInventoryExt.usrASCJCommodityID>(cache, null, false);
         }
 
         protected virtual void UpdateCommodityCostMetal(PXCache cache, InventoryItem row, ASCJINInventoryItemExt rowExt)

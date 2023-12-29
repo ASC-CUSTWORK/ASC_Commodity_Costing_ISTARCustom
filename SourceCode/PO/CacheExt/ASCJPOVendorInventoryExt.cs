@@ -83,7 +83,7 @@ namespace ASCJewelryLibrary.PO.CacheExt
         #endregion
 
         #region UsrASCJContractIncrement
-        [PXDBDecimal(4)]
+        [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Increment")]
         public decimal? UsrASCJContractIncrement { get; set; }
         public abstract class usrASCJContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrASCJContractIncrement> { }

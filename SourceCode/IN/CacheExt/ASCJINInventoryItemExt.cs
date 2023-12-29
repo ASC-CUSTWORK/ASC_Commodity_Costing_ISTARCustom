@@ -15,8 +15,9 @@ namespace ASCJewelryLibrary.IN.CacheExt
     {
         public static bool IsActive() => true;
 
-        #region Inventory
+        #region UsrASCJInventoryID
         [PXInt]
+        [PXFormula(typeof(InventoryItem.inventoryID))]
         public virtual int? UsrASCJInventoryID { get; set; }
         public abstract class usrASCJInventoryID : PX.Data.BQL.BqlInt.Field<usrASCJInventoryID> { }
         #endregion
@@ -171,14 +172,14 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #endregion
 
         #region UsrASCJContractIncrement
-        [PXDBDecimal(4)]
+        [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Increment/Dollar")]
         public decimal? UsrASCJContractIncrement { get; set; }
         public abstract class usrASCJContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrASCJContractIncrement> { }
         #endregion
 
         #region UsrASCJIncrement
-        [PXDecimal(4)]
+        [PXDecimal(6)]
         [PXUIField(DisplayName = "Increment", IsReadOnly = true)]
         [PXFormula(typeof(Switch<
             Case<Where<usrASCJCommodityType.IsEqual<CommodityType.gold>>, Mult<usrASCJActualGRAMGold, usrASCJContractIncrement>,
@@ -308,7 +309,17 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #region UsrASCJUnitCost
         [PXDecimal(4)]
         [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        [PXFormula(typeof(Add<Add<Add<Add<usrASCJPackagingLaborCost, usrASCJOtherMaterialsCost>, usrASCJFabricationCost>, usrASCJPackagingCost>, usrASCJPreciousMetalCost>))]
+        //[PXFormula(typeof(Add<Add<Add<Add<usrASCJPackagingLaborCost, usrASCJOtherMaterialsCost>, usrASCJFabricationCost>, usrASCJPackagingCost>, usrASCJPreciousMetalCost>))]
+        [PXFormula(typeof(Add<Add<Add<Add<
+             Switch<Case<Where<usrASCJPackagingLaborCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJPackagingLaborCost.IsNotNull>, usrASCJPackagingLaborCost>>,
+             Switch<Case<Where<usrASCJOtherMaterialsCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJOtherMaterialsCost.IsNotNull>, usrASCJOtherMaterialsCost>>>,
+             Switch<Case<Where<usrASCJFabricationCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJFabricationCost.IsNotNull>, usrASCJFabricationCost>>>,
+              Switch<Case<Where<usrASCJPackagingCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJPackagingCost.IsNotNull>, usrASCJPackagingCost>>>,
+            usrASCJPreciousMetalCost >))]
         public decimal? UsrASCJUnitCost { get; set; }
         public abstract class usrASCJUnitCost : PX.Data.BQL.BqlDecimal.Field<usrASCJUnitCost> { }
         #endregion
@@ -316,7 +327,17 @@ namespace ASCJewelryLibrary.IN.CacheExt
         #region UsrASCJEstLandedCost
         [PXDecimal(4)]
         [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        [PXFormula(typeof(Add<Add<Add<Add<usrASCJDutyCost, usrASCJHandlingCost>, usrASCJFreightCost>, usrASCJLaborCost>, usrASCJUnitCost>))]
+        //  [PXFormula(typeof(Add<Add<Add<Add<usrASCJDutyCost, usrASCJHandlingCost>, usrASCJFreightCost>, usrASCJLaborCost>, usrASCJUnitCost>))]
+        [PXFormula(typeof(Add<Add<Add<Add<
+             Switch<Case<Where<usrASCJDutyCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJDutyCost.IsNotNull>, usrASCJDutyCost>>,
+             Switch<Case<Where<usrASCJHandlingCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJHandlingCost.IsNotNull>, usrASCJHandlingCost>>>,
+             Switch<Case<Where<usrASCJFreightCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJFreightCost.IsNotNull>, usrASCJFreightCost>>>,
+              Switch<Case<Where<usrASCJLaborCost.IsNull>, PX.Objects.CS.decimal0>,
+                    Case<Where<usrASCJLaborCost.IsNotNull>, usrASCJLaborCost>>>,
+            usrASCJUnitCost>))]
         public decimal? UsrASCJEstLandedCost { get; set; }
         public abstract class usrASCJEstLandedCost : PX.Data.BQL.BqlDecimal.Field<usrASCJEstLandedCost> { }
         #endregion

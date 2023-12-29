@@ -18,6 +18,7 @@ using System.Linq;
 using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 using ASCJewelryLibrary.IN.CacheExt;
 using PX.Objects.PO.GraphExtensions.POOrderEntryExt;
+using ASCJewelryLibrary.Common.Descriptor;
 
 namespace ASCJewelryLibrary.PO
 {
@@ -92,6 +93,17 @@ namespace ASCJewelryLibrary.PO
         #endregion
 
         #region Event Handlers
+
+        protected virtual void _(Events.FieldVerifying<POLine, ASCJPOLineExt.usrASCJMarketPrice> e)
+        {
+            if (e.Row == null) return;
+            decimal? newValue = (decimal?)e.NewValue;
+            if (newValue == decimal.Zero)
+            {
+                e.Cache.RaiseExceptionHandling<ASCJPOLineExt.usrASCJMarketPrice>(e.Row, newValue,
+                    new PXSetPropertyException<ASCJPOLineExt.usrASCJMarketPrice>(ASCJMessages.ASCJError.MarketPriceNotFound, PXErrorLevel.Warning));
+            }
+        }
 
         protected virtual void _(Events.FieldUpdated<POOrder, POOrder.vendorID> e)
         {

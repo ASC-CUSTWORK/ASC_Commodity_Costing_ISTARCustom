@@ -16,24 +16,24 @@ namespace ASCJewelryLibrary.Common.Services.DataProvider
             _graph = graph;
         }
 
-        public APVendorPrice GetAPVendorPrice(int? bAccountID, int? inventoryID, string UOM, DateTime? effectiveDate, bool withException = false)
-        {
-            var result = SelectFrom<APVendorPrice>
-            .Where<APVendorPrice.vendorID.IsEqual<P.AsInt>
-                .And<APVendorPrice.inventoryID.IsEqual<P.AsInt>
-                    .And<APVendorPrice.uOM.IsEqual<P.AsString>
-                       .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>.Or<APVendorPrice.effectiveDate.IsNull>>
-                         .And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>
-            .OrderBy<APVendorPrice.effectiveDate.Desc>
-            .View.Select(_graph, bAccountID, inventoryID, UOM, effectiveDate, effectiveDate)?.TopFirst;
+        //public APVendorPrice GetAPVendorPrice(int? bAccountID, int? inventoryID, string UOM, DateTime? effectiveDate, bool withException = false)
+        //{
+        //    var result = SelectFrom<APVendorPrice>
+        //    .Where<APVendorPrice.vendorID.IsEqual<P.AsInt>
+        //        .And<APVendorPrice.inventoryID.IsEqual<P.AsInt>
+        //            .And<APVendorPrice.uOM.IsEqual<P.AsString>
+        //               .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>.Or<APVendorPrice.effectiveDate.IsNull>>
+        //                 .And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>
+        //    .OrderBy<APVendorPrice.effectiveDate.Desc>
+        //    .View.Select(_graph, bAccountID, inventoryID, UOM, effectiveDate, effectiveDate)?.TopFirst;
 
-            if (result == null && withException == true)
-            {
-                throw new PXException(ASCJMessages.ASCJError.VendorPriceNotFound);
-            }
+        //    if (result == null && withException == true)
+        //    {
+        //        throw new PXException(ASCJMessages.ASCJError.VendorPriceNotFound);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public Vendor GetVendor(int? bAccountID, bool withException = false)
         {

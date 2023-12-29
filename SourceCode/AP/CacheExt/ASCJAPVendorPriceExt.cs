@@ -34,7 +34,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
 
         #region UsrASCJCommodity
         [PXDBString(1)]
-        [PXUIField(DisplayName = "Commodity Metal Type", Enabled = false)]
+        [PXUIField(DisplayName = "Commodity Metal Type")]
         [CommodityType.ASCJList]
         [PXDefault(typeof(Search<ASCJINInventoryItemExt.usrASCJCommodityType, Where<InventoryItem.inventoryID, Equal<Current<APVendorPrice.inventoryID>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Default<APVendorPrice.inventoryID>))]

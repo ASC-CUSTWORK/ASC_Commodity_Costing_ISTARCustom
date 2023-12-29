@@ -139,7 +139,7 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         #endregion
 
         #region UsrASCJContractIncrement
-        [PXDBDecimal(4)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.0000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Increment", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrASCJContractIncrement>))]
