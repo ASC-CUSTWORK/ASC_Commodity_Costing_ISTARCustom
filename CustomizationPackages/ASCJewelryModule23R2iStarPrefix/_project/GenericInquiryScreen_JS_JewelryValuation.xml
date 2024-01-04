@@ -1,6 +1,6 @@
 ﻿<GenericInquiryScreen>
     <data-set>
-        <relations format-version="3" relations-version="20210225" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
+        <relations format-version="3" relations-version="20230829" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
             <link from="GIFilter (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIGroupBy (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIMassAction (DesignID)" to="GIDesign (DesignID)" />
@@ -137,7 +137,7 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="d2d341b7-532a-4cd8-aaca-494b4c02cd4c" Name="JS-JewelryValuation" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0">
+                <row DesignID="d2d341b7-532a-4cd8-aaca-494b4c02cd4c" Name="JS-JewelryValuation" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0">
                     <GIFilter LineNbr="7" IsActive="0" Name="InventoryItem" FieldName="InventoryItem.inventoryCD" DataType="string" IsExpression="1" DefaultValue="SSR121292143161" ColSpan="1" Required="0" />
                     <GIFilter LineNbr="6" IsActive="1" Name="ForTony" FieldName="PX.Data.Maintenance.GI.CheckboxCombobox+checkbox" DataType="string" DisplayName="ForTony" IsExpression="0" DefaultValue="=1" ColSpan="1" Required="1" />
                     <GIFilter LineNbr="5" IsActive="1" Name="Wahehouse" FieldName="INSite.siteCD" DataType="string" DisplayName="Warehouse" IsExpression="0" ColSpan="1" Required="0" />
@@ -148,7 +148,7 @@
                     <GITable Alias="VendorItem" Name="PX.Objects.PO.POVendorInventory" />
                     <GITable Alias="SilverStkDet" Name="PX.Objects.IN.INKitSpecStkDet">
                         <GIRelation LineNbr="4" ChildTable="CommodityItem" IsActive="0" JoinType="L">
-                            <GIOn LineNbr="4" ParentField="compInventoryID" Condition="E " ChildField="inventoryID" Operation="A" />
+                            <GIOn LineNbr="4" ParentField="compInventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
                         </GIRelation>
                     </GITable>
                     <GITable Alias="SilverItem" Name="PX.Objects.IN.InventoryItem" />
@@ -156,23 +156,23 @@
                     <GITable Alias="Item3" Name="PX.Objects.IN.InventoryItem" />
                     <GITable Alias="InventoryItem" Name="PX.Objects.IN.InventoryItem">
                         <GIRelation LineNbr="9" ChildTable="INJewelryInventoryItem" IsActive="1" JoinType="I">
-                            <GIOn LineNbr="25" ParentField="inventoryID" Condition="E " ChildField="inventoryID" Operation="A" />
+                            <GIOn LineNbr="25" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="8" ChildTable="ItemClass" IsActive="1" JoinType="I">
-                            <GIOn LineNbr="24" ParentField="itemClassID" Condition="E " ChildField="itemClassID" Operation="A" />
+                            <GIOn LineNbr="24" ParentField="itemClassID" Condition="E" ChildField="itemClassID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="7" ChildTable="VendorItem" IsActive="1" JoinType="L">
-                            <GIOn LineNbr="9" ParentField="preferredVendorID" Condition="E " ChildField="vendorID" Operation="A" />
-                            <GIOn LineNbr="8" ParentField="inventoryID" Condition="E " ChildField="inventoryID" Operation="A" />
+                            <GIOn LineNbr="9" ParentField="preferredVendorID" Condition="E" ChildField="vendorID" Operation="A" />
+                            <GIOn LineNbr="8" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="6" ChildTable="SilverStkDet" IsActive="0" JoinType="L">
-                            <GIOn LineNbr="7" ParentField="inventoryID" Condition="E " ChildField="kitInventoryID" Operation="A" />
+                            <GIOn LineNbr="7" ParentField="inventoryID" Condition="E" ChildField="kitInventoryID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="3" ChildTable="INKitSpecStkDet" IsActive="0" JoinType="L">
-                            <GIOn LineNbr="3" ParentField="inventoryID" Condition="E " ChildField="kitInventoryID" Operation="A" />
+                            <GIOn LineNbr="3" ParentField="inventoryID" Condition="E" ChildField="kitInventoryID" Operation="A" />
                         </GIRelation>
                         <GIRelation LineNbr="2" ChildTable="INItemStats" IsActive="1" JoinType="I">
-                            <GIOn LineNbr="2" ParentField="inventoryID" Condition="E " ChildField="inventoryID" Operation="A" />
+                            <GIOn LineNbr="2" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
                         </GIRelation>
                         <GIResult LineNbr="53" SortOrder="51" IsActive="0" Field="=iif([InventoryItem.UsrActualGRAMGold] =0, 0,([InventoryItem.UsrPricingGRAMGold]/[InventoryItem.UsrActualGRAMGold] /31.10348) *(1+ [GoldLoss] /100  ))" SchemaField="InventoryItem.BasePrice" Caption="Adjusted Increment" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d42a4cef-b9d2-449c-991d-b15849fba7f2" />
                         <GIResult LineNbr="52" SortOrder="50" IsActive="1" Field="= iif ( [InventoryItem.UsrActualGRAMGold]=0, 0,( [InventoryItem.UsrPricingGRAMGold]/ [InventoryItem.UsrActualGRAMGold]/31.10348) *(1+ [InventoryItem.UsrContractSurcharge] /100  ))" SchemaField="InventoryItem.BasePrice" Caption="Current Increment" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="b2bd53a6-950b-425e-8ade-3ffddb5a2a37" />
@@ -224,7 +224,7 @@
                     <GITable Alias="INJewelryInventoryItem" Name="ASCISTARCustom.IN.DAC.ASCIStarINJewelryItem" />
                     <GITable Alias="INItemStats" Name="PX.Objects.IN.INItemStats">
                         <GIRelation LineNbr="11" ChildTable="INSite" IsActive="1" JoinType="I">
-                            <GIOn LineNbr="27" ParentField="siteID" Condition="E " ChildField="siteID" Operation="A" />
+                            <GIOn LineNbr="27" ParentField="siteID" Condition="E" ChildField="siteID" Operation="A" />
                         </GIRelation>
                         <GIResult LineNbr="29" SortOrder="31" IsActive="0" Field="=[INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)/31.103480*[INItemStats.QtyOnHand]*[SilverBullion]-([INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)/31.103480*[SilverBullion]*(1+[SilverLoss]))" Caption="Commodity Cost Change" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="097a894a-8826-4ac2-a7b9-6426cb482a00" />
                         <GIResult LineNbr="28" SortOrder="30" IsActive="0" Field="=[INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)/31.103480*[SilverBullion]*(1+[SilverLoss])" Caption="New Market Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="ad8e05b2-f9b2-408d-99f8-84b371842c90" />
@@ -239,25 +239,25 @@
                     <GITable Alias="GoldItem" Name="PX.Objects.IN.InventoryItem" />
                     <GITable Alias="CommodityItem" Name="PX.Objects.IN.InventoryItem">
                         <GIRelation LineNbr="5" ChildTable="CommodityClass" IsActive="0" JoinType="I">
-                            <GIOn LineNbr="6" ParentField="=[CommodityClass.ItemClassCD]" Condition="E " ChildField="='COMMODITY'" Operation="A" />
-                            <GIOn LineNbr="5" ParentField="itemClassID" Condition="E " ChildField="itemClassID" Operation="A" />
+                            <GIOn LineNbr="6" ParentField="=[CommodityClass.ItemClassCD]" Condition="E" ChildField="='COMMODITY'" Operation="A" />
+                            <GIOn LineNbr="5" ParentField="itemClassID" Condition="E" ChildField="itemClassID" Operation="A" />
                         </GIRelation>
                         <GIResult LineNbr="30" SortOrder="24" IsActive="0" Field="inventoryCD" Caption="Commodity" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="3b20ddeb-1482-42d6-a4da-b391e0b8298c" />
                     </GITable>
                     <GITable Alias="CommodityClass" Name="PX.Objects.IN.INItemClass" />
-                    <GIWhere LineNbr="13" IsActive="1" DataFieldName="INSite.siteCD" Condition="E " IsExpression="0" Value1="[Wahehouse]" CloseBrackets=")        " Operation="A" />
-                    <GIWhere LineNbr="12" IsActive="1" OpenBrackets="(        " DataFieldName="[Wahehouse]" Condition="NU" IsExpression="0" Operation="O" />
-                    <GIWhere LineNbr="11" IsActive="0" DataFieldName="[InventoryItem]" Condition="NU" IsExpression="0" CloseBrackets=")        " Operation="A" />
-                    <GIWhere LineNbr="10" IsActive="0" DataFieldName="InventoryItem.inventoryCD" Condition="E " IsExpression="0" Value1="[InventoryItem]" CloseBrackets=")        " Operation="O" />
-                    <GIWhere LineNbr="9" IsActive="0" OpenBrackets="((       " DataFieldName="[InventoryItem]" Condition="NN" IsExpression="0" Operation="A" />
-                    <GIWhere LineNbr="8" IsActive="1" DataFieldName="[ForTony]" Condition="E " IsExpression="0" Value1="=0" CloseBrackets=")        " Operation="A" />
-                    <GIWhere LineNbr="7" IsActive="1" DataFieldName="InventoryItem.usrLegacyID" Condition="LI" IsExpression="0" Value1="='TONY'" CloseBrackets=")        " Operation="O" />
-                    <GIWhere LineNbr="6" IsActive="1" OpenBrackets="((       " DataFieldName="[ForTony]" Condition="E " IsExpression="0" Value1="=1" Operation="A" />
+                    <GIWhere LineNbr="13" IsActive="1" DataFieldName="INSite.siteCD" Condition="E" IsExpression="0" Value1="[Wahehouse]" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="12" IsActive="1" OpenBrackets="(" DataFieldName="[Wahehouse]" Condition="NU" IsExpression="0" Operation="O" />
+                    <GIWhere LineNbr="11" IsActive="0" DataFieldName="[InventoryItem]" Condition="NU" IsExpression="0" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="10" IsActive="0" DataFieldName="InventoryItem.inventoryCD" Condition="E" IsExpression="0" Value1="[InventoryItem]" CloseBrackets=")" Operation="O" />
+                    <GIWhere LineNbr="9" IsActive="0" OpenBrackets="((" DataFieldName="[InventoryItem]" Condition="NN" IsExpression="0" Operation="A" />
+                    <GIWhere LineNbr="8" IsActive="1" DataFieldName="[ForTony]" Condition="E" IsExpression="0" Value1="=0" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="7" IsActive="1" DataFieldName="InventoryItem.usrLegacyID" Condition="LI" IsExpression="0" Value1="='TONY'" CloseBrackets=")" Operation="O" />
+                    <GIWhere LineNbr="6" IsActive="1" OpenBrackets="((" DataFieldName="[ForTony]" Condition="E" IsExpression="0" Value1="=1" Operation="A" />
                     <GIWhere LineNbr="5" IsActive="1" DataFieldName="INItemStats.qtyOnHand" Condition="NE" IsExpression="0" Value1="0" Operation="A" />
-                    <GIWhere LineNbr="4" IsActive="1" DataFieldName="ItemClass.itemClassCD" Condition="RL" IsExpression="0" Value1="='JWLRY'" CloseBrackets=")        " Operation="A" />
-                    <GIWhere LineNbr="3" IsActive="1" OpenBrackets="(        " DataFieldName="ItemClass.itemClassCD" Condition="E " IsExpression="1" Value1="JEWELRY" Operation="O" />
-                    <GIWhere LineNbr="2" IsActive="0" DataFieldName="InventoryItem.metal" Condition="E " IsExpression="1" Value1="FSS" CloseBrackets=")        " Operation="A" />
-                    <GIWhere LineNbr="1" IsActive="0" OpenBrackets="(        " DataFieldName="InventoryItem.metal" Condition="E " IsExpression="1" Value1="SS" Operation="O" />
+                    <GIWhere LineNbr="4" IsActive="1" DataFieldName="ItemClass.itemClassCD" Condition="RL" IsExpression="0" Value1="='JWLRY'" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="3" IsActive="1" OpenBrackets="(" DataFieldName="ItemClass.itemClassCD" Condition="E" IsExpression="1" Value1="JEWELRY" Operation="O" />
+                    <GIWhere LineNbr="2" IsActive="0" DataFieldName="InventoryItem.metal" Condition="E" IsExpression="1" Value1="FSS" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="1" IsActive="0" OpenBrackets="(" DataFieldName="InventoryItem.metal" Condition="E" IsExpression="1" Value1="SS" Operation="O" />
                     <SiteMap linkname="toDesignById">
                         <row Title="Jewelry Valuation" Url="~/genericinquiry/genericinquiry.aspx?id=d2d341b7-532a-4cd8-aaca-494b4c02cd4c" ScreenID="GIJS0022" NodeID="bb7fff37-d861-4741-be08-651d4a4aec01" ParentID="00000000-0000-0000-0000-000000000000">
                             <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="110" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">

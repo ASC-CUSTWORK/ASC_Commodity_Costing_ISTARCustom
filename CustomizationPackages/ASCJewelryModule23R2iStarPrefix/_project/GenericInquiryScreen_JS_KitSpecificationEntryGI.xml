@@ -1,6 +1,6 @@
 ﻿<GenericInquiryScreen>
     <data-set>
-        <relations format-version="3" relations-version="20210225" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
+        <relations format-version="3" relations-version="20230829" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
             <link from="GIFilter (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIGroupBy (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIMassAction (DesignID)" to="GIDesign (DesignID)" />
@@ -137,8 +137,8 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="1" ExposeViaOData="0" ExposeViaMobile="0" RowStyleFormula="=IIF([INKitSpecHdr.AllowCompAddition]=1,'red20','default')" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
-                    <GINavigationScreen Link="IN209500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1">
+                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="1" ExposeViaOData="0" ExposeViaMobile="0" RowStyleFormula="=IIF([INKitSpecHdr.AllowCompAddition]=1,'red20','default')" ShowDeletedRecords="0" ShowArchivedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
+                    <GINavigationScreen Link="IN209500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1" NoteID="bb85c7ae-ebca-4cd5-903a-90815cf8ebaf">
                         <GINavigationParameter LineNbr="2" FieldName="RevisionID" ParameterName="INKitSpecHdr.revisionID" IsExpression="0" />
                         <GINavigationParameter LineNbr="1" FieldName="KitInventoryID" ParameterName="INKitSpecHdr.kitInventoryID" IsExpression="0" />
                     </GINavigationScreen>

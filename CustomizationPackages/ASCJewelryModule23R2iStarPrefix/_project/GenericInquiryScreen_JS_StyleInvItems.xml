@@ -1,6 +1,6 @@
 ﻿<GenericInquiryScreen>
     <data-set>
-        <relations format-version="3" relations-version="20210225" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
+        <relations format-version="3" relations-version="20230829" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
             <link from="GIFilter (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIGroupBy (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIMassAction (DesignID)" to="GIDesign (DesignID)" />
@@ -137,8 +137,8 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="587d10fa-80d3-4b36-92be-b7edf1605340" Name="JS-StyleInvItems" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
-                    <GINavigationScreen Link="IN202500" LineNbr="1" SortOrder="1" WindowMode="N" IsActive="1" />
+                <row DesignID="587d10fa-80d3-4b36-92be-b7edf1605340" Name="JS-StyleInvItems" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
+                    <GINavigationScreen Link="IN202500" LineNbr="1" SortOrder="1" WindowMode="N" IsActive="1" NoteID="fac197ed-0b92-4fc2-826d-a8aa38b877d3" />
                     <GISort LineNbr="1" IsActive="1" DataFieldName="InventoryItem.inventoryID" SortOrder="A" />
                     <GITable Alias="InventoryItem" Name="PX.Objects.IN.InventoryItem">
                         <GIResult LineNbr="22" SortOrder="21" IsActive="1" Field="ringSize" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="79ad7122-4809-4252-9106-37008ae3a72b" />
@@ -163,7 +163,7 @@
                         <GIResult LineNbr="2" SortOrder="4" IsActive="1" Field="descr" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d17984dd-b3e2-4707-9afc-102ff0c2872e" />
                         <GIResult LineNbr="1" SortOrder="3" IsActive="1" Field="inventoryCD" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="9bb92ddc-07e9-4111-9e98-c9591ccd5e32" />
                     </GITable>
-                    <GIWhere LineNbr="1" IsActive="0" DataFieldName="InventoryItem.productWorkgroupID" Condition="E " IsExpression="1" Value1="PDS" Operation="A" />
+                    <GIWhere LineNbr="1" IsActive="0" DataFieldName="InventoryItem.productWorkgroupID" Condition="E" IsExpression="1" Value1="PDS" Operation="A" />
                     <SiteMap linkname="toDesignById">
                         <row Title="Style Inventory Stock Items" Url="~/genericinquiry/genericinquiry.aspx?id=587d10fa-80d3-4b36-92be-b7edf1605340" ScreenID="GIJS0011" NodeID="5b25a395-507f-4886-bd0d-8cbdad75335f" ParentID="00000000-0000-0000-0000-000000000000">
                             <MUIScreen IsPortal="0" WorkspaceID="6557c1c6-747e-45bb-9072-54f096598d61" Order="6.25" SubcategoryID="6d40b0b6-18f4-4139-adac-8ec8cb2a17ea">

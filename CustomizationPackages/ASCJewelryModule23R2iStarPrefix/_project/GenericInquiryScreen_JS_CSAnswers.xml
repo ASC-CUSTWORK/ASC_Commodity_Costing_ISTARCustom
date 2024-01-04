@@ -1,6 +1,6 @@
 ﻿<GenericInquiryScreen>
     <data-set>
-        <relations format-version="3" relations-version="20210225" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
+        <relations format-version="3" relations-version="20230829" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
             <link from="GIFilter (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIGroupBy (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIMassAction (DesignID)" to="GIDesign (DesignID)" />
@@ -137,7 +137,7 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="4c00acfb-5150-4775-a090-e04e09b28371" Name="JS-CSAnswers" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0">
+                <row DesignID="4c00acfb-5150-4775-a090-e04e09b28371" Name="JS-CSAnswers" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0">
                     <GIFilter LineNbr="1" IsActive="1" Name="JSAttrID" FieldName="CSAttributeDetail.attributeID" DataType="string" DisplayName="Attribute ID" IsExpression="0" ColSpan="1" Required="0" />
                     <GISort LineNbr="1" IsActive="1" DataFieldName="CSAttributeDetail.sortOrder" SortOrder="A" />
                     <GITable Alias="CSAttributeDetail" Name="PX.Objects.CS.CSAttributeDetail">
@@ -146,8 +146,8 @@
                         <GIResult LineNbr="7" SortOrder="2" IsActive="1" Field="valueID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="ef16e063-cbe4-4a57-b52c-c37df936aabd" />
                         <GIResult LineNbr="6" SortOrder="1" IsActive="1" Field="attributeID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="c2e4f08a-42aa-475a-b740-b25f6bbf20ca" />
                     </GITable>
-                    <GIWhere LineNbr="2" IsActive="1" DataFieldName="[JSAttrID]" Condition="NN" IsExpression="0" CloseBrackets=")        " Operation="A" />
-                    <GIWhere LineNbr="1" IsActive="1" OpenBrackets="(        " DataFieldName="CSAttributeDetail.attributeID" Condition="E " IsExpression="0" Value1="[JSAttrID]" Operation="A" />
+                    <GIWhere LineNbr="2" IsActive="1" DataFieldName="[JSAttrID]" Condition="NN" IsExpression="0" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="1" IsActive="1" OpenBrackets="(" DataFieldName="CSAttributeDetail.attributeID" Condition="E" IsExpression="0" Value1="[JSAttrID]" Operation="A" />
                     <SiteMap linkname="toDesignById">
                         <row Title="JS-CSAnswers" Url="~/GenericInquiry/GenericInquiry.aspx?id=4c00acfb-5150-4775-a090-e04e09b28371" ScreenID="GI000262" NodeID="e35e722d-a781-4e2f-aa53-770425611e95" ParentID="00000000-0000-0000-0000-000000000000">
                             <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="55" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">

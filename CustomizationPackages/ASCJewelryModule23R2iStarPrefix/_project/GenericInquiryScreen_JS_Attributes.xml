@@ -1,6 +1,6 @@
 ﻿<GenericInquiryScreen>
     <data-set>
-        <relations format-version="3" relations-version="20210225" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
+        <relations format-version="3" relations-version="20230829" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
             <link from="GIFilter (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIGroupBy (DesignID)" to="GIDesign (DesignID)" />
             <link from="GIMassAction (DesignID)" to="GIDesign (DesignID)" />
@@ -137,8 +137,8 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="0871275a-0efa-4fc4-a7b9-70c3575294ce" Name="JS-Attributes" SelectTop="100" FilterColCount="3" PageSize="100" ExportTop="100" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0">
-                    <GINavigationScreen Link="GI000262" LineNbr="1" SortOrder="1" WindowMode="L" IsActive="1" Icon="account_details">
+                <row DesignID="0871275a-0efa-4fc4-a7b9-70c3575294ce" Name="JS-Attributes" SelectTop="100" FilterColCount="3" PageSize="100" ExportTop="100" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0">
+                    <GINavigationScreen Link="GI000262" LineNbr="1" SortOrder="1" WindowMode="L" IsActive="1" Icon="account_details" NoteID="d3bc1921-c131-48e9-9b4d-ef242b8097c2">
                         <GINavigationParameter LineNbr="1" FieldName="JSAttrID" ParameterName="CSAttribute.attributeID" IsExpression="0" />
                     </GINavigationScreen>
                     <GITable Alias="CSAttribute" Name="PX.Objects.CS.CSAttribute">
