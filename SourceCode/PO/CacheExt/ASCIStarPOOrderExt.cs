@@ -36,12 +36,26 @@ namespace ASCISTARCustom.PO.DAC
         public abstract class usrPricingDate : PX.Data.BQL.BqlDateTime.Field<usrPricingDate> { }
         #endregion
 
+        #region UsrFinalPO
+        [PXDBBool]
+        [PXUIField(DisplayName = "Final PO")]
+        public virtual bool? UsrFinalPO { get; set; }
+        public abstract class usrFinalPO : PX.Data.BQL.BqlBool.Field<usrFinalPO> { }
+        #endregion
+
         #region UsrProgram
         [PXDBString(255)]
         [PXUIField(DisplayName = "Program", Required = true)]
         [PXDefault]
         public virtual string UsrProgram { get; set; }
         public abstract class usrProgram : PX.Data.BQL.BqlString.Field<usrProgram> { }
+        #endregion
+
+        #region UsrTrackingNo
+        [PXDBString(25)]
+        [PXUIField(DisplayName = "Tracking No")]
+        public virtual string UsrTrackingNo { get; set; }
+        public abstract class usrTrackingNo : PX.Data.BQL.BqlString.Field<usrTrackingNo> { }
         #endregion
 
         #region UsrMarketID
