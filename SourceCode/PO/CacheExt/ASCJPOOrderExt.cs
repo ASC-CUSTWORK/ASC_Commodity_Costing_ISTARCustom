@@ -36,12 +36,26 @@ namespace ASCJewelryLibrary.PO.DAC
         public abstract class usrASCJPricingDate : PX.Data.BQL.BqlDateTime.Field<usrASCJPricingDate> { }
         #endregion
 
+        #region UsrASCJFinalPO
+        [PXDBBool]
+        [PXUIField(DisplayName = "Final PO")]
+        public virtual bool? UsrASCJFinalPO { get; set; }
+        public abstract class usrASCJFinalPO : PX.Data.BQL.BqlBool.Field<usrASCJFinalPO> { }
+        #endregion
+
         #region UsrASCJProgram
         [PXDBString(255)]
         [PXUIField(DisplayName = "Program", Required = true)]
         [PXDefault]
         public virtual string UsrASCJProgram { get; set; }
         public abstract class usrASCJProgram : PX.Data.BQL.BqlString.Field<usrASCJProgram> { }
+        #endregion
+
+        #region UsrASCJTrackingNo
+        [PXDBString(25)]
+        [PXUIField(DisplayName = "Tracking No")]
+        public virtual string UsrASCJTrackingNo { get; set; }
+        public abstract class usrASCJTrackingNo : PX.Data.BQL.BqlString.Field<usrASCJTrackingNo> { }
         #endregion
 
         #region UsrASCJMarketID
