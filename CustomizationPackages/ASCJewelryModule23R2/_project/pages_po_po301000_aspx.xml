@@ -134,6 +134,7 @@
                     <Prop Key="ID" Value="CstPXTextEdit10" />
                     <Prop Key="DataField" Value="UsrASCJTrackingNo" />
                     <Prop Key="CommitChanges" Value="True" />
+                    <Prop Key="Width" Value="220" />
                 </PXTextEdit>
             </AddItem>
             <PXLayoutRule OriginalIndex="11" />
