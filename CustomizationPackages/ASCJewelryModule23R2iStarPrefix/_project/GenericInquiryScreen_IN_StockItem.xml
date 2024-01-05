@@ -213,14 +213,12 @@
                     <SiteMap linkname="toDesignById">
                         <row Position="20" Title="Stock Items" Url="~/GenericInquiry/GenericInquiry.aspx?id=e4352bbd-a53a-42c4-9b96-e9f0fda070c7" ScreenID="IN2025PL" NodeID="a191afac-d5c5-48b3-a450-970d364acb26" ParentID="12167736-ae7e-46ab-8a8c-dd4b86217519">
                             <ListEntryPoint EntryScreenID="IN202500" IsActive="1" />
-                            <FilterHeader FilterID="a5249262-57eb-ed11-829c-00155df1540c" UserName="matt.butler" ViewName="Results" FilterName="Proposed Style" IsDefault="0" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="3">
-                            </FilterHeader>
+                            <FilterHeader FilterID="a5249262-57eb-ed11-829c-00155df1540c" UserName="matt.butler" ViewName="Results" FilterName="Proposed Style" IsDefault="0" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="3" />
                             <FilterHeader FilterID="af5c6a55-57eb-ed11-829c-00155df1540c" UserName="matt.butler" ViewName="Results" FilterName="Inventory" IsDefault="1" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="2">
                                 <FilterRow FilterRowNbr="2" OpenBrackets="0" DataField="InventoryItem_itemClassID" Condition="1" ValueSt="COMMODITY" CloseBrackets="0" Operator="0" IsUsed="1" FilterType="0" />
                             </FilterHeader>
                             <FilterHeader FilterID="f53d0ae2-9641-ee11-829f-00155d73340f" UserName="Caroline" ViewName="Results" FilterName="Precious Metals" IsDefault="0" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="17" />
-                            <FilterHeader FilterID="75343d3b-0dfb-ed11-829c-00155d73340b" UserName="matt.butler" ViewName="Results" FilterName="Quote Only" IsDefault="0" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="16">
-                            </FilterHeader>
+                            <FilterHeader FilterID="75343d3b-0dfb-ed11-829c-00155d73340b" UserName="matt.butler" ViewName="Results" FilterName="Quote Only" IsDefault="0" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="16" />
                             <FilterHeader FilterID="b2de8ed3-b9f5-ed11-829b-00155d73340b" UserName="matt.butler" ViewName="Results" FilterName="Setup" IsDefault="0" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="14">
                                 <FilterRow FilterRowNbr="2" OpenBrackets="0" DataField="InventoryItem_itemClassID" Condition="0" ValueSt="COMMODITY" CloseBrackets="0" Operator="0" IsUsed="1" FilterType="0" />
                             </FilterHeader>
