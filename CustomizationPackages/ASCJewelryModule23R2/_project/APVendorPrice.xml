@@ -12,4 +12,5 @@
     <Column TableName="APVendorPrice" ColumnName="UsrASCJFloor" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrASCJCeiling" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="APVendorPrice" ColumnName="UsrASCJLaborPerUnit" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="9" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APVendorPrice" ColumnName="UsrASCJBasisValue" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
 </Table>

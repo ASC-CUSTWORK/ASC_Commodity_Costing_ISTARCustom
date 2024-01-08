@@ -81,7 +81,8 @@ namespace ASCJewelryLibrary.IN.GraphExt
             var row = e.Row;
             if (row == null) return;
 
-            bool isVisible = IsVisibleFields(row.ItemClassID);
+            var rowExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(row);
+            bool isVisible = IsVisibleFields(rowExt, row.ItemClassID);
             SetVisibleJewelFields(e.Cache, row, isVisible);
 
             if (this.ASCJJewelryItemView.Current == null)
@@ -89,9 +90,10 @@ namespace ASCJewelryLibrary.IN.GraphExt
 
             SetReadOnlyJewelAttrFields(e.Cache, row, this.ASCJJewelryItemView.Current?.MetalType);
 
-            PXUIFieldAttribute.SetRequired<ASCJINJewelryItem.metalType>(this.ASCJJewelryItemView.Cache, isVisible);
+            bool isRequire = isVisible || rowExt.UsrASCJCommodityType == CommodityType.Gold || rowExt.UsrASCJCommodityType == CommodityType.Silver;
+            PXUIFieldAttribute.SetRequired<ASCJINJewelryItem.metalType>(this.ASCJJewelryItemView.Cache, isRequire);
             PXDefaultAttribute.SetPersistingCheck<ASCJINJewelryItem.metalType>(this.ASCJJewelryItemView.Cache, this.ASCJJewelryItemView.Current,
-                isVisible ? PXPersistingCheck.NullOrBlank : PXPersistingCheck.Nothing);
+                isRequire ? PXPersistingCheck.NullOrBlank : PXPersistingCheck.Nothing);
         }
 
         protected virtual void _(Events.FieldDefaulting<InventoryItem, ASCJINInventoryItemExt.usrASCJCostingType> e)
@@ -165,7 +167,9 @@ namespace ASCJewelryLibrary.IN.GraphExt
             var row = e.Row;
             if (e.Row == null) return;
 
-            bool isVisible = IsVisibleFields(row.ItemClassID);
+            var rowExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(row);
+
+            bool isVisible = IsVisibleFields(rowExt, row.ItemClassID);
             SetVisibleJewelFields(e.Cache, row, isVisible);
         }
 
@@ -432,6 +436,21 @@ namespace ASCJewelryLibrary.IN.GraphExt
             ASCJINInventoryItemExt rowExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(row);
         }
 
+        protected virtual void _(Events.RowPersisting<ASCJINJewelryItem> e)
+        {
+            var row = e.Row;
+            if (row == null || row.MetalType != null) return;
+
+            var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(this.Base.Item.Current);
+
+            if (inventoryItemExt.UsrASCJCommodityType == CommodityType.Gold || inventoryItemExt.UsrASCJCommodityType == CommodityType.Silver)
+            {
+                var errorEx = new PXSetPropertyException<ASCJINJewelryItem.metalType>(ASCJINConstants.ASCJWarnings.MetalTypeEmpty, PXErrorLevel.Error);
+                e.Cache.RaiseExceptionHandling<ASCJINJewelryItem.metalType>(row, row.MetalType, errorEx);
+                throw new PXException();
+            }
+        }
+
         #endregion InventoryItem Events
 
         #region JewelryItem Events
@@ -642,16 +661,13 @@ namespace ASCJewelryLibrary.IN.GraphExt
             e.Cache.SetValueExt<ASCJPOVendorInventoryExt.usrASCJContractSurcharge>(row, apVendorPriceExt.UsrASCJCommoditySurchargePct ?? 0.0m);
             //e.Cache.SetValueExt<ASCJPOVendorInventoryExt.usrASCJFabricationWeight>(row, apVendorPriceExt.UsrASCJLaborPerUnit ?? 0.0m);
 
-            if (row.IsDefault == true)
+            if (row.IsDefault == true && this.Base.Item.Current != null)
             {
-                if (this.Base.Item.Current != null)
-                {
-                    var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(this.Base.Item.Current);
+                var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(this.Base.Item.Current);
 
-                    inventoryItemExt.UsrASCJContractSurcharge = apVendorPriceExt.UsrASCJCommoditySurchargePct;
-                    inventoryItemExt.UsrASCJContractLossPct = apVendorPriceExt.UsrASCJCommodityLossPct;
-                    inventoryItemExt.UsrASCJMatrixStep = apVendorPriceExt.UsrASCJMatrixStep;
-                }
+                inventoryItemExt.UsrASCJContractSurcharge = apVendorPriceExt.UsrASCJCommoditySurchargePct;
+                inventoryItemExt.UsrASCJContractLossPct = apVendorPriceExt.UsrASCJCommodityLossPct;
+                inventoryItemExt.UsrASCJMatrixStep = apVendorPriceExt.UsrASCJMatrixStep;
             }
         }
 
@@ -782,7 +798,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             e.Cache.SetValueExt<ASCJINVendorDuty.countryID>(e.Row, countryID);
         }
         #endregion
-       
+
         #endregion Event Handlers
 
         #region Helper Methods
@@ -822,11 +838,11 @@ namespace ASCJewelryLibrary.IN.GraphExt
             PXUIFieldAttribute.SetVisible<ASCJINInventoryItemExt.usrASCJMatrixPriceTOZ>(cache, row, isVisibleSilver);
         }
 
-        protected virtual bool IsVisibleFields(int? itemClassID)
+        protected virtual bool IsVisibleFields(ASCJINInventoryItemExt rowExt, int? itemClassID)
         {
             INItemClass itemClass = INItemClass.PK.Find(Base, itemClassID);
 
-            return itemClass?.ItemClassCD.Trim() != "COMMODITY" && PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(this.Base.Item.Current)?.UsrASCJCommodityType != ASCJConstants.CommodityType.Undefined;
+            return itemClass?.ItemClassCD.Trim() != "COMMODITY" && rowExt?.UsrASCJCommodityType != ASCJConstants.CommodityType.Undefined;
             // acupower: remove from constant to jewel preferences screen and find from rowSelected
         }
 
@@ -930,7 +946,8 @@ namespace ASCJewelryLibrary.IN.GraphExt
             VerifyLossAndSurcharge(cache, row, rowExt, jewelCostBuilder);
         }
 
-        private decimal? CalculateFabricationValue(POVendorInventory poVendorInventory) {
+        private decimal? CalculateFabricationValue(POVendorInventory poVendorInventory)
+        {
             var poVendorInventoryExt = PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(poVendorInventory);
 
             var metalWeight = GetMetalWeight();

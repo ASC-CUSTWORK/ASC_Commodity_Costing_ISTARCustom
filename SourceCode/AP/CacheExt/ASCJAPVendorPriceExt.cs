@@ -34,7 +34,7 @@ namespace ASCJewelryLibrary.AP.CacheExt
 
         #region UsrASCJCommodity
         [PXDBString(1)]
-        [PXUIField(DisplayName = "Commodity Metal Type")]
+        [PXUIField(DisplayName = "Commodity Metal Type", IsReadOnly = true)]
         [CommodityType.ASCJList]
         [PXDefault(typeof(Search<ASCJINInventoryItemExt.usrASCJCommodityType, Where<InventoryItem.inventoryID, Equal<Current<APVendorPrice.inventoryID>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Default<APVendorPrice.inventoryID>))]
@@ -108,11 +108,8 @@ namespace ASCJewelryLibrary.AP.CacheExt
         #endregion
 
         #region UsrASCJBasisValue
-        [PXDecimal(4)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
-        [PXFormula(typeof(Switch<
-            Case<Where<Current<usrASCJCommodity>, Equal<CommodityType.gold>>, APVendorPrice.salesPrice,
-            Case<Where<Current<usrASCJCommodity>, Equal<CommodityType.silver>>, Div<Add<APVendorPrice.salesPrice, Add<APVendorPrice.salesPrice, usrASCJMatrixStep>>, ASCJConstants.DecimalTwo>>>>))]
         public decimal? UsrASCJBasisValue { get; set; }
         public abstract class usrASCJBasisValue : PX.Data.BQL.BqlDecimal.Field<usrASCJBasisValue> { }
         #endregion

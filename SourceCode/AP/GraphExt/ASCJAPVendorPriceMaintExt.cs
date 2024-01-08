@@ -1,6 +1,7 @@
 ﻿using ASCJewelryLibrary.AP.CacheExt;
 using ASCJewelryLibrary.Common.Builder;
 using ASCJewelryLibrary.IN.CacheExt;
+using ASCJewelryLibrary.IN.DAC;
 using ASCJewelryLibrary.PO.CacheExt;
 using PX.Data;
 using PX.Data.BQL;
@@ -44,24 +45,25 @@ namespace ASCJewelryLibrary.AP.GraphExt
             var row = e.Row;
             if (row == null) return;
 
-            UpdateFloorCeilingFields(e.Cache, row);
+            UpdateCostProviderFields(e.Cache, row);
         }
         protected virtual void _(Events.FieldUpdated<APVendorPrice, ASCJAPVendorPriceExt.usrASCJMatrixStep> e)
         {
             var row = e.Row;
             if (row == null) return;
 
-            UpdateFloorCeilingFields(e.Cache, row);
+            UpdateCostProviderFields(e.Cache, row);
 
 
         }
         #endregion
 
         #region Methods
-        private void UpdateFloorCeilingFields(PXCache cache, APVendorPrice row)
+        private void UpdateCostProviderFields(PXCache cache, APVendorPrice row)
         {
+            if (row.InventoryID == null || row.VendorID == null) return;
+
             var rowExt = PXCache<APVendorPrice>.GetExtension<ASCJAPVendorPriceExt>(row);
-            if (rowExt?.UsrASCJCommodity != CommodityType.Silver) return;
 
             var poVendorInventory = new POVendorInventory() { VendorID = row.VendorID };
             PXCache<POVendorInventory>.GetExtension<ASCJPOVendorInventoryExt>(poVendorInventory).UsrASCJMarketID = rowExt.UsrASCJMarketID;
@@ -70,8 +72,15 @@ namespace ASCJewelryLibrary.AP.GraphExt
             var inventoryItemExt = PXCache<InventoryItem>.GetExtension<ASCJINInventoryItemExt>(inventoryItem);
             inventoryItemExt.UsrASCJMatrixStep = rowExt.UsrASCJMatrixStep;
 
+            var inJewelryAttribute = new ASCJINJewelryItem();
+            var itemCD = inventoryItem.InventoryCD.Trim();
+            if (itemCD == "24K") inJewelryAttribute.MetalType = "24K";
+            if (itemCD == "SSS") inJewelryAttribute.MetalType = "SSS";
+
+
             var jewelryCostProvider = new ASCJCostBuilder(this.Base)
                             .WithInventoryItem(inventoryItemExt)
+                            .WithJewelryAttrData(inJewelryAttribute)
                             .WithPOVendorInventory(poVendorInventory)
                             .Build();
             if (jewelryCostProvider == null) return;
@@ -80,6 +89,7 @@ namespace ASCJewelryLibrary.AP.GraphExt
 
             cache.SetValueExt<ASCJAPVendorPriceExt.usrASCJFloor>(row, jewelryCostProvider.Floor);
             cache.SetValueExt<ASCJAPVendorPriceExt.usrASCJCeiling>(row, jewelryCostProvider.Ceiling);
+            cache.SetValueExt<ASCJAPVendorPriceExt.usrASCJBasisValue>(row, jewelryCostProvider.BasisValue);
         }
         #endregion
 

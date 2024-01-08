@@ -116,9 +116,9 @@ namespace ASCJewelryLibrary.IN.CacheExt
 
         #region UsrASCJCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Costing Type")]
+        [PXUIField(DisplayName = "Costing Type", Required = true)]
         [CostingType.ASCJList]
-        [PXDefault(CostingType.ContractCost, PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(CostingType.ContractCost)]
         public string UsrASCJCostingType { get; set; }
         public abstract class usrASCJCostingType : PX.Data.BQL.BqlString.Field<usrASCJCostingType> { }
         #endregion
