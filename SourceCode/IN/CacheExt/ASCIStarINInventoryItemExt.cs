@@ -116,9 +116,9 @@ namespace ASCISTARCustom.IN.CacheExt
 
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
-        [PXUIField(DisplayName = "Costing Type")]
+        [PXUIField(DisplayName = "Costing Type", Required = true)]
         [CostingType.List]
-        [PXDefault(CostingType.ContractCost, PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(CostingType.ContractCost)]
         public string UsrCostingType { get; set; }
         public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
         #endregion

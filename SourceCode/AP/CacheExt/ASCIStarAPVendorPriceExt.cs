@@ -1,5 +1,7 @@
 ﻿using ASCISTARCustom.Common.Descriptor;
+using ASCISTARCustom.Cost;
 using ASCISTARCustom.IN.CacheExt;
+using PX.Api;
 using PX.Data;
 using PX.Objects.AP;
 using PX.Objects.IN;
@@ -33,7 +35,7 @@ namespace ASCISTARCustom.AP.CacheExt
 
         #region UsrCommodity
         [PXDBString(1)]
-        [PXUIField(DisplayName = "Commodity Metal Type", Enabled = false)]
+        [PXUIField(DisplayName = "Commodity Metal Type", IsReadOnly = true)]
         [CommodityType.List]
         [PXDefault(typeof(Search<ASCIStarINInventoryItemExt.usrCommodityType, Where<InventoryItem.inventoryID, Equal<Current<APVendorPrice.inventoryID>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Default<APVendorPrice.inventoryID>))]
@@ -107,11 +109,8 @@ namespace ASCISTARCustom.AP.CacheExt
         #endregion
 
         #region UsrBasisValue
-        [PXDecimal(6)]
+        [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
-        [PXFormula(typeof(Switch<
-            Case<Where<Current<usrCommodity>, Equal<CommodityType.gold>>, APVendorPrice.salesPrice,
-            Case<Where<Current<usrCommodity>, Equal<CommodityType.silver>>, Div<Add<APVendorPrice.salesPrice, Add<APVendorPrice.salesPrice, usrMatrixStep>>, ASCIStarConstants.DecimalTwo>>>>))]
         public decimal? UsrBasisValue { get; set; }
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
