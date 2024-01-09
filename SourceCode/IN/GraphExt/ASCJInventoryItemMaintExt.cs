@@ -159,6 +159,9 @@ namespace ASCJewelryLibrary.IN.GraphExt
             var row = e.Row;
             if (row == null) return;
 
+            if (this.ASCJJewelryItemView.Current == null) this.ASCJJewelryItemView.Current = this.ASCJJewelryItemView.Select();
+            if (this.ASCJJewelryItemView.Current == null) this.ASCJJewelryItemView.Current = this.ASCJJewelryItemView.Insert();
+
             this.ASCJJewelryItemView.SetValueExt<ASCJINJewelryItem.shortDesc>(this.ASCJJewelryItemView.Current, e.NewValue);
         }
 

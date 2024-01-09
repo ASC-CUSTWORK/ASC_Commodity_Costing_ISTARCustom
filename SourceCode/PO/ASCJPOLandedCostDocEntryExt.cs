@@ -28,7 +28,8 @@ namespace ASCJewelryLibrary.PO
             foreach (var item in items)
             {
                 var vendorDuty = GetVendorDuty(item.InventoryID, Base.Document.Current.VendorID);
-                var curyAllocatedLCAmt = vendorDuty?.DutyPct / 100.00m * item.LineAmt;
+                if (vendorDuty == null) continue;
+                var curyAllocatedLCAmt = (vendorDuty?.DutyPct ?? decimal.Zero) / 100.00m * item.LineAmt;
                 item.CuryAllocatedLCAmt = curyAllocatedLCAmt;
 
                 Base.ReceiptLines.Update(item);

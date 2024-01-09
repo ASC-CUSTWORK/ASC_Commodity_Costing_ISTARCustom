@@ -53,6 +53,7 @@ namespace ASCJewelryLibrary.PO.DAC
 
         #region UsrASCJTrackingNo
         [PXDBString(25)]
+        [PXDefault(false, PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Tracking No")]
         public virtual string UsrASCJTrackingNo { get; set; }
         public abstract class usrASCJTrackingNo : PX.Data.BQL.BqlString.Field<usrASCJTrackingNo> { }

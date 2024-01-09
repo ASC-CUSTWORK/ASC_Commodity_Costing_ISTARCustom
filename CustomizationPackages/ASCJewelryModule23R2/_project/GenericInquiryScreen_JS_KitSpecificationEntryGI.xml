@@ -137,7 +137,7 @@
         </layout>
         <data>
             <GIDesign>
-                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="1" ExposeViaOData="0" ExposeViaMobile="0" RowStyleFormula="=IIF([INKitSpecHdr.AllowCompAddition]=1,'red20','default')" ShowDeletedRecords="0" ShowArchivedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
+                <row DesignID="b42e06d9-d503-4137-b6a1-b3715b470b10" Name="JS-KitSpecificationEntryGI" FilterColCount="3" PageSize="0" ExportTop="0" PrimaryScreenIDNew="IN209500" NewRecordCreationEnabled="1" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="1" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0" NotesAndFilesTable="$&lt;None&gt;">
                     <GINavigationScreen Link="IN209500" LineNbr="1" SortOrder="1" WindowMode="I" IsActive="1" NoteID="004da255-7184-49ea-8580-98e478c44f22">
                         <GINavigationParameter LineNbr="2" FieldName="RevisionID" ParameterName="INKitSpecHdr.revisionID" IsExpression="0" />
                         <GINavigationParameter LineNbr="1" FieldName="KitInventoryID" ParameterName="INKitSpecHdr.kitInventoryID" IsExpression="0" />
