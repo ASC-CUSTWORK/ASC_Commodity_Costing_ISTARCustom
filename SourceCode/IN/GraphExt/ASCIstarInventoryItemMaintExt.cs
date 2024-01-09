@@ -150,6 +150,9 @@ namespace ASCISTARCustom.IN.GraphExt
             var row = e.Row;
             if (row == null) return;
 
+            if (this.JewelryItemView.Current == null) this.JewelryItemView.Current = this.JewelryItemView.Select();
+            if (this.JewelryItemView.Current == null) this.JewelryItemView.Current = this.JewelryItemView.Insert();
+
             this.JewelryItemView.SetValueExt<ASCIStarINJewelryItem.shortDesc>(this.JewelryItemView.Current, e.NewValue);
         }
 
@@ -649,7 +652,6 @@ namespace ASCISTARCustom.IN.GraphExt
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrCommodityVendorPrice>(row, apVendorPrice.SalesPrice ?? 0.0m);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrBasisPrice>(row, apVendorPrice.SalesPrice ?? 0.0m);
             e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrContractSurcharge>(row, apVendorPriceExt.UsrCommoditySurchargePct ?? 0.0m);
-            //e.Cache.SetValueExt<ASCIStarPOVendorInventoryExt.usrFabricationWeight>(row, apVendorPriceExt.UsrLaborPerUnit ?? 0.0m);
 
             if (row.IsDefault == true && this.Base.Item.Current != null)
             {

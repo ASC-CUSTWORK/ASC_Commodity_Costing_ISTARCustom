@@ -38,6 +38,7 @@ namespace ASCISTARCustom.PO.DAC
 
         #region UsrFinalPO
         [PXDBBool]
+        [PXDefault(false, PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Final PO")]
         public virtual bool? UsrFinalPO { get; set; }
         public abstract class usrFinalPO : PX.Data.BQL.BqlBool.Field<usrFinalPO> { }

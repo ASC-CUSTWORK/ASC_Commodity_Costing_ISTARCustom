@@ -113,6 +113,14 @@ namespace ASCISTARCustom.INKit
 
         #region CacheAttached
 
+        [PXMergeAttributes(Method = MergeMethod.Merge)]
+        [PXDefault(true)]
+        protected virtual void _(Events.CacheAttached<INKitSpecHdr.allowCompAddition> e) { }
+
+        [PXMergeAttributes(Method = MergeMethod.Merge)]
+        [PXDefault(true)]
+        protected virtual void _(Events.CacheAttached<INKitSpecStkDet.allowSubstitution> e) { }
+
         [PXRemoveBaseAttribute(typeof(PXDBStringAttribute))]
         [PXRemoveBaseAttribute(typeof(PXDefaultAttribute))]
         [PXMergeAttributes(Method = MergeMethod.Append)]
@@ -491,10 +499,9 @@ namespace ASCISTARCustom.INKit
         protected virtual void _(Events.FieldVerifying<INKitSpecStkDet, INKitSpecStkDet.compInventoryID> e)
         {
             var row = e.Row;
-            if (row == null) return;
+            if (row == null || e.NewValue == null) return;
 
             var newValue = (int?)e.NewValue;
-            if (newValue == null) return;
 
             if (Hdr.Current?.KitInventoryID == newValue)
             {
@@ -503,12 +510,8 @@ namespace ASCISTARCustom.INKit
                 throw new PXSetPropertyException(ASCIStarINKitMessages.Error.CannotCreateItself, invItem.InventoryCD, invItem.InventoryCD);
             }
 
-
             if (JewelryItemView.Current == null)
                 JewelryItemView.Current = JewelryItemView.Select()?.TopFirst;
-
-
-
         }
 
         protected virtual void _(Events.FieldUpdated<INKitSpecStkDet, INKitSpecStkDet.compInventoryID> e)
@@ -556,6 +559,7 @@ namespace ASCISTARCustom.INKit
                 itemVendor.RecordID = null;
                 itemVendor.IsDefault = false;
                 itemVendor.InventoryID = row.KitInventoryID;
+                itemVendor.NoteID = new Guid();
 
                 var inventoryID = ASCIStarMetalType.GetBaseInventoryID(this.Base, inJewelryItemDB.MetalType);
                 if (inventoryID != null)
