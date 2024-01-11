@@ -106,14 +106,7 @@ namespace ASCISTARCustom.IN.CacheExt
         public decimal? UsrActualGRAMSilver { get; set; }
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
         #endregion
-
-        #region UsrProductWeight
-        [PXDBDecimal(28)]
-        [PXUIField(DisplayName = "Product Weight, Grams")]
-        public decimal? UsrProductWeight { get; set; }
-        public abstract class usrProductWeight : PX.Data.BQL.BqlDecimal.Field<usrProductWeight> { }
-        #endregion
-
+              
         #region UsrCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type", Required = true)]

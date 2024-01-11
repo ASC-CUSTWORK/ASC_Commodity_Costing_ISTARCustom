@@ -31,6 +31,7 @@
   <col name="RingLength" type="NVarChar(10)" nullable="true" />
   <col name="RingSize" type="NVarChar(10)" nullable="true" />
   <col name="OD" type="NVarChar(10)" nullable="true" />
+  <col name="ProductWeight" type="Decimal(9,6)" nullable="true" />
   <col name="tstamp" type="Timestamp" />
   <col name="NoteID" type="UniqueIdentifier" />
   <col name="CreatedByID" type="UniqueIdentifier" />

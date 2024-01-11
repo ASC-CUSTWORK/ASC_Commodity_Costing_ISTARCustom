@@ -980,10 +980,10 @@
                                     <AddItem>
                                         <PXNumberEdit TypeFullName="PX.Web.UI.PXNumberEdit">
                                             <Prop Key="Virtual:ApplyStylesheetSkin" />
-                                            <Prop Key="ID" Value="CstUsrProductWeight" />
-                                            <Prop Key="DisplayFormat" Value="##0.000000" />
+                                            <Prop Key="ID" Value="CstProductWeight" />
+                                            <Prop Key="DisplayFormat" Value="##0.0000" />
                                             <Prop Key="CommitChanges" Value="True" />
-                                            <Prop Key="DataField" Value="Item.UsrProductWeight" />
+                                            <Prop Key="DataField" Value="ProductWeight" />
                                         </PXNumberEdit>
                                     </AddItem>
                                 </Children>
