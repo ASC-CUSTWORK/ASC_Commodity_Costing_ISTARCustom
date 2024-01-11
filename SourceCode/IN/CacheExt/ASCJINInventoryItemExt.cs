@@ -107,13 +107,6 @@ namespace ASCJewelryLibrary.IN.CacheExt
         public abstract class usrASCJActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrASCJActualGRAMSilver> { }
         #endregion
 
-        #region UsrASCJProductWeight
-        [PXDBDecimal(4)]
-        [PXUIField(DisplayName = "Product Weight, Grams")]
-        public decimal? UsrASCJProductWeight { get; set; }
-        public abstract class usrASCJProductWeight : PX.Data.BQL.BqlDecimal.Field<usrASCJProductWeight> { }
-        #endregion
-
         #region UsrASCJCostingType
         [PXDBString(1, IsUnicode = true, InputMask = "")]
         [PXUIField(DisplayName = "Costing Type", Required = true)]

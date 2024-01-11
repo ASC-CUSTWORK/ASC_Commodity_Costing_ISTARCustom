@@ -25,5 +25,4 @@
     <Column TableName="InventoryItem" ColumnName="UsrASCJMatrixStep" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrASCJCommodityType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
     <Column TableName="InventoryItem" ColumnName="UsrASCJPackagingLaborCost" ColumnType="decimal" AllowNull="True" DecimalPrecision="6" DecimalLength="19" IsNewColumn="True" IsUnicode="True" />
-    <Column TableName="InventoryItem" ColumnName="UsrASCJProductWeight" ColumnType="decimal" AllowNull="True" DecimalPrecision="18" DecimalLength="21" IsNewColumn="True" IsUnicode="True" />
 </Table>

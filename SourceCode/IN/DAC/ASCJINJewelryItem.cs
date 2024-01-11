@@ -300,6 +300,13 @@ namespace ASCJewelryLibrary.IN.DAC
         public abstract class od : BqlString.Field<od> { }
         #endregion
 
+        #region ProductWeight
+        [PXDBDecimal(4)]
+        [PXUIField(DisplayName = "Product Weight, Grams")]
+        public decimal? ProductWeight { get; set; }
+        public abstract class productWeight : PX.Data.BQL.BqlDecimal.Field<productWeight> { }
+        #endregion
+
         #region NoteID
         [PXNote()]
         public virtual Guid? NoteID { get; set; }
