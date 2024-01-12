@@ -301,8 +301,8 @@ namespace ASCJewelryLibrary.IN.CacheExt
 
         #region UsrASCJUnitCost
         [PXDecimal(4)]
-        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
-        //[PXFormula(typeof(Add<Add<Add<Add<usrASCJPackagingLaborCost, usrASCJOtherMaterialsCost>, usrASCJFabricationCost>, usrASCJPackagingCost>, usrASCJPreciousMetalCost>))]
+        [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, IsReadOnly = true)]
+        //  [PXFormula(typeof(Add<Add<Add<Add<usrASCJPackagingLaborCost, usrASCJOtherMaterialsCost>, usrASCJFabricationCost>, usrASCJPackagingCost>, usrASCJPreciousMetalCost>))]
         [PXFormula(typeof(Add<Add<Add<Add<
              Switch<Case<Where<usrASCJPackagingLaborCost.IsNull>, PX.Objects.CS.decimal0>,
                     Case<Where<usrASCJPackagingLaborCost.IsNotNull>, usrASCJPackagingLaborCost>>,
@@ -312,14 +312,14 @@ namespace ASCJewelryLibrary.IN.CacheExt
                     Case<Where<usrASCJFabricationCost.IsNotNull>, usrASCJFabricationCost>>>,
               Switch<Case<Where<usrASCJPackagingCost.IsNull>, PX.Objects.CS.decimal0>,
                     Case<Where<usrASCJPackagingCost.IsNotNull>, usrASCJPackagingCost>>>,
-            usrASCJPreciousMetalCost >))]
+            usrASCJPreciousMetalCost>))]
         public decimal? UsrASCJUnitCost { get; set; }
         public abstract class usrASCJUnitCost : PX.Data.BQL.BqlDecimal.Field<usrASCJUnitCost> { }
         #endregion
 
         #region UsrASCJEstLandedCost
         [PXDecimal(4)]
-        [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
+        [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, IsReadOnly = true)]
         //  [PXFormula(typeof(Add<Add<Add<Add<usrASCJDutyCost, usrASCJHandlingCost>, usrASCJFreightCost>, usrASCJLaborCost>, usrASCJUnitCost>))]
         [PXFormula(typeof(Add<Add<Add<Add<
              Switch<Case<Where<usrASCJDutyCost.IsNull>, PX.Objects.CS.decimal0>,
