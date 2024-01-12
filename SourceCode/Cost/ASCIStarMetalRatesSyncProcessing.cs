@@ -129,7 +129,6 @@ namespace ASCISTARCustom.Cost
                 resultMessage.Price = decimal.Zero;
                 resultMessage.Status = ASCIStarApiResponseMessage.Error;
                 resultMessage.Message = message;
-
             }
             if (newSalesPRice != decimal.Zero)
             {

@@ -14,7 +14,6 @@ namespace ASCISTARCustom.Cost.DAC.Unbounds
         private const string _cacheName = "Market Vendor Filter";
 
         #region VendorID
-        [PXInt]
         [PXUIField(DisplayName = "Vendor")]
         [VendorNonEmployeeActive()]
         [PXRestrictor(typeof(Where<Vendor.vendorClassID.IsEqual<MarketClass>>), "", ShowWarning = false)]
