@@ -40,20 +40,10 @@ namespace ASCISTARCustom.Common.Descriptor
         {
             public const string SymbolNotSpecified = "Symbol not provided. Please specify the desired symbol in preferences and try again.";
             public const string ProcError = "Error: {0}";
-            public const string MissingMetalType = "The Metal Type is missing!";
-            public const string VendorDoesNotContainValidPrice = "{0} does not contain a valid price for {1} on {2}";
             public const string VendorRecordNotFound = "Vendor record not found";
             public const string VendorPriceNotFound = "Vendor price record not found, check Vendor Prices screen.";
             public const string MarketPriceNotFound = "Market price record not found, check Vendor Prices screen.";
-            public const string UnitConversionNotFound = "Unit conversion record from {0} to {1} not found";
-            public const string POVendorInventoryMetalItemEmpty = "Metal Item can not be empty.";
             public const string POVendorInventoryVendorPriceEmpty = "Vendor Price can not be empty.";
-            public const string NoDefaultVendor = "To proceed, please add a default vendor or select one on the Vendors tab.";
-            public const string CostRollupTypeNotSet = "Cost Rollup Type is not set. Please select Rollup Type before saving.";
-            public const string MoreThenOneDefaultVendor = "You have more than one default vendor. Please select one on the Vendors tab.";
-            public const string MarketNotFound = "Market field cannot be empty";
-            public const string CannotCreateItself = "Unable to create {0} using {0} as a source.";
-            public const string BaseItemNotSpecifyed = "System is missing the base items. Please ensure 'SSS' and '24K' items are created before proceeding.";
         }
         #endregion
 

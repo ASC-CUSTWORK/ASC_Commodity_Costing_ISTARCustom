@@ -1,0 +1,282 @@
+﻿<GenericInquiryScreen>
+    <data-set>
+        <relations format-version="3" relations-version="20230829" main-table="GIDesign" stable-sharing="True" file-name="(Name)">
+            <link from="GIFilter (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GIGroupBy (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GIMassAction (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GIMassUpdateField (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GINavigationScreen (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GINavigationParameter (DesignID, NavigationScreenLineNbr)" to="GINavigationScreen (DesignID, LineNbr)" />
+            <link from="GINavigationCondition (DesignID, NavigationScreenLineNbr)" to="GINavigationScreen (DesignID, LineNbr)" />
+            <link from="GIOn (DesignID, RelationNbr)" to="GIRelation (DesignID, LineNbr)" />
+            <link from="GIRecordDefault (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GIRelation (DesignID, ParentTable)" to="GITable (DesignID, Alias)" />
+            <link from="GIRelation (DesignID, ChildTable)" to="GITable (DesignID, Alias)" />
+            <link from="GIResult (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GIResult (ObjectName, DesignID)" to="GITable (Alias, DesignID)" />
+            <link from="GISort (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GITable (DesignID)" to="GIDesign (DesignID)" />
+            <link from="GIWhere (DesignID)" to="GIDesign (DesignID)" />
+            <link from="SiteMap (Url)" to="GIDesign (DesignID)" type="WeakByUrl" linkname="toDesignById" baseurl="~/GenericInquiry/GenericInquiry.aspx" paramnames="id" />
+            <link from="SiteMap (Url)" to="GIDesign (Name)" type="WeakByUrl" linkname="toDesignByName" baseurl="~/GenericInquiry/GenericInquiry.aspx" />
+            <link from="ListEntryPoint (ListScreenID)" to="SiteMap (ScreenID)" />
+            <link from="SiteMap (ScreenID)" to="GIDesign (PrimaryScreenIDNew)" linkname="to1Screen" />
+            <link from="FilterHeader (ScreenID)" to="SiteMap (ScreenID)" />
+            <link from="FilterRow (FilterID)" to="FilterHeader (FilterID)" />
+            <link from="PivotTable (NoteID)" to="FilterHeader (RefNoteID)" />
+            <link from="PivotField (ScreenID, PivotTableID)" to="PivotTable (ScreenID, PivotTableID)" />
+            <link from="MUIScreen (NodeID)" to="SiteMap (NodeID)" />
+            <link from="MUIWorkspace (WorkspaceID)" to="MUIScreen (WorkspaceID)" type="FromMaster" linkname="workspaceToScreen" split-location="yes" updateable="True" />
+            <link from="MUISubcategory (SubcategoryID)" to="MUIScreen (SubcategoryID)" type="FromMaster" updateable="True" />
+            <link from="MUITile (ScreenID)" to="SiteMap (ScreenID)" />
+            <link from="MUIWorkspace (WorkspaceID)" to="MUITile (WorkspaceID)" type="FromMaster" linkname="workspaceToTile" split-location="yes" updateable="True" />
+            <link from="MUIArea (AreaID)" to="MUIWorkspace (AreaID)" type="FromMaster" updateable="True" />
+            <link from="MUIPinnedScreen (NodeID, WorkspaceID)" to="MUIScreen (NodeID, WorkspaceID)" type="WeakIfEmpty" isEmpty="Username" />
+            <link from="MUIFavoriteWorkspace (WorkspaceID)" to="MUIWorkspace (WorkspaceID)" type="WeakIfEmpty" isEmpty="Username" />
+            <link from="GIDesign (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GIFilter (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GIFilter (NoteID)" to="GIFilterKvExt (RecordID)" type="RowKvExt" />
+            <link from="GIGroupBy (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GIOn (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GIRelation (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GIResult (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GIResult (NoteID)" to="GIResultKvExt (RecordID)" type="RowKvExt" />
+            <link from="GISort (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GITable (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="GIWhere (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="FilterHeader (NoteID)" to="Note (NoteID)" type="Note" />
+            <link from="FilterHeader (NoteID)" to="FilterHeaderKvExt (RecordID)" type="RowKvExt" />
+        </relations>
+        <layout>
+            <table name="GIDesign">
+                <table name="GIFilter" uplink="(DesignID) = (DesignID)">
+                    <table name="Note" uplink="(NoteID) = (NoteID)" />
+                    <table name="GIFilterKvExt" uplink="(NoteID) = (RecordID)" />
+                </table>
+                <table name="GIGroupBy" uplink="(DesignID) = (DesignID)">
+                    <table name="Note" uplink="(NoteID) = (NoteID)" />
+                </table>
+                <table name="GIMassAction" uplink="(DesignID) = (DesignID)" />
+                <table name="GIMassUpdateField" uplink="(DesignID) = (DesignID)" />
+                <table name="GINavigationScreen" uplink="(DesignID) = (DesignID)">
+                    <table name="GINavigationParameter" uplink="(DesignID, LineNbr) = (DesignID, NavigationScreenLineNbr)" />
+                    <table name="GINavigationCondition" uplink="(DesignID, LineNbr) = (DesignID, NavigationScreenLineNbr)" />
+                </table>
+                <table name="GIRecordDefault" uplink="(DesignID) = (DesignID)" />
+                <table name="GISort" uplink="(DesignID) = (DesignID)">
+                    <table name="Note" uplink="(NoteID) = (NoteID)" />
+                </table>
+                <table name="GITable" uplink="(DesignID) = (DesignID)">
+                    <table name="GIRelation" uplink="(DesignID, Alias) = (DesignID, ParentTable)">
+                        <table name="GIOn" uplink="(DesignID, LineNbr) = (DesignID, RelationNbr)">
+                            <table name="Note" uplink="(NoteID) = (NoteID)" />
+                        </table>
+                        <table name="Note" uplink="(NoteID) = (NoteID)" />
+                    </table>
+                    <table name="GIResult" uplink="(Alias, DesignID) = (ObjectName, DesignID)">
+                        <table name="Note" uplink="(NoteID) = (NoteID)" />
+                        <table name="GIResultKvExt" uplink="(NoteID) = (RecordID)" />
+                    </table>
+                    <table name="Note" uplink="(NoteID) = (NoteID)" />
+                </table>
+                <table name="GIWhere" uplink="(DesignID) = (DesignID)">
+                    <table name="Note" uplink="(NoteID) = (NoteID)" />
+                </table>
+                <table name="SiteMap" uplink="(DesignID) = (Url)" linkname="toDesignById">
+                    <table name="ListEntryPoint" uplink="(ScreenID) = (ListScreenID)" />
+                    <table name="FilterHeader" uplink="(ScreenID) = (ScreenID)">
+                        <table name="FilterRow" uplink="(FilterID) = (FilterID)" />
+                        <table name="PivotTable" uplink="(RefNoteID) = (NoteID)">
+                            <table name="PivotField" uplink="(ScreenID, PivotTableID) = (ScreenID, PivotTableID)" />
+                        </table>
+                        <table name="Note" uplink="(NoteID) = (NoteID)" />
+                        <table name="FilterHeaderKvExt" uplink="(NoteID) = (RecordID)" />
+                    </table>
+                    <table name="MUIScreen" uplink="(NodeID) = (NodeID)">
+                        <table name="MUIPinnedScreen" uplink="(NodeID, WorkspaceID) = (NodeID, WorkspaceID)" />
+                    </table>
+                    <table name="MUITile" uplink="(ScreenID) = (ScreenID)" />
+                </table>
+                <table name="SiteMap" uplink="(Name) = (Url)" linkname="toDesignByName">
+                    <table name="ListEntryPoint" uplink="(ScreenID) = (ListScreenID)" />
+                    <table name="FilterHeader" uplink="(ScreenID) = (ScreenID)">
+                        <table name="FilterRow" uplink="(FilterID) = (FilterID)" />
+                        <table name="PivotTable" uplink="(RefNoteID) = (NoteID)">
+                            <table name="PivotField" uplink="(ScreenID, PivotTableID) = (ScreenID, PivotTableID)" />
+                        </table>
+                        <table name="Note" uplink="(NoteID) = (NoteID)" />
+                        <table name="FilterHeaderKvExt" uplink="(NoteID) = (RecordID)" />
+                    </table>
+                    <table name="MUIScreen" uplink="(NodeID) = (NodeID)">
+                        <table name="MUIPinnedScreen" uplink="(NodeID, WorkspaceID) = (NodeID, WorkspaceID)" />
+                    </table>
+                    <table name="MUITile" uplink="(ScreenID) = (ScreenID)" />
+                </table>
+                <table name="SiteMap" uplink="(PrimaryScreenIDNew) = (ScreenID)" linkname="to1Screen">
+                    <table name="ListEntryPoint" uplink="(ScreenID) = (ListScreenID)" />
+                    <table name="FilterHeader" uplink="(ScreenID) = (ScreenID)">
+                        <table name="FilterRow" uplink="(FilterID) = (FilterID)" />
+                        <table name="PivotTable" uplink="(RefNoteID) = (NoteID)">
+                            <table name="PivotField" uplink="(ScreenID, PivotTableID) = (ScreenID, PivotTableID)" />
+                        </table>
+                        <table name="Note" uplink="(NoteID) = (NoteID)" />
+                        <table name="FilterHeaderKvExt" uplink="(NoteID) = (RecordID)" />
+                    </table>
+                    <table name="MUIScreen" uplink="(NodeID) = (NodeID)">
+                        <table name="MUIPinnedScreen" uplink="(NodeID, WorkspaceID) = (NodeID, WorkspaceID)" />
+                    </table>
+                    <table name="MUITile" uplink="(ScreenID) = (ScreenID)" />
+                </table>
+                <table name="Note" uplink="(NoteID) = (NoteID)" />
+            </table>
+            <table name="MUIWorkspace">
+                <table name="MUIFavoriteWorkspace" uplink="(WorkspaceID) = (WorkspaceID)" />
+            </table>
+            <table name="MUISubcategory" />
+            <table name="MUIArea" />
+        </layout>
+        <data>
+            <GIDesign>
+                <row DesignID="d2d341b7-532a-4cd8-aaca-494b4c02cd4c" Name="JS-JewelryValuation" FilterColCount="3" PageSize="0" ExportTop="0" NewRecordCreationEnabled="0" MassDeleteEnabled="0" AutoConfirmDelete="0" MassRecordsUpdateEnabled="0" MassActionsOnRecordsEnabled="0" ExposeViaOData="0" ExposeViaMobile="0" ShowDeletedRecords="0" ShowArchivedRecords="0">
+                    <GIFilter LineNbr="7" IsActive="0" Name="InventoryItem" FieldName="InventoryItem.inventoryCD" DataType="string" IsExpression="1" DefaultValue="SSR121292143161" ColSpan="1" Required="0" />
+                    <GIFilter LineNbr="6" IsActive="1" Name="ForTony" FieldName="PX.Data.Maintenance.GI.CheckboxCombobox+checkbox" DataType="string" DisplayName="ForTony" IsExpression="0" DefaultValue="=1" ColSpan="1" Required="1" />
+                    <GIFilter LineNbr="5" IsActive="1" Name="Wahehouse" FieldName="INSite.siteCD" DataType="string" DisplayName="Warehouse" IsExpression="0" ColSpan="1" Required="0" />
+                    <GIFilter LineNbr="4" IsActive="1" Name="GoldLoss" FieldName="InventoryItem.markupPct" DataType="string" DisplayName="Gold Loss %:" IsExpression="0" DefaultValue="3.5" ColSpan="1" Required="1" />
+                    <GIFilter LineNbr="3" IsActive="1" Name="GoldMarket" FieldName="InventoryItem.basePrice" DataType="string" DisplayName="Gold Market:" IsExpression="0" DefaultValue="1800.00" ColSpan="1" Required="1" />
+                    <GIFilter LineNbr="2" IsActive="1" Name="SilverLoss" FieldName="InventoryItem.markupPct" DataType="string" DisplayName="Silver Loss %:" IsExpression="0" DefaultValue="5" ColSpan="1" Required="1" />
+                    <GIFilter LineNbr="1" IsActive="1" Name="SilverBullion" FieldName="InventoryItem.basePrice" DataType="string" DisplayName="Silver Market:" IsExpression="0" DefaultValue="20" ColSpan="1" Required="1" />
+                    <GITable Alias="VendorItem" Name="PX.Objects.PO.POVendorInventory" />
+                    <GITable Alias="SilverStkDet" Name="PX.Objects.IN.INKitSpecStkDet">
+                        <GIRelation LineNbr="4" ChildTable="CommodityItem" IsActive="0" JoinType="L">
+                            <GIOn LineNbr="4" ParentField="compInventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
+                        </GIRelation>
+                    </GITable>
+                    <GITable Alias="SilverItem" Name="PX.Objects.IN.InventoryItem" />
+                    <GITable Alias="ItemClass" Name="PX.Objects.IN.INItemClass" />
+                    <GITable Alias="Item3" Name="PX.Objects.IN.InventoryItem" />
+                    <GITable Alias="InventoryItem" Name="PX.Objects.IN.InventoryItem">
+                        <GIRelation LineNbr="9" ChildTable="INJewelryInventoryItem" IsActive="1" JoinType="I">
+                            <GIOn LineNbr="25" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
+                        </GIRelation>
+                        <GIRelation LineNbr="8" ChildTable="ItemClass" IsActive="1" JoinType="I">
+                            <GIOn LineNbr="24" ParentField="itemClassID" Condition="E" ChildField="itemClassID" Operation="A" />
+                        </GIRelation>
+                        <GIRelation LineNbr="7" ChildTable="VendorItem" IsActive="1" JoinType="L">
+                            <GIOn LineNbr="9" ParentField="preferredVendorID" Condition="E" ChildField="vendorID" Operation="A" />
+                            <GIOn LineNbr="8" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
+                        </GIRelation>
+                        <GIRelation LineNbr="6" ChildTable="SilverStkDet" IsActive="0" JoinType="L">
+                            <GIOn LineNbr="7" ParentField="inventoryID" Condition="E" ChildField="kitInventoryID" Operation="A" />
+                        </GIRelation>
+                        <GIRelation LineNbr="3" ChildTable="INKitSpecStkDet" IsActive="0" JoinType="L">
+                            <GIOn LineNbr="3" ParentField="inventoryID" Condition="E" ChildField="kitInventoryID" Operation="A" />
+                        </GIRelation>
+                        <GIRelation LineNbr="2" ChildTable="INItemStats" IsActive="1" JoinType="I">
+                            <GIOn LineNbr="2" ParentField="inventoryID" Condition="E" ChildField="inventoryID" Operation="A" />
+                        </GIRelation>
+                        <GIResult LineNbr="53" SortOrder="51" IsActive="0" Field="=iif([InventoryItem.UsrActualGRAMGold] =0, 0,([InventoryItem.UsrPricingGRAMGold]/[InventoryItem.UsrActualGRAMGold] /31.10348) *(1+ [GoldLoss] /100  ))" SchemaField="InventoryItem.BasePrice" Caption="Adjusted Increment" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="d42a4cef-b9d2-449c-991d-b15849fba7f2" />
+                        <GIResult LineNbr="52" SortOrder="50" IsActive="1" Field="= iif ( [InventoryItem.UsrActualGRAMGold]=0, 0,( [InventoryItem.UsrPricingGRAMGold]/ [InventoryItem.UsrActualGRAMGold]/31.10348) *(1+ [InventoryItem.UsrContractSurcharge] /100  ))" SchemaField="InventoryItem.BasePrice" Caption="Current Increment" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="b2bd53a6-950b-425e-8ade-3ffddb5a2a37" />
+                        <GIResult LineNbr="51" SortOrder="1" IsActive="1" Field="usrLegacyID" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="83273156-25bc-4184-9ae0-96109f421b23" />
+                        <GIResult LineNbr="50" SortOrder="40" IsActive="1" Field="usrFreightCost" SchemaField="InventoryItem.BasePrice" Caption="Freight Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="4d84242d-fb02-4cd5-96b7-3afa47241a42" />
+                        <GIResult LineNbr="49" SortOrder="39" IsActive="1" Field="=IIf(([InventoryItem.UsrPreciousMetalCost] + [InventoryItem.UsrFabricationCost] + [InventoryItem.UsrPackagingCost] ) = 0, 0,  [InventoryItem.UsrDutyCost] / ([InventoryItem.UsrPreciousMetalCost] + [InventoryItem.UsrFabricationCost] + [InventoryItem.UsrPackagingCost] ))" SchemaField="InventoryItem.BasePrice" Caption="Duty %" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="6d2f3632-7c72-4035-aad5-4b4ad7cbcd72" />
+                        <GIResult LineNbr="48" SortOrder="38" IsActive="1" Field="usrDutyCost" Caption="Duty Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e357100c-4c65-4a36-ac08-aa5f04585b45" />
+                        <GIResult LineNbr="47" SortOrder="37" IsActive="1" Field="usrPackagingCost" SchemaField="INItemStats.QtyOnHand" Caption="Packaging Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="b23fbbe8-d7d5-48af-b49a-9667506b5bf8" />
+                        <GIResult LineNbr="46" SortOrder="49" IsActive="1" SchemaField="INItemStats.QtyOnHand" Caption="Total Change In Value" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="0" RowID="e1cef41b-09cf-4abe-897b-88036fb6e69a">
+                            <column name="Field"><![CDATA[=ROUND ( (    (      (	        ISNULL( [InventoryItem.UsrFabricationCost] , 0) +	        ISNULL( [InventoryItem.UsrLaborCost] , 0 ) +         ISNULL( [InventoryItem.UsrOtherCost] , 0 ) + 	        ISNULL( [InventoryItem.UsrHandlingCost] , 0 ) + 	        ISNULL( [InventoryItem.UsrFreightCost] ,0 ) 	  ) -           IIF(	 	   	    (	               ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) + 	               ISNULL( [InventoryItem.UsrFabricationCost] , 0 ) + 	               ISNULL( [InventoryItem.UsrPackagingCost] , 0 ) 	   	    ) = 0 ,	 	 	    ISNULL( [InventoryItem.UsrDutyCost], 0 )	 	    ,	   	      ( 	     	        ISNULL( [InventoryItem.UsrDutyCost] , 0 ) / 	       		      (	         	            ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) + 	         	            ISNULL( [InventoryItem.UsrFabricationCost] , 0) + 	         	            ISNULL( [InventoryItem.UsrPackagingCost] , 0 ) 	         		      ) * [INItemStats.AvgCost]  	    	        ) 		       ) +	       (	         [InventoryItem.UsrPricingGRAMSilver] * 			   ([SilverBullion]/31.103480) * 		     (1 + [SilverLoss] / 100)	       ) + 	      ( 	        [InventoryItem.UsrPricingGRAMGold] * 		    ([GoldMarket]/31.103480) * 		      (1 + ([GoldLoss] / 100) ) 	      )	 )	 -	 [INItemStats.AvgCost]   )  * [INItemStats.QtyOnHand], 2 ) / 1.00]]></column>
+                        </GIResult>
+                        <GIResult LineNbr="45" SortOrder="48" IsActive="1" SchemaField="INItemStats.QtyOnHand" Caption="Change Per Unit" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="0" RowID="051b9b90-3cc9-4098-b38f-0aafd050a9bd">
+                            <column name="Field"><![CDATA[= (   (	      ISNULL( [InventoryItem.UsrFabricationCost] , 0) +		  ISNULL( [InventoryItem.UsrLaborCost] , 0 ) + 	  ISNULL( [InventoryItem.UsrOtherCost] , 0 ) + 		  ISNULL( [InventoryItem.UsrHandlingCost] , 0 ) + 		  ISNULL( [InventoryItem.UsrFreightCost] ,0 ) 	  ) -   	IIF(	 	   	 (	     	   ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) + 	     	   ISNULL( [InventoryItem.UsrFabricationCost] , 0 ) + 	     	   ISNULL( [InventoryItem.UsrPackagingCost] , 0 ) 	   	 ) = 0 ,	 	 	  ISNULL( [InventoryItem.UsrDutyCost], 0 )	 	 ,	   	   ( 	     	     ISNULL( [InventoryItem.UsrDutyCost] , 0 ) / 	       		   (	         	         ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) + 	         	         ISNULL( [InventoryItem.UsrFabricationCost] , 0) + 	         	         ISNULL( [InventoryItem.UsrPackagingCost] , 0 ) 	         		   ) * [INItemStats.AvgCost]  	    	   ) 		 ) +	  (	    [InventoryItem.UsrPricingGRAMSilver] * ([SilverBullion]/31.103480) * 		(1 + [SilverLoss] / 100)	 ) + 	  ( 	    [InventoryItem.UsrPricingGRAMGold] * 		([GoldMarket]/31.103480) * 		(1 + ([GoldLoss] / 100) ) 	  )	 )	 -	 [INItemStats.AvgCost]/ 1.00]]></column>
+                        </GIResult>
+                        <GIResult LineNbr="44" SortOrder="47" IsActive="1" SchemaField="INItemStats.QtyOnHand" Caption="Adjusted Cost Per Unit" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="0" RowID="f3b286fe-b8e5-421e-8d59-592b4558fc1a">
+                            <column name="Field"><![CDATA[=   (	      ISNULL( [InventoryItem.UsrFabricationCost] , 0) +		  ISNULL( [InventoryItem.UsrLaborCost] , 0 ) + 	  ISNULL( [InventoryItem.UsrOtherCost] , 0 ) + 		  ISNULL( [InventoryItem.UsrHandlingCost] , 0 ) + 		  ISNULL( [InventoryItem.UsrFreightCost] ,0 ) 	  ) -   	IIF(	 	   	 (	     	   ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) + 	     	   ISNULL( [InventoryItem.UsrFabricationCost] , 0 ) + 	     	   ISNULL( [InventoryItem.UsrPackagingCost] , 0 ) 	   	 ) = 0 ,	 	 	  ISNULL( [InventoryItem.UsrDutyCost], 0 )	 	 ,	   	   ( 	     	     ISNULL( [InventoryItem.UsrDutyCost] , 0 ) / 	       		   (	         	         ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) + 	         	         ISNULL( [InventoryItem.UsrFabricationCost] , 0) + 	         	         ISNULL( [InventoryItem.UsrPackagingCost] , 0 ) 	         		   ) * [INItemStats.AvgCost]  	    	   ) 		 ) +	  (	    [InventoryItem.UsrPricingGRAMSilver] * ([SilverBullion]/31.103480) * 		(1 + [SilverLoss] / 100)	 ) + 	  ( 	    [InventoryItem.UsrPricingGRAMGold] * 		([GoldMarket]/31.103480) * 		(1 + ([GoldLoss] / 100) ) 	  )]]></column>
+                        </GIResult>
+                        <GIResult LineNbr="43" SortOrder="44" IsActive="1" Field="=[INItemStats.QtyOnHand] * ([INItemStats.AvgCost] -  ( ISNULL( [InventoryItem.UsrFabricationCost] , 0) + ISNULL( [InventoryItem.UsrLaborCost] , 0 ) +  ISNULL( [InventoryItem.UsrOtherCost] , 0 ) +  ISNULL( [InventoryItem.UsrHandlingCost] , 0 ) +  ISNULL( [InventoryItem.UsrFreightCost] ,0 )   ) -   IIF(      (      ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) +       ISNULL( [InventoryItem.UsrFabricationCost] , 0 ) +       ISNULL( [InventoryItem.UsrPackagingCost] , 0 )     ) = 0      ,    ISNULL( [InventoryItem.UsrDutyCost], 0 )  ,    (       ISNULL( [InventoryItem.UsrDutyCost] , 0 ) /         (          ISNULL( [InventoryItem.UsrPreciousMetalCost] ,0 ) +           ISNULL( [InventoryItem.UsrFabricationCost] , 0) +           ISNULL( [InventoryItem.UsrPackagingCost] , 0 )           ) * [INItemStats.AvgCost]       )  ))" SchemaField="INItemStats.QtyOnHand" Caption="Total Metal Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="098940d4-986b-4554-804b-a41ee364a367" />
+                        <GIResult LineNbr="42" SortOrder="46" IsActive="1" Field="=[INItemStats.QtyOnHand] * [InventoryItem.UsrPricingGRAMSilver] * ([SilverBullion]/31.103480) * (1 + [SilverLoss] / 100)" SchemaField="INItemStats.QtyOnHand" Caption="Silver Value" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="0" RowID="bc6cf79e-4680-41a1-bd4f-bdcc1c4dc840" />
+                        <GIResult LineNbr="41" SortOrder="45" IsActive="1" Field="=[INItemStats.QtyOnHand] * [InventoryItem.UsrPricingGRAMGold] * ([GoldMarket]/31.103480) * (1 + [GoldLoss] / 100)" SchemaField="INItemStats.QtyOnHand" Caption="Gold Value" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="0" RowID="9d36c64e-630f-4966-a2b9-2faa2509f193" />
+                        <GIResult LineNbr="40" SortOrder="43" IsActive="1" Field="=[INItemStats.AvgCost] -  ( ISNULL( [InventoryItem.UsrFabricationCost] , 0) + ISNULL( [InventoryItem.UsrLaborCost] , 0 ) +  ISNULL( [InventoryItem.UsrOtherCost] , 0 ) +  ISNULL( [InventoryItem.UsrHandlingCost] , 0 ) +  ISNULL( [InventoryItem.UsrFreightCost] ,0 )   ) -   IIF(      (      ISNULL( [InventoryItem.UsrPreciousMetalCost] , 0 ) +       ISNULL( [InventoryItem.UsrFabricationCost] , 0 ) +       ISNULL( [InventoryItem.UsrPackagingCost] , 0 )     ) = 0      ,    ISNULL( [InventoryItem.UsrDutyCost], 0 )  ,    (       ISNULL( [InventoryItem.UsrDutyCost] , 0 ) /         (          ISNULL( [InventoryItem.UsrPreciousMetalCost] ,0 ) +           ISNULL( [InventoryItem.UsrFabricationCost] , 0) +           ISNULL( [InventoryItem.UsrPackagingCost] , 0 )           ) * [INItemStats.AvgCost]       )  )" SchemaField="INItemStats.QtyOnHand" Caption="Avg Weighted Metal Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="447a0181-de03-4458-a6c0-b38f55c6f108" />
+                        <GIResult LineNbr="39" SortOrder="42" IsActive="1" Field="usrOtherCost" SchemaField="InventoryItem.BasePrice" Caption="Other Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="98611cf8-7184-40b9-afe3-d1ea01f97cff" />
+                        <GIResult LineNbr="38" SortOrder="41" IsActive="1" Field="usrLaborCost" SchemaField="InventoryItem.BasePrice" Caption="Labor Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e6563d7f-81d4-471b-bf2c-b99afd26b21d" />
+                        <GIResult LineNbr="37" SortOrder="36" IsActive="1" Field="usrFabricationCost" SchemaField="INItemStats.QtyOnHand" Caption="Fabrication Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="c775404d-87c3-4f0c-b6f0-f807c60d8821" />
+                        <GIResult LineNbr="36" SortOrder="35" IsActive="1" Field="usrPricingGRAMSilver" Caption="Fine Silver Grams" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="0" RowID="082ec9fe-01ef-4a5b-bc0c-566633547654" />
+                        <GIResult LineNbr="35" SortOrder="34" IsActive="1" Field="usrActualGRAMSilver" Caption="Silver Grams" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="25cdd120-94d0-40ca-be3b-52cba581592e" />
+                        <GIResult LineNbr="34" SortOrder="33" IsActive="1" Field="usrPricingGRAMGold" Caption="Fine Gold Grams" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="0" RowID="b92ddade-a1e9-4f34-aa6c-25153ee4e7c6" />
+                        <GIResult LineNbr="33" SortOrder="32" IsActive="1" Field="usrActualGRAMGold" Caption="Gold Grams" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="f7523261-1147-4dc4-adf6-77929a2e327c" />
+                        <GIResult LineNbr="9" SortOrder="10" IsActive="0" Field="=[InventoryItem.UsrSideStoneCaratWt]/30.10" Caption="In Troy Ounce" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="1" RowID="bce0614a-3c52-4f33-8b4a-e7fbfc2ab451" />
+                        <GIResult LineNbr="8" SortOrder="9" IsActive="0" Field="= IIF([SilverBullion]='0.00',1,[SilverBullion]*[InventoryItem.UsrSideStoneCaratWt])/31.10" SchemaField="InventoryItem.BasePrice" Caption="Current Price" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="1" RowID="6b8a8139-6727-41c3-b43b-99094078300b" />
+                        <GIResult LineNbr="7" SortOrder="7" IsActive="1" Field="usrCommodityType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="4075e6dd-fb5c-4d46-8cc5-4d1fff369349" />
+                        <GIResult LineNbr="6" SortOrder="8" IsActive="0" Field="usrSideStoneCaratWt" Caption="Metal Weight in Gms" IsVisible="1" DefaultNav="1" TotalAggregateFunction="SUM" QuickFilter="0" FastFilter="1" RowID="837c3123-6da4-47f9-97d8-df9cf8f3ba96" />
+                        <GIResult LineNbr="5" SortOrder="6" IsActive="0" Field="usrColorStoneCaratsWeight" IsVisible="0" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="3c015b46-7920-4fe3-9987-20fada89b466" />
+                        <GIResult LineNbr="4" SortOrder="5" IsActive="0" Field="itemSubType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="33367c2e-0c6f-437d-b86b-b02f31544a71" />
+                        <GIResult LineNbr="3" SortOrder="4" IsActive="0" Field="kItemType" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="2c01746a-60b8-46bc-b6af-563ade565598" />
+                        <GIResult LineNbr="2" SortOrder="3" IsActive="1" Field="descr" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="6ab0f901-8cc3-4062-b2d9-8450f947381f" />
+                        <GIResult LineNbr="1" SortOrder="2" IsActive="1" Field="inventoryCD" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="1" RowID="bd01b5ca-b8ff-4990-b473-0f78adf888ae" />
+                    </GITable>
+                    <GITable Alias="INSite" Name="PX.Objects.IN.INSite">
+                        <GIResult LineNbr="54" SortOrder="52" IsActive="1" Field="siteCD" Caption="Warehouse" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="60016f02-6e28-43e0-8f2a-296f68f9bc72" />
+                    </GITable>
+                    <GITable Alias="INKitSpecStkDet" Name="PX.Objects.IN.INKitSpecStkDet">
+                        <GIResult LineNbr="32" SortOrder="26" IsActive="0" Field="uOM" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="51b4f84c-7eb5-4bf8-b51b-7480be45b376" />
+                        <GIResult LineNbr="31" SortOrder="25" IsActive="0" Field="dfltCompQty" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="079c0be5-9b2c-463b-a7ae-a513b6ac1d46" />
+                        <GIResult LineNbr="18" SortOrder="18" IsActive="0" Field="= [SilverStkDet.DfltCompQty] *Switch( [SilverStkDet.UOM] = 'DWT', 0.643100, [SilverStkDet.UOM] = 'GRAM', 1,'1'='1',1)" Caption="Silver G/Unit" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="4cb018c9-81f4-4b12-89f4-4c958b209593" />
+                        <GIResult LineNbr="16" SortOrder="16" IsActive="0" Field="dfltCompQty" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="dbb66127-5cf7-43f8-9989-4acbbd900a64" />
+                        <GIResult LineNbr="15" SortOrder="15" IsActive="0" Field="compInventoryID_description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="59517b31-4247-404b-bdb6-3908317cab65" />
+                    </GITable>
+                    <GITable Alias="INJewelryInventoryItem" Name="ASCISTARCustom.IN.DAC.ASCIStarINJewelryItem" />
+                    <GITable Alias="INItemStats" Name="PX.Objects.IN.INItemStats">
+                        <GIRelation LineNbr="11" ChildTable="INSite" IsActive="1" JoinType="I">
+                            <GIOn LineNbr="27" ParentField="siteID" Condition="E" ChildField="siteID" Operation="A" />
+                        </GIRelation>
+                        <GIResult LineNbr="29" SortOrder="31" IsActive="0" Field="=[INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)/31.103480*[INItemStats.QtyOnHand]*[SilverBullion]-([INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)/31.103480*[SilverBullion]*(1+[SilverLoss]))" Caption="Commodity Cost Change" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="097a894a-8826-4ac2-a7b9-6426cb482a00" />
+                        <GIResult LineNbr="28" SortOrder="30" IsActive="0" Field="=[INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)/31.103480*[SilverBullion]*(1+[SilverLoss])" Caption="New Market Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="ad8e05b2-f9b2-408d-99f8-84b371842c90" />
+                        <GIResult LineNbr="27" SortOrder="29" IsActive="0" Field="=[INItemStats.QtyOnHand]*[InfoInventoryItemCommodityWt.RateInOunce]*[InfoInventoryItemCommodityWt.WtInOunce]" Caption="Commodity Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="6e97213e-21db-49bc-80fc-e4a8b6fbc70b" />
+                        <GIResult LineNbr="26" SortOrder="28" IsActive="0" Field="=[INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)/31.103480" Caption="Total Ounces" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="dba778ce-9fce-4b56-8257-20d3f0b5667c" />
+                        <GIResult LineNbr="25" SortOrder="27" IsActive="0" Field="=[INItemStats.QtyOnHand]*Switch( [INKitSpecStkDet.UOM] = 'DWT', 0.643100, [INKitSpecStkDet.UOM] = 'GRAM', 1,'1'='1',1)" SchemaField="InfoInventoryItemCommodityWt.WtInGram" Caption="Total Grams" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="4f744535-44a7-4933-a15d-18f464f4e796" />
+                        <GIResult LineNbr="23" SortOrder="23" IsActive="1" Field="totalCost" SchemaField="INItemStats.QtyOnHand" Caption="Total Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="a58306b9-d6cf-499f-83b5-9fab7e139cbc" />
+                        <GIResult LineNbr="22" SortOrder="22" IsActive="1" Field="avgCost" SchemaField="InventoryItem.BasePrice" Caption="Avg Cost" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="e0c5414c-cdee-4a9d-b876-be4efc6dc12c" />
+                        <GIResult LineNbr="21" SortOrder="21" IsActive="1" Field="qtyOnHand" SchemaField="INItemStats.QtyOnHand" Caption="Qty On Hand" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="993cceab-a564-4e37-92fd-ac06702643d0" />
+                    </GITable>
+                    <GITable Alias="GoldStkDet" Name="PX.Objects.IN.INKitSpecStkDet" />
+                    <GITable Alias="GoldItem" Name="PX.Objects.IN.InventoryItem" />
+                    <GITable Alias="CommodityItem" Name="PX.Objects.IN.InventoryItem">
+                        <GIRelation LineNbr="5" ChildTable="CommodityClass" IsActive="0" JoinType="I">
+                            <GIOn LineNbr="6" ParentField="=[CommodityClass.ItemClassCD]" Condition="E" ChildField="='COMMODITY'" Operation="A" />
+                            <GIOn LineNbr="5" ParentField="itemClassID" Condition="E" ChildField="itemClassID" Operation="A" />
+                        </GIRelation>
+                        <GIResult LineNbr="30" SortOrder="24" IsActive="0" Field="inventoryCD" Caption="Commodity" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="3b20ddeb-1482-42d6-a4da-b391e0b8298c" />
+                    </GITable>
+                    <GITable Alias="CommodityClass" Name="PX.Objects.IN.INItemClass" />
+                    <GIWhere LineNbr="13" IsActive="1" DataFieldName="INSite.siteCD" Condition="E" IsExpression="0" Value1="[Wahehouse]" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="12" IsActive="1" OpenBrackets="(" DataFieldName="[Wahehouse]" Condition="NU" IsExpression="0" Operation="O" />
+                    <GIWhere LineNbr="11" IsActive="0" DataFieldName="[InventoryItem]" Condition="NU" IsExpression="0" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="10" IsActive="0" DataFieldName="InventoryItem.inventoryCD" Condition="E" IsExpression="0" Value1="[InventoryItem]" CloseBrackets=")" Operation="O" />
+                    <GIWhere LineNbr="9" IsActive="0" OpenBrackets="((" DataFieldName="[InventoryItem]" Condition="NN" IsExpression="0" Operation="A" />
+                    <GIWhere LineNbr="8" IsActive="1" DataFieldName="[ForTony]" Condition="E" IsExpression="0" Value1="=0" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="7" IsActive="1" DataFieldName="InventoryItem.usrLegacyID" Condition="LI" IsExpression="0" Value1="='TONY'" CloseBrackets=")" Operation="O" />
+                    <GIWhere LineNbr="6" IsActive="1" OpenBrackets="((" DataFieldName="[ForTony]" Condition="E" IsExpression="0" Value1="=1" Operation="A" />
+                    <GIWhere LineNbr="5" IsActive="1" DataFieldName="INItemStats.qtyOnHand" Condition="NE" IsExpression="0" Value1="0" Operation="A" />
+                    <GIWhere LineNbr="4" IsActive="1" DataFieldName="ItemClass.itemClassCD" Condition="RL" IsExpression="0" Value1="='JWLRY'" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="3" IsActive="1" OpenBrackets="(" DataFieldName="ItemClass.itemClassCD" Condition="E" IsExpression="1" Value1="JEWELRY" Operation="O" />
+                    <GIWhere LineNbr="2" IsActive="0" DataFieldName="InventoryItem.metal" Condition="E" IsExpression="1" Value1="FSS" CloseBrackets=")" Operation="A" />
+                    <GIWhere LineNbr="1" IsActive="0" OpenBrackets="(" DataFieldName="InventoryItem.metal" Condition="E" IsExpression="1" Value1="SS" Operation="O" />
+                    <SiteMap linkname="toDesignById">
+                        <row Title="Jewelry Valuation" Url="~/genericinquiry/genericinquiry.aspx?id=d2d341b7-532a-4cd8-aaca-494b4c02cd4c" ScreenID="GIJS0022" NodeID="bb7fff37-d861-4741-be08-651d4a4aec01" ParentID="00000000-0000-0000-0000-000000000000">
+                            <MUIScreen IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="110" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4">
+                                <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
+                            </MUIScreen>
+                        </row>
+                    </SiteMap>
+                </row>
+            </GIDesign>
+            <MUIWorkspace>
+                <row IsPortal="0" WorkspaceID="ef42b26b-f044-4dd4-93a2-9aa870222192" Order="865" Title="Jewelry" Icon="attach_money" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" IsSystem="0" />
+            </MUIWorkspace>
+            <MUISubcategory>
+                <row IsPortal="1" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+                <row IsPortal="0" SubcategoryID="98e86774-69e3-41ea-b94f-eb2c7a8426d4" Order="896" Name="Inquiries" Icon="" IsSystem="1" />
+            </MUISubcategory>
+            <MUIArea>
+                <row IsPortal="0" AreaID="3635ea7d-0975-48ff-b4ac-a870f7e1e8b5" Order="30" Name="Configuration" />
+            </MUIArea>
+        </data>
+    </data-set>
+</GenericInquiryScreen>

@@ -143,7 +143,7 @@
                         <GINavigationParameter LineNbr="1" FieldName="InventoryCD" ParameterName="InventoryItem.InventoryCD" IsExpression="0" />
                     </GINavigationScreen>
                     <GISort LineNbr="1" IsActive="1" DataFieldName="InventoryItem.inventoryCD" SortOrder="A" />
-                    <GITable Alias="JewelryAttributes" Name="ASCISTARCustom.Inventory.DAC.ASCIStarINJewelryItem">
+                    <GITable Alias="JewelryAttributes" Name="ASCISTARCustom.IN.DAC.ASCIStarINJewelryItem">
                         <GIResult LineNbr="32" SortOrder="32" IsActive="1" Field="customerCode_description" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="f8f51440-2422-4512-ac53-09b6363c58f6" />
                         <GIResult LineNbr="31" SortOrder="31" IsActive="1" Field="customerCode" IsVisible="1" DefaultNav="1" QuickFilter="0" FastFilter="0" RowID="852f7462-8f35-42c2-b104-8c920d5591f6" />
                     </GITable>
@@ -216,7 +216,7 @@
                     <SiteMap linkname="toDesignById">
                         <row Position="20" Title="Stock Items" Url="~/GenericInquiry/GenericInquiry.aspx?id=e4352bbd-a53a-42c4-9b96-e9f0fda070c7" ScreenID="IN2025PL" NodeID="a191afac-d5c5-48b3-a450-970d364acb26" ParentID="12167736-ae7e-46ab-8a8c-dd4b86217519">
                             <ListEntryPoint EntryScreenID="IN202500" IsActive="1" />
-                            <FilterHeader FilterID="41f8e419-8393-ee11-bf53-08bfb8da0304" UserName="admin" ViewName="Results" FilterName="Proposed Style" IsDefault="0" IsShared="0" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="3">
+                            <FilterHeader FilterID="a5249262-57eb-ed11-829c-00155df1540c" UserName="matt.butler" ViewName="Results" FilterName="Proposed Style" IsDefault="0" IsShared="1" IsShortcut="0" IsSystem="0" IsHidden="0" FilterOrder="3">
                                 <FilterRow FilterRowNbr="2" OpenBrackets="0" DataField="InventoryItem_INVSQ_Attributes" Condition="0" ValueSt="false" ValueSt2="False" CloseBrackets="0" Operator="0" IsUsed="1" FilterType="0" />
                                 <FilterRow FilterRowNbr="1" OpenBrackets="0" DataField="InventoryItem_INVSTYLE_Attributes" Condition="0" ValueSt="True" ValueSt2="False" CloseBrackets="0" Operator="0" IsUsed="1" FilterType="0" />
                             </FilterHeader>
@@ -256,7 +256,7 @@
                                 <FilterRow FilterRowNbr="2" OpenBrackets="1" DataField="InventoryItem_itemClassID" Condition="7" ValueSt="JWLRY" CloseBrackets="0" Operator="1" IsUsed="1" FilterType="0" />
                                 <FilterRow FilterRowNbr="1" OpenBrackets="0" DataField="InventoryItem_INVSTYLE_Attributes" Condition="1" ValueSt="True" ValueSt2="False" CloseBrackets="0" Operator="0" IsUsed="1" FilterType="0" />
                             </FilterHeader>
-                            <MUIScreen IsPortal="0" WorkspaceID="00000000-0000-0000-0000-000000000000" Order="642202" SubcategoryID="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" />
+                            <MUIScreen IsPortal="0" WorkspaceID="00000000-0000-0000-0000-000000000000" Order="642222" SubcategoryID="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" />
                         </row>
                     </SiteMap>
                     <SiteMap linkname="to1Screen">

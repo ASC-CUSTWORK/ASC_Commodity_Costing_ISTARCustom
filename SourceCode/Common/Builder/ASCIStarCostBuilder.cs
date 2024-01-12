@@ -1,7 +1,7 @@
 ﻿using ASCISTARCustom.Common.DTO.Interfaces;
 using ASCISTARCustom.Common.Helper;
-using ASCISTARCustom.Cost.CacheExt;
-using ASCISTARCustom.Inventory.DAC;
+using ASCISTARCustom.PO.CacheExt;
+using ASCISTARCustom.IN.DAC;
 using PX.Common;
 using PX.Data;
 using PX.Data.BQL;
@@ -22,7 +22,6 @@ namespace ASCISTARCustom.Common.Builder
         private string Currency { get; set; } = "USD";
         private bool IsEnabledOverrideVendor { get; set; }
         private InventoryItem PreciousMetalItem { get; set; }
-
         public ASCIStarINJewelryItem INJewelryItem { get; set; }
         public IASCIStarItemCostSpecDTO ItemCostSpecification { get; set; }
         public POVendorInventory POVendorInventory { get; set; }
@@ -259,6 +258,8 @@ namespace ASCISTARCustom.Common.Builder
 
         public decimal? GetPurchaseUnitCost(string costingType)
         {
+            if (PreciousMetalMarketCostPerTOZ == decimal.Zero) return decimal.Zero;
+
             ItemCostSpecification.UsrPreciousMetalCost = CalculatePreciousMetalCost(costingType);
 
             return (ItemCostSpecification.UsrPreciousMetalCost ?? 0m)
@@ -277,8 +278,8 @@ namespace ASCISTARCustom.Common.Builder
             .Where<APVendorPrice.vendorID.IsEqual<P.AsInt>
                 .And<APVendorPrice.inventoryID.IsEqual<P.AsInt>
                     .And<APVendorPrice.uOM.IsEqual<P.AsString>
-                       .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>.Or<APVendorPrice.effectiveDate.IsNull>>
-                         .And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>
+                       .And<Brackets<APVendorPrice.effectiveDate.IsLessEqual<P.AsDateTime>
+                         .And<Brackets<APVendorPrice.expirationDate.IsGreaterEqual<P.AsDateTime>.Or<APVendorPrice.expirationDate.IsNull>>>>>>>>
             .OrderBy<APVendorPrice.effectiveDate.Desc>
             .View.Select(graph, vendorID, inventoryID, UOM, effectiveDate, effectiveDate)?.TopFirst;
         #endregion

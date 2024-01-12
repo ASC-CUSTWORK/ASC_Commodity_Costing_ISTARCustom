@@ -4,7 +4,7 @@ using ASCISTARCustom.Common.Helper.Exceptions;
 using ASCISTARCustom.Common.Helper.Extensions;
 using ASCISTARCustom.Common.Models;
 using ASCISTARCustom.Common.Services.REST.Interfaces;
-using ASCISTARCustom.Preferences.DAC;
+using ASCISTARCustom.Cost.DAC;
 using PX.Data;
 using RestSharp;
 using System;
@@ -51,7 +51,7 @@ namespace ASCISTARCustom.Common.Services.REST
         /// <returns>A string containing the content of the response.</returns>
         /// <exception cref="ASCIStarStatusCodeException">Thrown when the response has a non-OK status code.</exception>
         /// <exception cref="PXException">Thrown when an ASCIStarStatusCodeException is caught, to indicate a remote server error.</exception>
-        private string Request(string endpoint, Method httpMethod = Method.GET, object body = null, params Dictionary<string, string>[] parameters)
+        private string Request(string endpoint, Method httpMethod = Method.Get, object body = null, params Dictionary<string, string>[] parameters)
         {
             var client = new RestClient(_setup.BaseURL);
             var request = new RestRequest(endpoint);
@@ -118,7 +118,7 @@ namespace ASCISTARCustom.Common.Services.REST
                 mergedDic = paramKeyValue.Concat(parameters).ToDictionary(x => x.Key, x => x.Value);
             }
 
-            var responce = Request(endpoint, Method.GET, null, mergedDic ?? paramKeyValue);
+            var responce = Request(endpoint, Method.Get, null, mergedDic ?? paramKeyValue);
             return ASCIStarJsonConverter<TModel>.FromJson(responce);
         }
         #endregion
