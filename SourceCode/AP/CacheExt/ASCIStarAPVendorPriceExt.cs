@@ -69,7 +69,7 @@ namespace ASCISTARCustom.AP.CacheExt
         #endregion
 
         #region UsrCommodityPerGram
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Basis Price/Gram", IsReadOnly = true)]
         [PXFormula(typeof(Switch<Case<Where<Current<APVendorPrice.uOM>, NotEqual<TOZ>>, Null>, Div<APVendorPrice.salesPrice, TOZ2GRAM_31_10348>>))]
         public decimal? UsrCommodityPerGram { get; set; }
@@ -87,7 +87,7 @@ namespace ASCISTARCustom.AP.CacheExt
         #endregion
 
         #region UsrMatrixStep
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 10)]
         [PXUIField(DisplayName = "Matrix Step")]
         [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMatrixStep { get; set; }
@@ -95,21 +95,21 @@ namespace ASCISTARCustom.AP.CacheExt
         #endregion
 
         #region UsrFloor
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Floor", IsReadOnly = true)]
         public decimal? UsrFloor { get; set; }
         public abstract class usrFloor : PX.Data.BQL.BqlDecimal.Field<usrFloor> { }
         #endregion
 
         #region UsrCeiling
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Ceiling", IsReadOnly = true)]
         public decimal? UsrCeiling { get; set; }
         public abstract class usrCeiling : PX.Data.BQL.BqlDecimal.Field<usrCeiling> { }
         #endregion
 
         #region UsrBasisValue
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
         public decimal? UsrBasisValue { get; set; }
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }

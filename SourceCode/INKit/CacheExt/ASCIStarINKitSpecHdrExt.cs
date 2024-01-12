@@ -105,7 +105,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrUnitCost
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         [PXFormula(typeof(Add<Add<Add<Add<usrPreciousMetalCost, usrOtherMaterialsCost>, usrFabricationCost>, usrPackagingCost>, usrPackagingLaborCost>))]
@@ -114,7 +114,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrPreciousMetalCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Precious Metal Cost")]
         public decimal? UsrPreciousMetalCost { get; set; }
@@ -122,7 +122,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrFabricationCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fabrication/Value Add")]
         public decimal? UsrFabricationCost { get; set; }
@@ -130,7 +130,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrPackagingCost
-        [PXDBDecimal(6, MinValue = 0)]
+        [PXDBDecimal(4, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Packaging Cost")]
         public decimal? UsrPackagingCost { get; set; }
@@ -138,7 +138,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrLaborCost
-        [PXDBDecimal(6, MinValue = 0)]
+        [PXDBDecimal(4, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "In-house Labor Cost")]
         public decimal? UsrLaborCost { get; set; }
@@ -146,7 +146,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrPackagingLaborCost
-        [PXDBDecimal(6, MinValue = 0)]
+        [PXDBDecimal(4, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Labor Packaging")]
         public decimal? UsrPackagingLaborCost { get; set; }
@@ -154,7 +154,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrOtherMaterialsCost
-        [PXDBDecimal(6, MinValue = 0)]
+        [PXDBDecimal(4, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Materials Cost")]
         public decimal? UsrOtherMaterialsCost { get; set; }
@@ -162,7 +162,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrOtherCost
-        [PXDBDecimal(6, MinValue = 0)]
+        [PXDBDecimal(4, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Other Cost", Visible = false)]
         public decimal? UsrOtherCost { get; set; }
@@ -170,7 +170,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrEstLandedCost
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         [PXFormula(typeof(Add<Add<Add<Add<usrUnitCost, usrHandlingCost>, usrFreightCost>, usrLaborCost>, usrDutyCost>))]
@@ -179,7 +179,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrFreightCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Freight Cost")]
         public decimal? UsrFreightCost { get; set; }
@@ -187,7 +187,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrHandlingCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Handling Cost")]
         public decimal? UsrHandlingCost { get; set; }
@@ -195,7 +195,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrDutyCost
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Duty Cost")]
         public decimal? UsrDutyCost { get; set; }
@@ -219,7 +219,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrMatrixStep
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 10)]
         [PXUIField(DisplayName = "Matrix Step")]
         [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Selector<INKitSpecHdr.kitInventoryID, ASCIStarINInventoryItemExt.usrMatrixStep>))]

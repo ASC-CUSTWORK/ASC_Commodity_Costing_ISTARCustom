@@ -33,7 +33,7 @@ namespace ASCISTARCustom.PO.DAC
 
         #region UsrMarketPrice
         [PXUIField(DisplayName = "Market Price", IsReadOnly = true)]
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         public virtual decimal? UsrMarketPrice { get; set; }
         public abstract class usrMarketPrice : PX.Data.BQL.BqlDecimal.Field<usrMarketPrice> { }
         #endregion
@@ -88,7 +88,7 @@ namespace ASCISTARCustom.PO.DAC
         #endregion
 
         #region UsrBasisValue
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Basis Value", IsReadOnly = true)]
         public decimal? UsrBasisValue { get; set; }
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }

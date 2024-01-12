@@ -117,7 +117,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrBasisValue
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Price / TOZ @ Basis", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrBasisValue { get; set; }
@@ -125,7 +125,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrMarketPriceGram
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Market Price per Gram", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMarketPriceGram { get; set; }
@@ -133,7 +133,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrMarketPriceTOZ
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Market Price per TOZ", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMarketPriceTOZ { get; set; }
@@ -141,7 +141,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrMatrixPriceGram
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Matrix Price per Gram", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMatrixPriceGram { get; set; }
@@ -149,7 +149,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrMatrixPriceTOZ
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Matrix Price per TOZ", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMatrixPriceTOZ { get; set; }
@@ -182,7 +182,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrMatrixStep
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 10)]
+        [PXDBDecimal(2, MinValue = 0, MaxValue = 10)]
         [PXUIField(DisplayName = "Matrix Step")]
         [PXDefault(TypeCode.Decimal, "0.500000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMatrixStep { get; set; }
@@ -190,14 +190,14 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrFloor
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Floor", IsReadOnly = true, Visible = false)]
         public decimal? UsrFloor { get; set; }
         public abstract class usrFloor : PX.Data.BQL.BqlDecimal.Field<usrFloor> { }
         #endregion
 
         #region UsrCeiling
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Ceiling", IsReadOnly = true, Visible = false)]
         public decimal? UsrCeiling { get; set; }
         public abstract class usrCeiling : PX.Data.BQL.BqlDecimal.Field<usrCeiling> { }
@@ -212,7 +212,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrPreciousMetalCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Precious Metal Cost")]
         public decimal? UsrPreciousMetalCost { get; set; }
         public abstract class usrPreciousMetalCost : PX.Data.BQL.BqlDecimal.Field<usrPreciousMetalCost> { }
@@ -220,14 +220,14 @@ namespace ASCISTARCustom.IN.CacheExt
 
         #region UsrMaterialsCost
         [PXUIField(DisplayName = "Other Materials Cost")]
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrOtherMaterialsCost { get; set; }
         public abstract class usrOtherMaterialsCost : PX.Data.BQL.BqlDecimal.Field<usrOtherMaterialsCost> { }
         #endregion
 
         #region UsrFabricationCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Fabrication/Value Add")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrFabricationCost { get; set; }
@@ -236,14 +236,14 @@ namespace ASCISTARCustom.IN.CacheExt
 
         #region UsrLaborCost
         [PXUIField(DisplayName = "In-house Labor Cost")]
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrLaborCost { get; set; }
         public abstract class usrLaborCost : PX.Data.BQL.BqlDecimal.Field<usrLaborCost> { }
         #endregion
 
         #region UsrHandlingCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Handling Cost")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
 
@@ -252,7 +252,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrFreightCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Freight Cost")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrFreightCost { get; set; }
@@ -261,7 +261,7 @@ namespace ASCISTARCustom.IN.CacheExt
 
         #region UsrDutyCost
         [PXUIField(DisplayName = "Duty Cost")]
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrDutyCost { get; set; }
         public abstract class usrDutyCost : PX.Data.BQL.BqlDecimal.Field<usrDutyCost> { }
@@ -277,7 +277,7 @@ namespace ASCISTARCustom.IN.CacheExt
 
         #region UsrOtherCost
         [PXUIField(DisplayName = "Other Cost", Visible = false)]
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrOtherCost { get; set; }
         public abstract class usrOtherCost : PX.Data.BQL.BqlDecimal.Field<usrOtherCost> { }
@@ -285,14 +285,14 @@ namespace ASCISTARCustom.IN.CacheExt
 
         #region UsrPackagingCost
         [PXUIField(DisplayName = "Packaging Cost")]
-        [PXDBDecimal(6, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrPackagingCost { get; set; }
         public abstract class usrPackagingCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingCost> { }
         #endregion
 
         #region UsrPackagingLaborCost
-        [PXDBDecimal(6, MinValue = 0)]
+        [PXDBDecimal(4, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Labor Packaging")]
         public decimal? UsrPackagingLaborCost { get; set; }
@@ -300,7 +300,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrUnitCost
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Unit Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         [PXFormula(typeof(Add<Add<Add<Add<usrPackagingLaborCost, usrOtherMaterialsCost>, usrFabricationCost>, usrPackagingCost>, usrPreciousMetalCost>))]
         public decimal? UsrUnitCost { get; set; }
@@ -308,7 +308,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrEstLandedCost
-        [PXDecimal(6)]
+        [PXDecimal(4)]
         [PXUIField(DisplayName = "Est. Landed Cost", Visibility = PXUIVisibility.Visible, Enabled = false)]
         [PXFormula(typeof(Add<Add<Add<Add<usrDutyCost, usrHandlingCost>, usrFreightCost>, usrLaborCost>, usrUnitCost>))]
         public decimal? UsrEstLandedCost { get; set; }

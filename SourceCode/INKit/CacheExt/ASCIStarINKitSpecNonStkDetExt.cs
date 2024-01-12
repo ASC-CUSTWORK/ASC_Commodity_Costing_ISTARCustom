@@ -29,7 +29,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrUnitPct
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Unit Pct")]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrUnitPct { get; set; }
@@ -37,7 +37,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrExtCost
-        [PXDBDecimal(6)]
+        [PXDBDecimal(4)]
         [PXUIField(DisplayName = "Ext Cost", Enabled = false)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXFormula(typeof(Mult<INKitSpecNonStkDet.dfltCompQty, usrUnitCost>))]
