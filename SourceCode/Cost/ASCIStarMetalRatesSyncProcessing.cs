@@ -1,31 +1,30 @@
 ﻿using ASCISTARCustom.AP.CacheExt;
 using ASCISTARCustom.Common.Builder;
 using ASCISTARCustom.Common.Services.REST.Interfaces;
+using ASCISTARCustom.Cost.DAC;
 using ASCISTARCustom.Cost.DAC.Projections;
 using ASCISTARCustom.Cost.DAC.Unbounds;
-using ASCISTARCustom.Cost.DAC;
+using ASCISTARCustom.Cost.Descriptor;
 using PX.Common;
 using PX.Data;
 using PX.Objects.AP;
 using PX.Objects.IN;
-using PX.Reports.Mail;
-using PX.SM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static ASCISTARCustom.Common.Descriptor.ASCIStarConstants;
 
 namespace ASCISTARCustom.Cost
 {
     public class ASCIStarMetalRatesSyncProcessing : PXGraph<ASCIStarMetalRatesSyncProcessing>
     {
         #region Constants
-        private const string LondonPM = "LONDON PM";
-        private const string LondonAM = "LONDON AM";
-        private const string NewYork = "NEW YORK";
         private const string Gold24K = "24K";
         private const string Silver = "SSS";
         #endregion
+
+        public PXCancel<ASCIStarMarketVendor> Cancel;
 
         #region DataViews
         public PXFilter<ASCIStarMarketVendorFilter> Filter;
@@ -44,23 +43,22 @@ namespace ASCISTARCustom.Cost
             var graph = this;
             VandorBasis.SetProcessDelegate((List<ASCIStarMarketVendor> selectedRecords) =>
             {
-                var listMessages = new Dictionary<int, ApiResponseMessage>();
+                var listMessages = new Dictionary<int, ASCIStarApiResponseMessage>();
                 PXLongOperation.SetCustomInfo(listMessages, selectedRecords.Cast<object>().ToArray());
                 Processing(selectedRecords, listMessages, graph);
                 foreach (var msg in listMessages)
                 {
                     switch (msg.Value.Status)
                     {
-                        case ApiResponseMessage.Success:
+                        case ASCIStarApiResponseMessage.Success:
                             PXProcessing<ASCIStarMarketVendor>.SetProcessed();
                             break;
-                        case ApiResponseMessage.Warning:
+                        case ASCIStarApiResponseMessage.Warning:
                             PXProcessing<ASCIStarMarketVendor>.SetWarning(msg.Key, msg.Value.Message);
                             break;
-                        case ApiResponseMessage.Error:
+                        case ASCIStarApiResponseMessage.Error:
                             PXProcessing<ASCIStarMarketVendor>.SetError(msg.Key, msg.Value.Message);
                             break;
-
                     }
                 }
             });
@@ -80,12 +78,8 @@ namespace ASCISTARCustom.Cost
         }
         #endregion
 
-        #region Actions
-        public PXCancel<ASCIStarMarketVendor> Cancel;
-        #endregion
-
         #region ServiceMethods
-        private static void Processing(List<ASCIStarMarketVendor> selectedRecords, Dictionary<int, ApiResponseMessage> listMessages, ASCIStarMetalRatesSyncProcessing graph)
+        private static void Processing(List<ASCIStarMarketVendor> selectedRecords, Dictionary<int, ASCIStarApiResponseMessage> listMessages, ASCIStarMetalRatesSyncProcessing graph)
         {
             var vendors = graph.GetVendorByBAccuntID(graph);
             var inventoryItems = graph.GetInventoryItemByID(graph);
@@ -93,29 +87,28 @@ namespace ASCISTARCustom.Cost
 
             foreach (var record in selectedRecords)
             {
-
                 var vendor = vendors.Select(record.VendorID).RowCast<Vendor>().FirstOrDefault();
                 var item = inventoryItems.Select(record.InventoryID).RowCast<InventoryItem>().FirstOrDefault();
                 listMessages[selectedRecords.IndexOf(record)] = graph.CreateOrUpdatePriceRecord(graph, vendorPriceMaint, record, vendor, item);            
             }
         }
 
-        public virtual ApiResponseMessage CreateOrUpdatePriceRecord(ASCIStarMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, Vendor vendor, InventoryItem item)
+        public virtual ASCIStarApiResponseMessage CreateOrUpdatePriceRecord(ASCIStarMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCIStarMarketVendor record, Vendor vendor, InventoryItem item)
         {
             string trimmedAcctCD = vendor.AcctCD.Trim();
             decimal newSalesPRice = decimal.Zero;
-            var resultMessage = new ApiResponseMessage();
+            var resultMessage = new ASCIStarApiResponseMessage();
             try
             {
                 switch (trimmedAcctCD)
                 {
-                    case LondonPM:
+                    case MarketList.MessageLondonPM:
                         newSalesPRice = GetLondonPMPrice(graph, record, item);
                         break;
-                    case LondonAM:
+                    case MarketList.MessageLondonAM:
                         newSalesPRice = GetLondonAMPrice(graph, record, item);
                         break;
-                    case NewYork:
+                    case MarketList.MessageNewYork:
                         newSalesPRice = GetNewYorkPrice(graph, record, item);
                         break;
                     default:
@@ -127,21 +120,21 @@ namespace ASCISTARCustom.Cost
             catch (Exception exc)
             {
                 resultMessage.Price = decimal.Zero;
-                resultMessage.Status = ApiResponseMessage.Error;
+                resultMessage.Status = ASCIStarApiResponseMessage.Error;
                 resultMessage.Message = exc.Message;
             }
-            if (resultMessage.Status != ApiResponseMessage.Error && newSalesPRice == decimal.Zero)
+            if (resultMessage.Status != ASCIStarApiResponseMessage.Error && newSalesPRice == decimal.Zero)
             {
                 string message = string.Format("Market {0} return Zero price for {1} metal, item: {2}", trimmedAcctCD, record.Commodity, record.InventoryID);
                 resultMessage.Price = decimal.Zero;
-                resultMessage.Status = ApiResponseMessage.Error;
+                resultMessage.Status = ASCIStarApiResponseMessage.Error;
                 resultMessage.Message = message;
 
             }
             if (newSalesPRice != decimal.Zero)
             {
                 resultMessage.Price = newSalesPRice;
-                resultMessage.Status = ApiResponseMessage.Success;
+                resultMessage.Status = ASCIStarApiResponseMessage.Success;
                 resultMessage.Message = string.Empty;
                 var vendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(graph, record.VendorID, record.InventoryID, record.UOM, graph.Accessinfo.BusinessDate.Value);
                 ProcessAPVendorPrice(vendorPriceMaint, record, vendorPrice, newSalesPRice);
@@ -237,10 +230,6 @@ namespace ASCISTARCustom.Cost
             if (filter.VendorID != null)
             {
                 cmd.WhereAnd<Where<ASCIStarMarketVendor.vendorID, Equal<Current<ASCIStarMarketVendorFilter.vendorID>>>>();
-            }
-            if (filter.ItemClassCD != null)
-            {
-                cmd.WhereAnd<Where<ASCIStarMarketVendor.itemClassCD, Equal<Current<ASCIStarMarketVendorFilter.itemClassCD>>>>();
             }
             if (filter.InventoryID != null)
             {

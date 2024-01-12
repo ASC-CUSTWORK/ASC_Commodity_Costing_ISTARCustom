@@ -12,14 +12,13 @@
 	</px:PXDataSource>
 </asp:Content>
 <asp:Content ID="cont2" ContentPlaceHolderID="phF" Runat="Server">
-	<px:PXFormView ID="form" runat="server" DataSourceID="ds" DataMember="Filter" Width="100%" Height="100px" AllowAutoHide="false">
+	<px:PXFormView ID="form" runat="server" DataSourceID="ds" DataMember="Filter" Width="100%" Height="60px" AllowAutoHide="false">
 		<Template>
 			<px:PXLayoutRule ID="PXLayoutRule1" runat="server" StartRow="True"></px:PXLayoutRule>
 			<px:PXLayoutRule runat="server" ID="CstPXLayoutRule1" StartColumn="True" ></px:PXLayoutRule>
 			<px:PXSegmentMask AllowEdit="True" CommitChanges="True" runat="server" ID="ASCIStarVendorIDSegmentMask" DataField="VendorID" ></px:PXSegmentMask>
-			<px:PXSegmentMask CommitChanges="True" runat="server" ID="ASCIStarItemClassCDSegmentMask" DataField="ItemClassCD" ></px:PXSegmentMask>
-			<px:PXLayoutRule runat="server" ID="CstPXLayoutRule2" StartColumn="True" ></px:PXLayoutRule>
-			<px:PXSegmentMask CommitChanges="True" AllowEdit="True" runat="server" ID="ASCIStarInventoryIDSegmentMask5" DataField="InventoryID" ></px:PXSegmentMask></Template>
+			<px:PXLayoutRule LabelsWidth="M" ControlSize="SM" runat="server" ID="CstPXLayoutRule2" StartColumn="True" ></px:PXLayoutRule>
+			<px:PXSelector CommitChanges="True" AllowEdit="True" runat="server" ID="ASCIStarInventoryIDSegmentMask5" DataField="InventoryID" ></px:PXSelector></Template>
 	</px:PXFormView>
 </asp:Content>
 <asp:Content ID="cont3" ContentPlaceHolderID="phG" Runat="Server">
