@@ -9,6 +9,7 @@ using PX.Data;
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ASCJewelryLibrary.Common.Services.REST
 {
@@ -80,7 +81,7 @@ namespace ASCJewelryLibrary.Common.Services.REST
                 PXTrace.WriteError($"Error: {ex.Message}");
                 PXTrace.WriteError($"Status Code: {ex.StatusCode}");
                 PXTrace.WriteError($"Content: {ex.Content}");
-                throw new PXException(ASCJMessages.ASCJStatusCode.RemoteServerError);
+                throw new Exception(ex.Message);
             }
         }
 

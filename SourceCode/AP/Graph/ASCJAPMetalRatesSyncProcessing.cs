@@ -1,9 +1,10 @@
 ﻿using ASCJewelryLibrary.AP.CacheExt;
-using ASCJewelryLibrary.Common.Builder;
-using ASCJewelryLibrary.Common.Services.REST.Interfaces;
+using ASCJewelryLibrary.AP.DAC;
 using ASCJewelryLibrary.AP.DAC.Projections;
 using ASCJewelryLibrary.AP.DAC.Unbounds;
-using ASCJewelryLibrary.AP.DAC;
+using ASCJewelryLibrary.AP.Descriptor;
+using ASCJewelryLibrary.Common.Builder;
+using ASCJewelryLibrary.Common.Services.REST.Interfaces;
 using PX.Common;
 using PX.Data;
 using PX.Objects.AP;
@@ -12,18 +13,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
 namespace ASCJewelryLibrary.AP
 {
     public class ASCJMetalRatesSyncProcessing : PXGraph<ASCJMetalRatesSyncProcessing>
     {
         #region Constants
-        private const string LondonPM = "LONDON PM";
-        private const string LondonAM = "LONDON AM";
-        private const string NewYork = "NEW YORK";
         private const string Gold24K = "24K";
         private const string Silver = "SSS";
         #endregion
+
+        public PXCancel<ASCJMarketVendor> Cancel;
 
         #region DataViews
         public PXFilter<ASCJMarketVendorFilter> Filter;
@@ -42,18 +43,22 @@ namespace ASCJewelryLibrary.AP
             var graph = this;
             VandorBasis.SetProcessDelegate((List<ASCJMarketVendor> selectedRecors) =>
             {
-                var listMessages = new Dictionary<int, PXSetPropertyException>();
+                var listMessages = new Dictionary<int, ASCJApiResponseMessage>();
                 PXLongOperation.SetCustomInfo(listMessages, selectedRecors.Cast<object>().ToArray());
                 Processing(selectedRecors, listMessages, graph);
                 foreach (var msg in listMessages)
                 {
-                    if (msg.Value.ErrorLevel == PXErrorLevel.RowError)
+                    switch (msg.Value.Status)
                     {
-                        PXProcessing.SetError(msg.Key, msg.Value);
-                    }
-                    else if (msg.Value.ErrorLevel == PXErrorLevel.RowWarning)
-                    {
-                        PXProcessing.SetWarning(msg.Key, msg.Value);
+                        case ASCJApiResponseMessage.Success:
+                            PXProcessing<ASCJMarketVendor>.SetProcessed();
+                            break;
+                        case ASCJApiResponseMessage.Warning:
+                            PXProcessing<ASCJMarketVendor>.SetWarning(msg.Key, msg.Value.Message);
+                            break;
+                        case ASCJApiResponseMessage.Error:
+                            PXProcessing<ASCJMarketVendor>.SetError(msg.Key, msg.Value.Message);
+                            break;
                     }
                 }
             });
@@ -73,12 +78,8 @@ namespace ASCJewelryLibrary.AP
         }
         #endregion
 
-        #region Actions
-        public PXCancel<ASCJMarketVendor> Cancel;
-        #endregion
-
         #region ServiceMethods
-        private static void Processing(List<ASCJMarketVendor> selectedRecords, Dictionary<int, PXSetPropertyException> listMessages, ASCJMetalRatesSyncProcessing graph)
+        private static void Processing(List<ASCJMarketVendor> selectedRecords, Dictionary<int, ASCJApiResponseMessage> listMessages, ASCJMetalRatesSyncProcessing graph)
         {
             var vendors = graph.GetVendorByBAccuntID(graph);
             var inventoryItems = graph.GetInventoryItemByID(graph);
@@ -86,47 +87,58 @@ namespace ASCJewelryLibrary.AP
 
             foreach (var record in selectedRecords)
             {
-                try
-                {
-                    var vendor = vendors.Select(record.VendorID).RowCast<Vendor>().FirstOrDefault();
-                    var item = inventoryItems.Select(record.InventoryID).RowCast<InventoryItem>().FirstOrDefault();
-                    graph.CreateOrUpdatePriceRecord(graph, vendorPriceMaint, record, vendor, item);
-                }
-                catch (Exception exc)
-                {
-                    listMessages[selectedRecords.IndexOf(record)] = new PXSetPropertyException(exc.Message, PXErrorLevel.RowError);
-                }
+                var vendor = vendors.Select(record.VendorID).RowCast<Vendor>().FirstOrDefault();
+                var item = inventoryItems.Select(record.InventoryID).RowCast<InventoryItem>().FirstOrDefault();
+                listMessages[selectedRecords.IndexOf(record)] =   graph.CreateOrUpdatePriceRecord(graph, vendorPriceMaint, record, vendor, item);
             }
         }
 
-        public virtual void CreateOrUpdatePriceRecord(ASCJMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCJMarketVendor record, Vendor vendor, InventoryItem item)
+        public virtual ASCJApiResponseMessage CreateOrUpdatePriceRecord(ASCJMetalRatesSyncProcessing graph, Lazy<APVendorPriceMaint> vendorPriceMaint, ASCJMarketVendor record, Vendor vendor, InventoryItem item)
         {
             string trimmedAcctCD = vendor.AcctCD.Trim();
             decimal newSalesPRice = decimal.Zero;
+            var resultMessage = new ASCJApiResponseMessage();
+            try
+            {
+                switch (trimmedAcctCD)
+                {
+                    case MarketList.MessageLondonPM:
+                        newSalesPRice = GetLondonPMPrice(graph, record, item);
+                        break;
+                    case MarketList.MessageLondonAM:
+                        newSalesPRice = GetLondonAMPrice(graph, record, item);
+                        break;
+                    case MarketList.MessageNewYork:
+                        newSalesPRice = GetNewYorkPrice(graph, record, item);
+                        break;
+                    default:
+                        newSalesPRice = decimal.Zero;
+                        break;
+                }
+            }
 
-            if (trimmedAcctCD == LondonPM)
+            catch (Exception exc)
             {
-                newSalesPRice = GetLondonPMPrice(graph, record, item);
+                resultMessage.Price = decimal.Zero;
+                resultMessage.Status = ASCJApiResponseMessage.Error;
+                resultMessage.Message = exc.Message;
             }
-            else if (trimmedAcctCD == LondonAM)
+            if (resultMessage.Status != ASCJApiResponseMessage.Error && newSalesPRice == decimal.Zero)
             {
-                newSalesPRice = GetLondonAMPrice(graph, record, item);
+                string message = string.Format("Market {0} return Zero price for {1} metal, item: {2}", trimmedAcctCD, record.Commodity, record.InventoryID);
+                resultMessage.Price = decimal.Zero;
+                resultMessage.Status = ASCJApiResponseMessage.Error;
+                resultMessage.Message = message;
             }
-            else if (trimmedAcctCD == NewYork)
+            if (newSalesPRice != decimal.Zero)
             {
-                newSalesPRice = GetNewYorkPrice(graph, record, item);
-            }
-
-            if (newSalesPRice == decimal.Zero)
-            {
-                PXProcessing<ASCJMarketVendor>.SetError(string.Format("Market {0} return Zero price for {1} metal, item: {2}", trimmedAcctCD, record.Commodity, record.InventoryID));
-            }
-            else
-            {
+                resultMessage.Price = newSalesPRice;
+                resultMessage.Status = ASCJApiResponseMessage.Success;
+                resultMessage.Message = string.Empty;
                 var vendorPrice = ASCJCostBuilder.GetAPVendorPrice(graph, record.VendorID, record.InventoryID, record.UOM, graph.Accessinfo.BusinessDate.Value);
-
                 ProcessAPVendorPrice(vendorPriceMaint, record, vendorPrice, newSalesPRice);
             }
+            return resultMessage;
         }
 
         public virtual decimal GetNewYorkPrice(ASCJMetalRatesSyncProcessing graph, ASCJMarketVendor record, InventoryItem item)
@@ -217,10 +229,6 @@ namespace ASCJewelryLibrary.AP
             if (filter.VendorID != null)
             {
                 cmd.WhereAnd<Where<ASCJMarketVendor.vendorID, Equal<Current<ASCJMarketVendorFilter.vendorID>>>>();
-            }
-            if (filter.ItemClassCD != null)
-            {
-                cmd.WhereAnd<Where<ASCJMarketVendor.itemClassCD, Equal<Current<ASCJMarketVendorFilter.itemClassCD>>>>();
             }
             if (filter.InventoryID != null)
             {

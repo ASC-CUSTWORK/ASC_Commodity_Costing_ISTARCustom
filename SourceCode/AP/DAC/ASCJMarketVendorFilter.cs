@@ -1,7 +1,9 @@
 ﻿using PX.Data;
+using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
 using System;
+using static ASCJewelryLibrary.Common.Descriptor.ASCJConstants;
 
 namespace ASCJewelryLibrary.AP.DAC.Unbounds
 {
@@ -14,22 +16,20 @@ namespace ASCJewelryLibrary.AP.DAC.Unbounds
         #region VendorID
         [PXUIField(DisplayName = "Vendor")]
         [VendorNonEmployeeActive]
+        [PXRestrictor(typeof(Where<Vendor.vendorClassID.IsEqual<MarketClass>>), "", ShowWarning = false)]
         public virtual int? VendorID { get; set; }
         public abstract class vendorID : PX.Data.BQL.BqlInt.Field<vendorID> { }
         #endregion
 
         #region InventoryID
-        [InventoryIncludingTemplates(DisplayName = "Inventory ID")]
+        [PXInt]
+        [PXSelector(typeof(SearchFor<InventoryItem.inventoryID>.In<SelectFrom<InventoryItem>
+           .InnerJoin<INItemClass>.On<InventoryItem.itemClassID.IsEqual<INItemClass.itemClassID>>
+           .Where<INItemClass.itemClassCD.IsEqual<CommodityClass>>>)
+           , SubstituteKey = typeof(InventoryItem.inventoryCD), DescriptionField = typeof(InventoryItem.descr))]
+        [PXUIField(DisplayName = "Commodity Inventory ID")]
         public virtual int? InventoryID { get; set; }
         public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
-        #endregion
-
-        #region ItemClassCD
-        [PXString(30, IsUnicode = true)]
-        [PXUIField(DisplayName = "Item Class", Visibility = PXUIVisibility.SelectorVisible)]
-        [PXDimensionSelector("INITEMCLASS", typeof(INItemClass.itemClassCD), DescriptionField = typeof(INItemClass.descr), ValidComboRequired = true)]
-        public virtual string ItemClassCD { get; set; }
-        public abstract class itemClassCD : PX.Data.BQL.BqlString.Field<itemClassCD> { }
         #endregion
     }
 }

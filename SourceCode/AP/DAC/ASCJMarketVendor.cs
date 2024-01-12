@@ -1,6 +1,5 @@
 ﻿using ASCJewelryLibrary.AP.CacheExt;
 using PX.Data;
-using PX.Data.EP;
 using PX.Objects.AP;
 using PX.Objects.CM;
 using PX.Objects.IN;
@@ -53,11 +52,12 @@ namespace ASCJewelryLibrary.AP.DAC.Projections
         public abstract class inventoryID : PX.Data.BQL.BqlInt.Field<inventoryID> { }
         #endregion
 
+        #region ItemClassCD
         [PXDBString(30, IsUnicode = true, BqlField = typeof(INItemClass.itemClassCD))]
         [PXUIField(DisplayName = "Class ID", Enabled = false, Visibility = PXUIVisibility.SelectorVisible)]
-        [PXFieldDescription]
         public virtual string ItemClassCD { get; set; }
         public abstract class itemClassCD : PX.Data.BQL.BqlString.Field<itemClassCD> { }
+        #endregion
 
         #region CuryID
         [PXDBString(5, BqlField = typeof(APVendorPrice.curyID))]

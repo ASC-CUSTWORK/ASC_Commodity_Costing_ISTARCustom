@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AP\CacheExt\ASCJAPVendorPriceFilterExt.cs" />
+    <Compile Include="AP\Descriptor\ASCJApiResponseMessage.cs" />
     <Compile Include="AP\GraphExt\ASCJAPVendorPriceMaintExt.cs" />
     <Compile Include="Common\Builder\ASCJCostBuilder.cs" />
     <Compile Include="Common\DAC\AuditSystemFields.cs" />
