@@ -95,7 +95,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrActualGRAMSilver
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Silver, Grams", IsReadOnly =true)]
+        [PXUIField(DisplayName = "Silver, Grams", IsReadOnly = true)]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseSilverGrams>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrActualGRAMSilver>))]
         public decimal? UsrActualGRAMSilver { get; set; }
         public abstract class usrActualGRAMSilver : PX.Data.BQL.BqlDecimal.Field<usrActualGRAMSilver> { }
@@ -298,6 +298,15 @@ namespace ASCISTARCustom.INKit.CacheExt
         public abstract class usrIsMetal : PX.Data.BQL.BqlBool.Field<usrIsMetal> { }
         #endregion
 
+        #region UsrCommodityType
+        [PXString(1)]
+        [PXUIField(DisplayName = "Commodity Type")]
+        [CommodityType.List]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrCommodityType>))]
+        public string UsrCommodityType { get; set; }
+        public abstract class usrCommodityType : PX.Data.BQL.BqlBool.Field<usrCommodityType> { }
+        #endregion
+
         #region Implementation Unneeded Interface's fields
 
         [PXInt]
@@ -317,9 +326,6 @@ namespace ASCISTARCustom.INKit.CacheExt
         public decimal? UsrDutyCostPct { get; set; }
         public abstract class usrDutyCostPct : PX.Data.BQL.BqlBool.Field<usrDutyCostPct> { }
 
-        [PXString]
-        public string UsrCommodityType { get; set; }
-        public abstract class usrCommodityType : PX.Data.BQL.BqlBool.Field<usrCommodityType> { }
         #endregion
     }
 }
