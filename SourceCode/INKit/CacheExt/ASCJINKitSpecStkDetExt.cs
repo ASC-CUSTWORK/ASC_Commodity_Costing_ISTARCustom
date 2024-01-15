@@ -300,6 +300,13 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         public abstract class usrASCJIsMetal : PX.Data.BQL.BqlBool.Field<usrASCJIsMetal> { }
         #endregion
 
+        [PXString(1)]
+        [PXUIField(DisplayName = "Commodity Type")]
+        [CommodityType.ASCJList]
+        [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCJINInventoryItemExt.usrASCJCommodityType>))]
+        public string UsrASCJCommodityType { get; set; }
+        public abstract class usrASCJCommodityType : PX.Data.BQL.BqlBool.Field<usrASCJCommodityType> { }
+
         #region Implementation Unneeded Interface's fields
 
         [PXInt]
@@ -318,10 +325,6 @@ namespace ASCJewelryLibrary.INKit.CacheExt
         [PXDecimal]
         public decimal? UsrASCJDutyCostPct { get; set; }
         public abstract class usrASCJDutyCostPct : PX.Data.BQL.BqlBool.Field<usrASCJDutyCostPct> { }
-
-        [PXString]
-        public string UsrASCJCommodityType { get; set; }
-        public abstract class usrASCJCommodityType : PX.Data.BQL.BqlBool.Field<usrASCJCommodityType> { }
         #endregion
     }
 }

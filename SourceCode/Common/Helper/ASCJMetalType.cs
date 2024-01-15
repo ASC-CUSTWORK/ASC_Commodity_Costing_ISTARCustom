@@ -186,7 +186,7 @@ namespace ASCJewelryLibrary.Common.Helper
         /// <param name="graph"></param>
         /// <param name="metalType">String value representing the metal type. </param>
         /// <returns>int? value of InventoryID from InventoryItem table.</returns>
-        public static int? GetBaseInventoryID(PXGraph graph, string metalType)
+        public static int? GetCommodityInventoryByMetalType(PXGraph graph, string metalType)
         {
             string inventoryCD = string.Empty;
             bool isGold = ASCJMetalType.IsGold(metalType);

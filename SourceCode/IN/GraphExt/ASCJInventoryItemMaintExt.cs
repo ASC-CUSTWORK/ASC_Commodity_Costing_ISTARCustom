@@ -516,7 +516,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
                 e.Cache.RaiseExceptionHandling<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, false, new PXSetPropertyException(ASCJINConstants.ASCJErrors.MarketEmpty, PXErrorLevel.RowError));
             }
 
-            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.ASCJJewelryItemView.Current?.MetalType);
+            var inventoryID = ASCJMetalType.GetCommodityInventoryByMetalType(this.Base, this.ASCJJewelryItemView.Current?.MetalType);
 
             var apVendorPrice = ASCJCostBuilder.GetAPVendorPrice(this.Base, row.VendorID, inventoryID, ASCJConstants.TOZ.value, PXTimeZoneInfo.Today);
 
@@ -644,7 +644,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
             ASCJVendorExt vendorExt = vendor?.GetExtension<ASCJVendorExt>();
             e.Cache.SetValue<ASCJPOVendorInventoryExt.usrASCJMarketID>(row, vendorExt.UsrASCJMarketID);
 
-            var inventoryID = ASCJMetalType.GetBaseInventoryID(this.Base, this.ASCJJewelryItemView.Current?.MetalType);
+            var inventoryID = ASCJMetalType.GetCommodityInventoryByMetalType(this.Base, this.ASCJJewelryItemView.Current?.MetalType);
 
             var apVendorPrice = ASCJCostBuilder.GetAPVendorPrice(this.Base, vendor.BAccountID, inventoryID, ASCJConstants.TOZ.value, PXTimeZoneInfo.Today);
 
