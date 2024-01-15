@@ -22,7 +22,6 @@ namespace ASCJewelryLibrary.AP.DAC.Unbounds
         #endregion
 
         #region InventoryID
-        [PXInt]
         [PXSelector(typeof(SearchFor<InventoryItem.inventoryID>.In<SelectFrom<InventoryItem>
            .InnerJoin<INItemClass>.On<InventoryItem.itemClassID.IsEqual<INItemClass.itemClassID>>
            .Where<INItemClass.itemClassCD.IsEqual<CommodityClass>>>)
