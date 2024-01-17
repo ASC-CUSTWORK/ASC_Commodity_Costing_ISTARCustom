@@ -42,6 +42,7 @@ namespace ASCJewelryLibrary.IN.GraphExt
         #region Cache Attached
         [PXMergeAttributes(Method = MergeMethod.Replace)]
         [PXDBString(30, IsUnicode = true, InputMask = "####.##.####")]
+        [PXUIField(DisplayName = "Tariff / HTS Code")]
         [PXSelector(typeof(SearchFor<ASCJAPTariffHTSCode.hSTariffCode>))]
         protected virtual void _(Events.CacheAttached<InventoryItem.hSTariffCode> e) { }
         #endregion
