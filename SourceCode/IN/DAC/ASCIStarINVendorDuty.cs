@@ -33,7 +33,7 @@ namespace ASCISTARCustom.IN.DAC
 
         #region HSTariffCode
         [PXDBString(30, IsUnicode = true)]
-        [PXUIField(DisplayName = "Tariff Code")]
+        [PXUIField(DisplayName = "Tariff / HTS Code")]
         [PXSelector(typeof(SearchFor<ASCIStarAPTariffHTSCode.hSTariffCode>))]
         [PXDefault(typeof(InventoryItem.hSTariffCode))]
         public virtual string HSTariffCode { get; set; }
