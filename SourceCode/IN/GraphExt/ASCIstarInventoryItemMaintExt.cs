@@ -48,7 +48,6 @@ namespace ASCISTARCustom.IN.GraphExt
         #endregion
 
         #region Actions
-
         public PXAction<InventoryItem> UpdateMetalCost;
         [PXUIField(DisplayName = "Update Metal Cost", MapEnableRights = PXCacheRights.Select, MapViewRights = PXCacheRights.Select)]
         [PXButton]
@@ -60,7 +59,6 @@ namespace ASCISTARCustom.IN.GraphExt
 
             return adapter.Get();
         }
-
         #endregion Action
 
         #region Event Handlers
@@ -423,11 +421,9 @@ namespace ASCISTARCustom.IN.GraphExt
             e.Cache.RaiseExceptionHandling<ASCIStarINInventoryItemExt.usrCommodityType>(row, e.NewValue,
                 new PXSetPropertyException(ASCIStarINConstants.Warnings.MetalTypeEmpty, PXErrorLevel.Warning));
 
-            this.JewelryItemView.SetValueExt<ASCIStarINJewelryItem.metalType>(this.JewelryItemView.Current, null);
+            //this.JewelryItemView.SetValueExt<ASCIStarINJewelryItem.metalType>(this.JewelryItemView.Current, null);
             JewelryItemView.Cache.RaiseExceptionHandling<ASCIStarINJewelryItem.metalType>(JewelryItemView.Current, null,
                 new PXSetPropertyException(ASCIStarINConstants.Warnings.SelectMetalType, PXErrorLevel.Warning));
-
-            ASCIStarINInventoryItemExt rowExt = PXCache<InventoryItem>.GetExtension<ASCIStarINInventoryItemExt>(row);
         }
 
         #endregion InventoryItem Events
