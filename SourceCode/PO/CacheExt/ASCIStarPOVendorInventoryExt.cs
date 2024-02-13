@@ -225,16 +225,16 @@ namespace ASCISTARCustom.PO.CacheExt
         #endregion
 
         #region UsrFabricationWeight
-        [PXDBDecimal(2)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDBDecimal(4)]
+        [PXDefault(TypeCode.Decimal, "0.0000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fabrication / Weight", Visibility = PXUIVisibility.Visible)]
         public decimal? UsrFabricationWeight { get; set; }
         public abstract class usrFabricationWeight : PX.Data.BQL.BqlDecimal.Field<usrFabricationWeight> { }
         #endregion
 
         #region UsrFabricationPiece
-        [PXDBDecimal(2)]
-        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDBDecimal(4)]
+        [PXDefault(TypeCode.Decimal, "0.0000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Fabrication / Piece", Visibility = PXUIVisibility.Visible)]
         public decimal? UsrFabricationPiece { get; set; }
         public abstract class usrFabricationPiece : PX.Data.BQL.BqlDecimal.Field<usrFabricationPiece> { }
