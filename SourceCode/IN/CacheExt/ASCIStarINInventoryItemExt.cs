@@ -204,7 +204,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(2, MinValue = -100, MaxValue = 100)]
+        [PXDBDecimal(4, MinValue = -100, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge, %")]
         public decimal? UsrContractSurcharge { get; set; }
@@ -212,7 +212,7 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrPreciousMetalCost
-        [PXDBDecimal(4)]
+        [PXDBDecimal(6)]
         [PXUIField(DisplayName = "Precious Metal Cost")]
         public decimal? UsrPreciousMetalCost { get; set; }
         public abstract class usrPreciousMetalCost : PX.Data.BQL.BqlDecimal.Field<usrPreciousMetalCost> { }

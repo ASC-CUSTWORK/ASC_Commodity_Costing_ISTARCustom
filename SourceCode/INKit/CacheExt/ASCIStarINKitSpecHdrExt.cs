@@ -89,7 +89,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Total Surcharge, %")]
         public decimal? UsrContractSurcharge { get; set; }
@@ -114,7 +114,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrPreciousMetalCost
-        [PXDBDecimal(4)]
+        [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Precious Metal Cost")]
         public decimal? UsrPreciousMetalCost { get; set; }
@@ -235,11 +235,11 @@ namespace ASCISTARCustom.INKit.CacheExt
 
         [PXString]
         public string UsrCostingType { get; set; }
-        public abstract class usrCostingType : PX.Data.BQL.BqlDecimal.Field<usrCostingType> { }
+        public abstract class usrCostingType : PX.Data.BQL.BqlString.Field<usrCostingType> { }
 
         [PXString]
         public string UsrCommodityType { get; set; }
-        public abstract class usrCommodityType : PX.Data.BQL.BqlDecimal.Field<usrCommodityType> { }
+        public abstract class usrCommodityType : PX.Data.BQL.BqlString.Field<usrCommodityType> { }
         #endregion
     }
 }

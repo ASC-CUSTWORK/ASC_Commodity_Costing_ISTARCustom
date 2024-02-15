@@ -320,11 +320,11 @@ namespace ASCISTARCustom.INKit.CacheExt
 
         [PXDecimal]
         public decimal? UsrPreciousMetalCost { get; set; }
-        public abstract class usrPreciousMetalCost : PX.Data.BQL.BqlBool.Field<usrPreciousMetalCost> { }
+        public abstract class usrPreciousMetalCost : PX.Data.BQL.BqlDecimal.Field<usrPreciousMetalCost> { }
 
         [PXDecimal]
         public decimal? UsrDutyCostPct { get; set; }
-        public abstract class usrDutyCostPct : PX.Data.BQL.BqlBool.Field<usrDutyCostPct> { }
+        public abstract class usrDutyCostPct : PX.Data.BQL.BqlDecimal.Field<usrDutyCostPct> { }
 
         #endregion
     }

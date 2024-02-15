@@ -776,6 +776,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit231" />
                                 <Prop Key="DataField" Value="UsrContractSurcharge" />
                                 <Prop Key="CommitChanges" Value="True" />
+                                <Prop Key="DisplayFormat" Value="##0.00" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -873,6 +874,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit211" />
                                 <Prop Key="DataField" Value="UsrPreciousMetalCost" />
                                 <Prop Key="CommitChanges" Value="True" />
+                                <Prop Key="DisplayFormat" Value="##0.0000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>

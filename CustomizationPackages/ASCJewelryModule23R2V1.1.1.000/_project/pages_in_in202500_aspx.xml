@@ -84,6 +84,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit49" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrContractSurcharge" />
+                                <Prop Key="DisplayFormat" Value="##0.00" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -201,6 +202,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit51" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrPreciousMetalCost" />
+                                <Prop Key="DisplayFormat" Value="##0.0000" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -555,6 +557,7 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
+                    <Prop Key="DisplayFormat" Value="##0.00" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
@@ -584,6 +587,7 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
+                    <Prop Key="DisplayFormat" Value="##0.0000" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
@@ -1241,4 +1245,7 @@
             <PXTextEdit DataField="HSTariffCode" OriginalIndex="8" Remove="True" />
         </Children>
     </PXTabItem>
+    <PXNumberEdit DataField="BaseItemWeight" ParentId="phG_tab_Items#7_edBaseItemWeight" TypeFullName="PX.Web.UI.PXNumberEdit">
+        <Prop Key="CommitChanges" Value="True" />
+    </PXNumberEdit>
 </Page>

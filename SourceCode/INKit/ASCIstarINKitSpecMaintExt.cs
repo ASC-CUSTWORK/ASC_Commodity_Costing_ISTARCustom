@@ -1290,16 +1290,16 @@ namespace ASCISTARCustom.INKit
             List<INKitSpecStkDet> stkLineList = this.Base.StockDet.Select()?.FirstTableItems?
                 .Where(x => x.GetExtension<ASCIStarINKitSpecStkDetExt>().UsrCostRollupType == ASCIStarConstants.CostRollupType.PreciousMetal).ToList();
 
-            decimal? totalLossAbsValue = stkLineList.Sum(row =>
+            decimal? totalAbsoluteValue = stkLineList.Sum(row =>
             {
                 var rowExt = row.GetExtension<ASCIStarINKitSpecStkDetExt>();
                 decimal? lineFieldValue = (decimal?)cache.GetValue<TField>(row);
-                return rowExt.UsrExtCost * lineFieldValue;
+                return rowExt.UsrExtCost / (1 + lineFieldValue / 100);
             });
 
             decimal? totalExtCost = stkLineList.Sum(line => line.GetExtension<ASCIStarINKitSpecStkDetExt>().UsrExtCost);
 
-            return totalExtCost == 0.0m || totalExtCost == null ? decimal.Zero : totalLossAbsValue / totalExtCost;
+            return totalExtCost == 0.0m || totalExtCost == null ? decimal.Zero : (totalExtCost / totalAbsoluteValue - 1) * 100;
         }
 
         private decimal? GetIncrementTotalValue()
@@ -1308,18 +1308,20 @@ namespace ASCISTARCustom.INKit
 
             decimal? totalPerMetalType = decimal.Zero;
             decimal? totalPerPreciousMetalType = decimal.Zero;
+            var basicMetalType = JewelryItemView.Select().TopFirst?.MetalType;
+            var basiMultFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(basicMetalType);
             foreach (var row in stkLineList)
             {
                 var rowExt = row.GetExtension<ASCIStarINKitSpecStkDetExt>();
                 string metalType = GetASCIStarINJewelryItem(row.CompInventoryID)?.MetalType;
                 totalPerMetalType += ASCIStarMetalType.GetMultFactorConvertTOZtoGram(metalType) * (rowExt.UsrActualGRAMGold + rowExt.UsrActualGRAMSilver);
-                totalPerPreciousMetalType += ASCIStarMetalType.GetMultFactorConvertTOZtoGram(JewelryItemView.Select().TopFirst?.MetalType) * (rowExt.UsrActualGRAMGold + rowExt.UsrActualGRAMSilver); ;
+                totalPerPreciousMetalType += basiMultFactor * (rowExt.UsrActualGRAMGold + rowExt.UsrActualGRAMSilver);
             }
 
 
             return totalPerPreciousMetalType == 0.0m || totalPerPreciousMetalType == null
-                ? decimal.Zero
-                : ASCIStarMetalType.GetMultFactorConvertTOZtoGram(JewelryItemView.Select().TopFirst?.MetalType) * totalPerMetalType / totalPerPreciousMetalType;
+                        ? decimal.Zero
+                        : ASCIStarMetalType.GetMultFactorConvertTOZtoGram(basicMetalType) * totalPerMetalType / totalPerPreciousMetalType;
         }
 
         private int? GetVendorMarketID(POVendorInventory row, ASCIStarPOVendorInventoryExt rowExt)
