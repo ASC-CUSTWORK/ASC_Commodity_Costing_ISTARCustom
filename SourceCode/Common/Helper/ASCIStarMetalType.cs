@@ -158,6 +158,17 @@ namespace ASCISTARCustom.Common.Helper
                 case ASCIStarConstants.MetalType.Type_10K: return 10.000000m;
                 case ASCIStarConstants.MetalType.Type_08K: return 8.000000m;
                 case ASCIStarConstants.MetalType.Type_06K: return 6.000000m;
+
+                case ASCIStarConstants.MetalType.Type_24F: return 24.000000m;
+                case ASCIStarConstants.MetalType.Type_22F: return 22.000000m;
+                case ASCIStarConstants.MetalType.Type_20F: return 20.000000m;
+                case ASCIStarConstants.MetalType.Type_18F: return 18.000000m;
+                case ASCIStarConstants.MetalType.Type_16F: return 16.000000m;
+                case ASCIStarConstants.MetalType.Type_14F: return 14.000000m;
+                case ASCIStarConstants.MetalType.Type_12F: return 12.000000m;
+                case ASCIStarConstants.MetalType.Type_10F: return 10.000000m;
+                case ASCIStarConstants.MetalType.Type_08F: return 8.000000m;
+                case ASCIStarConstants.MetalType.Type_06F: return 6.000000m;
                 default: return 24.0m;
             }
         }
