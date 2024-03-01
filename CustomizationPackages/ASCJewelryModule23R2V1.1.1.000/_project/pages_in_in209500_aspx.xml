@@ -694,12 +694,14 @@
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrContractLossPct" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="DisplayFormat" Value="##0.00" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
                 <PXGridColumn TypeFullName="PX.Web.UI.PXGridColumn">
                     <Prop Key="DataField" Value="UsrContractSurcharge" />
                     <Prop Key="Width" Value="100" />
+                    <Prop Key="DisplayFormat" Value="##0.00" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>
@@ -785,6 +787,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit230" />
                                 <Prop Key="DataField" Value="UsrContractLossPct" />
                                 <Prop Key="CommitChanges" Value="True" />
+                                <Prop Key="DisplayFormat" Value="##0.00" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>

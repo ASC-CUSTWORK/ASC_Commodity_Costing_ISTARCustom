@@ -1276,8 +1276,8 @@ namespace ASCISTARCustom.INKit
         {
             if (this.Base.Hdr.Current == null) return;
 
-            var newTotalLoss = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractLossPct>(this.Base.StockDet.Cache);
-            var newTotalSurcharge = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractSurcharge>(this.Base.StockDet.Cache);
+            var newTotalLoss = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractLossPct, ASCIStarINKitSpecStkDetExt.usrContractSurcharge>(this.Base.StockDet.Cache);
+            var newTotalSurcharge = GetFieldTotalPersentage<ASCIStarINKitSpecStkDetExt.usrContractSurcharge, ASCIStarINKitSpecStkDetExt.usrContractLossPct>(this.Base.StockDet.Cache);
             var newIncrement = GetIncrementTotalValue();
 
             this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractLossPct>(this.Base.Hdr.Current, newTotalLoss);
@@ -1285,21 +1285,26 @@ namespace ASCISTARCustom.INKit
             this.Base.Hdr.SetValueExt<ASCIStarINKitSpecHdrExt.usrContractIncrement>(this.Base.Hdr.Current, newIncrement);
         }
 
-        private decimal? GetFieldTotalPersentage<TField>(PXCache cache) where TField : IBqlField
+        private decimal? GetFieldTotalPersentage<TField, THField>(PXCache cache) where TField : IBqlField where THField : IBqlField
         {
             List<INKitSpecStkDet> stkLineList = this.Base.StockDet.Select()?.FirstTableItems?
                 .Where(x => x.GetExtension<ASCIStarINKitSpecStkDetExt>().UsrCostRollupType == ASCIStarConstants.CostRollupType.PreciousMetal).ToList();
 
-            decimal? totalAbsoluteValue = stkLineList.Sum(row =>
+            decimal? totalAbsoluteValue = decimal.Zero;
+            decimal? totalFieldValue = decimal.Zero;
+
+            foreach (var stkLine in stkLineList)
             {
-                var rowExt = row.GetExtension<ASCIStarINKitSpecStkDetExt>();
-                decimal? lineFieldValue = (decimal?)cache.GetValue<TField>(row);
-                return rowExt.UsrExtCost / (1 + lineFieldValue / 100);
-            });
+                var rowExt = stkLine.GetExtension<ASCIStarINKitSpecStkDetExt>();
+                decimal? lineBaseValue = (decimal?)cache.GetValue<TField>(stkLine);
+                decimal? lineHelperValue = (decimal?)cache.GetValue<THField>(stkLine);
+                decimal? temp = rowExt.UsrExtCost / (1 + lineBaseValue / 100) / (1 + lineHelperValue / 100);
+                totalAbsoluteValue += temp;
+                totalFieldValue += temp * lineBaseValue / 100;
+            }
 
-            decimal? totalExtCost = stkLineList.Sum(line => line.GetExtension<ASCIStarINKitSpecStkDetExt>().UsrExtCost);
-
-            return totalExtCost == 0.0m || totalExtCost == null ? decimal.Zero : (totalExtCost / totalAbsoluteValue - 1) * 100;
+            decimal? returnvalue = totalAbsoluteValue == 0.0m || totalAbsoluteValue == null ? decimal.Zero : totalFieldValue / totalAbsoluteValue * 100;
+            return returnvalue;
         }
 
         private decimal? GetIncrementTotalValue()

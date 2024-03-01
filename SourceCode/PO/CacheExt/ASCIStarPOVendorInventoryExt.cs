@@ -111,7 +111,7 @@ namespace ASCISTARCustom.PO.CacheExt
         #endregion
 
         #region UsrContractLossPct
-        [PXDBDecimal(2)]
+        [PXDBDecimal(4)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Metal Loss %", Visible = false)]
         public decimal? UsrContractLossPct { get; set; }

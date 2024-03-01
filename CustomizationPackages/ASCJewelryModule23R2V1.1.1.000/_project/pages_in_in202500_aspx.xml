@@ -93,6 +93,7 @@
                                 <Prop Key="ID" Value="CstPXNumberEdit48" />
                                 <Prop Key="CommitChanges" Value="True" />
                                 <Prop Key="DataField" Value="UsrContractLossPct" />
+                                <Prop Key="DisplayFormat" Value="##0.00" />
                             </PXNumberEdit>
                         </AddItem>
                         <AddItem>
@@ -549,6 +550,7 @@
                     <Prop Key="Width" Value="100" />
                     <Prop Key="AutoCallBack" Value="True" />
                     <Prop Key="CommitChanges" Value="True" />
+                    <Prop Key="DisplayFormat" Value="##0.00" />
                 </PXGridColumn>
             </AddItem>
             <AddItem>

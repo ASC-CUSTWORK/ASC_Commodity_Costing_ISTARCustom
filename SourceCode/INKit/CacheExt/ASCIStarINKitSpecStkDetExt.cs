@@ -119,7 +119,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrContractLossPct
-        [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Metal Loss, %", Enabled = false)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrContractLossPct>))]
@@ -128,7 +128,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrContractSurcharge
-        [PXDBDecimal(2, MinValue = 0, MaxValue = 1000)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Surcharge, %", Enabled = false, Visible = true)]
         [PXFormula(typeof(Selector<INKitSpecStkDet.compInventoryID, ASCIStarINInventoryItemExt.usrContractSurcharge>))]

@@ -97,7 +97,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #endregion
 
         #region UsrContractLossPct
-        [PXDBDecimal(2, MinValue = 0, MaxValue = 100)]
+        [PXDBDecimal(4, MinValue = 0, MaxValue = 100)]
         [PXUIField(DisplayName = "Total Metal Loss, %")]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrContractLossPct { get; set; }
