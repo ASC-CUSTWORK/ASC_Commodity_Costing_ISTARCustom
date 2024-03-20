@@ -89,7 +89,7 @@ namespace ASCISTARCustom.Cost
             {
                 var vendor = vendors.Select(record.VendorID).RowCast<Vendor>().FirstOrDefault();
                 var item = inventoryItems.Select(record.InventoryID).RowCast<InventoryItem>().FirstOrDefault();
-                listMessages[selectedRecords.IndexOf(record)] = graph.CreateOrUpdatePriceRecord(graph, vendorPriceMaint, record, vendor, item);            
+                listMessages[selectedRecords.IndexOf(record)] = graph.CreateOrUpdatePriceRecord(graph, vendorPriceMaint, record, vendor, item);
             }
         }
 
@@ -116,7 +116,7 @@ namespace ASCISTARCustom.Cost
                         break;
                 }
             }
-            
+
             catch (Exception exc)
             {
                 resultMessage.Price = decimal.Zero;
@@ -135,10 +135,10 @@ namespace ASCISTARCustom.Cost
                 resultMessage.Price = newSalesPRice;
                 resultMessage.Status = ASCIStarApiResponseMessage.Success;
                 resultMessage.Message = string.Empty;
-                var vendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(graph, record.VendorID, record.InventoryID, record.UOM, graph.Accessinfo.BusinessDate.Value);
+                var vendorPrice = ASCIStarCostBuilder.GetAPVendorPrice(graph, record.VendorID, record.InventoryID, record.UOM, graph.Accessinfo.BusinessDate.Value.AddDays(-1));
                 ProcessAPVendorPrice(vendorPriceMaint, record, vendorPrice, newSalesPRice);
             }
-            return resultMessage;   
+            return resultMessage;
         }
 
         public virtual decimal GetNewYorkPrice(ASCIStarMetalRatesSyncProcessing graph, ASCIStarMarketVendor record, InventoryItem item)
@@ -183,7 +183,7 @@ namespace ASCISTARCustom.Cost
                 }
                 else
                 {
-                    if (vendorPrice.EffectiveDate == vendorPriceMaint.Value.Accessinfo.BusinessDate)
+                    if (vendorPrice.EffectiveDate == vendorPriceMaint.Value.Accessinfo.BusinessDate.Value.AddDays(-1))
                     {
                         vendorPrice.SalesPrice = salesPrice;
                         var vendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(vendorPrice);
@@ -194,8 +194,8 @@ namespace ASCISTARCustom.Cost
                     {
                         vendorPrice.ExpirationDate =
                           vendorPriceMaint.Value.Accessinfo.BusinessDate.HasValue
-                        ? vendorPriceMaint.Value.Accessinfo.BusinessDate.Value.AddDays(-1)
-                        : DateTime.Today.AddDays(-1);
+                        ? vendorPriceMaint.Value.Accessinfo.BusinessDate.Value.AddDays(-2)
+                        : DateTime.Today.AddDays(-2);
                         vendorPriceMaint.Value.Records.Update(vendorPrice);
 
                         CreateAPVendorPriceRecord(vendorPriceMaint, row, salesPrice);
@@ -214,7 +214,8 @@ namespace ASCISTARCustom.Cost
             vendorPrice.InventoryID = row.InventoryID;
             vendorPrice.SalesPrice = salesPrice;
             vendorPrice.UOM = row.UOM;
-            vendorPrice.EffectiveDate = vendorPriceMaint.Value.Accessinfo.BusinessDate;
+
+            vendorPrice.EffectiveDate = vendorPriceMaint.Value.Accessinfo.BusinessDate.Value.AddDays(-1);
 
             var vendorPriceExt = PXCache<APVendorPrice>.GetExtension<ASCIStarAPVendorPriceExt>(vendorPrice);
             vendorPriceExt.UsrFormAPI = true;

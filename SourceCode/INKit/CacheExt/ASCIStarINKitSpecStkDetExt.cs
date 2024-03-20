@@ -223,7 +223,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrPackagingLaborCost
         [PXDBDecimal(4, MinValue = 0)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Labor For Packaging")]
+        [PXUIField(DisplayName = "Labor Packaging", Enabled = false)]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBasePackagingLaborCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrPackagingLaborCost>))]
         public decimal? UsrPackagingLaborCost { get; set; }
         public abstract class usrPackagingLaborCost : PX.Data.BQL.BqlDecimal.Field<usrPackagingLaborCost> { }
@@ -249,7 +249,7 @@ namespace ASCISTARCustom.INKit.CacheExt
         #region UsrOtherMaterialsCost
         [PXDBDecimal(4, MinValue = 0, MaxValue = 1000)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Materials Cost", Enabled = false)]
+        [PXUIField(DisplayName = "Other Materials Cost", Enabled = false)]
         [PXFormula(typeof(Mult<INKitSpecStkDet.dfltCompQty, usrBaseMaterialCost>), typeof(SumCalc<ASCIStarINKitSpecHdrExt.usrOtherMaterialsCost>))]
         public decimal? UsrOtherMaterialsCost { get; set; }
         public abstract class usrOtherMaterialsCost : PX.Data.BQL.BqlDecimal.Field<usrOtherMaterialsCost> { }
