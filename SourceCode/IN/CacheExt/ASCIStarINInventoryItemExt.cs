@@ -172,8 +172,8 @@ namespace ASCISTARCustom.IN.CacheExt
         #endregion
 
         #region UsrIncrement
-        [PXDecimalAttribute(6)]
-        [PXUIField(DisplayName = "Increment", IsReadOnly = true)]
+        [PXDecimal(6)]
+        [PXUIField(DisplayName = "Increment/Weight", IsReadOnly = true)]
         [PXFormula(typeof(Switch<
             Case<Where<usrCommodityType.IsEqual<CommodityType.gold>>, Mult<usrActualGRAMGold, usrContractIncrement>,
             Case<Where<usrCommodityType.IsEqual<CommodityType.silver>>, Mult<usrActualGRAMSilver, usrContractIncrement>>>>))]
