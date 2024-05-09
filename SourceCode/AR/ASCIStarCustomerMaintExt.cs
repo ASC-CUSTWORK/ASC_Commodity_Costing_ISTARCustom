@@ -14,6 +14,14 @@ namespace ASCISTARCustom.AR
 
         #region Events
 
+        protected virtual void _(Events.RowSelected<PX.Objects.CR.Standalone.Location> e)
+        {
+            if (e.Row == null) return;
+
+            PXUIFieldAttribute.SetRequired<PX.Objects.CR.Standalone.Location.cBranchID>(e.Cache, true);
+            PXDefaultAttribute.SetPersistingCheck<PX.Objects.CR.Standalone.Location.cBranchID>(e.Cache, e.Row, PXPersistingCheck.NullOrBlank);
+        }
+
         protected virtual void _(Events.RowInserted<ASCIStarCustomerAllowance> e)
         {
             if (e.Row == null || this.Base.BAccount.Current?.BAccountID == null) return;

@@ -44,6 +44,13 @@ namespace ASCISTARCustom.Cost
         #endregion
 
         #region EventHandlers
+        protected virtual void _(Events.RowSelected<PX.Objects.CR.Standalone.Location> e)
+        {
+            if (e.Row == null) return;
+
+            PXUIFieldAttribute.SetRequired<PX.Objects.CR.Standalone.Location.vBranchID>(e.Cache, true);
+            PXDefaultAttribute.SetPersistingCheck<PX.Objects.CR.Standalone.Location.vBranchID>(e.Cache, e.Row, PXPersistingCheck.NullOrBlank);
+        }
         protected virtual void _(Events.FieldDefaulting<APVendorPrice, APVendorPrice.vendorID> e)
         {
             if (e.Row == null || this.Base.BAccount.Current == null) return;
