@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\..\Dependencies\VERSION2021R2\Autofac.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -41,43 +41,43 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Common.Std.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.CS.Contracts">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.CS.Contracts.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.CS.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.DbServices">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.DbServices.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.DbServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Objects.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.Customization">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Web.Customization.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Web.Customization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.UI">
-      <HintPath>..\..\Dependencies\VERSION2021R2\PX.Web.UI.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Web.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\Dependencies\VERSION2021R2\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\RestSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -123,6 +123,7 @@
     <Compile Include="AP\CacheExt\ASCIStarAPVendorPriceExt.cs" />
     <Compile Include="AP\DAC\ASCIStarAPTariffHTSCode.cs" />
     <Compile Include="Cost\Descriptor\ASCIStarApiResponseMessage.cs" />
+    <Compile Include="IN\CacheExt\ASCIStarINItemXRefExt.cs" />
     <Compile Include="IN\DAC\ASCIStarINVendorDuty.cs" />
     <Compile Include="AR\Descriptor\ASCIStarARConstants.cs" />
     <Compile Include="IN\CacheExt\ASCIStarINUnitExt.cs" />

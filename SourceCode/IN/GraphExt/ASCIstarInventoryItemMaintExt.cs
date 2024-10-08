@@ -16,6 +16,7 @@ using PX.Data.BQL.Fluent;
 using PX.Objects.AP;
 using PX.Objects.IN;
 using PX.Objects.PO;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,11 @@ namespace ASCISTARCustom.IN.GraphExt
         [PXUIField(DisplayName = "Tariff / HTS Code")]
         [PXSelector(typeof(SearchFor<ASCIStarAPTariffHTSCode.hSTariffCode>))]
         protected virtual void _(Events.CacheAttached<InventoryItem.hSTariffCode> e) { }
+
+        [PXMergeAttributes(Method = MergeMethod.Merge)]
+        [PXDBLastModifiedDateTime]
+        [PXUIField(DisplayName = "Last Modified Date", IsReadOnly = true)]
+        protected virtual void _(Events.CacheAttached<INItemXRef.lastModifiedDateTime> e) { }
         #endregion
 
         #region Actions
@@ -786,6 +792,20 @@ namespace ASCISTARCustom.IN.GraphExt
             e.Cache.RaiseFieldDefaulting<ASCIStarINVendorDuty.countryID>(e.Row, out object countryID);
             e.Cache.SetValueExt<ASCIStarINVendorDuty.countryID>(e.Row, countryID);
         }
+        #endregion
+
+        #region CreationDate Event
+        protected void _(Events.RowInserting<INItemXRef> row)
+        {
+            if (row.Row == null) return;
+
+            var inItemXRef = row.Row;
+
+            var inItemXRefExt = inItemXRef.GetExtension<ASCIStarINItemXRefExt>();
+
+            inItemXRefExt.UsrCreationDate = DateTime.Now;
+        }
+
         #endregion
 
         #endregion Event Handlers
