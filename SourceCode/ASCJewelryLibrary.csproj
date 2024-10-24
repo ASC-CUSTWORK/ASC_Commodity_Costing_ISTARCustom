@@ -32,52 +32,52 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\..\..\iStarSite\Bin\Autofac.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\VERSION2021R2\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common">
-      <HintPath>..\..\..\iStarSite\Bin\PX.Common.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>..\..\..\iStarSite\Bin\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Common.Std.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.CS.Contracts">
-      <HintPath>..\..\..\iStarSite\Bin\PX.CS.Contracts.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.CS.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>..\..\..\iStarSite\Bin\PX.Data.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>..\..\..\iStarSite\Bin\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.DbServices">
-      <HintPath>..\..\..\iStarSite\Bin\PX.DbServices.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.DbServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>..\..\..\iStarSite\Bin\PX.Objects.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.Customization">
-      <HintPath>..\..\..\iStarSite\Bin\PX.Web.Customization.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Web.Customization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.UI">
-      <HintPath>..\..\..\iStarSite\Bin\PX.Web.UI.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Web.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\..\iStarSite\Bin\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\RestSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
