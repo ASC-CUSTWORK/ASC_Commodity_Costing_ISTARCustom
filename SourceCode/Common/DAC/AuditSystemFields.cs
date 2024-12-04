@@ -3,8 +3,6 @@ using System;
 
 namespace ASCISTARCustom.Common.DAC
 {
-    [Serializable]
-    [PXCacheName("Base System Fields")]
     public class AuditSystemFields
     {
         #region Tstamp

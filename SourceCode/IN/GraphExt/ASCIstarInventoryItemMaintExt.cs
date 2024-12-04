@@ -45,6 +45,8 @@ namespace ASCISTARCustom.IN.GraphExt
         [PXDBString(30, IsUnicode = true, InputMask = "####.##.####")]
         [PXUIField(DisplayName = "Tariff / HTS Code")]
         [PXSelector(typeof(SearchFor<ASCIStarAPTariffHTSCode.hSTariffCode>))]
+        [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
+
         protected virtual void _(Events.CacheAttached<InventoryItem.hSTariffCode> e) { }
 
         [PXMergeAttributes(Method = MergeMethod.Merge)]

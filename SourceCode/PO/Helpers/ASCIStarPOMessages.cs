@@ -8,6 +8,7 @@ namespace ASCISTARCustom.PO.Helpers
         public static class Constants
         {
             public const string LandedCostCode = "CUSTOMSDUTY";
+            public const string LandedCostCodeFreitnin = "FREIGHTIN";
         }
 
         public static class Warnings

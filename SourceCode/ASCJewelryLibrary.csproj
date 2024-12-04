@@ -32,52 +32,52 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\Autofac.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Common.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Common.Std.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.CS.Contracts">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.CS.Contracts.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.CS.Contracts.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Data.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Data.BQL.Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.DbServices">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.DbServices.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.DbServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Objects.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.Customization">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Web.Customization.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Web.Customization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PX.Web.UI">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\PX.Web.UI.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\PX.Web.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\..\..\23.217\iStar23.217DB\Bin\RestSharp.dll</HintPath>
+      <HintPath>..\..\..\iStarSite\Bin\RestSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -127,6 +127,8 @@
     <Compile Include="IN\DAC\ASCIStarINVendorDuty.cs" />
     <Compile Include="AR\Descriptor\ASCIStarARConstants.cs" />
     <Compile Include="IN\CacheExt\ASCIStarINUnitExt.cs" />
+    <Compile Include="PO\ASCiStarDutyFreightMaint.cs" />
+    <Compile Include="PO\ASCiStarVendorDutyMaint.cs" />
     <Compile Include="PO\CacheExt\ASCIStarPOVendorInventoryExt.cs" />
     <Compile Include="Cost\DAC\Projections\ASCIStarMarketVendor.cs" />
     <Compile Include="Cost\DAC\Unbounds\ASCIStarMarketVendorFilter.cs" />
@@ -140,6 +142,8 @@
     <Compile Include="PO\ASCIStarPOLandedCostDocEntryExt.cs" />
     <Compile Include="PO\ASCIStarPOReceiptEntryExt.cs" />
     <Compile Include="PO\CacheExt\ASCIStarPOReceiptExt.cs" />
+    <Compile Include="PO\DAC\ASCiStarDutyFreight.cs" />
+    <Compile Include="PO\DAC\ASCiStarVendorDuty.cs" />
     <Compile Include="PO\Helpers\ASCIStarPOMessages.cs" />
     <Compile Include="SO\CacheExt\ASCIStarSOLineExt.cs" />
     <Compile Include="IN\CacheExt\ASCIStarINInventoryItemExt.cs" />
