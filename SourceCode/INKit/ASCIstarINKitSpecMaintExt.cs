@@ -92,10 +92,73 @@ namespace ASCISTARCustom.INKit
             }
         }
 
+        protected void _(Events.RowInserted<INKitSpecStkDet> row)
+        {
+            var components = Base.StockDet.Select().FirstTableItems;
+
+            decimal totalIncrement = 0m;
+
+            foreach (var result in components)
+            {
+                var item = SelectFrom<InventoryItem>
+                    .Where<InventoryItem.inventoryID.IsEqual<@P.AsInt>>.View.Select(Base, result.CompInventoryID).TopFirst;
+                InventoryItem inventoryItem = item;
+                var inventoryExt = inventoryItem.GetExtension<ASCIStarINInventoryItemExt>();
+                if (inventoryExt.UsrCommodityType == CommodityType.Gold)
+                {
+                    totalIncrement += inventoryExt?.UsrIncrement ?? 0m;
+                }
+            }
+            Base.Hdr.Current.GetExtension<ASCIStarINKitSpecHdrExt>().UsrContractIncrement = totalIncrement;
+        }
+
+        protected void _(Events.RowDeleted<INKitSpecStkDet> row)
+        {
+            var components = Base.StockDet.Select().FirstTableItems;
+
+            decimal totalIncrement = 0m;
+
+            foreach (var result in components)
+            {
+                var item = SelectFrom<InventoryItem>
+                    .Where<InventoryItem.inventoryID.IsEqual<@P.AsInt>>.View.Select(Base, result.CompInventoryID).TopFirst;
+                InventoryItem inventoryItem = item;
+                var inventoryExt = inventoryItem.GetExtension<ASCIStarINInventoryItemExt>();
+                if (inventoryExt.UsrCommodityType == CommodityType.Gold)
+                {
+                    totalIncrement += inventoryExt?.UsrIncrement ?? 0m;
+                }
+            }
+            Base.Hdr.Current.GetExtension<ASCIStarINKitSpecHdrExt>().UsrContractIncrement = totalIncrement;
+        }
+
         public delegate void PersistDelegate();
         [PXOverride]
         public void Persist(PersistDelegate baseMethod)
         {
+            //var components = Base.StockDet.Select().FirstTableItems;
+            //var components = SelectFrom<INKitSpecStkDet>
+            //    .InnerJoin<InventoryItem>.On<INKitSpecStkDet.compInventoryID.IsEqual<InventoryItem.inventoryID>>
+            //    .Where<INKitSpecStkDet.kitInventoryID.IsEqual<@P.AsInt>
+            //        .And<ASCIStarINInventoryItemExt.usrCommodityType.IsEqual<@P.AsString>>>
+            //    .View.Select(Base, Base.Hdr.Current.KitInventoryID, CommodityType.Gold).FirstTableItems.ToList();
+
+            //decimal totalIncrement = 0m;
+
+            //foreach (var result in components)
+            //{
+            //    var item = SelectFrom<InventoryItem>
+            //        .Where<InventoryItem.inventoryID.IsEqual<@P.AsInt>>.View.Select(Base, result.CompInventoryID).TopFirst;
+            //    InventoryItem inventoryItem = item;
+            //    var inventoryExt = inventoryItem.GetExtension<ASCIStarINInventoryItemExt>();
+            //    if (inventoryExt.UsrCommodityType == CommodityType.Gold)
+            //    {
+            //        totalIncrement += inventoryExt?.UsrIncrement ?? 0m;
+            //    }
+            //}
+            //Base.Hdr.Current.GetExtension<ASCIStarINKitSpecHdrExt>().UsrContractIncrement = totalIncrement;
+
+
             CopyFieldsValueToStockItem(Base.Hdr.Current);
             CopyFieldsValueToPOVendorInventory(Base.Hdr.Current);
 
@@ -108,7 +171,10 @@ namespace ASCISTARCustom.INKit
                     CopyJewelryItemFieldsToStockItem(Base.Hdr.Current);
                 }
             }
+
+            //Base.Persist();
             baseMethod();
+
         }
         #endregion
 
@@ -519,6 +585,10 @@ namespace ASCISTARCustom.INKit
             var row = e.Row;
             if (row == null) return;
 
+            //if (JewelryItemView.Current == null)
+            //{
+            //    return;
+            //}
             e.Cache.RaiseFieldDefaulting<ASCIStarINKitSpecStkDetExt.usrCostingType>(row, out object _costType);
             e.Cache.SetValueExt<ASCIStarINKitSpecStkDetExt.usrCostingType>(row, _costType);
 
@@ -797,6 +867,7 @@ namespace ASCISTARCustom.INKit
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrContractIncrement>(cache, row, true);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrContractLossPct>(cache, row, true);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrContractSurcharge>(cache, row, true);
+            PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrContractSurchargeAmount>(cache, row, true);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrPreciousMetalCost>(cache, row, true);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrOtherMaterialsCost>(cache, row, true);
             PXUIFieldAttribute.SetReadOnly<ASCIStarPOVendorInventoryExt.usrFabricationCost>(cache, row, true);
@@ -815,6 +886,7 @@ namespace ASCISTARCustom.INKit
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrContractIncrement>(cache, null, false);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrContractLossPct>(cache, null, false);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrContractSurcharge>(cache, null, false);
+            PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrContractSurchargeAmount>(cache, null, false);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrPreciousMetalCost>(cache, null, false);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrOtherMaterialsCost>(cache, null, false);
             PXUIFieldAttribute.SetVisible<ASCIStarPOVendorInventoryExt.usrFabricationCost>(cache, null, false);
@@ -995,7 +1067,7 @@ namespace ASCISTARCustom.INKit
                 itemExt.UsrPreciousMetalCost = kitSpecHdrExt.UsrPreciousMetalCost;
                 itemExt.UsrContractLossPct = kitSpecHdrExt.UsrContractLossPct;
                 itemExt.UsrContractSurcharge = kitSpecHdrExt.UsrContractSurcharge;
-                itemExt.UsrContractIncrement = kitSpecHdrExt.UsrContractIncrement;
+                //itemExt.UsrContractIncrement = kitSpecHdrExt.UsrContractIncrement;
                 itemExt.UsrFabricationCost = kitSpecHdrExt.UsrFabricationCost;
                 itemExt.UsrOtherCost = kitSpecHdrExt.UsrOtherCost;
                 itemExt.UsrOtherMaterialsCost = kitSpecHdrExt.UsrOtherMaterialsCost;

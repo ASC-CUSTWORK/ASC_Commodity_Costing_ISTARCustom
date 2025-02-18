@@ -123,9 +123,13 @@ namespace ASCISTARCustom.Common.Builder
         public virtual decimal? CalculatePreciousMetalCost(string costingType = null)
         {
             decimal? preciousMetalCost = decimal.Zero;
+            decimal? defaultPreciousMetalCost = decimal.Zero;
 
             decimal priciousMetalMultFactor = ASCIStarMetalType.GetMultFactorConvertTOZtoGram(INJewelryItem?.MetalType);
 
+            decimal? surchargeValue = (100.0m + (ItemCostSpecification.UsrContractSurcharge ?? 0.0m)) / 100.0m;
+            decimal? metalLossValue = (100.0m + (ItemCostSpecification.UsrContractLossPct ?? 0.0m)) / 100.0m;
+            decimal? goldMetalLoss = (ItemCostSpecification.UsrContractLossPct ?? 0);
             if (ASCIStarMetalType.IsGold(INJewelryItem?.MetalType))
             {
                 switch (costingType ?? ItemCostSpecification.UsrCostingType)
@@ -141,7 +145,11 @@ namespace ASCISTARCustom.Common.Builder
 
                     default: break;
                 }
-                preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0.0m);
+                //preciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMGold ?? 0.0m);
+                defaultPreciousMetalCost = preciousMetalCost * priciousMetalMultFactor * (ItemCostSpecification.UsrPricingGRAMGold ?? 0.001m);
+                preciousMetalCost = defaultPreciousMetalCost * surchargeValue + (POVendorInventoryExt.UsrContractSurchargeAmount ?? 0); /* priciousMetalMultFactor * (ItemCostSpecification.UsrPricingGRAMGold ?? 0.001m)*/
+                PreciousMetalUnitCost = preciousMetalCost + (defaultPreciousMetalCost * goldMetalLoss / 100);
+                return PreciousMetalUnitCost;
 
             }
             else if (ASCIStarMetalType.IsSilver(INJewelryItem?.MetalType))
@@ -162,9 +170,7 @@ namespace ASCISTARCustom.Common.Builder
                 preciousMetalCost = PreciousMetalAvrSilverMarketCostPerTOZ * priciousMetalMultFactor * (ItemCostSpecification.UsrActualGRAMSilver ?? 0.0m);
             }
 
-            decimal? surchargeValue = (100.0m + (ItemCostSpecification.UsrContractSurcharge ?? 0.0m)) / 100.0m;
-            decimal? metalLossValue = (100.0m + (ItemCostSpecification.UsrContractLossPct ?? 0.0m)) / 100.0m;
-            PreciousMetalUnitCost = preciousMetalCost * metalLossValue * surchargeValue;
+            PreciousMetalUnitCost = preciousMetalCost * metalLossValue; /* surchargeValue;*/
             return PreciousMetalUnitCost;
         }
 

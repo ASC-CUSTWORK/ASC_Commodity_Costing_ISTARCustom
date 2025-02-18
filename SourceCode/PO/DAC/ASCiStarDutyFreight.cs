@@ -1,11 +1,9 @@
-﻿using ASCISTARCustom.AP.DAC;
-using ASCISTARCustom.Common.DAC;
+﻿using ASCISTARCustom.Common.DAC;
 using PX.Data;
 using PX.Data.BQL;
-using PX.Data.Licensing;
 using PX.Objects.CR;
+using PX.Objects.CS;
 using System;
-using Address = PX.Objects.CR.Address;
 
 namespace ASCISTARCustom.PO.DAC
 {
@@ -25,18 +23,26 @@ namespace ASCISTARCustom.PO.DAC
         #region HSTariffCode
         [PXDBString(30, InputMask = "9999.99.9999", IsUnicode = true)]
         [PXUIField(DisplayName = "Tariff / HTS Code", Visibility = PXUIVisibility.SelectorVisible)]
-        public virtual string HSTariffCode { get; set; }
+        public string HSTariffCode { get; set; }
         public abstract class hSTariffCode : BqlString.Field<hSTariffCode> { }
         #endregion
 
         #region CountryCode
         [PXDBString(100)]
         [PXUIField(DisplayName = "Country Code")]
-        //[PXSelector(typeof(Search<Address.countryID>))]
+        //[PXSelector(typeof(Search<Country.countryID>))]
         [Country]
         public string CountryCode { get; set; }
         public abstract class countryCode : BqlString.Field<countryCode> { }
+        #endregion
 
+        #region CountryName
+        [PXDBString(255, IsUnicode = true)]
+        [PXUIField(DisplayName = "Country Name", Enabled = false)]
+        [PXUnboundDefault(typeof(Search<Country.description,
+                    Where<Country.countryID, Equal<Current<ASCiStarDutyFreight.countryCode>>>>))]
+        public string CountryName { get; set; }
+        public abstract class countryName : PX.Data.BQL.BqlString.Field<countryName> { }
         #endregion
 
         #region DutyPercent

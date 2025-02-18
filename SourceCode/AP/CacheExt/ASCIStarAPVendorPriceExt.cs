@@ -86,6 +86,14 @@ namespace ASCISTARCustom.AP.CacheExt
         public abstract class usrCommodityIncrement : PX.Data.BQL.BqlDecimal.Field<usrCommodityIncrement> { }
         #endregion
 
+        #region UsrCommoditySurchargeAmount
+        [PXDBDecimal(4)]
+        [PXUIField(DisplayName = "Surcharge, $")]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrCommoditySurchargeAmount { get; set; }
+        public abstract class usrCommoditySurchargeAmount : PX.Data.BQL.BqlDecimal.Field<usrCommoditySurchargeAmount> { }
+        #endregion
+
         #region UsrMatrixStep
         [PXDBDecimal(2, MinValue = 0, MaxValue = 10)]
         [PXUIField(DisplayName = "Matrix Step")]

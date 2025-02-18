@@ -7,6 +7,7 @@ namespace ASCISTARCustom.PO
 {
     public class ASCiStarVendorDutyMaint : PXGraph<ASCiStarVendorDutyMaint, ASCiStarVendorDuty>
     {
+        [PXImport(typeof(ASCiStarVendorDuty))]
         public SelectFrom<ASCiStarVendorDuty>.OrderBy<ASCiStarVendorDuty.createdDateTime.Asc>.View ASCiStarVendorDutyView;
     }
 }

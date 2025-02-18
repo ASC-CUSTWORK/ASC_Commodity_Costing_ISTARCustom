@@ -13,8 +13,8 @@ namespace ASCISTARCustom.PO.DAC
 
         #region UsrAccrualLandedCost 
         [PXDBBool()]
-        [PXUIField(DisplayName = "Accrual Landed Cost")]
-        [PXDefault(false, PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Accrual Landed Cost", IsReadOnly = false)]
+        [PXDefault(true, PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual bool? UsrAccrualLandedCost { get; set; }
         public abstract class usrAccrualLandedCost : PX.Data.BQL.BqlBool.Field<usrAccrualLandedCost> { }
         #endregion

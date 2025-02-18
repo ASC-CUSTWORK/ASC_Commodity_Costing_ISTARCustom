@@ -145,6 +145,7 @@
     <Compile Include="PO\DAC\ASCiStarDutyFreight.cs" />
     <Compile Include="PO\DAC\ASCiStarVendorDuty.cs" />
     <Compile Include="PO\Helpers\ASCIStarPOMessages.cs" />
+    <Compile Include="SO\ASCiStarSOInvoiceEntryExt.cs" />
     <Compile Include="SO\CacheExt\ASCIStarSOLineExt.cs" />
     <Compile Include="IN\CacheExt\ASCIStarINInventoryItemExt.cs" />
     <Compile Include="IN\CacheExt\ASCIStarINItemClassExt.cs" />

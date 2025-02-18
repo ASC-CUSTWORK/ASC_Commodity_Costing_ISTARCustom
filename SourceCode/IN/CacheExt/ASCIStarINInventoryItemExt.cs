@@ -124,12 +124,28 @@ namespace ASCISTARCustom.IN.CacheExt
         public abstract class usrBasisValue : PX.Data.BQL.BqlDecimal.Field<usrBasisValue> { }
         #endregion
 
+        #region UsrBasisValue
+        [PXDecimal(4)]
+        [PXUIField(DisplayName = "Price / TOZ Add-On", IsReadOnly = true)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrBasisValueAddOn { get; set; }
+        public abstract class usrBasisValueAddOn : PX.Data.BQL.BqlDecimal.Field<usrBasisValueAddOn> { }
+        #endregion
+
         #region UsrMarketPriceGram
         [PXDecimal(4)]
         [PXUIField(DisplayName = "Market Price per Gram", IsReadOnly = true)]
         [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
         public decimal? UsrMarketPriceGram { get; set; }
         public abstract class usrMarketPriceGram : PX.Data.BQL.BqlDecimal.Field<usrMarketPriceGram> { }
+        #endregion
+
+        #region UsrMarketPriceGram
+        [PXDecimal(4)]
+        [PXUIField(DisplayName = "Market Price per TOZ Add-On", IsReadOnly = true)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        public decimal? UsrMarketPriceAddOn { get; set; }
+        public abstract class usrMarketPriceAddOn : PX.Data.BQL.BqlDecimal.Field<usrMarketPriceAddOn> { }
         #endregion
 
         #region UsrMarketPriceTOZ
@@ -166,14 +182,14 @@ namespace ASCISTARCustom.IN.CacheExt
 
         #region UsrContractIncrement
         [PXDBDecimal(6)]
-        [PXUIField(DisplayName = "Increment/Dollar")]
+        [PXUIField(DisplayName = "Vendor Increment")]
         public decimal? UsrContractIncrement { get; set; }
         public abstract class usrContractIncrement : PX.Data.BQL.BqlDecimal.Field<usrContractIncrement> { }
         #endregion
 
         #region UsrIncrement
         [PXDecimal(6)]
-        [PXUIField(DisplayName = "Increment/Weight", IsReadOnly = true)]
+        [PXUIField(DisplayName = "Increment", IsReadOnly = true)]
         [PXFormula(typeof(Switch<
             Case<Where<usrCommodityType.IsEqual<CommodityType.gold>>, Mult<usrActualGRAMGold, usrContractIncrement>,
             Case<Where<usrCommodityType.IsEqual<CommodityType.silver>>, Mult<usrActualGRAMSilver, usrContractIncrement>>>>))]
@@ -209,6 +225,14 @@ namespace ASCISTARCustom.IN.CacheExt
         [PXUIField(DisplayName = "Surcharge, %")]
         public decimal? UsrContractSurcharge { get; set; }
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
+        #endregion
+
+        #region UsrContractSurcharge
+        [PXDBDecimal(4, MinValue = 0)]
+        [PXDefault(TypeCode.Decimal, "0.000000", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Surcharge, $")]
+        public decimal? UsrContractSurchargeAmount { get; set; }
+        public abstract class usrContractSurchargeAmount : PX.Data.BQL.BqlDecimal.Field<usrContractSurchargeAmount> { }
         #endregion
 
         #region UsrPreciousMetalCost

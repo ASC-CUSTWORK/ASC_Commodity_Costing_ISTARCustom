@@ -126,6 +126,14 @@ namespace ASCISTARCustom.PO.CacheExt
         public abstract class usrContractSurcharge : PX.Data.BQL.BqlDecimal.Field<usrContractSurcharge> { }
         #endregion
 
+        #region UsrContractSurchargeAmount
+        [PXDBDecimal(4)]
+        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXUIField(DisplayName = "Surcharge, $", Visible = false)]
+        public decimal? UsrContractSurchargeAmount { get; set; }
+        public abstract class usrContractSurchargeAmount : PX.Data.BQL.BqlDecimal.Field<usrContractSurchargeAmount> { }
+        #endregion
+
         #region UsrPreciousMetalCost
         [PXDBDecimal(6)]
         [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]

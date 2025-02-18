@@ -31,11 +31,12 @@ namespace ASCISTARCustom.PO.DAC
         #endregion
 
         #region UOM
-        //[INUnit(DisplayName = "UOM")]
-        [PXDBString(6, IsKey = true)]
-        [PXUIField(DisplayName = "UOM")]
-        [PXSelector(
-            typeof(Search<INUnit.fromUnit>))]
+        [INUnit(DisplayName = "UOM")]
+        [PXCustomizeSelectorColumns(typeof(INUnit.fromUnit), typeof(INUnit.toUnit), typeof(INUnit.unitMultDiv))]
+        //[PXDBString(6, IsKey = true)]
+        //[PXUIField(DisplayName = "UOM")]
+        //[PXSelector(
+        //    typeof(Search<INUnit.fromUnit>), typeof(INUnit.toUnit), typeof(INUnit.unitMultDiv))]
         public string UOM { get; set; }
         public abstract class uOM : PX.Data.BQL.BqlString.Field<uOM> { }
         #endregion
