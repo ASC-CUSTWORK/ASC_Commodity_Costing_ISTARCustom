@@ -212,7 +212,7 @@ namespace ASCISTARCustom.IN.GraphExt
             //decimal? pricingGRAMGold = (decimal?)e.NewValue * mult / 24;
             var costBuilder = CreateCostBuilder(rowExt);
             decimal? pricingGRAMGold = (decimal?)e.NewValue * mult / 24;
-            if (costBuilder.INJewelryItem.MetalType.EndsWith("F"))
+            if (costBuilder != null && costBuilder.INJewelryItem.MetalType.EndsWith("F"))
             {
                 pricingGRAMGold = pricingGRAMGold * 0.05m;
             }
