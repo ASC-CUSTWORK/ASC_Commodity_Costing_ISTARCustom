@@ -1009,18 +1009,24 @@ namespace ASCISTARCustom.IN.GraphExt
             cache.SetValueExt<ASCIStarINInventoryItemExt.usrBasisValueAddOn>(row, basisValueAddOn);
             if (rowExt.UsrCommodityType == CommodityType.Gold)
             {
-                var defaultIncrement = 1 / ASCIStarConstants.TOZ2GRAM_31_10348.value * rowExt.UsrActualGRAMGold * rowExt.UsrPricingGRAMGold;
-                var surchargeAmount = 0m;
-                var lostAmount = 0m;
-                if (rowExt.UsrContractSurcharge != 0 && rowExt.UsrContractSurcharge != null)
-                {
-                    surchargeAmount = (decimal)(defaultIncrement * (rowExt.UsrContractSurcharge / 100));
-                }
-                if (rowExt.UsrContractLossPct != 0 && rowExt.UsrContractLossPct != null)
-                {
-                    lostAmount = (decimal)(defaultIncrement * (rowExt.UsrContractLossPct / 100));
-                }
-                var goldIncrement = defaultIncrement + surchargeAmount + lostAmount;
+                //var defaultIncrement = 1 / ASCIStarConstants.TOZ2GRAM_31_10348.value * rowExt.UsrActualGRAMGold * rowExt.UsrPricingGRAMGold;
+                //var surchargeAmount = 0m;
+                //var lostAmount = 0m;
+                //if (rowExt.UsrContractSurcharge != 0 && rowExt.UsrContractSurcharge != null)
+                //{
+                //    surchargeAmount = (decimal)(defaultIncrement * (rowExt.UsrContractSurcharge / 100));
+                //}
+                //if (rowExt.UsrContractLossPct != 0 && rowExt.UsrContractLossPct != null)
+                //{
+                //    lostAmount = (decimal)(defaultIncrement * (rowExt.UsrContractLossPct / 100));
+                //}
+                //var goldIncrement = defaultIncrement + surchargeAmount + lostAmount;
+
+                var goldIncrement = 1 / ASCIStarConstants.TOZ2GRAM_31_10348.value
+                       * rowExt.UsrActualGRAMGold
+                       * rowExt.UsrPricingGRAMGold
+                       * (1 + (rowExt.UsrContractSurcharge != null ? rowExt.UsrContractSurcharge / 100 : 0))
+                       * (1 + (rowExt.UsrContractLossPct != null ? rowExt.UsrContractLossPct / 100 : 0));
                 cache.SetValueExt<ASCIStarINInventoryItemExt.usrIncrement>(row, goldIncrement);
             }
             if (rowExt.UsrCommodityType == CommodityType.Silver)
